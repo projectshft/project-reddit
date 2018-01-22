@@ -1,0 +1,23 @@
+
+
+.border-bottom {
+  border-bottom-color: lightgrey;
+  border-bottom-style: solid;
+  border-bottom-width: thin;
+}
+
+.comments {
+  color: blue;
+  text-decoration: underline;
+}
+
+.x {
+  color: gray;
+  margin-left: 10px;
+  font-weight: bold;
+}
+
+.remove-post {
+  display: inline;
+  margin-top: 5px;
+}
