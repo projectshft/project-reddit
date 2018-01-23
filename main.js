@@ -1,3 +1,4 @@
+//this is a good ol fashioned test
 $('#post').on('click', function() {
 
   //create post
