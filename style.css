@@ -50,3 +50,40 @@ button {
 .del-post {
   margin-left: 5px;
 }
+
+.fa-close:hover {
+  cursor: pointer;
+  color: red;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.fa-close {
+  color: maroon;
+}
+
+.fa-comment {
+  color: silver;
+}
+
+.fa-comment:hover {
+  cursor: pointer;
+  color: blue;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.fa-edit {
+  color: silver
+}
+
+.fa-edit:hover {
+  cursor: pointer;
+  color: blue;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.fa-save {
+ vertical-align: bottom;
+}

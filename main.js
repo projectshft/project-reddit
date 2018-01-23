@@ -2,27 +2,89 @@ $(".post-button").click(function() {
   var userName = $(".input-username").val();
   var comment = $(".input-comment").val();
 
-  var template =
-    "<div class='row align-items-end justify-content-center'><div class='col-centered comment-box col-sm-11 col-md-10 col-lg-7'><div class='btn-group'><button type='button' class='btn btn-link remove-post'>remove</button><button type='button' class='btn btn-link show-comments'>comments</button><span class='btn comment'>" + comment + "</span></div><div class='row justify-content-center'><div class='col'><div class='added-comments btn' style='display: none;'><form class='form-inline'><input type='text' class='form-control-sm new-comment' placeholder='Comment Text'><input type='text' class='form-control-sm new-user' placeholder='User Name'><button type='button' class='btn btn-sm btn-primary post-comment'>Post Comment</button></form></div></div></div><p class='posted-by'>Posted By: <strong>" + userName + "</strong</p></div></div>"
+  //handlebars
+  var newPost = {
+    userName: userName, comment: comment
+  }
+  var source = $("#post-template").html();
+  var template = Handlebars.compile(source);
+  var newHTML = template(newPost);
+  $('.comment-section').append(newHTML);
+  //!handlebars
 
-  $('.comment-section').append(template);
+  //clear texboxes
+  $(".input-username").val('');
+  $(".input-comment").val('');
 
   $('.remove-post').click(function () {
     $(this).closest('.row').remove();
   });
 
-  $('.show-comments').click(function () {
+
+
+  $('.edit-post').click(function(){
+    var oldPost = $($(this)[0]).siblings(".comment")[0].textContent;
+    var changes = {
+      oldPost: oldPost
+    }
+    var editSource = $("#edit-post-template").html();
+    var editTemplate = Handlebars.compile(editSource);
+    var editComment = editTemplate(changes);
+    // delete original post
+    $($(this)[0]).siblings(".comment").remove();
+    // add text box and save button
+    $(this).closest('div').append(editComment);
+
+
+    $('.save-changes').click(function(){
+      //handlebars for post edit.
+      // save input.
+      var updatedComment = $($(this)[0].parentNode).find(".input-comment").val();
+      var updates = {
+        updatedComment: updatedComment
+      }
+      var updateSource = $("#save-changes-template").html();
+      var updateTemplate = Handlebars.compile(updateSource);
+      var updateComment = updateTemplate(updates);
+
+      //remove edit text box, update DOM with new version of the comment, remove save button.
+      $($(this)[0].parentNode).find(".input-comment").remove();
+      $(this).closest('.btn-group').append(updateComment);
+      $(this).remove();
+    });
+  });
+
+
+  $('.show-comments').click(function (e) {
+    e.stopImmediatePropagation();
     var $newComment = $($(this)[0].parentNode.parentNode).find(".added-comments");
+    console.log($newComment);
     $newComment.toggle();
   });
 
+
   $(".added-comments").find(".post-comment").each(function(){
     $(this).click(function (e) {
+      //stop multiple click events from firing.
       e.stopImmediatePropagation();
+
       var newUser = $($(this)[0].parentNode).find('.new-user').val();
       var newComment = $($(this)[0].parentNode).find('.new-comment').val();
-      var newCommentTemplate = "<div><span>" + newComment + " </span><span>Posted by: <strong>" + newUser + "</strong></span><button type='button' class='btn btn-link del-post'>delete</button></div><br>"
-      $(this).closest('div').prepend(newCommentTemplate);
+
+      //handlebars
+      var commentObject = {
+        newUser: newUser, newComment: newComment
+      }
+      var commentSource = $("#new-comment-template").html();
+      var commentTemplate = Handlebars.compile(commentSource);
+      var commentHTML = commentTemplate(commentObject);
+      $(this).closest('.added-comments').prepend(commentHTML);
+      //!handlebars
+
+      //clear texboxes
+      $($(this)[0].parentNode).find('.new-user').val('');
+      $($(this)[0].parentNode).find('.new-comment').val('');
+
       var $delPost = $($(this)[0].parentNode.parentNode).find(".del-post");
 
       $delPost.click(function(){
