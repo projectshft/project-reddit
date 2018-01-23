@@ -1,5 +1,120 @@
-//this is a good ol fashioned test
+//Figure out how to change id of 'comment' button immediately after clicking 'comment' button
+
+//create list of posts and names to be associated with those posts
+var postsArray = [];
+
+//function that pushes object into array
+var postsObj = function(msg, name) {
+  postsArray.push({
+    userMsg: msg,
+    userName: name,
+    post: postsArray.length + 1,
+    comments: []
+  })
+};
+
+//function that posts array items on click event
 $('#post').on('click', function() {
+  postsObj($('#message').val(), $('#name').val());
+  console.log(postsArray);
+  var newPost = '<div><div><button type="button" style="padding:0px" class="btn-link remove">remove</button><button type="button" class="btn-link comments" id="' + postsArray[postsArray.length - 1].post + '" data-toggle="modal" data-target="commentsModal">comments</button></div><div class="msg">' + postsArray[postsArray.length - 1].userMsg + '</div><div class="name">Posted by: <b>' + postsArray[postsArray.length - 1].userName + '</b></div><hr></div>'
+  $('.posts').append(newPost);
+
+  //clear text boxes after each post
+  $('#message').val('');
+  $('#name').val('');
+
+  //remove posts upon clicking 'remove' button
+  $('.remove').on('click', function() {
+    $(this).parent().parent().remove();
+  });
+
+  //show comments modal when user clicks 'comments' button
+  $('.comments').on('click', function(e) {
+    e.stopImmediatePropagation();
+    $('#comments-modal').css({"display":"block"});
+
+    //post comments with 'comment' button
+    var commentsObj = function(msg, name) {
+      postsArray[id - 1].comments.push({
+        userComment: msg,
+        userCommentName: name,
+        comment: postsArray[id - 1].comments.length + 1
+      })
+    }
+
+    //comments modal to feature original post
+    var id = $(this).attr('id');
+    console.log(id);
+    var postModal = '<div class="show-post"><div class="msg">' + postsArray[id - 1].userMsg + '</div><div class="name">Posted by: <b>' + postsArray[id - 1].userName + '</b></div><hr></div>'
+    $('.post-modal').append(postModal);
+
+    if (postsArray[id - 1].comments != '') {
+      var commentButtonId = postsArray[id - 1].comments[postsArray[id - 1].comments.length - 1].comment * -1;
+      console.log(commentButtonId);
+    } else {
+      var commentButtonId = 0;
+    };
+    console.log(postsArray);
+    console.log(postsArray[id - 1].comments.length);
+    var commentButton = '<button type="button" class="btn btn-secondary comment" id="' + commentButtonId + '">Comment</button>'
+    $('.modal-footer').append(commentButton);
+
+    /*var returnComments = '<div><div><button type="button" class="close-comment">&times;</button></div><div class=comment-text></div><div class="name-input"></div><hr></div>';
+    console.log(returnComments);
+    for (let i = 0; i < postsArray[id - 1].comments.length; i++) {
+      if ()
+    }*/
+    if (postsArray[id - 1].comments != '') {
+      for (let i = 0; i < postsArray[id - 1].comments.length; i++) {
+        var returnComments = '<div class="new-comment"><div><button type="button" class="close-comment">&times;</button></div><div>' + postsArray[id - 1].comments[i].userComment + '</div><div>Posted by: <b>' + postsArray[id - 1].comments[i].userCommentName + '</b></div><hr></div>';
+        console.log(returnComments);
+        $('#comments').append(returnComments);
+      }
+    };
+
+    $('.comment').on('click', function(e) {
+      e.stopImmediatePropagation();
+
+      commentsObj($('#comment').val(), $('#name-comment').val());
+
+      commentButtonId = postsArray[id - 1].comments[postsArray[id - 1].comments.length - 1].comment;
+      console.log(commentButtonId);
+
+      var idComment = $(this).attr('id') * -1;
+      console.log(idComment);
+
+      console.log(postsArray);
+      var newComment = '<div class="new-comment"><div><button type="button" class="close-comment">&times;</button></div><div>' + postsArray[id - 1].comments[idComment].userComment + '</div><div>Posted by: <b>' + postsArray[id - 1].comments[idComment].userCommentName + '</b></div><hr></div>';
+      $('#comments').append(newComment);
+
+      //clear text boxes after each comment
+      $('#comment').val('');
+      $('#name-comment').val('');
+
+      //delete comments
+      $('.close-comment').on('click', function() {
+        $(this).parent().parent().remove();
+        postsArray[id - 1].comments.splice(idComment - 1, 1);
+        console.log(postsArray);
+      });
+    });
+
+
+  });
+
+  //close comments with (x) button
+  $('.close').on('click', function() {
+    $('#comments-modal').css({"display":"none"});
+    $('.show-post').remove();
+    $('.new-comment').remove();
+    console.log(postsArray);
+  });
+});
+
+//function that adds comment information to post information objects
+
+/*$('#post').on('click', function() {
 
   //create post
   var userMsg = $('#message').val();
@@ -50,7 +165,7 @@ $('#post').on('click', function() {
     $('#comments-modal').css({"display":"none"});
     $('.show-post').remove();
   });
-});
+});*/
 
 //post message with 'Enter' key
 $('#name').keyup(function(event) {
