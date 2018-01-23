@@ -1,0 +1,98 @@
+body {
+  font-family: sans-serif;
+}
+
+h1 {
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.comment-section .btn {
+  padding: 5px 5px 5px 0px;
+  margin-top: 0px;
+}
+
+.comment-section .save-changes {
+  padding: 5px;
+  text-align: center;
+  width: 50px;
+  margin-left: 3px;
+}
+
+.form-inline .btn {
+  padding: 8px 16px;
+  margin-left: 8px;
+}
+
+.added-comments {
+  text-align: left;
+}
+
+.col-centered {
+  border-bottom: 1px solid lightgray;
+  padding: 0px 0px 0px 0px;
+}
+
+.comment-box {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.comment {
+  margin-bottom: 0px;
+  white-space: pre-wrap;
+  text-align: left;
+}
+
+.posted-by {
+  margin-bottom: 15px;
+}
+
+.input {
+  padding: 5px 0px 5px 0px;
+}
+
+button {
+  margin-top: 5px;
+}
+
+.del-post {
+  margin-left: 5px;
+}
+
+.fa-close:hover {
+  cursor: pointer;
+  color: red;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.fa-close {
+  color: maroon;
+}
+
+.fa-comment {
+  color: silver;
+}
+
+.fa-comment:hover {
+  cursor: pointer;
+  color: blue;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.fa-edit {
+  color: silver
+}
+
+.fa-edit:hover {
+  cursor: pointer;
+  color: blue;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.fa-save {
+ vertical-align: bottom;
+}
