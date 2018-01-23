@@ -1,7 +1,8 @@
-var button = document.getElementsByClassName('submit')[0];
+var form = document.getElementsByClassName('post-form')[0];
 var i = 0
 
-button.addEventListener('click', function() {
+form.addEventListener('submit', function(event1) {
+  event.preventDefault()
   var userName = $('#name').val();
   var post = $('#message').val();
 
