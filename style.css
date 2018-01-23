@@ -1,0 +1,52 @@
+body {
+  font-family: sans-serif;
+}
+
+h1 {
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.comment-section .btn {
+  padding: 5px 5px 5px 0px;
+  margin-top: 0px;
+}
+
+.form-inline .btn {
+  padding: 8px 16px;
+  margin-left: 8px;
+}
+
+.added-comments {
+  text-align: left;
+}
+
+.col-centered {
+  border-bottom: 1px solid lightgray;
+  padding: 0px 0px 0px 0px;
+}
+
+.comment-box {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.comment {
+  margin-bottom: 0px;
+}
+
+.posted-by {
+  margin-bottom: 15px;
+}
+
+.input {
+  padding: 5px 0px 5px 0px;
+}
+
+button {
+  margin-top: 5px;
+}
+
+.del-post {
+  margin-left: 5px;
+}
