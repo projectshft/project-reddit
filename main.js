@@ -18,13 +18,37 @@
 
 */
 
-var addPost = function () {
+//var text = ;
+//var user = ;
+var postData = {
+  posts: [
+    { post: $('.post-text').val(), name: $('.your-name').val() },
+  ]
+};
 
-    $('.add-post').click(function () {
-      if ($('.post-text').val() == ""|| $('.post-text').val() == "") {
-        alert('Please complete both input fields');
-      } else {
-        $('div.posts').append($('.post-text').val());
+var source = $('#post-template').html();
+var template = Handlebars.compile(source);
+var newHTML = template(postData);
+
+// append our new html to the page
+$('.post').append(newHTML);
+
+var addPost = function () {
+  $('.add-post').click(function () {
+    if ($('.post-text').val() === ""|| $('.your-name').val() === "") {
+          alert('Please complete both input fields');
+        } else {
+      $('.posts').append($('.post-text').val() + ' Posted By: ' + $('.your-name').val());
       }
     });
-}
+};
+addPost();
+
+
+/*      if ($('.post-text').val() == ""|| $('.post-text').val() == "") {
+        alert('Please complete both input fields');
+      } else {
+        $('div.posts').append(text);
+      }
+    });
+}*/
