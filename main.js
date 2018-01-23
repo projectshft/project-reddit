@@ -96,28 +96,30 @@ clickTools = function(rowId, post) {
     row.remove()
   });
   editButton.addEventListener('click', function() {
-    result = window.prompt("Update your post", post);
-    if (result === null) {
-      return;
-    }
-    row.children[1].innerHTML = result
+      result = window.prompt("Update your post", post);
+      if (result === null) {
+        return;
+      }
+      row.children[1].children[0].innerHTML = result
+      post = result
+
   })
 
-  reorderPosts = function() {
-    var qualObj = {}
-    var items = []
-    for (var j = 0; j < buttonsCount; j++) {
-      qualObj["id"] = j
-      qualObj["quality"] = document.getElementsByClassName("message")[j].getAttribute('qual')
-      items[j] = Object.assign({}, qualObj)
-    }
-    items.sort(function(a, b) {
-      return parseInt(b.quality) - parseInt(a.quality);
-    });
-    for (var k = 0; k < buttonsCount; k++) {
-      document.getElementById(items[k].id).style.order = (k)
-    }
+reorderPosts = function() {
+  var qualObj = {}
+  var items = []
+  for (var j = 0; j < buttonsCount; j++) {
+    qualObj["id"] = j
+    qualObj["quality"] = document.getElementsByClassName("message")[j].getAttribute('qual')
+    items[j] = Object.assign({}, qualObj)
   }
-  reorderPosts()
+  items.sort(function(a, b) {
+    return parseInt(b.quality) - parseInt(a.quality);
+  });
+  for (var k = 0; k < buttonsCount; k++) {
+    document.getElementById(items[k].id).style.order = (k)
+  }
+}
+reorderPosts()
 
 }
