@@ -7,6 +7,7 @@
       function noenter() {
         return !(window.event && window.event.keyCode == 13); }
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.js"></script>
   </head>
   <body>
     <h1>Project Reddit</h1>
@@ -18,13 +19,13 @@
     <div id='comments-modal' class="modal">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Comments</h4>
+              <div class="post-modal">
+              </div>
+              <h4 class="modal-title">Comments</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body">
-          <div class="post-modal">
-          </div>
-          <div class="comments">
+          <div id="comments">
           </div>
           <hr>
           <div class="form-group">
