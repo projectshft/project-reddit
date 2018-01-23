@@ -35,39 +35,26 @@ var newHTML = template(postData);
 $('.post').append(newHTML);
 //function is run when the 'post' button is clicked
 //function should take 1st input and post them beneath the previous post and take 2nd input and display "posted by:..."
-var addPost = function () {
-//listens to post button when clicked.
-  $('.add-post').click(function () {
-    //checks to make sure the are values in both input boxes.
-    if ($('.post-text').val() === ""|| $('.your-name').val() === "") {
-      //alerts user of error, that they don't have values in both input boxes.
-          alert('Please complete both input fields');
-        } else {
-          //when there are 2 values, appends them in a string to an html element
-      $('.posts').append('<div class="post">' + '<a href="#" class="remove">remove</a> ' + '<a href="#" class="show-comments">comments</a> ' + $('.post-text').val() + ' Posted By: ' + '<strong>' + $('.your-name').val() + '</strong>' + '</div>');
-      }
-    });
-};
+
+$('.add-post').click(function () {
+  //checks to make sure the are values in both input boxes.
+  if ($('.post-text').val() === ""|| $('.your-name').val() === "") {
+    //alerts user of error, that they don't have values in both input boxes.
+    alert('Please complete both input fields');
+  } else {
+    //when there are 2 values, appends them in a string to an html element
+    $('.posts').append('<div class="post">' + '<a href="#" class="remove">remove</a> ' + '<a href="#" class="show-comments">comments</a> ' + $('.post-text').val() + ' Posted By: ' + '<strong>' + $('.your-name').val() + '</strong>' + '</div>');
+    $('.remove').click(removePost);
+  }
+});
 
 //when user clicks on the remove button, it should remove that post.
 //optionally add an alert to warn/confirm removal
+
+
 var removePost = function () {
   //add an event listner to remove button when clicked
-  $('.remove').click(function () {
-    
-  })
+  $(this).parent().remove();
+
   return false;
-}
-
-
-//calls the function
-addPost();
-
-
-/*      if ($('.post-text').val() == ""|| $('.post-text').val() == "") {
-        alert('Please complete both input fields');
-      } else {
-        $('div.posts').append(text);
-      }
-    });
-}*/
+};
