@@ -1,17 +1,29 @@
-$('.post').click( function (a) {
-  a.preventDefault(); // Prevent default submit behavior on click
-  a.stopImmediatePropagation();
+$('.post').click( function (event) {
+  event.preventDefault(); // Prevent default submit behavior on click
+
+  // Get the posts unordered list
   let $posts = $('.posts');
 
   // Get the poster's name and message
   let $message = $('#message').val();
+  if ($message.trim().length == 0) { // Prevent empty message string
+    return;
+  }
   let $name = $('#name').val();
+  if ($name.trim().length == 0) { // Prevent empty name string
+    return;
+  }
 
-  // Creating a post template
+  /*
+    Creates a post template with remove and comment show/hide links,
+    the message text, an empty comments section, an inline form for adding
+    comments, and the post author's name.
+  */
   let template =
     '<li>' +
     ' <p>' +
     '   <a href="#" class="post-remove">remove</a>' +
+    '   <a href="#" class="post-edit">edit</a>' +
     '   <a href="#" class="comment-show">comments</a>' +
     '   <span class="message-text">' + $message + '</span>' +
     ' </p>' +
@@ -27,36 +39,73 @@ $('.post').click( function (a) {
     ' <p class="message-name">Posted By: <strong>' + $name + '</strong></p>' +
     '<hr></li>';
 
+  // Add the filled in templated to the posts list
   $posts.append(template);
-  // $(this).parent().find('.comments').last().toggle();
-  // $commentsToggle.toggle();
 
-  // Remove current post
+  // Hide the new post's comments section
+  let $commentsToggle = $(this).parent().find('.comments').last();
+  $commentsToggle.toggle();
+
+  // Remove link to delete the clicked post
   $('.post-remove').click( function () {
     $(this).closest('li').remove();
   });
 
-  // Toggle comments
-  $('.comment-show').click( function () {
+  // Edit functionality - edit an existing post's message
+  $('.post-edit').on( 'click', function(event) {
+
+    event.stopImmediatePropagation();
+
+    let $messageText = $(this).find('.message-text').first();
+
+    // Handle message being saved
+    if ($(this).text() === 'save') {
+      $messageText.attr({
+        class: 'message-text',
+        contenteditable: 'false'
+      });
+      $(this).text('edit');
+      return;
+    }
+
+    // Make the message editable and change the edit text to 'save'
+    $messageText.attr({
+      class: 'message-text  form-control',
+      contenteditable: 'true'
+    });
+    $(this).text('save');
+  });
+
+  // Comments link to show/hide the selected comments section
+  $('.comment-show').click( function (event) {
+    event.stopImmediatePropagation();
     // $(this).parent().find('.comments').toggle();
     // $commentsToggle.hide();
     let $comments = $(this).parent().next();
     $comments.toggle();
   });
 
+  // Comment posting functionality
+  $('.comment-post').click( function(event) {
 
-  $('.comment-post').click( function(a) {
+    // Prevent default submit behavior on click
+    event.preventDefault();
+    // Prevents (earlier) posts from posting multiple comments for a single submit
+    event.stopImmediatePropagation();
 
-    a.preventDefault(); // Prevent default submit behavior on click
-    a.stopImmediatePropagation();
     // Get the comment thread, new comment message, and user name
     let $commentThread = $(this).parent().prev();
-    console.log($commentThread);
     let $commentText = $(this).prev().prev().val();
+    if ($commentText.trim().length == 0) {
+      return;
+    }
     let $commentUserName = $(this).prev().val();
+    if ($commentUserName.trim().length == 0) {
+      return;
+    }
 
     // Create a remove comment button
-    let removeComment = '<strong class="comment-remove">&times</strong>';
+    let removeComment = '<strong class="comment-remove text-primary">&times</strong>';
 
     let template =
       '<li>' +
