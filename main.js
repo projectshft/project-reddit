@@ -6,4 +6,25 @@
   4. added posts display beneath the the previously posted post.
 
   5.ability to leave comments on each posts
-    a. 
+    a.remove and comments buttons
+    b.an 'x' by a post that when pushed deletes that post
+    c.if both inputs in text box, should post their comments in comments list
+    d. if 'remove' is pushed, should remove the post. Ask for confirmation first?
+    e. enable users to edit posts
+    f. Instead of having the comments appear right below the posts, enable a post to
+     be "clickable" and for the page to seem to navigate to a new page that is
+     dedicated to just that post and it's comments. Of course, it won't be a new page.
+     Perhaps hide the original info and only display the comments of said post.
+
+*/
+
+var addPost = function () {
+
+    $('.add-post').click(function () {
+      if ($('.post-text').val() == ""|| $('.post-text').val() == "") {
+        alert('Please complete both input fields');
+      } else {
+        $('div.posts').append($('.post-text').val());
+      }
+    });
+}
