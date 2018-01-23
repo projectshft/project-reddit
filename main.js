@@ -1,16 +1,16 @@
 $('.post').click( function (event) {
   event.preventDefault(); // Prevent default submit behavior on click
 
-  // Get the posts unordered list
+  // Get the unordered list for posts
   let $posts = $('.posts');
 
   // Get the poster's name and message
   let $message = $('#message').val();
-  if ($message.trim().length == 0) { // Prevent empty message string
+  if ($message.trim().length == 0) { // Prevent empty strings
     return;
   }
   let $name = $('#name').val();
-  if ($name.trim().length == 0) { // Prevent empty name string
+  if ($name.trim().length == 0) {
     return;
   }
 
@@ -39,24 +39,24 @@ $('.post').click( function (event) {
     ' <p class="message-name">Posted By: <strong>' + $name + '</strong></p>' +
     '<hr></li>';
 
-  // Add the filled in templated to the posts list
-  $posts.append(template);
+  // Add the filled in template to the top of the posts list
+  $posts.prepend(template);
 
   // Hide the new post's comments section
-  let $commentsToggle = $(this).parent().find('.comments').last();
-  $commentsToggle.toggle();
+  let $commentsSection = $(this).parent().find('.comments').first();
+  $commentsSection.toggle();
 
-  // Remove link to delete the clicked post
+  // Remove link to delete the selected post
   $('.post-remove').click( function () {
     $(this).closest('li').remove();
   });
 
-  // Edit functionality - edit an existing post's message
-  $('.post-edit').on( 'click', function(event) {
+  // Edit link - edit an existing post's message
+  $('.post-edit').click( function(event) {
 
     event.stopImmediatePropagation();
 
-    let $messageText = $(this).find('.message-text').first();
+    let $messageText = $(this).siblings('.message-text');
 
     // Handle message being saved
     if ($(this).text() === 'save') {
@@ -78,9 +78,9 @@ $('.post').click( function (event) {
 
   // Comments link to show/hide the selected comments section
   $('.comment-show').click( function (event) {
+    // Prevent erroneous comment toggling
     event.stopImmediatePropagation();
-    // $(this).parent().find('.comments').toggle();
-    // $commentsToggle.hide();
+
     let $comments = $(this).parent().next();
     $comments.toggle();
   });
@@ -96,7 +96,7 @@ $('.post').click( function (event) {
     // Get the comment thread, new comment message, and user name
     let $commentThread = $(this).parent().prev();
     let $commentText = $(this).prev().prev().val();
-    if ($commentText.trim().length == 0) {
+    if ($commentText.trim().length == 0) { // Test for empty strings
       return;
     }
     let $commentUserName = $(this).prev().val();
@@ -107,13 +107,16 @@ $('.post').click( function (event) {
     // Create a remove comment button
     let removeComment = '<strong class="comment-remove text-primary">&times</strong>';
 
+    // New comment template
     let template =
       '<li>' +
-      ' <p>' + $commentText + ' Posted By: ' + $commentUserName + ' ' + removeComment + '</p>' +
+      ' <p>' + $commentText + ' Posted By: <strong>' + $commentUserName + ' </strong>' + removeComment + '</p>' +
       '</li>';
 
+    // Comments are added to the end of the comments list (oldest to newest)
     $commentThread.append(template);
 
+    // Delete a selected comment
     $('.comment-remove').click( function () {
       $(this).parent().remove();
     });
