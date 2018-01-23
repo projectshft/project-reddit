@@ -21,8 +21,8 @@ $(".post-button").click(function() {
   });
 
 
-
   $('.edit-post').click(function(){
+    //save current post.
     var oldPost = $($(this)[0]).siblings(".comment")[0].textContent;
     var changes = {
       oldPost: oldPost
@@ -32,13 +32,12 @@ $(".post-button").click(function() {
     var editComment = editTemplate(changes);
     // delete original post
     $($(this)[0]).siblings(".comment").remove();
-    // add text box and save button
+    // add text box loaded with original post, add save button.
     $(this).closest('div').append(editComment);
 
 
     $('.save-changes').click(function(){
-      //handlebars for post edit.
-      // save input.
+      // save new input.
       var updatedComment = $($(this)[0].parentNode).find(".input-comment").val();
       var updates = {
         updatedComment: updatedComment

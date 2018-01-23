@@ -40,6 +40,8 @@ h1 {
 
 .comment {
   margin-bottom: 0px;
+  white-space: pre-wrap;
+  text-align: left;
 }
 
 .posted-by {
