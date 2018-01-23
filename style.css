@@ -40,8 +40,16 @@
   padding-top:5px;
 }
 
-.Rtable-cell-narrow {
+.Rtable-cell-medium {
   width: 15%;
+}
+
+.Rtable-cell-wide {
+  width: 75%
+}
+
+.Rtable-cell-narrow {
+  width: 10%;
 }
 
 .Rtable-cell-wide {
@@ -71,7 +79,20 @@
 }
 
 .q-content {
-  text-align:center;
   float: left;
-  margin-left: 10%;
+  margin-left: 5%;
+}
+
+.comments {
+  float: left;
+  width: 85%;
+  margin-left: 15px;
+}
+
+.post-comment {
+  float: left;
+  width:100%;
+  margin-left: 15px;
+  margin-bottom: 10px;
+  margin-right: 5px;
 }
