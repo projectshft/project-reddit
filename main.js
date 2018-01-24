@@ -94,7 +94,7 @@ clickTools = function(rowId, post) {
     reorderPosts()
   });
   trashButton.addEventListener('click', function() {
-    row.remove()
+    row.style.display = 'none'
   });
   editButton.addEventListener('click', function() {
       result = window.prompt("Update your post", post);
@@ -111,14 +111,21 @@ reorderPosts = function() {
   var items = []
   for (var j = 0; j < buttonsCount; j++) {
     qualObj["id"] = j
-    qualObj["quality"] = document.getElementsByClassName("message")[j].getAttribute('qual')
+    if (document.getElementsByClassName("message")[j]) {
+      qualObj["quality"] = document.getElementsByClassName("message")[j].getAttribute('qual')
+    } else qualObj["quality"] = 0
+
     items[j] = Object.assign({}, qualObj)
   }
   items.sort(function(a, b) {
     return parseInt(b.quality) - parseInt(a.quality);
   });
+  orderOfQuality = 0
   for (var k = 0; k < buttonsCount; k++) {
-    document.getElementById(items[k].id).style.order = (k)
+    if (document.getElementById(items[k].id)) {
+      document.getElementById(items[k].id).style.order = orderOfQuality
+      orderOfQuality++
+    }
   }
 }
 reorderPosts()
