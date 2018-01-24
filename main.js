@@ -38,6 +38,7 @@ form.addEventListener('submit', function(event1) {
   })
 
   $('.submit-comment').on('click', function(event1) {
+    //allows a user to submit a comment and provides an edit and delete icon for the comment
     event1.stopImmediatePropagation();
     var commentName = $(this).prev().val();
     var commentContent = $(this).prev().prev().val()
@@ -94,6 +95,7 @@ clickTools = function(rowId, post) {
     reorderPosts()
   });
   trashButton.addEventListener('click', function() {
+    //turns off the display for a row - doesn't delete the row so row numbering still works
     row.style.display = 'none'
   });
   editButton.addEventListener('click', function() {
@@ -107,6 +109,7 @@ clickTools = function(rowId, post) {
   })
 
 reorderPosts = function() {
+  //creates an array of objects that list each element's id and quality
   var qualObj = {}
   var items = []
   for (var j = 0; j < buttonsCount; j++) {
@@ -117,10 +120,12 @@ reorderPosts = function() {
 
     items[j] = Object.assign({}, qualObj)
   }
+  //sorts the items by quality with the highest quality post first
   items.sort(function(a, b) {
     return parseInt(b.quality) - parseInt(a.quality);
   });
   orderOfQuality = 0
+  //loops through all posts and orders them based on their quality ranking
   for (var k = 0; k < buttonsCount; k++) {
     if (document.getElementById(items[k].id)) {
       document.getElementById(items[k].id).style.order = orderOfQuality
