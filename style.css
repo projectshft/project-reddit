@@ -1,0 +1,98 @@
+
+
+.posts {
+  display: flex;
+  flex-basis: 100%;
+  flex-wrap: wrap;
+  align-content: space-between;
+}
+
+.Rtable {
+  display: flex;
+  width: 200%;
+  align-content: space-between;
+}
+
+.Rtable-cell {
+  box-sizing:border-box;
+  flex-grow: 1;
+  width: 100%; // Default to full width
+  padding: 50px;
+  overflow: hidden; // Or flex might break
+  list-style:none;
+  border: solid .5px lightgray;
+}
+
+.Rtable-cell-header {
+  text-align: center;
+  text-indent: 0px;
+
+}
+
+.Rtable-cell-empty {
+  text-indent: 0px;
+  border: none;
+  padding: 5px
+
+}
+
+.Rtable-cell-content {
+  padding-top:5px;
+}
+
+.Rtable-cell-medium {
+  width: 15%;
+}
+
+.Rtable-cell-wide {
+  width: 75%
+}
+
+.Rtable-cell-narrow {
+  width: 10%;
+}
+
+.Rtable-cell-wide {
+  width: 70%
+}
+
+.cell-content {
+  float:left;
+  margin-left: 5px;
+}
+
+.comment-button {
+  float:right;
+  margin-right: 5px;
+}
+
+.quality-up {
+  font-size: 11px;
+  margin-left: 5px;
+  float:left;
+}
+
+.quality-down {
+  font-size: 11px;
+  margin-right: 5px;
+  float: left;
+}
+
+.q-content {
+  float: left;
+  margin-left: 5%;
+}
+
+.comments {
+  float: left;
+  width: 85%;
+  margin-left: 15px;
+}
+
+.post-comment {
+  float: left;
+  width:100%;
+  margin-left: 15px;
+  margin-bottom: 10px;
+  margin-right: 5px;
+}
