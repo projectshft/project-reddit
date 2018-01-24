@@ -27,12 +27,11 @@ var postData = {
 var source = $('#post-template').html();
 var template = Handlebars.compile(source);
 var newHTML = template(postData);
-
-/*var commentsContainer = '<div class="comments-container">' + '<div class=comments-list></div>' +
-'<input type="text" class="comment-name">' +
-'<button class="btn btn-primary add-comment">Post Comment</button> </div>';*/ //hidden here as a reference. not my actual code.
-// append our new html to the page
 $('.post').append(newHTML);
+
+var commentsContainer = '<div class="comments-container">' + '<div class="row">' + '<div class="col-sm-4">' + '<input type="text" class="form-control comment-text" placeholder="Comment Text" aria-describedby="sizing-addon3" value="Yes, it does!">' + '</div>' + '<div class="col-sm-4">' + '<input type="text" class="form-control user-name" placeholder="User Name" aria-describedby="sizing-addon3" value="Julie">' + '</div>' + '<div class="col-sm-4">' +
+'<button type="button" class="btn btn-primary btn-sm add-comment">Post Comment</button>' + '</div>' + '</div>';
+
 //function is run when the 'post' button is clicked
 //function should take 1st input and post them beneath the previous post and take 2nd input and display "posted by:..."
 
@@ -43,8 +42,9 @@ $('.add-post').click(function () {
     alert('Please complete both input fields');
   } else {
     //when there are 2 values, appends them in a string to an html element
-    $('.posts').append('<div class="post">' + '<a href="#" class="remove">remove</a> ' + '<a href="#" class="show-comments">comments</a> ' + $('.post-text').val() + ' Posted By: ' + '<strong>' + $('.your-name').val() + '</strong>' + '</div>');
+    $('.posts').append('<div class="post">' + '<a href="#" class="remove">remove</a> ' + '<a href="#" class="show-comments">comments</a> ' + $('.post-text').val() + ' Posted By: ' + '<strong>' + $('.your-name').val() + '</strong>' + commentsContainer + '</div>');
     $('.remove').click(removePost);
+    $('.show-comments').click(showCommentsAndInputBoxes);
   }
 });
 
@@ -55,6 +55,22 @@ $('.add-post').click(function () {
 var removePost = function () {
   //add an event listner to remove button when clicked
   $(this).parent().remove();
-
-  return false;
 };
+//adds a comment beneath the associated post when post comment button is clicked
+$('.add-comment').click(function () {
+  if ($('.comment-text').val() === ""|| $('.user-name').val() === "") {
+    //alerts user of error, that they don't have values in both input boxes.
+    alert('Please complete both input fields');
+  } else {
+    //when there are 2 values, appends them in a string to an html element
+    $('.posts').append('<div class="comment">' + $('.comment-text').val() + ' Posted By: ' + '<strong>' + $('.user-name').val() + '</strong>' + '</div>');//need to finish making this append to the proper spot. should make a new div? nested in the div class=post that this post made. also need to make sure it adds an x button that will remove said comment and set up the option to edit as well.
+  }
+});
+//need the ability to "open" the comments to display beneath the post when comments link is clicked and show the comments input boxes.
+var showCommentsAndInputBoxes = function () {
+  return false;
+}
+//need to be able to hide the comments section when another comments section is opened or if the comments button is clicked again.
+var hideCommentsAndInputBoxes = function () {
+  return false;
+}
