@@ -31,21 +31,22 @@ $('.add-post').click(function () {
   } else {
     //when there are 2 values, appends them in a string to an html element
     $('.posts').append('<div class="post">' + '<a href="#" class="remove">remove</a> ' + '<a href="#" class="show-comments">comments</a> ' + $('.post-text').val() + ' Posted By: ' + '<strong>' + $('.your-name').val() + '</strong>' + commentsContainer + '</div>');
-    $('.remove').click(removePost);
-
   }
 });
 
 //when user clicks on the remove button, it should remove that post.
 //optionally add an alert to warn/confirm removal
-
-var removePost = function () {
+$('#posts').on('click', '.remove', function () {
   //add an event listner to remove button when clicked
-  var warningResponse = prompt("Are you sure you want to delete this post? Y or N");
-  if (warningResponse == 'Y') {
+  var answer = confirm("Are you sure you want to delete this post?")
+  if (answer)
     $(this).parent().remove();
-  }
-};
+
+  // var warningResponse = prompt("Are you sure you want to delete this post? Y or N");
+  // if (warningResponse == 'Y') {
+  //
+  // }
+});
 //adds a comment beneath the associated post when post comment button is clicked
 $('#posts').on('click', '.add-comment', function () {
 
