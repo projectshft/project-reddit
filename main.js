@@ -36,18 +36,16 @@ $('.add-post').click(function () {
 
 //when user clicks on the remove button, it should remove that post.
 //optionally add an alert to warn/confirm removal
+
 $('#posts').on('click', '.remove', function () {
   //add an event listner to remove button when clicked
   var answer = confirm("Are you sure you want to delete this post?")
   if (answer)
     $(this).parent().remove();
-
-  // var warningResponse = prompt("Are you sure you want to delete this post? Y or N");
-  // if (warningResponse == 'Y') {
-  //
-  // }
 });
+
 //adds a comment beneath the associated post when post comment button is clicked
+
 $('#posts').on('click', '.add-comment', function () {
 
   if ($('.comment-text').val() === ""|| $('.user-name').val() === "") {
@@ -59,12 +57,9 @@ $('#posts').on('click', '.add-comment', function () {
     //need to finish making this append to the proper spot. should make a new div? nested in the div class=post that this post made. also need to make sure it adds an x button that will remove said comment and set up the option to edit as well.
   }
 });
+
 //need the ability to "open" the comments to display beneath the post when comments link is clicked and show the comments input boxes.
-var showCommentsAndInputBoxes = function () {
-//  $('').on('click', '.show-comments', (showCommentsAndInputBoxes);
-  return false;
-}
-//need to be able to hide the comments section when another comments section is opened or if the comments button is clicked again.
-var hideCommentsAndInputBoxes = function () {
-  return false;
-}
+$('#posts').on('click', '.show-comments', function () {
+  $(this).parent().css("display", "none");
+  $('#posts').children().toggle();
+});
