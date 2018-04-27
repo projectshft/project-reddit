@@ -1,0 +1,15 @@
+div .row {
+  border-bottom: 1px inset;
+}
+
+.comments {
+  display:none;
+}
+
+.show {
+  display: inline-block;
+}
+
+li {
+  list-style-type: none;
+}
