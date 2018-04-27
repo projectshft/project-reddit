@@ -21,6 +21,12 @@ h1 {
   margin-bottom: 0px;
 }
 
-.panel-body {
-  padding: 10px;
+.glyphicon-remove {
+  color: red;
+}
+
+.comment {
+  padding-left: 30px;
+  font-size: 12px;
+
 }
