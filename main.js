@@ -15,11 +15,23 @@ function addPost(name, text) {
             "</div>"+
           "</div>"+
         "<div class='panel-footer'>Posted by: <strong>"+name+"</strong>"+
-          "<span class='options'><a class='toggle-comments'>comments</a> <a class='remove-post'>remove</a></span>"+
+          "<span class='options'><a class='toggle-comments'>comments</a> <a class='edit-post'>edit</a> <a class='remove-post'>remove</a></span>"+
         "</div>"+
       "</div>"+
   "</div>";
-  var row = $(template);
+  var post = $(template);
+
+  var editPost = function(){
+    var postBody = $(this).closest(".post").find(".panel-body");
+    var currentText = postBody.text();
+    var editingArea = "<input class='edit-post form-control' type='text' value='"+currentText+"'></input><button class='btn btn-info submit-edit'>Submit</button>";
+    postBody.html(editingArea);
+    //submit button functionality
+    postBody.find(".submit-edit").click(function(){
+      var newText = postBody.find("input").val();
+      postBody.html(newText);
+    });
+  }
 
   var addComment = function(){
     var commentArea=$(this).closest(".comments").find(".comment-area");
@@ -34,29 +46,27 @@ function addPost(name, text) {
     "</span>"+
     "</a>"+
     "</div>");
-    //remove comment functionality
+    //functionality for remove comment
     comment.find(".rm-comment").click(function(){
       $(this).parent().remove();
     });
     commentArea.append(comment);
     $(this).parent().find("input").val("");//clear inputs
   };
+  post.find(".edit-post").click(editPost);
 
   //functionality for "remove" link
-  row.find(".remove-post").click(function(){
+  post.find(".remove-post").click(function(){
     $(this).closest(".post").remove();
   });
   //functionality for "comments" link
-  row.find(".toggle-comments").click(function(){
+  post.find(".toggle-comments").click(function(){
     $(this).closest(".post").find(".comments").toggle();
   });
-  row.find(".submit-comment").click(addComment);
+  post.find(".submit-comment").click(addComment);
 
-  $("#posts").append(row);
-
+  $("#posts").append(post);
 }
-
-
 
 $("#add-post").click(function(){
   var text = $("#post-text").val();
