@@ -11,39 +11,48 @@
 // })
 
 
+$(document).ready(function(){
+//toggle comments
 
 
+  $('#toggle-comment').click(function(){
+      $('.comments').toggle();
 
-var postIt = $('#post-button').on('click', function() {
 
-  // var addComment = 'comments';
-  var posted = $('<p>' + $('#post-input').val() + '<p>');
-  var addedName = $('<p>' + 'Posted By: ' + $('#name-input').val() + '<p>');
+  });
 
-  // posted.click(function() {
-  //   $(this).alert("Hello");
-  // })
-  // $($input).prependTo(posted);
-$('.posts').append(posted);
+
+//click button to post your message and name
+$('#post-button').on('click', function() {
+
+
+  var postInputed = $('<p>' + $('#post-input').val() + '</p>');
+  var nameInputed = $('<p>' + 'Posted By: ' + $('#name-input').val() + '</p>');
+
+  var addComment = $( "#toggle-comment" )
+    .html("<a href='#'>Comments</a>");
+
+var hey= $('.posts').append(postInputed);
+
+$('.posts').prepend("<a id='toggle-comment' href='#'>Comments</a>");
 $('#post-input').val('');
 
-
-  // var name = $('<p>' + 'Posted By: '+ $('#name').val() + '<p>');
-  $('.names').append(addedName);
+  $('.names').append(nameInputed);
   $('#name-input').val('');
-})
+});
 
-//
-// var commentIt = $('button').on('click', function() {
-//
-//   // var addComment = 'comments';
-//   var posted = $('<p>'+ $input +  $('#post').val() + '<p>');
-//   var addedName = $('<p>' + 'Posted By: ' + $('#name').val() + '<p>');
-//
-//
-//   $('.posts').append(posted)
-//   $('#post').val('');
-//
-//   $('.posts').append(addedName)
-//   $('#name').val('');
-// })
+// click button to post comments
+$('#comment-button').on('click', function() {
+
+  var commentInputed = $('<span>' + $('#comment-input').val() + '</span>' +  '<span>'+ ' ' + 'Posted By: ' + $('#username-input').val() + '</span>' + '<p>' + '</p>');
+  // var usernameVar= $('<span>'+ ' ' + 'Posted By: ' + $('#username-input').val() + '</span>');
+
+
+  $('.comment').append(commentInputed );
+  $('#comment-input').val('');
+  $('#username-input').val('');
+
+});
+
+
+});

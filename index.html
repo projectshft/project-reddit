@@ -12,59 +12,68 @@
 
 <div class="col-md-6 offset-md-3">
   <div class="page-header">
-<h1>Project Reddit</h1>
+    <h1>Project Reddit</h1>
+  </div>
+
+
+  <div class="posts">
+  </div>
+
+  <div id="toggle-comment">
+    <!-- <a href="#">Comments</a> -->
+  </div>
+
+  <div class="comments comment">
+  </div>
+
+  <div class="comments username">
+  </div>
+
+
+  <!--start comment section  -->
+  <form>
+    <div class="comments comments-section">
+      <input type="text" id="comment-input" placeholder="Comment Text"></input>
+    </div>
+
+    <div class="comments comments-section">
+      <input type="text" id="username-input" placeholder="User Name"></input>
+    </div>
+
+
+    <button id="comment-button" type="button" class="comments btn btn-primary comments-section">Post Comment</button>
+  </form>
+  <!-- end comment section -->
+
+  <div class="names">
+  </div>
+
+
+  <form>
+    <h2>Add a New Post</h2>
+
+    <div>
+      <input type="text" id="post-input" class="form-control" placeholder="Post Text"></input>
+    </div>
+
+
+    <div>
+      <input type="text" id="name-input" class="form-control" placeholder="Your Name"></input>
+    </div>
+
+
+    <button type="button" id="post-button" class="btn btn-primary">Post</button>
+
+  </form>
 </div>
 
 
-<div class="posts">
-</div>
-
-<!--start comment section  -->
-<form>
-<div class="comments-section">
-<input type="text" id="comment-input"  placeholder="Comment Text"></input>
-</div>
-
-<div class="comments-section">
-<input type="text" id="user-name-input"  placeholder="User Name"></input>
-</div>
-
-
-<button id="comment-button" type="button" class="btn btn-primary comments-section">Post Comment</button>
-</form>
-<!-- end comment section -->
-
-
-<div class="names">
-</div>
-
-<div id="name-of-poster">
-</div>
-
-<form>
-<h2>Add a New Post</h2>
-
-<div>
-<input type="text" id="post-input" class="form-control" placeholder="Post Text"></input>
-</div>
-
-
-<div>
-<input type="text" id="name-input" class="form-control" placeholder="Your Name"></input>
-</div>
-
-
-<button type="button" id="post-button" class="btn btn-primary">Post</button>
-
-</form>
-</div>
 
 
 
 
-
-
-  <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
-  <script src="main.js"></script>
+<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+<script src="main.js"></script>
 </body>
+
 </html>
