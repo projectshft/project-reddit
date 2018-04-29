@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+  <link href="style.css" rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+  <meta charset="utf-8">
+  <title>Ask Joey</title>
+</head>
+
+<body>
+  <div class="header">
+    <div class="col-md-8 offset-md-2">
+      <h1 class="pageTitle">AskJoey.com</h1>
+    </div>
+  </div>
+
+  <!-- Main Page -->
+  <div class="container col-md-8 offset-md-2 mainPage">
+    <div class="row">
+      <div class="postHeader col-md-8 text-center">
+        <h4>Topic</h4></div>
+      <div class="postHeader col-md-2 text-center">
+        <h4>Posted By</h4></div>
+      <div class="postHeader col-md-2 text-center">
+        <h4>Tools</h4></div>
+    </div>
+    <div class="frontPage">
+    </div>
+
+    <form style="margin-top:30px;">
+      <h3>Add a new post</h3>
+
+      <div class="form-group">
+        <!-- hard coded color and background color, for some reason css doesnt work; -->
+        <input id="name" type="text" class="form-control" placeholder="Name" style="color: #FFFFFF;background-color: #7b8699;"></input>
+      </div>
+
+      <div class="form-group">
+        <!-- hard coded color and background color, for some reason css doesnt work; -->
+        <textarea id="message" type="text" class="form-control" placeholder="Message" style="color: #FFFFFF; background-color: #7b8699;" required></textarea>
+      </div>
+
+      <button type="submit" id="postButton" class="btn btn-custom">Post</button>
+    </form>
+  </div>
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="extensions/editPost.js"></script>
+  <script src="main.js"></script>
+</body>
+
+</html>
