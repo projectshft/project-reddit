@@ -55,8 +55,6 @@ var createPost = function(){
 var $comment = $(commentTemplate);
 
 
-
-
 $(this).prev('.comment-section').append($comment);
 
 }
@@ -81,9 +79,9 @@ if (e.target.classList.contains('remove-post')) {
 }
 
 //toggles comment section and forms
- if (e.target.classList.contains('view-comments')) {
+if (e.target.classList.contains('view-comments')) {
   var commentSection = $(this).prev('.show-toggle');
-   if (commentSection.hasClass('show')) {
+  if (commentSection.hasClass('show')) {
     commentSection.addClass('comments').removeClass('show');
   } else if (commentSection.hasClass('comments')) {
     commentSection.addClass('show').removeClass('comments');
