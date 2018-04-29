@@ -50,7 +50,6 @@ var addPost = function(userName, messageText) {
   $completePostTemplate.find(".dnVote").click(dnVote);
   //toggle to show comments
   $completePostTemplate.find(".toggleComment").click(mainPageComment);
-  $completePostTemplate.find(".msg").click(hideMainPage);
 
   return $completePostTemplate;
 };
