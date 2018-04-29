@@ -15,3 +15,11 @@ div .row {
 li {
   list-style-type: none;
 }
+
+.top-margin{
+  margin-top: 30px;
+}
+
+.action-butttons a {
+  display: inline-block;
+}

@@ -1,13 +1,4 @@
 
-var commentToggler = function() {
-  var viewComments = $('.comments');
-  if (viewComments.hasClass('show')) {
-    viewComments.addClass('comments').removeClass('show');
-  } else {
-    viewComments.addClass('show').removeClass('comments');
-}
-};
-
 var createPost = function(){
   $postName = $('#name-input').val();
   $postBody = $('#post-input').val();
@@ -20,7 +11,7 @@ var createPost = function(){
                 +  '<div class="col text-center">'
                 +  '<p class="post">' + $postBody + ' </p>'
                 +  '<div>'
-                +  '<div class="comments show-toggle" id="comment-edit">'
+                +  '<div class="comments show-toggle">'
                 +  '<ul class="comment-section text-left"></ul> '
                 +  '<div class="form-group">'
                 +  '<input type="text" class="form-control comment-input"'
@@ -30,8 +21,8 @@ var createPost = function(){
                 +  '</div>'
                 +  '</div>'
                 +  '<div class="action-buttons">'
-                +  '<a href="#" class= "view-comments role="button" id="comment-toggle"> Comments </a>'
-                +  '<a href="#" class="remove-post" role="button" id="post-remove"> Remove </a>'
+                +  '<a href="#" class="view-comments" role="button"> Comments </a>'
+                +  '<a href="#" class="remove-post" role="button"> Remove </a>'
                 +  '</div>'
                 +  '</div>'
                 +  '<p class="text-muted"> Posted By: <strong>' + $postName + '</strong> </p>'
@@ -49,7 +40,9 @@ var createPost = function(){
   $('#post-button').click(function() {
         createPost();
 
-        $('.form-group').click(function(e) {
+
+//looping through multiple times when multiple posts are open.
+        $('.form-group').unbind('click').click(function(e) {
               if (e.target.classList.contains('comment-button')) {
                 $commentName = $(this).find('.username-input').val();
                 $commentBody = $(this).find('.comment-input').val();
@@ -64,37 +57,40 @@ var $comment = $(commentTemplate);
 
 
 
-$(this).prevAll('.comment-section').append($comment);
+$(this).prev('.comment-section').append($comment);
 
+}
 $('.comment-section').click(function(e) {
-debugger;
 if (e.target.classList.contains('close')) {
   var trashComment = e.target.closest('li')
   trashComment.remove();
 }
 
 })
-}
+
 })
 
 
 
 
-
-$('.action-buttons').click(function(e) {
+//deletes the post
+$('.action-buttons').unbind('click').click(function(e) {
 if (e.target.classList.contains('remove-post')) {
   var thisPost = $(this).closest('.row')
   thisPost.remove();
 }
-if (e.target.classList.contains('view-comments')) {
+
+//toggles comment section and forms
+ if (e.target.classList.contains('view-comments')) {
   var commentSection = $(this).prev('.show-toggle');
-  if (commentSection.hasClass('show')) {
+   if (commentSection.hasClass('show')) {
     commentSection.addClass('comments').removeClass('show');
-  } else {
+  } else if (commentSection.hasClass('comments')) {
     commentSection.addClass('show').removeClass('comments');
   }
 }
-})
+});
+
 
 
 
