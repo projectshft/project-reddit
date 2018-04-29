@@ -78,7 +78,7 @@ var mainPageComment = function() {
 
   // 1st remove all other editbar and comment bar, then add it's own comment bar IF it doesn't have one. Preventing multiple Bar open at the same time.
   if ($(this).closest('.row').find('.commentBar').length === 0) {
-    $('.editData').remove();
+    $('.editBar').remove();
     $('.commentBar').remove();
 
     var commentBarTemplateStart = '<div class="row commentBar">';
@@ -93,7 +93,7 @@ var mainPageComment = function() {
     $(this).closest('.row').find('.commentBarLoc').append($completeComment);
   } else { // if it already has an comment bar, then remove it, effectively toggle on and off, also hides the comments.
     $(this).closest('.row').find('.commentsData').addClass('hide');
-    $('.editData').remove();
+    $('.editBar').remove();
     $('.commentBar').remove();
   }
 };

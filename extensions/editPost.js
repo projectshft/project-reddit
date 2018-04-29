@@ -4,10 +4,10 @@ var toggleEditBar = function() {
   $('.commentsData').addClass('hide');
   // 1st remove all other editbar, then add it's own editbar IF it doesn't have one. Preventing multiple editBar and commentBar open at the same time.
   if ($(this).parent().siblings('.postMessage').find('.editData').length === 0) {
-    $('.editData').remove();
+    $('.editBar').remove();
     $('.commentBar').remove();
 
-    var editTemplateStart = '<div class="row editData">';
+    var editTemplateStart = '<div class="row editBar">';
     var editTemplateInput = '<textarea type="text" class="editPostInput col-md-10" placeholder="New Message" style="color: black;background-color: ##6997e0;"></textarea>';
     var editTemplateButton = '<button type="button" class="editPostButton btn btn-custom">Edit</button></div>';
     var $completeEdit = $(editTemplateStart + editTemplateInput + editTemplateButton);
@@ -17,7 +17,7 @@ var toggleEditBar = function() {
     //append bar to postMessage div
     $(this).parent().siblings('.postMessage').append($completeEdit);
   } else { // if it already has an edit bar, then remove it, effectively toggle on and off.
-    $('.editData').remove();
+    $('.editBar').remove();
     $('.commentBar').remove();
   }
 };
@@ -32,6 +32,6 @@ var editButtonFunction = function() {
     // delete original msg and place in new message, and close edit bar.
     $(this).parent().parent().find($('.msg')).empty();
     $(this).parent().parent().find($('.msg')).text($('.editPostInput').val());
-    $('.editData').remove();
+    $('.editBar').remove();
   }
 };
