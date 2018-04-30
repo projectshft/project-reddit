@@ -31,5 +31,40 @@
   </div>
   </body>
   <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.js"></script>
   <script src="main.js"></script>
 </html>
+
+
+<script id="post-template" type="text/x-handlebars-template">
+  <div class="row">
+  <div class="col text-center">
+  <p class="post">  {{bodyText}}   </p>
+  <div>
+  <div class="comments show-toggle">
+  <ul class="comment-section text-left">
+  </ul>
+  <div class="form-group">
+  <input type="text" class="form-control comment-input"
+  placeholder="Comment Text">
+  <input type="text" class="form-control username-input"  placeholder="Username">
+  <button type="button"  class="btn btn-primary comment-button">Post Comment</button>
+  </div>
+  </div>
+  <div class="action-buttons">
+  <a href="#" class="view-comments" role="button"> Comments </a>
+  <a href="#" class="remove-post" role="button"> Remove </a>
+  <a href="#" class="edit-post" role="button"> Edit </a>
+  </div>
+  </div>
+  <p class="text-muted"> Posted By: <strong>  {{postName}}  </strong> </p>
+  </div>
+  </div>
+</script>
+
+<script id="comment-template" type="text/x-handlebars-template">
+      <li class="comment"> {{commentBody}} <span class="text-muted"> Posted By: <strong> {{commentName}} </strong></span>
+     <button type="button" class="close Xout" id="close" aria-label="Close"><span class="close close-out" aria-hidden="true">&times;</span>
+  </button>
+</li>
+</script>
