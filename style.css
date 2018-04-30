@@ -23,3 +23,7 @@ li {
 .action-butttons a {
   display: inline-block;
 }
+
+.post {
+  font-size: 16px;
+}
