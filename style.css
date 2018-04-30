@@ -1,0 +1,42 @@
+header {
+  margin-bottom: 20px;
+}
+
+input {
+  margin-bottom: 10px;
+}
+
+.add-comment {
+  margin-top: 20px;
+}
+
+.glyphicon {
+  color: #337ab7;
+  margin-left: 5px;
+}
+
+.glyphicon:hover {
+  cursor: pointer;
+}
+
+.post {
+  border: 1px solid #dedede;
+  color: #4a4a4a;
+  color: #444;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.comments {
+  background-color: #f5f5fa;
+  border: 1px solid #dedede;
+  margin-top: 10px;
+  padding: 10px 20px;
+}
+.post-content, .post-comment-content {
+  font-size: 1.2em;
+}
+
+.edit-post, .remove-post, .toggle-post-comments {
+  margin-left: 5px;
+}
