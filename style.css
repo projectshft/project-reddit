@@ -1,0 +1,110 @@
+/*Body background css*/
+body {
+  background-image: url('https://www.drrobertjones.com/wp-content/uploads/2017/01/dexmedia-1.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: 100% 100%;
+}
+
+h3 {
+  color: rgb(33, 152, 196);
+}
+
+/* only vertical resize, just to keep it clean */
+textarea {
+  resize: vertical;
+}
+
+input {
+  font-family: Verdana;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+button {
+  border: none;
+  background-color: inherit;
+  color: rgb(33, 152, 196);
+}
+
+/* should have been in boostrap, but .hide seems missing in mine. */
+.hide {
+  display: none;
+}
+
+.fa-times {
+  cursor: pointer;
+}
+
+.commentsData {
+  color: black;
+  font-size: 12px;
+}
+
+.btn-custom {
+  background-color: rgb(74, 88, 112);
+}
+
+.pageTitle {
+  display: block;
+  font-family: 'Kaushan Script', 'Helvetica Neue', Helvetica, Arial, cursive;
+  color: rgb(33, 152, 196);
+  border-bottom: 1px solid lightgrey;
+  margin-top: 20px;
+  padding-bottom: 20px;
+  text-align: center;
+}
+
+.postHeader {
+  border: 0.5px solid black;
+  padding-top: 5px;
+  color: rgb(33, 152, 196);
+  background-color: rgb(74, 88, 112);
+}
+
+.row {
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+}
+
+.frontPage {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.postContent {
+  border: 1px solid black;
+  color: #FFFFFF;
+  background-color: #7b8699;
+  padding: 5px;
+  text-align: center;
+  word-wrap: break-word;
+}
+
+.postMessage {
+  border-width: 1px 0px 1px 1px;
+  border-style: solid;
+  border-color: black;
+  color: #FFFFFF;
+  background-color: #7b8699;
+  padding: 12px 5px 5px 10px;
+  word-wrap: break-word;
+}
+
+.toggleComment {
+  border-width: 1px 1px 1px 0px;
+  border-style: solid;
+  border-color: black;
+  color: #FFFFFF;
+  background-color: #7b8699;
+  padding: 5px;
+  font-size: small;
+  padding-top: 15px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.paddedTop {
+  padding-top: 12px;
+}
