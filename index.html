@@ -10,64 +10,38 @@
 </head>
 
 
-<div class="col-md-6 offset-md-3">
-  <div class="page-header">
-    <h1>Project Reddit</h1>
+<div class="container">
+  <div class="row mt-4">
+    <div class="col-md-8 offset-md-2">
+      <h1>Project Reddit</h1>
+      <hr>
+      <div class="post-section">
+        <a href="#" class="toggle-me">comment</a>
+        <!-- <form class="comments" >
+          <input type="text" id="comment-input" class="comments" placeholder="Comment Text"></input>
+        <input type="text" id="username-input" class="comments" placeholder="User Name"></input>
+      <button type="button" id="comment-button" class="comments btn btn-primary btn-sm">Comment</button>
+      </form> -->
   </div>
 
 
-  <div class="posts">
-  </div>
-
-  <div id="toggle-comment">
-    <!-- <a href="#">Comments</a> -->
-  </div>
-
-  <div class="comments comment">
-  </div>
-
-  <div class="comments username">
-  </div>
-
-
-  <!--start comment section  -->
-  <form>
-    <div class="comments comments-section">
-      <input type="text" id="comment-input" placeholder="Comment Text"></input>
+  <form class="card">
+    <div class="card-body">
+      <h2>Add a new post</h2>
+      <div class="form-group">
+        <input type="text" id="post-input" class="form-control" placeholder="Post Text"></input>
     </div>
-
-    <div class="comments comments-section">
-      <input type="text" id="username-input" placeholder="User Name"></input>
-    </div>
-
-
-    <button id="comment-button" type="button" class="comments btn btn-primary comments-section">Post Comment</button>
-  </form>
-  <!-- end comment section -->
-
-  <div class="names">
-  </div>
-
-
-  <form>
-    <h2>Add a New Post</h2>
-
-    <div>
-      <input type="text" id="post-input" class="form-control" placeholder="Post Text"></input>
-    </div>
-
-
-    <div>
+    <div class="form-group">
       <input type="text" id="name-input" class="form-control" placeholder="Your Name"></input>
     </div>
-
-
-    <button type="button" id="post-button" class="btn btn-primary">Post</button>
-
-  </form>
+  <button type="button" id="post-button" class="btn btn-primary btn-block">Post</button>
 </div>
+</form>
 
 
+</div>
+</div>
+</div>
 
 
 
