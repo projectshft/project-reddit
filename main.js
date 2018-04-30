@@ -6,8 +6,6 @@ var createPost = function(){
   $('#post-input').val('');
   $('#name-input').val('');
 
-
-
   var source = $('#post-template').html();
   var template = Handlebars.compile(source);
   var newHtml = template(obj);
@@ -16,10 +14,8 @@ var createPost = function(){
 
   };
 
-
   $('#post-button').click(function() {
     createPost();
-
 
     //looping through multiple times when multiple posts are open.
     $('.form-group').unbind('click').click(function(e) {
