@@ -11,7 +11,6 @@ var createPost = function(){
   var newHtml = template(obj);
 
   $('#posts').append(newHtml);
-
   };
 
   $('#post-button').click(function() {
@@ -39,11 +38,8 @@ var createPost = function(){
           var trashComment = e.target.closest('li')
           trashComment.remove();
         }
-
       })
-
     })
-
     //deletes the post
     $('.action-buttons').unbind('click').click(function(e) {
       if (e.target.classList.contains('remove-post')) {
@@ -52,7 +48,7 @@ var createPost = function(){
       }
       //edit function
       if (e.target.classList.contains('edit-post')) {
-        var edit = prompt("Place edit here");
+        var edit = prompt("Place edit here", $(this).closest('.col').find('.post').text());
         var targetEdit = $(this).closest('.col').find('.post');
         targetEdit.text(edit);
       }
@@ -67,8 +63,4 @@ var createPost = function(){
         }
       }
     });
-
-
-
-
   });
