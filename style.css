@@ -1,0 +1,19 @@
+ul {
+  list-style-type: none;
+}
+
+.comments-section {
+  float: left;
+}
+
+#comment-button {
+  margin: 0px 0px 0px 10px;
+}
+
+#post-button {
+  margin: 15px 0px 0px 0px;
+}
+
+#post-input {
+  margin: 0px 0px 10px 0px;
+}
