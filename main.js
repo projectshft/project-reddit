@@ -23,6 +23,7 @@ var createPost = function(){
                 +  '<div class="action-buttons">'
                 +  '<a href="#" class="view-comments" role="button"> Comments </a>'
                 +  '<a href="#" class="remove-post" role="button"> Remove </a>'
+                +  '<a href="#" class="edit-post" role="button"> Edit </a>'
                 +  '</div>'
                 +  '</div>'
                 +  '<p class="text-muted"> Posted By: <strong>' + $postName + '</strong> </p>'
@@ -76,6 +77,12 @@ $('.action-buttons').unbind('click').click(function(e) {
 if (e.target.classList.contains('remove-post')) {
   var thisPost = $(this).closest('.row')
   thisPost.remove();
+}
+
+if (e.target.classList.contains('edit-post')){
+  var edit = prompt("Place edit here");
+  var targetEdit = $(this).closest('.col').find('.post');
+  targetEdit.text(edit);
 }
 
 //toggles comment section and forms
