@@ -48,6 +48,16 @@
   width: 17px;
 }
 
+/* .float-post{
+  float: left;
+  position: fixed;
+  margin:auto;
+  top: 300px;
+  background-color: rgba(34, 34, 17);
+  left: 25%;
+  width: 50%;
+} */
+
 .hide {
   display: none;
 }
@@ -107,6 +117,10 @@
 
 .remove-width {
   width: 45px;
+}
+
+.show{
+  display: block;
 }
 
 .tborder-gray:before {

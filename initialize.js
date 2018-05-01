@@ -8,7 +8,10 @@
 */
 
 // ------this is the array that stores each post and it's comments as an object------
-var hide = 'hide"'
+
+
+var commentCount=0; //counts amount of comments made
+var postCount=0; //counts amount of posts submitted
 
 var posts = [{
   'userName': 'Hew',
@@ -18,12 +21,21 @@ var posts = [{
     'commentMessage': 'You can make comments here'
   }],
 }]
-commentCount=0; //counts amount of comments made
-postCount=0; //counts amount of posts submitted
-commentSubmit = '#comment-submit-' + 1
-commenterName = '#comment-user-' + 1
-commenterText = '#post-comment-' + 1
-thisPostId = 1; //since the page adds the first post object, I initialized thisPostId since there is no hovering that happens to find the variable.
-newPost();
-newComment();
-//If we want to load the page without any pre-loaded content, simply remove newPost(), newComment, and thisPostId from this page
+
+
+//If we want to load the page without any pre-loaded content, simply remove newPost(), newComment, and thisPostId from this page. And delete the object in the area
+
+console.log("initial variables are created")
+console.log("posts array already contains initial object --> pushing to post skipped")
+
+
+$( document ).ready(function() {
+
+  let commentSubmit = '#comment-submit-' + 1
+  let commenterName = '#comment-user-' + 1
+  let commenterText = '#post-comment-' + 1
+  let thisPostId = 1; //since the page adds the first post object, I initialized thisPostId since there is no hovering that happens to find the variable.
+
+  newPost();
+  newComment(thisPostId);
+});

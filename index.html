@@ -7,6 +7,9 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.js"></script>
+
   <link rel="stylesheet" type="text/css" href="style.css">
   <meta charset="utf-8">
   <title></title>
@@ -23,93 +26,11 @@
 
     </div>
   </div>
+
   <!--=======POST'S CONTENT AREA======== -->
   <div class="container-fluid posts tborder-gray post-bg">
-      <!--=======THIS IS A TEST POST THAT IS NO LONGER USED======== -->
-    <!-- <div class="a-post" data-post-id="1" id="post-id-1"> -->
-      <!--=======USER NAME======== -->
-      <!-- <div class="row">
-        <div class="col-sm-3">
-        </div>
-        <div class="padded-column">
-        </div>
-        <h5>Hew:</h5>
-      </div> -->
-      <!--=======MESSAGE======== -->
-      <!-- <div class="row">
-        <div class="col-sm-3">
-        </div>
-        <div class="padded-column">
-        </div>
-        <div class="posts-border rounded">
-          <p class="posted-message">Welcome to my project!!! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
-          <button type="button" id="edit-done-1" class="btn bttn-done my-1 hide">Done</button>
-        </div>
-      </div> -->
-      <!--=======OPTIONS======== -->
-      <!-- <div class="row pb-3">
-        <div class="col-sm-3">
-        </div>
-        <div class="padded-column">
-        </div>
-        <div class="comments-width">
-          <a data-comments-id="1" id="comments-id-1" class="text-muted options-position comment-post" href="#">Comments</a>
-        </div>
-        <div class="remove-width">
-          <a data-remove-id="1" id="remove-id-1" class="text-muted options-position remove-post" href="#">Remove</a>
-        </div>
-        <div class="edit-width">
-          <a data-edit-id="1" id="edit-id-1" class="text-muted options-position" href="#">Edit</a>
-        </div>
-      </div> -->
-      <!--=======COMMENTS SECTION======== -->
-      <!-- <div id="comments-section-1" class="hide comments-section ">
-        <div class="a-comment" data-comment="1" id="comment-1">
-          <div class="row">
-            <div class="comments-padding">
-            </div>
-            <p class="commenter col-5"> Hew: <a id="comment-delete-1" href='#'>X</a> </p>
-          </div>
-          <div class="row">
-            <div class="comments-padding">
-            </div>
-            <p class="col-5 comment-message"> You can make comments here </p>
-          </div>
-        </div>
-
-
-      </div> -->
-
-      <!--=======THIS IS A TEST COMMENT AREA THAT IS NO LONGER USED======== -->
-      <!-- <div id="post-comments-1" class=" hide row post-comments pb-5">
-        <div class="col-sm-4">
-        </div> -->
-        <!--=======COMMENT NAME======== -->
-        <!-- <div class="comment-box col-sm-5">
-          <div class="row pb-1">
-
-            <div class="col-sm-12">
-              <input class="form-control input-group" id="comment-user-1" placeholder="Your Name"></input>
-            </div>
-          </div> -->
-          <!--=======COMMENT POST TEXT======== -->
-          <!-- <div class="row">
-            <div class="col-sm-12">
-              <textarea class="form-control input-group" id="post-comment-1" placeholder="Post Text"></textarea>
-            </div>
-          </div> -->
-          <!--=======POST COMMENT======== -->
-          <!-- <div class="row">
-            <div class="col-sm-12">
-              <button type="button" class="btn bttn-post comment-submit" id="comment-submit-1">Comment</button>
-              <button type="button" class="btn back-to-page">Back</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> -->
-    
   </div>
+
   <!--=======USER POST HEADER======== -->
   <div id="user-post-header"class="container-fluid post-bg py-3">
     <div class="row">
@@ -117,29 +38,137 @@
         <h2> Add a New Post </h2>
       </div>
     </div>
+
     <!--=======ENTER NAME======== -->
     <div class="row pb-1">
       <div class="col-sm-12">
         <input class="input-group" id="post-user" placeholder="Your Name"></input>
       </div>
     </div>
+
     <!--=======ENTER POST TEXT======== -->
     <div class="row">
       <div class="col-sm-12">
         <textarea class="input-group input-height" id="post-message" placeholder="Post Text"></textarea>
       </div>
     </div>
+
     <!--=======POST BUTTON======== -->
     <div class="row">
       <div class="col-sm-12">
         <button type="button" class="btn bttn-post" id="post-to-board">Post</button>
       </div>
     </div>
+
   </div>
 
 
 
 </body>
+
+<script id="post-template" type="text/x-handlebars-template">
+  <div class=" pt-3 a-post" data-post-id="{{ postCount }}" id="post-id-{{ postCount }}">
+
+    <!-- =======USER NAME======== -->
+    <div class="row">
+      <div class="padded-column">
+      </div>
+      <h5>{{userName}}:</h5>
+    </div>
+
+    <!-- =======MESSAGE======== -->
+    <div class="row">
+      <div class="padded-column">
+      </div>
+      <div class="posts-border pt-3 rounded" id="message-id-{{ postCount }}">
+        <p class="posted-message">{{message}}</p>
+    <!-- =======HIDDEN DONE BUTTON======== -->
+        <button type="button" id="edit-done-{{ postCount }}" class="btn bttn-post edit-done my-1 hide">Done</button>
+      </div>
+      <div class="padded-column">
+      </div>
+    </div>
+
+    <!--=======OPTIONS======== -->
+    <div class="row pb-3">
+      <div class="padded-column">
+      </div>
+
+      <div class="comments-width">
+        <a class="primary-text options-position comment-post pl-1" data-comments-id="{{ postCount }}" id="comments-id-{{ postCount }}" href="#">Comment</a>
+      </div>
+
+      <div class="remove-width">
+        <a class="primary-text options-position remove-post pl-2" data-remove-id="{{ postCount }}" id="remove-id-{{ postCount }}" href="#">Remove</a>
+      </div>
+
+      <div class="edit-width">
+        <a class="primary-text options-position edit-post pl-2" data-edit-id="{{ postCount }}" id="edit-id-{{ postCount }}" href="#">Edit</a>
+      </div>
+
+    </div>
+
+    <!--=======COMMENTS SECTION======== -->
+    <div class="comments-section" id="comments-section-{{ postCount }}">
+
+    </div>
+
+    <div id="post-comments-{{ postCount }}" class="hide row post-comments pb-5">
+      <div class="col-sm-1">
+      </div>
+      <div class="comment-box col-sm-10">
+
+        <!--=======COMMENT NAME======== -->
+        <div class="row pb-1">
+          <div class="col-sm-12">
+            <input class=" input-group" id="comment-user-{{ postCount }}" placeholder="Your Name">
+          </div>
+        </div>
+
+        <!--=======COMMENT POST TEXT======== -->
+        <div class="row">
+          <div class="col-sm-12">
+            <textarea class="input-group" id="post-comment-{{ postCount }}" placeholder="Post Text">
+            </textarea>
+          </div>
+        </div>
+
+        <!--=======COMMENT BUTTONS======== -->
+        <div class="row">
+          <div class="col-sm-12">
+            <button type="button" class="btn bttn-post comment-submit mr-2" id="comment-submit-{{ postCount }}">Comment</button>
+            <button type="button" class="btn back-to-page bttn-post">Back</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <button type="button" class="btn back-to-page bttn-post hide" id="back-id-{{postCount}}">Back</button>
+      </div>
+    </div>
+  </div>
+</script>
+
+<script id="comment-template" type="text/x-handlebars-template">
+
+    <div class="a-comment" data-comment="{{ commentCount }}" id="comment-{{ commentCount }}">
+      <div class="row">
+        <div class="comments-padding">
+        </div>
+        <p class="commenter col-10">{{ commenter }}: <a id="comment-delete-{{ commentCount }}" href="#">X</a></p>
+      </div>
+      <div class="row">
+        <div class="comments-padding">
+        </div>
+        <p class="col-10 comment-message">{{ commentMessage }}</p>
+      </div>
+    </div>
+  </div>
+</script>
+
+
 <script type="text/javascript" src="postTemplates.js"></script>
 <script type="text/javascript" src="buttonFunctions.js"></script>
 <script type="text/javascript" src="initialize.js"></script>

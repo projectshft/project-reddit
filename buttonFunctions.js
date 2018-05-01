@@ -1,6 +1,9 @@
 
 var submitComment = function() {
-  $(commentsId).unbind().click(function() {
+  $('.comment-submit').unbind().click(function() {
+    let thisPostId = $(this).closest("[data-post-id]").attr('data-post-id')
+    commenterName = '#comment-user-' + thisPostId //stores id of input area for commenter's name to get it's value when comment button is pressed-- please reference function submitComment
+    commenterText = '#post-comment-' + thisPostId //stores id of  textarea for commenter's message to get it's value when comment button is pressed
     let name = $(commenterName).val()
     let text = $(commenterText).val()
     // ------PUSH object containg commenter and the comments to posts array------
@@ -8,74 +11,75 @@ var submitComment = function() {
       'commenter': name,
       'commentMessage': text
     })
-    // console.log(posts[thisPostId - 1])
-    newComment();
+    newComment(thisPostId);
   })
 }
 
-var displayPost = function() {
-  displayComments = '#message-id-' + thisPostId;
 
-  $(displayComments).on('click', function(event) {
-    $('#comments-section-' + thisPostId).removeClass('hide'); //comment this out to always show comments
-    $('#post-comments-' + thisPostId).removeClass('hide');
+var targetDisplayPost = function(){
+  $('.posted-message').unbind().click(function(){
+    let thisPostId = $(this).closest("[data-post-id]").attr('data-post-id')
     $('.a-post').addClass('hide');
     $('#user-post-header').addClass('hide');
     $('#post-id-' + thisPostId).removeClass('hide');
-  })
-
-  $('.back-to-page').on("click", function() {
-    $('#comments-section-' + thisPostId).addClass('hide'); //comment this out to always show comments
-    $('#post-comments-' + thisPostId).addClass('hide');
-    $('.a-post').removeClass('hide');
-    $('#user-post-header').removeClass('hide');
+    $('#post-id-' + thisPostId).addClass('py-5');
+    if( $('#post-comments-' + thisPostId).hasClass('hide') ){
+      $('#back-id-' + thisPostId).addClass('show')
+    }
   })
 }
 
-var openComment = function() {
-  displayComments = '#comments-id-' + thisPostId;
-
-  $(displayComments).on('click', function(event) {
-    $('#comments-section-' + thisPostId).removeClass('hide'); //comment this out to always show comments
+var displayCommentBox = function() {
+  $('.comment-post').unbind().click(function(){
+    console.log('display comments')
+    let thisPostId = $(this).closest("[data-post-id]").attr('data-post-id')
+    let postId = '#post-id-' + thisPostId
     $('#post-comments-' + thisPostId).removeClass('hide');
-    // $('.a-post').addClass('hide');
-    // $('#user-post-header').addClass('hide');
-    // $('#post-id-' + thisPostId).removeClass('hide');
+    $('#back-id-' + thisPostId).removeClass('show')
   })
+}
 
-  $('.back-to-page').on("click", function() {
-    $('#comments-section-' + thisPostId).addClass('hide'); //comment this out to always show comments
+var backToPage = function(){
+  $('.back-to-page').unbind().on("click", function() {
+    let thisPostId = $(this).closest("[data-post-id]").attr('data-post-id')
     $('#post-comments-' + thisPostId).addClass('hide');
-    // $('.a-post').removeClass('hide');
-    // $('#user-post-header').removeClass('hide');
+    $('.a-post').removeClass('hide');
+    $('#user-post-header').removeClass('hide');
+    $('#post-id-' + thisPostId).removeClass('py-5');
+    $('#back-id-' + thisPostId).removeClass('show')
   })
 }
 
 var removePost = function() {
-  removeId = '#remove-id-' + thisPostId //stores #remove-id-number
-  $(removeId).click(function() {
-    let postId = '#post-id-' + thisPostId //stores string: '#post-id-number'
-    $(postId).remove(); //$(#post-id-number).remove() => removes entire post
+  $('.remove-post').unbind().click(function(){
+    $(this).closest('.a-post').remove();
+    console.log('remove post')
     $('.a-post').removeClass('hide');
     $('#user-post-header').removeClass('hide');
   })
 }
 
+
+
 $('#post-to-board').click(function() {
   let name = $('#post-user').val()
   let text = $('#post-message').val()
+
   // ------PUSH object containg name and message to posts array------
   posts.push({
     'userName': name,
     'postMessage': text,
     'comments': [],
   })
+
+  console.log("new post info pushed to posts array, then initiates execution of new post #" + (postCount+1))
   newPost();
 })
 
 var editPost = function(){
-  editId = '#edit-id-' + thisPostId //stores #edit-id-number
-  $(editId).click(function(){
+  // let editId = '#edit-id-' + thisPostId //stores #edit-id-number
+  $('.edit-post').click(function(){
+    let thisPostId = $(this).closest("[data-post-id]").attr('data-post-id')
     let postId = '#post-id-' + thisPostId //finds particular post
     let doneId = '#edit-done-' + thisPostId //finds the Done button that always existed but was hidden
     postdata = $(postId).find('.posted-message').html();
@@ -85,8 +89,9 @@ var editPost = function(){
 }
 
 var doneEdit = function(){
-  buttonDoneId = '#edit-done-' + thisPostId //stores #edit-done-number
-  $(buttonDoneId).click(function(){
+  // buttonDoneId = '#edit-done-' + thisPostId //stores #edit-done-number
+  $('.edit-done').click(function(){
+    let thisPostId = $(this).closest("[data-post-id]").attr('data-post-id')
     let postId = '#post-id-' + thisPostId //finds particular post
     let doneId = '#edit-done-' + thisPostId //targets specific id of the done button
     postdata = $(postId).find('.edit-height').val(); //uses parent to find child- edit height is a css that makes the edit box taller and was an easily targetable class.
@@ -96,11 +101,13 @@ var doneEdit = function(){
 }
 
 var deleteComment = function(){
-  console.log("SAOIFHODFJSD")
   deleteCommentButtonId = '#comment-delete-' + thisCommentId //stores #edit-done-number
   $(deleteCommentButtonId).click(function(){
-    console.log("ASASDSDS")
     let commentId = '#comment-' + thisCommentId //stores string: '#post-id-number'
     $(commentId).remove(); //$(#post-id-number).remove() => removes entire post
   })
 }
+
+/*
+remove doesn't need an id
+*/

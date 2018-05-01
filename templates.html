@@ -1,0 +1,16 @@
+<script id="post-template" type="text/x-handlebars-template">
+
+    <div class="a-comment" data-comment="{{ commentCount }}" id="comment-{{ commentCount }}">
+      <div class="row">
+        <div class="comments-padding">
+        </div>
+        <p class="commenter col-10">{{ commenter }}: <a id="comment-delete-{{ commentCount }}" href="#">X</a></p>
+      </div>
+      <div class="row">
+        <div class="comments-padding">
+        </div>
+        <p class="col-10 comment-message">{{ commentMessage }}</p>
+      </div>
+    </div>
+  </div>
+</script>
