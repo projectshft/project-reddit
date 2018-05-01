@@ -1,0 +1,29 @@
+div .row {
+  border-bottom: 1px inset;
+}
+
+.comments {
+  display:none;
+}
+
+
+
+.show {
+  display: inline-block;
+}
+
+li {
+  list-style-type: none;
+}
+
+.top-margin{
+  margin-top: 30px;
+}
+
+.action-butttons a {
+  display: inline-block;
+}
+
+.post {
+  font-size: 16px;
+}
