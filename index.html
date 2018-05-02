@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet" type='text/css'>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="viewport" content="initial-scale=1"/>
+  <title></title>
+</head>
+
+<body class="page-background">
+
+  <div class="container-fluid post-bg">
+    <div class="row pb-2 pt-5">
+
+      <div class="col-sm-12 bborder-gray">
+        <h2> Project Distillery</h2>
+      </div>
+
+    </div>
+  </div>
+
+  <!--=======POST'S CONTENT AREA======== -->
+  <div class="container-fluid posts tborder-gray post-bg">
+  </div>
+
+  <!--=======USER POST HEADER======== -->
+  <div id="user-post-header"class="container-fluid post-bg py-3">
+    <div class="row">
+      <div class="col-sm-12  tborder-gray">
+        <h4> Add a New Post </h4>
+      </div>
+    </div>
+
+    <!--=======ENTER NAME======== -->
+    <div class="row pb-1">
+      <div class="col-sm-12">
+        <input class="input-group" id="post-user" placeholder="Your Name"></input>
+      </div>
+    </div>
+
+    <!--=======ENTER POST TEXT======== -->
+    <div class="row">
+      <div class="col-sm-12">
+        <textarea class="input-group input-height" id="post-message" placeholder="Post Text"></textarea>
+      </div>
+    </div>
+
+    <!--=======POST BUTTON======== -->
+    <div class="row">
+      <div class="col-sm-12">
+        <button type="button" class="btn bttn-post" id="post-to-board">Post</button>
+      </div>
+    </div>
+
+  </div>
+
+
+
+</body>
+
+<script id="post-template" type="text/x-handlebars-template">
+  <div class=" pt-3 a-post" data-post-id="{{ postCount }}" id="post-id-{{ postCount }}">
+
+    <!-- =======USER NAME======== -->
+    <div class="row">
+      <div class="padded-column">
+      </div>
+      <h5>{{userName}}:</h5>
+    </div>
+
+    <!-- =======MESSAGE======== -->
+    <div class="row">
+      <div class="padded-column">
+      </div>
+      <div id="post-box-{{ postCount }}" class="posts-border detailed-view pt-3 rounded">
+        <p class="posted-message">{{message}}</p>
+      </div>
+      <div class="padded-column">
+      </div>
+    </div>
+
+    <!--=======OPTIONS======== -->
+    <div class="row pb-3">
+      <div class="padded-column">
+      </div>
+
+      <div class="comments-width">
+        <a class="primary-text options-position comment-post col-sm-auto px-1" href="#">Comment</a>
+      </div>
+
+      <div class="remove-width">
+        <a class="primary-text options-position remove-post col-sm-auto pl-3" href="#"> Remove</a>
+      </div>
+
+      <div class="edit-width">
+        <a class="primary-text options-position edit-post col-sm-auto px-4" href="#">Edit</a>
+      </div>
+      <!-- =======HIDDEN DONE BUTTON======== -->
+    </div>
+    <button type="button" id="edit-done-{{ postCount }}" class="btn bttn-post edit-done hide mb-4">Done</button>
+
+    <!--=======COMMENTS SECTION======== -->
+    <div class="comments-section hide" data-comments-section="1" id="comments-section-{{ postCount }}">
+
+    </div>
+
+    <div id="post-comments-{{ postCount }}" class="hide row post-comments pb-5">
+      <div class="col-sm-1">
+      </div>
+      <div class="comment-box col-sm-10">
+
+        <!--=======COMMENT NAME======== -->
+        <div class="row pb-1">
+          <div class="col-sm-12">
+            <input class=" input-group" id="comment-user-{{ postCount }}" placeholder="Your Name">
+          </div>
+        </div>
+
+        <!--=======COMMENT POST TEXT======== -->
+        <div class="row">
+          <div class="col-sm-12">
+            <textarea class="input-group" id="post-comment-{{ postCount }}" placeholder="Post Text">
+            </textarea>
+          </div>
+        </div>
+
+        <!--=======COMMENT BUTTONS======== -->
+        <div class="row">
+          <div class="col-sm-12">
+            <button type="button" class="btn bttn-post comment-submit mr-2" id="comment-submit-{{ postCount }}">Comment</button>
+            <button type="button" class="btn back-to-page bttn-post">Back</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <button type="button" class="btn back-to-page bttn-post hide" id="back-id-{{postCount}}">Back</button>
+
+      </div>
+    </div>
+  </div>
+</script>
+
+<script id="comment-template" type="text/x-handlebars-template">
+
+    <div class="a-comment" data-comment="{{ commentCount }}" id="comment-{{ commentCount }}">
+      <div class="row">
+        <div class="comments-padding">
+        </div>
+        <p class="commenter col-10">{{ commenter }}: <a class="comment-delete" id="comment-delete-{{ commentCount }}" href="#">Remove</a></p>
+      </div>
+      <div class="row">
+        <div class="comments-padding">
+        </div>
+        <p class="col-10 comment-message">{{ commentMessage }}</p>
+      </div>
+    </div>
+  </div>
+</script>
+
+
+<script type="text/javascript" src="postTemplates.js"></script>
+<script type="text/javascript" src="buttonFunctions.js"></script>
+<script type="text/javascript" src="initialize.js"></script>
+
+</html>
