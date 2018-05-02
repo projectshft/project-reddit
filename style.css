@@ -5,12 +5,13 @@
 }
 
 .bttn-post {
+  margin-top: 5px;
   color: #fff;
-  background-color: #1a1300;
-  border-color: #1a1300;
+  background-color: rgba(204, 153, 30, .7);
+  border-color: rgba(204, 153, 30, .75);
 }
 .bttn-post:hover{
-  background-color: rgba(204, 153, 0, .75)
+  background-color: rgba(204, 153, 0, 1)
 }
 
 .comment-box {
@@ -21,15 +22,15 @@
   color: rgba(255, 210, 77);
   font-weight: bold;
   margin-bottom: -5px;
-  border-left: 1px dotted #ecf2f9;
-  border-top: 1px dotted #ecf2f9;
-  border-right: 1px dotted #ecf2f9;
+  border-left: 1px dotted rgba(204, 153, 30, .7);
+  border-top: 1px dotted rgba(204, 153, 30, .7);
+  border-right: 1px dotted rgba(204, 153, 30, .7);
 }
 
 .comment-message {
-  border-left: 1px dotted #ecf2f9;
-  border-bottom: 1px dotted #ecf2f9;
-  border-right: 1px dotted #ecf2f9;
+  border-left: 1px dotted rgba(204, 153, 30, .7);
+  border-bottom: 1px dotted rgba(204, 153, 30, .7);
+  border-right: 1px dotted rgba(204, 153, 30, .7);
 }
 
 .comments-padding {
@@ -37,7 +38,11 @@
 }
 
 .comments-width {
-  width: 50px;
+  width: 70px;
+}
+
+.edit-done{
+  margin-top: -5px;
 }
 
 .edit-height {
@@ -45,18 +50,8 @@
 }
 
 .edit-width {
-  width: 17px;
+  width: 29px;
 }
-
-/* .float-post{
-  float: left;
-  position: fixed;
-  margin:auto;
-  top: 300px;
-  background-color: rgba(34, 34, 17);
-  left: 25%;
-  width: 50%;
-} */
 
 .hide {
   display: none;
@@ -67,17 +62,28 @@
 }
 
 .options-position {
-  font-size: 50%;
+  font-size: 15px;
   float: left;
   display: inline-block;
+
 }
+
+/*
+@media (min-width: 481px)  {
+  .post-bg {
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+    max-width: 100%;
+    width: 100%;
+  }
+} */
 
 .padded-column {
   width: 2%
 }
 
 .page-background {
-  background-image: url(barrels.jpeg);
+  background-image: url(bg.jpeg);
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center center;
@@ -86,7 +92,7 @@
 }
 
 .post-bg {
-  background-color: rgba(34, 34, 17, 0.75);
+  background-color: rgba(33, 33, 19, 0.98);
   top: 0;
   left: 25%;
   width: 50%;
@@ -116,7 +122,7 @@
 }
 
 .remove-width {
-  width: 45px;
+  width: 58px;
 }
 
 .show{
@@ -129,6 +135,10 @@
   margin: 0 auto;
   width: 99%;
   border-top: 1px solid rgba(221, 221, 187, .4);
+}
+
+h4 {
+  color: #ddddbb;
 }
 
 h2 {
@@ -147,9 +157,7 @@ p a {
   float: right;
   text-decoration: none;
   color: rgba(221, 221, 187, .85);
-  text-transform: uppercase;
-  font-family: 'Oswald', sans-serif;
-  font-size: 12px;
+  /* font-size: 12px; */
 }
 
 p a:hover {

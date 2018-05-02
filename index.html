@@ -12,6 +12,8 @@
 
   <link rel="stylesheet" type="text/css" href="style.css">
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="viewport" content="initial-scale=1"/>
   <title></title>
 </head>
 
@@ -35,7 +37,7 @@
   <div id="user-post-header"class="container-fluid post-bg py-3">
     <div class="row">
       <div class="col-sm-12  tborder-gray">
-        <h2> Add a New Post </h2>
+        <h4> Add a New Post </h4>
       </div>
     </div>
 
@@ -80,10 +82,8 @@
     <div class="row">
       <div class="padded-column">
       </div>
-      <div class="posts-border pt-3 rounded" id="message-id-{{ postCount }}">
+      <div id="post-box-{{ postCount }}" class="posts-border detailed-view pt-3 rounded">
         <p class="posted-message">{{message}}</p>
-    <!-- =======HIDDEN DONE BUTTON======== -->
-        <button type="button" id="edit-done-{{ postCount }}" class="btn bttn-post edit-done my-1 hide">Done</button>
       </div>
       <div class="padded-column">
       </div>
@@ -95,21 +95,22 @@
       </div>
 
       <div class="comments-width">
-        <a class="primary-text options-position comment-post pl-1" data-comments-id="{{ postCount }}" id="comments-id-{{ postCount }}" href="#">Comment</a>
+        <a class="primary-text options-position comment-post col-sm-auto px-1" href="#">Comment</a>
       </div>
 
       <div class="remove-width">
-        <a class="primary-text options-position remove-post pl-2" data-remove-id="{{ postCount }}" id="remove-id-{{ postCount }}" href="#">Remove</a>
+        <a class="primary-text options-position remove-post col-sm-auto pl-3" href="#"> Remove</a>
       </div>
 
       <div class="edit-width">
-        <a class="primary-text options-position edit-post pl-2" data-edit-id="{{ postCount }}" id="edit-id-{{ postCount }}" href="#">Edit</a>
+        <a class="primary-text options-position edit-post col-sm-auto px-4" href="#">Edit</a>
       </div>
-
+      <!-- =======HIDDEN DONE BUTTON======== -->
     </div>
+    <button type="button" id="edit-done-{{ postCount }}" class="btn bttn-post edit-done hide mb-4">Done</button>
 
     <!--=======COMMENTS SECTION======== -->
-    <div class="comments-section" id="comments-section-{{ postCount }}">
+    <div class="comments-section hide" data-comments-section="1" id="comments-section-{{ postCount }}">
 
     </div>
 
@@ -146,6 +147,7 @@
     <div class="row">
       <div class="col-sm-12">
         <button type="button" class="btn back-to-page bttn-post hide" id="back-id-{{postCount}}">Back</button>
+
       </div>
     </div>
   </div>
@@ -157,7 +159,7 @@
       <div class="row">
         <div class="comments-padding">
         </div>
-        <p class="commenter col-10">{{ commenter }}: <a id="comment-delete-{{ commentCount }}" href="#">X</a></p>
+        <p class="commenter col-10">{{ commenter }}: <a class="comment-delete" id="comment-delete-{{ commentCount }}" href="#">Remove</a></p>
       </div>
       <div class="row">
         <div class="comments-padding">
