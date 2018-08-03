@@ -1,3 +1,38 @@
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto', sans-serif
+}
+
+h1 {
+  text-align:center;
+  /* padding: 15px; */
+  width: 100%;
+}
+
+li {
+  /* padding 5px; */
+  width: 100%
+}
+
+input {
+  padding: 3px;
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.btn {
+  text-align:center;
+  width:30%;
+  margin-left:35%;
+  margin-top:5px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+#remove {
+  height: 10px;
+  width: 10px;
+  margin-bottom:10px;
+  float:right;
 }
