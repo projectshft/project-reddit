@@ -16,13 +16,13 @@
     <li>Write clean??? code</li>
     <li>Utilize patterns to organize your JavaScript if necessary</li>
     <li>use jQuery</li>
-    <li>create spaces between input boxes</li>
+
   </ol>
   <ol><strong>User Stories</strong>
-    <li>story 1: when post button is click it should store name value </li>
-    <li>story 2: when post button is click it should store text value</li>
-    <li>story 3: </li>
-    <li>story 4: </li>
+    <li>story 1: You should see stored name on screen </li>
+    <li>story 2: stored name should say: Posted By:"name"/li>
+    <li>story 3: with the name in bold </li>
+
   </ol>
   <h2>project starts below here:</h2>
 
@@ -39,16 +39,28 @@
 
   <div class="container">
     <div class="row">
+      <div class="col-sm-3 nothing">Nothing should go here</div>
+      <div class="col-sm-6">
+        <ul class="post-here">
+        </ul>
+      </div>
+      <div class="col-sm-3 nothing">Nothing should go here</div>
+    </div>
+  </div>
+
+
+  <div class="container">
+    <div class="row">
       <div class="col-sm-3"></div>
       <div class="col-sm-6">
-        <h3>Add a New Post</h3>
+        <h4>Add a New Post</h4>
         <div class="column-inner" </div>
           <input type="text" class="form-control post-text" placeholder="Post Text"></input>
         </div>
         <div class="column-inner" </div>
-          <input type="text" class="form-control your-name" placeholder="Your Name"></input>
+          <input type="text" class="form-control your-name" type="form" placeholder="Your Name"></input>
         </div>
-        <button id="post" class="btn btn-primary">Post</button>
+        <button id="post-button" class="btn btn-primary">Post</button>
       </div>
       <div class="col-sm-3"></div>
     </div>

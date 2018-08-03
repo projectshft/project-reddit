@@ -1,23 +1,30 @@
 
+var nameObject = {};
+var textObject = {};
+var postArray =[];
+var initialPost = [];
+var postNewThread = "";
 
+$('#post-button').click(function(){
 
-$('#post').click(function(){
-  // alert("Your button works, ya big dummy");
   var postersName = $('.your-name').val();
   var postersText = $('.post-text').val();
-  var nameObject = {name:postersName};
-  var textObject = {text:postersText};
-  var postArray = [nameObject,textObject]
-  console.log(nameObject);
-  console.log(textObject);
-  console.log(postArray);
+  nameObject = {name:postersName};
+  textObject = {text:postersText};
+  postArray = [nameObject,textObject]
+  initialPost.push(postArray);
+
+
+  $('.post-here').append("<li>"+postersText+"<br>Posted By: "+postersName+ "</li");
+
+
 });
 
 
 //outline for post should be:
 // array with objects prop 1 is commenter Name
 // prop 2 is text string.
-var initialPost=[];
+
 
 
 
