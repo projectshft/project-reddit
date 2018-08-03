@@ -116,6 +116,14 @@ ul ul,
 ol ul,
 ul ol {
   margin-bottom: 0;
+  list-style: none;
+}
+
+li {
+  list-style: none;
+  border-top: 1px;
+  border-bottom: 1px;
+  border-color: grey;
 }
 
 dt {
