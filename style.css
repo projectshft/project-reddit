@@ -1,0 +1,18 @@
+
+.album-view-song-item {
+  height: 3rem;
+  border-bottom: 1px solid rgba(255,255,255,0.5);
+}
+
+.song-item-number {
+    width: 5%;
+    min-width: 30px;
+}
+
+.song-item-title {
+    width: 85%;
+}
+
+.song-item-duration {
+    width: 5%;
+}
