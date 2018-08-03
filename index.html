@@ -55,7 +55,7 @@
       <hr>
     </div>
 
-    <form>
+    <form id="posts-form">
       <div class="form-group">
         <!-- decide later: Do I want to use this? <label for="post">Post:</label> -->
         <textarea class="form-control" rows="3" id="inputPostText" placeholder="Post"></textarea>
@@ -69,6 +69,19 @@
       <button type="button" class="btn btn-primary" id="post-btn">Post</button>
     </form>
   </div>
+
+<div class="container col-8" id="create-comments">
+  <form class="form-inline">
+    <!-- using class "sr-only" makes the label not show up in browser -->
+    <label class="sr-only" for="comment-input">Name</label>
+    <input type="text" class="form-control" id="commentInput" placeholder="Comment">
+    <!-- using class "sr-only" makes the label not show up on browser-->
+    <label class="sr-only" for="Commenter-Name">Username</label>
+    <input type="text" class="form-control" id="commentPosterName" placeholder="Name">
+
+    <button type="button" class="btn btn-primary">Submit</button>
+  </form>
+</div>
 
 </main>
 
