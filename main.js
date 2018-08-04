@@ -9,11 +9,28 @@ entered into the form - are there any values?
 render values to page */
 
 var posts = [];
+var postText;
+var name;
+$list = $('ul');
 
 var clicked = function() {
-  alert('clicked');
-  $('button').on('click', clicked);
-}
+  console.log('clicked!');
+  postText = ($('#post-text').val());
+  name = ($('#your-name').val());
+  newPosts();
+};
+
+$('button').on('click', clicked);
+
+var newPosts = function() {
+  $list.append('<li>' + postText + "<br>Posted By: " + name + '</li>');
+};
+
+
+
+
+
+
 
 /* 2.
 
