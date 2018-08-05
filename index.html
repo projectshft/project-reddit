@@ -1,69 +1,83 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
+
+	<meta charset="utf-8">
+
 	<!-- 	Project title -->
 	<title>Reddit-Project</title>
 	
-	<meta charset="utf-8">
 	<!-- link to bootstrap -->
   <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
   <!-- link to css page -->
   <link rel="stylesheet" type="text/css" href="style.css">
   <!-- link to jquery -->
   <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+
 </head>
 
 <body>
-<!-- 	navbar -->
+	<!-- 	navbar -->
   <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
+
       <div class="navbar-header">
         <a class="navbar-brand" href="#">Home Page</a>
       </div>
+
       <ul class="nav navbar-nav navbar-right">
         <li class="active">
           <li><a href="#">Favorites</a></li>
           <li><a href="#">Trending</a></li>
-          <li><a href="#">Contact</a></li>     
-        </ul>
-      </div>
+          <li><a href="#">Contact</a></li>  
+        </li>   
+      </ul>
+    </div> <!-- close container-fluid -->
+  </nav> <!-- close navbar -->
 
-      <section id="page-header">
-			<div class="row">
-			  <div class="col-md-6 col-md-offset-3">
-				<!-- <div class="page-header"> -->
+  <!-- main content -->
+  <section id="page-header">
+		<div class="row">
+		  <div class="col-md-6 col-md-offset-3">
+
+				<!-- main title --> 
 				<div style="background:transparent !important" class="jumbotron">
 					<h1>Project Reddit</h1>
-			</div>
+				</div>
 
-			<div class="posts">
-			</div>
+				<!-- main posts -->
+				<div class="posts">
+				</div>
 
-			<form style="margin-top:30px;">
-				<h3>Add a New Post</h3>
+				<!-- main form -->
+				<form style="margin-top:30px;">
+					<h3>Add a New Post</h3>
 
+	 				<div class="container-fluid">
 
+	   				<div class="row">
+	     				<div class="form-group">
+	     					<textarea id="message" type="text" class="form-control" placeholder="Post Text"></textarea>
+	     				</div>
+	    			</div> <!-- close row --> 
+	    			
+	    			<div class="row">
+	    				<div class="form-group">
+	        			<input id="name" type="text" class="form-control" placeholder="Your Name"></input>
+	      			</div> 
+	    			</div> <!-- close row -->
 
-		   <div class="row">
-		     <div class="form-group">
-		     	<textarea id="message" type="text"
-		     	class="form-control"
-		      placeholder="Post Text"></textarea>
-		     </div>
-		    </div>
-		    <div class="row">
-		    	<div class="form-group">
-		        <input id="name" type="text"
-				      class="form-control"
-				      placeholder="Your Name"></input>
-		      </div>
-		    </div>
-		    <button type="button" class="btn btn-primary btn-lg" id="post-button">Post</button>
-		    <button type="button" class="btn btn-primary btn-lg" id="button">Post (jQuery)</button>
-			 </form>
-			 </div>
-			</div>
+						<button type="button" class="btn btn-primary btn-lg" id="post-button">Post</button>
 
-		<script src="main.js"></script>
-	</body>
-	</html>
+						<button type="button" class="btn btn-primary btn-lg" id="button">Post (jQuery)</button>		
+		 			</div> <!-- close container-fluid -->
+
+				</form>
+			</div> <!-- close column -->
+		</div> <!-- close row -->
+	</section> <!-- close main content -->
+
+	<!-- external javascript -->
+	<script src="main.js"></script>
+</body>
+</html>

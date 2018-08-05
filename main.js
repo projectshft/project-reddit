@@ -56,13 +56,23 @@ $(document).ready(function() {
     var newPost = document.createElement('div');
     newPost.append(message);
     newPost.append(author);
+
+    //modify newPost class
+    newPost.setAttribute("class", "newPost");
   
     //add new post to html div for posts 
     var posts = document.getElementsByClassName('posts')[0];
     posts.append(newPost);
-   
+    
+    // add line break to end of posts div
+    var lineBreak = document.createElement('div');
+    lineBreak.innerHTML = "<hr>";
+    posts.append(lineBreak);
+
     });
-  
+
+
+
 
 });
 
