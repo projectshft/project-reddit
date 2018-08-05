@@ -17,16 +17,17 @@ $(document).ready(function() {
     var userInputMessage = $('#message').val();
     console.log(userInputMessage);
     userInputMessage = "Post: " + userInputMessage;
-  
+    userInputMessage = "<span class='comment-button'>Comments</span> " + userInputMessage;
+    userInputMessage = "<span class='remove'>Remove</span>" + " " + userInputMessage;
 
 
-    var remove = document.createElement('div');
-    remove.innerHTML = "Remove";
+ 
     var comments = document.createElement('div');
     comments.innerHTML = "Comments";
     var x = document.createElement('div');
     
-
+    //dynamically add class comment-button to comments div
+    comments.setAttribute("class", "comment-button");
 
     // create message div and add html
     var message = document.createElement('div');
@@ -37,9 +38,7 @@ $(document).ready(function() {
     author.innerHTML = userInputName;
 
     // create outer div to store inner message and author divs
-    var newPost = document.createElement('div');
-    newPost.append(remove);
-    newPost.append(comments);
+    var newPost = document.createElement('div'); 
     newPost.append(message);
     newPost.append(author);
 
@@ -56,11 +55,15 @@ $(document).ready(function() {
     posts.append(lineBreak);
 
   }); // click event
-  
+
+
+    $('#posts').on('click', '.comment-button', function () {
+      console.log('clicked!');
+     });
 
     var posts = $('#posts');
     posts.click(function () { 
-      console.log(this);
+      // console.log(this);
     });
 
 }); //on load event
