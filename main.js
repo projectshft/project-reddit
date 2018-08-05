@@ -20,3 +20,4 @@ button.addEventListener('click', function () {
   var posts = document.getElementsByClassName('posts')[0];
   posts.append(userInputElement);
 });
+
