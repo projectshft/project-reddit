@@ -1,38 +1,38 @@
-// plain javascript
+// // plain javascript
 
-var button = document.getElementsByTagName('button')[0];
+// var button = document.getElementsByTagName('button')[0];
 
-button.addEventListener('click', function () { 
-  console.log('button clicked');
+// button.addEventListener('click', function () { 
+//   console.log('button clicked');
 
-  // get name
-  var userInputName = document.getElementById('name').value;
-  console.log('name: ', userInputName);
+//   // get name
+//   var userInputName = document.getElementById('name').value;
+//   console.log('name: ', userInputName);
 
-  // get message
-  var userInputMessage = document.getElementById('message').value;
-  console.log('msg: ', userInputMessage);
+//   // get message
+//   var userInputMessage = document.getElementById('message').value;
+//   console.log('msg: ', userInputMessage);
 
-  // add name and message to page
-  var userInput = document.createTextNode(userInputName + ' - ' + userInputMessage);
+//   // add name and message to page
+//   var userInput = document.createTextNode(userInputName + ' - ' + userInputMessage);
 
-  var newPost = document.createElement('li');
-  newPost.appendChild(userInput);
+//   var newPost = document.createElement('li');
+//   newPost.appendChild(userInput);
 
-  var posts = document.getElementsByClassName('posts')[0];
-  posts.append(newPost);
-});
+//   var posts = document.getElementsByClassName('posts')[0];
+//   posts.append(newPost);
+// });
 
 // jQuery 
 
 $(document).ready(function() {
   console.log('document loaded');
 
-  var submitButton = $('#button');
-  console.log(submitButton);
+  var Button = $('#button');
+  console.log(Button);
 
-  submitButton.click(function () { 
-    console.log('jquery button is clicked');
+  Button.click(function () { 
+    console.log('button is clicked');
 
     // get value of name-add "Posted by;"
     var userInputName = $('#name').val();
