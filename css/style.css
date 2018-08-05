@@ -14,3 +14,7 @@ li {
   color: blue;
   cursor: pointer;
 }
+
+#comment-submission {
+  display:none;
+}
