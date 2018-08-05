@@ -1,9 +1,18 @@
-* { 
-  background-color: grey;
+
+.navbar-header { 
+	background-color: FFF8DC;
+	border: 2px solid grey;
  }
 
-.btn btn-primary { 
-  text-align: center;
- }
 
- 
+.nav {
+	background-color: FFF8DC;
+	border: 2px solid grey;	
+
+}
+
+section {
+  padding: 150px 0;
+}
+
+

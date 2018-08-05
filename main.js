@@ -1,3 +1,5 @@
+// plain javascript
+
 var button = document.getElementsByTagName('button')[0];
 
 button.addEventListener('click', function () { 
@@ -12,12 +14,32 @@ button.addEventListener('click', function () {
   console.log('msg: ', userInputMessage);
 
   // add name and message to page
-  var userInputElement = document.createTextNode(userInputName + ' - ' + userInputMessage);
+  var userInput = document.createTextNode(userInputName + ' - ' + userInputMessage);
 
-  var li = document.createElement('li');
-  li.appendChild(userInputElement);
+  var newPost = document.createElement('li');
+  newPost.appendChild(userInput);
 
   var posts = document.getElementsByClassName('posts')[0];
-  posts.append(userInputElement);
+  posts.append(newPost);
 });
+
+// jQuery 
+
+$(document).ready(function() {
+  console.log('document loaded');
+  var submitButton = $('#button');
+    console.log(submitButton);
+    submitButton.click(function () { 
+      console.log('jquery button is clicked');
+
+    
+
+    });
+  
+
+});
+
+
+
+
 
