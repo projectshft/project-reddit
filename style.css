@@ -1,18 +1,18 @@
-
-.album-view-song-item {
-  height: 3rem;
-  border-bottom: 1px solid rgba(255,255,255,0.5);
+.post-list {
+  width: 90%;
+  margin: 1.5rem auto;
+  font-size: 14;
 }
 
-.song-item-number {
-    width: 5%;
-    min-width: 30px;
+.li-plain {
+  width: 100%;
+  list-style: none;
+  list-style-type: none;
 }
 
-.song-item-title {
-    width: 85%;
-}
-
-.song-item-duration {
-    width: 5%;
+.li-click {
+  color: blue;
+  display:block;
+  text-decoration: none;
+  font-size: 12;
 }
