@@ -15,4 +15,6 @@ section {
   padding: 150px 0;
 }
 
-
+.form-group { 
+background-color: red;
+ }
