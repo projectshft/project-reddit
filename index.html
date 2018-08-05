@@ -14,42 +14,54 @@
   </head>
   <body>
 
-<!--empty column on left -->
-  <div class="container col-2">
-    <span></span>
-  </div>
-
 <!--main content -->
-<main class="main-content col-8">
+<div class="buffer"></div>
+<main class="main-content">
 
-  <div class="container header col-8">
-    <div class="row" id="page-title">
-      <h1>Project Reddit</h1>
-    </div>
+  <div class="container header title" id="page-title">
+    <h1>Project Reddit</h1>
+    <hr>
   </div>
 
-  <div class="container col-8" id="display-posts">
+  <div class="container" id="display-posts">
+    <!-- <div class="row post-container">
 
-      <div class="row">
         <div class="post">
-          <a href="#" class="comment-link">Comment</a>
-          <p>This is an example of a post someone might leave!</p>
+          <p>This is an example of a post someone might leave owieroiewuroiweuroqiweporqiweroqij;klfn;kvjoirwe!</p>
           <p class="posted-by-name"><b>Posted by:</b> Lindsay</p>
-          <hr>
+          <a href="#" class="comment-link">Comment</a>
         </div>
-      </div>
 
-      <div class="row">
-        <div class="post">
-          <p>This is an example of a post someone might leave!</p>
-          <hr>
+        <div class="row comment-container">
+          <div class="comment-post">
+            <p>This is a comment</p>
+            <p class="posted-by-name"><b>Posted by:</b> Lindsay</p>
+            <a href="#" class="comment-link">Comment</a>
+          </div>
+          <div class="comment-post">
+            <p>This is a comment of a comment</p>
+            <p class="posted-by-name"><b>Posted by:</b> Lindsay</p>
+            <a href="#" class="comment-link">Comment</a>
+          </div>
         </div>
-      </div>
+
+        <div class="row comment-container">
+          <div class="comment-post">
+            <p>This is a comment</p>
+            <p class="posted-by-name"><b>Posted by:</b> Lindsay</p>
+            <a href="#" class="comment-link">Comment</a>
+          </div>
+        </div>
+
+      <hr>
+    </div> -->
+
+
 
   </div>
 
 <!--create a new post section -->
-  <div class="container col-8" id="create-posts">
+  <div class="container" id="create-posts">
 
     <div class="row create-post-header">
       <h3>Add a New Post</h3>
@@ -71,27 +83,24 @@
     </form>
   </div>
 
-<div class="container hideComments" id="createComments">
+<!-- <div class="container hideComments" id="createComments">
   <form class="form-inline">
 
-        <!-- using class "sr-only" makes the label not show up in browser-->
+
         <label class="sr-only" for="comment-input">Name</label>
         <input type="text" class="form-control" id="commentInput" placeholder="Comment">
 
-        <!-- using class "sr-only" makes the label not show up on browser-->
         <label class="sr-only" for="Commenter-Name">Username</label>
         <input type="text" class="form-control" id="commentPosterName" placeholder="Name">
 
-        <button type="button" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-primary post-btn">Submit</button>
   </form>
-</div>
+</div> -->
 
 </main>
 
-<!--empty column on right -->
-  <div class="container col-2">
-    <span></span>
-  </div>
+
+
 
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

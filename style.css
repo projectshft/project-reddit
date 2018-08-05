@@ -6,10 +6,33 @@ body{
   box-sizing:border-box;
 }
 
-.col-small-2 {
+.hideComments {
+  display: none;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.comment-container{
+  margin-left: 20px;
+  padding-top: 15px;
+}
+
+.col-sm-2 {
+  width:20%;
+  height: auto;
+  border: solid red 3px;
+}
+
+.col-sm-8 {
+  width: 60%;
+}
+
+.buffer-row{
   height: 100%;
 }
 
-.hideComments {
-  display: none;
+.comment {
+  padding-top: 10px;
 }
