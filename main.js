@@ -3,12 +3,13 @@ var seed = 0;
 
 var addPost = function (){
   //get text from input on view
-  var text = document.getElementById('input-box').value;
+  var text = $('#input-box').val();
+  var name = $('#input-box1').val();
   // create new post
   var post = {
     text: text,
-    votes: 0,
-    id: getId()
+    name: name,
+    // id: getId()
   };
   // add post to array of posts
   posts.push(post);
@@ -19,14 +20,15 @@ var addPost = function (){
   target.innerHTML = createListMarkup(posts);
 };
 //return unique ID
-var getId = function () {
-  seed++
-  return seed
-};
+// var getId = function () {
+//   seed++
+//   return seed
+// };
 var createListMarkup = function(posts){
   var markup = '';
+  var namePrepend = "Posted By:";
   for(var i = 0; i < posts.length; i++){
-    markup += '<p>' + posts[i].text + '</p>';
+    markup += '<p>' + '<a href="#">Remove</a>' + ' ' + '<a href="#">Comment</a>' + ' ' + posts[i].text + '</p>' + '<p>' + namePrepend + ' ' + posts[i].name + '</p>';
   }
   return markup;
 }
