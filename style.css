@@ -2,7 +2,6 @@
 h2 {
   border-bottom:  1px solid lightgrey;
 }
-
 input {
   width: 100%;
   color: lightgrey;
@@ -11,16 +10,13 @@ ul{
   width: 100%;
   padding-left: 0;
 }
-
-li {
+dl {
   width: 100%;
   border-bottom:  1px solid lightgrey;
   list-style-type: none;
   padding-bottom: 10px;
   padding-top: 10px;
-
 }
-
 .column-inner{
   padding-bottom: 4px;
   padding-top: 4px
@@ -32,7 +28,6 @@ li {
 .title {
   padding-top: 25px;
 }
-
 .nothing{
   color: white;
 }
