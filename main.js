@@ -1,8 +1,9 @@
-var commentCommentHtml = "<input id='comment-text' placeholder='comment'></input>";
-var commentUserHtml = "<input id='comment-name' placeholder='username'></input>";
+var commentCommentHtml = "<input id='comment-text' placeholder='Comment'></input>";
+var commentUserHtml = "<input id='comment-name' placeholder='Your Name'></input>";
 var postRemoveHtml = "<a id='remove-post'>remove</a>";
 var postCommentsHtml = "<a id='view-comments'>comments</a>";
-var commentButtonHtml = "<button type='button' class='btn btn-primary' id='create-comment'>Submit Comment</button>"
+var commentButtonHtml = "<button type='button' class='btn btn-primary' id='create-comment'>Submit Comment</button>";
+var commentRemoveHtml = "<a id='remove-comment'>x</a>";
 
 //listen for clicks and get values from input boxes for posts
 var createPost = $('#create-post').on('click', function () {
@@ -43,13 +44,20 @@ var createPost = $('#create-post').on('click', function () {
       alert('You must enter text in both fields');
     }
     else if (commentText != '' && commentName != '') {
-      $('#comments-list').append("<li>" + commentText + '</li>' + '<li>'
-      + 'Posted by: ' + commentName + '</li>');
+      $('#comments-list').append("<li id='idkWhatToName'>" + commentText + "</li>" + "<li id='iStillDontKnow'>"
+      + 'Posted by: ' + commentName + '</li>' + commentRemoveHtml);
     }
     // toggle comment section on and off
     $("#view-comments").click(function(event){
            $("#comment-section").toggle();
-       });
+    });
+    //remove comments
+    var removeComment = $("#remove-comment").click(function(){
+      //loop through to remove just the comment that is clicked on
+      // for (i = 0; i <)
+      $("#idkWhatToName").remove();
+      $("#iStillDontKnow").remove();
+    });
   });
 });
 
