@@ -1,3 +1,14 @@
 h1 {
   font-size: 300px;
 }
+.hide-input {
+  display: none;
+}
+
+.form-control1 {
+  display: inline;
+}
+
+button {
+  padding: 0px;
+}
