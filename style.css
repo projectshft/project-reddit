@@ -1,0 +1,22 @@
+.posts {
+  flex-basis: 100%;
+  flex-wrap: wrap;
+  align-content: space-between;
+}
+.comment-button {
+  float:right;
+  margin-right: 5px;
+}
+.add-comment {
+  float: left;
+  width: 85%;
+  margin-left: 15px;
+}
+
+.post-comment {
+  float: left;
+  width:100%;
+  margin-left: 15px;
+  margin-bottom: 10px;
+  margin-right: 5px;
+}
