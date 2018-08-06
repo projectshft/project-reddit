@@ -19,20 +19,6 @@ ul {
   padding-top: 15px;
 }
 
-.col-sm-2 {
-  width:20%;
-  height: auto;
-  border: solid red 3px;
-}
-
-.col-sm-8 {
-  width: 60%;
-}
-
-.buffer-row{
-  height: 100%;
-}
-
 .comment {
   padding-top: 10px;
 }

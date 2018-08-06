@@ -30,9 +30,12 @@ $(document).on('click','.comment-link', function(){ //when elements with class c
 $(document).on('click','#submitCommentBtn',function(){ //when comment form submit button is clicked
   var comment = $('#commentInput').val(); //value of #commentInput entry set to variable 'comment'
   var commenterName = $('#commentPosterName').val();//value of #commentPosterName text set to variable 'commenterName'
-  $(this).parent().siblings('div.comment-container').append('<div class="comment">'+'<p>'+comment+'</p>'+'<p>'+'<b>'+'Posted By: '+'</b>'+commenterName+'</p>'+'<a href="#" class="comment-link">'+'Comment'+'</a>'+'<a href="#" class="remove-comment-link">'+'  X  '+'</a></div>'); //append input values to comment container
+  $(this).parent().siblings('div.comment-container').append('<div class="comment">'+'<p>'+comment+'</p>'+'<p>'+'<b>'+'Posted By: '+'</b>'+commenterName+'</p>'+'<a href="#" class="sub-comment-link">'+'Comment'+'</a>'+'<a href="#" class="remove-comment-link">'+'  X  '+'</a><div class="sub-comment-container"></div>'); //append input values to comment container
   $("#createComments").addClass('hideComments'); //then re-add class to element so that form is no longer visible
 });
 $(document).on('click','.remove-comment-link', function(){ //when user clicks X next to comment
   $(this).parent('.comment').remove(); // comment is deleted
+});
+$(document).on('click','.remove-post-link', function(){ //when user clicks remove next to post
+  $(this).parents('div.post-container').remove(); // post is deleted
 });
