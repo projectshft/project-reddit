@@ -13,8 +13,7 @@ $(document).ready(function(){
   $("button").click(function(e){ //event handler instructs doc to invoke function when btn clicked
     var post= $('#inputPostText').val(); //value of #inputPostText text entry set to variable 'post'
     var posterName= $('#inputName').val(); //value of #inputName text entry set to variable 'posterName'
-
-    $('#display-posts').prepend('<div class="row post-container"><p class="post">'+ post +'</p><p><b>'+'Posted By: '+'</b>'+ posterName +'</p>'+'<a href="#" class="comment-link">'+'Comment'+'</a><div class="comment-container"></div>'+commentFormTemplate+'</div><hr>');//tells document to construct and add html to document
+    $('#display-posts').prepend('<div class="row post-container"><p class="post">'+ post +'</p><p><b>'+'Posted By: '+'</b>'+ posterName +'</p>'+'<a href="#" class="comment-link">'+'Comment'+'</a><a href="#" class="remove-post-link">'+'  Remove'+'</a><div class="comment-container"></div>'+commentFormTemplate+'</div><hr>');//tells document to construct and add html to document
   });
 });
 /* ==================== 2.user can leave comments on each posts
@@ -27,10 +26,13 @@ $(document).ready(function(){
 // a hidden comment form was added when original post was submitted and added to page
 $(document).on('click','.comment-link', function(){ //when elements with class comment-link are clicked
   $(this).siblings('#createComments').removeClass('hideComments'); //remove class that hides the comment form
-  $('form').on('click','#submitCommentBtn',function(){ //when comment form submit button is clicked
-    var comment = $('#commentInput').val(); //value of #commentInput entry set to variable 'comment'
-    var commenterName = $('#commentPosterName').val();//value of #commentPosterName text set to variable 'commenterName'
-    $(this).parent().siblings('.comment-container').append('<div class="comment">'+'<p>'+comment+'</p>'+'<p>'+'<b>'+'Posted By: '+'</b>'+commenterName+'</p>'+'<a href="#" class="comment-link">'+'Comment'+'</a></div>'); //append input values to comment container
-    $("#createComments").addClass('hideComments'); //then re-add class to element so that form is no longer visible
-  });
+});
+$(document).on('click','#submitCommentBtn',function(){ //when comment form submit button is clicked
+  var comment = $('#commentInput').val(); //value of #commentInput entry set to variable 'comment'
+  var commenterName = $('#commentPosterName').val();//value of #commentPosterName text set to variable 'commenterName'
+  $(this).parent().siblings('div.comment-container').append('<div class="comment">'+'<p>'+comment+'</p>'+'<p>'+'<b>'+'Posted By: '+'</b>'+commenterName+'</p>'+'<a href="#" class="comment-link">'+'Comment'+'</a>'+'<a href="#" class="remove-comment-link">'+'  X  '+'</a></div>'); //append input values to comment container
+  $("#createComments").addClass('hideComments'); //then re-add class to element so that form is no longer visible
+});
+$(document).on('click','.remove-comment-link', function(){ //when user clicks X next to comment
+  $(this).parent('.comment').remove(); // comment is deleted
 });
