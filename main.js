@@ -68,3 +68,7 @@ var createPost = $('#create-post').on('click', function () {
 //         onClick();
 //     }
 // }
+
+//Notes: wanted individual items to be removed instead of just removing them all upon click
+//wanted to use for loops to do this
+//wanted functionality to be able to hit enter and serve as a click
