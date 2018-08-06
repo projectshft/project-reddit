@@ -19,3 +19,7 @@
 .form-inline {
   opacity: 0;
 }
+
+.form-show {
+  opacity: 1;
+}

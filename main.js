@@ -61,10 +61,10 @@ var postPost = function () {
 
 postPost();
 
-var $hidden = $('.form-inline')
+var $hidden = $('#hidden-form')
 
 // tried to toggle 'display: hidden/inline-block' - didn't work
-// trying instead to toggle opacity of hidden comment input form
+// trying instead to toggle 'opacity: 0/1' of hidden comment input form
 $(document).ready(function(){
   $('.comment-button').click(function(){
     if ($hidden.style.opacity = 0) {
