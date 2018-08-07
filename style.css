@@ -1,0 +1,20 @@
+.container {
+  list-style-type: none;
+}
+
+body {
+  font-style: normal;
+}
+ul {
+  list-style-type: none;
+}
+
+.comment {
+  display: inline-block;
+  margin-top: 20px;
+}
+
+.comment-button {
+  margin: 20px;
+  display: inline-block;
+}
