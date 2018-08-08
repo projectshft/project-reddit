@@ -1,6 +1,8 @@
 var posts = [];
 var seed = 0;
-
+$('#button-addon2').on('click', function (){
+  return addPost();
+})
 var addPost = function (){
   //get text from input on view
   var text = $('#input-box').val();
@@ -10,6 +12,7 @@ var addPost = function (){
   var post = {
     text: text,
     name: name,
+    comment: []
     // id: getId()
   };
   // add post to array of posts
@@ -24,35 +27,33 @@ var addPost = function (){
   // })
 
 //Adding html elements when hypertext link is clicked
+    $("#list-target").on('click', '.add-comment', function(){
+//Apending two input boxes for comment and user name who commented along with button element to post comment
+      $(".comment-row").append( '<div>' + '<input type="text" class="form-control1" placeholder="Comment" aria-label="Recipient"></input>'
+      + '<input type="text" class="form-control2" placeholder="User Name" aria-label="Recipient"></input>'
+      + '<button id="com-button" type="button" class="btn btn-primary btn-small">Post</button>' + '</div>');
 
-  $(".add-comment").click(function(){
-    $(".comment-row").append( '<div>' + '<input type="text" class="form-control1" id="input-box2" placeholder="Comment" aria-label="Recipient"></input>'
-    + '<input type="text" class="form-control1" id="input-box3" placeholder="User Name" aria-label="Recipient"></input>'
-    + '<button onclick="createComment()" id="com-button" type="button" class="btn btn-primary btn-small">Post</button>' + '</div>');
+    })
 
-
-
-
+      $('#com-button').on('click', function(){
+        return createComment();
   })
+      var comments = [];
+      var createComment = function () {
+        alert("clicked");
+        var userInput = $(".form-control1").val();
+        var userId = $(".form-control2").val();
 
-};
-var comments = [];
-var createComment = function () {
+          // var comment = {
+          //   input: userInput,
+          //   id: userId
+        }
 
-  var userInput = $("#input-box2").val();
-  var userId = $("#input-box3").val();
+        // comments.push(comment);
+        // console.log(comments);
+      };
 
-    var comment = {
-      input: userInput,
-      id: userId
-  }
-debugger;
-
-  comments.push(comment);
-  console.log(comments);
-};
-
-//return unique ID
+// return unique ID
 // var getId = function () {
 //   seed++
 //   return seed
@@ -62,7 +63,7 @@ var createListMarkup = function(posts){
   var namePrepend = "Posted By:";
 
   for(var i = 0; i < posts.length; i++){
-    markup += '<div class="comment-row">' + '<p>' + '<a href="#" id="delete-comment">Remove</a>' + ' ' + '<a href="#" class="add-comment">Comment</a>' + ' ' + posts[i].text + '</p>' + '<p>' + namePrepend + ' ' + posts[i].name + '</p>' + '</div>';
+    markup += '<div class="comment-row">' + '<p>' + '<a href="#" class="delete-comment">Remove</a>' + ' ' + '<a href="#" class="add-comment">Comment</a>' + ' ' + posts[i].text + '</p>' + '<p>' + namePrepend + ' ' + posts[i].name + '</p>' + '</div>';
   }
   return markup;
-}
+};
