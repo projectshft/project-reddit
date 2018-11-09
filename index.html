@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+
 <head>
   <meta charset="utf-8">
   <title></title>
@@ -10,38 +11,50 @@
 </head>
 
 <body>
-  <main class="container narrow border rounded" >
+  <main class="container narrow border rounded">
+
+    <header>
       <h1 class="rounded">Project Reddit</h1>
-      <div class="container">
-        <div class='d-flex flex-column post-container'>
-            <div class='post border-bottom border-top'>
-              Test jasjd kjdsfj oasdkjf kalsjfd;lkj dsfisadjflskdjf oisdjf fjdsif
-              kfjsdo jfkjiajsdfj jkdjij sidjfiji asdfji ijdj a jdflkjd fjaldsjfjds
-              ksjdlfja skjid jdkj akdjfija;dsljf sadfjkljalksdjflajdf
-            </div>
-            <div class='post border-bottom'>
-              A second element in the table.
-            </div>
-        </div>
-        <div class="container">
-          <h2 class="rounded">Add a New Post</h2>
-          <div class="container">
-            <form>
-              <input class="d-block" type="text" name="" value="" placeholder="Post Text">
-              <input class="d-block" type="text" name="" value="" placeholder="Your Name">
-              <button type="button" name="button" class="btn btn-primary">Post</button>
-            </form>
+    </header>
+
+    <div class="container">
+      <div class='d-flex flex-column post-container'>
+        <div class='post border-bottom border-top'>
+          <div class='post-message'>
+            "This is an example post."
+          </div>
+          <div class="post-name">
+            Posted By: <b>Justin</b>
           </div>
         </div>
       </div>
-      <button type="button" class="close" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </main>
+      <div class="container">
+        <h2 class="rounded">Add a New Post</h2>
+        <div class="container">
+          <form>
+            <input required id="post-message" class="d-block" type="text" name="message" placeholder="Post Text">
+            <input required id="post-name" class="d-block" type="text" name="name" placeholder="Your Name">
+            <button id="post-button" type="submit" name="post-button" class="btn btn-primary">Post</button>
+          </form>
+        </div>
+      </div>
+    </div>
 
+    <button type="button" class="close" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
 
-  <!-- <script id="template" type="text/x-handlebars-template">
-  </script> -->
+  </main>
+  <script id="post-template" type="text/x-handlebars-template">
+    <div class='post border-bottom border-top'>
+      <div class='post-message'>
+        "{{ message }}"
+      </div>
+      <div class="post-name">
+        Posted By: <b>{{ name }}</b>
+      </div>
+    </div>
+  </script>
   <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.js" charset="utf-8"></script>
   <script type="text/javascript" src="scripts/main.js"></script>
