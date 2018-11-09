@@ -1,3 +1,42 @@
-div {
-  color: red;
+main {
+  padding: 10px;
+}
+body {
+  font-family: 'Signika', sans-serif;
+
+}
+
+h1 {
+  font-family: 'Fredericka the Great', cursive;
+  font-weight: bold;
+  background-color: #DCDCDC;
+  padding-left: 30px;
+  padding: 5px 0px 5px 20px;
+  margin-top: 20px;
+  margin-bottom: 50px;
+}
+h2 {
+  font-family: 'Fredericka the Great', cursive;
+  font-size: 25px;
+  font-weight: bold;
+  background-color: #DCDCDC;
+  margin-top: 30px;
+  padding: 3px 0px 3px 10px;
+}
+input {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 2px;
+  width: 50%;
+}
+::placeholder {
+  opacity: 0.5;
+  font-style: italic;
+}
+.post {
+  padding: 10px 0px;
+  letter-spacing: 0.08em;
+}
+
+.post-container {
 }
