@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- MetaData and other stuff -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- All Stylings here -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
+  <title>Project-Reddit</title>
+
+  <!-- jquery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<body>
+  <!-- Page Title -->
+  <div class="container">
+    <div class="row">
+      <div class="page-header col-md-12">
+        <h1>Project Reddit</h1>
+      </div>
+    </div>
+
+    <!--  Posting board, where all posts will live-->
+    <div class="row">
+      <div class="board col-md-8 col-md-offset-1">
+        <ul class="post-list">
+        </ul>
+      </div>
+    </div>
+    <!-- Post input fields  -->
+    <div class="row">
+      <div class="post-input-area col-md-8 col-md-offset-1">
+        <div class="input-info form-group">
+          <input type="text" id="post-input-name" class="form-control" placeholder="Enter Name Here">
+          <input type="text" id="post-input-message" class="form-control" placeholder="Enter Post Text Here">
+          <button class="btn btn-primary submit-post-btn">Submit Post</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- handlebar templates -->
+
+<script id="comment-template" type="text/x-handlebars-template">
+    <div class="comment-message">
+    <p>{{commentMessage}} - By: {{commentAuthor}}</p>
+  </div>
+</script>
+
+  <script id="post-template" type="text/x-handlebars-template">
+    <li class="post">
+      <div class="id-number-div">ID:<span class="id-number">{{uniquePostNumber}}</span></div>
+      <div class="post-message"><p>{{postMessage}}</p></div>
+      <div class="post-author"><p>Posted by: <strong>{{postAuthor}}</strong></p></div>
+      <div class="add-comment">
+        <input type="text" class="comment-input-message" placeholder="Enter Comment Here">
+        <input type="text" class="comment-input-author" placeholder="Enter Your Name Here">
+        <button class="btn post-comment-btn">Post Comment</button>
+      </div>
+      <div class="comments-section">
+      </div>
+      <div class="comment-delete">
+        <button class="btn btn-link comments-btn">View Comments</button>
+        <button class="btn delete-btn btn-danger">Delete Post</button>
+      </div>
+    </li>
+  </script>
+
+  <!-- Scripts -->
+  <script src="handlebars-v4.0.12.js" charset="utf-8"></script>
+  <script src="main.js" charset="utf-8"></script>
+</body>
+
+</html>
