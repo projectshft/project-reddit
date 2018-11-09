@@ -1,6 +1,5 @@
 var posts = [];
 var source = $('#post-template').html();
-console.log(source);
 var template = Handlebars.compile(source);
 
 $('#post-button').click(function(e){
@@ -10,11 +9,31 @@ $('#post-button').click(function(e){
     message: $('#post-message').val()
   };
   posts.push(post);
-  renderPosts(post);
+  renderPosts();
 })
 
-var renderPosts = function (post) {
-  var newHTML = template(post);
-  console.log('The newHTML is: ', newHTML);
-  $('.post-container').append(newHTML);
+var renderPosts = function () {
+  for (i=0; i<posts.length; i++) {
+    posts[i].postNumber = i;
+  }
+  $('.post-container').empty();
+  for(i=0; i<posts.length; i++) {
+    var newHTML = template(posts[i]);
+    $('.post-container').append(newHTML);
+  }
+  setRemoveEventListener();
+}
+
+var setRemoveEventListener = function () {
+  $('.remove-button').off("click");
+  $('.remove-button').on("click", function() {
+  var $post = $(this).parent().parent();
+  var postNumberIndex = $post.data().number;
+
+  //remove the post from the array posts
+  posts.splice(postNumberIndex, 1);
+
+  //remove the post from the DOM
+  renderPosts();
+})
 }

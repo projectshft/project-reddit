@@ -18,16 +18,7 @@
     </header>
 
     <div class="container">
-      <div class='d-flex flex-column post-container'>
-        <div class='post border-bottom border-top'>
-          <div class='post-message'>
-            "This is an example post."
-          </div>
-          <div class="post-name">
-            Posted By: <b>Justin</b>
-          </div>
-        </div>
-      </div>
+      <div class='d-flex flex-column post-container'></div>
       <div class="container">
         <h2 class="rounded">Add a New Post</h2>
         <div class="container">
@@ -46,12 +37,16 @@
 
   </main>
   <script id="post-template" type="text/x-handlebars-template">
-    <div class='post border-bottom border-top'>
+    <div class='post border-bottom border-top' data-number='{{ postNumber }}'>
       <div class='post-message'>
-        "{{ message }}"
+        {{ message }}
       </div>
       <div class="post-name">
         Posted By: <b>{{ name }}</b>
+      </div>
+      <div class="post-tools">
+        <button type="button" class='btn remove-button'>Remove</button>
+        <button type="button" class='btn comments-button'>Comments</button>
       </div>
     </div>
   </script>
