@@ -92,8 +92,9 @@ const addPostComment = (jqPost, post) => {
   $(`.add-comment`).find(`h3`).text(`Add a new comment`);
   $(`#name`).focus();
   $('#message').attr(`placeholder`, `Comment`);
-  $(`.add-comment`).find(`.add-post-btn`).hide();
-  $(`.add-comment`).append(`<button class="btn btn-primary add-comment-btn">Comment</buton>`);
+  $(`.add-post-btn`).hide();
+  $(`.add-comment-btn`).show();
+  // $(`.add-comment`).append(`<button class="btn btn-primary add-comment-btn">Comment</buton>`);
 
   // Create post comment Obj, add to post comments arr, render comments
   $(`.add-comment-btn`).on(`click`, function(e) {
@@ -109,8 +110,8 @@ const addPostComment = (jqPost, post) => {
     $(`.add-comment`).find(`h3`).text(`Add a new post`);
     $(`#name`).val('').focus();
     $('#message').attr(`placeholder`, `Message`).val('');
-    $(`.add-comment`).find(`.add-comment-btn`).hide();
-    $(`.add-comment`).find(`.add-post-btn`).show();
+    $(`.add-comment-btn`).hide();
+    $(`.add-post-btn`).show();
   });
 };
 
