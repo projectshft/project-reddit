@@ -6,8 +6,9 @@ var source = $('#post-template').html();
 var template = Handlebars.compile(source);
 var posts = [];
 
-//master unique id generator
+//master unique id generators
 var id = 0;
+var commentId = 0;
 
 //when post button is clicked, the text and name from the boxes should appear as a new post
 $postButton.click(() => {
@@ -24,9 +25,8 @@ $postButton.click(() => {
   renderPosts();
 })
 
-//build the top line of remove post & comments show/hide buttons
+//builds the top line of remove post & comments show/hide buttons
 //TODO - can I use handlebars for this line template too?
-//TODO - make comments start as hidden
 var createTopLine = (post => {
   var lineTemplate = '<div class="top-line"><a href="#" class="remove-post" data-post-id="' + post.id + '">remove </a><a href="#" class="comments-show-hide" data-post-id="post' + post.id + '">comments </a>'
 
@@ -53,20 +53,68 @@ var createTopLine = (post => {
   return $topLine;
 })
 
+var createCommentLine = (post => {
+  var commentTemplate = '<p><input type="text" placeholder="Comment Text" class="comment-text"></input><input type="text" placeholder="User Name" class="comment-user"></input><button class="btn btn-sm btn-primary comment-button" type="button">Post Comment </button> </p>'
+
+  // get the text & user name and build a new comment into the comment array on the correct post
+  var postComment = function() {
+    var newCommentText = $(this).prevAll('.comment-text').val();
+    var newCommentUser = $(this).prevAll('.comment-user').val();
+    commentId++;
+    var newComment = {
+      commentText : newCommentText,
+      commentUser : newCommentUser,
+      commentId : commentId
+    }
+    post.comments.push(newComment);
+    renderComments(post)
+    }
+
+  var $commentLine = $(commentTemplate);
+  $commentLine.on('click', '.comment-button', postComment);
+  return $commentLine;
+})
+
+var createCommentRemovalIcon = function(index,comment) {
+var commentRemovalTemplate = '<span class="glyphicon glyphicon-remove remove-comment" data-comment-id="' + comment.commentId + '"></span>';
+  var removeComment = function() {
+    var removeId = $(this).data('comment-id');
+    posts[index].comments = posts[index].comments.filter(selectedComment => selectedComment.commentId !== comment.commentId);
+    renderComments(posts[index]);
+  }
+  $commentRemovalIcon = $(commentRemovalTemplate);
+  $commentRemovalIcon.on('click', removeComment);
+  return $commentRemovalIcon;
+}
+
 //clear out the posts section and re-print the current status
 var renderPosts = function() {
   $postsSection.empty();
   posts.forEach(post => {
     var $topLine = createTopLine(post);
-    let newHTML = template(post);
+    var newHTMLPost = template(post);
+    var $commentLine = createCommentLine(post);
     $postsSection.append($topLine);
-    $postsSection.append(newHTML);
+    $postsSection.append(newHTMLPost);
+    $postsSection.append($commentLine);
+    renderComments(post);
   })
 }
 
-//listen for post comment button clicks and push the comment into the array, then render it
+var renderComments = function(post) {
+  var commentAreaId = "#commentspost" + post.id;
+  $(commentAreaId).empty();
+  var source = $('#comment-template').html();
+  var template = Handlebars.compile(source);
+  post.comments.forEach(comment => {
+    var commentRemoval = createCommentRemovalIcon(posts.indexOf(post),comment);
+    var newHTMLComment = template(comment);
+    $(commentAreaId).append(newHTMLComment);
+    $(commentAreaId).append(commentRemoval);
+  })
+};
 
-
+//prevent enter from submitting
 //allow for editing posts
 //render "separate" edit comments page
 //style updates

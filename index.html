@@ -19,16 +19,16 @@
         <script id="post-template" type="text/x-handlebars-template">
           <div class='single-post' id='handlebarspost{{id}}'>
             {{ postText }}
-            <p>Posted By: <strong> {{ username }} </strong></p>
-            <div class="comment-area">
-              <h5> Comments </h5>
-            <p> {{commentText}} Posted By: <strong> {{commentUsername}} </strong> </p>
-              <p><input type="text" placeholder="Comment Text" class="comment-text"></input>
-              <input type="text" placeholder="User Name" class="comment-user"></input>
-            <button class="btn btn-sm btn-primary comment-button" type="button">Post Comment </button> </p>
+
+            <h5> Comments </h5>
+            <div class="comment-area" id="commentspost{{id}}">
+
+
             </div>
+            <p>Posted By: <strong> {{ username }} </strong></p>
           </div>
         </script>
+
       </div>
       <div id="edit-input">
       </div>
@@ -47,6 +47,9 @@
 
     </div>
   </div>
+  <script id = "comment-template" type = text/x-handlebars-template">
+    <p> {{commentText}} Posted By: <strong> {{commentUser}} </strong></p>
+  </script>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.js" charset="utf-8"></script>
   <script src="main.js"></script>

@@ -1,0 +1,12 @@
+.comment-area {
+  display:none;
+}
+
+.top-line {
+  width: auto;
+  white-space:nowrap;
+}
+
+.glyphicon-remove {
+  color:blue;
+}
