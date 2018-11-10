@@ -7,6 +7,7 @@
 </head>
 
 <body>
+  <div class="full-main-page">
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
       <div class="page-header">
@@ -19,18 +20,44 @@
       <form style="margin-top:30px;">
         <h3>Add a new post</h3>
         <div class="form-group">
-          <textarea id="message" type="text" class="form-control" placeholder="Post Text"></textarea>
+          <label for="message">Message:</label><textarea id="message" type="text" class="form-control" placeholder="Post Text"></textarea>
         </div>
         <div class="form-group">
-          <input id="name" type="text" class="form-control" placeholder="Your Name"></input>
+          <label for="name">Username:</label><input id="name" type="text" class="form-control" placeholder="Your Name"></input>
         </div>
         <button type="button" class="btn btn-primary" id="post-button">Post</button>
       </form>
     </div>
   </div>
+  </div>
+
+  <div class="full-comments-page">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <div class="page-header">
+          <h1>Project Reddit</h1>
+        </div>
+        <a href="#" id="back-link">back</a>
+        <div id="comments">
+
+        </div>
+
+        <form style="margin-top:30px;">
+          <h3>Add a New Comment</h3>
+          <div class="form-group">
+            <label for="message">Comment Text:</label><textarea id="new-comment-message" type="text" class="form-control" placeholder="Comment Text"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="name">Username:</label><input id="new-comment-name" type="text" class="form-control" placeholder="Your Name"></input>
+          </div>
+          <button type="button" class="btn btn-primary" id="post-comment-button">Post</button>
+        </form>
+      </div>
+    </div>
+  </div>
 
   <script id="post-template" type="text/x-handlebars-template">
-    <div class='single-post' id='single-post{{id}}'>
+    <div class='single-post well well-sm' id='single-post{{id}}'>
       {{ postText }}
         <p>Posted By: <strong> {{ username }} </strong></p>
         <div class="comment-area" id="comments-post{{id}}">
@@ -49,12 +76,13 @@
 
   <script id='top-line-template' type="text/x-handlebars-template">
     <div class="top-line">
-    <a href="#" class="remove-post" data-post-id="{{id}}">remove </a>
-    <a href="#" class="comments-show-hide" data-post-id="post{{id}}">comments </a>
-    <a href="#" class="edit-post" data-post-id="post{{id}}">edit </a>
+    <a href="#" class="remove-post" data-post-id="{{id}}">remove | </a>
+    <a href="#" class="comments-show-hide" data-post-id="post{{id}}">comments | </a>
+    <a href="#" class="edit-post" data-post-id="post{{id}}">edit post | </a>
+    <a href="#" class="full-page-view" data-post-id="post{{id}}">full page view</a>
     <div class= "edit-section">
-      <input type="text" class="edit-message"></input>
-      <input type="text" class="edit-user"></input>
+      <label>Message: </label> <input type="text" class="edit-message"></input>
+      <label>Username: </label><input type="text" class="edit-user"></input>
       <button type="button" class="btn btn-primary btn-xs edit-button">Submit Changes</button>
     </div>
   </script>
@@ -66,6 +94,11 @@
   <script id="comment-removal-icon-template" type="text/x-handlebars-template">
     <span class="glyphicon glyphicon-remove remove-comment" data-comment-id="'{{commentId}}'"></span>
   </p>
+  </script>
+
+  <script id="full-page-post-section" type="text/x-handlebars-template">
+    <h3 id="full-page-post-text">{{postText}}</h3>
+    <p>Posted By: <strong> {{ username }} </strong></p>
   </script>
 
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
