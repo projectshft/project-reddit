@@ -18,38 +18,54 @@
     </header>
 
     <div class="container">
-      <div class='d-flex flex-column post-container'></div>
+      <div class='d-flex flex-column post-container'>
+      </div>
       <div class="container">
         <h2 class="rounded">Add a New Post</h2>
         <div class="container">
           <form>
-            <input required id="post-message" class="d-block" type="text" name="message" placeholder="Post Text">
-            <input required id="post-name" class="d-block" type="text" name="name" placeholder="Your Name">
+            <input id="post-message" class="d-block post-inputs" type="text" name="message" placeholder="Post Text">
+            <input id="post-name" class="d-block post-inputs" type="text" name="name" placeholder="Your Name">
             <button id="post-button" type="submit" name="post-button" class="btn btn-primary">Post</button>
           </form>
         </div>
       </div>
     </div>
 
-    <button type="button" class="close" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-
   </main>
   <script id="post-template" type="text/x-handlebars-template">
-    <div class='post border-bottom border-top' data-number='{{ postNumber }}'>
-      <div class='post-message'>
+    <div class='post border-bottom border-top' data-postnumber='{{ postNumber }}'>
+      <div class='post-message lead'>
         {{ message }}
       </div>
       <div class="post-name">
         Posted By: <b>{{ name }}</b>
       </div>
       <div class="post-tools">
-        <button type="button" class='btn remove-button'>Remove</button>
-        <button type="button" class='btn comments-button'>Comments</button>
+        <a class="remove-button" href="#">Remove</a>
+        <a class="comments-button" href="#">Comments({{ numberOfComments }})</a>
+      </div>
+      <div class="container">
+        <div class="comments-container container">
+            <div class="comment-text">
+              Duh, it did.
+            </div>
+            <div class="comment-name">
+             Posted By: Sean
+             <button type="button" class="close" aria-label="Close">
+               <span aria-hidden="true" style="margin-left: 8px">&times;</span>
+             </button>
+            </div>
+          <form>
+            <input class="comment-inputs comment-text-input" type="text" name="comment-message" placeholder="Comment Text">
+            <input class="comment-inputs user-name-input" type="text" name="comment-name" placeholder="User Name">
+            <button type="submit" name="post-comment-button" class="btn btn-primary post-comment-button">Post Comment</button>
+          </form>
+        </div>
       </div>
     </div>
   </script>
+
   <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.js" charset="utf-8"></script>
   <script type="text/javascript" src="scripts/main.js"></script>

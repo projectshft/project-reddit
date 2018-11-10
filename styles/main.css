@@ -1,9 +1,9 @@
 main {
   padding: 10px;
 }
+
 body {
   font-family: 'Signika', sans-serif;
-
 }
 
 h1 {
@@ -15,6 +15,7 @@ h1 {
   margin-top: 20px;
   margin-bottom: 50px;
 }
+
 h2 {
   font-family: 'Fredericka the Great', cursive;
   font-size: 25px;
@@ -23,19 +24,27 @@ h2 {
   margin-top: 30px;
   padding: 3px 0px 3px 10px;
 }
-input {
+
+input.post-inputs {
   margin-top: 10px;
   margin-bottom: 10px;
   padding: 2px;
   width: 50%;
 }
+
 ::placeholder {
   opacity: 0.5;
   font-style: italic;
 }
+
 .post {
   padding: 10px 0px;
 }
 
-.post-container {
+.close {
+  float: inherit;
+}
+
+.comments-container {
+  display: none;
 }
