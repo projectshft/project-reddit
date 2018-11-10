@@ -10,7 +10,7 @@ var posts = [];
 var id = 0;
 var commentId = 0;
 
-//when post button is clicked, the text and name from the boxes should appear as a new post
+//when post button is clicked, the user input text and name are built into a new post
 $postButton.click(() => {
   newText = $textInput.val();
   newUsername = $usernameInput.val();
@@ -26,7 +26,6 @@ $postButton.click(() => {
 })
 
 //builds the top line of remove post & comments show/hide buttons
-//TODO - can I use handlebars for this line template too?
 var createTopLine = (post => {
   var lineTemplate = '<div class="top-line"><a href="#" class="remove-post" data-post-id="' + post.id + '">remove </a><a href="#" class="comments-show-hide" data-post-id="post' + post.id + '">comments </a>'
 
@@ -41,8 +40,9 @@ var createTopLine = (post => {
   //show/hide the comments section by individual post.
   var toggleComments = function(e) {
     e.preventDefault();
-    var postId = '#handlebars' + $(this).data('post-id');
+    var postId = '#handlebars-' + $(this).data('post-id');
     $(postId).children('.comment-area').toggle();
+    $commentArea.toggle();
   }
 
   //build the line and individually bind click handlers to each link
@@ -54,10 +54,13 @@ var createTopLine = (post => {
 })
 
 var createCommentLine = (post => {
-  var commentTemplate = '<p><input type="text" placeholder="Comment Text" class="comment-text"></input><input type="text" placeholder="User Name" class="comment-user"></input><button class="btn btn-sm btn-primary comment-button" type="button">Post Comment </button> </p>'
+  var commentTemplate = '<p><span class="comment-input-line"><input type="text" placeholder="Comment Text" class="comment-text"></input><input type="text" placeholder="User Name" class="comment-user"></input><button class="btn btn-sm btn-primary comment-button" type="button">Post Comment </button> </span>'
 
   // get the text & user name and build a new comment into the comment array on the correct post
   var postComment = function() {
+    var idToSearch = $(this).closest('.single-post').attr('id');
+    var postToComment = posts.find(post => "handlebars-post" + post.id === idToSearch);
+    var postToCommentIndex = posts.indexOf(postToComment);
     var newCommentText = $(this).prevAll('.comment-text').val();
     var newCommentUser = $(this).prevAll('.comment-user').val();
     commentId++;
@@ -66,8 +69,8 @@ var createCommentLine = (post => {
       commentUser : newCommentUser,
       commentId : commentId
     }
-    post.comments.push(newComment);
-    renderComments(post)
+    posts[postToCommentIndex].comments.push(newComment);
+    renderComments(postToComment);
     }
 
   var $commentLine = $(commentTemplate);
@@ -76,7 +79,7 @@ var createCommentLine = (post => {
 })
 
 var createCommentRemovalIcon = function(index,comment) {
-var commentRemovalTemplate = '<span class="glyphicon glyphicon-remove remove-comment" data-comment-id="' + comment.commentId + '"></span>';
+var commentRemovalTemplate = '<span class="glyphicon glyphicon-remove remove-comment" data-comment-id="' + comment.commentId + '"></span></p>';
   var removeComment = function() {
     var removeId = $(this).data('comment-id');
     posts[index].comments = posts[index].comments.filter(selectedComment => selectedComment.commentId !== comment.commentId);
@@ -93,28 +96,30 @@ var renderPosts = function() {
   posts.forEach(post => {
     var $topLine = createTopLine(post);
     var newHTMLPost = template(post);
-    var $commentLine = createCommentLine(post);
     $postsSection.append($topLine);
     $postsSection.append(newHTMLPost);
-    $postsSection.append($commentLine);
     renderComments(post);
   })
 }
 
+//clear out the comments and then re-print them for a particular post
 var renderComments = function(post) {
   var commentAreaId = "#commentspost" + post.id;
   $(commentAreaId).empty();
   var source = $('#comment-template').html();
   var template = Handlebars.compile(source);
+  var commentInput = createCommentLine(post);
   post.comments.forEach(comment => {
     var commentRemoval = createCommentRemovalIcon(posts.indexOf(post),comment);
     var newHTMLComment = template(comment);
     $(commentAreaId).append(newHTMLComment);
     $(commentAreaId).append(commentRemoval);
   })
+  $(commentAreaId).append(commentInput);
 };
 
 //prevent enter from submitting
+//sanitize inputs
 //allow for editing posts
 //render "separate" edit comments page
 //style updates
