@@ -10,3 +10,7 @@
 .glyphicon-remove {
   color:blue;
 }
+
+.edit-section {
+  display:none;
+}
