@@ -16,23 +16,54 @@
 <body>
     <h1>Project Reddit</h1>
     <section class="post-list">
+        <!-- <li>
+            <button id="remove">Remove</button>
+            <button id="comments">Comments</button>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="x" value="option1">
+                <label class="form-check-label" for="x">&#x2716</label>
+            </div>
+        </li> -->
 
+        <!-- issue? this is a form -->
+        <!-- <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+            <label class="form-check-label" for="inlineCheckbox1">&#x2716</label>
+        </div> -->
     </section>
 
-    <h2>Add a New Post</h2>
-    <form>
-        <div class="form-text">
-            <input type="text" class="" id="text" placeholder="Post Text">
-        </div>
-        <div class="form-name">
-            <input type="text" class="" id="name" placeholder="Enter name">
-        </div>
+    <section id="commentInput">
+        <form class="form-inline" id="comments">
+            <div class="form-row">
+                <div class="col-auto">
+                    <input type="text" class="form-control form-control-sm" id="commentText" placeholder="Comment Text">
+                </div>
+                <div class="col-auto">
+                    <input type="text" class="form-control form-control-sm" id="userName" placeholder="User name">
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-postComment">Post Comment</button>
+                </div>
+            </div>
+        </form>
+    </section>
 
-        <button type="submit" class="btn btn-primary">Post</button>
-    </form>
+    <section id="postInput">
+        <h2>Add a New Post</h2>
+        <form id="posts">
+            <div class="form-control">
+                <input type="text" class="" id="text" placeholder="Post Text">
+            </div>
+            <div class="form-control">
+                <input type="text" class="" id="name" placeholder="Enter name">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Post</button>
+        </form>
+    </section>
 
     <!-- Optional JavaScript -->
-   
+
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
@@ -40,19 +71,8 @@
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.min.js"></script>
-     
-    
-    <script id="comments-template" type="text/x-handlebars-template">
-        <div id="new-post">
-            <!-- <ul>
-                {{#each originalPost}}
-                    <li></li>
-            </ul> -->
-            
-        </div>
-    </script>
-    <script src="scripts.js"></script>
+
+    <script scr="script.js"></script>
 </body>
 
 
