@@ -24,7 +24,12 @@ var createPost = function () {
     Postings.push(post);
 
     // Appends it to the other posts  
-    $('.post-list').append('<button id="remove">Remove</button>' + '<li>' + post.text + '<b>' + " Posted by: " + '</b> ' + post.name);
+    $('.post-list').append(
+        '<button id="remove">Remove</button>'
+        + '<button id="comments">Comments</button>'
+        + '<li>' + post.text + '<b>' + " Posted by: " + '</b> ' + post.name
+        + '<div class="form-check form-check-inline">' + '<input class="form-check-input" type="checkbox" id="x" value="option1">' + '<label class="form-check-label" for="x">&#x2716</label>' + '</div>'
+    );
 
     //clears form
     $('#text').val("");
