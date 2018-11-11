@@ -19,6 +19,7 @@
 
     <div class="container">
       <div class='d-flex flex-column post-container'>
+        <!-- The post-template will be inserted here when posts are rendered -->
       </div>
       <div class="container">
         <h2 class="rounded">Add a New Post</h2>
@@ -31,8 +32,8 @@
         </div>
       </div>
     </div>
-
   </main>
+
   <script id="post-template" type="text/x-handlebars-template">
     <div class='post border-bottom border-top' data-postnumber='{{ postNumber }}'>
       <div class='post-message lead'>
@@ -43,25 +44,31 @@
       </div>
       <div class="post-tools">
         <a class="remove-button" href="#">Remove</a>
-        <a class="comments-button" href="#">Comments({{ numberOfComments }})</a>
+        <a class="comments-button" href="#">Comments</a>
       </div>
       <div class="container">
         <div class="comments-container container">
-            <div class="comment-text">
-              Duh, it did.
-            </div>
-            <div class="comment-name">
-             Posted By: Sean
-             <button type="button" class="close" aria-label="Close">
-               <span aria-hidden="true" style="margin-left: 8px">&times;</span>
-             </button>
-            </div>
-          <form>
-            <input class="comment-inputs comment-text-input" type="text" name="comment-message" placeholder="Comment Text">
-            <input class="comment-inputs user-name-input" type="text" name="comment-name" placeholder="User Name">
-            <button type="submit" name="post-comment-button" class="btn btn-primary post-comment-button">Post Comment</button>
-          </form>
+          <!-- The comment-template will be inserted here when comments are rendered -->
         </div>
+        <form class="comment-form">
+          <input class="comment-inputs comment-text-input" type="text" name="comment-message" placeholder="Comment Text">
+          <input class="comment-inputs user-name-input" type="text" name="comment-name" placeholder="User Name">
+          <button type="submit" name="post-comment-button" class="btn btn-primary post-comment-button">Post Comment</button>
+        </form>
+      </div>
+    </div>
+  </script>
+
+  <script id="comment-template" type="text/x-handlebars-template">
+    <div class="container" data-commentnumber="{{ commentNumber }}">
+      <div class="comment-text lead">
+        {{ text }}
+      </div>
+      <div class="comment-name">
+       Posted By: <b>{{ userName }}</b>
+       <button class="close delete-icon" type="button" aria-label="Close">
+         <span aria-hidden="true" style="margin-left: 8px">&times;</span>
+       </button>
       </div>
     </div>
   </script>

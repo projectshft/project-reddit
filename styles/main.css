@@ -48,3 +48,7 @@ input.post-inputs {
 .comments-container {
   display: none;
 }
+
+.comment-form {
+  display: none;
+}
