@@ -47,7 +47,7 @@
 
 <script id="comment-template" type="text/x-handlebars-template">
     <div class="comment-message">
-    <p>{{commentMessage}} - By: {{commentAuthor}}</p>
+    <p><span class="comment-id">{{uniqueCommentNumber}}</span>{{commentMessage}} - By: {{commentAuthor}}</p><button class="btn btn-link delete-comment-btn">   X</button>
   </div>
 </script>
 

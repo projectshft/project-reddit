@@ -14,7 +14,9 @@
 
 //Array that will hold all the posts
 var allPostsArray = [];
-postCount = 1;
+var postCount = 1;
+var commentCount = 1;
+
 
 //I want to gather the information and create a post using handlebars
 
@@ -36,6 +38,7 @@ var generateCommentsHTML = function(commentObject) {
 
 //render the comments based on array data
 
+//currenty unused
 var renderComments = function (thisPost){
 
   $('.comments-section').empty();
@@ -48,8 +51,8 @@ var renderComments = function (thisPost){
 }
 
 
-// I want to gather the post information
-var getPostData = function() {
+// I want to gather the post information and add to database
+var addAndGetPostData = function() {
   var $postAuthor = $('#post-input-name').val();
   var $postMessage = $('#post-input-message').val();
   var postData = {
@@ -58,12 +61,8 @@ var getPostData = function() {
     postMessage:$postMessage,
     postComments:[]
   }
-  return postData;
-}
-
-//I want to add the post data to the overall post database
-var addPostData = function(postObject){
-  allPostsArray.push(postObject);
+  allPostsArray.push(postData);
+  postCount++;
 }
 
 //This function reads data from the database and returns the post Object
@@ -73,6 +72,8 @@ var getPostObjectFromPostArray = function(dataArray, arrayIndex){
 }
 
 //This function clears the board and posts the post based on the array data
+
+
  var renderPosts = function(){
    //clear the board
    $postBoard = $('.post-list');
@@ -82,12 +83,11 @@ var getPostObjectFromPostArray = function(dataArray, arrayIndex){
    allPostsArray.forEach(function(postInArray){
      var postHTML = generatePost(postInArray);
      //and append it to the (emptied) board of posts
-     $postBoard.append(postHTML)
+     $postBoard.append(postHTML);
      $('#post-input-name').val("");
-     $('#post-input-message').val("")
+     $('#post-input-message').val("");
 
    });
-   postCount++
  };
 
  //Get the comment data FOR THAT POST and push it to array
@@ -95,6 +95,7 @@ var getPostObjectFromPostArray = function(dataArray, arrayIndex){
  var addCommentDataToArray = function(commentMessage,commentAuthor,postID) {
   //Put comments into an object)
   var commentsObject = {
+    uniqueCommentNumber:commentCount,
     commentAuthor:commentAuthor,
     commentMessage:commentMessage
   }
@@ -103,6 +104,7 @@ var getPostObjectFromPostArray = function(dataArray, arrayIndex){
   });
 
    correctPostObject['postComments'].push(commentsObject);
+   commentCount++;
  }
 
  //Deletes the post from the main array
@@ -114,11 +116,28 @@ var getPostObjectFromPostArray = function(dataArray, arrayIndex){
    var thisPostIndex = allPostsArray.indexOf(thisPost);
    allPostsArray.splice(thisPostIndex,1);
 
+ };
+
+ //delete the comment from the comments array
+
+ var deleteCommentFromArray = function(postID,commentID){
+   //need to get the post object first
+   var thisPost = allPostsArray.find(function(post){
+     return post["uniquePostNumber"] == postID
+   });
+   //once i get the right post object I need to access the array and then find the comment using the author
+   var thisPostComments = thisPost['postComments'];
+   var thisCommentObject = thisPostComments.find(function(commentObjects){
+     return commentObjects['uniqueCommentNumber'] == commentID;
+   });
+   thisCommentIndex = thisPostComments.indexOf(thisCommentObject);
+   thisPostComments.splice(thisCommentIndex,1);
  }
+
 
 $(document).ready(function() {
       $('.submit-post-btn').on('click', function() {
-        addPostData(getPostData());
+        addAndGetPostData();
         renderPosts();
       });
       //event delegation to listen for created elements
@@ -157,5 +176,22 @@ $(document).ready(function() {
           $commentInputAuthor.val("");
 
         })
-      })
-    })
+      });
+      $(document).on('click','.delete-comment-btn', function(){
+        var $postIdNumber = $(this).closest('.post').find('.id-number').html();
+        var $commentIDNumber = $(this).prev().find('.comment-id').html()
+        deleteCommentFromArray($postIdNumber,$commentIDNumber);
+
+        var $thisCommentSection = $(this).closest('.comments-section');
+        var thisPost = allPostsArray.find(function(allPosts) {
+          return allPosts['uniquePostNumber'] == $postIdNumber;
+        });
+
+        var commentsArray = thisPost['postComments']
+        $thisCommentSection.empty()
+        commentsArray.forEach(function(commentInArray) {
+          var thisCommentHTML = generateCommentsHTML(commentInArray);
+          $thisCommentSection.prepend(thisCommentHTML)
+        });
+      });
+    });

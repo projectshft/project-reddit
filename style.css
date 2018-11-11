@@ -7,3 +7,10 @@
 ul{
   list-style: none;
 }
+.comment-message{
+  display: flex;
+  flex-direction: row;
+  vertical-align: middle;
+}
+.delete-comment-btn{
+}
