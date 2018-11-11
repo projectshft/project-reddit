@@ -23,8 +23,8 @@ var createPost = function () {
     }
     Postings.push(post);
 
-    // Appends it to the other posts with the post on 1 line and the name on a 2nd line. 
-    $('.post-list').append('<li>' + post.text + '<br>' + '<b>' + " Posted by: " + '</b> ' + post.name);
+    // Appends it to the other posts  
+    $('.post-list').append('<button id="remove">Remove</button>' + '<li>' + post.text + '<b>' + " Posted by: " + '</b> ' + post.name);
 
     //clears form
     $('#text').val("");
@@ -35,31 +35,30 @@ console.log(Postings);
 $('.btn-primary').click(function (event) {
     event.preventDefault();
     createPost();
+    $('.post-list > li').prepend(createRemoveButton(0, html));
 });
 
 
 /////////////////PART 2//////////////////////////
 //NOW when append a POST:
-function createRemoveButton() {
-    //create button
-    return $('<button/>', {
-        id: "remove",
-        text: "Remove",
-        click: removePost()
-    })
-};
+// function createRemoveButton() {
+//     //create button
+//     return $('<button/>', {
+//         id: "remove",
+//         text: "Remove",
+//     })
+// };
 
 //append it
-$('.post-list').prepend(createRemoveButton());
+// $('.post-list > li').prepend(createRemoveButton(0, html));
 
 //event - //When the 'Remove' button is clicked, the entire post (including comments) is deleted.
 // $('#remove').click(function(event){
-function removePost() {
-
-}
+//     this.
+// }
 // })
 
-createRemoveButton();
+// createRemoveButton();
 
 
     //add X = delete comment after post
