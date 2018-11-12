@@ -1,0 +1,11 @@
+.col-1 {
+  float: top;
+  width: 8.33333333%;
+}
+
+.js #manage_comments {
+    display:none; /* hide for JS enabled browsers */
+}
+#manage_comments {
+    /* form styles here */
+}
