@@ -33,7 +33,7 @@
           </div>
 
           <button type="submit" class="btn btn-primary add-post-btn">Post</button>
-          <button type="submit" class="btn btn-primary add-comment-btn hide-el">Comment</button>
+          <!-- <button type="submit" class="btn btn-primary add-comment-btn hide-el">Comment</button> -->
         </form>
 
       </div>
@@ -71,7 +71,7 @@
 
   <!-- Handlebars comment template -->
   <script id="comment-template" type="text/x-handlebars-template">
-    <li class="comment-item">
+    <li class="comment-item" data-id='{{id}}'>
       <span class="comment"><strong>{{author}}</strong> - {{comment}}</span>
       <a href="#" class="delete-comment">
         <i class="fas fa-times" style="color: red;"></i>
