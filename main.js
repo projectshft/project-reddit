@@ -96,8 +96,7 @@ const addPostComment = (jqPost, post) => {
   $(`#name`).focus();
   $('#message').attr(`placeholder`, `Comment`);
   $(`.add-post-btn`).hide();
-  $('.add-comment').append(`<button type="submit" class="btn btn-primary add-comment-btn">Comment</button>`);
-  // TODO: Appending adds multiple 'Add Comment' buttons to page, but jQ's .show/.hide methods resulted in incrementing blank comment creation. Figure out why & fix!
+  $(`.add-comment-btn`).show();
 
   // Create post comment obj, add to post comments arr, render comments
   $(`.add-comment-btn`).on(`click`, function(e) {
@@ -116,6 +115,8 @@ const addPostComment = (jqPost, post) => {
     $('#message').attr(`placeholder`, `Message`).val('');
     $(`.add-comment-btn`).hide();
     $(`.add-post-btn`).show();
+
+    $(`.add-comment-btn`).off();
   });
 };
 
