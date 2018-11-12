@@ -1,59 +1,65 @@
 var posts = [];
 
+
 //function that creates new post upon entering text and clicking post button
 var makeNewPost = $('#post-button').click(function() {
-  //variable declaration for input values and handlebars template
+  //variable declaration for input values
   var $postContent = $('#post-content').val();
   var $userName = $('#user-name').val();
+  posts.push({postContent: $postContent, userName: $userName});
+  renderPost();
+});
+
+//function to render comments
+var renderPost = function () {
+  //declare varables for handlebars template and interpolation
   var postSource = $('#post-template').html();
   var postTemplate = Handlebars.compile(postSource);
-  var newPost = postTemplate({post: $postContent, user: $userName});
-  //add post content as an object to the posts array for data management
-  posts.push({postContent: $postContent, userName: $userName});
+  for (let i = 0; i < posts.length; i++) {
+    var newPost = postTemplate({post: posts[i].postContent, user: posts[i].userName});
+  }
   $('#posts').append(newPost);
-});
-
-
-
-//function to delete post
-var deletePost = $(document).on('click', '#remove', function () {
-    $(this).parent().parent().remove();
-  //   var postWithContent = posts.filter(function (instance) {
-  //   //unfortunately deletes all content in the posts array at this point
-  //   // if (instance.postContent === $('postContent').val()) {
-  //   //   return false;
-  //   // }
-  // });
-});
-
-
-//function to post comment
-var displayComments = $(document).on('click', '#show-comments', function () {
-  var commentFormSource = $('#comment-form-template').html();
-  var commentFormTemplate = Handlebars.compile(commentFormSource);
-  var commentForm = commentFormTemplate();
-  $('#user-line').prepend(commentForm);
-});
-
-//function to hide Comments
-var hideComments = function () {
-  $(document).on('click', '#show-comments', function () {
-    $('.comment-form').remove();
-  })
 };
 
 
 
-//function to post a new comment
-var postComment = $(document).on('click', '#comment-button', function () {
+//function to delete post
+var deletePost = $(document).on('click', '.remove', function () {
+  var $postData = $(this).parent().find('.post-data').html();
+  var $userData = $(this).parent().find('.user-data').html();
+  //loop to remove content from posts array
+  var filteredPosts = posts.filter(function(post) {
+    if (post.postContent !== $postData && post.userName !== $userData) {
+      return true;
+    }
+  });
+  posts = filteredPosts;
+  $(this).parent().parent().remove();
+});
+
+
+//function to display comments
+var displayComments = $(document).on('click', '.show-comments', function () {
+  var $commentForm = $(this).parent().find('.comment-form');
+  $($commentForm).toggle();
+});
+
+
+
+//function to add comment data to array and invoke function to render comments
+var makeNewComment = $(document).on('click', '#comment-button', function () {
   var $commentText = $('#comment-text').val();
   var $commentUserName = $('#comment-user').val();
   var commentSource = $('#comment-template').html();
   var commentTemplate = Handlebars.compile(commentSource);
   var newComment = commentTemplate({comment: $commentText, user: $commentUserName});
-  $('#content-line').append(newComment);
+  $(this).parent().parent().prepend(newComment);
+  // for (let i = 0; i < posts.length; i++) {
+  //   if (posts[i].postContent === $postData && posts[i].userName === $userData) {
+  //     posts[i].comments = {$commentUserName: $commentText};
+  //   }
+  // }
 });
-
 
 //function to delete comment
 var deleteComment = $(document).on('click', '#delete-comment-button', function() {

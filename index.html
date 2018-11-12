@@ -39,28 +39,24 @@
 
   <script id="post-template" type="text/x-handlebars-template">
     <div class="li list-group-item" id="content">
-      <div id="content-line">
-        <a id="remove">Delete Post</a> <a id="show-comments">Comments</a>  {{ post }}
+      <div class="content-line">
+        <a class="remove">Delete Post</a> <a class="show-comments">Display Comments </a> <span class='post-data'>{{ post }}</span>
+        <div class="container comment-form">
+          <div class="form-row">
+            <div class="col-md-3">
+              <input type="text" class="form-control" id="comment-text" placeholder="Comment Text">
+            </div>
+            <div class="col-md-3">
+              <input type="text" class="form-control" id="comment-user" placeholder="User Name">
+            </div>
+            <div class="col-md-1">
+              <button id="comment-button" class="btn btn-primary ">Post Comment</button>
+            </div>
+          </div>
+        </div>
       </div>
       <div id="user-line">
-        Posted By: <strong> {{ user }} </strong>
-      </div>
-    </div>
-  </script>
-
-
-  <script id="comment-form-template" type="text/x-handlebars-template">
-    <div class="container comment-form">
-      <div class="form-row">
-        <div class="col-md-3">
-          <input type="text" class="form-control" id="comment-text" placeholder="Comment Text">
-        </div>
-        <div class="col-md-3">
-          <input type="text" class="form-control" id="comment-user" placeholder="User Name">
-        </div>
-        <div class="col-md-1">
-          <button id="comment-button" class="btn-primary ">Post Comment</button>
-        </div>
+        Posted By: <strong><span class="user-data">{{ user }}</span></strong>
       </div>
     </div>
   </script>
