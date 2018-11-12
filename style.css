@@ -1,0 +1,16 @@
+.container {
+  max-width: 800px;
+}
+
+.li {
+  border-left: 0;
+  border-right: 0;
+}
+
+.form-control {
+  margin-top: 10px;
+}
+
+.fas {
+  color: #3366BB;
+}
