@@ -3,11 +3,13 @@
 
 const posts = [];
 const $postButton = {};
+const $deleteCommentBtn = {};
 
 // **************************************** FUNCTIONS **************************************** //
 
 // Creates a post object, pushes to the posts array, and renders posts
 let postId = 0;
+let commentId = 0;
 const createPost = (author, message) => {
   const post = {
     author: author,
@@ -21,9 +23,10 @@ const createPost = (author, message) => {
     },
     addComment(comment) {
       this.comments.push(comment);
+      commentId++; // Increment id for newly created comments
     },
     deleteComment(comment) {
-      this.comments.splice(comments.indexOf(comment), 1);
+      this.comments.splice(this.comments.indexOf(comment), 1);
     }
   };
 
@@ -52,11 +55,11 @@ const sortAndRenderPosts = () => {
 const handlePostButtonClick = jqButton => {
   const $clickedButton = jqButton.buttonClicked;
   const $associatedPost = jqButton.associatedPost;
-  const closestPostID = jqButton.associatedPost.data('id');
+  const htmlPostDataId = jqButton.associatedPost.data('id');
 
   // Maps JS post obj to HTML post DOM element, execute appropriate button action, re-render posts
   posts.map(post => {
-    if(post.id === closestPostID) {
+    if(post.id === htmlPostDataId) {
       // Upvote post
       if($clickedButton.hasClass('upvote-post')) {
         post.votes++;
@@ -80,7 +83,7 @@ const handlePostButtonClick = jqButton => {
       // Add comment to post
       else if($clickedButton.hasClass('add-post-comment')) {
         addPostComment($associatedPost, post);
-        renderComments($associatedPost, post.comments);
+        renderComments($associatedPost, post.comments); // Show existing comments
       }
     }
   });
@@ -88,18 +91,19 @@ const handlePostButtonClick = jqButton => {
 
 // Update DOM to allow user to add a comment to an individual post's comments arr
 const addPostComment = (jqPost, post) => {
-  // Change 'Add Post' form to 'Add Comment' form with new submit button (for targeting)
+  // Change 'Add Post' form to 'Add Comment' form
   $(`.add-comment`).find(`h3`).text(`Add a new comment`);
   $(`#name`).focus();
   $('#message').attr(`placeholder`, `Comment`);
   $(`.add-post-btn`).hide();
-  $(`.add-comment-btn`).show();
-  // $(`.add-comment`).append(`<button class="btn btn-primary add-comment-btn">Comment</buton>`);
+  $('.add-comment').append(`<button type="submit" class="btn btn-primary add-comment-btn">Comment</button>`);
+  // TODO: Appending adds multiple 'Add Comment' buttons to page, but jQ's .show/.hide methods resulted in incrementing blank comment creation. Figure out why & fix!
 
-  // Create post comment Obj, add to post comments arr, render comments
+  // Create post comment obj, add to post comments arr, render comments
   $(`.add-comment-btn`).on(`click`, function(e) {
     e.preventDefault();
     const postComment = {
+      id: commentId,
       author: $(`#name`).val(),
       comment: $(`#message`).val()
     };
@@ -130,12 +134,27 @@ const renderComments = (jqPost, comments) => {
     let commentHTML = template(comment);
     jqPost.find(`.comments-list`).append(commentHTML);
   });
+
+  // Add listener for newly rendered 'Delete Comment' button
+  $('.delete-comment').on('click', function() {
+    $deleteCommentBtn.buttonClicked = $(this);
+    $deleteCommentBtn.associatedComment = $(this).closest('.comment-item');
+    deletePostComment($(this).closest('.post-item'));
+  });
 };
 
-// TODO: Implement ability to delete comments
-const deleteComment = (jqPost, post) => {
-  post.deleteComment(postComment);
-  renderComments(jqPost, post.comments);
+// Delete comment from post on page
+const deletePostComment = jqPost => {
+  // Map comment obj to html comment, delete comment obj, re-render page
+  const closestCommentId = $deleteCommentBtn.associatedComment.data('id');
+  posts.map(post => {
+    post.comments.map(comment => {
+      if (comment.id === closestCommentId) {
+        post.deleteComment(comment);
+        renderComments(jqPost, post.comments);
+      }
+    });
+  });
 };
 
 // Update DOM to allow user to edit a post, thus updating the post obj, then rendering the update
