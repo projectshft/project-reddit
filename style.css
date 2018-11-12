@@ -1,4 +1,4 @@
-.add-comment{
+.add-comment, .comment-id{
   display:none;
 }
 .id-number-div{
@@ -12,5 +12,7 @@ ul{
   flex-direction: row;
   vertical-align: middle;
 }
-.delete-comment-btn{
+
+body {
+  background-color:#f0f0f0;
 }
