@@ -1,5 +1,9 @@
 #commentForm {
-    visibility: hidden;
+    display: none;
 }
+
+/* #commentForm .on{
+    display: inline-flex;
+} */
 
 

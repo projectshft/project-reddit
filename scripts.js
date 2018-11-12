@@ -14,6 +14,8 @@
 //Part 1 - 
 
 var Postings = [];
+
+//global button creation for non-Bootstrap buttons
 var remove = $('<button class="btn-remove">Remove</button>');
 var comment = $('<button class="btn-comment">Comment</button>');
 
@@ -25,12 +27,14 @@ var createPost = function () {
     var post = {
         text: $('#text').val(),
         name: $('#name').val(),
+        comments: ""
     }
 
     //add to array
     Postings.push(post);
 
-    // Appends it to the other posts  
+    // Appends it  
+    //ISSUE - only puts the 3 buttons on the 1st post 
     $('.post-list').append(
         '<li>', remove, comment,
         + "" + post.text + '<b>' + " Posted by: " + '</b> ' + post.name, checkbox, '</li>'
@@ -50,59 +54,53 @@ $('.btn-primary').click(function (event) {
 
 
 /////////////////PART 2//////////////////////////
-$('remove').insertAfter('.post-list li');
 
-// When "Comment" button is clicked, the comment input box toggles hidden/visible - set CSS
+var createComment = function () {
+    // Gets name and post input from user when they click the 'post' button. 
+    var comment = {
+        commentText: $('#commentText').val(),
+        userName: $('#userName').val(),
+    }
+    //ISSUE adds comment as next object
+    Postings.push(comment);
+    console.log(Postings);
+
+    //ISSUE I believe comment is there, but hidden by comment form
+    $('.post-list', 'li').append(
+        '<li>'
+        + "" + comment.commentText + '<b>' + " Posted by: " + '</b> ' + comment.userName, checkbox, '</li>'
+    );
+
+    //clears form
+    $('#commentText').val("");
+    $('#userName').val("");
+};
+
+// When "Comment" button is clicked on a post, 
 //uncomment display in CSS
-$('li.btn-comment').on("click", (function (event) {
+//??How do I get it to add an event listener to the button, not just the document???
+$('btn-comment').click(function () {
+    $('#commentForm').toggle(display);
+    alert('Make a comment.');
+    //toggle the comment form to visible
+
+});
+
+
+//ISSUE - post and comment disappear
+$('.btn-postComment').click(function (event) {
     event.preventDefault();
-    this.alert("Make a comment");
-    $(this, "#commentForm").toggle();
-}));
+    createComment();
+    console.log(Postings);
+});
 
-
-
-
-// //When the 'Post Comment" button is clicked, the comment is appended to THAT post ALONG with an X button
-// var createComment = function () {
-//     // Gets name and post input from user when they click the 'post' button. 
-//     var comment = {
-//         commentText: $('#commentText').val(),
-//         userName: $('#userName').val(),
-//     }
-
-//     Postings[comments].push(comment);
-
-//     $('this.li').append(
-//         '<li>'
-//         + "" + comment.commentText + '<b>' + " Posted by: " + '</b> ' + comment.userName
-//         + '<div class="form-check form-check-inline">' + '<input class="form-check-input" type="checkbox" id="x" value="option1">' + '<label class="form-check-label" for="x">&#x2716</label>' + '</div>'
-//         + '</li>'
-//     );
-//     // $('.post-list this.li').append(
-//     //     '<li>'
-//     //     + "" + comment.commentText + '<b>' + " Posted by: " + '</b> ' + comment.userName
-//     //     + '<div class="form-check form-check-inline">' + '<input class="form-check-input" type="checkbox" id="x" value="option1">' + '<label class="form-check-label" for="x">&#x2716</label>' + '</div>'
-//     //     + '</li>'
-//     // );
-
-//     //clears form
-//     $('#commentText').val("");
-//     $('#userName').val("");
-// };
-
-
-// $('.btn-postComment').click(function (event) {
-//     event.preventDefault();
-//     createComment();
-// });
-// console.log(Postings);
-
-// //When "x"button (next to post) is clicked, the comment is deleted.
+// When "x"button (next to post) is clicked, the comment is deleted.
+$('.form-check').click(function (){
+    $(this).detach();
+});
 
 // ///When the 'Remove' button is clicked, the entire post (including comments) is deleted.
-// //$('#btn-remove').click(function(event){
-// //     this.
-// // }
-// // })
+$('#btn-remove').click(function(){
+    $(this).detach(Postings[i]);
+});
 
