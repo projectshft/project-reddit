@@ -14,8 +14,9 @@
 //Part 1 - 
 
 var Postings = [];
-var remove = $('<button id="btn-remove">Remove</button>');
-var comment = $('<button id="btn-comment">Comment</button>');
+var remove = $('<button class="btn-remove">Remove</button>');
+var comment = $('<button class="btn-comment">Comment</button>');
+
 var checkbox = $('<div class="form-check form-check-inline">' + '<input class="form-check-input" type="checkbox" id="x" value="option1">' + '<label class="form-check-label" for="x">&#x2716</label>' + '</div>');
 
 
@@ -32,9 +33,7 @@ var createPost = function () {
     // Appends it to the other posts  
     $('.post-list').append(
         '<li>', remove, comment,
-        "" + post.text + '<b>' + " Posted by: " + '</b> ' + post.name,
-        checkbox,
-        '</li>'
+        + "" + post.text + '<b>' + " Posted by: " + '</b> ' + post.name, checkbox, '</li>'
     );
 
     //clears form
@@ -51,14 +50,15 @@ $('.btn-primary').click(function (event) {
 
 
 /////////////////PART 2//////////////////////////
+$('remove').insertAfter('.post-list li');
+
 // When "Comment" button is clicked, the comment input box toggles hidden/visible - set CSS
 //uncomment display in CSS
-$('#btn-comment').click(function (event) {
+$('li.btn-comment').on("click", (function (event) {
     event.preventDefault();
-    //$("#commentForm").slidetoggle('slow', function () {
-    $(this).html("Make a comment on this post.");
-    //})
-});
+    this.alert("Make a comment");
+    $(this, "#commentForm").toggle();
+}));
 
 
 
