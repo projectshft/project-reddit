@@ -41,18 +41,21 @@ var createComment = function (text, name, postIndex) {
         commentText: text,
         userName: name
     }
-    //ISSUE adds comment as next object
+    //add comment to Postings array for that post
     Postings[postIndex].comments.push(comment);
     console.log(Postings);
 
-    //ISSUE I believe comment is there, but hidden by comment form
-    $('.post-list').find('.comments').append(
+    //Find post with that postIndex on DOM
+    var $post = $('.post-list').find('.post').eq(postIndex);
+    
+     //Append comment to DOM
+    $post.find('.commentsList').append(
         '<div class="comment">' + comment.commentText + " Posted by: " + '<b> ' + comment.userName + '</b>' + '<input class="form-check-input" type="checkbox" id="x" value="option1"></div>'
     );
 
     //clears form
-    $('#commentText').val("");
-    $('#userName').val("");
+    $('.commentText').val("");
+    $('.userName').val("");
 };
 
 // When "Comment" button is clicked on a post, 
@@ -68,8 +71,8 @@ var createComment = function (text, name, postIndex) {
 //ISSUE - post and comment disappear
 $('.post-list').on('click', '.add-comment', function (event) {
     event.preventDefault();
-    var text = $(this).siblings('.commentText').val()
-    var name = $(this).siblings('.userName').val()
+    var text = $('.commentText').val()
+    var name = $('.userName').val()
     var postIndex = $(this).closest('.post').index();
     createComment(text, name, postIndex);
 });
