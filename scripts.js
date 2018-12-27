@@ -1,9 +1,5 @@
 var Postings = [];
 
-//global button creation for non-Bootstrap buttons
-var checkbox = $('<div class="form-check form-check-inline">' + '<input class="form-check-input" type="checkbox" id="x" value="option1">' + '<label class="form-check-label" for="x">&#x2716</label>' + '</div>');
-
-
 var createPost = function () {
     // Gets name and post input from user when they click the 'post' button. 
     var post = {
@@ -50,7 +46,7 @@ var createComment = function (text, name, postIndex) {
     
      //Append comment to DOM
     $post.find('.commentsList').append(
-        '<div class="comment">' + comment.commentText + " Posted by: " + '<b> ' + comment.userName + '</b>' + '<input class="form-check-input" type="checkbox" id="x" value="option1"></div>'
+        '<div class="comment">' + comment.commentText + " Posted by: " + '<b> ' + comment.userName + '</b>' + '<a href="#" class="delete">Delete</a></div>'
     );
 
     //clears form
@@ -58,7 +54,13 @@ var createComment = function (text, name, postIndex) {
     $('.userName').val("");
 };
 
-// When "Comment" button is clicked on a post, 
+var removeComment = function (postIndex, commentIndex) {
+    //delete that comment from Postings array for that post
+    Postings[postIndex].comments.splice(commentIndex, 1);
+    console.log(Postings);
+}
+// When "Comment" button is clicked on a post, toggle show/hide
+
 // $('.post-list').on('click', '.btn-comment', function(e) {
 //     e.preventDefault();
 //     // $('.comments').toggleClass('show');
@@ -68,22 +70,25 @@ var createComment = function (text, name, postIndex) {
 // });
 
 
-//ISSUE - post and comment disappear
+//When Add Comment button is clicked, get the input and trigger the createComment function
 $('.post-list').on('click', '.add-comment', function (event) {
     event.preventDefault();
-    var text = $('.commentText').val()
-    var name = $('.userName').val()
+    var text = $(this).siblings('.commentText').val()
+    var name = $(this).siblings('.userName').val()
     var postIndex = $(this).closest('.post').index();
     createComment(text, name, postIndex);
 });
 
-// When "x"button (next to post) is clicked, the comment is deleted.
-$('.form-check').click(function (){
-    $(this).detach();
+// When "delete" button (next to comment) is clicked, the comment is deleted from DOM.
+$('.post-list').on('click', '.delete', function (){
+    var commentIndex = $(this).closest('.comment').index();
+    var postIndex = $(this).closest('.post').index();
+    removeComment(postIndex, commentIndex);
+    $(this).closest('.comment').remove();
 });
 
 // ///When the 'Remove' button is clicked, the entire post (including comments) is deleted.
-$('#btn-remove').click(function(){
-    $(this).detach(Postings[i]);
-});
+// $('#btn-remove').click(function(){
+//     $(this).detach(Postings[i]);
+// });
 
