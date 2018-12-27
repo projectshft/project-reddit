@@ -59,6 +59,12 @@ var removeComment = function (postIndex, commentIndex) {
     Postings[postIndex].comments.splice(commentIndex, 1);
     console.log(Postings);
 }
+
+var removePost = function(postIndex){
+    //delete post and its comments from array
+    Postings.splice(postIndex, 1);
+}
+
 // When "Comment" button is clicked on a post, toggle show/hide
 
 // $('.post-list').on('click', '.btn-comment', function(e) {
@@ -87,8 +93,10 @@ $('.post-list').on('click', '.delete', function (){
     $(this).closest('.comment').remove();
 });
 
-// ///When the 'Remove' button is clicked, the entire post (including comments) is deleted.
-// $('#btn-remove').click(function(){
-//     $(this).detach(Postings[i]);
-// });
+// ///When the 'Remove' button is clicked, the entire post (including comments) is deleted from DOM.
+$('.post-list').on('click', '.btn-remove', function(){
+    var postIndex = $(this).closest('.post').index();
+    removePost(postIndex);
+    $(this).closest('.post').remove();
+});
 
