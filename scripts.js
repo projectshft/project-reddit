@@ -35,10 +35,10 @@ var createPost = function () {
 
     // Appends it  
     //ISSUE - only puts the 3 buttons on the 1st post 
-    $('.post-list').append(
-        '<li>', remove, comment,
-        + "" + post.text + '<b>' + " Posted by: " + '</b> ' + post.name, checkbox, '</li>'
-    );
+    $('.post-list').append('<div class="post">' + '<button class="btn-remove">Remove</button>' + '<button class="btn-comment">Comment</button>' + post.text + '<div> Posted by: <b>' + post.name + '</b></div> </div>');
+        // '<li>', remove, comment,
+        // + "" + post.text + '<b>' + " Posted by: " + '</b> ' + post.name, checkbox, '</li>'
+    
 
     //clears form
     $('#text').val("");
