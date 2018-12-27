@@ -8,14 +8,14 @@ var createPost = function () {
         comments: []
     };
 
-    var comments = '<div class="comments">' + '<div class="commentsList"></div>' +'<input type="text" class="commentText" placeholder="Your comment">' + '<input type="text" class="userName" placeholder="User Name"><button class="btn add-comment">Add Comment</button></div>';
+    var comments = '<div class="comments">' + '<div class="commentsList"></div>' + '<input type="text" class="commentText" placeholder="Your comment">' + '<input type="text" class="userName" placeholder="User Name"><button class="btn add-comment">Add Comment</button></div>';
 
     //add to array
     Postings.push(post);
 
     // Appends it  
     $('.post-list').append('<div class="post">' + '<button class="btn-remove">Remove</button>' + '<button class="btn-comment">Comment</button>' + post.text + comments + '<div> Posted by: <b>' + post.name + '</b></div> <hr/></div>');
-      
+
     //clears form so ready for new post
     $('#text').val("");
     $('#name').val("");
@@ -43,8 +43,8 @@ var createComment = function (text, name, postIndex) {
 
     //Find post with that postIndex on DOM
     var $post = $('.post-list').find('.post').eq(postIndex);
-    
-     //Append comment to DOM
+
+    //Append comment to DOM
     $post.find('.commentsList').append(
         '<div class="comment">' + comment.commentText + " Posted by: " + '<b> ' + comment.userName + '</b>' + '<a href="#" class="delete">Delete</a></div>'
     );
@@ -60,20 +60,16 @@ var removeComment = function (postIndex, commentIndex) {
     console.log(Postings);
 }
 
-var removePost = function(postIndex){
+var removePost = function (postIndex) {
     //delete post and its comments from array
     Postings.splice(postIndex, 1);
 }
 
 // When "Comment" button is clicked on a post, toggle show/hide
-
-// $('.post-list').on('click', '.btn-comment', function(e) {
-//     e.preventDefault();
-//     // $('.comments').toggleClass('show');
-//     alert('Make a comment.');
-//     //toggle the comment form to visible
-
-// });
+$('.post-list').on('click', '.btn-comment', function (e) {
+    e.preventDefault();
+    $(this).parent().children('.comments').toggle('.show');
+});
 
 
 //When Add Comment button is clicked, get the input and trigger the createComment function
@@ -86,7 +82,7 @@ $('.post-list').on('click', '.add-comment', function (event) {
 });
 
 // When "delete" button (next to comment) is clicked, the comment is deleted from DOM.
-$('.post-list').on('click', '.delete', function (){
+$('.post-list').on('click', '.delete', function () {
     var commentIndex = $(this).closest('.comment').index();
     var postIndex = $(this).closest('.post').index();
     removeComment(postIndex, commentIndex);
@@ -94,7 +90,7 @@ $('.post-list').on('click', '.delete', function (){
 });
 
 // ///When the 'Remove' button is clicked, the entire post (including comments) is deleted from DOM.
-$('.post-list').on('click', '.btn-remove', function(){
+$('.post-list').on('click', '.btn-remove', function () {
     var postIndex = $(this).closest('.post').index();
     removePost(postIndex);
     $(this).closest('.post').remove();
