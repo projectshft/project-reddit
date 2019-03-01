@@ -31,3 +31,21 @@ input {
   margin-bottom: 80px;
   margin-top: 15px;
 }
+
+i {
+  font-size: 25px;
+  margin-top: 5px;
+  margin-right: 10px;
+}
+
+.icon-row {
+  display: none;
+}
+
+.delete {
+  color: #cc0909
+}
+
+.show {
+  display: inline-block;
+}
