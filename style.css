@@ -1,0 +1,17 @@
+body {
+  background-color: #edfaff;
+  color: #6b6b6b;
+}
+
+.header {
+  padding: 20px;
+  text-align: center;
+  text-transform: uppercase;
+  border-bottom: 2px solid #d3d3d3;
+  margin-bottom: 15px;
+}
+
+/* .content {
+  border: 1px solid #d3d3d3;
+  height: 100px;
+} */
