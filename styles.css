@@ -33,7 +33,7 @@ input {
 }
 
 i {
-  font-size: 25px;
+  font-size: 22px;
   margin-top: 5px;
   margin-right: 10px;
 }
@@ -42,10 +42,24 @@ i {
   display: none;
 }
 
+.comment-icon-row {
+  display: inline-block
+}
+
+.add-comment {
+  display: none;
+}
+
 .delete {
   color: #cc0909
 }
 
+.delete-comment {
+  color: green;
+  font-size: 16px;
+  margin-left: 5px;
+}
+
 .show {
-  display: inline-block;
+  display: block;
 }
