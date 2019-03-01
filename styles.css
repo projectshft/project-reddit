@@ -1,14 +1,14 @@
 body {
-  background-color: white;
+  background-color: #e9e9e9;
 }
 
 .input-area {
-  margin-top: 50px;
-  margin-bottom: 200px;
+  margin-top: 30px;
 }
 
 .posts {
   margin-top: 30px;
+  margin-bottom: 50px;
 }
 
 input {
@@ -18,9 +18,16 @@ input {
 }
 
 .userpost {
-  background-color: white;
   border-top: solid grey 1px;
   border-bottom: solid grey 1px;
   padding-top: 25px;
   padding-bottom: 25px;
+}
+
+.inner-container {
+  background-color: rgb(199, 223, 255);
+  border-radius: 10px;
+  border: solid cornflowerblue 2px;
+  margin-bottom: 80px;
+  margin-top: 15px;
 }
