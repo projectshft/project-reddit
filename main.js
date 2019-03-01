@@ -31,12 +31,13 @@ $('#add-comment').on('click', function (e) {
   e.preventDefault();
   const userName = $('#comment-username').val();
   const message = $('#comment-message').val();
+  const commentSection = $(this).closest('.userpost').find('.comment-text');
 
-  $(this).closest('.userpost').find('.comment-text').append(
+  commentSection[0].innerHTML +=
     '<div class="comment-post">'
     + '<div class="comment-text"><div>' + message + '</div>' 
     + '<div>Posted By: <b>' + userName + '</b>'
-    + '<div class="comment-icon-row"><i class="far fa-window-close delete-comment"></i></div></div>');
+    + '<div class="comment-icon-row"><i class="far fa-window-close delete-comment"></i></div></div>';
   
   // deletePostListener();
   // addPostMouseOverListeners();
@@ -56,7 +57,6 @@ const deletePostListener = function() {
 // Adds event listens to all comment icons and if clicked shows the add comment area
 const commentAddListener = function() {
   $(".comment").each(function() {
-    console.log($(this).closest('.icon-row'));
     $(this).on("click", function() {
       if($(this).closest(".icon-row").next(".add-comment").hasClass('show')) {
         $(this).closest(".icon-row").next(".add-comment").removeClass('show');
