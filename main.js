@@ -1,6 +1,6 @@
-// $(document).ready(function () {
-var $postContainer = $('#posts');
-var postCounter = 0;
+/** A div that will contain all of our posts*/
+var $postContainer = $("#post-content");
+/** An array of posts objects */
 var postData = [
   {
     name: 'Andres',
@@ -17,12 +17,12 @@ var postData = [
     ]
   },
   {
-    name: 'Andres',
+    name: 'Mike',
     post: 'Cool post yall...',
     comments: []
   },
   {
-    name: 'Andres',
+    name: 'Jake',
     post: 'Cool post yall...',
     comments: {
       author: 'Luis',
@@ -30,6 +30,42 @@ var postData = [
     }
   }
 ];
+
+
+/** 
+ * Renders a post object to the user
+ * @param { Object } userPost - An object that contains a name, post, and comment properties.
+ */
+function renderPost(userPost) {
+
+  $postContainer.append(`
+
+    <div class="alert alert-primary">
+      <p>${userPost.post}</p>  
+      <p class="post-author">Posted by: <strong>${userPost.name}</strong></p>
+ 
+      <p onclick="com()" class="post-comment-btn">comments<p>
+      
+      <form class="comment-form">
+          <div class="form-group comment-form-name">
+            <input type="text" class="form-control" id="comment-name" placeholder="Your name">
+          </div>
+          <div class="form-group">
+            <textarea class="form-control" placeholder="Enter Comment" id="comment-body" rows="3"></textarea>
+          </div>
+          <button type="button" id="comment-submit-btn" class="btn btn-primary">Post Comment</button>
+  
+        </form>
+    </div> 
+  `);
+
+}
+
+
+function com() {
+  console.log($(event.target).closest('.alert').find('.comment-form').toggleClass('show'));
+}
+
 
 /** Handle submitting form */
 function submitForm() {
@@ -39,10 +75,11 @@ function submitForm() {
   postObj.name = name;
   postObj.post = postBody;
 
+  // render post to user
+  renderPost(postObj)
+  // push post object to our array
   postData.push(postObj);
-  $postContainer.append(`<p>${postData[postCounter].post} - Posted by: <strong>${postData[postCounter].name}</p></strong>`);
-  postCounter++;
+};
 
-}
 
 console.log(postData);

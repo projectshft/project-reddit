@@ -1,4 +1,27 @@
 #posts {
-  overflow: scroll;
-  height: 30em;
+  /* overflow: scroll; */
+  /* height: 30em; */
+}
+
+.post-author {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.post-comment-btn {
+  cursor: pointer;
+}
+
+.comment-form-name {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+
+.show {
+  display: block !important;
+}
+
+form.comment-form {
+  display: none;
 }
