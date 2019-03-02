@@ -46,10 +46,6 @@ requirements:
 var postsList = [];
 var commentsList = [];
 
-// create template for comments form
-var $commentsTemplate =
-'<form style class="margin-top:30px">'
-+ '  <div class="form-group"> ' + '<input id="commenter" type="text" class="form-control-sm" placeholder="Name"></input>' + '<input id="comment-content" type="text" class="form-control-sm" placeholder="Comment"></input> <button type="submit" class="btn-secondary commentbutton">Post Comment</button></form>';
 
 //USER STORY 1: when a user fills out the two post inputs and clicks "Post", it should immediately add the post to the posts section, with username and message
 
@@ -97,23 +93,28 @@ $('button').on('click', function(e) {
         });
     
 
-
         // USER STORY 2: when a user clicks "comments" (above each post), it should toggle the comments and input box visible/hidden
 
     //renderComments = function () {
 
-        $('.fa-comments').on('click', function(e) {
-            e.preventDefault();
+        $('.fa-comments').on('click', function() {
 
-            //when comments link is clicked, comments form appears
+            // create template for comments form
+            var $commentsTemplate =
+            '<form style class="margin-top:30px">'
+            + '  <div class="form-group"> ' + '<input id="commenter" type="text" class="form-control-sm" placeholder="Name"></input>' + '<input id="comment-content" type="text" class="form-control-sm" placeholder="Comment"></input> <button type="submit" class="btn-secondary commentbutton">Post Comment</button></form>';
+
+            //when comments link is clicked, comments form appears and the name and comment are inserted into the template
             $(this).closest(".post").append('<div class="comments">' + $commentsTemplate + '</div>');
-    
             
-            // //get values of text input
-        
-            var $commentContent = $(this).closest("#comment-content").val();
-            var $commenter = $(this).closest('#commenter').val();
+            console.log("This is what the template looks like:", $commentsTemplate);
+            
+            // //get values of text input - is currently only returning undefined
+            var $commentContent = $(this).find('#comment-content').val();
+            var $commenter = $(this).find('#commenter').val();
 
+            console.log("this is what the comment's content is:", $commentContent);
+            console.log("This is what the commenter's name is:", $commenter);
     
             // // //if the comments div has DOM elements, clear them
             // // if ( $('.comments').children().length > 0 ) {
@@ -127,19 +128,20 @@ $('button').on('click', function(e) {
             $(".commentbutton").on('click', function(){
 
                 $(this).closest('.post').append('<div class="comment">' + $commentContent + ' Posted by: ' + $commenter + ' <a href="#" class="remove-comment"><i class="fa fa-times" aria-hidden="true"></i></a> <hr /> </div>');
+            
+                // USER STORY 3: when a user clicks the 'x' next to a comment, it should delete it
+
+                $(".fa-times").on('click', function(){
+                    $(this).closest(".comment").remove();
+                })
             });
 
-            // USER STORY 3: when a user clicks the 'x' next to a comment, it should delete it
-
-            $(".fa-times").on('click', function(){
-                $(this).closest(".comment").empty();
-            })
-             
             //add comments as a key with the comment content and commenter name as it's value to the post array
             post.comments = ({commentContent: $commentContent, commenter: $commenter});
 
-            console.table("this is what post array looks like:", post);
+            console.log("this is what post array looks like:", post);
         });
+
 });
 
 
