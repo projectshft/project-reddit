@@ -42,8 +42,8 @@ const addCommentListener = function () {
       + '<div>Posted By: <b>' + userName + '</b>'
       + '<div class="comment-icon-row"><i class="far fa-window-close delete-comment"></i></div></div>';      
     
-    $(this).closest(".add-comment").removeClass('show');
-    deleteCommentListener();    
+    $(this).closest(".add-comment").removeClass('show'); // Hides add comment section when button is clicked
+    deleteCommentListener();
     });
   });
 }
@@ -52,7 +52,11 @@ const addCommentListener = function () {
 const deletePostListener = function() {
   $(".delete").each(function() {
     $(this).on("click", function() {
-      $(this).closest('.userpost').remove();
+      let confirmDeletePost = confirm("Are you sure you want to delete this post?");
+
+      if(confirmDeletePost) {
+          $(this).closest('.userpost').remove();
+      }
     });
   });
 }
@@ -61,7 +65,11 @@ const deletePostListener = function() {
 const deleteCommentListener = function() {
   $(".delete-comment").each(function() {
     $(this).on("click", function() {
-      $(this).closest('.comment-text').remove();
+      let confirmDeleteComment = confirm("Are you sure you want to delete this comment?");
+
+      if(confirmDeleteComment) {
+        $(this).closest('.comment-text').remove();
+      }
     });
   });
 }
