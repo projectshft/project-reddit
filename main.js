@@ -12,8 +12,8 @@ $('#add-post').on('click', function (e) {
     '<div class="userpost">'
     + '<div class="post-text"><div>' + message + '</div>' 
     + '<div>Posted By: <b>' + userName + '</b>'
-    + '<div class="icon-row"><i class="far fa-comment comment"></i>'
-    + '<i class="far fa-window-close delete"></i></div></div>'
+    + '<div class="icon-row"><i class="far fa-comment comment" data-toggle="tooltip" title="Add Comment"></i>'
+    + '<i class="far fa-window-close delete" data-toggle="tooltip" title="Delete Post"></i></div></div>'
     + '<div class="comment-post"></div>' 
     + '<form class="input-area add-comment"><h5>Add Comment</h5>'
     + '<div class="form-group"><input class="comment-username" type="text" placeholder="User Name" /></div>'
@@ -44,12 +44,15 @@ const addCommentListener = function () {
     commentSection[0].innerHTML +=
       '<div class="comment-text"><div>' + message + '</div>' 
       + '<div>Posted By: <b>' + userName + '</b>'
-      + '<div class="comment-icon-row"><i class="far fa-window-close delete-comment"></i></div></div>';      
-    
-    $(this).closest(".add-comment").removeClass('show'); // Hides add comment section when button is clicked
+      + '<div class="comment-icon-row">'
+      + '<i class="far fa-window-close delete-comment" data-toggle="tooltip" title="Delete Comment"></i></div>'
+      + '</div>';  
 
+    // Resets the user name and message fields back to empty after adding a comment
     $(this).closest(".add-comment").find('.comment-username').val('');
     $(this).closest(".add-comment").find('.comment-message').val('');
+
+    $(this).closest(".add-comment").removeClass('show'); // Hides add comment section when button is clicked
 
     deleteCommentListener();
     });
