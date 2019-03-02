@@ -28,11 +28,21 @@
   padding-bottom: 0;
 }
 
+.comment {
+  padding-bottom: 0;
+  margin-bottom: .5rem;
+}
+
 .comment-container {
   margin-top: 1rem;
   padding-left: 2rem;
 }
 
+.fa-times {
+  color: red;
+  margin-left: 1.2rem;
+  cursor: pointer;
+}
 
 .show {
   display: block !important;

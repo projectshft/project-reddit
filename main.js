@@ -34,9 +34,10 @@ function renderPost(userPost) {
       <p class="post-content">${userPost.post}</p>
       <div class="post-author-container">
         posted by: <p class="post-author">${userPost.name}</p>
-      </div>  
+      </div>
+      <hr>  
       
-      <p onclick="toggleCommentForm()" class="post-comment-btn">comments<p>
+      <p onclick="toggleCommentForm()" class="post-comment-btn">comments:<p>
       <div class="comment-container"></div>
       
       <form class="comment-form">
@@ -63,7 +64,11 @@ function renderComment(comment) {
   var $commentContainer = $(event.target).closest('.alert').find('.comment-container');
 
   $commentContainer.append(`
-    <p>${comment.content} - posted by: <strong>${comment.author}<strong></p>
+    <p class="comment">
+      ${comment.content} - posted by: <strong>${comment.author}<strong>
+      <i class="fas fa-times"></i>
+    </p>
+    <hr>
   `);
   console.log('user object', comment);
 }
@@ -103,8 +108,10 @@ function submitComment() {
   if (!postUserObj['comments']) {
     commentArray.push(commentObj);
     postUserObj.comments = commentArray;
-    $(event.target).closest('.alert').find('#comment-name').val("Your name");
-    $(event.target).closest('.alert').find('#comment-body').val("Enter comment");
+    $(event.target).closest('.alert').find('#comment-name').val("");
+    $(event.target).closest('.alert').find('#comment-name').attr("placeholder", "Your name");
+    $(event.target).closest('.alert').find('#comment-body').val("");
+    $(event.target).closest('.alert').find('#comment-body').attr("Enter Comment");
   } else {
     // push the comment in the comments array 
     postUserObj['comments'].push(commentObj);
@@ -113,8 +120,8 @@ function submitComment() {
   renderComment(commentObj);
 
   // reset form values 
-  $(event.target).closest('.alert').find('#comment-name').attr("");
-  $(event.target).closest('.alert').find('#comment-body').val(" Your name");
+  $(event.target).closest('.alert').find('#comment-name').attr("placeholder", "Your name");
+  $(event.target).closest('.alert').find('#comment-body').attr("placeholder", "Enter comment");
 
 };
 
