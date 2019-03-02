@@ -6,15 +6,31 @@
 .post-author {
   margin-bottom: 0;
   padding-bottom: 0;
+  display: inline;
+  font-weight: bold;
+}
+
+.post-author-container {
+  margin-bottom: 2rem;
 }
 
 .post-comment-btn {
   cursor: pointer;
 }
 
+.post-content {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
 .comment-form-name {
   margin-bottom: 0;
   padding-bottom: 0;
+}
+
+.comment-container {
+  margin-top: 1rem;
+  padding-left: 2rem;
 }
 
 
