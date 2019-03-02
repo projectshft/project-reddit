@@ -16,7 +16,7 @@ $('#add-post').on('click', function (e) {
     + '<div class="add-comment"><h5>Add Comment</h5>'
     + '<input id="comment-username" type="text" placeholder="User Name">'
     + '<input id="comment-message" type="text" placeholder="Comment Text" Text"></input>'
-    + '<button type="submit" class="btn btn-primary" id="add-comment">Add Comment</button></div>';
+    + '<button type="submit" class="btn btn-primary post-comment">Add Comment</button></div>';
   
   deletePostListener();
   addPostMouseOverListeners();
@@ -27,7 +27,8 @@ $('#add-post').on('click', function (e) {
 /* When add comment is clicked this function grabs the values of the username and comment inputs,
    builds a post, and then adds it to the comment list */
 const addCommentListener = function() {
-$('#add-comment').on('click', function (e) { 
+$('.post-comment').each(function () {
+  $(this).on("click", function(e) {  
   e.preventDefault();
   const userName = $('#comment-username').val();
   const message = $('#comment-message').val();
@@ -39,9 +40,9 @@ $('#add-comment').on('click', function (e) {
     + '<div>Posted By: <b>' + userName + '</b>'
     + '<div class="comment-icon-row"><i class="far fa-window-close delete-comment"></i></div></div>';
   
-  // deletePostListener();
-  // addPostMouseOverListeners();
-  // commentAddListener();
+  deleteCommentListener();
+  
+});
 });
 }
 
@@ -50,6 +51,14 @@ const deletePostListener = function() {
   $(".delete").each(function() {
     $(this).on("click", function() {
       this.parentElement.parentElement.remove();
+    });
+  });
+}
+
+const deleteCommentListener = function() {
+  $(".delete-comment").each(function() {
+    $(this).on("click", function() {
+      this.parentElement.parentElement.parentElement.remove();
     });
   });
 }
