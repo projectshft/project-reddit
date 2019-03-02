@@ -106,6 +106,6 @@ const getTimeStamp = function () {
     + currentdate.getFullYear() + " @ "  
     + currentdate.getHours() + ":"  
     + currentdate.getMinutes() + ":"
-    + currentdate.getSeconds()
+    + (currentdate.getSeconds() < 10 ? '0' : '') + currentdate.getSeconds();
   return timestamp;
 }
