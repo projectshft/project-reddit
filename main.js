@@ -10,15 +10,15 @@ $('#add-post').on('click', function (e) {
   posts[0].innerHTML +=
     '<div class="userpost">'
     + '<div class="post-text"><div>' + message + '</div>' 
-    + '<div>Posted By: <b>' + userName + '</b></div></div>'
+    + '<div>Posted By: <b>' + userName + '</b>'
+    + '<div class="icon-row"><i class="far fa-comment comment"></i>'
+    + '<i class="far fa-window-close delete"></i></div></div>'
     + '<div class="comment-text"></div>' 
-    + '<div class="icon-row"><i class="far fa-window-close delete"></i>'
-    + '<i class="far fa-comment comment"></i></div>' 
     + '<div class="add-comment"><h5>Add Comment</h5>'
     + '<input class="comment-username" type="text" placeholder="User Name">'
     + '<input class="comment-message" type="text" placeholder="Comment Text" Text"></input>'
     + '<button type="submit" class="btn btn-primary post-comment">Add Comment</button></div>';
-  
+    
   deletePostListener();
   addPostMouseOverListeners();
   commentAddListener();

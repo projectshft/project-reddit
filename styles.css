@@ -41,13 +41,14 @@ input {
 }
 
 i {
-  font-size: 22px;
+  font-size: 20px;
   margin-top: 5px;
   margin-right: 10px;
 }
 
 .icon-row {
   display: none;
+  margin-left: 20px;
 }
 
 .comment-icon-row {
@@ -69,5 +70,5 @@ i {
 }
 
 .show {
-  display: block;
+  display: inline-block;
 }
