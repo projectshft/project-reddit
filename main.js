@@ -14,8 +14,8 @@ $('#add-post').on('click', function (e) {
     + '<div class="icon-row"><i class="far fa-window-close delete"></i>'
     + '<i class="far fa-comment comment"></i></div>' 
     + '<div class="add-comment"><h5>Add Comment</h5>'
-    + '<input id="comment-username" type="text" placeholder="User Name">'
-    + '<input id="comment-message" type="text" placeholder="Comment Text" Text"></input>'
+    + '<input class="comment-username" type="text" placeholder="User Name">'
+    + '<input class="comment-message" type="text" placeholder="Comment Text" Text"></input>'
     + '<button type="submit" class="btn btn-primary post-comment">Add Comment</button></div>';
   
   deletePostListener();
@@ -30,8 +30,8 @@ const addCommentListener = function() {
 $('.post-comment').each(function () {
   $(this).on("click", function(e) {  
   e.preventDefault();
-  const userName = $('#comment-username').val();
-  const message = $('#comment-message').val();
+  const userName = $('.comment-username').val();
+  const message = $('.comment-message').val();
   const commentSection = $(this).closest('.userpost').find('.comment-text');
 
   commentSection[0].innerHTML +=
