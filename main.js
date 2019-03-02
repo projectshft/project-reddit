@@ -1,6 +1,7 @@
 const posts = $('.posts');
+
 /* When add post is clicked this function grabs the values of the username and message inputs,
-   builds a post, and then adds it to the post list */
+   builds a post, and then adds it to the posts list */
 $('#add-post').on('click', function (e) { 
   e.preventDefault();
   const userName = $('#username').val();
@@ -69,10 +70,10 @@ const deleteCommentListener = function() {
 const commentAddListener = function() {
   $(".comment").each(function() {
     $(this).on("click", function() {
-      if($(this).closest(".icon-row").next(".add-comment").hasClass('show')) {
-        $(this).closest(".icon-row").next(".add-comment").removeClass('show');
+      if($(this).closest(".post-text").find(".add-comment").hasClass('show')) {
+        $(this).closest(".post-text").find(".add-comment").removeClass('show');
       } else {
-        $(this).closest(".icon-row").next(".add-comment").addClass('show');
+        $(this).closest(".post-text").find(".add-comment").addClass('show');
       }
     });
   });
