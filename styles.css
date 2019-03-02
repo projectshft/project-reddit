@@ -25,17 +25,22 @@ input {
 }
 
 .post-text {
+  font-family: 'Ubuntu', sans-serif;
   font-size: 20px;
 }
 
 .comment-text {
   margin-left: 15px;
   margin-top: 20px;
-  font-size: 16px;
+  font-size: 17px;
+}
+
+.comment-post {
+  font-family: 'Sarabun', sans-serif;
 }
 
 .inner-container {
-  background-color: rgb(199, 223, 255);
+  background-color: #c7dfff;
   border-radius: 10px;
   border: solid cornflowerblue 2px;
   margin-bottom: 80px;
@@ -43,7 +48,7 @@ input {
 }
 
 i {
-  font-size: 20px;
+  font-size: 19px;
   margin-top: 5px;
   margin-right: 10px;
 }
