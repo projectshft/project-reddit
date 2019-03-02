@@ -2,52 +2,52 @@ const posts = $('.posts');
 
 /* When add post is clicked this function grabs the values of the username and message inputs,
    builds a post, and then adds it to the posts list */
-$('#add-post').on('click', function (e) { 
+$('#add-post').on('click', function(e) { 
   e.preventDefault();
-  const userName = $('#username').val();
-  const message = $('#message').val();
+  const postUserName = $('#username').val();
+  const postMessage = $('#message').val();
 
   // Builds out the HTML for each new post
   posts[0].innerHTML +=
     '<div class="userpost">'
-    + '<div class="post-text"><div>' + message + '</div>' 
-    + '<div>Posted By: <b>' + userName + '</b>'
+    + '<div class="post-text"><div>' + postMessage + '</div>' 
+    + '<div>Posted By: <b>' + postUserName + '</b>'
     + '<div class="icon-row"><i class="far fa-comment comment" data-toggle="tooltip" title="Add Comment"></i>'
     + '<i class="fas fa-edit" data-toggle="tooltip" title="Edit Post"></i>'
-    + '<i class="far fa-window-close delete" data-toggle="tooltip" title="Delete Post"></i></div></div>'
+    + '<i class="far fa-window-close delete" data-toggle="tooltip" title="Delete Post"></i></div>'
+    + '<div class="timestamp">' + getTimeStamp() + '</div></div>'
     + '<div class="comment-post"></div>' 
     + '<form class="input-area add-comment"><h5>Add Comment</h5>'
     + '<div class="form-group"><input class="comment-username" type="text" placeholder="User Name" /></div>'
     + '<div class="form-group"><input class="comment-message" type="text" placeholder="Comment Text" /></div>'
     + '<button type="submit" class="btn btn-primary post-comment">Add Comment</button></form>';
 
-   // Resets the user name and message fields back to empty after adding a post
-   $('#username').val(''); 
-   $('#message').val('');
+  // Resets the user name and message fields back to empty after adding a post
+  $('#username').val(''); 
+  $('#message').val('');
 
   deletePostListener();
-  //addPostMouseOverListeners();
-  commentAddListener();
-  addCommentListener();
+  commentButtonListener();
+  addCommentButtonListener();
 });
 
 /* When add comment is clicked this function grabs the values of the username and comment inputs,
    builds a post, and then adds it to the comment list */
-const addCommentListener = function () {
-  $('.post-comment').each(function () {
+const addCommentButtonListener = function() {
+  $('.post-comment').each(function() {
     $(this).on("click", function(e) {  
     e.preventDefault();
-    const userName = $(this).closest(".add-comment").find('.comment-username').val();
-    const message = $(this).closest(".add-comment").find('.comment-message').val();
+    const commentUserName = $(this).closest(".add-comment").find('.comment-username').val();
+    const commentMessage = $(this).closest(".add-comment").find('.comment-message').val();
     const commentSection = $(this).closest('.userpost').find('.comment-post');
 
     // Builds out HTML of a new comment
     commentSection[0].innerHTML +=
-      '<div class="comment-text"><div>' + message + '</div>' 
-      + '<div>Posted By: <b>' + userName + '</b>'
+      '<div class="comment-text"><div>' + commentMessage + '</div>' 
+      + '<div>Posted By: <b>' + commentUserName + '</b>'
       + '<div class="comment-icon-row"><i class="fas fa-edit" data-toggle="tooltip" title="Edit Comment"></i>'
       + '<i class="far fa-window-close delete-comment" data-toggle="tooltip" title="Delete Comment"></i></div>'
-      + '</div>';  
+      + '<div class="timestamp">' + getTimeStamp() + '</div></div>';  
 
     // Resets the user name and message fields back to empty after adding a comment
     $(this).closest(".add-comment").find('.comment-username').val('');
@@ -65,9 +65,8 @@ const deletePostListener = function() {
   $(".delete").each(function() {
     $(this).on("click", function() {
       let confirmDeletePost = confirm("Are you sure you want to delete this post?");
-
       if(confirmDeletePost) {
-          $(this).closest('.userpost').remove();
+        $(this).closest('.userpost').remove();
       }
     });
   });
@@ -78,7 +77,6 @@ const deleteCommentListener = function() {
   $(".delete-comment").each(function() {
     $(this).on("click", function() {
       let confirmDeleteComment = confirm("Are you sure you want to delete this comment?");
-
       if(confirmDeleteComment) {
         $(this).closest('.comment-text').remove();
       }
@@ -87,7 +85,7 @@ const deleteCommentListener = function() {
 }
 
 // Adds click event listeners to all comment icons and if clicked shows the add comment area
-const commentAddListener = function() {
+const commentButtonListener = function() {
   $(".comment").each(function() {
     $(this).on("click", function() {
       if($(this).closest(".post-text").find(".add-comment").hasClass('show')) {
@@ -99,30 +97,15 @@ const commentAddListener = function() {
   });
 }
 
-/* This function handles when a post area has the mouse enter or leave it along with what
-   happens when those events occur such as showing or hiding certain features */   
-// const addPostMouseOverListeners = function() {
-  
-//   // Checks if the icon row is showing and shows or hides it if the targeted post is moused into or out of
-//   const checkIconRowShow = function() {
-//     if($(this).find(".icon-row").hasClass('show')) {
-//       $(this).find(".icon-row").removeClass('show');
-//     } else {
-//       $(this).find(".icon-row").addClass('show');
-//     }
-//   }
-
-//   // // Checks if add comment section is showing or not and hides it if the mouse leaves the current post area
-//   // const checkCommentAddShow = function () {
-//   //   if($(this).find(".add-comment").hasClass('show')) {
-//   //     $(this).find(".add-comment").removeClass('show');
-//   //   }
-//   // }
-
-//   // For each user post handles what happens when the mouse enters or leaves the post area
-//   $('.userpost').each(function() {
-//     $(this).mouseenter(checkIconRowShow);
-//     $(this).mouseleave(checkIconRowShow);
-//     //$(this).mouseleave(checkCommentAddShow);
-//   });
-// }
+// This function creates and returns a timestamp when add post or add comment buttons are pushed
+const getTimeStamp = function () {
+  const currentdate = new Date(); 
+  const timestamp = 
+    (currentdate.getMonth()+1) + "/"
+    + currentdate.getDate()  + "/" 
+    + currentdate.getFullYear() + " @ "  
+    + currentdate.getHours() + ":"  
+    + currentdate.getMinutes() + ":"
+    + currentdate.getSeconds()
+  return timestamp;
+}
