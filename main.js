@@ -6,6 +6,7 @@ $('#add-post').on('click', function (e) {
   const userName = $('#username').val();
   const message = $('#message').val();
 
+  // Builds out the HTML for each new post
   posts[0].innerHTML +=
     '<div class="userpost">'
     + '<div class="post-text"><div>' + message + '</div>' 
@@ -26,27 +27,28 @@ $('#add-post').on('click', function (e) {
 
 /* When add comment is clicked this function grabs the values of the username and comment inputs,
    builds a post, and then adds it to the comment list */
-const addCommentListener = function() {
-$('.post-comment').each(function () {
-  $(this).on("click", function(e) {  
-  e.preventDefault();
-  const userName = $('.comment-username').val();
-  const message = $('.comment-message').val();
-  const commentSection = $(this).closest('.userpost').find('.comment-text');
+const addCommentListener = function () {
+  $('.post-comment').each(function () {
+    $(this).on("click", function(e) {  
+    e.preventDefault();
+    const userName = $('.comment-username').val();
+    const message = $('.comment-message').val();
+    const commentSection = $(this).closest('.userpost').find('.comment-text');
 
-  commentSection[0].innerHTML +=
-    '<div class="comment-post">'
-    + '<div class="comment-text"><div>' + message + '</div>' 
-    + '<div>Posted By: <b>' + userName + '</b>'
-    + '<div class="comment-icon-row"><i class="far fa-window-close delete-comment"></i></div></div>';
-  
-  deleteCommentListener();
-  
-});
-});
+    // Builds out HTML of a new comment
+    commentSection[0].innerHTML +=
+      '<div class="comment-post">'
+      + '<div class="comment-text"><div>' + message + '</div>' 
+      + '<div>Posted By: <b>' + userName + '</b>'
+      + '<div class="comment-icon-row"><i class="far fa-window-close delete-comment"></i></div></div>';
+    
+    deleteCommentListener();
+    
+    });
+  });
 }
 
-// Adds event listens to all delete icons and if clicked removes that post
+// Adds click event listeners to all delete post icons and if clicked removes that post
 const deletePostListener = function() {
   $(".delete").each(function() {
     $(this).on("click", function() {
@@ -55,6 +57,7 @@ const deletePostListener = function() {
   });
 }
 
+// Adds click event listeners to all delete comment icons and if clicked removes that comment
 const deleteCommentListener = function() {
   $(".delete-comment").each(function() {
     $(this).on("click", function() {
@@ -63,7 +66,7 @@ const deleteCommentListener = function() {
   });
 }
 
-// Adds event listens to all comment icons and if clicked shows the add comment area
+// Adds click event listeners to all comment icons and if clicked shows the add comment area
 const commentAddListener = function() {
   $(".comment").each(function() {
     $(this).on("click", function() {
@@ -72,7 +75,7 @@ const commentAddListener = function() {
       } else {
         $(this).closest(".icon-row").next(".add-comment").addClass('show');
       }
-      });
+    });
   });
 }
 
@@ -86,8 +89,17 @@ const addPostMouseOverListeners = function() {
     }
   }
 
+  // Checks if add comment section is showing or not and hides it if the mouse leaves the current post area
+  const checkCommentAddShow = function () {
+    if($(this).find(".add-comment").hasClass('show')) {
+      $(this).find(".add-comment").removeClass('show');
+    }
+  }
+
   $('.userpost').each(function() {
     $(this).mouseenter(checkIconRowShow);
-    $(this).mouseleave(checkIconRowShow);   
+    $(this).mouseleave(checkIconRowShow);
+    $(this).mouseleave(checkCommentAddShow);
+
   });
 }
