@@ -2,60 +2,63 @@ const posts = $('.posts');
 
 /* When add post is clicked this function grabs the values of the username and message inputs,
    builds a post, and then adds it to the posts list */
-$('#add-post').on('click', function(e) { 
-  e.preventDefault();
+
+$('#add-post').on('click', function() { 
   const postUserName = $('#username').val();
   const postMessage = $('#message').val();
 
-  // Builds out the HTML for each new post
-  posts[0].innerHTML +=
-    '<div class="userpost">'
-    + '<div class="post-text"><div>' + postMessage + '</div>' 
-    + '<div>Posted By: <b>' + postUserName + '</b>'
-    + '<div class="icon-row"><i class="far fa-comment comment" data-toggle="tooltip" title="Add Comment"></i>'
-    + '<i class="fas fa-edit" data-toggle="tooltip" title="Edit Post"></i>'
-    + '<i class="far fa-window-close delete" data-toggle="tooltip" title="Delete Post"></i></div>'
-    + '<div class="timestamp">' + getTimeStamp() + '</div></div>'
-    + '<div class="comment-post"></div>' 
-    + '<form class="input-area add-comment"><h5>Add Comment</h5>'
-    + '<div class="form-group"><input class="comment-username" type="text" placeholder="User Name" /></div>'
-    + '<div class="form-group"><input class="comment-message" type="text" placeholder="Comment Text" /></div>'
-    + '<button type="submit" class="btn btn-primary post-comment">Add Comment</button></form>';
+  if(postUserName && postMessage) {  // Checks if the user inputs are not empty
 
-  // Resets the user name and message fields back to empty after adding a post
-  $('#username').val(''); 
-  $('#message').val('');
+    // Builds out the HTML for each new post
+    posts[0].innerHTML +=
+      '<div class="userpost">'
+      + '<div class="post-text"><div>' + postMessage + '</div>' 
+      + '<div>Posted By: <b>' + postUserName + '</b>'
+      + '<div class="icon-row"><i class="far fa-comment comment" data-toggle="tooltip" title="Add Comment"></i>'
+      + '<i class="fas fa-edit" data-toggle="tooltip" title="Edit Post"></i>'
+      + '<i class="far fa-window-close delete" data-toggle="tooltip" title="Delete Post"></i></div>'
+      + '<div class="timestamp">' + getTimeStamp() + '</div></div>'
+      + '<div class="comment-post"></div>' 
+      + '<form class="input-area add-comment"><h5>Add Comment</h5>'
+      + '<div class="form-group"><input class="comment-username" type="text" placeholder="User Name" /></div>'
+      + '<div class="form-group"><input class="comment-message" type="text" placeholder="Comment Text" /></div>'
+      + '<button type="button" class="btn btn-primary post-comment">Add Comment</button></form>';
 
-  deletePostListener();
-  commentButtonListener();
-  addCommentButtonListener();
+    // Resets the user name and message fields back to empty after adding a post
+    $('#username').val(''); 
+    $('#message').val('');
+
+    deletePostListener();
+    commentButtonListener();
+    addCommentButtonListener();
+  }
 });
 
 /* When add comment is clicked this function grabs the values of the username and comment inputs,
    builds a post, and then adds it to the comment list */
+   
 const addCommentButtonListener = function() {
   $('.post-comment').each(function() {
-    $(this).on("click", function(e) {  
-    e.preventDefault();
-    const commentUserName = $(this).closest(".add-comment").find('.comment-username').val();
-    const commentMessage = $(this).closest(".add-comment").find('.comment-message').val();
-    const commentSection = $(this).closest('.userpost').find('.comment-post');
+    $(this).on("click", function() {  
+      const commentUserName = $(this).closest(".add-comment").find('.comment-username').val();
+      const commentMessage = $(this).closest(".add-comment").find('.comment-message').val();
+      const commentSection = $(this).closest('.userpost').find('.comment-post');
 
-    // Builds out HTML of a new comment
-    commentSection[0].innerHTML +=
-      '<div class="comment-text"><div>' + commentMessage + '</div>' 
-      + '<div>Posted By: <b>' + commentUserName + '</b>'
-      + '<div class="comment-icon-row"><i class="fas fa-edit" data-toggle="tooltip" title="Edit Comment"></i>'
-      + '<i class="far fa-window-close delete-comment" data-toggle="tooltip" title="Delete Comment"></i></div>'
-      + '<div class="timestamp">' + getTimeStamp() + '</div></div>';  
+      // Builds out HTML of a new comment
+      commentSection[0].innerHTML +=
+        '<div class="comment-text"><div>' + commentMessage + '</div>' 
+        + '<div>Posted By: <b>' + commentUserName + '</b>'
+        + '<div class="comment-icon-row"><i class="fas fa-edit" data-toggle="tooltip" title="Edit Comment"></i>'
+        + '<i class="far fa-window-close delete-comment" data-toggle="tooltip" title="Delete Comment"></i></div>'
+        + '<div class="timestamp">' + getTimeStamp() + '</div></div>';  
 
-    // Resets the user name and message fields back to empty after adding a comment
-    $(this).closest(".add-comment").find('.comment-username').val('');
-    $(this).closest(".add-comment").find('.comment-message').val('');
+      // Resets the user name and message fields back to empty after adding a comment
+      $(this).closest(".add-comment").find('.comment-username').val('');
+      $(this).closest(".add-comment").find('.comment-message').val('');
 
-    $(this).closest(".add-comment").removeClass('show'); // Hides add comment section when button is clicked
+      $(this).closest(".add-comment").removeClass('show'); // Hides add comment section when button is clicked
 
-    deleteCommentListener();
+      deleteCommentListener();
     });
   });
 }
