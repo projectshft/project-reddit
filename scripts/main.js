@@ -1,6 +1,7 @@
 var submissions = [];
 var usernameSubmission = '';
 var messageSubmission = '';
+var messageID = 0;
 
 //build a click listener to capture and push submitted username and message to submissions array.
 $('.btn-submit').on('click', function() {
@@ -29,6 +30,9 @@ $('.btn-submit').on('click', function() {
 
     console.log('this is the current value of the submissions array: ', submissions);
 
+    //add a messageID
+    messageID += 1;
+
     //in addition to adding the submission to an object and pushing to an array, I think I may also want to immediately add them directly to the page.
     $('.message-list').prepend(
       '<div class="post-box">'+
@@ -36,19 +40,21 @@ $('.btn-submit').on('click', function() {
           '<div class="username col-11">'
             +usernameSubmission+
           '</div>'+
-          '<div class="delete-icon col-1">'+
+          '<div class="delete-icon-'+messageID+' col-1">'+
             '<button type="button" class="btn" style="padding:0px;"><i class="fas fa-trash"></i></button>'+
           '</div>'+
           '<div class="message-box col-11">'
             +messageSubmission+
           '</div>'+
-          '<div class="comments-icon col-1">'+
+          '<div class="comments-icon'+messageID+' col-1">'+
             '<div class="comments-spacing-div">'+
               '<button type="button" class="btn" style="padding:0px;"><i class="fas fa-comment"></i></button>'+
             '</div>'+
           '</div>'+
         '</div>'+
       '</div>');
+
+    console.log('this is the current messageID: ', messageID)
 
     //clear the input fields
     $('#usernameInput').val('');
