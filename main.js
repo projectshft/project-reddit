@@ -14,7 +14,7 @@ $('#add-post').on('click', function (e) {
     + '<div>Posted By: <b>' + userName + '</b>'
     + '<div class="icon-row"><i class="far fa-comment comment"></i>'
     + '<i class="far fa-window-close delete"></i></div></div>'
-    + '<div class="comment-text"></div>' 
+    + '<div class="comment-post"></div>' 
     + '<div class="add-comment"><h5>Add Comment</h5>'
     + '<input class="comment-username" type="text" placeholder="User Name">'
     + '<input class="comment-message" type="text" placeholder="Comment Text" Text"></input>'
@@ -34,12 +34,11 @@ const addCommentListener = function () {
     e.preventDefault();
     const userName = $(this).closest(".add-comment").find('.comment-username').val();
     const message = $(this).closest(".add-comment").find('.comment-message').val();
-    const commentSection = $(this).closest('.userpost').find('.comment-text');
+    const commentSection = $(this).closest('.userpost').find('.comment-post');
 
     // Builds out HTML of a new comment
     commentSection[0].innerHTML +=
-      '<div class="comment-post">'
-      + '<div class="comment-text"><div>' + message + '</div>' 
+      '<div class="comment-text"><div>' + message + '</div>' 
       + '<div>Posted By: <b>' + userName + '</b>'
       + '<div class="comment-icon-row"><i class="far fa-window-close delete-comment"></i></div></div>';
     
@@ -61,7 +60,7 @@ const deletePostListener = function() {
 const deleteCommentListener = function() {
   $(".delete-comment").each(function() {
     $(this).on("click", function() {
-      this.parentElement.parentElement.parentElement.remove();
+      $(this).closest('.comment-text').remove();
     });
   });
 }
