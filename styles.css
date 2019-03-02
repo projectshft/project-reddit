@@ -52,6 +52,11 @@ i {
   margin-left: 20px;
 }
 
+.timestamp {
+  float: right;
+  font-size: 14px;
+}
+
 .comment-text {
   margin-left: 15px;
   margin-top: 20px;
