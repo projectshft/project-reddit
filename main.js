@@ -15,13 +15,13 @@ $('#add-post').on('click', function (e) {
     + '<div class="icon-row"><i class="far fa-comment comment"></i>'
     + '<i class="far fa-window-close delete"></i></div></div>'
     + '<div class="comment-post"></div>' 
-    + '<div class="add-comment"><h5>Add Comment</h5>'
-    + '<input class="comment-username" type="text" placeholder="User Name">'
-    + '<input class="comment-message" type="text" placeholder="Comment Text" Text"></input>'
-    + '<button type="submit" class="btn btn-primary post-comment">Add Comment</button></div>';
+    + '<form class="input-area add-comment"><h5>Add Comment</h5>'
+    + '<div class="form-group"><input class="comment-username" type="text" placeholder="User Name" /></div>'
+    + '<div class="form-group"><input class="comment-message" type="text" placeholder="Comment Text" /></div>'
+    + '<button type="submit" class="btn btn-primary post-comment">Add Comment</button></form>';
     
   deletePostListener();
-  addPostMouseOverListeners();
+  //addPostMouseOverListeners();
   commentAddListener();
   addCommentListener();
 });
@@ -80,28 +80,28 @@ const commentAddListener = function() {
 
 /* This function handles when a post area has the mouse enter or leave it along with what
    happens when those events occur such as showing or hiding certain features */   
-const addPostMouseOverListeners = function() {
+// const addPostMouseOverListeners = function() {
   
-  // Checks if the icon row is showing and shows or hides it if the targeted post is moused into or out of
-  const checkIconRowShow = function() {
-    if($(this).find(".icon-row").hasClass('show')) {
-      $(this).find(".icon-row").removeClass('show');
-    } else {
-      $(this).find(".icon-row").addClass('show');
-    }
-  }
+//   // Checks if the icon row is showing and shows or hides it if the targeted post is moused into or out of
+//   const checkIconRowShow = function() {
+//     if($(this).find(".icon-row").hasClass('show')) {
+//       $(this).find(".icon-row").removeClass('show');
+//     } else {
+//       $(this).find(".icon-row").addClass('show');
+//     }
+//   }
 
-  // Checks if add comment section is showing or not and hides it if the mouse leaves the current post area
-  const checkCommentAddShow = function () {
-    if($(this).find(".add-comment").hasClass('show')) {
-      $(this).find(".add-comment").removeClass('show');
-    }
-  }
+//   // // Checks if add comment section is showing or not and hides it if the mouse leaves the current post area
+//   // const checkCommentAddShow = function () {
+//   //   if($(this).find(".add-comment").hasClass('show')) {
+//   //     $(this).find(".add-comment").removeClass('show');
+//   //   }
+//   // }
 
-  // For each user post handles what happens when the mouse enters or leaves the post area
-  $('.userpost').each(function() {
-    $(this).mouseenter(checkIconRowShow);
-    $(this).mouseleave(checkIconRowShow);
-    $(this).mouseleave(checkCommentAddShow);
-  });
-}
+//   // For each user post handles what happens when the mouse enters or leaves the post area
+//   $('.userpost').each(function() {
+//     $(this).mouseenter(checkIconRowShow);
+//     $(this).mouseleave(checkIconRowShow);
+//     //$(this).mouseleave(checkCommentAddShow);
+//   });
+// }
