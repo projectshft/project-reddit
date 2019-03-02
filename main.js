@@ -40,6 +40,7 @@ function renderPost(userPost) {
           <div class="form-group comment-form-name">
             <input type="text" class="form-control" id="comment-name" placeholder="Your name">
           </div>
+
           <div class="form-group">
             <textarea class="form-control" placeholder="Enter Comment" id="comment-body" rows="3"></textarea>
           </div>
@@ -70,8 +71,10 @@ function submitComment() {
   var commentArray = [];
   var commentObj = {};
 
-  var commentAuthor = $('#comment-name').val();
-  var commentContent = $('#comment-body').val();
+  var commentAuthor = $(event.target).closest('.alert').find('#comment-name').val();
+  var commentContent = $(event.target).closest('.alert').find('#comment-body').val();
+
+
   commentObj.author = commentAuthor;
   commentObj.content = commentContent;
 
@@ -82,13 +85,15 @@ function submitComment() {
   if (!postUserObj['comments']) {
     commentArray.push(commentObj);
     postUserObj.comments = commentArray;
+    $(event.target).closest('.alert').find('#comment-name').val(" ");
+    $(event.target).closest('.alert').find('#comment-body').val(" ");
     return;
   }
 
   postUserObj['comments'].push(commentObj);
 
-  $('#comment-name').empty();
-  $('#comment-body').empty();
+  $(event.target).closest('.alert').find('#comment-name').val(" ");
+  $(event.target).closest('.alert').find('#comment-body').val(" ");
 
 }
 
