@@ -10,26 +10,27 @@ need to link:
 
 requirements: 
     Part 1
-        -use Bootstrap 3 or 4
+      ✔︎ -use Bootstrap 3 or 4
         -write clean and pretty html, css, and javascript (hr tag to separate posts)
         -use correct comments (with intent) and logging; (refer to Sean's powerpoint)
         -utilize patterns to organize javascript if necessary
-        -use JQuery
+      ✔︎ -use JQuery
 
         functionality:
-        add post (Requires name and input) (.posts div in html file)
-        add comment
-        all posts will go to page, newer ones above
+      ✔︎ add post (Requires name and input) (.posts div in html file)
+      ✔︎ add comment
+      ✔︎ all posts will go to page, newer ones above
 
     Part 2
-        -We now want users to be able to leave comments on each post. When a user clicks 'comments' (above each post) it should toggle the comments and input box visible/hidden.
+      ✔︎ -We now want users to be able to leave comments on each post. When a user clicks 'comments' (above each post) it should toggle the comments and input box visible/hidden.
         -When a user clicks the 'x' next to a comment, it should delete it.
         -When a user fills out the two comment inputs and clicks 'Post Comment' it should immediately add the comment to the list of comments.
-        -when a user clicks 'remove' above a post, it should remove the post, too.
+      ✔︎ -when a user clicks 'remove' above a post, it should remove the post, too.
 
         to consider:
         this
         data-names
+        render comments or render posts?
     
     Additions:
         -post timestamp
@@ -43,12 +44,19 @@ requirements:
 */
 
 var postsList = [];
+var commentsList = [];
 
-//User Story 1: when a user fills out the two post inputs and clicks "Post", it should immediately add the post to the posts section, with username and message
+// create template for comments form
+var $commentsTemplate =
+'<form style class="margin-top:30px">'
++ '  <div class="form-group"> ' + '<input id="commenter" type="text" class="form-control-sm" placeholder="Name"></input>' + '<input id="comment-content" type="text" class="form-control-sm" placeholder="Comment"></input> <button type="submit" class="btn-secondary commentbutton">Post Comment</button></form>';
+
+//USER STORY 1: when a user fills out the two post inputs and clicks "Post", it should immediately add the post to the posts section, with username and message
 
 $('button').on('click', function(e) {
     e.preventDefault();
     
+    //grab the input from the form fields
     var $postContent = $('#message').val();
     var $userName = $('#name').val();
 
@@ -60,52 +68,80 @@ $('button').on('click', function(e) {
     
     //adds post objects to the postsList array
     postsList.push(post);
-    $renderPosts();
-});
-
-$renderPosts = function () {
-
-    var dt = new Date(); //use moment.js (figure out how to download) to refactor timestamp
-    var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds(); 
-
-    //if the posts div has any posts, clear them out so that posts aren't duplicated in the prepend process
-    if ( $('.posts').children().length > 0 ) {
-        $('.posts').empty(); 
-    };
-
-    for (var i = 0; i < postsList.length; i++) {
-        $('.posts').prepend('<li> <a href="#" class="remove-link"><i class="fa fa-trash" aria-hidden="true"></i></a>' + ' ' + '<a href="#" class="comment-link" data-name="comments"><i class="fa fa-comments" aria-hidden="true"></i></a> <br>' + postsList[i].postContent + '<br> Posted by: ' + postsList[i].userName + ' at ' + time + '<hr /> </li>');
-    }
-    //checks to make sure each new post is added to postsList
-    console.log("When 'Post' is clicked, array posts becomes:", postsList);
-};
-
-// User Story 2: when a user clicks "comments" (above each post), it should toggle the comments and input box visible/hidden
-//renderComments = function () {
-$('.comment-link').on('click', function() {
+  
+        var dt = new Date(); //use moment.js (figure out how to download) to refactor timestamp
+        var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds(); 
     
-    var $commentsTemplate =
-        '<tr class="comments-view-comment-item">'
-        + '  <td class="comment-item-number" data-song-number="' + songNumber + '">' + songNumber + '</td>'
-        + '  <td class="comment-item-title">' + songName + '</td>'
-        + '  <td class="comment-item-duration">' + songLength + '</td>'
-        + '</tr>'
-        ;
-        $('.posts').html($commentsTemplate);
+        //if the posts div has any posts, clear them out so that posts aren't duplicated in the prepend process
+        if ( $('.posts').children().length > 0 ) {
+            $('.posts').empty(); 
+        };
+    
+       for (var i = 0; i < postsList.length; i++) {
+            $('.posts').prepend('<div class="post"> <a href="#" class="remove-link"><i class="fa fa-trash" aria-hidden="true"></i></a>' + ' ' + '<a href="#" class="comment-link" data-name="comments"><i class="fa fa-comments" aria-hidden="true"></i></a> <br>' + postsList[i].postContent + '<br> Posted by: ' + postsList[i].userName + ' at ' + time + '<hr /> </div>');
+       }
+        //checks to make sure each new post is added to postsList
+        console.log("When 'Post' is clicked, array posts becomes:", postsList);
+    
+        // USER STORY 5: when a user clicks 'remove' above a post, it should remove the post, too
+        $('.fa-trash').on('click', function() {
+    
+            //remove the post from the page
+          $(this).closest(".post").remove();
+    
+            //remove the post object from the array
+          //postsList.splice(this);
+    
+           //checks to make sure each deleted post is removed from postsList
+           console.log("When remove is clicked, the array posts becomes:", postsList);
+        });
+    
+
+
+        // USER STORY 2: when a user clicks "comments" (above each post), it should toggle the comments and input box visible/hidden
+
+    //renderComments = function () {
+
+        $('.fa-comments').on('click', function(e) {
+            e.preventDefault();
+
+            //when comments link is clicked, comments form appears
+            $(this).closest(".post").append('<div class="comments">' + $commentsTemplate + '</div>');
+    
+            
+            // //get values of text input
+        
+            var $commentContent = $(this).closest("#comment-content").val();
+            var $commenter = $(this).closest('#commenter').val();
+
+    
+            // // //if the comments div has DOM elements, clear them
+            // // if ( $('.comments').children().length > 0 ) {
+            // //     $('.comments').empty(); 
+            // // };
+            // commentsList.push(comment);
+            // //
+            
+            // USER STORY 4: when a user fills out the two comment inputs and clicks "Post Comment", it should immediately add the comment to the list of comments
+
+            $(".commentbutton").on('click', function(){
+
+                $(this).closest('.post').append('<div class="comment">' + $commentContent + ' Posted by: ' + $commenter + ' <a href="#" class="remove-comment"><i class="fa fa-times" aria-hidden="true"></i></a> <hr /> </div>');
+            });
+
+            // USER STORY 3: when a user clicks the 'x' next to a comment, it should delete it
+
+            $(".fa-times").on('click', function(){
+                $(this).closest(".comment").empty();
+            })
+             
+            //add comments as a key with the comment content and commenter name as it's value to the post array
+            post.comments = ({commentContent: $commentContent, commenter: $commenter});
+
+            console.table("this is what post array looks like:", post);
+        });
 });
 
-
-// User Story 3: when a user clicks the 'x' next to a comment, it should delete it
-$('remove').on('click', function() {
-    $('li').find(this).remove();
-    // if (e.target.hasClass('remove')) {
-    // }
-});
-
-// User Story 4: when a user fills out the two comment inputs and clicks "Post Comment", it should immediately add the comment to the list of comments
-
-
-// User Story 5: when a user clicks 'remove' above a post, it should remove the post, too
 
 
  /* ----------------
