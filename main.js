@@ -40,8 +40,9 @@ const addCommentListener = function () {
     commentSection[0].innerHTML +=
       '<div class="comment-text"><div>' + message + '</div>' 
       + '<div>Posted By: <b>' + userName + '</b>'
-      + '<div class="comment-icon-row"><i class="far fa-window-close delete-comment"></i></div></div>';
+      + '<div class="comment-icon-row"><i class="far fa-window-close delete-comment"></i></div></div>';      
     
+    $(this).closest(".add-comment").removeClass('show');
     deleteCommentListener();    
     });
   });
