@@ -56,35 +56,23 @@ function renderPost(userPost) {
 
 }
 
-/** 
- * Function that renders comments to each post 
- * @param { Object } comment - An object that contains the comment author and content
- */
-function renderComment(comment) {
-  var $commentContainer = $(event.target).closest('.alert').find('.comment-container');
+/** Handle submitting form */
+function submitForm() {
+  var postObj = {};
+  var postBody = $('#post-body').val();
+  var name = $('#post-name').val();
+  postObj.name = name;
+  postObj.post = postBody;
 
-  $commentContainer.append(`
-    <p class="comment">
-      ${comment.content} - posted by: <strong>${comment.author}<strong>
-      <i class="fas fa-times"></i>
-    </p>
-    <hr>
-  `);
-  console.log('user object', comment);
-}
+  postData.push(postObj);
+  // render post to user
+  renderPost(postObj);
 
-
-/** 
- * Function that finds the user object in the postData array 
- * @param { String } name - The name of the user
- */
-function findUserObj(name) {
-  var user = postData.find(function (userFound) {
-    return userFound.name === name;
-  });
-  return user;
+  $('#post-body').val("");
+  $('#post-body').attr("placeholder", "Your name");
+  $('#post-name').val("");
+  $('#post-name').attr("placeholder", "Enter text");
 };
-
 
 
 /** Function that handles submitting a comment */
@@ -120,10 +108,34 @@ function submitComment() {
   renderComment(commentObj);
 
   // reset form values 
+  $(event.target).closest('.alert').find('#comment-name').val("");
   $(event.target).closest('.alert').find('#comment-name').attr("placeholder", "Your name");
-  $(event.target).closest('.alert').find('#comment-body').attr("placeholder", "Enter comment");
+  $(event.target).closest('.alert').find('#comment-body').val("");
+  $(event.target).closest('.alert').find('#comment-body').attr("Enter Comment");
 
 };
+
+/** 
+ * Function that renders comments to each post 
+ * @param { Object } comment - An object that contains the comment author and content
+ */
+function renderComment(comment) {
+  var $commentContainer = $(event.target).closest('.alert').find('.comment-container');
+
+  $commentContainer.append(`
+    <p class="comment">
+      ${comment.content} - posted by: <strong>${comment.author}<strong>
+      <i onClick="removeComment()" class="fas fa-times"></i>
+    </p>
+  `);
+  console.log('user object', comment);
+}
+
+/** Deletes a comment the user clicked on */
+function removeComment() {
+  var $commentElement = $(event.target).closest('.comment');
+  $commentElement.remove();
+}
 
 /** Handles the comments toggle */
 function toggleCommentForm() {
@@ -131,15 +143,13 @@ function toggleCommentForm() {
 };
 
 
-/** Handle submitting form */
-function submitForm() {
-  var postObj = {};
-  var postBody = $('#post-body').val();
-  var name = $('#post-name').val();
-  postObj.name = name;
-  postObj.post = postBody;
-
-  postData.push(postObj);
-  // render post to user
-  renderPost(postObj);
+/** 
+ * Function that finds the user object in the postData array 
+ * @param { String } name - The name of the user
+ */
+function findUserObj(name) {
+  var user = postData.find(function (userFound) {
+    return userFound.name === name;
+  });
+  return user;
 };
