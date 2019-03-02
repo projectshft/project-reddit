@@ -13,6 +13,7 @@ $('#add-post').on('click', function (e) {
     + '<div class="post-text"><div>' + message + '</div>' 
     + '<div>Posted By: <b>' + userName + '</b>'
     + '<div class="icon-row"><i class="far fa-comment comment" data-toggle="tooltip" title="Add Comment"></i>'
+    + '<i class="fas fa-edit" data-toggle="tooltip" title="Edit Post"></i>'
     + '<i class="far fa-window-close delete" data-toggle="tooltip" title="Delete Post"></i></div></div>'
     + '<div class="comment-post"></div>' 
     + '<form class="input-area add-comment"><h5>Add Comment</h5>'
@@ -44,7 +45,7 @@ const addCommentListener = function () {
     commentSection[0].innerHTML +=
       '<div class="comment-text"><div>' + message + '</div>' 
       + '<div>Posted By: <b>' + userName + '</b>'
-      + '<div class="comment-icon-row">'
+      + '<div class="comment-icon-row"><i class="fas fa-edit" data-toggle="tooltip" title="Edit Comment"></i>'
       + '<i class="far fa-window-close delete-comment" data-toggle="tooltip" title="Delete Comment"></i></div>'
       + '</div>';  
 
