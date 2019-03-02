@@ -49,10 +49,9 @@ input, textarea {
 }
 
 .posts-background {
-  background-color: #E8EEF2;
-  margin: 120px 0px 120px 0px;
-  border-radius: 25px;
+  margin-top: 120px;
   height: 67vh;
+  padding: 2vh;
   /* HEIGHT OBEYS TOP MARGIN BUT NOT BOTTOM. TF IS THE SOLUTION?! */
 }
 
@@ -92,4 +91,52 @@ input, textarea {
   top: 18px;
   right: 0px;
   margin-right: 16px;
+}
+
+.message-list {
+  height: 100px;
+  float: none;
+  margin: auto;
+  height: 63vh;
+}
+
+.post-box {
+  background-color: #E8EEF2;
+  margin: 10px 0px 10px 0px;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0px 4px 5px -3px black;
+  padding: 1% 1% 2% 1%;
+}
+
+.message-box {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1;
+  max-height: 80%;
+  height: auto;
+}
+
+.delete-icon {
+  height: auto;
+  color: #37393A;
+  text-align: right;
+}
+
+.username {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  height: auto;
+  padding: 2px 0px 5px 40px;
+}
+
+.comments-icon {
+  height: auto;
+  color: #37393A;
+  text-align: right;
+  bottom: 5px;
+  align-self: flex-end;
 }
