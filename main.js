@@ -51,7 +51,7 @@ const addCommentListener = function () {
 const deletePostListener = function() {
   $(".delete").each(function() {
     $(this).on("click", function() {
-      this.parentElement.parentElement.remove();
+      $(this).closest('.userpost').remove();
     });
   });
 }
