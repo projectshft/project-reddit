@@ -1,70 +1,111 @@
-// logic goes here
+
 $(document).ready(function(){
 
 
+
+/************ Data structure to store posts and comments *********************
+
+
+var post = [
+
+  { postName: 'Alice',
+    postMessage: 'Hello World??',
+    postComment: [
+      {
+        commentName: 'Vera',
+        commentMessage: 'String of comment'
+      },
+      {
+        commentName: 'Julius',
+        commentMessage: 'String of comment'
+      }
+  },
+
+  { postName: 'Alice',
+    postMessage: 'Hello World??',
+    postComment: [
+      {
+        commentName: 'Vera',
+        commentMessage: 'String of comment'
+      },
+      {
+        commentName: 'Julius',
+        commentMessage: 'String of comment'
+      }
+  },
+
+];
+***************************************************************************/
+
+// Function to create post & comment section
+// var createPostCommentSection = function(postName, postMessage,
+// commentName, commentMessage){
+
+  // Template to render post and comment section
+    //see Edward link for shorthand joining method
+  // var template =
+  //   //long <tr> <td> lists
+  // ;
+
 // PART 1
+// Creates posts
+
+    $('form').submit(function(e){
+      e.preventDefault();
+
+     var name = $('input#name').val();
+     var message = $('textarea#message').val();
+
+      $('ul').append('<li>'+message+'<br>'+'Posted by: '+'<strong>'+name+'</strong>'+'</li>');
+
+    });
 
 
-// $('#post').on('click', function(){
-//   alert('Submitted!');
-// });
-
-
-// listen for post button click
-// grab inputs: post and name
-// display in virtual DOM as html
-
-$('form').submit(function(e){
-  e.preventDefault();
-  var name = $('input#name').val();
-  var message = $('textarea#message').val();
-  $('.comments').html('<h6>'+message+'<br>'+'Posted by: '+'<strong>'+name+'</strong>'+'</h6>');
-// TODO: 1) apply Bootstrap to make name bold & italic
-//       2) apply Bootstrap to space out lines
-
-});
-
-// $('form').submit(function(e){
-//   e.preventDefault();
-//   var message = $('textarea#message').val();
-//   $('.comments').html('<h6>'+message+'</h6>');
-// });
-
-
-
-
+/*
 // PART 2
-// a) When a user clicks 'comments' (above each post) it should
-// toggle the comments and input box visible/hidden.
 
-// $('#btn1').on('click', function(){
-//   // $('.para1').hide();
-//   $('.para1').toggle();
+  // a) When a user clicks 'comments' (above each post) it should
+  // toggle the comments and input box visible/hidden.
 
-// $('#btn1').click(function(e){
-//   alert(e.currentTarget.id);
-//   alert(e.currentTarget.className);
-//   alert(e.currentTarget.innerHTML);
-//   alert(e.currentTarget.outerHTML);
-//   alert(e.currentTarget.value);
-// });
-//
-// $('#btn1').on('click', function(){
-//   $('.para1').show();
-// });
+  var toggleCommentInputs = function(){
+    // $('#btn1').on('click', function(){
+    //   // $('.para1').hide();
+    //   $('.para1').toggle();
+  };
 
-// b) When a user clicks the 'x' next to a comment, it should delete it.
-//
-// $('#btn1').on('click', function(){
-//   $('.para1').hide();
-// });
 
-// c) When a user fills out the two comment inputs and clicks 'Post Comment'
-// it should immediately add the comment to the list of comments.
+  // b) When a user clicks the 'x' next to a comment, it should delete it.
 
-// d) Lastly, when a user clicks 'remove' above a post, it should remove the post too.
+  var deleteComment = function(){
+    // $('#btn1').on('click', function(){
+    //   $('.para1').hide();
+    // });
+  };
 
-// $('#btn1').on('click', function(){
-//   $('.para1').hide();
-// });
-});
+
+  // c) When a user fills out the two comment inputs and clicks 'Post Comment'
+  // it should immediately add the comment to the list of comments.
+
+  var addComment = function(){
+
+  };
+
+
+  // d) Lastly, when a user clicks 'remove' above a post, it should remove the post too.
+  // *****remove from data structure***********
+  // use .splice()
+
+  var removePost = function(){
+
+  };
+
+
+// }; /********  var createPostCommentSection  *********/
+
+
+/**********  Declared global variables  ***********/
+// var name = $('input#name').val();
+// var message = $('textarea#message').val();
+
+
+}); /***** $(document).ready(function() *******/
