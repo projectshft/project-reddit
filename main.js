@@ -17,18 +17,10 @@ var postData = [
     ]
   },
   {
-    name: 'Mike',
+    name: 'Smith',
     post: 'Cool post yall...',
     comments: []
   },
-  {
-    name: 'Jake',
-    post: 'Cool post yall...',
-    comments: {
-      author: 'Luis',
-      comment: 'man this post sucks...',
-    }
-  }
 ];
 
 /** 
@@ -75,10 +67,28 @@ function com(name) {
 
 
 function submitComment() {
+  var commentArray = [];
+  var commentObj = {};
+
+  var commentAuthor = $('#comment-name').val();
+  var commentContent = $('#comment-body').val();
+  commentObj.author = commentAuthor;
+  commentObj.content = commentContent;
+
   var postAuthorClicked = $(event.target).closest('.alert').find('.post-author').text();
-  // console.log('and the author is-->', postAuthorClicked, 'end comment')
+
   var postUserObj = com(postAuthorClicked);
-  console.log('found user object', postUserObj);
+
+  if (!postUserObj['comments']) {
+    commentArray.push(commentObj);
+    postUserObj.comments = commentArray;
+    return;
+  }
+
+  postUserObj['comments'].push(commentObj);
+
+  $('#comment-name').empty();
+  $('#comment-body').empty();
 
 }
 
