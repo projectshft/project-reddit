@@ -3,7 +3,6 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    -->
     <title>Project Reddit</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -15,6 +14,10 @@
 
     <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
   </head>
+
+  <!-- TO-DO: Compare "Add a new post" section to that in x_INDEX.html, as time allows. That version has better responsiveness than this one. (Also investigate different font links.)-->
+
+  <!-- TO-DO: Revise the three-column design/syntax of <div class:"col col-7 col"></div> with Bootstrap .offset.md-* classes. (More research needed.) -->
 
   <body>
     <div class="container">
@@ -28,8 +31,9 @@
         </div>
         <div class="col"></div>
       </div>
+    </div>
 
-      <div class="container" id=post-view">
+    <div class="container" id=post-view">
       <div class="row align-items-center">
         <div class="col"></div>
 
@@ -75,6 +79,7 @@
       </div>
     </div>
 
+    <!-- TO-DO: Compare "Add a new post" section to that in x_INDEX.html, as time allows. That version has better responsiveness than this one. -->
     <div class="container" id="post-creation">
       <div class="row align-items-center">
         <div class="col"></div>
@@ -95,7 +100,6 @@
               class="form-control"
               placeholder="Your name"
             />
-            <!-- </div> -->
           </div>
           <div class="col"></div>
         </div>
@@ -123,7 +127,16 @@
       </form>
     </div>
 
-    <script type="text/javascript" src="main.js"></script>
+    <div class="container">
+        <div class="row">
+          <div class="col"></div>
+          <div class="col-7" id="empty-bottom"> <!-- TO-DO: Insert <footer> -->
+          </div>
+          <div class="col"></div>
+        </div>
+    </div>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="main.js"></script>
   </body>
 </html>
