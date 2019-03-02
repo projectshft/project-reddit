@@ -31,8 +31,8 @@ const addCommentListener = function () {
   $('.post-comment').each(function () {
     $(this).on("click", function(e) {  
     e.preventDefault();
-    const userName = $('.comment-username').val();
-    const message = $('.comment-message').val();
+    const userName = $(this).closest(".add-comment").find('.comment-username').val();
+    const message = $(this).closest(".add-comment").find('.comment-message').val();
     const commentSection = $(this).closest('.userpost').find('.comment-text');
 
     // Builds out HTML of a new comment
@@ -42,8 +42,7 @@ const addCommentListener = function () {
       + '<div>Posted By: <b>' + userName + '</b>'
       + '<div class="comment-icon-row"><i class="far fa-window-close delete-comment"></i></div></div>';
     
-    deleteCommentListener();
-    
+    deleteCommentListener();    
     });
   });
 }
@@ -79,8 +78,11 @@ const commentAddListener = function() {
   });
 }
 
-// Toggles the icon row to show or not when a post area is moused into or out of
+/* This function handles when a post area has the mouse enter or leave it along with what
+   happens when those events occur such as showing or hiding certain features */   
 const addPostMouseOverListeners = function() {
+  
+  // Checks if the icon row is showing and shows or hides it if the targeted post is moused into or out of
   const checkIconRowShow = function() {
     if($(this).find(".icon-row").hasClass('show')) {
       $(this).find(".icon-row").removeClass('show');
@@ -96,10 +98,10 @@ const addPostMouseOverListeners = function() {
     }
   }
 
+  // For each user post handles what happens when the mouse enters or leaves the post area
   $('.userpost').each(function() {
     $(this).mouseenter(checkIconRowShow);
     $(this).mouseleave(checkIconRowShow);
     $(this).mouseleave(checkCommentAddShow);
-
   });
 }
