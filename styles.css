@@ -24,6 +24,14 @@ input {
   padding-bottom: 25px;
 }
 
+.post-text {
+  font-size: 20px;
+}
+
+.comment-post {
+  margin-left: 15px;
+}
+
 .inner-container {
   background-color: rgb(199, 223, 255);
   border-radius: 10px;
