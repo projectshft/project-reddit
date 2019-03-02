@@ -7,6 +7,25 @@ body {
   background-color: #e9e9e9;
 }
 
+input {
+  width: 100%;
+  margin: 5px 0px;
+  padding-left: 7px;
+}
+
+i {
+  margin-top: 5px;
+  margin-right: 10px;
+}
+
+.inner-container {
+  background-color: #c7dfff;
+  border-radius: 10px;
+  border: solid #4376d4 2px;
+  margin-bottom: 80px;
+  margin-top: 15px;
+}
+
 .input-area {
   margin-top: 30px;
 }
@@ -14,12 +33,6 @@ body {
 .posts {
   margin-top: 30px;
   margin-bottom: 50px;
-}
-
-input {
-  width: 100%;
-  margin: 5px 0px;
-  padding-left: 7px;
 }
 
 .userpost {
@@ -34,37 +47,29 @@ input {
   font-size: 20px;
 }
 
+.icon-row {
+  display: inline-block;
+  margin-left: 20px;
+}
+
 .comment-text {
   margin-left: 15px;
   margin-top: 20px;
   font-size: 17px;
 }
 
+.comment {
+  color: #2aca2a
+}
+
 .comment-post {
   font-family: 'Sarabun', sans-serif;
 }
 
-.inner-container {
-  background-color: #c7dfff;
-  border-radius: 10px;
-  border: solid cornflowerblue 2px;
-  margin-bottom: 80px;
-  margin-top: 15px;
-}
-
-i {
-  font-size: 19px;
-  margin-top: 5px;
-  margin-right: 10px;
-}
-
-.icon-row {
-  display: inline-block;
-  margin-left: 20px;
-}
-
 .comment-icon-row {
-  display: inline-block
+  display: inline-block;
+  font-size: 16px;
+  margin-left: 5px;
 }
 
 .add-comment {
@@ -72,14 +77,12 @@ i {
   margin-top: 20px;
 }
 
-.delete {
-  color: #cc0909
+.delete, .delete-comment {
+  color: #cc0909;
 }
 
-.delete-comment {
-  color: green;
-  font-size: 16px;
-  margin-left: 5px;
+.fa-edit {
+  color: #17238f
 }
 
 .show {
