@@ -21,8 +21,8 @@ $('#add-post').on('click', function (e) {
     + '<button type="submit" class="btn btn-primary post-comment">Add Comment</button></form>';
 
    // Resets the user name and message fields back to empty after adding a post
-   $('#username').val(""); 
-   $('#message').val("");
+   $('#username').val(''); 
+   $('#message').val('');
 
   deletePostListener();
   //addPostMouseOverListeners();
@@ -47,6 +47,10 @@ const addCommentListener = function () {
       + '<div class="comment-icon-row"><i class="far fa-window-close delete-comment"></i></div></div>';      
     
     $(this).closest(".add-comment").removeClass('show'); // Hides add comment section when button is clicked
+
+    $(this).closest(".add-comment").find('.comment-username').val('');
+    $(this).closest(".add-comment").find('.comment-message').val('');
+
     deleteCommentListener();
     });
   });
