@@ -3,7 +3,7 @@ var usernameSubmission = '';
 var messageSubmission = '';
 var messageID = 0;
 
-//build a click listener to capture and push submitted username and message to submissions array.
+//add click listener to capture and push submitted username and message to submissions array.
 $('.btn-submit').on('click', function() {
   //add if statements to check that inputs are populated. If one is empty, output an error but DON'T reset fields -- that shit's annoying.
   console.log($('#usernameInput').val());
@@ -40,13 +40,13 @@ $('.btn-submit').on('click', function() {
           '<div class="username col-11">'
             +usernameSubmission+
           '</div>'+
-          '<div class="delete-icon-'+messageID+' col-1">'+
-            '<button type="button" class="btn" style="padding:0px;"><i class="fas fa-trash"></i></button>'+
+          '<div class="delete-icon col-1">'+
+            '<button type="button" class="btn delete-btn" style="padding:0px;"><i class="fas fa-trash"></i></button>'+
           '</div>'+
           '<div class="message-box col-11">'
             +messageSubmission+
           '</div>'+
-          '<div class="comments-icon'+messageID+' col-1">'+
+          '<div class="comments-icon col-1">'+
             '<div class="comments-spacing-div">'+
               '<button type="button" class="btn" style="padding:0px;"><i class="fas fa-comment"></i></button>'+
             '</div>'+
@@ -55,6 +55,11 @@ $('.btn-submit').on('click', function() {
       '</div>');
 
     console.log('this is the current messageID: ', messageID)
+
+    //add event listener to delete comment
+    $('.delete-btn').on('click', function() {
+      $(this).closest('.post-box').remove();
+    });
 
     //clear the input fields
     $('#usernameInput').val('');
