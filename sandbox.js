@@ -1,8 +1,8 @@
 /* Comment Driven Dev
-requirements: 
+Eval 2 requirements: 
     Part 1
       ✔︎ -use Bootstrap 3 or 4
-      ✖︎ -write clean and pretty html, css, and javascript (hr tag to separate posts)
+      ✖︎ -write clean and pretty html, css, and javascript
       ✖︎ -use correct comments (with intent) and logging; (refer to Sean's powerpoint)
       ✖︎ -utilize patterns to organize javascript if necessary
       ✔︎ -use JQuery
@@ -18,39 +18,25 @@ requirements:
       ✖︎ -When a user fills out the two comment inputs and clicks 'Post Comment' it should immediately add the comment to the list of comments.
       ✔︎ -when a user clicks 'remove' above a post, it should remove the post, too.
 
-        to consider:
-        this
-        data-names
-        render comments or render posts?
-    
-    Additions:
-        -post timestamp
-        -comment timestamp
-        -reddit navbar
-
     Edge Cases:
         -can you add an empty post?/without a username
         -can you add an empty comment?/without a username
-        -what happens if I comment on a post and then make a new post? (stuff is deleted);
     
     Bugs:
-        -can't seem to remove post from the array
-        -if all posts are deleted and then I submit a new post, all preview posts return
-        -if I comment on a post and then submit a new post, the comment input box and comment disappears
-        -comments do not toggle
+        -infinite loop created by deletePosts();
 */
 
 
 var $commentsForm =
 '<div class="comments-section"><form style class="margin-top:30px">'
-+ '  <div class="form-group"> ' + '<input id="commenter" type="text" class="form-control-sm" placeholder="Username"></input>'
-+ '<input id="commentcontent" type="text" class="form-control-sm" placeholder="Comment Text"></input>'
++ '  <div class="form-group"> ' + '<input id="commenter" type="text" class="form-control-sm" placeholder="Username" required></input>'
++ '<input id="commentcontent" type="text" class="form-control-sm" placeholder="Comment Text" required></input>'
 + '<button type="submit" class="btn-secondary commentbutton">Post Comment</button></div></form> <hr /> </div>';
 
 var $upVotes = 0;
 var $downVotes = 0;
 
-var Post = function () {
+var submitPost = function () {
         //USER STORY 1: when a user fills out the two post inputs and clicks "Post", it should immediately add the post to the posts section, with username and message
     $('button').on('click', function(e) {
         e.preventDefault();
@@ -64,33 +50,24 @@ var Post = function () {
         var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds(); 
     
             //create what the post will look like
-        var newPost = '<div class="post">' + $postContent + ' <a href="#" class="remove-link"><i class="fa fa-trash" aria-hidden="true"></i></a>' + ' ' + '<a href="#" class="comment-link" data-name="comments"><i class="fa fa-comments" aria-hidden="true"></i></a> ' + '<button class="btn-success btn-xs"><i class="fa fa-thumbs-up"> ' + $upVotes + '</i></button> <button class="btn-danger btn-xs"><i class="fa fa-thumbs-down"> ' + $downVotes + '</i></button> <br> Posted by: ' + '<strong>' + $userName + '</strong> at ' + time + ' </div> <br>';
+        var newPost = '<div class="post">' + $postContent + ' <a href="#" class="remove-link"><i class="fa fa-trash" aria-hidden="true"></i></a>'
+        + ' ' + '<a href="#" class="comment-link" data-name="comments"><i class="fa fa-comments" aria-hidden="true"></i></a> ' 
+        + '<button class="btn-success btn-xs"><i class="fa fa-thumbs-up"> ' + $upVotes + '</i></button> <button class="btn-danger btn-xs"><i class="fa fa-thumbs-down"> ' 
+        + $downVotes + '</i></button> <br> Posted by: ' + '<strong>' + $userName + '</strong> at ' + time + ' </div> <br>';
  
             //add the new post to the posts div
         $('.posts')[0].innerHTML += newPost;
-            
-        //When the thumbs up or thumbs down buttons are clicked, their value will increase
-        // $('.fa-thumbs-up').on('click', function(){
-        //     $(this).$upVotes += 1;
-        //     console.log("This is the number of upvotes this post has:", $upVotes);
-        // });
-
-        // $('.fa-thumbs-down').on('click', function() {
-        //     $(this).$downVotes += 1;
-        //     console.log("This is the number of downvotes this post has:", $downVotes);
-        // });
         
-    Post();
+    submitPost();
     deletePost();
-});    
+    });    
     
-   // USER STORY 5: when a user clicks 'remove' above a post, it should remove the post, too 
-var deletePost = function () {    
-        //when the trashcan is clicked, the post should be removed
-    $('.fa-trash').on('click', function() {
-        $(this).closest(".post").remove();
-    });
-
+        // USER STORY 5: when a user clicks 'remove' above a post, it should remove the post, too 
+    var deletePost = function () {    
+            //when the trashcan is clicked, the post should be removed
+            $('.fa-trash').on('click', function() {
+            $(this).closest(".post").remove();
+        });
     deletePost();
 };   
 
@@ -100,15 +77,17 @@ var deletePost = function () {
             //the commentsform should toggle visible/hidden
         $(this).closest(".post").toggleClass("show");
 
-            //if the post that was clicked has the show class it should show the commentsForm
+            //if the post that was clicked has the show class it should show the commentsForm, otherwise hide it
         if ($(this).closest(".post").hasClass('show')) {
             $(this).closest(".post").append($commentsForm);
+        } else {
+            $(this).closest(".post").remove($commentsForm);
         };
            
             // USER STORY 4: when a user fills out the two comment inputs and clicks "Post Comment", it should immediately add the comment to the list of comments
         $(".commentbutton").on('click', function(e){
             e.preventDefault();
-            
+
                 // when the user inputs their name and comment into the form, it should be referenced in these variables
             var $commentContent = $(this).closest('.post').find('#commentcontent').val();
             var $commenter = $(this).closest('.post').find('#commenter').val();
@@ -129,9 +108,9 @@ var deletePost = function () {
     });
 };
 
-Post();
+submitPost();
 
- /* ----------------
+ /* ---------------- Below this line is alternate code/attempted features!
  Below is alternative User Story 1 without jQuery:
 
 var button = document.getElementsByClassName('btn')[0]; //variable for the button
@@ -146,7 +125,7 @@ button.addEventListener('click', function(e) { //the listener won't listen until
     document.getElementsByClassName('posts')[0].innerHTML += messageString;
 }); 
 - - - - - - - - - - - - - -
-alternative to User Story 1 with JQuery and a render function: (prints cumulative posts each time post is pressed)
+Below is alternative to User Story 1 with JQuery and a render function: (prints cumulative posts each time post is pressed)
 
 $('button').on('click', function(e) {
     e.preventDefault();
@@ -181,4 +160,35 @@ $('button').on('click', function(e) {
     renderPosts();
 
 });  
+- - - - - - - - - -  - - 
+    Below is an attempted start to the upvoting extension: 
+
+     When the thumbs up or thumbs down buttons are clicked, their value will increase
+        $('.fa-thumbs-up').on('click', function(){
+            $(this).$upVotes += 1;
+            console.log("This is the number of upvotes this post has:", $upVotes);
+        });
+
+        $('.fa-thumbs-down').on('click', function() {
+            $(this).$downVotes += 1;
+            console.log("This is the number of downvotes this post has:", $downVotes);
+        });
+
+- - - - - - - - - - - 
+      Below is an attempt at validating the comment input fields:
+                //A commenter should not be able to post a comment without entering their name
+            var isValidName = $commenter.checkValidity();
+            if (isValidName) {
+                var $commenter = $(this).closest('.post').find('#commenter').val();
+              } else {
+                alert("You must enter your name");
+              };
+
+                A commenter should not be able to post an empty comment
+            var isValidComment = $commentContent.checkValidity();
+            if (isValidComment) {
+                var $commentContent = $(this).closest('.post').find('#commentcontent').val();
+            } else {
+                alert("You must enter a comment.");
+            };
 */    
