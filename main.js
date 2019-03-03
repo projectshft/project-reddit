@@ -24,10 +24,10 @@ $('#add-post').on('click', function() {
       + '<div class="form-group"><input class="edit-message" type="text" placeholder="Edit Post" />'
       + '<button type="button" class="btn btn-primary edit-button">Edit Post</button></div></form>'
       + '<div class="comment-post show"></div>' 
-      + '<form class="input-area add-comment"><h5>Add Comment</h5>'
+      + '<div class="comment-section"><form class="input-area add-comment"><h5>Add Comment</h5>'
       + '<div class="form-group"><input class="comment-username" type="text" placeholder="User Name" /></div>'
       + '<div class="form-group"><input class="comment-message" type="text" placeholder="Comment Text" /></div>'
-      + '<button type="button" class="btn btn-primary post-comment">Add Comment</button></form>';      
+      + '<button type="button" class="btn btn-primary post-comment">Add Comment</button></form></div>';      
 
     // Resets the user name and message fields back to empty after adding a post
     $('#username').val(''); 

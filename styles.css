@@ -58,6 +58,11 @@ i {
   font-weight: bold;
 }
 
+.comment-section {
+  margin-top: 20px;
+  margin-left: 15px;
+}
+
 .timestamp {
   float: right;
   font-size: 14px;
