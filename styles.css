@@ -69,12 +69,13 @@ i {
 
 .comment-post {
   font-family: 'Sarabun', sans-serif;
+  display: none;
 }
 
 .comment-icon-row {
   display: inline-block;
   font-size: 16px;
-  margin-left: 5px;
+  margin-left: 15px;
 }
 
 .add-comment {
@@ -90,6 +91,19 @@ i {
   color: #17238f
 }
 
+.edit-post {
+  display: none;
+}
+
+.edit-message {
+  margin-right: 20px;
+  width: 85%
+}
+
 .show {
-  display: inline-block;
+  display: block;
+}
+
+.show-add-comment {
+  display: inline;
 }
