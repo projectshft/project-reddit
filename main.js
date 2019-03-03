@@ -34,7 +34,7 @@ var comments = function() {
 
   //3. when comment is posted, add X and when clicked, deletes posts
     var deleteComment = $('.fa-times').on('click', function() {
-      $(this).closest("individual-comments").remove();
+      $(this).closest('.individual-comments').remove();
     });
   })
 };
