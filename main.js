@@ -70,7 +70,6 @@ $(document).on("click", ".leave-comment-button", function() {
       $("#comment-modal").modal("hide");
     }
   };
-
   // Add a click event listener to the modal submit button
   $("#add-comment-button").click(createComment);
 });
@@ -78,8 +77,10 @@ $(document).on("click", ".leave-comment-button", function() {
 // *** When a user clicks the 'x' next to a comment, it should delete it.
 
 $(document).on("click", ".delete-comment i", function() {
-  if(confirm("Are you sure you want to permanently delete this comment?"))
-    $(this).closest(".comment").remove();
+  if(confirm("Are you sure you want to permanently delete this comment?"));
+    $(this)
+      .closest(".comment")
+      .remove();
 });
 
 const onHover = function() {
@@ -97,5 +98,7 @@ $(document).on("mouseleave", ".delete-comment i", offHover);
 
 $(document).on("click", ".delete-post-button", function() {
   if(confirm("Are you sure you want to permanently delete this entire post and its contents?"));
-    $(this).closest(".post-content").remove();
+    $(this)
+      .closest(".post-content")
+      .remove();
 });
