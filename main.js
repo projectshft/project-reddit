@@ -1,34 +1,14 @@
 /** A div that will contain all of our posts*/
 var $postContainer = $("#post-content");
 /** An array of posts objects */
-var postData = [
-  {
-    name: 'Andres',
-    post: 'Cool post yall...',
-    comments: [
-      {
-        author: 'Luis',
-        content: 'this sucks...'
-      },
-      {
-        author: 'Bob',
-        content: 'what she said'
-      }
-    ]
-  },
-  {
-    name: 'Smith',
-    post: 'Cool post yall...',
-    comments: []
-  },
-];
+var postData = [];
 
 /** 
  * Renders a post object to the user
  * @param { Object } userPost - An object that contains a name, post, and comment properties.
  */
 function renderPost(userPost) {
-
+  // renders a post
   $postContainer.append(`
     <div class="alert alert-primary">
       <p onClick="removePost()" class="btn btn-link remove-btn">Remove post</p>
@@ -58,7 +38,7 @@ function renderPost(userPost) {
 }
 
 /** Handle submitting form */
-function submitForm() {
+function submitPost() {
   var postObj = {};
   var postBody = $('#post-body').val();
   var name = $('#post-name').val();
@@ -84,7 +64,6 @@ function submitComment() {
   var commentAuthor = $(event.target).closest('.alert').find('#comment-name').val();
   var commentContent = $(event.target).closest('.alert').find('#comment-body').val();
 
-
   commentObj.author = commentAuthor;
   commentObj.content = commentContent;
 
@@ -107,7 +86,6 @@ function submitComment() {
   };
 
   renderComment(commentObj);
-
   // reset form values 
   $(event.target).closest('.alert').find('#comment-name').val("");
   $(event.target).closest('.alert').find('#comment-name').attr("placeholder", "Your name");
@@ -147,7 +125,6 @@ function removePost() {
 function toggleCommentForm() {
   $(event.target).closest('.alert').find('.comment-form').toggleClass('show');
 };
-
 
 /** 
  * Function that finds the user object in the postData array 
