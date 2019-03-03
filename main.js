@@ -192,13 +192,13 @@ const hideCommentsButtonListener = function() {
 
 // This function creates and returns a timestamp 
 const getTimeStamp = function () {
-  const currentdate = new Date(); 
-  const timestamp = 
-    (currentdate.getMonth()+1) + "/"
-    + currentdate.getDate()  + "/" 
-    + currentdate.getFullYear() + " @ "  
-    + currentdate.getHours() + ":"  
-    + (currentdate.getMinutes() < 10 ? '0' : '') + currentdate.getMinutes() + ":"
-    + (currentdate.getSeconds() < 10 ? '0' : '') + currentdate.getSeconds();
-  return timestamp;
+  const currentDate = new Date(); 
+  const timeStamp = 
+    (currentDate.getMonth()+1) + "/"
+    + currentDate.getDate()  + "/" 
+    + currentDate.getFullYear() + " @ "  
+    + currentDate.getHours() + ":"  
+    + (currentDate.getMinutes() < 10 ? '0' : '') + currentDate.getMinutes() + ":"
+    + (currentDate.getSeconds() < 10 ? '0' : '') + currentDate.getSeconds();
+  return timeStamp;
 }
