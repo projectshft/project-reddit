@@ -33,37 +33,40 @@ const $newPostButton = $(".new-post-button");
 $newPostButton.click(createPost);
 
 // *** We now want users to be able to leave comments on each post. When a user clicks 'comments' (above each post) it should toggle the comments and input box visible/hidden.
-const createComment = () => {
-  // Capture input from the Bootstrap modal input fields
-  const $commenterName = $("#commenter-name").val();
-  const $commentText = $("#comment-text").val();
-  // Place into commentTemplate
-  const commentTemplate = `
-    <div class="comment">
-      <p class="ml-5"><strong class="commenter-name">${$commenterName}</strong><em> comments: </em>${$commentText}</p>
-    </div>`;
-  // append to the related post, only if there is content
-  if($commentText !== "" && $commenterName !== "") {
-    $(".post-content").find(".post").append(commentTemplate);
-    // hide comment modal 
-    $("#comment-modal").modal("hide");
-  }
-  $("#commenter-name").val("");
-  $("#comment-text").val("");
-};
-// Add a click event listener to the modal submit button
-const $addCommentButton = $("#add-comment-button");
-$addCommentButton.click(createComment);
+
+// Initialize the $selectedPost variable to null, otherwise comments seem to always go into the post that was selected first, like it retains that value.
+let $selectedPost = null;
 
 // Click event listener for the leave comment buttons. Targets the spcific post corresponding to the clicked button. No longer duplicates messages.
 $(document).on("click", ".leave-comment-button", (event) => {
 
-  const $selectedPost = $(event.target)
+  $selectedPost = $(event.target)
     .closest(".post-content")
     .find(".post");
-    
-  $selectedPost.append("<p>love this shit! </p> ");
+  
+  const createComment = () => {
+    // Capture input from the Bootstrap modal input fields
+    const $commenterName = $("#commenter-name").val();
+    const $commentText = $("#comment-text").val();
+    // Place into commentTemplate
+    const commentTemplate = `
+      <div class="comment">
+        <p class="ml-5"><strong class="commenter-name">${$commenterName}</strong><em> comments: </em>${$commentText}</p>
+      </div>`;
+    // append to the related post, only if there is content
+    if($commentText !== "" && $commenterName !== "") {
 
+      $selectedPost.append(commentTemplate);
+      
+      // hide comment modal 
+      $("#comment-modal").modal("hide");
+    }
+    $("#commenter-name").val("");
+    $("#comment-text").val("");
+  };
+
+  // Add a click event listener to the modal submit button
+  $("#add-comment-button").click(createComment);
 });
 
 
