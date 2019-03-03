@@ -12,6 +12,7 @@ function renderPost(userPost) {
   $postContainer.append(`
     <div class="alert alert-primary">
       <p onClick="removePost()" class="btn btn-link remove-btn">Remove post</p>
+      <a href="#post-form" onClick="editPost()" class="btn btn-link edit-btn">Edit post</a>
       <p onclick="toggleCommentForm()" class="post-comment-btn btn btn-link">comments<p>
       <p class="post-content">${userPost.post}</p>
       <div class="post-author-container">
@@ -41,8 +42,24 @@ function renderPost(userPost) {
 function submitPost() {
   // a post user object
   var postObj = {};
+
   var postBody = $('#post-body').val();
   var name = $('#post-name').val();
+
+  var foundUser = findUserObj(name);
+  // Replaces previous post content if user clicked to edit post
+  if (foundUser && foundUser.name === name) {
+    var oldText = $(`.post-author:contains(${name})`).closest('.alert').find('.post-content');
+    var newText = $('#post-body').val();
+    oldText.text(`${newText}`);
+
+    // reset form values after submitting successfully 
+    $('#post-body').val("");
+    $('#post-body').attr("placeholder", "Your name");
+    $('#post-name').val("");
+    $('#post-name').attr("placeholder", "Enter text");
+    return;
+  }
 
   // validate user input
   if (name === "" || postBody === "") {
@@ -67,6 +84,7 @@ function submitPost() {
 
 /** Function that handles submitting a comment */
 function submitComment() {
+  // $('.:contains("test")');
   // an array that will contain all of comments as objects
   var commentArray = [];
   // comment object with author and content properties
@@ -135,6 +153,21 @@ function removeComment() {
 function removePost() {
   $(event.target).closest('.alert').remove();
 }
+
+/** Function pre-populates form values if user clicked 'edit post' link */
+function editPost() {
+  // find the user object post and get the data
+  var postName = $(event.target).closest('.alert').find('.post-author').text();
+  var foundUser = findUserObj(postName);
+
+  // populate form  with previous data and reset attributes
+  $('#post-name').attr("placeholder", "Your name");
+  $('#post-body').attr("placeholder", "Enter text");
+  $('#post-form').find('#post-name').val(foundUser.name);
+  $('#post-form').find('#post-body').val(foundUser.post);
+
+}
+
 
 /** Handles the comments toggle */
 function toggleCommentForm() {

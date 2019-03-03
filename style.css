@@ -1,5 +1,5 @@
 #post-content {
-  padding-bottom: 5rem;
+  padding-bottom: 8rem;
 }
 
 .post-author {
@@ -45,6 +45,14 @@
 .fa-times {
   color: red;
   margin-left: 1.2rem;
+  cursor: pointer;
+}
+
+.edit-btn {
+  position: relative;
+  display: inline;
+  top: .2rem;
+  padding-bottom: 0;
   cursor: pointer;
 }
 
