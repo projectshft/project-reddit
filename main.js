@@ -7,9 +7,9 @@ $('#add-post').on('click', function() {
   const postUserName = $('#username').val();
   const postMessage = $('#message').val();
 
-  if(postUserName && postMessage) {  // Checks if the user inputs are not empty
+  if(postUserName && postMessage) {  // Checks if the user and message inputs are not empty
 
-    // Builds out the HTML for each new post
+    // Builds out the HTML for each new post and adds it to the page
     posts[0].innerHTML +=
       '<div class="userpost">'
       + '<div class="post-text"><div class="post-message">' + postMessage + '</div>' 
@@ -26,8 +26,7 @@ $('#add-post').on('click', function() {
       + '<form class="input-area add-comment"><h5>Add Comment</h5>'
       + '<div class="form-group"><input class="comment-username" type="text" placeholder="User Name" /></div>'
       + '<div class="form-group"><input class="comment-message" type="text" placeholder="Comment Text" /></div>'
-      + '<button type="button" class="btn btn-primary post-comment">Add Comment</button></form>';
-      
+      + '<button type="button" class="btn btn-primary post-comment">Add Comment</button></form>';      
 
     // Resets the user name and message fields back to empty after adding a post
     $('#username').val(''); 
@@ -135,7 +134,7 @@ const editPostButtonListener = function() {
   $(".edit-button").each(function() {
     $(this).on("click", function() {
       const editedPostText =  $(this).closest(".form-group").find(".edit-message").val();
-      $(this).closest(".post-text").find(".post-message").html(editedPostText + ' (edited)');
+      $(this).closest(".post-text").find(".post-message").html(editedPostText + ' (edited on: ' + getTimeStamp() + ')');
       $(this).closest(".edit-post").removeClass('show-add-comment'); // Hides add comment section when button is clicked
     });
   });
@@ -167,7 +166,7 @@ const editCommentButtonListener = function() {
   $(".edit-comment-button").each(function() {
     $(this).on("click", function() {
       const editedCommentText =  $(this).closest(".form-group").find(".edit-comment-message").val();
-      $(this).closest(".comment-text").find(".comment-message-text").html(editedCommentText + ' (edited)');
+      $(this).closest(".comment-text").find(".comment-message-text").html(editedCommentText + ' (edited on: ' + getTimeStamp() + ')');
       $(this).closest(".edit-comment").removeClass('show-add-comment'); 
     });
   });
@@ -186,7 +185,7 @@ const hideCommentsButtonListener = function() {
   });
 }
 
-// This function creates and returns a timestamp when add post or add comment buttons are pushed
+// This function creates and returns a timestamp 
 const getTimeStamp = function () {
   const currentdate = new Date(); 
   const timestamp = 
