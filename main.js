@@ -152,7 +152,6 @@ $('button').on('click', function(e) {
 
         console.log("this is what post array looks like:", post);
     });
-
 });
 
 
