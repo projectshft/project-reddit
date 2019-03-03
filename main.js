@@ -15,7 +15,7 @@ $('#add-post').on('click', function() {
       + '<div class="post-text"><div class="post-message">' + postMessage + '</div>' 
       + '<div>Posted By: <b>' + postUserName + '</b>'
       + '<div class="icon-row"><i class="far fa-comment comment" data-toggle="tooltip" title="Add Comment"></i>'
-      + '<i class="fas fa-edit" data-toggle="tooltip" title="Edit Post"></i>'
+      + '<i class="fas fa-edit edit-post-show" data-toggle="tooltip" title="Edit Post"></i>'
       + '<i class="fas fa-eye-slash hide-comment" data-toggle="tooltip" title="Hide/Show Comments"></i>'
       + '<i class="far fa-window-close delete" data-toggle="tooltip" title="Delete Post"></i></div>'
       + '<div class="timestamp">' + getTimeStamp() + '</div></div>'
@@ -54,11 +54,14 @@ const addCommentButtonListener = function() {
 
       // Builds out HTML of a new comment
       commentSection[0].innerHTML +=
-        '<div class="comment-text"><div>' + commentMessage + '</div>' 
+        '<div class="comment-text"><div class="comment-message-text">' + commentMessage + '</div>' 
         + '<div>Posted By: <b>' + commentUserName + '</b>'
-        + '<div class="comment-icon-row"><i class="fas fa-edit" data-toggle="tooltip" title="Edit Comment"></i>'
+        + '<div class="comment-icon-row"><i class="fas fa-edit edit-comment-show" data-toggle="tooltip" title="Edit Comment"></i>'
         + '<i class="far fa-window-close delete-comment" data-toggle="tooltip" title="Delete Comment"></i></div>'
-        + '<div class="timestamp">' + getTimeStamp() + '</div></div>';  
+        + '<div class="timestamp">' + getTimeStamp() + '</div></div>'
+        + '<form class="input-area edit-comment">'
+        + '<div class="form-group"><input class="edit-comment-message" type="text" placeholder="Edit Comment" />'
+        + '<button type="button" class="btn btn-primary edit-comment-button">Edit Comment</button></div></form></div>';  
 
       // Resets the user name and message fields back to empty after adding a comment
       $(this).closest(".add-comment").find('.comment-username').val('');
@@ -67,6 +70,7 @@ const addCommentButtonListener = function() {
       $(this).closest(".add-comment").removeClass('show-add-comment'); // Hides add comment section when button is clicked
 
       deleteCommentListener();
+      editCommentShowListener();
     });
   });
 }
@@ -110,7 +114,7 @@ const commentButtonListener = function() {
 
 // Adds click event listeners to all edit post icons and if clicked shows the edit post area
 const editPostShowListener = function() {
-  $(".fa-edit").each(function() {
+  $(".edit-post-show").each(function() {
     $(this).on("click", function() {
       if($(this).closest(".post-text").find(".edit-post").hasClass('show-add-comment')) {
         $(this).closest(".post-text").find(".edit-post").removeClass('show-add-comment');
@@ -133,6 +137,35 @@ const editPostButtonListener = function() {
     });
   });
 }
+
+/* This function adds click event listeners to all of the edit comment icons that will show and hide the edit
+   comment section. It also grabs the value of the current comment text and sets the edit comment input field to
+   that value.  */
+
+const editCommentShowListener = function() {
+  $(".edit-comment-show").each(function() {
+    $(this).on("click", function() {
+      if($(this).closest(".comment-text").find(".edit-comment").hasClass('show-add-comment')) {
+        $(this).closest(".comment-text").find(".edit-comment").removeClass('show-add-comment');
+      } else {
+        const currentCommentText = $(this).closest(".comment-text").find(".comment-message-text").html();
+        $(this).closest(".comment-text").find(".edit-comment-message").val(currentCommentText);
+        $(this).closest(".comment-text").find(".edit-comment").addClass('show-add-comment');
+      }
+    });
+  });
+}
+
+// // Adds click event listeners to all edit comment icons and if clicked shows the edit comment area
+// const editCommentButtonListener = function() {
+//   $(".edit-comment-button").each(function() {
+//     $(this).on("click", function() {
+//       const editedCommentText =  $(this).closest(".form-group").find(".edit-comment").val();
+//       $(this).closest(".post-text").find(".comment-message-text").html(editedCommentText + ' (edited)');
+//       $(this).closest(".edit-comment").removeClass('show-add-comment'); // Hides add comment section when button is clicked
+//     });
+//   });
+// }
 
 // Adds click event listeners to all hide comments icons and if clicked shows or hides a posts comments
 const hideCommentsButtonListener = function() {
