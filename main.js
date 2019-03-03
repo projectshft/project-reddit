@@ -52,16 +52,17 @@ function submitPost() {
     var newText = $('#post-body').val();
     oldText.text(`${newText}`);
 
+    foundUser.post = newText;
     // reset form values after submitting successfully 
     resetFormValues();
     return;
   }
 
   // validate user input
-  if (name === "" || postBody === "") {
-    alert('Please enter a name and post content');
+  if (validateInput(name, postBody)) {
     return;
-  }
+  };
+
   // assign properties and values to our user object
   postObj.name = name;
   postObj.post = postBody;
@@ -86,10 +87,9 @@ function submitComment() {
   var commentContent = $(event.target).closest('.alert').find('#comment-body').val();
 
   // validate user input
-  if (commentContent === "" || commentAuthor === "") {
-    alert('Please enter a name and comment content');
+  if (validateInput(commentAuthor, commentContent)) {
     return;
-  }
+  };
   // create comment properties and assign values
   commentObj.author = commentAuthor;
   commentObj.content = commentContent;
@@ -137,6 +137,10 @@ function removeComment() {
 
 /** Deletes a post when the user clicks the 'Remove post' link */
 function removePost() {
+  var postUsername = $(event.target).closest('.alert').find('.post-author').text();
+  var userObjToDelete = findUserObj(postUsername);
+  // remove post object from postData array
+  postData.splice(postData.indexOf(userObjToDelete), 1);
   $(event.target).closest('.alert').remove();
 }
 
@@ -160,6 +164,7 @@ function toggleCommentForm() {
   $(event.target).closest('.alert').find('.comment-form').toggleClass('show');
 };
 
+/** The following functions are helper functions to help with minor tasks */
 function resetFormValues() {
   $('#post-body').val("");
   $('#post-body').attr("placeholder", "Your name");
@@ -172,6 +177,14 @@ function resetCommentFormValues() {
   $(event.target).closest('.alert').find('#comment-name').attr("placeholder", "Your name");
   $(event.target).closest('.alert').find('#comment-body').val("");
   $(event.target).closest('.alert').find('#comment-body').attr("Enter Comment");
+}
+
+function validateInput(inputOne, inputTwo) {
+  if (inputOne === "" || inputTwo === "") {
+    alert("Please don't leave empty fields");
+    return true;
+  }
+  return false;
 }
 
 /** 
