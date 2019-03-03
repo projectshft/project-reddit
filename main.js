@@ -39,6 +39,8 @@ $('#add-post').on('click', function() {
     hideCommentsButtonListener();
     editPostShowListener();
     editPostButtonListener();
+  } else {
+    alert("User Name and Message Text must not be empty");
   }
 });
 
@@ -71,6 +73,7 @@ const addCommentButtonListener = function() {
 
       deleteCommentListener();
       editCommentShowListener();
+      editCommentButtonListener();
     });
   });
 }
@@ -156,16 +159,19 @@ const editCommentShowListener = function() {
   });
 }
 
-// // Adds click event listeners to all edit comment icons and if clicked shows the edit comment area
-// const editCommentButtonListener = function() {
-//   $(".edit-comment-button").each(function() {
-//     $(this).on("click", function() {
-//       const editedCommentText =  $(this).closest(".form-group").find(".edit-comment").val();
-//       $(this).closest(".post-text").find(".comment-message-text").html(editedCommentText + ' (edited)');
-//       $(this).closest(".edit-comment").removeClass('show-add-comment'); // Hides add comment section when button is clicked
-//     });
-//   });
-// }
+/* This function adds click event listeners to all edit comment buttons.  When an edit comment button is clicked the location of the
+   current comment is grabbed and the HTML value is replaced by the value in the edit comment input field.  The edit comment
+   section is then hidden from view. */
+
+const editCommentButtonListener = function() {
+  $(".edit-comment-button").each(function() {
+    $(this).on("click", function() {
+      const editedCommentText =  $(this).closest(".form-group").find(".edit-comment-message").val();
+      $(this).closest(".comment-text").find(".comment-message-text").html(editedCommentText + ' (edited)');
+      $(this).closest(".edit-comment").removeClass('show-add-comment'); 
+    });
+  });
+}
 
 // Adds click event listeners to all hide comments icons and if clicked shows or hides a posts comments
 const hideCommentsButtonListener = function() {
