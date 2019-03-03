@@ -10,33 +10,42 @@
 </head>
 <body>
     <div class="container">
-        <div class="row">
           <div class="col-8">
+            <div class="header border-bottom pb-4">
             <h1>Project Reddit</h1>
-            <div class="border-top">
-              <div class="postBox">
-                <!-- <a href="">remove</a>
-                <h6 data-post="1">TEXT</h6>
-                <div>
-                  <h6 class="user">Posted By: <strong>NAME</strong>
-                  </h6>
-                </div> -->
-              </div>
-              </div>
-          </div>
-        </div>
-      <div class="border-top">
-          <form>
-              <div class="form-group">
-                <label for="postForm" class="font-weight-bold">Add a New Post</label>
-                <input type="text" class="form-control" id="postFormBody" placeholder="Post Text">
-              </div>
-              <div class="form-group">
-                <input type="text" class="form-control" id="postFormName" placeholder="Your Name">
-              </div>
-              <button type="button" class="btn btn-primary">Post</button>
-            </form>
             </div>
+              <div class="postBox">
+                  <!-- <div class="pb-3">
+                      <button type="button" id="postDelete" class="btn btn-link p-0">delete </button>
+                      <button type="button" id="postComments" class="btn btn-link p-0">comments </button>
+                      <h6 class="post font-weight-light" data-post="1">Post Text</h6>
+                      <div>
+                      <h6 class="user">Posted By: <strong>User</strong></h6>
+                      </div>
+                      </div> -->
+                  <!-- <div class="container p-0">
+                  <div class="commentBox">
+                    <form class="form-inline">
+                      <input type="text" class="form-control w-25" id="commentFormBody" placeholder="Comment Text">
+                      <input type="text" class="form-control w-25" id="commentFormName" placeholder="Your Name">
+                      <button type="button" class="btn btn-primary w-25">Post Comment</button>
+                    </form>                                 
+                  </div>
+              </div> -->
+              </div>
+              <div class="pb-4">
+                <form>
+                    <div class="form-group">
+                      <label for="postForm" class="font-weight-bold mt-4">Add a New Post</label>
+                      <input type="text" class="form-control" id="postFormBody" placeholder="Post Text">
+                    </div>
+                    <div class="form-group">
+                      <input type="text" class="form-control" id="postFormName" placeholder="Your Name">
+                    </div>
+                    <button type="button" class="btn btn-primary">Post</button>
+                  </form>
+                  </div>
+              </div>
             </div>
             <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
             <script src="main.js"></script>
