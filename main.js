@@ -77,7 +77,11 @@ var post = [
    var commentName = $('input#commentName').val();
    var commentText = $('textarea#commentText').val();
 
-    $('ul').append('<li>'+commentText+'<br>'+'Posted by: '+'<strong>'+commentName+'</strong>'+'</li>');
+    $('ul').append(
+                    '<li>'+commentText+'<br>'
+                    +'Posted by: '+'<strong>'+commentName+'</strong>'+'  '
+                    +'<a><i class="far fa-times-circle" href="#"></i></a>'+'</li>'
+                  );
   });
 
 
