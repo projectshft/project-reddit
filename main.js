@@ -1,7 +1,7 @@
 
 // *** We want the user to be able to enter a new post into the text box with a user name, and when the submit button is clicked, a new post is generated.
 
-const createPost = () => {
+const createPost = function() {
   // Capture the input from the .user-name and textarea #new-post.
   const $newPostName = $("#new-post-name").val();
   const $newPostMessage = $("#new-post-message").val();
@@ -17,15 +17,19 @@ const createPost = () => {
         <button type="button" class="leave-comment-button btn btn-secondary btn-sm" data-toggle="modal" data-target="#comment-modal">
         Leave comment
         </button>
+        <button type="button" class="delete-post-button btn btn-danger btn-sm">
+        Delete post
+        </button>
       </div>
     </div>`;
   // append the content wrapper with the new post, if there is content
   if($newPostName !== "" && $newPostMessage !== ""){
+    
     $(".post-wrapper").append(newPostTemplate);
-  }
 
-  $("#new-post-name").val("");
-  $("#new-post-message").val("");
+    $("#new-post-name").val("");
+    $("#new-post-message").val("");
+  }
 };
 
 // Add a click event listener to the submit button to create a post
@@ -33,9 +37,9 @@ $(".new-post-button").click(createPost);
 
 // *** We now want users to be able to leave comments on each post. When a user clicks 'comments' (above each post) it should toggle the comments and input box visible/hidden.
 
-// Initialize the $selectedPost variable to null, otherwise comments seem to always go into the post that was selected first, like it retains that value. Needs further research.
+// Initialize the $selectedPost variable.
 
-let $selectedPost = null;
+let $selectedPost;
 // Click event listener for the leave comment buttons. Targets the spcific post corresponding to the clicked button. No longer duplicates messages.
 $(document).on("click", ".leave-comment-button", function() {
 
@@ -45,7 +49,7 @@ $(document).on("click", ".leave-comment-button", function() {
 
   // *** When a user fills out the two comment inputs and clicks 'Post Comment' it should immediately add the comment to the list of comments.
   
-  const createComment = () => {
+  const createComment = function() {
     // Capture input from the Bootstrap modal input fields
     const $commenterName = $("#commenter-name").val();
     const $commentText = $("#comment-text").val();
@@ -60,11 +64,11 @@ $(document).on("click", ".leave-comment-button", function() {
 
       $selectedPost.append(commentTemplate);
       
+      $("#commenter-name").val("");
+      $("#comment-text").val("");
       // hide comment modal 
       $("#comment-modal").modal("hide");
     }
-    $("#commenter-name").val("");
-    $("#comment-text").val("");
   };
 
   // Add a click event listener to the modal submit button
@@ -79,7 +83,7 @@ $(document).on("click", ".delete-comment i", function() {
 });
 
 const onHover = function() {
-  $(this).css("color", "red");
+  $(this).css("color", "#DB3545");
 };
 
 const offHover = function () {
@@ -89,9 +93,9 @@ const offHover = function () {
 $(document).on("mouseenter", ".delete-comment i", onHover);
 $(document).on("mouseleave", ".delete-comment i", offHover);
 
-
 // *** Lastly, when a user clicks 'remove' above a post, it should remove the post too.
 
-
-
-
+$(document).on("click", ".delete-post-button", function() {
+  if(confirm("Are you sure you want to permanently delete this entire post and its contents?"));
+    $(this).closest(".post-content").remove();
+});
