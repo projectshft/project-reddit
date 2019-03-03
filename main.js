@@ -36,13 +36,14 @@ $(".new-post-button").click(createPost);
 // Initialize the $selectedPost variable to null, otherwise comments seem to always go into the post that was selected first, like it retains that value. Needs further research.
 
 let $selectedPost = null;
-
 // Click event listener for the leave comment buttons. Targets the spcific post corresponding to the clicked button. No longer duplicates messages.
-$(document).on("click", ".leave-comment-button", (event) => {
+$(document).on("click", ".leave-comment-button", function() {
 
-  $selectedPost = $(event.target)
+  $selectedPost = $(this)
     .closest(".post-content")
     .find(".post");
+
+  // *** When a user fills out the two comment inputs and clicks 'Post Comment' it should immediately add the comment to the list of comments.
   
   const createComment = () => {
     // Capture input from the Bootstrap modal input fields
@@ -65,20 +66,28 @@ $(document).on("click", ".leave-comment-button", (event) => {
     $("#commenter-name").val("");
     $("#comment-text").val("");
   };
+
   // Add a click event listener to the modal submit button
   $("#add-comment-button").click(createComment);
 });
 
 // *** When a user clicks the 'x' next to a comment, it should delete it.
 
+$(document).on("click", ".delete-comment i", function() {
+  if(confirm("Are you sure you want to permanently delete this comment?"))
+    $(this).closest(".comment").remove();
+});
 
+const onHover = function() {
+  $(this).css("color", "red");
+};
 
+const offHover = function () {
+  $(this).css("color", "inherit");
+};
 
-
-// *** When a user fills out the two comment inputs and clicks 'Post Comment' it should immediately add the comment to the list of comments.
-
-
-
+$(document).on("mouseenter", ".delete-comment i", onHover);
+$(document).on("mouseleave", ".delete-comment i", offHover);
 
 
 // *** Lastly, when a user clicks 'remove' above a post, it should remove the post too.
