@@ -2,7 +2,7 @@
 var $postContainer = $("#post-content");
 /** 
  * An array of posts objects 
- * example of data structure
+ * example of data
  *[
   {
     name: "Luis",
@@ -44,10 +44,24 @@ function renderPost(userPost) {
   // renders a post
   $postContainer.append(`
     <div class="alert alert-primary">
-      <p onClick="removePost()" class="btn btn-link remove-btn">Remove post</p>
-      <a href="#post-form" onClick="editPost()" class="btn btn-link edit-btn">Edit post</a>
-      <p onclick="toggleCommentForm()" class="post-comment-btn btn btn-link">comments<p>
+      <p 
+        onClick="removePost()" 
+        class="btn btn-link remove-btn">
+        Remove post
+      </p>
+      <a 
+        href="#post-form" 
+        onClick="editPost()" 
+        class="btn btn-link edit-btn">
+        Edit post
+      </a>
+      <p 
+        onclick="toggleCommentForm()" 
+        class="post-comment-btn btn btn-link">
+        comments
+      </p>
       <p class="post-content">${userPost.post}</p>
+
       <div class="post-author-container">
         posted by: <p class="post-author">${userPost.name}</p>
       </div>
@@ -56,16 +70,28 @@ function renderPost(userPost) {
       <div class="comment-container"></div>
       
       <form class="comment-form">
-          <div class="form-group comment-form-name">
-            <input type="text" class="form-control" id="comment-name" placeholder="Your name">
-          </div>
+        <div class="form-group comment-form-name">
+          <input 
+            type="text" 
+            class="form-control" 
+            id="comment-name" 
+            placeholder="Your name">
+        </div>
 
-          <div class="form-group">
-            <textarea class="form-control" placeholder="Enter Comment" id="comment-body" rows="3"></textarea>
-          </div>
-          <button type="button" onClick="submitComment()" id="comment-submit-btn" class="btn btn-primary">Post Comment</button>
-  
-        </form>
+        <div class="form-group">
+          <textarea 
+            class="form-control" 
+            placeholder="Enter Comment" 
+            id="comment-body" 
+            rows="3"></textarea>
+        </div>
+
+        <button 
+          type="button" 
+          onClick="submitComment()" 
+          id="comment-submit-btn" 
+          class="btn btn-primary">Post Comment</button>
+      </form>
     </div> 
   `);
 }
@@ -79,6 +105,7 @@ function submitPost() {
   var name = $('#post-name').val();
 
   var foundUser = findUserObj(name);
+
   // Replaces previous post content if user clicked to edit post
   if (foundUser && foundUser.name === name) {
     var oldText = $(`.post-author:contains(${name})`).closest('.alert').find('.post-content');
@@ -145,7 +172,6 @@ function submitComment() {
   renderComment(commentObj);
   // reset form values 
   resetCommentFormValues();
-
 };
 
 /** 
@@ -161,12 +187,12 @@ function renderComment(comment) {
       <i onClick="removeComment()" class="fas fa-times"></i>
     </p>
   `);
-}
+};
 
 /** Deletes a comment the user clicked on */
 function removeComment() {
   $(event.target).closest('.comment').remove();
-}
+};
 
 /** Deletes a post when the user clicks the 'Remove post' link */
 function removePost() {
@@ -175,7 +201,7 @@ function removePost() {
   // remove post object from postData array
   postData.splice(postData.indexOf(userObjToDelete), 1);
   $(event.target).closest('.alert').remove();
-}
+};
 
 /** Function pre-populates form values if user clicked 'edit post' link */
 function editPost() {
@@ -188,8 +214,7 @@ function editPost() {
   $('#post-body').attr("placeholder", "Enter text");
   $('#post-form').find('#post-name').val(foundUser.name);
   $('#post-form').find('#post-body').val(foundUser.post);
-
-}
+};
 
 /** Handles the comments toggle */
 function toggleCommentForm() {
@@ -203,14 +228,14 @@ function resetFormValues() {
   $('#post-body').attr("placeholder", "Your name");
   $('#post-name').val("");
   $('#post-name').attr("placeholder", "Enter text");
-}
+};
 
 function resetCommentFormValues() {
   $(event.target).closest('.alert').find('#comment-name').val("");
   $(event.target).closest('.alert').find('#comment-name').attr("placeholder", "Your name");
   $(event.target).closest('.alert').find('#comment-body').val("");
   $(event.target).closest('.alert').find('#comment-body').attr("Enter Comment");
-}
+};
 
 function validateInput(inputOne, inputTwo) {
   if (inputOne === "" || inputTwo === "") {
@@ -218,7 +243,7 @@ function validateInput(inputOne, inputTwo) {
     return true;
   }
   return false;
-}
+};
 
 /** 
  * Function that finds the user object in the postData array 
