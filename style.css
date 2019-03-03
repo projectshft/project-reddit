@@ -1,8 +1,3 @@
-#posts {
-  /* overflow: scroll; */
-  /* height: 30em; */
-}
-
 .post-author {
   margin-bottom: 0;
   padding-bottom: 0;
@@ -15,6 +10,8 @@
 }
 
 .post-comment-btn {
+  padding-bottom: 0;
+  margin-bottom: 0;
   cursor: pointer;
 }
 
@@ -34,8 +31,10 @@
 }
 
 .comment-container {
-  margin-top: 1rem;
+  margin-top: 0;
+  padding-top: 0;
   padding-left: 2rem;
+  padding-bottom: 1rem;
 }
 
 .fa-times {
@@ -50,4 +49,14 @@
 
 form.comment-form {
   display: none;
+}
+
+.btn.btn-link {
+  padding-left: 0;
+}
+
+.remove-btn {
+  padding-bottom: 0;
+  margin-bottom: 0;
+  cursor: pointer;
 }

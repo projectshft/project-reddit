@@ -31,13 +31,14 @@ function renderPost(userPost) {
 
   $postContainer.append(`
     <div class="alert alert-primary">
+      <p onClick="removePost()" class="btn btn-link remove-btn">Remove post</p>
       <p class="post-content">${userPost.post}</p>
       <div class="post-author-container">
         posted by: <p class="post-author">${userPost.name}</p>
       </div>
       <hr>  
       
-      <p onclick="toggleCommentForm()" class="post-comment-btn">comments:<p>
+      <p onclick="toggleCommentForm()" class="post-comment-btn btn btn-link">comments:<p>
       <div class="comment-container"></div>
       
       <form class="comment-form">
@@ -135,6 +136,11 @@ function renderComment(comment) {
 function removeComment() {
   var $commentElement = $(event.target).closest('.comment');
   $commentElement.remove();
+}
+
+/** Deletes a post when the user clicks the 'Remove post' link */
+function removePost() {
+  $(event.target).closest('.alert').remove();
 }
 
 /** Handles the comments toggle */
