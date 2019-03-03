@@ -53,26 +53,31 @@ const addCommentButtonListener = function() {
       const commentMessage = $(this).closest(".add-comment").find('.comment-message').val();
       const commentSection = $(this).closest('.userpost').find('.comment-post');
 
-      // Builds out HTML of a new comment
-      commentSection[0].innerHTML +=
-        '<div class="comment-text"><div class="comment-message-text">' + commentMessage + '</div>' 
-        + '<div>Posted By: <b>' + commentUserName + '</b>'
-        + '<div class="comment-icon-row"><i class="fas fa-edit edit-comment-show" data-toggle="tooltip" title="Edit Comment"></i>'
-        + '<i class="far fa-window-close delete-comment" data-toggle="tooltip" title="Delete Comment"></i></div>'
-        + '<div class="timestamp">' + getTimeStamp() + '</div></div>'
-        + '<form class="input-area edit-comment">'
-        + '<div class="form-group"><input class="edit-comment-message" type="text" placeholder="Edit Comment" />'
-        + '<button type="button" class="btn btn-primary edit-comment-button">Edit Comment</button></div></form></div>';  
+      if(commentUserName && commentMessage) { // Checks if the user and message inputs are not empty
 
-      // Resets the user name and message fields back to empty after adding a comment
-      $(this).closest(".add-comment").find('.comment-username').val('');
-      $(this).closest(".add-comment").find('.comment-message').val('');
+        // Builds out HTML of a new comment
+        commentSection[0].innerHTML +=
+          '<div class="comment-text"><div class="comment-message-text">' + commentMessage + '</div>' 
+          + '<div>Posted By: <b>' + commentUserName + '</b>'
+          + '<div class="comment-icon-row"><i class="fas fa-edit edit-comment-show" data-toggle="tooltip" title="Edit Comment"></i>'
+          + '<i class="far fa-window-close delete-comment" data-toggle="tooltip" title="Delete Comment"></i></div>'
+          + '<div class="timestamp">' + getTimeStamp() + '</div></div>'
+          + '<div class="edit-comment">'
+          + '<div><input class="edit-comment-message" type="text" placeholder="Edit Comment" />'
+          + '<button type="button" class="btn btn-primary edit-comment-button">Edit Comment</button></div></div>';  
 
-      $(this).closest(".add-comment").removeClass('show-add-comment'); // Hides add comment section when button is clicked
+        // Resets the user name and message fields back to empty after adding a comment
+        $(this).closest(".add-comment").find('.comment-username').val('');
+        $(this).closest(".add-comment").find('.comment-message').val('');
 
-      deleteCommentListener();
-      editCommentShowListener();
-      editCommentButtonListener();
+        $(this).closest(".add-comment").removeClass('show-add-comment'); 
+
+        deleteCommentListener();
+        editCommentShowListener();
+        editCommentButtonListener();
+      } else {
+        alert("User Name and Comment Text must not be empty")
+      }
     });
   });
 }
@@ -165,7 +170,7 @@ const editCommentShowListener = function() {
 const editCommentButtonListener = function() {
   $(".edit-comment-button").each(function() {
     $(this).on("click", function() {
-      const editedCommentText =  $(this).closest(".form-group").find(".edit-comment-message").val();
+      const editedCommentText =  $(this).closest(".edit-comment").find(".edit-comment-message").val();
       $(this).closest(".comment-text").find(".comment-message-text").html(editedCommentText + ' (edited on: ' + getTimeStamp() + ')');
       $(this).closest(".edit-comment").removeClass('show-add-comment'); 
     });
