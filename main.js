@@ -21,7 +21,7 @@ const createPost = () => {
     </div>`;
   // append the content wrapper with the new post, if there is content
   if($newPostName !== "" && $newPostMessage !== ""){
-    $(".content-wrapper").append(newPostTemplate);
+    $(".post-wrapper").append(newPostTemplate);
   }
 
   $("#new-post-name").val("");
@@ -29,12 +29,12 @@ const createPost = () => {
 };
 
 // Add a click event listener to the submit button to create a post
-const $newPostButton = $(".new-post-button");
-$newPostButton.click(createPost);
+$(".new-post-button").click(createPost);
 
 // *** We now want users to be able to leave comments on each post. When a user clicks 'comments' (above each post) it should toggle the comments and input box visible/hidden.
 
-// Initialize the $selectedPost variable to null, otherwise comments seem to always go into the post that was selected first, like it retains that value.
+// Initialize the $selectedPost variable to null, otherwise comments seem to always go into the post that was selected first, like it retains that value. Needs further research.
+
 let $selectedPost = null;
 
 // Click event listener for the leave comment buttons. Targets the spcific post corresponding to the clicked button. No longer duplicates messages.
@@ -51,7 +51,8 @@ $(document).on("click", ".leave-comment-button", (event) => {
     // Place into commentTemplate
     const commentTemplate = `
       <div class="comment">
-        <p class="ml-5"><strong class="commenter-name">${$commenterName}</strong><em> comments: </em>${$commentText}</p>
+        <a class="delete-comment ml-4 pr-2 float-left" title="Delete comment"><i class="fas fa-minus-circle"></i></a>
+        <p class="comment-text d-inline-block w-75"><em class="commenter-name">${$commenterName}</em><strong> comments: </strong>${$commentText}</p>
       </div>`;
     // append to the related post, only if there is content
     if($commentText !== "" && $commenterName !== "") {
@@ -64,12 +65,9 @@ $(document).on("click", ".leave-comment-button", (event) => {
     $("#commenter-name").val("");
     $("#comment-text").val("");
   };
-
   // Add a click event listener to the modal submit button
   $("#add-comment-button").click(createComment);
 });
-
-
 
 // *** When a user clicks the 'x' next to a comment, it should delete it.
 
