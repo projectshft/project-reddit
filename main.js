@@ -16,9 +16,10 @@ $('#add-post').on('click', function() {
       + '<div>Posted By: <b>' + postUserName + '</b>'
       + '<div class="icon-row"><i class="far fa-comment comment" data-toggle="tooltip" title="Add Comment"></i>'
       + '<i class="fas fa-edit" data-toggle="tooltip" title="Edit Post"></i>'
+      + '<i class="fas fa-eye-slash hide-comment" data-toggle="tooltip" title="Hide/Show Comments"></i>'
       + '<i class="far fa-window-close delete" data-toggle="tooltip" title="Delete Post"></i></div>'
       + '<div class="timestamp">' + getTimeStamp() + '</div></div>'
-      + '<div class="comment-post"></div>' 
+      + '<div class="comment-post show"></div>' 
       + '<form class="input-area add-comment"><h5>Add Comment</h5>'
       + '<div class="form-group"><input class="comment-username" type="text" placeholder="User Name" /></div>'
       + '<div class="form-group"><input class="comment-message" type="text" placeholder="Comment Text" /></div>'
@@ -31,12 +32,13 @@ $('#add-post').on('click', function() {
     deletePostListener();
     commentButtonListener();
     addCommentButtonListener();
+    hideCommentsButtonListener();
   }
 });
 
 /* When add comment is clicked this function grabs the values of the username and comment inputs,
    builds a post, and then adds it to the comment list */
-   
+
 const addCommentButtonListener = function() {
   $('.post-comment').each(function() {
     $(this).on("click", function() {  
@@ -56,7 +58,7 @@ const addCommentButtonListener = function() {
       $(this).closest(".add-comment").find('.comment-username').val('');
       $(this).closest(".add-comment").find('.comment-message').val('');
 
-      $(this).closest(".add-comment").removeClass('show'); // Hides add comment section when button is clicked
+      $(this).closest(".add-comment").removeClass('show-add-comment'); // Hides add comment section when button is clicked
 
       deleteCommentListener();
     });
@@ -91,10 +93,22 @@ const deleteCommentListener = function() {
 const commentButtonListener = function() {
   $(".comment").each(function() {
     $(this).on("click", function() {
-      if($(this).closest(".post-text").find(".add-comment").hasClass('show')) {
-        $(this).closest(".post-text").find(".add-comment").removeClass('show');
+      if($(this).closest(".post-text").find(".add-comment").hasClass('show-add-comment')) {
+        $(this).closest(".post-text").find(".add-comment").removeClass('show-add-comment');
       } else {
-        $(this).closest(".post-text").find(".add-comment").addClass('show');
+        $(this).closest(".post-text").find(".add-comment").addClass('show-add-comment');
+      }
+    });
+  });
+}
+
+const hideCommentsButtonListener = function() {
+  $(".hide-comment").each(function() {
+    $(this).on("click", function() {
+      if($(this).closest(".post-text").find(".comment-post").hasClass('show')) {
+        $(this).closest(".post-text").find(".comment-post").removeClass('show');
+      } else {
+        $(this).closest(".post-text").find(".comment-post").addClass('show');
       }
     });
   });
