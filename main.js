@@ -35,7 +35,6 @@ function renderPost(userPost) {
         </form>
     </div> 
   `);
-
 }
 
 /** Handle submitting form */
@@ -54,10 +53,7 @@ function submitPost() {
     oldText.text(`${newText}`);
 
     // reset form values after submitting successfully 
-    $('#post-body').val("");
-    $('#post-body').attr("placeholder", "Your name");
-    $('#post-name').val("");
-    $('#post-name').attr("placeholder", "Enter text");
+    resetFormValues();
     return;
   }
 
@@ -75,16 +71,12 @@ function submitPost() {
   renderPost(postObj);
 
   // reset form values after submitting successfully 
-  $('#post-body').val("");
-  $('#post-body').attr("placeholder", "Your name");
-  $('#post-name').val("");
-  $('#post-name').attr("placeholder", "Enter text");
+  resetFormValues();
 };
 
 
 /** Function that handles submitting a comment */
 function submitComment() {
-  // $('.:contains("test")');
   // an array that will contain all of comments as objects
   var commentArray = [];
   // comment object with author and content properties
@@ -111,10 +103,7 @@ function submitComment() {
   if (!postUserObj['comments']) {
     commentArray.push(commentObj);
     postUserObj.comments = commentArray;
-    $(event.target).closest('.alert').find('#comment-name').val("");
-    $(event.target).closest('.alert').find('#comment-name').attr("placeholder", "Your name");
-    $(event.target).closest('.alert').find('#comment-body').val("");
-    $(event.target).closest('.alert').find('#comment-body').attr("Enter Comment");
+    resetCommentFormValues();
   } else {
     // push the comment in the comments array 
     postUserObj['comments'].push(commentObj);
@@ -122,10 +111,7 @@ function submitComment() {
 
   renderComment(commentObj);
   // reset form values 
-  $(event.target).closest('.alert').find('#comment-name').val("");
-  $(event.target).closest('.alert').find('#comment-name').attr("placeholder", "Your name");
-  $(event.target).closest('.alert').find('#comment-body').val("");
-  $(event.target).closest('.alert').find('#comment-body').attr("Enter Comment");
+  resetCommentFormValues();
 
 };
 
@@ -168,12 +154,25 @@ function editPost() {
 
 }
 
-
 /** Handles the comments toggle */
 function toggleCommentForm() {
   $(event.target).closest('.alert').find('.comment-container').toggleClass('show');
   $(event.target).closest('.alert').find('.comment-form').toggleClass('show');
 };
+
+function resetFormValues() {
+  $('#post-body').val("");
+  $('#post-body').attr("placeholder", "Your name");
+  $('#post-name').val("");
+  $('#post-name').attr("placeholder", "Enter text");
+}
+
+function resetCommentFormValues() {
+  $(event.target).closest('.alert').find('#comment-name').val("");
+  $(event.target).closest('.alert').find('#comment-name').attr("placeholder", "Your name");
+  $(event.target).closest('.alert').find('#comment-body').val("");
+  $(event.target).closest('.alert').find('#comment-body').attr("Enter Comment");
+}
 
 /** 
  * Function that finds the user object in the postData array 
