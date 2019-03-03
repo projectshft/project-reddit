@@ -29,7 +29,7 @@ input, textarea {
   position: relative;
 }
 
-.under-div {
+/* .under-div {
   width: 300px;
   height: 5px;
   background-color: #37393A;
@@ -37,7 +37,7 @@ input, textarea {
   margin-top: 53px;
   margin-left: -20px;
   border-radius: 5px;
-}
+} */
 
 .footer {
   width: 100%;
@@ -53,6 +53,7 @@ input, textarea {
   height: 67vh;
   padding: 2vh;
   /* HEIGHT OBEYS TOP MARGIN BUT NOT BOTTOM. TF IS THE SOLUTION?! */
+  background-color: white;
 }
 
 #usernameInput {
@@ -65,6 +66,25 @@ input, textarea {
 }
 
 #messageInput {
+  position: absolute;
+  right: 0px;
+  height: 80px;
+  max-width: 69%;
+  border-radius: 5px;
+  border-color: #77B6EA;
+  box-shadow: inset 2px 2px 0px #348bba;
+}
+
+#commentUsernameInput {
+  position: absolute;
+  top: 0px;
+  max-width: 30%;
+  border-radius: 5px;
+  margin-left: -16px;
+  border-color: #77B6EA;
+}
+
+#commentInput {
   position: absolute;
   right: 0px;
   height: 80px;
@@ -100,6 +120,13 @@ input, textarea {
   height: 63vh;
 }
 
+.post-focus {
+  height: 100px;
+  float: none;
+  margin: auto;
+  height: 63vh;
+}
+
 .post-box {
   background-color: #E8EEF2;
   margin: 10px 0px 10px 0px;
@@ -117,12 +144,21 @@ input, textarea {
   line-height: 1.2;
   max-height: 80%;
   height: auto;
+  /* background-color: green; */
 }
 
 .delete-icon {
   height: auto;
   color: #37393A;
   text-align: right;
+  /* background-color: pink; */
+}
+
+.back-icon {
+  height: auto;
+  color: #37393A;
+  text-align: right;
+  /* background-color: pink; */
 }
 
 .username {
@@ -131,6 +167,7 @@ input, textarea {
   font-size: 12px;
   height: auto;
   padding: 2px 0px 5px 40px;
+  /* background-color: orange; */
 }
 
 .comments-icon {
@@ -139,4 +176,9 @@ input, textarea {
   text-align: right;
   bottom: 5px;
   align-self: flex-end;
+  /* background-color: blue; */
+}
+
+.hide {
+  display: none;
 }
