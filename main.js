@@ -12,21 +12,22 @@ $('#add-post').on('click', function() {
     // Builds out the HTML for each new post
     posts[0].innerHTML +=
       '<div class="userpost">'
-      + '<div class="post-text"><div>' + postMessage + '</div>' 
+      + '<div class="post-text"><div class="post-message">' + postMessage + '</div>' 
       + '<div>Posted By: <b>' + postUserName + '</b>'
       + '<div class="icon-row"><i class="far fa-comment comment" data-toggle="tooltip" title="Add Comment"></i>'
       + '<i class="fas fa-edit" data-toggle="tooltip" title="Edit Post"></i>'
       + '<i class="fas fa-eye-slash hide-comment" data-toggle="tooltip" title="Hide/Show Comments"></i>'
       + '<i class="far fa-window-close delete" data-toggle="tooltip" title="Delete Post"></i></div>'
       + '<div class="timestamp">' + getTimeStamp() + '</div></div>'
+      + '<form class="input-area edit-post">'
+      + '<div class="form-group"><input class="edit-message" type="text" placeholder="Edit Post" />'
+      + '<button type="button" class="btn btn-primary edit-button">Edit Post</button></div></form>'
       + '<div class="comment-post show"></div>' 
       + '<form class="input-area add-comment"><h5>Add Comment</h5>'
       + '<div class="form-group"><input class="comment-username" type="text" placeholder="User Name" /></div>'
       + '<div class="form-group"><input class="comment-message" type="text" placeholder="Comment Text" /></div>'
-      + '<button type="button" class="btn btn-primary post-comment">Add Comment</button></form>'
-      + '<form class="input-area edit-post">'
-      + '<div class="form-group"><input class="edit-message" type="text" placeholder="Edit Post" />'
-      + '<button type="button" class="btn btn-primary edit-button">Edit Post</button></div></form>';
+      + '<button type="button" class="btn btn-primary post-comment">Add Comment</button></form>';
+      
 
     // Resets the user name and message fields back to empty after adding a post
     $('#username').val(''); 
@@ -37,6 +38,7 @@ $('#add-post').on('click', function() {
     addCommentButtonListener();
     hideCommentsButtonListener();
     editPostShowListener();
+    editPostButtonListener();
   }
 });
 
@@ -113,13 +115,26 @@ const editPostShowListener = function() {
       if($(this).closest(".post-text").find(".edit-post").hasClass('show-add-comment')) {
         $(this).closest(".post-text").find(".edit-post").removeClass('show-add-comment');
       } else {
+        const currentPostText = $(this).closest(".post-text").find(".post-message").html();
+        $(this).closest(".post-text").find(".edit-message").val(currentPostText);
         $(this).closest(".post-text").find(".edit-post").addClass('show-add-comment');
       }
     });
   });
 }
 
-// Adds click event listeners to all hide comments icons and if clicked shows or hide a posts comments
+// Adds click event listeners to all edit post icons and if clicked shows the edit post area
+const editPostButtonListener = function() {
+  $(".edit-button").each(function() {
+    $(this).on("click", function() {
+      const editedPostText =  $(this).closest(".form-group").find(".edit-message").val();
+      $(this).closest(".post-text").find(".post-message").html(editedPostText + ' (edited)');
+      $(this).closest(".edit-post").removeClass('show-add-comment'); // Hides add comment section when button is clicked
+    });
+  });
+}
+
+// Adds click event listeners to all hide comments icons and if clicked shows or hides a posts comments
 const hideCommentsButtonListener = function() {
   $(".hide-comment").each(function() {
     $(this).on("click", function() {
@@ -140,7 +155,7 @@ const getTimeStamp = function () {
     + currentdate.getDate()  + "/" 
     + currentdate.getFullYear() + " @ "  
     + currentdate.getHours() + ":"  
-    + currentdate.getMinutes() + ":"
+    + (currentdate.getMinutes() < 10 ? '0' : '') + currentdate.getMinutes() + ":"
     + (currentdate.getSeconds() < 10 ? '0' : '') + currentdate.getSeconds();
   return timestamp;
 }
