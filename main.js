@@ -1,6 +1,39 @@
 /** A div that will contain all of our posts*/
 var $postContainer = $("#post-content");
-/** An array of posts objects */
+/** 
+ * An array of posts objects 
+ * example of data structure
+ *[
+  {
+    name: "Luis",
+    post: "I like to play soccer!",
+    comments: [
+      {
+        author: "Bob",
+        content: "Me too!"
+      },
+      {
+        author: "Jim",
+        content: "I only play indoors..."
+      },
+    ]
+  },
+  {
+    name: "Mike",
+    post: "Javascript is the best programming language!"
+  },
+  {
+    name: "Sam",
+    post: "What's your favorite book?",
+    comments: [
+      {
+        author: 'Lisa',
+        content: 'The Hunger games!'
+      }
+    ]
+  },
+];
+ */
 var postData = [];
 
 /** 
