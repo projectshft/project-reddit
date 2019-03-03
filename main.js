@@ -23,7 +23,10 @@ $('#add-post').on('click', function() {
       + '<form class="input-area add-comment"><h5>Add Comment</h5>'
       + '<div class="form-group"><input class="comment-username" type="text" placeholder="User Name" /></div>'
       + '<div class="form-group"><input class="comment-message" type="text" placeholder="Comment Text" /></div>'
-      + '<button type="button" class="btn btn-primary post-comment">Add Comment</button></form>';
+      + '<button type="button" class="btn btn-primary post-comment">Add Comment</button></form>'
+      + '<form class="input-area edit-post">'
+      + '<div class="form-group"><input class="edit-message" type="text" placeholder="Edit Post" />'
+      + '<button type="button" class="btn btn-primary edit-button">Edit Post</button></div></form>';
 
     // Resets the user name and message fields back to empty after adding a post
     $('#username').val(''); 
@@ -33,6 +36,7 @@ $('#add-post').on('click', function() {
     commentButtonListener();
     addCommentButtonListener();
     hideCommentsButtonListener();
+    editPostShowListener();
   }
 });
 
@@ -102,6 +106,20 @@ const commentButtonListener = function() {
   });
 }
 
+// Adds click event listeners to all edit post icons and if clicked shows the edit post area
+const editPostShowListener = function() {
+  $(".fa-edit").each(function() {
+    $(this).on("click", function() {
+      if($(this).closest(".post-text").find(".edit-post").hasClass('show-add-comment')) {
+        $(this).closest(".post-text").find(".edit-post").removeClass('show-add-comment');
+      } else {
+        $(this).closest(".post-text").find(".edit-post").addClass('show-add-comment');
+      }
+    });
+  });
+}
+
+// Adds click event listeners to all hide comments icons and if clicked shows or hide a posts comments
 const hideCommentsButtonListener = function() {
   $(".hide-comment").each(function() {
     $(this).on("click", function() {
