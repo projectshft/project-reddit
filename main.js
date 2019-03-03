@@ -17,7 +17,8 @@ $('#add-post').on('click', function() {
       + '<div class="icon-row"><i class="far fa-comment comment" data-toggle="tooltip" title="Add Comment"></i>'
       + '<i class="fas fa-edit edit-post-show" data-toggle="tooltip" title="Edit Post"></i>'
       + '<i class="fas fa-eye-slash hide-comment" data-toggle="tooltip" title="Hide/Show Comments"></i>'
-      + '<i class="far fa-window-close delete" data-toggle="tooltip" title="Delete Post"></i></div>'
+      + '<i class="far fa-window-close delete" data-toggle="tooltip" title="Delete Post"></i>'
+      + '<div class="hidden-comments">Comments Hidden</div></div>'
       + '<div class="timestamp">' + getTimeStamp() + '</div></div>'
       + '<form class="input-area edit-post">'
       + '<div class="form-group"><input class="edit-message" type="text" placeholder="Edit Post" />'
@@ -183,8 +184,10 @@ const hideCommentsButtonListener = function() {
     $(this).on("click", function() {
       if($(this).closest(".post-text").find(".comment-post").hasClass('show')) {
         $(this).closest(".post-text").find(".comment-post").removeClass('show');
+        $(this).closest(".icon-row").find(".hidden-comments").addClass('comments-hidden');
       } else {
         $(this).closest(".post-text").find(".comment-post").addClass('show');
+        $(this).closest(".icon-row").find(".hidden-comments").removeClass('comments-hidden');
       }
     });
   });

@@ -52,6 +52,12 @@ i {
   margin-left: 20px;
 }
 
+.hidden-comments {
+  display: none;
+  font-size: 14px;
+  font-weight: bold;
+}
+
 .timestamp {
   float: right;
   font-size: 14px;
@@ -91,11 +97,11 @@ i {
   color: #17238f
 }
 
-.edit-post {
+.edit-post, .edit-comment {
   display: none;
 }
 
-.edit-message {
+.edit-message, .edit-comment-message {
   margin-right: 20px;
   width: 85%
 }
@@ -106,4 +112,8 @@ i {
 
 .show-add-comment {
   display: inline;
+}
+
+.comments-hidden {
+  display: inline-block;
 }
