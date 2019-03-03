@@ -25,30 +25,42 @@
       </div>
 
 
-      <div class="posts">
-        <button id="upvote" class="btn btn-primary">Add comment</button>
-        <button id="downvote" class="btn btn-primary">Delete comment</button>
-      </div>
 
-
-      <form style="margin-top:30px;">
+      <form id="post-section" style="margin-top:30px;">
 
         <h3>Add a new post</h3>
 
         <div class="form-group">
-          <input id="name" type="text"
+          <input id="postName" type="text"
             class="form-control"
-            placeholder="Name"></input>
+            placeholder="Your name"></input>
         </div>
 
         <div class="form-group">
-          <textarea id="message" type="text"
+          <textarea id="postText" type="text"
           class="form-control"
-          placeholder="Message"></textarea>
+          placeholder="Post text"></textarea>
         </div>
 
-        <button type="submit" class="btn btn-primary">Post</button>
+        <button type="submit" class="btn btn-post">Post</button>
+      </form>
 
+      <form id="comment-section" style="display: none">
+        <h3>Add a comment</h3>
+
+        <div class="form-group">
+          <input id="commentName" type="text"
+            class="form-control"
+            placeholder="User name"></input>
+        </div>
+
+        <div class="form-group">
+          <textarea id="commentText" type="text"
+          class="form-control"
+          placeholder="Comment text"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-comment">Post comment</button>
       </form>
 
     </div>

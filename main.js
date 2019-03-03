@@ -50,15 +50,39 @@ var post = [
 // PART 1
 // Creates posts
 
-    $('form').submit(function(e){
-      e.preventDefault();
 
-     var name = $('input#name').val();
-     var message = $('textarea#message').val();
+  $('#post-section').submit(function(e){
+    e.preventDefault();
 
-      $('ul').append('<li>'+message+'<br>'+'Posted by: '+'<strong>'+name+'</strong>'+'</li>');
+   var postName = $('input#postName').val();
+   var postText = $('textarea#postText').val();
 
-    });
+    $('ul').append(
+                     '<li>'+postText+'<br>'
+                    +'Posted by: '+'<strong>'+postName+'</strong>'+'</li>'
+                    +'<a href="#" id="add-comment">Add comment</a>'
+                  );
+
+          $('#add-comment').click(function() {
+            $('#comment-section').toggle();
+          });
+
+  });
+
+
+
+  $('#comment-section').submit(function(e){
+    e.preventDefault();
+
+   var commentName = $('input#commentName').val();
+   var commentText = $('textarea#commentText').val();
+
+    $('ul').append('<li>'+commentText+'<br>'+'Posted by: '+'<strong>'+commentName+'</strong>'+'</li>');
+  });
+
+
+
+
 
 
 /*
