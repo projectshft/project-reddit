@@ -39,6 +39,7 @@ function renderPost(userPost) {
 
 /** Handle submitting form */
 function submitPost() {
+  // a post user object
   var postObj = {};
   var postBody = $('#post-body').val();
   var name = $('#post-name').val();
@@ -48,7 +49,7 @@ function submitPost() {
     alert('Please enter a name and post content');
     return;
   }
-
+  // assign properties and values to our user object
   postObj.name = name;
   postObj.post = postBody;
 
@@ -56,6 +57,7 @@ function submitPost() {
   // render post to user
   renderPost(postObj);
 
+  // reset form values after submitting successfully 
   $('#post-body').val("");
   $('#post-body').attr("placeholder", "Your name");
   $('#post-name').val("");
@@ -65,7 +67,9 @@ function submitPost() {
 
 /** Function that handles submitting a comment */
 function submitComment() {
+  // an array that will contain all of comments as objects
   var commentArray = [];
+  // comment object with author and content properties
   var commentObj = {};
 
   var commentAuthor = $(event.target).closest('.alert').find('#comment-name').val();
@@ -76,7 +80,7 @@ function submitComment() {
     alert('Please enter a name and comment content');
     return;
   }
-
+  // create comment properties and assign values
   commentObj.author = commentAuthor;
   commentObj.content = commentContent;
 
