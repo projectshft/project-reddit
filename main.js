@@ -99,6 +99,6 @@ $(document).on("click", '#postComments',function() {
   $(this).parent().siblings(".commentBox").toggle();
 });
 
-$(document).on("click", function() { 
-  console.log(postArray);
-});
+// $(document).on("click", function() { //For debugging the array.
+//   console.log(postArray);
+// });
