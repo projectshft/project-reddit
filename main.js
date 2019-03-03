@@ -6,11 +6,26 @@ const createPost = () => {
   const $newPostName = $("#new-post-name").val();
   const $newPostMessage = $("#new-post-message").val();
   // Place the newPostText and userName into newPostTemplate
-  const newPostTemplate = `<div class="post-wrapper border-bottom pt-3"><div class="post-content"><h4 class="post-heading"><strong class="user-name">${$newPostName}</strong><em> says: </em></h4><p class="lead ml-2">${$newPostMessage}</p></div><div class="form-group text-right"><button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#comment-modal">Leave a comment</button></div></div>`;
+  const newPostTemplate = `
+    <div class="post-content border-bottom">
+      <div class="post pt-3">
+        <h4 class="post-heading"><strong class="user-name">${$newPostName}</strong><em> says: </em></h4>
+        <p class="lead ml-2">${$newPostMessage}</p>
+      </div>
+
+      <div class="form-group text-right">
+        <button type="button" class="leave-comment-button btn btn-secondary btn-sm" data-toggle="modal" data-target="#comment-modal">
+        Leave comment
+        </button>
+      </div>
+    </div>`;
   // append the content wrapper with the new post, if there is content
   if($newPostName !== "" && $newPostMessage !== ""){
     $(".content-wrapper").append(newPostTemplate);
   }
+
+  $("#new-post-name").val("");
+  $("#new-post-message").val("");
 };
 
 // Add a click event listener to the submit button to create a post
@@ -23,21 +38,33 @@ const createComment = () => {
   const $commenterName = $("#commenter-name").val();
   const $commentText = $("#comment-text").val();
   // Place into commentTemplate
-  const commentTemplate = `<p class="comment ml-5"><strong class="commenter-name">${$commenterName}</strong><em> comments: </em>${$commentText}</p>`
+  const commentTemplate = `
+    <div class="comment">
+      <p class="ml-5"><strong class="commenter-name">${$commenterName}</strong><em> comments: </em>${$commentText}</p>
+    </div>`;
   // append to the related post, only if there is content
   if($commentText !== "" && $commenterName !== "") {
-    $(".post-content").append(commentTemplate);
+    $(".post-content").find(".post").append(commentTemplate);
     // hide comment modal 
     $("#comment-modal").modal("hide");
   }
+  $("#commenter-name").val("");
+  $("#comment-text").val("");
 };
-
 // Add a click event listener to the modal submit button
 const $addCommentButton = $("#add-comment-button");
 $addCommentButton.click(createComment);
 
-// *** TODO *** Comments append to every post on submit ****
+// Click event listener for the leave comment buttons. Targets the spcific post corresponding to the clicked button. No longer duplicates messages.
+$(document).on("click", ".leave-comment-button", (event) => {
 
+  const $selectedPost = $(event.target)
+    .closest(".post-content")
+    .find(".post");
+    
+  $selectedPost.append("<p>love this shit! </p> ");
+
+});
 
 
 
