@@ -12,13 +12,13 @@ function renderPost(userPost) {
   $postContainer.append(`
     <div class="alert alert-primary">
       <p onClick="removePost()" class="btn btn-link remove-btn">Remove post</p>
+      <p onclick="toggleCommentForm()" class="post-comment-btn btn btn-link">comments<p>
       <p class="post-content">${userPost.post}</p>
       <div class="post-author-container">
         posted by: <p class="post-author">${userPost.name}</p>
       </div>
       <hr>  
       
-      <p onclick="toggleCommentForm()" class="post-comment-btn btn btn-link">comments:<p>
       <div class="comment-container"></div>
       
       <form class="comment-form">
@@ -42,6 +42,13 @@ function submitPost() {
   var postObj = {};
   var postBody = $('#post-body').val();
   var name = $('#post-name').val();
+
+  // validate user input
+  if (name === "" || postBody === "") {
+    alert('Please enter a name and post content');
+    return;
+  }
+
   postObj.name = name;
   postObj.post = postBody;
 
@@ -63,6 +70,12 @@ function submitComment() {
 
   var commentAuthor = $(event.target).closest('.alert').find('#comment-name').val();
   var commentContent = $(event.target).closest('.alert').find('#comment-body').val();
+
+  // validate user input
+  if (commentContent === "" || commentAuthor === "") {
+    alert('Please enter a name and comment content');
+    return;
+  }
 
   commentObj.author = commentAuthor;
   commentObj.content = commentContent;
@@ -107,13 +120,11 @@ function renderComment(comment) {
       <i onClick="removeComment()" class="fas fa-times"></i>
     </p>
   `);
-  console.log('user object', comment);
 }
 
 /** Deletes a comment the user clicked on */
 function removeComment() {
-  var $commentElement = $(event.target).closest('.comment');
-  $commentElement.remove();
+  $(event.target).closest('.comment').remove();
 }
 
 /** Deletes a post when the user clicks the 'Remove post' link */
@@ -123,6 +134,7 @@ function removePost() {
 
 /** Handles the comments toggle */
 function toggleCommentForm() {
+  $(event.target).closest('.alert').find('.comment-container').toggleClass('show');
   $(event.target).closest('.alert').find('.comment-form').toggleClass('show');
 };
 
