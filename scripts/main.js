@@ -57,10 +57,15 @@ $('.btn-submit').on('click', function() {
       $('.delete-'+messageID).on('click', function() {
         //assign relative messageID to a variable that can be accessed within the filer() below
         var relativeID = $(this).attr('data-id')
+        //ensure the correct object is being targeted by relativeID by setting up an array to be referenced in the upcoming filter
+        var targetSubmission = submissions.filter(function(index){
+          return index.id == relativeID;
+        });
         //filter the submissions array to delete the relative object from the array
         submissions = submissions.filter(function(index){
-          return index.id != relativeID;
+          return index.id != targetSubmission[0].id;
         });
+
         console.log('This is the new submissions array:' ,submissions);
         //remove the post from the html
         $(this).closest('.post-box').remove();
@@ -72,21 +77,27 @@ $('.btn-submit').on('click', function() {
         //hide post input fields and reveal comment input fields
         $('.post-input-fields').addClass('hide');
         $('.comment-input-fields').removeClass('hide');
-        //assign relative ID to a variable that can be referenced to point at the relevant index of submissions[]
+        //assign relative ID to a variable that can be used to filter out an array containing only the relative object
         var relativeID = $(this).attr('data-id')
+        //filter out only the relative object
+        var targetSubmission = submissions.filter(function(index){
+          return index.id == relativeID;
+        });
+
+        console.log(targetSubmission);
         //add focusPost html
         prependedMessageList = $('.posts-background').prepend(
           '<div class="post-focus col-lg-10 overflow-auto">'+
             '<div class="post-box">'+
               '<div class="row submit-target" style="padding:0px 10px 0px 20px">'+
                 '<div class="username col-11">'
-                  +submissions[relativeID - 1].username+
+                  +targetSubmission[0].username+
                 '</div>'+
                 '<div class="back-icon col-1">'+
                   '<button type="button" class="btn back-btn" style="padding:0px;"><i class="fas fa-arrow-alt-circle-left"></i></button>'+
                 '</div>'+
                 '<div class="message-box col-11">'
-                  +submissions[relativeID - 1].message+
+                  +targetSubmission[0].message+
                 '</div>'+
               '</div>'+
             '</div>'+
@@ -98,7 +109,7 @@ $('.btn-submit').on('click', function() {
           $(this).closest('.post-focus').remove();
           $('.message-list').removeClass('hide');
           $('.post-input-fields').removeClass('hide');
-          $('.comment-input-fields').addClass('hide');        
+          $('.comment-input-fields').addClass('hide');
         });
       });
     };
