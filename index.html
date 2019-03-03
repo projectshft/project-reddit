@@ -6,7 +6,6 @@
     <title>Project Reddit</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- LINK TO BOOTSTRAP 4 -->
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -15,128 +14,60 @@
     <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
   </head>
 
-  <!-- TO-DO: Compare "Add a new post" section to that in x_INDEX.html, as time allows. That version has better responsiveness than this one. (Also investigate different font links.)-->
-
-  <!-- TO-DO: Revise the three-column design/syntax of <div class:"col col-7 col"></div> with Bootstrap .offset.md-* classes. (More research needed.) -->
-
   <body>
     <div class="container">
-      <div class="row align-items-center">
-        <div class="col"></div>
-        <div class="col-7" id="title-header">
+      <div class="row">
+        <div class="col-8 offset-2" id="title-header">
           <header>
             <h1>Project Reddit</h1>
           </header>
-          <hr />
         </div>
-        <div class="col"></div>
       </div>
     </div>
 
-    <div class="container" id=post-view">
-      <div class="row align-items-center">
-        <div class="col"></div>
-
-        <div class="col-7 completed-posts">
-          <div class="full-post-output" id="full-output-1">
-            <div class="text-output" id="text-output-1">
-              <p>post-TEXT placeholder 111</p>
-            </div>
-
-            <div class="name-output" id="name-output-1">
-              <p>Posted by: placeholder 111</p>
-            </div>
-          </div>
-
-          <hr />
-
-          <div class="full-post-output" id="full-output-2">
-            <div class="text-output" id="text-output-2">
-              <p>post-TEXT placeholder 222</p>
-            </div>
-
-            <div class="name-output" id="text-output-2">
-              <p>Posted by: placeholder 222</p>
-            </div>
-          </div>
-
-          <hr />
-
-          <div class="full-post-output" id="full-output-3">
-            <div class="text-output" id="text-output-3">
-              <p>post-TEXT placeholder 333</p>
-            </div>
-
-            <div class="name-output" id="name-output-3">
-              <p>Posted by: placeholder 333</p>
-            </div>
-          </div>
-
-          <hr />
-        </div>
-
-        <div class="col"></div>
+    <section class="row align-items-center">
+      <div class="col-8 offset-2 completed-posts" id="post-view">
+        <hr />
       </div>
-    </div>
+    </section>
 
-    <!-- TO-DO: Compare "Add a new post" section to that in x_INDEX.html, as time allows. That version has better responsiveness than this one. -->
-    <div class="container" id="post-creation">
-      <div class="row align-items-center">
-        <div class="col"></div>
-        <div class="col-md-7">
+    <section class="input-fields">
+      <div class="row align-items-center" id="post-creation">
+        <div class="col-8 offset-2">
           <h3>Add a new post</h3>
         </div>
-        <div class="col"></div>
+
+        <div class="col-8 offset-2">
+          <input
+            id="name-input"
+            type="text"
+            class="form-control"
+            placeholder="Your name"
+          />
+
+          <textarea
+            id="post-body-input"
+            type="text"
+            class="form-control"
+            placeholder="Post text"
+          ></textarea>
+
+          <button
+            type="button"
+            class="btn btn-primary float-right"
+            id="post-button"
+          >
+            Post
+          </button>
+        </div>
       </div>
+    </section>
 
-      <form role="form" class="align-items-center">
-        <div class="form-group row">
-          <div class="col"></div>
-
-          <div class="col-md-7">
-            <input
-              id="name-input-field"
-              type="text"
-              class="form-control"
-              placeholder="Your name"
-            />
-          </div>
-          <div class="col"></div>
-        </div>
-
-        <div class="form-group row">
-          <div class="col"></div>
-          <div class="col-md-7">
-            <textarea
-              id="post-text"
-              type="text"
-              class="form-control"
-              placeholder="Post text"
-            ></textarea>
-          </div>
-          <div class="col"></div>
-        </div>
-
-        <div class="form-group row">
-          <div class="col"></div>
-          <div class="col-md-7 align-items-left">
-            <button type="submit" class="btn btn-primary">Post</button>
-          </div>
-          <div class="col"></div>
-        </div>
-      </form>
-    </div>
-
-    <div class="container">
-        <div class="row">
-          <div class="col"></div>
-          <div class="col-7" id="empty-bottom"> <!-- TO-DO: Insert <footer> -->
-          </div>
-          <div class="col"></div>
-        </div>
-    </div>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script type="text/javascript" src="main.js"></script>
+    <script
+      script
+      type="text/javascript"
+      src="https://code.jquery.com/jquery-3.3.1.js"
+    ></script>
+    <script type="text/javascript" src="x_MAIN.js"></script>
   </body>
 </html>
