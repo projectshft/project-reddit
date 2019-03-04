@@ -68,6 +68,16 @@ $(document).on("click", ".edit-comment-show", function() {
   }
 });
 
+/* This function generates click events for each dynamically created edit comment button.  When an edit comment 
+   button is clicked the location of the current comment is grabbed and the HTML value is replaced by the value 
+   in the edit comment input field.  The edit comment section is then hidden from view. */
+
+$(document).on("click", ".edit-comment-button", function() {
+  const editedCommentText =  $(this).closest(".edit-comment").find(".edit-comment-message").val();
+  $(this).closest(".comment-text").find(".comment-message-text").html(editedCommentText + ' (edited on: ' + getTimeStamp() + ')');
+  $(this).closest(".edit-comment").removeClass('show-add-comment'); 
+});
+
 
 /* When add post is clicked this function grabs the values of the username and message inputs,
    builds a post, and then adds it to the posts list */
@@ -139,26 +149,10 @@ const addCommentButtonListener = function() {
         $(this).closest(".add-comment").find('.comment-message').val('');
 
         $(this).closest(".add-comment").removeClass('show-add-comment'); 
-
         
-        editCommentButtonListener();
       } else {
         alert("User Name and Comment Text must not be empty")
       }
-    });
-  });
-}
-
-/* This function adds click event listeners to all edit comment buttons.  When an edit comment button is clicked the location of the
-   current comment is grabbed and the HTML value is replaced by the value in the edit comment input field.  The edit comment
-   section is then hidden from view. */
-
-const editCommentButtonListener = function() {
-  $(".edit-comment-button").each(function() {
-    $(this).on("click", function() {
-      const editedCommentText =  $(this).closest(".edit-comment").find(".edit-comment-message").val();
-      $(this).closest(".comment-text").find(".comment-message-text").html(editedCommentText + ' (edited on: ' + getTimeStamp() + ')');
-      $(this).closest(".edit-comment").removeClass('show-add-comment'); 
     });
   });
 }
