@@ -7,7 +7,7 @@ var addNewPost = $('button').on('click', function (e) {
   var comment = $('#message').val();
 
 
-  $('.posts').append('<div class="individual-post"><strong>'+ userName+ '</strong><br>'+ comment +'<br><div class="icons"><i class="far fa-trash-alt"></i>  <i class="far fa-comments" id="comment'+userName+'"></i><div  class="individual-comment'+userName+'"</div></div><br><hr></div>')
+  $('.posts').prepend('<div class="individual-post"><strong>'+ userName+ '</strong><br>'+ comment +'<br><div class="icons"><i class="far fa-trash-alt"></i>  <i class="far fa-comments" id="comment'+userName+'"></i><div  class="individual-comment'+userName+'"</div></div><br><hr></div>')
 
   //when trash icon is clicked, delete posts
   var deletePost = $('.fa-trash-alt').on('click', function() {

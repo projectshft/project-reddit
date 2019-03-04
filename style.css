@@ -1,7 +1,18 @@
+body {
+  background-color: lightblue;
+}
+
 li {
   list-style-type: none;
 }
 
 .fa-times {
   color: red;
+}
+
+.individual-post {
+  border-radius: 25px;
+  background-color: #eee;
+  padding: 20px;
+  margin: 15px;
 }
