@@ -1,4 +1,13 @@
-const posts = $('.posts');
+
+/* This function generates click events for each dynamically created delete post button.  It also
+   confirms with the user they want to delete the post before doing so. */
+
+   $(document).on("click", ".delete-post", function(){
+    let confirmDeletePost = confirm("Are you sure you want to delete this post?");
+    if(confirmDeletePost) {
+      $(this).closest('.userpost').remove();
+    }
+  });
 
 /* This function generates click events for each dynamically created delete comment button.  It also
    confirms with the user they want to delete the comment before doing so. */
@@ -10,9 +19,12 @@ $(document).on("click", ".delete-comment", function(){
   }
 });
 
+
+
 /* When add post is clicked this function grabs the values of the username and message inputs,
    builds a post, and then adds it to the posts list */
 
+const posts = $('.posts');
 $('#add-post').on('click', function() { 
   const postUserName = $('#username').val();
   const postMessage = $('#message').val();
@@ -27,7 +39,7 @@ $('#add-post').on('click', function() {
       + '<div class="icon-row"><i class="far fa-comment comment" data-toggle="tooltip" title="Add Comment"></i>'
       + '<i class="fas fa-edit edit-post-show" data-toggle="tooltip" title="Edit Post"></i>'
       + '<i class="fas fa-eye-slash hide-comment" data-toggle="tooltip" title="Hide/Show Comments"></i>'
-      + '<i class="far fa-window-close delete" data-toggle="tooltip" title="Delete Post"></i>'
+      + '<i class="far fa-window-close delete-post" data-toggle="tooltip" title="Delete Post"></i>'
       + '<div class="hidden-comments">Comments Hidden</div></div>'
       + '<div class="timestamp">' + getTimeStamp() + '</div></div>'
       + '<form class="input-area edit-post">'
@@ -43,7 +55,6 @@ $('#add-post').on('click', function() {
     $('#username').val(''); 
     $('#message').val('');
 
-    deletePostListener();
     commentButtonListener();
     addCommentButtonListener();
     hideCommentsButtonListener();
@@ -92,31 +103,6 @@ const addCommentButtonListener = function() {
     });
   });
 }
-
-// Adds click event listeners to all delete post icons and if clicked removes that post
-const deletePostListener = function() {
-  $(".delete").each(function() {
-    $(this).on("click", function() {
-      let confirmDeletePost = confirm("Are you sure you want to delete this post?");
-      if(confirmDeletePost) {
-        $(this).closest('.userpost').remove();
-      }
-    });
-  });
-}
-
-
-// // Adds click event listeners to all delete comment icons and if clicked removes that comment
-// const deleteCommentListener = function() {
-//   $(".delete-comment").each(function() {
-//     $(this).on("click", function() {
-//       // let confirmDeleteComment = confirm("Are you sure you want to delete this comment?");
-//       // if(confirmDeleteComment) {
-//         $(this).closest('.comment-text').remove();
-//       // }
-//     });
-//   });
-// }
 
 // Adds click event listeners to all comment icons and if clicked shows the add comment area
 const commentButtonListener = function() {
@@ -216,3 +202,7 @@ const getTimeStamp = function () {
     + (currentDate.getSeconds() < 10 ? '0' : '') + currentDate.getSeconds();
   return timeStamp;
 }
+
+// $(document).on("click", ".delete-comment", function(){
+
+// });
