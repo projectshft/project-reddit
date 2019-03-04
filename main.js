@@ -1,5 +1,15 @@
 const posts = $('.posts');
 
+/* This function generates click events for each dynamically created delete comment button.  It also
+   confirms with the user they want to delete the comment before doing so. */
+
+$(document).on("click", ".delete-comment", function(){ 
+  let confirmDeleteComment = confirm("Are you sure you want to delete this comment?");
+  if(confirmDeleteComment) {
+    $(this).closest('.comment-text').remove();
+  }
+});
+
 /* When add post is clicked this function grabs the values of the username and message inputs,
    builds a post, and then adds it to the posts list */
 
@@ -39,6 +49,7 @@ $('#add-post').on('click', function() {
     hideCommentsButtonListener();
     editPostShowListener();
     editPostButtonListener();
+    
   } else {
     alert("User Name and Message Text must not be empty");
   }
@@ -73,7 +84,6 @@ const addCommentButtonListener = function() {
 
         $(this).closest(".add-comment").removeClass('show-add-comment'); 
 
-        deleteCommentListener();
         editCommentShowListener();
         editCommentButtonListener();
       } else {
@@ -95,17 +105,18 @@ const deletePostListener = function() {
   });
 }
 
-// Adds click event listeners to all delete comment icons and if clicked removes that comment
-const deleteCommentListener = function() {
-  $(".delete-comment").each(function() {
-    $(this).on("click", function() {
-      let confirmDeleteComment = confirm("Are you sure you want to delete this comment?");
-      if(confirmDeleteComment) {
-        $(this).closest('.comment-text').remove();
-      }
-    });
-  });
-}
+
+// // Adds click event listeners to all delete comment icons and if clicked removes that comment
+// const deleteCommentListener = function() {
+//   $(".delete-comment").each(function() {
+//     $(this).on("click", function() {
+//       // let confirmDeleteComment = confirm("Are you sure you want to delete this comment?");
+//       // if(confirmDeleteComment) {
+//         $(this).closest('.comment-text').remove();
+//       // }
+//     });
+//   });
+// }
 
 // Adds click event listeners to all comment icons and if clicked shows the add comment area
 const commentButtonListener = function() {
