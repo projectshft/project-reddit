@@ -99,7 +99,7 @@ i {
   color: #cc0909;
 }
 
-.edit-post-show {
+.edit-post-show, .edit-comment-show {
   color: #17238f;
 }
 
