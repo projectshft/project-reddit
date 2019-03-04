@@ -30,6 +30,16 @@ $(document).on("click", ".comment", function() {
   }
 });
 
+// Adds click event listeners to all edit post icons and if clicked shows the edit post area
+$(document).on("click", ".edit-post-show", function() {
+  if($(this).closest(".post-text").find(".edit-post").hasClass('show-add-comment')) {
+    $(this).closest(".post-text").find(".edit-post").removeClass('show-add-comment');
+  } else {
+    const currentPostText = $(this).closest(".post-text").find(".post-message").html();
+    $(this).closest(".post-text").find(".edit-message").val(currentPostText);
+    $(this).closest(".post-text").find(".edit-post").addClass('show-add-comment');
+  }
+});
 
 
 /* When add post is clicked this function grabs the values of the username and message inputs,
@@ -68,7 +78,7 @@ $('#add-post').on('click', function() {
 
     addCommentButtonListener();
     hideCommentsButtonListener();
-    editPostShowListener();
+    //editPostShowListener();
     editPostButtonListener();
     
   } else {
@@ -114,20 +124,20 @@ const addCommentButtonListener = function() {
   });
 }
 
-// Adds click event listeners to all edit post icons and if clicked shows the edit post area
-const editPostShowListener = function() {
-  $(".edit-post-show").each(function() {
-    $(this).on("click", function() {
-      if($(this).closest(".post-text").find(".edit-post").hasClass('show-add-comment')) {
-        $(this).closest(".post-text").find(".edit-post").removeClass('show-add-comment');
-      } else {
-        const currentPostText = $(this).closest(".post-text").find(".post-message").html();
-        $(this).closest(".post-text").find(".edit-message").val(currentPostText);
-        $(this).closest(".post-text").find(".edit-post").addClass('show-add-comment');
-      }
-    });
-  });
-}
+// // Adds click event listeners to all edit post icons and if clicked shows the edit post area
+// const editPostShowListener = function() {
+//   $(".edit-post-show").each(function() {
+//     $(this).on("click", function() {
+//       if($(this).closest(".post-text").find(".edit-post").hasClass('show-add-comment')) {
+//         $(this).closest(".post-text").find(".edit-post").removeClass('show-add-comment');
+//       } else {
+//         const currentPostText = $(this).closest(".post-text").find(".post-message").html();
+//         $(this).closest(".post-text").find(".edit-message").val(currentPostText);
+//         $(this).closest(".post-text").find(".edit-post").addClass('show-add-comment');
+//       }
+//     });
+//   });
+// }
 
 // Adds click event listeners to all edit post icons and if clicked shows the edit post area
 const editPostButtonListener = function() {
