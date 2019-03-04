@@ -126,66 +126,47 @@ $('#add-post').on('click', function() {
     // Resets the user name and message fields back to empty after adding a post
     $('#username').val(''); 
     $('#message').val('');
-
-    addCommentButtonListener();
-    //hideCommentsButtonListener();
     
   } else {
     alert("User Name and Message Text must not be empty");
   }
 });
 
-/* When add comment is clicked this function grabs the values of the username and comment inputs,
-   builds a post, and then adds it to the comment list */
+/* This function generates click events for each dynamically created add comment button.  Once clicked it checks to make 
+   sure both input fields are not empty.  It then grabs those inputs and generates the HTML for a new comment and adds it
+   to the comment section for that particular post.  It then sets the input fields back to empty default and hides the
+   add comment section. */
 
-const addCommentButtonListener = function() {
-  $('.post-comment').each(function() {
-    $(this).on("click", function() {  
-      const commentUserName = $(this).closest(".add-comment").find('.comment-username').val();
-      const commentMessage = $(this).closest(".add-comment").find('.comment-message').val();
-      const commentSection = $(this).closest('.userpost').find('.comment-post');
+$(document).on("click", ".post-comment", function() {
+  const commentUserName = $(this).closest(".add-comment").find('.comment-username').val();
+  const commentMessage = $(this).closest(".add-comment").find('.comment-message').val();
+  const commentSection = $(this).closest('.userpost').find('.comment-post');
 
-      if(commentUserName && commentMessage) { // Checks if the user and message inputs are not empty
+  if(commentUserName && commentMessage) { // Checks if the user and message inputs are not empty
 
-        // Builds out HTML of a new comment
-        commentSection[0].innerHTML +=
-          '<div class="comment-text"><div class="comment-message-text">' + commentMessage + '</div>' 
-          + '<div>Posted By: <b>' + commentUserName + '</b>'
-          + '<div class="comment-icon-row"><i class="fas fa-edit edit-comment-show" data-toggle="tooltip" title="Edit Comment"></i>'
-          + '<i class="far fa-window-close delete-comment" data-toggle="tooltip" title="Delete Comment"></i></div>'
-          + '<div class="timestamp">' + getTimeStamp() + '</div></div>'
-          + '<div class="edit-comment">'
-          + '<div><input class="edit-comment-message" type="text" placeholder="Edit Comment" />'
-          + '<button type="button" class="btn btn-primary edit-comment-button">Edit Comment</button></div></div>';  
+    // Builds out HTML of a new comment
+    commentSection[0].innerHTML +=
+      '<div class="comment-text"><div class="comment-message-text">' + commentMessage + '</div>' 
+      + '<div>Posted By: <b>' + commentUserName + '</b>'
+      + '<div class="comment-icon-row"><i class="fas fa-edit edit-comment-show" data-toggle="tooltip" title="Edit Comment"></i>'
+      + '<i class="far fa-window-close delete-comment" data-toggle="tooltip" title="Delete Comment"></i></div>'
+      + '<div class="timestamp">' + getTimeStamp() + '</div></div>'
+      + '<div class="edit-comment">'
+      + '<div><input class="edit-comment-message" type="text" placeholder="Edit Comment" />'
+      + '<button type="button" class="btn btn-primary edit-comment-button">Edit Comment</button></div></div>';  
 
-        // Resets the user name and message fields back to empty after adding a comment
-        $(this).closest(".add-comment").find('.comment-username').val('');
-        $(this).closest(".add-comment").find('.comment-message').val('');
+    // Resets the user name and message fields back to empty after adding a comment
+    $(this).closest(".add-comment").find('.comment-username').val('');
+    $(this).closest(".add-comment").find('.comment-message').val('');
 
-        // Hides the add comment section after adding a comment
-        $(this).closest(".add-comment").removeClass('show-add-comment');       
+    // Hides the add comment section after adding a comment
+    $(this).closest(".add-comment").removeClass('show-add-comment');       
 
-      } else {
-        alert("User Name and Comment Text must not be empty")
-      }
-    });
-  });
-}
-
-// Adds click event listeners to all hide comments icons and if clicked shows or hides a posts comments
-// const hideCommentsButtonListener = function() {
-//   $(".hide-comment").each(function() {
-//     $(this).on("click", function() {
-//       if($(this).closest(".post-text").find(".comment-post").hasClass('show')) {
-//         $(this).closest(".post-text").find(".comment-post").removeClass('show');
-//         $(this).closest(".icon-row").find(".hidden-comments").addClass('comments-hidden');
-//       } else {
-//         $(this).closest(".post-text").find(".comment-post").addClass('show');
-//         $(this).closest(".icon-row").find(".hidden-comments").removeClass('comments-hidden');
-//       }
-//     });
-//   });
-// }
+  } else {
+    alert("User Name and Comment Text must not be empty");
+  }
+});
+  
 
 // This function creates and returns a timestamp 
 const getTimeStamp = function () {
