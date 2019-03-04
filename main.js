@@ -54,9 +54,19 @@ $(document).on("click", ".edit-post-button", function() {
   $(this).closest(".edit-post").removeClass('show-add-comment');
 });
 
-// $(document).on("click", ".delete-comment", function(){
+/* This function generates click events for each dynamically created edit comment icon.  It will show and hide the edit
+   comment section for that comment when pushed. It also grabs the value of the current comment text and sets the 
+   edit comment input field to that value when the edit comment section is shown.  */
 
-// });
+$(document).on("click", ".edit-comment-show", function() {
+  if($(this).closest(".comment-text").find(".edit-comment").hasClass('show-add-comment')) {
+    $(this).closest(".comment-text").find(".edit-comment").removeClass('show-add-comment');
+  } else {
+    const currentCommentText = $(this).closest(".comment-text").find(".comment-message-text").html();
+    $(this).closest(".comment-text").find(".edit-comment-message").val(currentCommentText);
+    $(this).closest(".comment-text").find(".edit-comment").addClass('show-add-comment');
+  }
+});
 
 
 /* When add post is clicked this function grabs the values of the username and message inputs,
@@ -130,28 +140,10 @@ const addCommentButtonListener = function() {
 
         $(this).closest(".add-comment").removeClass('show-add-comment'); 
 
-        editCommentShowListener();
+        
         editCommentButtonListener();
       } else {
         alert("User Name and Comment Text must not be empty")
-      }
-    });
-  });
-}
-
-/* This function adds click event listeners to all of the edit comment icons that will show and hide the edit
-   comment section. It also grabs the value of the current comment text and sets the edit comment input field to
-   that value.  */
-
-const editCommentShowListener = function() {
-  $(".edit-comment-show").each(function() {
-    $(this).on("click", function() {
-      if($(this).closest(".comment-text").find(".edit-comment").hasClass('show-add-comment')) {
-        $(this).closest(".comment-text").find(".edit-comment").removeClass('show-add-comment');
-      } else {
-        const currentCommentText = $(this).closest(".comment-text").find(".comment-message-text").html();
-        $(this).closest(".comment-text").find(".edit-comment-message").val(currentCommentText);
-        $(this).closest(".comment-text").find(".edit-comment").addClass('show-add-comment');
       }
     });
   });
