@@ -78,6 +78,20 @@ $(document).on("click", ".edit-comment-button", function() {
   $(this).closest(".edit-comment").removeClass('show-add-comment'); 
 });
 
+/* This function generates click events for each dynamically created hide/show comments button.  When 
+   clicked it hides or shows all of the comments on that specific post.  If the comments are hidden
+   it gives an indication that the comments are hidden beside the icon row */
+
+$(document).on("click", ".hide-comment", function() {
+  if($(this).closest(".post-text").find(".comment-post").hasClass('show')) {
+    $(this).closest(".post-text").find(".comment-post").removeClass('show');
+    $(this).closest(".icon-row").find(".hidden-comments").addClass('comments-hidden');
+  } else {
+    $(this).closest(".post-text").find(".comment-post").addClass('show');
+    $(this).closest(".icon-row").find(".hidden-comments").removeClass('comments-hidden');
+  }
+});
+
 
 /* When add post is clicked this function grabs the values of the username and message inputs,
    builds a post, and then adds it to the posts list */
@@ -114,7 +128,7 @@ $('#add-post').on('click', function() {
     $('#message').val('');
 
     addCommentButtonListener();
-    hideCommentsButtonListener();
+    //hideCommentsButtonListener();
     
   } else {
     alert("User Name and Message Text must not be empty");
@@ -148,8 +162,9 @@ const addCommentButtonListener = function() {
         $(this).closest(".add-comment").find('.comment-username').val('');
         $(this).closest(".add-comment").find('.comment-message').val('');
 
-        $(this).closest(".add-comment").removeClass('show-add-comment'); 
-        
+        // Hides the add comment section after adding a comment
+        $(this).closest(".add-comment").removeClass('show-add-comment');       
+
       } else {
         alert("User Name and Comment Text must not be empty")
       }
@@ -158,19 +173,19 @@ const addCommentButtonListener = function() {
 }
 
 // Adds click event listeners to all hide comments icons and if clicked shows or hides a posts comments
-const hideCommentsButtonListener = function() {
-  $(".hide-comment").each(function() {
-    $(this).on("click", function() {
-      if($(this).closest(".post-text").find(".comment-post").hasClass('show')) {
-        $(this).closest(".post-text").find(".comment-post").removeClass('show');
-        $(this).closest(".icon-row").find(".hidden-comments").addClass('comments-hidden');
-      } else {
-        $(this).closest(".post-text").find(".comment-post").addClass('show');
-        $(this).closest(".icon-row").find(".hidden-comments").removeClass('comments-hidden');
-      }
-    });
-  });
-}
+// const hideCommentsButtonListener = function() {
+//   $(".hide-comment").each(function() {
+//     $(this).on("click", function() {
+//       if($(this).closest(".post-text").find(".comment-post").hasClass('show')) {
+//         $(this).closest(".post-text").find(".comment-post").removeClass('show');
+//         $(this).closest(".icon-row").find(".hidden-comments").addClass('comments-hidden');
+//       } else {
+//         $(this).closest(".post-text").find(".comment-post").addClass('show');
+//         $(this).closest(".icon-row").find(".hidden-comments").removeClass('comments-hidden');
+//       }
+//     });
+//   });
+// }
 
 // This function creates and returns a timestamp 
 const getTimeStamp = function () {
