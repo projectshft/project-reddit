@@ -31,7 +31,8 @@ $(document).on("click", ".comment", function() {
 });
 
 /* This function generates click events for each dynamically created edit post icon.  When the icon
-   is clicked it will show or hide the edit post section for that specific post */
+   is clicked it will show or hide the edit post section for that specific post. It also grabs the value of
+   the current post text and sets the edit post input field to that value when the edit post section is shown.*/
 
 $(document).on("click", ".edit-post-show", function() {
   if($(this).closest(".post-text").find(".edit-post").hasClass('show-add-comment')) {
@@ -46,7 +47,7 @@ $(document).on("click", ".edit-post-show", function() {
 /* This function generates click events for each dynamically created edit post button.  When the button
    is clicked it will over write the current post text with the new value in the input field.
    It will then hide the edit post section after the edit is made. It will give an indication that the post
-   was edited along with a timestamp in the edited version*/
+   was edited along with a timestamp in the edited version */
 
 $(document).on("click", ".edit-post-button", function() {
   const editedPostText =  $(this).closest(".edit-post").find(".edit-message").val();
@@ -70,7 +71,8 @@ $(document).on("click", ".edit-comment-show", function() {
 
 /* This function generates click events for each dynamically created edit comment button.  When an edit comment 
    button is clicked the location of the current comment is grabbed and the HTML value is replaced by the value 
-   in the edit comment input field.  The edit comment section is then hidden from view. */
+   in the edit comment input field. It will give an indication that the comment was edited along with a timestamp
+   in the edited version. The edit comment section is then hidden from view. */
 
 $(document).on("click", ".edit-comment-button", function() {
   const editedCommentText =  $(this).closest(".edit-comment").find(".edit-comment-message").val();
@@ -106,7 +108,7 @@ const getTimeStamp = function () {
 }
 
 /* This function generates the click event for the add post button.  Once clicked it checks to make 
-   sure both input fields are not empty and alerts the user if either is empty.  It then grabs those inputs and 
+   sure both input fields are not empty and alerts the user if either is empty. It then grabs those inputs and 
    generates the HTML for a new post and adds it to the post section.  It then sets the input fields back to default */
 
 $('#add-post').on('click', function() { 
@@ -147,7 +149,7 @@ $('#add-post').on('click', function() {
 
 /* This function generates click events for each dynamically created add comment button.  Once clicked it checks to make 
    sure both input fields are not empty.  It then grabs those inputs and generates the HTML for a new comment and adds it
-   to the comment section for that particular post.  It then sets the input fields back to empty default and hides the
+   to the comment section for that particular post.  It then sets the input fields back to default and hides the
    add comment section. */
 
 $(document).on("click", ".post-comment", function() {
