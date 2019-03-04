@@ -1,85 +1,62 @@
-//Receive name and post-text inputs and output them to the "new post viewer" section of the html.
+// Receive poster name and post-text inputs. Outputs them to the "post viewer" section of the html.
 $('#post-button').on('click', function() {
+  // event.preventDefault(); ???
+  // If-SO: pass 'event' as parameter of function
   var $nameOutput = $('#name-input').val();
   var $textOutput = $('#post-body-input').val();
   console.log('$nameOutput is: ', $nameOutput);
   console.log('$textOutput is: ', $textOutput);
-  // var $outPut = ()
 
   // Append $postIt html output variable to the post-viewer
   $('#post-viewer').append(
-    `<p>${$textOutput}</p><p align="right"><i>Posted by: <b>${$nameOutput}</b></i></p><div class="border-bottom my-3"></div>`
+    `<p>${$textOutput}</p><p align="right"><i>Posted by: <b>${$nameOutput}</b></i><br><p align-left><button
+    class="btn btn-dark btn-sm"
+    type="button"
+    data-toggle="collapse"
+    data-target="#comment-card"
+    aria-expanded="false"
+    aria-controls="specific-comment-card"
+    id="comment-toggle-button">View comments
+  </button><button
+  type="button"
+  class="btn btn-outline-danger btn-sm"
+  id="post-remove-button">Remove Post</button><div class="border-bottom my-3"></div>`
   );
 
-  // Empty the the name and post-body input fields
-  // Use empty() ??? I *think* emptying the value is more comprehensive
+  // Empty the name and post-body input fields
+  // Use empty() ??? Use va() and empty() together?
   $('#name-input').val('');
   $('#post-body-input').val('');
+
+  // Create a variable to point to the new post entity and return it so it may be used to update the state of the message board array
+  var newEntryForPostEntity = [
+    { posts: [$nameOutput, $textOutput, 'There are no comments on this post.'] }
+  ];
+  console.log(newEntryForPostEntity);
+  return newEntryForPostEntity;
+  /////////////////////////////////////////////////////////////////////////////
 });
 
-//////////////////////////////////////////////////////////////////////////////
-// Create an array to contain post data that includes comments and commenters (from a separately built array yet to be designed)
+$('#post-comment-button').on('click', function() {
+  var $commenterNameOutput = $('#commenter-name-input').val();
+  var $commentBodyOutput = $('#comment-body-input').val();
+  console.log('$commenterNameOutput is: ', $commenterNameOutput);
+  console.log('$commentBodyOutput is: ', $commentBodyOutput);
+  // var $oneCommentOutput = ()
 
-// This array will be used/referenced to make the output manipulatible (edit, delete/remove, post a comment to, etc.).
+  // Append $postComment html output variable to the post-viewer
+  $('#comment-viewer').append(
+    `<p class="align-center">${$commentBodyOutput}</p><p class="align-right">By: <b>${$commenterNameOutput}</b></i></p><a  href="#"><i class="fas fa-trash-alt"></i><p align="right"><i></a><div class="border-bottom my-3"></div>`
+  );
 
-// This array may also be used to populate the comments viewer 
-
-var postEntity = [
-  {
-    nameOfPoster: '',
-    textOfPost: '',
-    commentsMadeUpon: [{ nameOfCommenter: '', textOfComment: '' }]
-  }
-
-  // Create an object that contains a key-value pair for posts and comments
-  {
-    // Create an array of individual posts
-    posts: [
-      // Create an object for each individual post that contains 1) the name of the poster 2) the associated text of their post, and 3) an array of associated comments
-      {
-        nameOfPoster: 'John Lennon',
-        textOfPost: 'Ob la di, Ob la da',
-        // Create an array of comments that contains each individual comment as an object with commenter
-        commentsMadeUpon: [
-          {
-            nameOfCommenter: 'George Harrison',
-            textOfComment: 'Life goes on'
-          },
-          {
-            nameOfCommenter: 'Ringo',
-            textOfComment: 'BRAH!!!'
-          },
-          {
-            nameOfCommenter: 'Paul McCartney',
-            textOfComment: 'la la la la la la'
-          },
-          {
-            nameOfCommenter: 'George Harrison',
-            textOfComment: 'Life goes on'
-          }
-        ]
-      },
-      {
-        nameOfPoster: 'Kyrie Irving',
-        textOf:
-          'Rebound... behind-the-back-dribble... through the legs... racing up the court... like I was born to do',
-        commentsMadeUpon: [
-          {
-            nameOfCommenter: 'Jason Tatum',
-            textOfComment: 'Yo, pass it here, flat-earther.... SLAM!!!!'
-          },
-          {
-            nameOfCommenter: 'Harrison Barnes',
-            textOfComment:
-              'Ky, come on now, do you *really* believe the world is flat?'
-          }
-        ]
-      },
-      {
-        nameOfPoster: 'J. Query',
-        textOf: 'Write less, do more!',
-        commentsMadeUpon: []
-      }
-    ]
-  }
-];
+  // Empty the name and post-body input fields
+  // Use empty() ??? Use va() and empty() together?
+  $('#commenter-name-input').val('');
+  $('#comment-body-input').val('');
+  var newEntryForCommentEntity = [
+    { posts: [$commenterNameOutput, $commentBodyOutput] }
+  ];
+  console.log(newEntryForCommentEntity);
+  // postEntity.push(newEntryForCommentEntity);
+  // return newEntryForCommentEntity;
+});
