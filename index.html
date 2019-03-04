@@ -9,67 +9,61 @@
     <link rel="stylesheet" href="style.css">
   </head>
 
-<body>
-  <div class="row">
-    <div class="col-md-6 col-md-offset-3">
+  <body>
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
 
-      <div class="page-header">
-        <h1>Project Reddit</h1>
-      </div>
+        <div class="page-header">
+          <h1>Project Reddit</h1>
+        </div>
 
-
-      <div class="comments" id="list">
-
-        <ul>
-
-        </ul>
-
-      </div>
+        <div class="comments" id="list">
+          <ul></ul>
+        </div>
 
 
+        <form id="post-section" style="margin-top:30px;">
+          <h3>Add a new post</h3>
 
-      <form id="post-section" style="margin-top:30px;">
+          <div class="form-group">
+            <input id="postName" type="text"
+              class="form-control"
+              placeholder="Your name"></input>
+          </div>
 
-        <h3>Add a new post</h3>
-
-        <div class="form-group">
-          <input id="postName" type="text"
+          <div class="form-group">
+            <textarea id="postText" type="text"
             class="form-control"
-            placeholder="Your name"></input>
-        </div>
+            placeholder="Post text"></textarea>
+          </div>
 
-        <div class="form-group">
-          <textarea id="postText" type="text"
-          class="form-control"
-          placeholder="Post text"></textarea>
-        </div>
+          <button type="submit" class="btn btn-post">Post</button>
+        </form>
 
-        <button type="submit" class="btn btn-post">Post</button>
-      </form>
 
-      <form id="comment-section" style="display: none">
-        <h3>Add a comment</h3>
+        <form id="comment-section" style="display: none ">
+          <h3>Add a comment</h3>
 
-        <div class="form-group">
-          <input id="commentName" type="text"
+          <div class="form-group">
+            <input id="commentName" type="text"
+              class="form-control"
+              placeholder="User name"></input>
+          </div>
+
+          <div class="form-group">
+            <textarea id="commentText" type="text"
             class="form-control"
-            placeholder="User name"></input>
-        </div>
+            placeholder="Comment text"></textarea>
+          </div>
 
-        <div class="form-group">
-          <textarea id="commentText" type="text"
-          class="form-control"
-          placeholder="Comment text"></textarea>
-        </div>
+          <button type="submit" class="btn btn-comment">Post comment</button>
+        </form>
 
-        <button type="submit" class="btn btn-comment">Post comment</button>
-      </form>
-
+      </div>
     </div>
-  </div>
 
-<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
-<script src="main.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script src="main.js"></script>
 
-</body>
+  </body>
 </html>
