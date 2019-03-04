@@ -30,7 +30,9 @@ $(document).on("click", ".comment", function() {
   }
 });
 
-// Adds click event listeners to all edit post icons and if clicked shows the edit post area
+/* This function generates click events for each dynamically created edit post icon.  When the icon
+   is clicked it will show or hide the edit post section for that specific post */
+
 $(document).on("click", ".edit-post-show", function() {
   if($(this).closest(".post-text").find(".edit-post").hasClass('show-add-comment')) {
     $(this).closest(".post-text").find(".edit-post").removeClass('show-add-comment');
@@ -40,6 +42,21 @@ $(document).on("click", ".edit-post-show", function() {
     $(this).closest(".post-text").find(".edit-post").addClass('show-add-comment');
   }
 });
+
+/* This function generates click events for each dynamically created edit post button.  When the button
+   is clicked it will over write the current post text with the new value in the input field.
+   It will then hide the edit post section after the edit is made. It will give an indication that the post
+   was edited along with a timestamp in the edited version*/
+
+$(document).on("click", ".edit-post-button", function() {
+  const editedPostText =  $(this).closest(".form-group").find(".edit-message").val();
+  $(this).closest(".post-text").find(".post-message").html(editedPostText + ' (edited on: ' + getTimeStamp() + ')');
+  $(this).closest(".edit-post").removeClass('show-add-comment');
+});
+
+// $(document).on("click", ".delete-comment", function(){
+
+// });
 
 
 /* When add post is clicked this function grabs the values of the username and message inputs,
@@ -65,7 +82,7 @@ $('#add-post').on('click', function() {
       + '<div class="timestamp">' + getTimeStamp() + '</div></div>'
       + '<form class="input-area edit-post">'
       + '<div class="form-group"><input class="edit-message" type="text" placeholder="Edit Post" />'
-      + '<button type="button" class="btn btn-primary edit-button">Edit Post</button></div></form>'
+      + '<button type="button" class="btn btn-primary edit-post-button">Edit Post</button></div></form>'
       + '<div class="comment-post show"></div>' 
       + '<div class="comment-section"><form class="input-area add-comment"><h5>Add Comment</h5>'
       + '<div class="form-group"><input class="comment-username" type="text" placeholder="User Name" /></div>'
@@ -78,8 +95,6 @@ $('#add-post').on('click', function() {
 
     addCommentButtonListener();
     hideCommentsButtonListener();
-    //editPostShowListener();
-    editPostButtonListener();
     
   } else {
     alert("User Name and Message Text must not be empty");
@@ -120,32 +135,6 @@ const addCommentButtonListener = function() {
       } else {
         alert("User Name and Comment Text must not be empty")
       }
-    });
-  });
-}
-
-// // Adds click event listeners to all edit post icons and if clicked shows the edit post area
-// const editPostShowListener = function() {
-//   $(".edit-post-show").each(function() {
-//     $(this).on("click", function() {
-//       if($(this).closest(".post-text").find(".edit-post").hasClass('show-add-comment')) {
-//         $(this).closest(".post-text").find(".edit-post").removeClass('show-add-comment');
-//       } else {
-//         const currentPostText = $(this).closest(".post-text").find(".post-message").html();
-//         $(this).closest(".post-text").find(".edit-message").val(currentPostText);
-//         $(this).closest(".post-text").find(".edit-post").addClass('show-add-comment');
-//       }
-//     });
-//   });
-// }
-
-// Adds click event listeners to all edit post icons and if clicked shows the edit post area
-const editPostButtonListener = function() {
-  $(".edit-button").each(function() {
-    $(this).on("click", function() {
-      const editedPostText =  $(this).closest(".form-group").find(".edit-message").val();
-      $(this).closest(".post-text").find(".post-message").html(editedPostText + ' (edited on: ' + getTimeStamp() + ')');
-      $(this).closest(".edit-post").removeClass('show-add-comment'); // Hides add comment section when button is clicked
     });
   });
 }
