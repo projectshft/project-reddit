@@ -1,3 +1,5 @@
+// NOTE: This only seems to work in codepen...
+
 // make variable to hold posts
 var posts = [];
 
@@ -17,6 +19,12 @@ function Post(userID, message) {
   this.userID = userID;
   this.message = message;
 }
+
+// //need function for comments
+// function Comment(userID, comment) {
+//   this.userID = userID;
+//   this.comment = comment;
+// }
 
 function RenderPosts(posts) {
   // empty to start fresh each time (no double posts)
