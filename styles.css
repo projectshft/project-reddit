@@ -22,8 +22,9 @@ i {
   background-color: #c7dfff;
   border-radius: 10px;
   border: solid #4376d4 2px;
-  margin-bottom: 80px;
+  margin-bottom: 200px;
   margin-top: 15px;
+  word-wrap: break-word;
 }
 
 .input-area {
@@ -94,7 +95,7 @@ i {
   margin-top: 20px;
 }
 
-.delete, .delete-comment {
+.delete-post, .delete-comment {
   color: #cc0909;
 }
 
