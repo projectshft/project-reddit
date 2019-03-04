@@ -92,14 +92,27 @@ $(document).on("click", ".hide-comment", function() {
   }
 });
 
+// This function creates and returns a timestamp 
+const getTimeStamp = function () {
+  const currentDate = new Date(); 
+  const timeStamp = 
+    (currentDate.getMonth()+1) + "/"
+    + currentDate.getDate()  + "/" 
+    + currentDate.getFullYear() + " @ "  
+    + currentDate.getHours() + ":"  
+    + (currentDate.getMinutes() < 10 ? '0' : '') + currentDate.getMinutes() + ":"
+    + (currentDate.getSeconds() < 10 ? '0' : '') + currentDate.getSeconds();
+  return timeStamp;
+}
 
-/* When add post is clicked this function grabs the values of the username and message inputs,
-   builds a post, and then adds it to the posts list */
+/* This function generates the click event for the add post button.  Once clicked it checks to make 
+   sure both input fields are not empty and alerts the user if either is empty.  It then grabs those inputs and 
+   generates the HTML for a new post and adds it to the post section.  It then sets the input fields back to default */
 
-const posts = $('.posts');
 $('#add-post').on('click', function() { 
   const postUserName = $('#username').val();
   const postMessage = $('#message').val();
+  const posts = $('.posts');
 
   if(postUserName && postMessage) {  // Checks if the user and message inputs are not empty
 
@@ -166,21 +179,3 @@ $(document).on("click", ".post-comment", function() {
     alert("User Name and Comment Text must not be empty");
   }
 });
-  
-
-// This function creates and returns a timestamp 
-const getTimeStamp = function () {
-  const currentDate = new Date(); 
-  const timeStamp = 
-    (currentDate.getMonth()+1) + "/"
-    + currentDate.getDate()  + "/" 
-    + currentDate.getFullYear() + " @ "  
-    + currentDate.getHours() + ":"  
-    + (currentDate.getMinutes() < 10 ? '0' : '') + currentDate.getMinutes() + ":"
-    + (currentDate.getSeconds() < 10 ? '0' : '') + currentDate.getSeconds();
-  return timeStamp;
-}
-
-// $(document).on("click", ".delete-comment", function(){
-
-// });
