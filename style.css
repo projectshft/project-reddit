@@ -10,6 +10,10 @@ body {
   border-bottom: 2px solid #d3d3d3;
 }
 
+.post-content {
+  word-wrap: break-word;
+}
+
 .delete-comment i {
   transition-duration: .25s;
 }
