@@ -76,7 +76,7 @@ i {
 }
 
 .comment {
-  color: #2aca2a
+  color: #2aca2a;
 }
 
 .comment-post {
@@ -99,8 +99,8 @@ i {
   color: #cc0909;
 }
 
-.fa-edit {
-  color: #17238f
+.edit-post-show {
+  color: #17238f;
 }
 
 .edit-post, .edit-comment {
@@ -109,7 +109,7 @@ i {
 
 .edit-message, .edit-comment-message {
   margin-right: 20px;
-  width: 85%
+  width: 85%;
 }
 
 .show {
