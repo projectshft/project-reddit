@@ -2,20 +2,31 @@
 /* This function generates click events for each dynamically created delete post button.  It also
    confirms with the user they want to delete the post before doing so. */
 
-   $(document).on("click", ".delete-post", function(){
-    let confirmDeletePost = confirm("Are you sure you want to delete this post?");
-    if(confirmDeletePost) {
-      $(this).closest('.userpost').remove();
-    }
-  });
+$(document).on("click", ".delete-post", function() {
+  let confirmDeletePost = confirm("Are you sure you want to delete this post?");
+  if(confirmDeletePost) {
+    $(this).closest('.userpost').remove();
+  }
+});
 
 /* This function generates click events for each dynamically created delete comment button.  It also
    confirms with the user they want to delete the comment before doing so. */
 
-$(document).on("click", ".delete-comment", function(){ 
+$(document).on("click", ".delete-comment", function() { 
   let confirmDeleteComment = confirm("Are you sure you want to delete this comment?");
   if(confirmDeleteComment) {
     $(this).closest('.comment-text').remove();
+  }
+});
+
+/* This function generates click events for each dynamically created comment icon.  When the icon
+   is clicked it will show or hide the add comments section for that specific post */
+
+$(document).on("click", ".comment", function() {
+  if($(this).closest(".post-text").find(".add-comment").hasClass('show-add-comment')) {
+    $(this).closest(".post-text").find(".add-comment").removeClass('show-add-comment');
+  } else {
+    $(this).closest(".post-text").find(".add-comment").addClass('show-add-comment');
   }
 });
 
@@ -55,7 +66,6 @@ $('#add-post').on('click', function() {
     $('#username').val(''); 
     $('#message').val('');
 
-    commentButtonListener();
     addCommentButtonListener();
     hideCommentsButtonListener();
     editPostShowListener();
@@ -99,19 +109,6 @@ const addCommentButtonListener = function() {
         editCommentButtonListener();
       } else {
         alert("User Name and Comment Text must not be empty")
-      }
-    });
-  });
-}
-
-// Adds click event listeners to all comment icons and if clicked shows the add comment area
-const commentButtonListener = function() {
-  $(".comment").each(function() {
-    $(this).on("click", function() {
-      if($(this).closest(".post-text").find(".add-comment").hasClass('show-add-comment')) {
-        $(this).closest(".post-text").find(".add-comment").removeClass('show-add-comment');
-      } else {
-        $(this).closest(".post-text").find(".add-comment").addClass('show-add-comment');
       }
     });
   });
