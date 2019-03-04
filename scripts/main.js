@@ -2,13 +2,16 @@ var submissions = [];
 var usernameSubmission = '';
 var messageSubmission = '';
 var messageID = 0;
+var commentID = 0;
 var prependedMessageList = '';
-var prependedFocusPost = '';
 var usernameCommentSubmission = '';
 var commentSubmission = '';
+var currentPostID = 0;
+var appendPostBox = '';
 
-//add click listener to capture and push submitted username and message to submissions array.
-$('.btn-submit').on('click', function() {
+
+//add click listener to capture and push submitted username and message to submissions array and v.DOM.
+$('#post-submit').on('click', function() {
   //add if statements to check that inputs are populated. If one is empty, output an error but DON'T reset fields -- that shit's annoying.
   if ($.trim($('#usernameInput').val()) == '' && $.trim($('#messageInput').val()) == '') {
     alert('Please enter a username and message.');
@@ -26,13 +29,15 @@ $('.btn-submit').on('click', function() {
       var currentSubmission = {
         id: messageID,
         username: usernameSubmission,
-        message: messageSubmission
+        message: messageSubmission,
+        comments: []
       };
       console.log('this is the object that was just submitted: ', currentSubmission);
       //add the currentSubmission to the submissions array.
       submissions.push(currentSubmission);
       console.log('this is the current value of the submissions array: ', submissions);
-      //in addition to adding the submission to an object and pushing to an array, I think I may also want to immediately add them directly to the page.
+      //in addition to adding the submission to an object and pushing to an array,
+      //I think I may also want to immediately add them directly to the page.
       prependedMessageList = $('.message-list').prepend(
         '<div class="post-box">'+
           '<div class="row submit-target" style="padding:0px 10px 0px 20px">'+
@@ -88,7 +93,7 @@ $('.btn-submit').on('click', function() {
         //add focusPost html
         prependedMessageList = $('.posts-background').prepend(
           '<div class="post-focus col-lg-10 overflow-auto">'+
-            '<div class="post-box">'+
+            '<div class="post-box c-target">'+
               '<div class="row submit-target" style="padding:0px 10px 0px 20px">'+
                 '<div class="username col-11">'
                   +targetSubmission[0].username+
@@ -103,7 +108,10 @@ $('.btn-submit').on('click', function() {
             '</div>'+
           '</div>'
         );
-        //add click listener on the back button that removes the .post-focus html and un-hides .message-list
+        //poing the currentPostID towrad the corrent ID
+        currentPostID = targetSubmission[0].id
+        //add click listener on the back button that removes the .post-focus html,
+        //un-hides .message-list and .post-input-fields, and hides the .comment-input-fields.
         $('.back-btn').on('click', function() {
           console.log('Back button was clicked.');
           $(this).closest('.post-focus').remove();
@@ -111,9 +119,140 @@ $('.btn-submit').on('click', function() {
           $('.post-input-fields').removeClass('hide');
           $('.comment-input-fields').addClass('hide');
         });
+        //check to see if there are previous comments. If there are, append them and and a delete event listener.
+        if (targetSubmission[0].comments.length > 0) {
+          targetSubmission[0].comments.forEach(function(index) {
+            console.log('current targetsubmission[0],', targetSubmission[0])
+            //natch the commentID to the current comment's ID
+            commentID = index.id;
+            //append the comment and it's html to the page.
+            appendPostBox = $('.c-target').append(
+              '<div class="post-box" style="background-color:#C7D3DD">'+
+                '<div class="row submit-target" style="padding:0px 10px 0px 20px">'+
+                  '<div class="username col-11">'
+                    +index.username+
+                  '</div>'+
+                  '<div class="delete-icon col-1">'+
+                    '<button type="button" class="btn delete-'+commentID+'" data-id="'+commentID+'" style="padding:0px;"><i class="fas fa-trash"></i></button>'+
+                  '</div>'+
+                  '<div class="message-box col-11">'
+                    +index.comment+
+                  '</div>'+
+                '</div>'+
+              '</div>'
+            );
+            //add an click listener to delete the correct comment from the submissions array and v.DOM.
+            $('.delete-'+commentID).on('click', function() {
+              //assign relative messageID to a variable that can be accessed within the filer() below
+              var relativeID = $(this).attr('data-id')
+              //initialize an object to use assign in the forEach loop
+              var targetIndex = {};
+              //for some reason submissions[currentPostID - 1].comments.indexOf(targetIndex); returns an error saying submissions[currentPostID - 1] is undefined. Doing it this way in line 160 works.
+              var submissionsShortcut = submissions[currentPostID - 1].comments
+              //find the comment who's ID matches click event's data ID
+              submissions.forEach(function(index){
+                index.comments.forEach(function(index){
+                  if (index.id == relativeID) {
+                  console.log('this is the index.id: ', index.id);
+                  console.log('this is the relativeID:, ', relativeID);
+                  targetIndex = index;
+                };
+                });
+              });
+              //get the index to splice
+              var indexToSplice = submissionsShortcut.indexOf(targetIndex);
+              //splice the comment from the array
+              submissions[currentPostID - 1].comments.splice(indexToSplice, 1);
+              console.log('This is the new submissions array:' ,submissions);
+              //remove the post from the html
+              $(this).closest('.post-box').remove();
+            });
+          });
+        };
       });
     };
   //clear the input fields
   $('#usernameInput').val('');
   $('#messageInput').val('');
+});
+//add click listener to capture and push submitted username and commit to submissions array and v.DOM.
+$('#comment-submit').on('click', function() {
+  //add if statements to check that inputs are populated. If one is empty, output an error but DON'T reset fields -- that shit's annoying.
+  if ($.trim($('#commentUsernameInput').val()) == '' && $.trim($('#commentInput').val()) == '') {
+    alert('Please enter a username and comment.');
+  } else if ($.trim($('#commentUsernameInput').val()) == ''){
+    alert('Please enter a username.');
+  } else if ($.trim($('#commentInput').val()) == ''){
+    alert('Please enter a comment.');
+  } else {
+      //assign comments to relative global variables
+      usernameCommentSubmission = $('#commentUsernameInput').val();
+      commentSubmission = $('#commentInput').val();
+      //add a commentID
+      commentID += 1;
+      //create new object to store comment input values
+      var currentComment = {
+        id: commentID,
+        username: usernameCommentSubmission,
+        comment: commentSubmission
+      };
+
+      console.log('This is the current submissions array: ', submissions)
+      console.log('This is the object that was just submitted: ', currentComment);
+      //use reduce to find the relavant post object's index so that we can push
+      //the currentComments object into the submission[i].comment array
+      var targetPushIndex = submissions.reduce(function(index, line, indexOf) {
+        if (line.id == currentPostID){
+          index = indexOf;
+        }
+        return index;
+      }, 0);
+      //push the currentComments object onto submissions[]'s appropriate object's comments array
+      submissions[targetPushIndex].comments.push(currentComment);
+      //append the comment and it's html to the page.
+      appendPostBox = $('.c-target').append(
+        '<div class="post-box" style="background-color:#C7D3DD">'+
+          '<div class="row submit-target" style="padding:0px 10px 0px 20px">'+
+            '<div class="username col-11">'
+              +currentComment.username+
+            '</div>'+
+            '<div class="delete-icon col-1">'+
+              '<button type="button" class="btn delete-'+commentID+'" data-id="'+commentID+'" style="padding:0px;"><i class="fas fa-trash"></i></button>'+
+            '</div>'+
+            '<div class="message-box col-11">'
+              +currentComment.comment+
+            '</div>'+
+          '</div>'+
+        '</div>'
+      );
+      //add an click listener to delete the correct comment from the submissions array and v.DOM.
+      $('.delete-'+commentID).on('click', function() {
+        //assign relative messageID to a variable that can be accessed within the filer() below
+        var relativeID = $(this).attr('data-id')
+        //initialize an object to use assign in the forEach loop
+        var targetIndex = {};
+        //for some reason submissions[currentPostID - 1].comments.indexOf(targetIndex); returns an error saying submissions[currentPostID - 1] is undefined. Doing it this way in line 241 works.
+        var submissionsShortcut = submissions[currentPostID - 1].comments
+        //find the comment who's ID matches click event's data ID
+        submissions.forEach(function(index){
+          index.comments.forEach(function(index){
+            if (index.id == relativeID) {
+              console.log('this is the index.id: ', index.id);
+              console.log('this is the relativeID:, ', relativeID);
+              targetIndex = index;
+            };
+          });
+        });
+        //get the index to splice
+        var indexToSplice = submissionsShortcut.indexOf(targetIndex);
+        //splice the comment from the array
+        submissions[currentPostID - 1].comments.splice(indexToSplice, 1);
+        console.log('This is the new submissions array:' ,submissions);
+        //remove the post from the html
+        $(this).closest('.post-box').remove();
+      });
+    }
+    //clear the input fields
+    $('#commentUsernameInput').val('');
+    $('#commentInput').val('');
 });
