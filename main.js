@@ -15,7 +15,7 @@ $(document).ready(function() {
 
 /* When the user submits a post entry, user name and post message
    are stored as an object in an array.*/
-  $('#btn-post').click(function() {
+  $('.btn-post').click(function() {
 
     var $postName = $('input#postName').val();
     var $postText = $('textarea#postText').val();
@@ -51,7 +51,7 @@ $(document).ready(function() {
 
 /* When the user submits a comment entry, user name and comments
   are stored as an object in an array.*/
-  $('#btn-comment').click(function() {
+  $('.btn-comment').click(function() {
 
     var $commentName = $('input#commentName').val();
     var $commentText = $('textarea#commentText').val();
