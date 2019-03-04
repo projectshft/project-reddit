@@ -49,7 +49,7 @@ $(document).on("click", ".edit-post-show", function() {
    was edited along with a timestamp in the edited version*/
 
 $(document).on("click", ".edit-post-button", function() {
-  const editedPostText =  $(this).closest(".form-group").find(".edit-message").val();
+  const editedPostText =  $(this).closest(".edit-post").find(".edit-message").val();
   $(this).closest(".post-text").find(".post-message").html(editedPostText + ' (edited on: ' + getTimeStamp() + ')');
   $(this).closest(".edit-post").removeClass('show-add-comment');
 });
@@ -127,9 +127,9 @@ $('#add-post').on('click', function() {
       + '<i class="far fa-window-close delete-post" data-toggle="tooltip" title="Delete Post"></i>'
       + '<div class="hidden-comments">Comments Hidden</div></div>'
       + '<div class="timestamp">' + getTimeStamp() + '</div></div>'
-      + '<form class="input-area edit-post">'
-      + '<div class="form-group"><input class="edit-message" type="text" placeholder="Edit Post" />'
-      + '<button type="button" class="btn btn-primary edit-post-button">Edit Post</button></div></form>'
+      + '<div class="edit-post">'
+      + '<div><input class="edit-message" type="text" placeholder="Edit Post" />'
+      + '<button type="button" class="btn btn-primary edit-post-button">Edit Post</button></div></div>'
       + '<div class="comment-post show"></div>' 
       + '<div class="comment-section"><form class="input-area add-comment"><h5>Add Comment</h5>'
       + '<div class="form-group"><input class="comment-username" type="text" placeholder="User Name" /></div>'
