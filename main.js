@@ -32,56 +32,60 @@ const createPost = function() {
   }
 };
 
-// Add a click event listener to the submit button to create a post
-$(".new-post-button").click(createPost);
-
 // *** We now want users to be able to leave comments on each post. When a user clicks 'comments' (above each post) it should toggle the comments and input box visible/hidden.
 
 // Initialize the $selectedPost variable.
 
 let $selectedPost;
-// Click event listener for the leave comment buttons. Targets the spcific post corresponding to the clicked button. No longer duplicates messages.
-$(document).on("click", ".leave-comment-button", function() {
+// Target the spcific post corresponding to the clicked button. No longer duplicates messages.
+
+const leaveComment = function() {
 
   $selectedPost = $(this)
     .closest(".post-content")
     .find(".post");
+  };
 
   // *** When a user fills out the two comment inputs and clicks 'Post Comment' it should immediately add the comment to the list of comments.
-  
-  const createComment = function() {
-    // Capture input from the Bootstrap modal input fields
-    const $commenterName = $("#commenter-name").val();
-    const $commentText = $("#comment-text").val();
-    // Place into commentTemplate
-    const commentTemplate = `
-      <div class="comment">
-        <a class="delete-comment ml-4 pr-2 float-left" title="Delete comment"><i class="fas fa-minus-circle"></i></a>
-        <p class="comment-text d-inline-block w-75"><em class="commenter-name">${$commenterName}</em><strong> comments: </strong>${$commentText}</p>
-      </div>`;
-    // append to the related post, only if there is content
-    if($commentText !== "" && $commenterName !== "") {
 
-      $selectedPost.append(commentTemplate);
-      
-      $("#commenter-name").val("");
-      $("#comment-text").val("");
-      // hide comment modal 
-      $("#comment-modal").modal("hide");
-    }
-  };
-  // Add a click event listener to the modal submit button
-  $("#add-comment-button").click(createComment);
-});
+const createComment = function() {
+  // Capture input from the Bootstrap modal input fields
+  const $commenterName = $("#commenter-name").val();
+  const $commentText = $("#comment-text").val();
+  // Place into commentTemplate
+  const commentTemplate = `
+    <div class="comment">
+      <a class="delete-comment ml-4 pr-2 float-left" title="Delete comment"><i class="fas fa-minus-circle"></i></a>
+      <p class="comment-text d-inline-block w-75"><em class="commenter-name">${$commenterName}</em><strong> comments: </strong>${$commentText}</p>
+    </div>`;
+  // append to the related post, only if there is content
+  if($commentText !== "" && $commenterName !== "") {
+
+    $selectedPost.append(commentTemplate);
+    
+    $("#commenter-name").val("");
+    $("#comment-text").val("");
+    // hide comment modal 
+    $("#comment-modal").modal("hide");
+  }
+};
 
 // *** When a user clicks the 'x' next to a comment, it should delete it.
 
-$(document).on("click", ".delete-comment i", function() {
+const deleteComment = function() {
   if(confirm("Are you sure you want to permanently delete this comment?"));
     $(this)
       .closest(".comment")
       .remove();
-});
+};
+
+// *** Lastly, when a user clicks 'remove' above a post, it should remove the post too.
+const deletePost = function() {
+  if(confirm("Are you sure you want to permanently delete this entire post and its contents?"));
+    $(this)
+      .closest(".post-content")
+      .remove();
+};
 
 const onHover = function() {
   $(this).css("color", "#DB3545");
@@ -91,14 +95,18 @@ const offHover = function () {
   $(this).css("color", "inherit");
 };
 
+
+// Add a click event listener to the submit button to create a post
+$(".new-post-button").click(createPost);
+// Click event listener for the leave comment buttons.
+$(document).on("click", ".leave-comment-button", leaveComment);
+// Add a click event listener to the modal submit button
+$("#add-comment-button").click(createComment);
+
+$(document).on("click", ".delete-comment i", deleteComment);
+
+$(document).on("click", ".delete-post-button", deletePost);
+
 $(document).on("mouseenter", ".delete-comment i", onHover);
+
 $(document).on("mouseleave", ".delete-comment i", offHover);
-
-// *** Lastly, when a user clicks 'remove' above a post, it should remove the post too.
-
-$(document).on("click", ".delete-post-button", function() {
-  if(confirm("Are you sure you want to permanently delete this entire post and its contents?"));
-    $(this)
-      .closest(".post-content")
-      .remove();
-});
