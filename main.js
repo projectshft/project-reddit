@@ -1,3 +1,5 @@
+// Create each post as an object, and store it in an array of objects
+var postBoard = [];
 // Receive poster name and post-text inputs. Outputs them to the "post viewer" section of the html.
 $('#post-button').on('click', function() {
   // event.preventDefault(); ???
@@ -32,8 +34,11 @@ $('#post-button').on('click', function() {
   var newEntryForPostEntity = [
     { posts: [$nameOutput, $textOutput, 'There are no comments on this post.'] }
   ];
-  console.log(newEntryForPostEntity);
-  return newEntryForPostEntity;
+  console.log('The newEntryForPostEntity object is: ', newEntryForPostEntity);
+  postBoard.push(newEntryForPostEntity);
+  console.log('The postBoard array is: ', postBoard);
+  // console.log(newEntryForPostEntity);
+  // return newEntryForPostEntity;
   /////////////////////////////////////////////////////////////////////////////
 });
 
