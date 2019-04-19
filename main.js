@@ -48,6 +48,17 @@ $(document).ready(function() {
     $('button').on('click', function() {
       var userID = $('#userID').val();
       var message = $('#message').val();
+      // Test console logs to ensure correct values are being passed
+
+      // console.log('The userID is ', userID);
+      // console.log('The post is ', message);
+
+      // Edge case testing - Must enter values in fields to post 
+      if (userID === '') {
+        window.alert('Please enter a User ID')
+      } else if (message === '') {
+        window.alert('Please enter a Post')
+      } else {
       createPost(userID, message);
-    });
+    }});
 });
