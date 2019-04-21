@@ -1,67 +1,185 @@
-// Create each post as an object, and store it in an array of objects
-var postBoard = [];
-// Receive poster name and post-text inputs. Outputs them to the "post viewer" section of the html.
-$('#post-button').on('click', function() {
-  // event.preventDefault(); ???
-  // If-SO: pass 'event' as parameter of function
-  var $nameOutput = $('#name-input').val();
-  var $textOutput = $('#post-body-input').val();
-  console.log('$nameOutput is: ', $nameOutput);
-  console.log('$textOutput is: ', $textOutput);
+/*********************
+ *  PostBoard module
+ *********************/
+const PostBoard = () => {
+  // Global variable to store posts
+  let postLibrary = [];
+  let $posts = $('#post-viewer');
 
-  // Append $postIt html output variable to the post-viewer
-  $('#post-viewer').append(
-    `<p>${$textOutput}</p><p align="right"><i>Posted by: <b>${$nameOutput}</b></i><br><p align-left><button
-    class="btn btn-dark btn-sm"
-    type="button"
-    data-toggle="collapse"
-    data-target="#comment-card"
-    aria-expanded="false"
-    aria-controls="specific-comment-card"
-    id="comment-toggle-button">View comments
-  </button><button
-  type="button"
-  class="btn btn-outline-danger btn-sm"
-  id="post-remove-button">Remove Post</button><div class="border-bottom my-3"></div>`
-  );
+  /*******************
+   *  Public functions
+   *******************/
+  /*****Fn: Add a post *****/
+  // Create each post as an object; store it in the array postLibrary
+  const newPost = (text, user) => {
+    // Ensure that empty fields will not be accepted for posting
+    if (text === '' || user === '') {
+      alert(
+        'All fields must be filled out for a submission to be posted. Please make sure the name and text fields are filled out.'
+      );
+    } else {
+      postLibrary.push({ text: text, name: user, comments: [] });
+    }
+  };
 
-  // Empty the name and post-body input fields
-  // Use empty() ??? Use va() and empty() together?
-  $('#name-input').val('');
-  $('#post-body-input').val('');
+  /*****Fn: Remove a post *****/
+  const removePost = currentPost => {
+    let $clickedPost = $(currentPost).closest('.post'); //select post to be removed
+    let index = $clickedPost.index();
+    postLibrary.splice(index, 1); // Remove designated post
+    $clickedPost.remove();
+  };
 
-  // Create a variable to point to the new post entity and return it so it may be used to update the state of the message board array
-  var newEntryForPostEntity = [
-    { posts: [$nameOutput, $textOutput, 'There are no comments on this post.'] }
-  ];
-  console.log('The newEntryForPostEntity object is: ', newEntryForPostEntity);
-  postBoard.push(newEntryForPostEntity);
-  console.log('The postBoard array is: ', postBoard);
-  // console.log(newEntryForPostEntity);
-  // return newEntryForPostEntity;
-  /////////////////////////////////////////////////////////////////////////////
+  /*****Fn: Toggle Comment *****/
+  const toggleComments = currentPost => {
+    let $clickedPost = $(currentPost).closest('.post');
+    $clickedPost.find('.comments-box').toggle();
+    // .toggleClass('show');
+  };
+
+  /*****Fn: Add a comment *****/
+  const newComment = (text, name, postIndex) => {
+    if (text === '' || name === '') {
+      alert(
+        'All fields must be filled out for a submission to be posted. Please make sure the name and text fields are filled out.'
+      );
+    } else {
+      let comment = { text: text, name: name };
+      // pushing the comment into the correct posts array
+      postLibrary[postIndex].comments.push(comment);
+    }
+  };
+
+  /*****Fn: Remove a comment *****/
+  const removeComment = commentButton => {
+    // Identify comment to be removed
+    let $clickedComment = $(commentButton).closest('.comment');
+    // Index of the comment element
+    let commentIndex = $clickedComment.index();
+    // Index of the associated post
+    let postIndex = $clickedComment.closest('.post').index();
+    // Remove the comment from the page
+    $clickedComment.remove();
+    // Remove the comment from the associated post object
+    postLibrary[postIndex].comments.splice(commentIndex, 1);
+  };
+
+  /*******************
+   *  Render Views
+   *******************/
+  /*****View: All posts *****/
+  const renderPosts = () => {
+    // Empty posts so there's no repeats in the rendering, then add from postLibrary array
+    $posts.empty();
+    for (let i = 0; i < postLibrary.length; i++) {
+      let post = postLibrary[i];
+
+      let commentsBox =
+        '<div class="comments-box initially-hidden"><div class="comments-list"></div><br><section class="comment-input-fields"><div class="row align-items-right"><div class="col-8 offset-2 right-justify" id="comment-creator"><h4><strong>Add a comment</strong></h4></div><div class="col-8 offset-2 form-group"><input class="form-control commenter-name" id="commenter-name-input" type="text" placeholder="Your name" aria-required="true"/><textarea class="form-control comment-input" id="comment-body-input" type="text" placeholder="Comment text" aria-required="true"></textarea><button type="button" class="add-comment btn btn-primary float-right" id="comment-button">Post comment</button></div></div><hr></hr></section>';
+
+      $posts.append(
+        '<div class="post"><div><a href="#" class="remove-post float-left">Remove post</a><br>' +
+          post.text +
+          '<br><div class="posted-by float-right"><strong> Posted by: </strong><span class="poster">' +
+          post.name +
+          '</span><br><a href="#" id="comments-toggler">Show/Hide comments</a><br><hr/></div><br>' +
+          commentsBox +
+          '</div>'
+      );
+    }
+  };
+
+  /*****View: All comments of one post *****/
+  const renderComments = () => {
+    // Empty comments so there's no repeats in the rendering
+    $('.comments-list').empty();
+    for (let i = 0; i < postLibrary.length; i++) {
+      let post = postLibrary[i];
+      // Index of the current post in the postLibrary array
+      let index = postLibrary.indexOf(post);
+
+      // Find post element equavlent to current post
+      let $post = $('#post-viewer')
+        .find('.post')
+        .eq(index);
+
+      for (let j = 0; j < post.comments.length; j++) {
+        let comment = post.comments[j];
+        // Append comment to associated post
+        $post
+          .find('.comments-list')
+          .append(
+            '<br><div class="comment"><a href="#" class="remove-comment float-left">Remove comment</a><br>' +
+              comment.text +
+              '<br><div class="by float-right"> By: <strong><span class="commenter">' +
+              comment.name +
+              '</strong><br></hr>' +
+              '</div></div>'
+          );
+      }
+    }
+  };
+
+  return {
+    newPost: newPost,
+    renderPosts: renderPosts,
+    removePost: removePost,
+
+    newComment: newComment,
+    renderComments: renderComments,
+    removeComment: removeComment,
+    toggleComments: toggleComments
+  };
+};
+
+const app = PostBoard();
+app.renderPosts();
+app.renderComments();
+
+/*********************
+ *  Event Handlers
+ **********************/
+/*****e: Add a post *****/
+$('.add-post').on('click', function(event) {
+  event.preventDefault();
+  let text = $('#post-body-input').val();
+  let user = $('#name-input').val();
+  // Clear the name and post input fields
+  $('input[type=text], textarea').val('');
+  app.newPost(text, user);
+  app.renderPosts();
+  app.renderComments();
 });
 
-$('#post-comment-button').on('click', function() {
-  var $commenterNameOutput = $('#commenter-name-input').val();
-  var $commentBodyOutput = $('#comment-body-input').val();
-  console.log('$commenterNameOutput is: ', $commenterNameOutput);
-  console.log('$commentBodyOutput is: ', $commentBodyOutput);
-  // var $oneCommentOutput = ()
+/*****e: Remove a post *****/
+$('#post-viewer').on('click', '.remove-post', function() {
+  app.removePost(this);
+});
 
-  // Append $postComment html output variable to the post-viewer
-  $('#comment-viewer').append(
-    `<p class="align-center">${$commentBodyOutput}</p><p class="align-right">By: <b>${$commenterNameOutput}</b></i></p><a  href="#"><i class="fas fa-trash-alt"></i><p align="right"><i></a><div class="border-bottom my-3"></div>`
-  );
+/*****e: Show/Hide comments *****/
+$('#post-viewer').on('click', '#comments-toggler', function() {
+  app.toggleComments(this);
+});
 
-  // Empty the name and post-body input fields
-  // Use empty() ??? Use va() and empty() together?
-  $('#commenter-name-input').val('');
-  $('#comment-body-input').val('');
-  var newEntryForCommentEntity = [
-    { posts: [$commenterNameOutput, $commentBodyOutput] }
-  ];
-  console.log(newEntryForCommentEntity);
-  // postEntity.push(newEntryForCommentEntity);
-  // return newEntryForCommentEntity;
+/*****e: Add a comment *****/
+$('#post-viewer').on('click', '.add-comment', function() {
+  let text = $(this)
+    .siblings('.comment-input')
+    .val();
+  let name = $(this)
+    .siblings('.commenter-name')
+    .val();
+  // Find index of the post
+  let postIndex = $(this)
+    .closest('.post')
+    .index();
+  // Clear the name and comment input fields
+  $('input[type=text], textarea').val('');
+  app.newComment(text, name, postIndex);
+  app.renderComments();
+});
+
+/*****e: Remove a comment *****/
+$('#post-viewer').on('click', '.remove-comment', function() {
+  app.removeComment(this);
 });

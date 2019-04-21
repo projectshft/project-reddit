@@ -5,12 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Project Reddit</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Google Font: Exo 2 -->
     <link
+      href="https://fonts.googleapis.com/css?family=Exo+2"
       rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
     />
 
-    <!-- LINK TO BOOTSTRAP 4 -->
+    <!-- Bootstrap 4.3.1 -->
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -24,63 +26,54 @@
       <div class="row">
         <div class="col-6 offset-3" id="title-header">
           <header>
-            <h1>Project Reddit</h1>
+            <h1><strong>Project Reddit</strong></h1>
           </header>
         </div>
       </div>
+
+      <section class="post-input-fields">
+        <div class="row align-items-center">
+          <div class="col-8 offset-2 right-justify" id="post-creator">
+            <h3><strong>Add a post</strong></h3>
+          </div>
+          <div class="col-8 offset-2 form-group">
+            <input
+              class="form-control"
+              id="name-input"
+              type="text"
+              placeholder="Your name"
+              aria-required="true"
+            />
+            <textarea
+              class="form-control"
+              id="post-body-input"
+              type="text"
+              placeholder="Post text"
+              aria-required="true"
+            ></textarea>
+            <button
+              type="button"
+              class="add-post btn btn-primary float-right"
+              id="post-button"
+            >
+              Post
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="row align-items-center">
+        <div class="col-8 offset-2 completed-posts" id="post-viewer"></div>
+      </section>
+
+      <!-- Scripts -->
+      <script
+        script
+        type="text/javascript"
+        src="https://code.jquery.com/jquery-3.3.1.js"
+      ></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+      <script type="text/javascript" src="main.js"></script>
     </div>
-
-    <section class="row align-items-center">
-      <div class="col-6 offset-3 completed-posts" id="post-viewer">
-        <hr />
-
-        <!-- <p class="text-received"></p>
-        <p class="name-received"></p> -->
-
-        <!-- <p class="full-post-output"></p> -->
-      </div>
-    </section>
-
-    <section class="post-input-fields">
-      <div class="row align-items-center">
-        <div class="col-6 offset-3" id="post-creator">
-          <h3>Add a post</h3>
-        </div>
-
-        <!-- <div class="row align-items-center"> -->
-        <div class="col-6 offset-3">
-          <input
-            id="name-input"
-            type="text"
-            class="form-control"
-            placeholder="Your name"
-            aria-required="true"
-          />
-
-          <textarea
-            id="post-body-input"
-            type="text"
-            class="form-control"
-            placeholder="Post text"
-            aria-required="true"
-          ></textarea>
-
-          <button
-            type="button"
-            class="btn btn-primary float-right"
-            id="post-button"
-          >
-            Post
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <script
-      script
-      type="text/javascript"
-      src="https://code.jquery.com/jquery-3.3.1.js"
-    ></script>
-    <script type="text/javascript" src="main.js"></script>
   </body>
 </html>

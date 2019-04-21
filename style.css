@@ -1,11 +1,29 @@
 body {
-  background-color: #ec9a38;
+  font-family: 'Exo 2', sans-serif;
+  background-color: black;
+  color: lightgray;
 }
 
 h1 {
+  color: #d24a26;
   margin-top: 30px;
   margin-left: 0;
   text-align: center;
+  font-size: 2.5rem;
+}
+
+h3 {
+  color: #d24a26;
+  text-align: left;
+  font-size: 1.5rem;
+  margin-top: 2rem;
+}
+
+h4 {
+  color: #d24a26;
+  margin-top: 15px;
+  margin-left: 0;
+  font-size: 1.5rem;
 }
 
 h6 {
@@ -15,6 +33,70 @@ h6 {
 textarea {
   margin-top: 10px;
   margin-bottom: 15px;
+}
+
+.post {
+  margin-top: 2rem;
+}
+
+.posted-by {
+  font-size: 1.25rem;
+  color: #d24a26;
+}
+
+.poster {
+  font-size: 1.25rem;
+  color: lightgray;
+  /* whitesmoke; */
+}
+
+hr {
+  height: 2px;
+  color: #d24a26;
+  background-color: #d24a26;
+  border: none;
+  margin-top: 1rem;
+}
+
+#post-viewer {
+  font-size: 1.5rem;
+}
+
+.remove-post {
+  font-size: 1rem;
+}
+
+#comments-toggler {
+  font-size: 1rem;
+  justify-content: left;
+  text-align: left;
+  margin-bottom: 2rem;
+}
+
+.initially-hidden {
+  display: none;
+}
+
+.comment {
+  color: #d24a26;
+  font-size: 1.12rem;
+  margin-top: 2rem;
+}
+
+.by {
+  font-size: 1.12rem;
+  color: lightgray;
+  /* whitesmoke; */
+}
+
+.commenter {
+  color: #d24a26;
+  font-size: 1.12rem;
+  margin-bottom: 2rem;
+}
+
+.remove-comment {
+  font-size: 1rem;
 }
 
 @media (max-width: 600px) {
