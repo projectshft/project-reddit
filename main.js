@@ -12,7 +12,7 @@ const PostBoard = () => {
    *  Public functions
    **********************/
   /*****Fn: Add a post *****/
-  const newPost = (user, text) => {
+  const newPost = (text, user) => {
     // Create each post as an object; store it in the postLibrary array
     if (user === '' || text === '') {
       // Ensure that empty fields will not be accepted for posting
@@ -37,7 +37,7 @@ const PostBoard = () => {
   };
 
   /*****Fn: Add a comment *****/
-  const newComment = (name, text, postIndex) => {
+  const newComment = (text, name, postIndex) => {
     if (name === '' || text === '') {
       // Ensure that empty fields will not be accepted for comments
       alert(INCOMPLETE_SUB); // Notify user of attempt to submit empty field(s)
