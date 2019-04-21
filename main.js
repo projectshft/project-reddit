@@ -5,63 +5,55 @@ const PostBoard = () => {
   // Global variable to store posts
   let postLibrary = [];
   let $posts = $('#post-viewer');
-
-  /*******************
+  // Error message for alerts
+  let INCOMPLETE_SUB =
+    'All fields must be filled out for a submission to be posted. Please make sure the name and text fields are filled out.';
+  /**********************
    *  Public functions
-   *******************/
+   **********************/
   /*****Fn: Add a post *****/
-  // Create each post as an object; store it in the array postLibrary
-  const newPost = (text, user) => {
-    // Ensure that empty fields will not be accepted for posting
-    if (text === '' || user === '') {
-      alert(
-        'All fields must be filled out for a submission to be posted. Please make sure the name and text fields are filled out.'
-      );
+  const newPost = (user, text) => {
+    // Create each post as an object; store it in the postLibrary array
+    if (user === '' || text === '') {
+      // Ensure that empty fields will not be accepted for posting
+      alert(INCOMPLETE_SUB); // Notify user of attempt to submit empty field(s)
     } else {
-      postLibrary.push({ text: text, name: user, comments: [] });
+      postLibrary.push({ name: user, text: text, comments: [] });
     }
   };
 
   /*****Fn: Remove a post *****/
   const removePost = currentPost => {
-    let $clickedPost = $(currentPost).closest('.post'); //select post to be removed
-    let index = $clickedPost.index();
+    let $clickedPost = $(currentPost).closest('.post'); //Select post to be removed
+    let index = $clickedPost.index(); // Index of the post
     postLibrary.splice(index, 1); // Remove designated post
     $clickedPost.remove();
   };
 
-  /*****Fn: Toggle Comment *****/
+  /*****Fn: Toggle comment *****/
   const toggleComments = currentPost => {
     let $clickedPost = $(currentPost).closest('.post');
     $clickedPost.find('.comments-box').toggle();
-    // .toggleClass('show');
   };
 
   /*****Fn: Add a comment *****/
-  const newComment = (text, name, postIndex) => {
-    if (text === '' || name === '') {
-      alert(
-        'All fields must be filled out for a submission to be posted. Please make sure the name and text fields are filled out.'
-      );
+  const newComment = (name, text, postIndex) => {
+    if (name === '' || text === '') {
+      // Ensure that empty fields will not be accepted for comments
+      alert(INCOMPLETE_SUB); // Notify user of attempt to submit empty field(s)
     } else {
-      let comment = { text: text, name: name };
-      // pushing the comment into the correct posts array
-      postLibrary[postIndex].comments.push(comment);
+      let comment = { name: name, text: text };
+      postLibrary[postIndex].comments.push(comment); // Push comment into associated post's comment array
     }
   };
 
   /*****Fn: Remove a comment *****/
   const removeComment = commentButton => {
-    // Identify comment to be removed
-    let $clickedComment = $(commentButton).closest('.comment');
-    // Index of the comment element
-    let commentIndex = $clickedComment.index();
-    // Index of the associated post
-    let postIndex = $clickedComment.closest('.post').index();
-    // Remove the comment from the page
-    $clickedComment.remove();
-    // Remove the comment from the associated post object
-    postLibrary[postIndex].comments.splice(commentIndex, 1);
+    let $clickedComment = $(commentButton).closest('.comment'); //Select comment to be removed
+    let commentIndex = $clickedComment.index(); // Index of the comment element
+    let postIndex = $clickedComment.closest('.post').index(); // Index of the associated post
+    $clickedComment.remove(); // Remove the comment from the page
+    postLibrary[postIndex].comments.splice(commentIndex, 1); // Remove the comment from the associated post object
   };
 
   /*******************
@@ -69,8 +61,7 @@ const PostBoard = () => {
    *******************/
   /*****View: All posts *****/
   const renderPosts = () => {
-    // Empty posts so there's no repeats in the rendering, then add from postLibrary array
-    $posts.empty();
+    $posts.empty(); // Empty posts first so there's no repeats in the rendering
     for (let i = 0; i < postLibrary.length; i++) {
       let post = postLibrary[i];
 
@@ -91,14 +82,10 @@ const PostBoard = () => {
 
   /*****View: All comments of one post *****/
   const renderComments = () => {
-    // Empty comments so there's no repeats in the rendering
-    $('.comments-list').empty();
+    $('.comments-list').empty(); // Empty comments first so there's no repeats in the rendering
     for (let i = 0; i < postLibrary.length; i++) {
       let post = postLibrary[i];
-      // Index of the current post in the postLibrary array
       let index = postLibrary.indexOf(post);
-
-      // Find post element equavlent to current post
       let $post = $('#post-viewer')
         .find('.post')
         .eq(index);
@@ -133,7 +120,7 @@ const PostBoard = () => {
 };
 
 const app = PostBoard();
-app.renderPosts();
+app.renderPosts(); // Render posts upon page load
 app.renderComments();
 
 /*********************
@@ -144,8 +131,7 @@ $('.add-post').on('click', function(event) {
   event.preventDefault();
   let text = $('#post-body-input').val();
   let user = $('#name-input').val();
-  // Clear the name and post input fields
-  $('input[type=text], textarea').val('');
+  $('input[type=text], textarea').val(''); // Clear the name and post text input fields
   app.newPost(text, user);
   app.renderPosts();
   app.renderComments();
@@ -173,8 +159,7 @@ $('#post-viewer').on('click', '.add-comment', function() {
   let postIndex = $(this)
     .closest('.post')
     .index();
-  // Clear the name and comment input fields
-  $('input[type=text], textarea').val('');
+  $('input[type=text], textarea').val(''); // Clear the name and comment text input fields
   app.newComment(text, name, postIndex);
   app.renderComments();
 });
