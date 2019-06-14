@@ -51,18 +51,18 @@ const renderPosts = () => {
   //clear all posts then rerender all posts like in shopping cart
   $postsContainer.empty();
 
-  posts.forEach( post => {
+  posts.forEach( (post, index) => {
 
     let htmlString = 
-      `<div class="container">
+      `<div class="container" data-id="${index}">
         <div class="row">
           <div class="post-container">
             <button class="remove-post blue-link-button">remove</button><button class="comments-toggle blue-link-button">comments</button><p class="post-text mb-0 d-inline-block">${post.postText}</p>
             <p class="post-author">Posted By: <b>${post.postAuthor}</b></p>
           </div>
         </div>
-      </div>
-      <hr/>`
+      <hr/>
+      </div>`
 
       $postsContainer.append(htmlString);
 
@@ -108,9 +108,19 @@ const newPostButtonClickHandler = (event) => {
 
 };
 
-const removeButtonClickHandler = () => {
+const removeButtonClickHandler = function() {
 
-  console.log('made it');
+  //$(this).closest('.container').remove();
+  //above only removes html from site - post is still in posts[]
+  //instead add index as data in post html
+  //  remove post from posts[]
+  //  rerender
+
+  const index = $(this).closest('.container').data().id;
+
+  posts.splice(index,1);
+
+  renderPosts();
 
 };
 
