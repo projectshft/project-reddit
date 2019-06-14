@@ -27,10 +27,11 @@ const renderPosts = () => {
         <div class="row">
           <div class="post-container">
             <p class="post-text">${post.postText}</p>
-            <p class="post-author">Posted By: ${post.postAuthor}</p>
+            <p class="post-author">Posted By: <b>${post.postAuthor}</b></p>
           </div>
         </div>
-      </div>`
+      </div>
+      <hr/>`
 
       $postsContainer.append(htmlString);
 
@@ -69,6 +70,9 @@ const newPostButtonClickHandler = function(event) {
   //clear input
   $postText.val('');
   $postAuthor.val('');
+
+  //after submitting and clearing, set focus back to textarea, better ux if submitted with enter
+  $postText.focus();
 
 };
 
