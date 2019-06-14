@@ -15,7 +15,7 @@ $( "#post-form" ).submit(function( event ) {
 //function that handles posting creation
 var createPost = function (postContent, userName){
 	var postTemplate =
-     '<div class="user-post">'
+     '<div class="user-post grey-separator">'
    + '  <p class="post-content"> ' + postContent + ' </p>'
 	 + '  <h5 class="post-name">Posted By: <em>' + userName + '</em> </h5>'
    + '</div>'
