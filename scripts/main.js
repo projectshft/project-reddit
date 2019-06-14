@@ -1,13 +1,13 @@
 $("#post-form").submit(function(event) {
-    $postItems = $('#post-items');
-    postText = $('#postText').val();
-    userName = $('#userName').val();
+    var $postItems = $('#post-items');
+    let postText = $('#postText').val();
+    let userName = $('#userName').val();
     //console.log(postText, userName);
     var newPost = createPost(postText, userName);
     //alert( "Handler for post .submit() called." );
     console.log(newPost);
 
-    //need to add inner html here somehow
+    //adds post to inner html of post-items
     $postItems.append(newPost);
     event.preventDefault();
 });
@@ -42,12 +42,14 @@ var createPost = function(postContent, userName) {
 
 //function that handles comment creation
 $("#comment-form").submit(function(event) {
-    $postComments = $(this).closest(".post-comments");
-    commentText = $('#commentText').val();
-    commentUserName = $('#commentUserName').val();
+		event.preventDefault();
+		console.log('comment posting clicked');
+    var $postComments = $(this).closest(".post-comments");
+    let commentText = $(this).closest('#commentText').val();
+    let commentUserName = $(this).closest('#commentUserName').val();
     //console.log(commentText, userName);
-    var newcomment = createcomment(commentText, commentUserName);
-    //alert( "Handler for comment .submit() called." );
+    var newcomment = createComment(commentText, commentUserName);
+    alert( "Handler for comment .submit() called." );
     console.log(newcomment);
 
     //need to add inner html here somehow
@@ -65,7 +67,7 @@ var createComment = function(commentContent, commentUserName) {
 };
 
 var commentForm =
-	'<form id="comment-form" class="form-inline">' +
+	'<form class="form-inline" id="comment-form">' +
 	'<input type="text" class="form-control mb-2 mr-sm-2" id="commentText" placeholder="Comment Text" required>' +
 	'<input type="text" class="form-control mb-2 mr-sm-2" id="commentUserName" placeholder="User Name" required>' +
 	'<button type="submit" class="btn btn-primary btn-sm mb-2">Post Comment</button></form>';
