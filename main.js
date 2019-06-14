@@ -1,7 +1,38 @@
+/**
+ * Part 2 plan
+ * 
+ * Add comments to post object DONE
+ * 
+ * Add 'remove' and 'comments' links to all posts
+ * 
+ * Click handler on remove to delete post
+ * 
+ * Add comment section to post html
+ *  initially empty, with add comment section, not visible
+ * 
+ * Click handler on comments to toggle visibility
+ * 
+ * Click handler in 'post comments' 
+ *  adds comment to html
+ *  'x' next to comment
+ * 
+ * Click handler on x's next to comments to delete comment
+ */
+
+
 const posts = [];
 /**
  * Make posts objects like so:
- * { postText: [text], postAuthor: [author] }
+ * { 
+ *    postText: 'sometext',
+ *    postAuthor: 'someauthor',
+ *    comments: [
+ *                {
+ *                  commentText: 'someText',
+ *                  commentAuthor: 'someAuthor
+ *                }
+ *              ] 
+ * }
  */
 
 const checkForValidText = () => {
@@ -58,7 +89,8 @@ const newPostButtonClickHandler = function(event) {
   //create post object and add to posts array
   let newPost = {
     postText: $postText.val(),
-    postAuthor: $postAuthor.val()
+    postAuthor: $postAuthor.val(),
+    comments: []
   };
 
   posts.push(newPost);
@@ -80,3 +112,4 @@ const newPostButtonClickHandler = function(event) {
 
 //post button for part 1
 $('#new-post-button').click(newPostButtonClickHandler);
+
