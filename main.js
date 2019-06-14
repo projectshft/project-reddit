@@ -26,7 +26,7 @@ const renderPosts = () => {
       `<div class="container">
         <div class="row">
           <div class="post-container">
-            <p class="post-text">${post.postText}</p>
+            <p class="post-text mb-0">${post.postText}</p>
             <p class="post-author">Posted By: <b>${post.postAuthor}</b></p>
           </div>
         </div>
