@@ -15,7 +15,26 @@ const checkForValidText = () => {
 
 const renderPosts = () => {
 
+  let $postsContainer = $('#posts');
 
+  //clear all posts then rerender all posts like in shopping cart
+  $postsContainer.empty();
+
+  posts.forEach( post => {
+
+    let htmlString = 
+      `<div class="container">
+        <div class="row">
+          <div class="post-container">
+            <p class="post-text">${post.postText}</p>
+            <p class="post-author">Posted By: ${post.postAuthor}</p>
+          </div>
+        </div>
+      </div>`
+
+      $postsContainer.append(htmlString);
+
+  });
 
 };
 
