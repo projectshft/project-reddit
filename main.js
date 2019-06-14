@@ -57,7 +57,7 @@ const renderPosts = () => {
       `<div class="container">
         <div class="row">
           <div class="post-container">
-            <p class="post-text mb-0">${post.postText}</p>
+            <button class="remove-post blue-link-button">remove</button><button class="comments-toggle blue-link-button">comments</button><p class="post-text mb-0 d-inline-block">${post.postText}</p>
             <p class="post-author">Posted By: <b>${post.postAuthor}</b></p>
           </div>
         </div>
