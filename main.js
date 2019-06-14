@@ -3,7 +3,7 @@
  * 
  * Add comments to post object DONE
  * 
- * Add 'remove' and 'comments' links to all posts
+ * Add 'remove' and 'comments' links to all posts DONE
  * 
  * Click handler on remove to delete post
  * 
@@ -70,7 +70,7 @@ const renderPosts = () => {
 
 };
 
-const newPostButtonClickHandler = function(event) {
+const newPostButtonClickHandler = (event) => {
   event.preventDefault();
 
   //check to see if anything is written to text areas
@@ -108,8 +108,17 @@ const newPostButtonClickHandler = function(event) {
 
 };
 
+const postButtonsClickHandler = () => {
+
+  console.log('made it');
+
+};
+
 
 
 //post button for part 1
 $('#new-post-button').click(newPostButtonClickHandler);
+
+//delegated click handler for buttons not rendered yet
+$('#posts').on('click', 'button', postButtonsClickHandler);
 
