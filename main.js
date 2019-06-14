@@ -13,6 +13,12 @@ const checkForValidText = () => {
 
 };
 
+const renderPosts = () => {
+
+
+
+};
+
 const newPostButtonClickHandler = function(event) {
   event.preventDefault();
 
@@ -26,12 +32,20 @@ const newPostButtonClickHandler = function(event) {
   }
 
   //save postText and postAuthor to variables, maybe not necessary
+  let $postText = $('#new-post-text');
+  let $postAuthor = $('#new-post-author');
 
   //create post object and add to posts array
+  let newPost = {
+    postText: $postText.val(),
+    postAuthor: $postAuthor.val()
+  };
 
-  //clear posts section front end
+  posts.push(newPost);
 
+  //clear posts section front end - done in render function
   //render all posts
+  renderPosts();
 
 };
 
