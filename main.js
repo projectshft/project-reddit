@@ -108,9 +108,15 @@ const newPostButtonClickHandler = (event) => {
 
 };
 
-const postButtonsClickHandler = () => {
+const removeButtonClickHandler = () => {
 
   console.log('made it');
+
+};
+
+const commentsToggleButtonClickHandler = () => {
+
+  console.log('sup');
 
 };
 
@@ -120,5 +126,6 @@ const postButtonsClickHandler = () => {
 $('#new-post-button').click(newPostButtonClickHandler);
 
 //delegated click handler for buttons not rendered yet
-$('#posts').on('click', 'button', postButtonsClickHandler);
+$('#posts').on('click', '.remove-post', removeButtonClickHandler);
+$('#posts').on('click', '.comments-toggle', commentsToggleButtonClickHandler);
 
