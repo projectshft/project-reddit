@@ -1,9 +1,6 @@
+// set the template to be able to take in two parameters and hold their values as strings
 
-
-// get the value of the users name and the value of the post they wrote
-
-
-var foo = function($userNameInput, $userPostInput){
+var newPost = function($userNameInput, $userPostInput){
 var template =
 '<article class="row">' +
   '<div class="col-md-10 col-sm-10">' +
@@ -25,12 +22,14 @@ var template =
 return template;
 }
 
-
+// Gets the template from newPost function so that when a new btn is clicked the
+// user name shows in the header of the card, and the comments shows in the <p> tag
+// in the post section of the card.
 var $btnPost = $('#btnPost');
 $btnPost.on('click', function(){
   var $userNameInput = $('#name').val();
   var $userPostInput = $('#message').val();
-  var callingFoo = foo($userNameInput, $userPostInput);
-  $('.comment-list').prepend(callingFoo);
+  var newPost = newPost($userNameInput, $userPostInput);
+  $('.comment-list').prepend(newPost);
 
 });
