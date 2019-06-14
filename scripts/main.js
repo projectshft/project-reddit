@@ -15,9 +15,10 @@ $( "#post-form" ).submit(function( event ) {
 //function that handles posting creation
 var createPost = function (postContent, userName){
 	var postTemplate =
-     '<div class="user-post grey-separator">'
+     '<div class="user-post grey-separator top-padded">'
    + '  <p class="post-content"> ' + postContent + ' </p>'
-	 + '  <h5 class="post-name">Posted By: <em>' + userName + '</em> </h5>'
+   + '<div class="post-comments"></div>'
+	 + '  <p class="post-name"><b>Posted By:</b> <em>' + userName + '</em> </p>'
    + '</div>'
    ;
 
@@ -32,7 +33,14 @@ var createPost = function (postContent, userName){
 	//EXTENSION: function that enables users to edits
 
 	//function that handles comment creation
+	var createComment = function (commentContent, userName){
+	var commentTemplate =
+     '<div class="user-comment grey-separator top-padded">'
+   + '  <p class="comment-content"> ' + commentContent + '	<b>Commented By:</b><em>' + userName + '</em></p>'
+   + '</div>';
 
+   return commentTemplate;
+};
 	//function that handles comment deletion
 
 

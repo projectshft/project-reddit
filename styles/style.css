@@ -1,5 +1,6 @@
 .left-align{
  	 text-align: left;
+ 	 font-family: 'Noto Sans HK', sans-serif;
  }
 
 .grey-separator {
@@ -8,10 +9,10 @@
 
 .jumbotron {
 	background-color: white;
-	
+	margin-bottom: 0px;
+	padding: 32px 0px;
 }
 
-
-.post-name {
-
+.top-padded {
+	padding-top: 25px;
 }

@@ -5,25 +5,22 @@
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 		<link rel="stylesheet" type="text/css" href="styles/style.css">
+		<link href="https://fonts.googleapis.com/css?family=Noto+Sans+HK:500&display=swap" rel="stylesheet">
 	</head>
 	<body>
-	
+		
 		<div class="container-fluid">
-
 			<div class="row">
 				<div class="col"></div>
 				<div class="col-sm-6 left-align">
-
 					<div class="jumbotron grey-separator">
 						<h1>Project Reddit</h1>
 					</div>
-
 					<div id="post-items">
 					</div>
-
-					<form id="post-form">
+					<form id="post-form" class="top-padded">
 						<div class="form-header">
-							<h2>Add a New Post</h2>
+							<h3>Add a New Post</h3>
 						</div>
 						<div class="form-group">
 							<input type="text" class="form-control" id="postText" placeholder="Post Text" required>
@@ -33,6 +30,16 @@
 						</div>
 						<button type="submit" id="post-submit" class="btn btn-primary">Post</button>
 					</form>
+
+
+
+					<form id="comment-form" class="form-inline">
+						<input type="text" class="form-control mb-2 mr-sm-2" id="commentText" placeholder="Comment Text" required>
+						<input type="text" class="form-control mb-2 mr-sm-2" id="commentUserName" placeholder="User Name" required>
+						<button type="submit" class="btn btn-primary btn-sm mb-2">Post Comment</button>
+					</form>
+
+
 				</div>
 				<div class="col"></div>
 			</div>
