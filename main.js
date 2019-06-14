@@ -66,6 +66,10 @@ const newPostButtonClickHandler = function(event) {
   //render all posts
   renderPosts();
 
+  //clear input
+  $postText.val('');
+  $postAuthor.val('');
+
 };
 
 
