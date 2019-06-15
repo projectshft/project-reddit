@@ -1,19 +1,26 @@
-
+var uniqueId = 0;
 //create post functionality
 
 
 $('.post-button').click(function(){
-
+  uniqueId ++;
   var $postText = $('#user-post-text').val();
   var $userName = $('#user-post-name').val();
   $('.list-group-flush').append('<li class = "list-group-item">'
     + '<button type="button" class="btn btn-primary btn-sm remove-button"> remove</button>'
     + '<button type="button" class="btn btn-primary btn-sm comment-button"> comments</button>'
     + $postText + '<br>' + "Posted By: "
-    + '<b>'+$userName +'</b>'+'</li>');
+    + '<b>'+$userName +'</b>'
+    + '<div class="collapse comments-display card card-body">'
+    + '<ul id="comments' + uniqueId +'">'+'</ul>'
+    + '<input type="text" class ="comment-text" placeholder="Comment Text"> <input type="text" placeholder="User Name" class="comment-user">'
+    + '<button type="button" class="btn btn-primary btn-sm post-comment-button"> Post Comment</button>'
+    + '</div>' + '</li>');
+
     //binding remove and commenting clicks to new elements
     bindRemoveEvent();
-    bindShowCommentsEvent();
+    bindToggleCommentsEvent();
+    bindPostCommentEvent();
 });
 
 
@@ -25,14 +32,17 @@ var bindRemoveEvent = function(){
   });
 };
 
-var bindShowCommentsEventCommentEvent = function(){
+//bug here in toggle
+var bindToggleCommentsEvent = function(){
   $('.comment-button').click(function(){
-     $('.list-group-item').append('<div><input type="text" id="user-comment" placeholder="Post Comment">'+ '<button type="input"' + 'class="btn btn-primary">Comment</button></div>');
+    var commentsToToggle = $(this).siblings('.comments-display');
+     commentsToToggle.toggle();
   });
 };
 
-//add commenting functionality
-// var createCommentField = function(){
-//   $('.list-group-item').append('<div><input type="text" id="user-post-text" placeholder="Post Comment">'+ '<button type="input"' + 'class="btn btn-primary">Comment</button></div>');
-// };
-// '<button type = "button" class = "btn btn-outline-primary btn-sm">Remove</button>'
+//working here
+var bindPostCommentEvent = function(){
+  $('.post-comment-button').click(function(){
+    $("#comments" + uniqueId).append('</li>' + $('.comment-text').val() + " Posted By: " + $('.comment-user').val() + '</li>' + '</br>');
+  });
+};
