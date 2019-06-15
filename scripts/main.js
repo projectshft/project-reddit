@@ -22,6 +22,17 @@ var createPost = function(postContent, userName, postNumber) {
   return postTemplate;
 };
 
+//function to create new comment html template
+var createComment = function(commentContent, commentUserName) {
+    var commentTemplate =
+        '<div class="user-comment">' +
+        '  <p class="comment-content">' + commentContent + '	| <span><b>Commented By: </b><em>' + 
+        commentUserName + '</em>    <i class="fa fa-times-circle remove-comment"></i></span></p>' +
+        '</div>';
+    
+    return commentTemplate;
+};
+
 //submit event to handle creation of new posts
 $("#post-form").submit(function(event) {
     event.preventDefault();
@@ -34,18 +45,19 @@ $("#post-form").submit(function(event) {
     postNumber++;
 });
 
-//function to create new comment html template
-var createComment = function(commentContent, commentUserName) {
-    var commentTemplate =
-        '<div class="user-comment">' +
-        '  <p class="comment-content">' + commentContent + '	| <span><b>Commented By: </b><em>' + commentUserName + '</em></p></span>' +
-        '</div>';
-    console.log(commentTemplate);
-    return commentTemplate;
-};
+//function that handles posting deletion
+$("#post-items").on('click','.remove-post',function(){
+		event.preventDefault();
+		console.log("post delete button clicked");
+
+		//grab this post and delete
+		let currentPost = $(this).closest('.user-post');
+		currentPost.remove();
+    
+});
 
 //submit event to handle creation of new comments
-$("#post-items").on('click','.comment-form-btn',function(){
+$("#post-items").on('click','.comment-form-btn', function(){
 		event.preventDefault();
 
 		//grab unique post Id # and comments section
@@ -65,43 +77,17 @@ $("#post-items").on('click','.comment-form-btn',function(){
     postComments.append(newComment);		
 });
 
-//function that handles posting deletion
-$("#post-items").on('click','.remove-post',function(){
+//function that handles comment deletion
+$("#post-items").on('click','.remove-comment', function(){
 		event.preventDefault();
-		console.log("post delete button clicked");
 
-		//grab this post
-		let currentPost = $(this).closest('.user-post');
-		currentPost.remove();
+		//grab this comment
+		let currentComment = $(this).closest('.user-comment');
+		currentComment.remove();
     
 });
 
 
-
-
-
-
-
-
-
-//onHover function that displays the 'x' to delete a post or edit post or post comments
-// var onHover = function () {
-//    var postItem = $(this).find('.user-post');
-
-//  };
-
-
-
 //EXTENSION: function that enables users to edit posts
-
-//function that handles comment creation
-
-		
-
-//function that handles comment deletion
-
-
-
-
 
 //EXTENSION: function that displays posts in a "new" screen, with comments below.
