@@ -40,6 +40,7 @@ const posts = [];
  * }
  */
 
+//pass jquery object referencing a textarea or input
 const checkForValidText = ($textArea) => ($textArea.val().trim() === '') ? false : true;
 
 const renderPosts = () => {
@@ -71,7 +72,7 @@ const renderPosts = () => {
       `     <div class="row" data-cid=${commentIndex}">
               <p class="mr-1 mb-0">${comment.commentText} </p>
               <p class="mb-0">Posted By: <b>${comment.commentAuthor}</b></p>
-              <button class="remove-comment close text-primary ml-1 mb-1"><span aria-hidden="true">&times;</span></button>
+              <button class="remove-comment-button close text-primary ml-1 mb-1"><span aria-hidden="true">&times;</span></button>
             </div>`
 
     });        
@@ -135,7 +136,7 @@ const newPostButtonClickHandler = (event) => {
 
 };
 
-const removeButtonClickHandler = function() {
+const removePostButtonClickHandler = function() {
 
   //$(this).closest('.container').remove();
   //above only removes html from site - post is still in posts[]
@@ -195,6 +196,11 @@ const newCommentButtonClickHandler = function() {
 
 };
 
+const removeCommentButtonClickHandler = function() {
+
+  console.log('removing comment');
+
+};
 
 
 //post button for part 1
@@ -205,6 +211,7 @@ $('#new-post-button').click(newPostButtonClickHandler);
 
 
 //delegated click handler for buttons not rendered yet
-$('#posts').on('click', '.remove-post', removeButtonClickHandler);
+$('#posts').on('click', '.remove-post', removePostButtonClickHandler);
 $('#posts').on('click', '.comments-toggle', commentsToggleButtonClickHandler);
 $('#posts').on('click', '.new-comment-button', newCommentButtonClickHandler);
+$('#posts').on('click', '.remove-comment-button', removeCommentButtonClickHandler);
