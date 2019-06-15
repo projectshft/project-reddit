@@ -49,16 +49,16 @@ const checkForValidText = () => {
 
 const renderPosts = () => {
 
-  let $postsContainer = $('#posts');
+  const $postsContainer = $('#posts');
 
   //clear all posts then rerender all posts like in shopping cart
   $postsContainer.empty();
 
   posts.forEach( (post, index) => {
 
-    let visibility = (posts[index].commentsOpen) ? '' : 'd-none';
+    const visibility = (posts[index].commentsOpen) ? '' : 'd-none';
 
-    let htmlString = 
+    const htmlString = 
       `<div class="container" data-id="${index}">
         <div class="row">
           <div class="post-container">
@@ -102,11 +102,11 @@ const newPostButtonClickHandler = (event) => {
   }
 
   //save postText and postAuthor to variables, maybe not necessary
-  let $postText = $('#new-post-text');
-  let $postAuthor = $('#new-post-author');
+  const $postText = $('#new-post-text');
+  const $postAuthor = $('#new-post-author');
 
   //create post object and add to posts array
-  let newPost = {
+  const newPost = {
     postText: $postText.val(),
     postAuthor: $postAuthor.val(),
     comments: [],
@@ -149,14 +149,14 @@ const commentsToggleButtonClickHandler = function() {
   //find comments div invisibility wrapper
   //if currently invisible, set to visible and vice versa
  
-  let $currentVisibilityWrapper = $(this).closest('.container').find('.visibility-wrapper');
+  const $currentVisibilityWrapper = $(this).closest('.container').find('.visibility-wrapper');
 
   ($currentVisibilityWrapper.hasClass('d-none'))
     ? $currentVisibilityWrapper.removeClass('d-none')
     : $currentVisibilityWrapper.addClass('d-none');
 
   //get current post id and set commentsOpen flag
-  let index = $(this).closest('.container').data().id;
+  const index = $(this).closest('.container').data().id;
 
   posts[index].commentsOpen = (posts[index].commentsOpen) ? false : true;
 
