@@ -61,20 +61,26 @@ const renderPosts = () => {
             <p class="post-author">Posted By: <b>${post.postAuthor}</b></p>
           </div>
         </div>
+        <div class="visibility-wrapper d-none">
+          <div class="row">
+            <div class="comments-container"></div>
+          </div>
+          <div class="row">
+            <input class="new-comment-text" type="text" placeholder="Comment Text"></input>
+            <input class="new-comment-author ml-1" type="text" placeholder="User Name"></input>
+            <button class="btn btn-primary new-comment-button ml-2" type="button">Post Comment</button>
+          </div>
+        </div>
       <hr/>
       </div>`
 
-      $postsContainer.append(htmlString);
+    //add comment section div to string above, invisible
+    //foreach comment in comments[], add to htmlString
 
-      renderComments(post);
+
+    $postsContainer.append(htmlString);
 
   });
-
-};
-
-const renderComments = (post) => {
-
-  debugger;
 
 };
 
