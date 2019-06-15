@@ -18,9 +18,9 @@
 }
 
 .user-comment {
-	text-align: center;
+	padding-left: 15px;
 }
 
-.comment-content:span {
+.comment-content: span {
 	font-size: 10px;
 }

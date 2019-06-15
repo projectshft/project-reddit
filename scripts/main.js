@@ -4,16 +4,18 @@ var postNumber = 0;
 var createPost = function(postContent, userName, postNumber) {
 
 	var commentForm =
+		'<div>' +
 		'<form class="form-inline comment-form">' +
 		'<input type="text" class="form-control mb-2 mr-sm-2" id="commentText-' + postNumber + '" placeholder="Comment Text" required>' +
 		'<input type="text" class="form-control mb-2 mr-sm-2" id="commentUserName-'+ postNumber + '" placeholder="User Name" required>' +
-		'<button type="button" class="btn btn-primary btn-sm mb-2 comment-form-btn">Post Comment</button></form>';
+		'<button type="button" class="btn btn-primary btn-sm mb-2 comment-form-btn">Post Comment</button></form>' +
+		'</div>';
 
   var postTemplate =
       '<div class="user-post grey-separator top-padded" data-post-number="' + postNumber + '">' +
       '<p><button type="button" class="btn btn-link btn-sm remove-post">Remove</button><button type="button" class="btn btn-link btn-sm">Comments</button></p>' +
       '  <p class="post-content"> ' + postContent + ' </p>' +
-      '<div class="post-comments">'+ commentForm +'</div>' +
+      '<div id="post-comments-'+ postNumber + '"></div>' + commentForm +
       '  <p class="post-name"><b>Posted By:</b> <em>' + userName + '</em> </p>' +
       '</div>';
 
@@ -40,7 +42,7 @@ $("#post-items").on('click','.comment-form-btn',function(){
 		//grab unique post Id #
 		let currentPost = $(this).closest('.user-post');
     let postId = currentPost.attr('data-post-number');
-    let postComments = $(this).closest('.post-comments');
+    let postComments = $("#post-items").find('#post-comments-'+ postId);
     
     //grab current comment values
     // debugger
@@ -50,13 +52,13 @@ $("#post-items").on('click','.comment-form-btn',function(){
     var newComment = createComment(commentText, commentUserName);
 
     //adds comment to inner html of post-comments
-    postComments.prepend(newComment);		
+    postComments.append(newComment);		
 });
 
 var createComment = function(commentContent, commentUserName) {
     var commentTemplate =
         '<div class="user-comment">' +
-        '  <p class="comment-content">' + commentContent + '	<span><b>Commented By: </b><em>' + commentUserName + '</em></p></span>' +
+        '  <p class="comment-content">' + commentContent + '	| <span><b>Commented By: </b><em>' + commentUserName + '</em></p></span>' +
         '</div>';
     console.log(commentTemplate);
     return commentTemplate;
