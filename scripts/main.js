@@ -34,27 +34,7 @@ $("#post-form").submit(function(event) {
     postNumber++;
 });
 
-//submit event to handle creation of new comments
-$("#post-items").on('click','.comment-form-btn',function(){
-		event.preventDefault();
-		console.log("comment button clicked");
-
-		//grab unique post Id #
-		let currentPost = $(this).closest('.user-post');
-    let postId = currentPost.attr('data-post-number');
-    let postComments = $("#post-items").find('#post-comments-'+ postId);
-    
-    //grab current comment values
-    // debugger
-    let commentText = $("#post-items").find('#commentText-'+ postId).val();
-    let commentUserName = $("#post-items").find('#commentUserName-'+ postId).val();
-
-    var newComment = createComment(commentText, commentUserName);
-
-    //adds comment to inner html of post-comments
-    postComments.append(newComment);		
-});
-
+//function to create new comment html template
 var createComment = function(commentContent, commentUserName) {
     var commentTemplate =
         '<div class="user-comment">' +
@@ -64,9 +44,43 @@ var createComment = function(commentContent, commentUserName) {
     return commentTemplate;
 };
 
+//submit event to handle creation of new comments
+$("#post-items").on('click','.comment-form-btn',function(){
+		event.preventDefault();
 
+		//grab unique post Id # and comments section
+		let currentPost = $(this).closest('.user-post');
+    let postId = currentPost.attr('data-post-number');
+    let postComments = $("#post-items").find('#post-comments-'+ postId);
+    
+    //grab current comment values
+    // debugger
+    let commentText = $("#post-items").find('#commentText-'+ postId).val();
+    let commentUserName = $("#post-items").find('#commentUserName-'+ postId).val();
+
+    //creates comment using html template function
+    var newComment = createComment(commentText, commentUserName);
+
+    //adds comment to inner html of post-comments for current post
+    postComments.append(newComment);		
+});
 
 //function that handles posting deletion
+$("#post-items").on('click','.remove-post',function(){
+		event.preventDefault();
+		console.log("post delete button clicked");
+
+		//grab this post
+		let currentPost = $(this).closest('.user-post');
+		currentPost.remove();
+    
+});
+
+
+
+
+
+
 
 
 
