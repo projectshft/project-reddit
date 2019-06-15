@@ -1,6 +1,6 @@
  //creating a base html for each post. The function takes in the post text and author name and adds formats them within an html element including a removeand comment button
  var createPost = function(userName, userText) {
-   var postTemplate = '<div><button type = "button" class ="attached-buttons" id = "remove-button">remove</button><button type = "button" class = "attached-buttons" id = "comment-button">comment</button><div id = "post-box">' + userText + '<br>' + 'Posted By: ' + userName + '</div></div>'
+   var postTemplate = '<div id = "all-post-content"><button type = "button" class ="attached-buttons" id = "remove-button">remove</button><button type = "button" class = "attached-buttons" id = "comment-button">comment</button><div id = "post-box">' + userText + '<br>' + 'Posted By: ' + userName + '</div></div>'
 
    var commentBoxTemplate = '<form><input id = "comment-text" type = "text" placeholder= "Comment Text"><input id = "comment-name" type = "text" placeholder = "User Name"><button type = "button" class = "btn btn-primary post-comment-button">Post Comment</button></form>';
 
@@ -18,10 +18,15 @@
      $(this).css('text-decoration', 'none')
    }
 
-   //when the comment button is clicked something happens
+   //when the comment button is a comment and username input boxes appear under the post along with a post comment button
    var commentClick = function() {
-     console.log('checking comment click')
      $('#post-box').append(commentBoxTemplate);
+
+   }
+
+   //when the remove button is clicked the post is then removed
+   var removeClick = function () {
+     $('#all-post-content').remove();
    }
 
 
@@ -30,7 +35,8 @@
    $posts.find('#remove-button').hover(onHover, offHover);
    $posts.find('#comment-button').hover(onHover, offHover);
    $posts.find('#comment-button').on('click', commentClick);
-   $posts.find('#remove-button').on('click', commentClick);
+   $posts.find('#remove-button').on('click', removeClick)
+
 
 
    return $posts;
