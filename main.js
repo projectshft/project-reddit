@@ -7,16 +7,19 @@
  * 
  * [X] Click handler on remove to delete post
  * 
- * Add comment section to post html
+ * [X] Add comment section to post html
  *  initially empty, with add comment section, not visible
  * 
- * Click handler on comments to toggle visibility
+ * [ ] Click handler on comments to toggle visibility
  * 
- * Click handler in 'post comments' 
+ * [ ] Click handler in 'post comments' 
  *  adds comment to html
  *  'x' next to comment
  * 
- * Click handler on x's next to comments to delete comment
+ * [ ] Click handler on x's next to comments to delete comment
+ * 
+ * [ ] Removing posts while comments visible sets them all back to invisible
+ *  on rendere check if it should stay visible
  */
 
 
@@ -142,14 +145,12 @@ const commentsToggleButtonClickHandler = function() {
 
   //find comments div invisibility wrapper
   //if currently invisible, set to visible and vice versa
+ 
+  let $currentVisibilityWrapper = $(this).closest('.container').find('.visibility-wrapper');
 
-  let $currentPostContainer = $(this).closest('.container'); 
-  let $currentVisibilityWrapper = $currentPostContainer.find('.visibility-wrapper');
-
-  if ($currentVisibilityWrapper.hasClass('d-none'))
-    $currentVisibilityWrapper.removeClass('d-none');
-  else
-    $currentVisibilityWrapper.addClass('d-none');
+  ($currentVisibilityWrapper.hasClass('d-none'))
+    ? $currentVisibilityWrapper.removeClass('d-none')
+    : $currentVisibilityWrapper.addClass('d-none');
 
 };
 
