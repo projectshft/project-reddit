@@ -159,12 +159,27 @@ const commentsToggleButtonClickHandler = function() {
 
 const newCommentButtonClickHandler = function() {
 
-  //validate input
-
+  const $commentText = $(this).siblings('.new-comment-text');
+  const $commentAuthor = $(this).siblings('.new-comment-author');
   
+  //validate input
+  if (!checkForValidText($commentText) || !checkForValidText($commentAuthor)) {
+    console.log('Invalid input, comment message and author required');
+    return;
+  }
+
   //add comment to posts.comments[]
+  const commentObject = {
+    commentText: $commentText.val(),
+    commentAuthor: $commentAuthor.val()
+  };
+
+  const index = $(this).closest('.container').data().id;
+
+  posts[index].comments.push(commentObject);
 
   //render
+  renderPosts();
 
 };
 
