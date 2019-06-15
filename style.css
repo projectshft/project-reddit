@@ -1,3 +1,15 @@
 h1{
   text-align: left;
 }
+
+#post-item{
+  padding: 0px;
+}
+
+.remove-button{
+  margin-right: 10px;
+}
+
+.comment-button{
+  margin-right: 5px;
+}
