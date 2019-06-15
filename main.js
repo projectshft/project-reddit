@@ -162,6 +162,12 @@ const commentsToggleButtonClickHandler = function() {
 
 };
 
+const newCommentButtonClickHandler = () => {
+
+  console.log('look at me baby');
+
+};
+
 
 
 //post button for part 1
@@ -174,4 +180,4 @@ $('#new-post-button').click(newPostButtonClickHandler);
 //delegated click handler for buttons not rendered yet
 $('#posts').on('click', '.remove-post', removeButtonClickHandler);
 $('#posts').on('click', '.comments-toggle', commentsToggleButtonClickHandler);
-
+$('#posts').on('click', '.new-comment-button', newCommentButtonClickHandler);
