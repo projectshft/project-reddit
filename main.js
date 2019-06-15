@@ -138,9 +138,18 @@ const removeButtonClickHandler = function() {
 
 };
 
-const commentsToggleButtonClickHandler = () => {
+const commentsToggleButtonClickHandler = function() {
 
-  console.log('sup');
+  //find comments div invisibility wrapper
+  //if currently invisible, set to visible and vice versa
+
+  let $currentPostContainer = $(this).closest('.container'); 
+  let $currentVisibilityWrapper = $currentPostContainer.find('.visibility-wrapper');
+
+  if ($currentVisibilityWrapper.hasClass('d-none'))
+    $currentVisibilityWrapper.removeClass('d-none');
+  else
+    $currentVisibilityWrapper.addClass('d-none');
 
 };
 
