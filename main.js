@@ -164,7 +164,11 @@ const commentsToggleButtonClickHandler = function() {
 
 const newCommentButtonClickHandler = () => {
 
-  console.log('look at me baby');
+  //validate input
+  
+  //add comment to posts.comments[]
+
+  //render
 
 };
 
