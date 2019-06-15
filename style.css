@@ -9,3 +9,11 @@ body {
 .post-button {
   margin-top: 10px;
 }
+
+.attached-buttons {
+  border: none;
+  background: none;
+  padding: 0;
+  margin-right: 3px;
+  color: #007bff;
+}
