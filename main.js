@@ -1,7 +1,6 @@
  //creating a base html for each post. The function takes in the post text and author name and adds formats them within an html element including a removeand comment button
  var createPost = function(userName, userText) {
-   var postTemplate = '<div class = "post-box"><button type = "button" class ="attached-buttons" id = "remove-button">remove</button><button type = "button" class = "attached-buttons" id = "comment-button">comment</button>' +
-     +userText + '<br>' + 'Posted By: ' + userName + '</div>'
+   var postTemplate = '<div><button type = "button" class ="attached-buttons" id = "remove-button">remove</button><button type = "button" class = "attached-buttons" id = "comment-button">comment</button><div id = "post-box">' + userText + '<br>' + 'Posted By: ' + userName + '</div></div>'
 
    var commentBoxTemplate = '<form><input id = "comment-text" type = "text" placeholder= "Comment Text"><input id = "comment-name" type = "text" placeholder = "User Name"><button type = "button" class = "btn btn-primary post-comment-button">Post Comment</button></form>';
 
@@ -22,7 +21,7 @@
    //when the comment button is clicked something happens
    var commentClick = function() {
      console.log('checking comment click')
-     $('.post-box').append(commentBoxTemplate);
+     $('#post-box').append(commentBoxTemplate);
    }
 
 
