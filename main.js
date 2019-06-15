@@ -12,6 +12,8 @@
  * 
  * [X] Click handler on comments to toggle visibility
  * 
+ * [ ] Refactor checkForValidText to take jquery object as argument
+ * 
  * [ ] Click handler in 'post comments' 
  *  adds comment to html
  *  'x' next to comment
@@ -38,7 +40,7 @@ const posts = [];
  * }
  */
 
-const checkForValidText = (selectorString) => ($(selectorString).val().trim() === '') ? false : true;
+const checkForValidText = ($textArea) => ($textArea.val().trim() === '') ? false : true;
 
 const renderPosts = () => {
 
@@ -89,7 +91,7 @@ const newPostButtonClickHandler = (event) => {
   //  if no text in one or the other, do nothing
   //    ignore whitespace? so if user only enters spaces/tabs it won't post
   // use helper function to use with other buttons
-  if (!checkForValidText('#new-post-text') || !checkForValidText('#new-post-author')) {
+  if (!checkForValidText($('#new-post-text')) || !checkForValidText($('#new-post-author'))) {
     console.log('Invalid input, post message and author required');
     return;
   }
@@ -155,9 +157,10 @@ const commentsToggleButtonClickHandler = function() {
 
 };
 
-const newCommentButtonClickHandler = () => {
+const newCommentButtonClickHandler = function() {
 
   //validate input
+
   
   //add comment to posts.comments[]
 
