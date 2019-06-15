@@ -1,11 +1,11 @@
 /**
  * Part 2 plan
  * 
- * Add comments to post object DONE
+ * [X] Add comments to post object
  * 
- * Add 'remove' and 'comments' links to all posts DONE
+ * [X] Add 'remove' and 'comments' links to all posts
  * 
- * Click handler on remove to delete post
+ * [X] Click handler on remove to delete post
  * 
  * Add comment section to post html
  *  initially empty, with add comment section, not visible
@@ -66,7 +66,15 @@ const renderPosts = () => {
 
       $postsContainer.append(htmlString);
 
+      renderComments(post);
+
   });
+
+};
+
+const renderComments = (post) => {
+
+  debugger;
 
 };
 
@@ -134,6 +142,10 @@ const commentsToggleButtonClickHandler = () => {
 
 //post button for part 1
 $('#new-post-button').click(newPostButtonClickHandler);
+
+//$('#new-post-button').click( function() { $(this).addClass('invisible'); });
+// above was to test bootstrap visible/invisible classes
+
 
 //delegated click handler for buttons not rendered yet
 $('#posts').on('click', '.remove-post', removeButtonClickHandler);
