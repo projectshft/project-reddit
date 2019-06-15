@@ -16,3 +16,11 @@
 .top-padded {
 	padding-top: 25px;
 }
+
+.user-comment {
+	text-align: center;
+}
+
+.comment-content:span {
+	font-size: 10px;
+}
