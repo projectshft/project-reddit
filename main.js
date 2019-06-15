@@ -1,7 +1,11 @@
  //creating a base html for each post. The function takes in the post text and author name and adds formats them within an html element including a removeand comment button
  var createPost = function(userName, userText) {
-   var postTemplate = '<p><button type = "button" class ="attached-buttons" id = "remove-button">remove</button><button type = "button" class = "attached-buttons" id = "comment-button">comment</button>' +
-     userText + '<br>' + 'Posted By: ' + userName + '</p>'
+   var postTemplate = '<div class = "post-box"><button type = "button" class ="attached-buttons" id = "remove-button">remove</button><button type = "button" class = "attached-buttons" id = "comment-button">comment</button>' +
+     +userText + '<br>' + 'Posted By: ' + userName + '</div>'
+
+   var commentBoxTemplate = '<form><input id = "comment-text" type = "text" placeholder= "Comment Text"><input id = "comment-name" type = "text" placeholder = "User Name"><button type = "button" class = "btn btn-primary post-comment-button">Post Comment</button></form>';
+
+   $posts = $(postTemplate)
 
    //set a function which changes the text color to navy and adds underline when hovered over
    var onHover = function() {
@@ -15,10 +19,19 @@
      $(this).css('text-decoration', 'none')
    }
 
+   //when the comment button is clicked something happens
+   var commentClick = function() {
+     console.log('checking comment click')
+     $('.post-box').append(commentBoxTemplate);
+   }
 
-   $posts = $(postTemplate)
+
+
+
    $posts.find('#remove-button').hover(onHover, offHover);
    $posts.find('#comment-button').hover(onHover, offHover);
+   $posts.find('#comment-button').on('click', commentClick);
+   $posts.find('#remove-button').on('click', commentClick);
 
 
    return $posts;
@@ -32,11 +45,6 @@
    $('.post-area').prepend(createPost(postName, postText));
  });
 
- //setting an underline and darker text to appear when hoering over the remove and comments button
- $('attached-buttons').mouseover(function() {
-   console.log(4444);
-   $(this).style.css('color', "navy");
- });
 
 
  //when comment is clicked on post after it is made, a toggle box
