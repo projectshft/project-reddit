@@ -10,7 +10,7 @@
  * [X] Add comment section to post html
  *  initially empty, with add comment section, not visible
  * 
- * [ ] Click handler on comments to toggle visibility
+ * [X] Click handler on comments to toggle visibility
  * 
  * [ ] Click handler in 'post comments' 
  *  adds comment to html
@@ -18,7 +18,7 @@
  * 
  * [ ] Click handler on x's next to comments to delete comment
  * 
- * [ ] Removing posts while comments visible sets them all back to invisible
+ * [X] Removing posts while comments visible sets them all back to invisible
  *  on rendere check if it should stay visible
  */
 
@@ -56,6 +56,8 @@ const renderPosts = () => {
 
   posts.forEach( (post, index) => {
 
+    let visibility = (posts[index].commentsOpen) ? '' : 'd-none';
+
     let htmlString = 
       `<div class="container" data-id="${index}">
         <div class="row">
@@ -64,7 +66,7 @@ const renderPosts = () => {
             <p class="post-author">Posted By: <b>${post.postAuthor}</b></p>
           </div>
         </div>
-        <div class="visibility-wrapper d-none">
+        <div class="visibility-wrapper ${visibility}">
           <div class="row">
             <div class="comments-container"></div>
           </div>
@@ -107,7 +109,8 @@ const newPostButtonClickHandler = (event) => {
   let newPost = {
     postText: $postText.val(),
     postAuthor: $postAuthor.val(),
-    comments: []
+    comments: [],
+    commentsOpen: false
   };
 
   posts.push(newPost);
@@ -151,6 +154,11 @@ const commentsToggleButtonClickHandler = function() {
   ($currentVisibilityWrapper.hasClass('d-none'))
     ? $currentVisibilityWrapper.removeClass('d-none')
     : $currentVisibilityWrapper.addClass('d-none');
+
+  //get current post id and set commentsOpen flag
+  let index = $(this).closest('.container').data().id;
+
+  posts[index].commentsOpen = (posts[index].commentsOpen) ? false : true;
 
 };
 
