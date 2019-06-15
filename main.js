@@ -221,6 +221,17 @@ const removeCommentButtonClickHandler = function() {
 
 };
 
+const newCommentEnterKeypressHandler = function(event) {
+
+  if (event.keyCode !== 13)
+    return;
+
+  console.log('Enter key pressed');
+
+  $(this).siblings('.new-comment-button').click();
+
+};
+
 
 //post button for part 1
 $('#new-post-button').click(newPostButtonClickHandler);
@@ -234,3 +245,7 @@ $('#posts').on('click', '.remove-post', removePostButtonClickHandler);
 $('#posts').on('click', '.comments-toggle', commentsToggleButtonClickHandler);
 $('#posts').on('click', '.new-comment-button', newCommentButtonClickHandler);
 $('#posts').on('click', '.remove-comment-button', removeCommentButtonClickHandler);
+
+//add delegated keypress handler for comment textboxes so user can press enter
+$('#posts').on('keypress', '.new-comment-text', newCommentEnterKeypressHandler);
+$('#posts').on('keypress', '.new-comment-author', newCommentEnterKeypressHandler);
