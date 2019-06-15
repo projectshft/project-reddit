@@ -54,6 +54,18 @@
                     </p>
                   </div>
                   <button type="button" class="btn btn-primary btn-sm" id="btnReply">reply</button>
+                  <button type="button" class="btn btn-success btn-sm" id="btnReply">Comments</button><br><br>
+                  <form class="comment" action="index.html" method="post">
+                    <div class="form-group">
+                      <input id="name" type="text" class="form-control" placeholder="Username">
+                    </div>
+                    <div class="form-group">
+                      <textarea id="message" type="text" class="form-control" placeholder="Message"></textarea>
+                    </div>
+                  </form>
+                  <div class="col-md-1 comment">
+                    <button type="button" class="btn btn-primary btn-sm" id="btnPostComment">Create Post</button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -62,9 +74,9 @@
           <article class="row">
             <div class="col-md-9 col-sm-9">
               <div class="panel panel-default">
-                <div class="panel-heading right">Comment</div>
+                <div class="panel-heading left">Comment</div>
                 <div class="panel-body">
-                  <header class="text-left">
+                  <header class="text-right">
                     <div class="comment-user"><i class="fa fa-user"></i> That Guy</div>
                     <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i> Dec 16, 2014</time>
                   </header>
@@ -75,6 +87,7 @@
                     </p>
                   </div>
                   <button type="button" class="btn btn-primary btn-sm" id="btnReply">reply</button>
+                  <button type="button" class="btn btn-danger btn-sm" id="btnDelete">delete</button>
                 </div>
               </div>
             </div>

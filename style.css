@@ -87,3 +87,6 @@
 #user-input{
   margin-bottom: 10px;
 }
+.comment{
+  display: none;
+}
