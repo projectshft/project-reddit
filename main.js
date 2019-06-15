@@ -18,7 +18,7 @@
  *  adds comment to html
  *  'x' next to comment
  * 
- * [ ] Click handler on x's next to comments to delete comment
+ * [X] Click handler on x's next to comments to delete comment
  * 
  * [X] Removing posts while comments visible sets them all back to invisible
  *  on rendere check if it should stay visible
@@ -45,6 +45,8 @@ const checkForValidText = ($textArea) => ($textArea.val().trim() === '') ? false
 
 const renderPosts = () => {
 
+  console.log('Rendering posts and comments');
+
   const $postsContainer = $('#posts');
 
   //clear all posts then rerender all posts like in shopping cart
@@ -59,7 +61,6 @@ const renderPosts = () => {
         <div class="row">
           <div class="post-container">
             <button class="remove-post blue-link-button">remove</button><button class="comments-toggle blue-link-button">comments</button><p class="post-text mb-0 d-inline-block">${post.postText}</p>
-            <p class="post-author mb-0">Posted By: <b>${post.postAuthor}</b></p>
           </div>
         </div>
         <div class="visibility-wrapper ${visibility}">
@@ -69,10 +70,10 @@ const renderPosts = () => {
     post.comments.forEach( (comment, commentIndex) => {
 
       htmlString +=
-      `     <div class="row" data-cid=${commentIndex}">
+      `     <div class="row" data-cid="${commentIndex}">
               <p class="mr-1 mb-0">${comment.commentText} </p>
               <p class="mb-0">Posted By: <b>${comment.commentAuthor}</b></p>
-              <button class="remove-comment-button close text-primary ml-1 mb-1"><span aria-hidden="true">&times;</span></button>
+              <button class="remove-comment-button close text-primary ml-1"><span aria-hidden="true">&times;</span></button>
             </div>`
 
     });        
@@ -84,6 +85,9 @@ const renderPosts = () => {
             <input class="new-comment-author ml-1 mb-1 mt-1" type="text" placeholder="User Name"></input>
             <button class="btn btn-primary new-comment-button ml-2" type="button">Post Comment</button>
           </div>
+        </div>
+        <div class="row">
+          <p class="post-author mb-0">Posted By: <b>${post.postAuthor}</b></p>
         </div>
       <hr/>
       </div>`
@@ -108,6 +112,8 @@ const newPostButtonClickHandler = (event) => {
     console.log('Invalid input, post message and author required');
     return;
   }
+
+  console.log('Adding post');
 
   //save postText and postAuthor to variables, maybe not necessary
   const $postText = $('#new-post-text');
@@ -144,6 +150,8 @@ const removePostButtonClickHandler = function() {
   //  remove post from posts[]
   //  rerender
 
+  console.log('Removing post');
+
   const index = $(this).closest('.container').data().id;
 
   posts.splice(index,1);
@@ -157,6 +165,8 @@ const commentsToggleButtonClickHandler = function() {
   //find comments div invisibility wrapper
   //if currently invisible, set to visible and vice versa
  
+  console.log('Toggling comment visibility');
+
   const $currentVisibilityWrapper = $(this).closest('.container').find('.visibility-wrapper');
 
   ($currentVisibilityWrapper.hasClass('d-none'))
@@ -181,6 +191,8 @@ const newCommentButtonClickHandler = function() {
     return;
   }
 
+  console.log('Adding comment');
+
   //add comment to posts.comments[]
   const commentObject = {
     commentText: $commentText.val(),
@@ -198,7 +210,14 @@ const newCommentButtonClickHandler = function() {
 
 const removeCommentButtonClickHandler = function() {
 
-  console.log('removing comment');
+  console.log('Removing comment');
+
+  const commentIndex = $(this).closest('.row').data().cid;
+  const postIndex = $(this).closest('.container').data().id;
+
+  posts[postIndex].comments.splice(commentIndex,1);
+
+  renderPosts();
 
 };
 
