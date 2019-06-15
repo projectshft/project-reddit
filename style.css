@@ -11,3 +11,7 @@
 .post-container .blue-link-button:focus {
   outline: 0;
 }
+
+.remove-comment:focus {
+  outline: 0;
+}

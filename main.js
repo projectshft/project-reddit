@@ -14,7 +14,7 @@
  * 
  * [X] Refactor checkForValidText to take jquery object as argument
  * 
- * [ ] Click handler in 'post comments' 
+ * [X] Click handler in 'post comments' 
  *  adds comment to html
  *  'x' next to comment
  * 
@@ -69,7 +69,9 @@ const renderPosts = () => {
 
       htmlString +=
       `     <div class="row" data-cid=${commentIndex}">
-              <p class="mr-1 mb-0">${comment.commentText} </p><p class="mb-0">Posted By: <b>${comment.commentAuthor}</b></p>
+              <p class="mr-1 mb-0">${comment.commentText} </p>
+              <p class="mb-0">Posted By: <b>${comment.commentAuthor}</b></p>
+              <button class="remove-comment close text-primary ml-1 mb-1"><span aria-hidden="true">&times;</span></button>
             </div>`
 
     });        
@@ -77,8 +79,8 @@ const renderPosts = () => {
     htmlString +=        
       `   </div>
           <div class="row">
-            <input class="new-comment-text" type="text" placeholder="Comment Text"></input>
-            <input class="new-comment-author ml-1" type="text" placeholder="User Name"></input>
+            <input class="new-comment-text mb-1 mt-1" type="text" placeholder="Comment Text"></input>
+            <input class="new-comment-author ml-1 mb-1 mt-1" type="text" placeholder="User Name"></input>
             <button class="btn btn-primary new-comment-button ml-2" type="button">Post Comment</button>
           </div>
         </div>
