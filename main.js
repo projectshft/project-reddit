@@ -12,7 +12,7 @@
  * 
  * [X] Click handler on comments to toggle visibility
  * 
- * [ ] Refactor checkForValidText to take jquery object as argument
+ * [X] Refactor checkForValidText to take jquery object as argument
  * 
  * [ ] Click handler in 'post comments' 
  *  adds comment to html
@@ -49,22 +49,33 @@ const renderPosts = () => {
   //clear all posts then rerender all posts like in shopping cart
   $postsContainer.empty();
 
-  posts.forEach( (post, index) => {
+  posts.forEach( (post, postIndex) => {
 
-    const visibility = (posts[index].commentsOpen) ? '' : 'd-none';
+    const visibility = (posts[postIndex].commentsOpen) ? '' : 'd-none';
 
-    const htmlString = 
-      `<div class="container" data-id="${index}">
+    let htmlString = 
+      `<div class="container" data-id="${postIndex}">
         <div class="row">
           <div class="post-container">
             <button class="remove-post blue-link-button">remove</button><button class="comments-toggle blue-link-button">comments</button><p class="post-text mb-0 d-inline-block">${post.postText}</p>
-            <p class="post-author">Posted By: <b>${post.postAuthor}</b></p>
+            <p class="post-author mb-0">Posted By: <b>${post.postAuthor}</b></p>
           </div>
         </div>
         <div class="visibility-wrapper ${visibility}">
-          <div class="row">
-            <div class="comments-container"></div>
-          </div>
+          <div class="comments-container">`;
+            
+    //add comments to string here
+    post.comments.forEach( (comment, commentIndex) => {
+
+      htmlString +=
+      `     <div class="row" data-cid=${commentIndex}">
+              <p class="mr-1 mb-0">${comment.commentText} </p><p class="mb-0">Posted By: <b>${comment.commentAuthor}</b></p>
+            </div>`
+
+    });        
+            
+    htmlString +=        
+      `   </div>
           <div class="row">
             <input class="new-comment-text" type="text" placeholder="Comment Text"></input>
             <input class="new-comment-author ml-1" type="text" placeholder="User Name"></input>
@@ -76,7 +87,6 @@ const renderPosts = () => {
 
     //add comment section div to string above, invisible
     //foreach comment in comments[], add to htmlString
-
 
     $postsContainer.append(htmlString);
 
