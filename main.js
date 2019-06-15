@@ -38,14 +38,7 @@ const posts = [];
  * }
  */
 
-const checkForValidText = () => {
-
-  if ($('#new-post-text').val().trim() === '' || $('#new-post-author').val().trim() === '')
-    return false;
-
-  return true;
-
-};
+const checkForValidText = (selectorString) => ($(selectorString).val().trim() === '') ? false : true;
 
 const renderPosts = () => {
 
@@ -96,7 +89,7 @@ const newPostButtonClickHandler = (event) => {
   //  if no text in one or the other, do nothing
   //    ignore whitespace? so if user only enters spaces/tabs it won't post
   // use helper function to use with other buttons
-  if (!checkForValidText()) {
+  if (!checkForValidText('#new-post-text') || !checkForValidText('#new-post-author')) {
     console.log('Invalid input, post message and author required');
     return;
   }
