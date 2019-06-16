@@ -17,21 +17,15 @@ $('.post-button').click(function(){
     + '<button type="button" class="btn btn-primary btn-sm post-comment-button"> Post Comment</button>'
     + '</div>' + '</li>');
 
-    //binding remove and commenting clicks to new elements
-    bindRemoveEvent();
-    bindPostCommentEvent();
 });
 
 
-//add remove functionality
-var bindRemoveEvent = function(){
-  $('.remove-button').click(function(){
-    var postToDelete = $(this).closest('.list-group-item');
-    postToDelete.remove();
-  });
-};
 
-
+//event listeners - remove, comment toggle, post comment
+$('.list-group-flush').on('click', '.remove-button', function(){
+  var postToDelete = $(this).closest('.list-group-item');
+  postToDelete.remove();
+});
 
 //comment toggle, event delegation so ul is listening for clicks bubbling up from new comment buttons
   $('.list-group-flush').on('click', '.comment-button', function(){
@@ -39,10 +33,13 @@ var bindRemoveEvent = function(){
     commentsToToggle.toggle();
   });
 
+$('.list-group-flush').on('click', '.post-comment-button', function(){
+  $("#comments" + uniqueId).append('<li class="list-unstyled">' + $('.comment-text').val()
+  + " Posted By: " + $('.comment-user').val()
+  + '<i class="fas fa-times"></i>' + '</li>');
+});
 
-
-var bindPostCommentEvent = function(){
-  $('.post-comment-button').click(function(){
-    $("#comments" + uniqueId).append('</li>' + $('.comment-text').val() + " Posted By: " + $('.comment-user').val() + '</li>' + '</br>');
-  });
-};
+$('.list-group-flush').on('click', '.fa-times', function(){
+  var commentToDelete = $(this).closest('.list-unstyled');
+  commentToDelete.remove();
+});

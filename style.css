@@ -17,3 +17,8 @@ h1{
 .post-comment-button{
   margin-left: 10px;
 }
+
+.fa-times{
+  margin-left: 10px;
+  color: blue;
+}
