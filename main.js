@@ -30,7 +30,7 @@
   * [X] Add edit button on posts
   * 
   * [ ] Click handler for edit button
-  *   [ ] save current post text
+  *   [X] save current post text - dont need to save, text is in post object
   *   [ ] remove post text div
   *   [ ] add text area
   *   [ ] add saved text to text area
@@ -254,6 +254,12 @@ const newCommentEnterKeypressHandler = function(event) {
 
 };
 
+const editPostButtonClickHandler = function() {
+
+  console.log('Editing post');
+
+};
+
 
 //post button for part 1
 $('#new-post-button').click(newPostButtonClickHandler);
@@ -265,6 +271,8 @@ $('#new-post-button').click(newPostButtonClickHandler);
 //delegated click handler for buttons not rendered yet
 $('#posts').on('click', '.remove-post', removePostButtonClickHandler);
 $('#posts').on('click', '.comments-toggle', commentsToggleButtonClickHandler);
+$('#posts').on('click', '.edit-post', editPostButtonClickHandler);
+
 $('#posts').on('click', '.new-comment-button', newCommentButtonClickHandler);
 $('#posts').on('click', '.remove-comment-button', removeCommentButtonClickHandler);
 
