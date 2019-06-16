@@ -48,6 +48,28 @@
   * [X] Have edit button toggle opening/closing edit area/buttons
   */
 
+  /**
+   * Extension 2 Plan
+   * 
+   * [ ] Add click handler on individual posts
+   * 
+   * [ ] Create renderIndividualPostPage function
+   *  [ ] set everything on main page invisible - class d-none?
+   *  [ ] Back button with click handler that calls renderPosts
+   *  [ ] post text
+   *  [ ] post author
+   *  [ ] edit post button
+   *  [ ] remove post button
+   *  [ ] dynamic comments section
+   *  [ ] add new comments section
+   * 
+   * [ ] When done remove commentsOpen from post objects
+   * 
+   * [ ] Change renderPosts()
+   *  [ ] remove comments and add comment section
+   *  [ ] remove edit and remove buttons
+   */
+
 
 const posts = [];
 /**
