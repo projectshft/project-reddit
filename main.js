@@ -31,11 +31,13 @@
   * 
   * [ ] Click handler for edit button
   *   [X] save current post text - dont need to save, text is in post object
-  *   [ ] remove post text div
-  *   [ ] add text area
-  *   [ ] add saved text to text area
+  *   [X] remove post text div
+  *   [X] add text area
+  *   [X] add saved text to text area
   *   [ ] add save button
   *   [ ] add cancel button
+  * 
+  * [ ] Turn off click handler if edit is open
   * 
   * [ ] Click handler for save button
   * 
@@ -257,6 +259,22 @@ const newCommentEnterKeypressHandler = function(event) {
 const editPostButtonClickHandler = function() {
 
   console.log('Editing post');
+
+  $(this).siblings('p').remove();
+
+  //add text area
+  //add saved text to text area
+  const index = $(this).closest('.container').data().id;
+
+  const htmlString =
+  `<div class="row">
+    <textarea>${posts[index].postText}</textarea>
+  </div>`;
+
+  $(this).parent().append(htmlString);
+
+  //add save button
+  //add cancel button
 
 };
 
