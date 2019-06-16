@@ -46,27 +46,23 @@ var createPost = function(post) {
     '      <div class="post-message-row">' +
     '    <div class="btn-group" role="group" aria-label="post actions">' +
     '      <button type="button" class="btn btn-link remove-post" id="' + post.number + '">remove</button>' +
-    '      <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#comments-list-' + post.number + '">comments</button>' +
+    '      <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#comment-list-' + post.number + '">comments</button>' +
     '    </div>' +
     '    <span>' + post.message + '</span>' +
     '    </div></div></div>' +
     '  <div class="row">' +
     '  <div class="col">' +
-    '      <div id="comments-list-' + post.number + '" class="collapse">' +
-    '          <div class="">' +
-    '        <span>[comment] Posted By: [name]</span>' +
-    '          <button type="button" class="close" aria-label="Close">' +
-    '              <span aria-hidden="true">&times;</span>' +
-    '              </button>' +
+    '      <div id="comment-list-' + post.number + '" class="collapse">' +
+    '          <div id="comments-div-' + post.number + '">' +
     '  </div>' +
     '    <form class="form-inline">' +
     '        <div class="form-group">' +
-    '            <input type="text" class="form-control mr-sm-2" id="comment-message" placeholder="Comment Text">' +
+    '            <input type="text" class="form-control mr-sm-2" id="comment-message-' + post.number + '" placeholder="Comment Text">' +
     '            </div>' +
     '  <div class="form-group">' +
-    '      <input type="text" class="form-control mr-sm-2" id="comment-name" placeholder="User Name">' +
+    '      <input type="text" class="form-control mr-sm-2" id="comment-name-' + post.number + '" placeholder="User Name">' +
     '      </div>' +
-    '        <button type="button" class="btn btn-primary" id="comment-button">Post Comment</button>' +
+    '        <button type="button" class="btn btn-primary comment-button" id="' + post.number + '.0">Post Comment</button>' +
     '        </form>' +
     '        </div></div></div>' +
     '      <div class="row">' +
@@ -95,9 +91,56 @@ var createPost = function(post) {
   // handle click event on remove button.
   $post.find('.remove-post').on('click', removePost);
 
+  // ------------
+  // new functions for comment display/submission (with adjustments to template)
+  var commentCount = 0;
+  //
+  // ---
+  var submitComment = function() {
+    var postNumber = Number($(this).attr("id"));
+    // var $commentList = $('#comment-list-' + postNumber);
+    var $commentsDiv = $('#comments-div-' + postNumber);
+    var commentName = $('#comment-name-' + postNumber).val();
+    var commentMessage = $('#comment-message-' + postNumber).val();
+
+    var comment = {
+      commentName: commentName,
+      commentMessage: commentMessage,
+      commentNumber: commentCount,
+    };
+
+    var arrayPost = posts.find(post => post.number === postNumber);
+    var postIndex = posts.indexOf(arrayPost);
+    posts[postIndex].comments.push(comment);
+    commentCount++;
+
+    // console.log(JSON.stringify(comment));
+    var $newComment = createComment(comment);
+    $commentsDiv.append($newComment); // $commentList.
+  };
+  // ---
+  var createComment = function(comment) {
+    // make jquery object (with template)
+    var commentTemplate =
+      '<div>' + comment.commentMessage +
+      ' Posted By: <strong>' + comment.commentName + '</strong>' +
+      '  <button type="button" class="close" aria-label="Close">' +
+      '  <span aria-hidden="true">&times;</span>' +
+      '  </button>' +
+      '</div>';
+    var $comment = $(commentTemplate);
+    // include removal ability
+    // $comment.find()
+    // console.log(commentTemplate);
+    return $comment;
+  };
+  // ---
+  $post.find('.comment-button').on('click', submitComment);
+  // ------------
+
   return $post;
 
-  // TO DO: create functions to handle comment display, submission, and removal.
+  // TO DO: create function to handle comment removal.
 };
 
-// [general] TO DO: clean up html (post template and index), work on css.
+// [general] TO DO: clean up html (templates and index), work on css.
