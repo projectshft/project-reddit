@@ -291,14 +291,23 @@ const editPostButtonClickHandler = function() {
 const saveEditButtonClickHandler = function() {
 
   //validate input
+  const $editText = $(this).closest('.container').find('textarea');
+
+  if (!checkForValidText($editText)) {
+    console.log('Invalid input, edit message');
+    return;
+  }
 
   console.log('Saving edit');
 
   //find post index
+  const index = $(this).closest('.post-container').closest('.container').data().id;
 
   //save edit to post
+  posts[index].postText = $(this).closest('.container').find('textarea').val();
 
   //rerender
+  renderPosts();
 
 };
 
