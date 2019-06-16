@@ -2,9 +2,12 @@
  var createPost = function(userName, userText) {
    var postTemplate = '<div id = "all-post-content"><button type = "button" class ="attached-buttons" id = "remove-button">remove</button><button type = "button" class = "attached-buttons" id = "comment-button">comment</button><div id = "post-box">' + userText + '<br>' + 'Posted By: ' + userName + '</div></div>'
 
-   var commentBoxTemplate = '<form><input id = "comment-text" type = "text" placeholder= "Comment Text"><input id = "comment-name" type = "text" placeholder = "User Name"><button type = "button" class = "btn btn-primary post-comment-button">Post Comment</button></form>';
+   var commentFormTemplate = '<form class = "commentBox" id ="commentform"><input id = "comment-text" type = "text" placeholder= "Comment Text"><input id = "comment-name" type = "text" placeholder = "User Name"><button type = "button" id ="post-comment-button" class = "btn btn-primary">Post Comment</button></form>'
 
-   $posts = $(postTemplate)
+
+   $posts = $(postTemplate);
+
+
 
    //set a function which changes the text color to navy and adds underline when hovered over
    var onHover = function() {
@@ -16,27 +19,49 @@
    var offHover = function() {
      $(this).css('color', ' #007bff')
      $(this).css('text-decoration', 'none')
-   }
+   };
 
    //when the comment button is a comment and username input boxes appear under the post along with a post comment button
+   //one the comment button is clicked again the form to add a comment is toggled off
    var commentClick = function() {
-     $('#post-box').append(commentBoxTemplate);
+     $posts.find('#post-box').after(commentFormTemplate);
+     $posts.find('#comment-button').on('click', function () {
+       $posts.find('.commentBox').toggle();
+       $
+     });
+     //when the post-comment button is clicked the post comment funciton runs
+     $posts.find('#post-comment-button').on('click', postComment)
+     //toggling the display
 
-   }
+
+
+
+
+   };
 
    //when the remove button is clicked the post is then removed
    var removeClick = function () {
      $('#all-post-content').remove();
-   }
+   };
+
+   //when post comment button is clicked the comment and then username of commenter is posted direclty underneath the post
+   var postComment = function () {
+     console.log('test');
+     var commentText = $('#comment-text').val();
+     var commentName = $('#comment-name').val();
+     var commentTextTemplate = '<p class = "commentBox" id = "comment">' + commentText + ' Posted By: ' + commentName + '</p>';
+     $posts.find('#post-box').after(commentTextTemplate);
 
 
 
+
+
+   };
 
    $posts.find('#remove-button').hover(onHover, offHover);
    $posts.find('#comment-button').hover(onHover, offHover);
    $posts.find('#comment-button').on('click', commentClick);
-   $posts.find('#remove-button').on('click', removeClick)
-
+   $posts.find('#remove-button').on('click', removeClick);
 
 
    return $posts;
