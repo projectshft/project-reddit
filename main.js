@@ -45,7 +45,7 @@
   * 
   * [X] For both of the above, reset edit button click handler
   * 
-  * [ ] Have edit button toggle opening/closing edit area/buttons
+  * [X] Have edit button toggle opening/closing edit area/buttons
   */
 
 
@@ -265,8 +265,15 @@ const editPostButtonClickHandler = function() {
 
   console.log('Editing post');
 
+  //if not in edit already, go into edit mode
+  //else rerender
+  if($(this).siblings('p').length === 0) {
+    console.log('Exiting edit');
+    renderPosts();
+    return;
+  }
+
   $(this).siblings('p').remove();
-  $('#posts').off('click', '.edit-post');
 
   //add text area
   //add saved text to text area
@@ -309,14 +316,12 @@ const saveEditButtonClickHandler = function() {
   posts[index].postText = $(this).closest('.container').find('textarea').val();
 
   //rerender
-  $('#posts').on('click', '.edit-post', editPostButtonClickHandler);
   renderPosts();
 
 };
 
 const cancelEditButtonClickHandler = function() {
 
-  $('#posts').on('click', '.edit-post', editPostButtonClickHandler);
   //on cancel, don't need to save anything
   renderPosts();
 
