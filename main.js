@@ -24,6 +24,24 @@
  *  on rendere check if it should stay visible
  */
 
+ /**
+  * Extension 1 plan
+  * 
+  * [ ] Add edit button on posts
+  * 
+  * [ ] Click handler for edit button
+  *   [ ] save current post text
+  *   [ ] remove post text div
+  *   [ ] add text area
+  *   [ ] add saved text to text area
+  *   [ ] add save button
+  *   [ ] add cancel button
+  * 
+  * [ ] Click handler for save button
+  * 
+  * [ ] Click handler for cancel button
+  */
+
 
 const posts = [];
 /**
@@ -228,6 +246,7 @@ const newCommentEnterKeypressHandler = function(event) {
 
   console.log('Enter key pressed');
 
+  //use already existing click handler
   $(this).siblings('.new-comment-button').click();
 
 };
