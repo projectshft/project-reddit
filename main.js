@@ -29,13 +29,13 @@
   * 
   * [X] Add edit button on posts
   * 
-  * [ ] Click handler for edit button
+  * [X] Click handler for edit button
   *   [X] save current post text - dont need to save, text is in post object
   *   [X] remove post text div
   *   [X] add text area
   *   [X] add saved text to text area
-  *   [ ] add save button
-  *   [ ] add cancel button
+  *   [X] add save button
+  *   [X] add cancel button
   * 
   * [X] Turn off click handler if edit is open
   * 
@@ -283,8 +283,22 @@ const editPostButtonClickHandler = function() {
 
   $(this).parent().append(htmlString);
 
-  //add save button
-  //add cancel button
+  //add save button - done
+  //add cancel button - done
+
+};
+
+const saveEditButtonClickHandler = function() {
+
+  //validate input
+
+  console.log('Saving edit');
+
+  //find post index
+
+  //save edit to post
+
+  //rerender
 
 };
 
@@ -304,9 +318,19 @@ $('#posts').on('click', '.edit-post', editPostButtonClickHandler);
 $('#posts').on('click', '.new-comment-button', newCommentButtonClickHandler);
 $('#posts').on('click', '.remove-comment-button', removeCommentButtonClickHandler);
 
+$('#posts').on('click', '.save-edit-button', saveEditButtonClickHandler);
+
 //add delegated keypress handler for comment textboxes so user can press enter
 $('#posts').on('keypress', '.new-comment-text', newCommentEnterKeypressHandler);
 $('#posts').on('keypress', '.new-comment-author', newCommentEnterKeypressHandler);
+
+
+
+
+
+
+
+
 
 //"run" script to save time for debugging
 posts.push({
