@@ -79,7 +79,7 @@ var createPost = function(post) {
 
     // remove post from DOM element using unique post number.
     var postNumber = $(this).attr("id");
-    $parentRow = $('#post-unit-' + postNumber);
+    var $parentRow = $('#post-unit-' + postNumber);
     $parentRow.remove();
 
     // remove post from array of posts.
@@ -88,7 +88,7 @@ var createPost = function(post) {
     posts.splice(postIndex, 1);
   };
 
-  // handle click event on remove button.
+  // handle click event on remove post button.
   $post.find('.remove-post').on('click', removePost);
 
   // initialize comment count.
@@ -126,23 +126,37 @@ var createPost = function(post) {
   };
 
   // create function to make jquery object (and methods) for submitted comment.
+  var pN = post.number;
   var createComment = function(comment) {
 
     // set template to display name/message of new comment with 'x' button.
     var commentTemplate =
-      '<div>' + comment.commentMessage +
+      '<div class="post-' + pN + '-comment-' + comment.commentNumber + '">' + comment.commentMessage +
       ' Posted By: <strong>' + comment.commentName + '</strong>' +
-      '  <button type="button" class="close" aria-label="Close">' +
-      '  <span aria-hidden="true">&times;</span>' +
-      '  </button>' +
+      '<a class="close" data-comment-number="' + comment.commentNumber + '" href="#" role="button">&times;</a>' +
       '</div>';
 
     // assign shorthand name to new jquery object from template.
     var $comment = $(commentTemplate);
 
-    //---TO DO: create function to handle comment removal (by 'x' button).
-    //---var removeComment = function () { }; <-- remove jquery & array element.
-    //---$comment.find('.class-name-of-x-button').on('click', removeComment);
+    // create function to handle comment removal.
+    var removeComment = function () {
+
+      // remove comment from DOM element using unique comment number.
+      var commentNumber = $(this).attr('data-comment-number');
+      var $parentDiv = $('.post-' + pN + '-comment-' + commentNumber);
+      $parentDiv.remove();
+
+      // remove comment from array of comments.
+      var arrayPost = posts.find(post => post.number === Number(pN));
+      var postIndex = posts.indexOf(arrayPost);
+      var arrayComment = posts[postIndex].comments.find(comment => comment.commentNumber === Number(commentNumber));
+      var commentIndex = posts[postIndex].comments.indexOf(arrayComment);
+      posts[postIndex].comments.splice(commentIndex, 1);
+    };
+
+    // handle click event on remove comment ('x') button.
+    $comment.find('.close').on('click', removeComment);
 
     return $comment;
   };
@@ -153,4 +167,4 @@ var createPost = function(post) {
   return $post;
 };
 
-//---TO DO (general): refine css & html (templates and index file); refactor code.
+//---TO DO: refine css & html (templates and index file); refactor code.
