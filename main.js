@@ -37,11 +37,13 @@
   *   [ ] add save button
   *   [ ] add cancel button
   * 
-  * [ ] Turn off click handler if edit is open
+  * [X] Turn off click handler if edit is open
   * 
   * [ ] Click handler for save button
   * 
   * [ ] Click handler for cancel button
+  * 
+  * [ ] For both of the above, reset edit button click handler
   */
 
 
@@ -261,6 +263,7 @@ const editPostButtonClickHandler = function() {
   console.log('Editing post');
 
   $(this).siblings('p').remove();
+  $('#posts').off('click', '.edit-post');
 
   //add text area
   //add saved text to text area
