@@ -1,24 +1,24 @@
-h1{
+h1 {
   text-align: left;
 }
 
-#post-item{
+#post-item {
   padding: 0px;
 }
 
-.remove-button{
+.remove-button {
   margin-right: 10px;
 }
 
-.comment-button{
+.comment-button {
   margin-right: 5px;
 }
 
-.post-comment-button{
+.post-comment-button {
   margin-left: 10px;
 }
 
-.fa-times{
+.fa-times {
   margin-left: 10px;
   color: blue;
 }
