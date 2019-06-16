@@ -39,11 +39,13 @@
   * 
   * [X] Turn off click handler if edit is open
   * 
-  * [ ] Click handler for save button
+  * [X] Click handler for save button
   * 
-  * [ ] Click handler for cancel button
+  * [X] Click handler for cancel button
   * 
-  * [ ] For both of the above, reset edit button click handler
+  * [X] For both of the above, reset edit button click handler
+  * 
+  * [ ] Have edit button toggle opening/closing edit area/buttons
   */
 
 
@@ -307,6 +309,15 @@ const saveEditButtonClickHandler = function() {
   posts[index].postText = $(this).closest('.container').find('textarea').val();
 
   //rerender
+  $('#posts').on('click', '.edit-post', editPostButtonClickHandler);
+  renderPosts();
+
+};
+
+const cancelEditButtonClickHandler = function() {
+
+  $('#posts').on('click', '.edit-post', editPostButtonClickHandler);
+  //on cancel, don't need to save anything
   renderPosts();
 
 };
@@ -317,7 +328,8 @@ $('#new-post-button').click(newPostButtonClickHandler);
 
 //$('#new-post-button').click( function() { $(this).addClass('invisible'); });
 // above was to test bootstrap visible/invisible classes
-
+//const $turnOnEditClickHandler = $('#posts').on('click', '.edit-post', editPostButtonClickHandler);
+//above line doesn't work? ask about it if there's time
 
 //delegated click handler for buttons not rendered yet
 $('#posts').on('click', '.remove-post', removePostButtonClickHandler);
@@ -328,6 +340,7 @@ $('#posts').on('click', '.new-comment-button', newCommentButtonClickHandler);
 $('#posts').on('click', '.remove-comment-button', removeCommentButtonClickHandler);
 
 $('#posts').on('click', '.save-edit-button', saveEditButtonClickHandler);
+$('#posts').on('click', '.cancel-edit-button', cancelEditButtonClickHandler);
 
 //add delegated keypress handler for comment textboxes so user can press enter
 $('#posts').on('keypress', '.new-comment-text', newCommentEnterKeypressHandler);
