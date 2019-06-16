@@ -11,17 +11,39 @@ var createPost = function(postContent, userName, postNumber) {
 		'<button type="button" class="btn btn-primary btn-sm mb-2 comment-form-btn">Post Comment</button></form>'
 		;
 
+	var editPostModal =
+		'<div class="modal fade" id="postModal-' + postNumber + '" tabindex="-1" role="dialog" aria-labelledby="postModalLabel" aria-hidden="true">' +
+	  '<div class="modal-dialog" role="document">' +
+	  '<div class="modal-content">' +
+	  '<div class="modal-header">' +
+	  '<h5 class="modal-title" id="postModalLabel-' + postNumber + '">Edit post by ' + userName + '</h5>' +
+	  '<button type="button" class="close" data-dismiss="modal" aria-label="Close">' +
+	  '<span aria-hidden="true">&times;</span>' +
+	  '</button></div>' +
+	  '<div class="modal-body">' + 
+	  '<form><div class="form-group">' +
+    '<input type="text" class="form-control" id="edit-post-form-' + postNumber + '">' +
+	  '</div></div>' +
+	  '<div class="modal-footer">' +
+	  '<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>' +
+	  '<button type="button" class="btn btn-primary update-post">Update Post</button>' +
+	  '</div></div></div></div>'
+	; 
+
   var postTemplate =
       '<div class="user-post grey-separator top-padded" data-post-number="' + postNumber + '">' +
       '<p><button type="button" class="btn btn-link btn-sm remove-post">Remove</button>' + 
+      '<button type="button" class="btn btn-link btn-sm edit-post" data-toggle="modal" data-target="#postModal-' + postNumber + '">Edit</button>' +
       '<button type="button" class="btn btn-link btn-sm toggle-comments">Comments</button></p>' +
       '  <p class="post-content"> ' + postContent + ' </p>' +
       '<div class="commentArea">' +
       '<div id="post-comments-'+ postNumber + '"></div>' + commentForm +
-      '</div>' +``
-      '  <p class="post-name"><b>Posted By:</b> <em>' + userName + '</em> </p>' +
+      '</div>' +
+      '  <p class="post-name"><b>Posted By:</b> <em>' + userName + '</em></p>' +
+      editPostModal +
       '</div>';
 
+  // console.log(editPostModal);
   return postTemplate;
 };
 
@@ -105,5 +127,33 @@ $("#post-items").on('click','.remove-comment', function(){
 
 
 //EXTENSION: function that enables users to edit posts
+
+//controls the edit posts modal
+$("#post-items").on('click', '.edit-post', function (event) {
+	//grab unique post Id # and post modal
+		let currentPost = $(this).closest('.user-post');
+		let currentPostContent = currentPost.find('.post-content').text();
+    let postId = currentPost.attr('data-post-number');
+    let postModal = $("#post-items").find('#postModal-'+ postId);
+
+  //sets form input value within modal 
+	  postModal.find('.modal-body input').val(currentPostContent);
+});
+
+//controls the actual edit post submission button
+$("#post-items").on('click', '.update-post', function (event) {
+	//grab unique post Id # and post modal
+		let currentPost = $(this).closest('.user-post');
+		let currentPostContent = currentPost.find('.post-content');
+    let postId = currentPost.attr('data-post-number');
+    let postModal = $("#post-items").find('#postModal-'+ postId);
+
+  //grabs the value every time Update Post button is clicked
+	  let newContent = postModal.find('.modal-body input').val();
+	  currentPostContent.text(newContent);
+
+	//manually hiding the modal here
+	  postModal.modal('hide');
+});
 
 //EXTENSION: function that displays posts in a "new" screen, with comments below.
