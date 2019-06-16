@@ -4,18 +4,21 @@ var postNumber = 0;
 var createPost = function(postContent, userName, postNumber) {
 
 	var commentForm =
-		'<div>' +
+		
 		'<form class="form-inline comment-form">' +
 		'<input type="text" class="form-control mb-2 mr-sm-2" id="commentText-' + postNumber + '" placeholder="Comment Text" required>' +
 		'<input type="text" class="form-control mb-2 mr-sm-2" id="commentUserName-'+ postNumber + '" placeholder="User Name" required>' +
-		'<button type="button" class="btn btn-primary btn-sm mb-2 comment-form-btn">Post Comment</button></form>' +
-		'</div>';
+		'<button type="button" class="btn btn-primary btn-sm mb-2 comment-form-btn">Post Comment</button></form>'
+		;
 
   var postTemplate =
       '<div class="user-post grey-separator top-padded" data-post-number="' + postNumber + '">' +
-      '<p><button type="button" class="btn btn-link btn-sm remove-post">Remove</button><button type="button" class="btn btn-link btn-sm">Comments</button></p>' +
+      '<p><button type="button" class="btn btn-link btn-sm remove-post">Remove</button>' + 
+      '<button type="button" class="btn btn-link btn-sm toggle-comments">Comments</button></p>' +
       '  <p class="post-content"> ' + postContent + ' </p>' +
+      '<div class="commentArea">' +
       '<div id="post-comments-'+ postNumber + '"></div>' + commentForm +
+      '</div>' +``
       '  <p class="post-name"><b>Posted By:</b> <em>' + userName + '</em> </p>' +
       '</div>';
 
@@ -53,6 +56,19 @@ $("#post-items").on('click','.remove-post',function(){
 		//grab this post and delete
 		let currentPost = $(this).closest('.user-post');
 		currentPost.remove();
+    
+});
+
+//function that displays comments section and comment form
+$("#post-items").on('click','.toggle-comments',function(){
+		event.preventDefault();
+		//grab unique post Id # and comments section
+		let currentPost = $(this).closest('.user-post');
+    let postId = currentPost.attr('data-post-number');
+    let postCommentArea = currentPost.find('.commentArea');
+
+    //adds or removes display value for comment section
+    postCommentArea.toggle();
     
 });
 

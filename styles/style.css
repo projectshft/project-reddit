@@ -17,6 +17,10 @@
 	padding-top: 25px;
 }
 
+.commentArea{
+	display: none;
+}
+
 .user-comment {
 	padding-left: 15px;
 }
