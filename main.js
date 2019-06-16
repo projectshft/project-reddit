@@ -349,6 +349,12 @@ const cancelEditButtonClickHandler = function() {
 
 };
 
+const goToPostPageClickHandler = function() {
+
+  console.log('Going to post #');
+
+};
+
 
 //post button for part 1
 $('#new-post-button').click(newPostButtonClickHandler);
@@ -372,6 +378,9 @@ $('#posts').on('click', '.cancel-edit-button', cancelEditButtonClickHandler);
 //add delegated keypress handler for comment textboxes so user can press enter
 $('#posts').on('keypress', '.new-comment-text', newCommentEnterKeypressHandler);
 $('#posts').on('keypress', '.new-comment-author', newCommentEnterKeypressHandler);
+
+//handlers for extension 2 - will probably not use above handlers after
+$('#posts').on('click', '.post-container', goToPostPageClickHandler);
 
 
 
