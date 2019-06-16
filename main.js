@@ -1,8 +1,8 @@
  //creating a base html for each post. The function takes in the post text and author name and adds formats them within an html element including a removeand comment button
  var createPost = function(userName, userText) {
-   var postTemplate = '<div id = "all-post-content"><button type = "button" class ="attached-buttons" id = "remove-button">remove</button><button type = "button" class = "attached-buttons" id = "comment-button">comment</button><div id = "post-box">' + userText + '<br>' + 'Posted By: ' + userName + '</div></div>'
+   var postTemplate = '<div id = "all-post-content"><button type = "button" class ="attached-buttons" id = "remove-button">remove</button><button type = "button" class = "attached-buttons" id = "comment-button">comment</button><div id = "post-box">' + userText + '<br>' + 'Posted By: ' +'<b>' + userName + '</b></div></div>'
 
-   var commentFormTemplate = '<form class = "commentBox" id ="commentform"><input id = "comment-text" type = "text" placeholder= "Comment Text"><input id = "comment-name" type = "text" placeholder = "User Name"><button type = "button" id ="post-comment-button" class = "btn btn-primary">Post Comment</button></form>'
+   var commentFormTemplate = '<form class = "commentBox" id ="commentform"><input id = "comment-text" class="comment-input" type = "text" placeholder= "Comment Text"><input id = "comment-name" class = "comment-input" type = "text" placeholder = "User Name"><button type = "button" id ="post-comment-button" class = "btn btn-primary">Post Comment</button></form>'
 
 
    $posts = $(postTemplate);
@@ -27,7 +27,7 @@
      $posts.find('#post-box').after(commentFormTemplate);
      $posts.find('#comment-button').on('click', function () {
        $posts.find('.commentBox').toggle();
-       $
+
      });
      //when the post-comment button is clicked the post comment funciton runs
      $posts.find('#post-comment-button').on('click', postComment)
@@ -46,11 +46,13 @@
 
    //when post comment button is clicked the comment and then username of commenter is posted direclty underneath the post
    var postComment = function () {
-     console.log('test');
      var commentText = $('#comment-text').val();
      var commentName = $('#comment-name').val();
-     var commentTextTemplate = '<p class = "commentBox" id = "comment">' + commentText + ' Posted By: ' + commentName + '</p>';
+     var commentTextTemplate = '<p class = "commentBox" id = "comment">' + commentText + ' Posted By: ' + '<b>' + commentName + ' ' + '</b><i class="fas fa-trash-alt"></i></p>';
      $posts.find('#post-box').after(commentTextTemplate);
+     $posts.find('i').on('click', function () {
+       $(this).closest('#comment').remove();
+     })
 
 
 
@@ -62,6 +64,7 @@
    $posts.find('#comment-button').hover(onHover, offHover);
    $posts.find('#comment-button').on('click', commentClick);
    $posts.find('#remove-button').on('click', removeClick);
+
 
 
    return $posts;

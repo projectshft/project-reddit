@@ -1,6 +1,4 @@
-body {
-  align-text: center;
-}
+
 
 .input-area {
   margin-top: 10px
@@ -16,4 +14,9 @@ body {
   padding: 0;
   margin-right: 3px;
   color: #007bff;
+}
+
+#post-comment-button {
+  padding: 3px;
+  margin: 3px;
 }
