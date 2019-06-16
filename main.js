@@ -271,12 +271,14 @@ const editPostButtonClickHandler = function() {
   const index = $(this).closest('.container').data().id;
 
   const htmlString =
-  `<div class="row">
-    <textarea>${posts[index].postText}</textarea>
-  </div>
-  <div class="row">
-    <button class="btn btn-primary save-edit-button mt-1 mr-1">Save</button>
-    <button class="btn btn-primary cancel-edit-button mt-1 mr-1">Cancel</button>
+  `<div class="container">
+    <div class="row">
+      <textarea>${posts[index].postText}</textarea>
+    </div>
+    <div class="row">
+      <button class="btn btn-primary save-edit-button mt-1 mr-1">Save</button>
+      <button class="btn btn-primary cancel-edit-button mt-1 mr-1">Cancel</button>
+    </div>
   </div>`;
 
   $(this).parent().append(htmlString);
