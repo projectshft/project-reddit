@@ -38,7 +38,7 @@ var createPost = function(post) {
 
   // set template to display name/message of new post, using the unique post
   // number in the IDs of the main div, remove button, comments button, and
-  // toggled comments content (list, removal 'x', and inline submission form).
+  // toggled comments content (list div and inline submission form).
   var template =
     '  <div class="post-unit border-bottom text-justify" id="post-unit-' + post.number + '">' +
     '    <div class="row">' +
@@ -91,36 +91,44 @@ var createPost = function(post) {
   // handle click event on remove button.
   $post.find('.remove-post').on('click', removePost);
 
-  // ------------
-  // new functions for comment display/submission (with adjustments to template)
+  // initialize comment count.
   var commentCount = 0;
-  //
-  // ---
+
+  // create function to handle comment submission.
   var submitComment = function() {
+
+    // retrieve post number and comments div by id of post comment button.
     var postNumber = Number($(this).attr("id"));
-    // var $commentList = $('#comment-list-' + postNumber);
     var $commentsDiv = $('#comments-div-' + postNumber);
+
+    // retrieve name and message input values.
     var commentName = $('#comment-name-' + postNumber).val();
     var commentMessage = $('#comment-message-' + postNumber).val();
 
+    // make comment object with name, message, and count.
     var comment = {
       commentName: commentName,
       commentMessage: commentMessage,
       commentNumber: commentCount,
     };
 
+    // add comment object to comments array of appropriate post object in posts array.
     var arrayPost = posts.find(post => post.number === postNumber);
     var postIndex = posts.indexOf(arrayPost);
     posts[postIndex].comments.push(comment);
+
+    // increment comment count.
     commentCount++;
 
-    // console.log(JSON.stringify(comment));
+    // create jquery object and add to comments div DOM element.
     var $newComment = createComment(comment);
-    $commentsDiv.append($newComment); // $commentList.
+    $commentsDiv.append($newComment);
   };
-  // ---
+
+  // create function to make jquery object (and methods) for submitted comment.
   var createComment = function(comment) {
-    // make jquery object (with template)
+
+    // set template to display name/message of new comment with 'x' button.
     var commentTemplate =
       '<div>' + comment.commentMessage +
       ' Posted By: <strong>' + comment.commentName + '</strong>' +
@@ -128,19 +136,21 @@ var createPost = function(post) {
       '  <span aria-hidden="true">&times;</span>' +
       '  </button>' +
       '</div>';
+
+    // assign shorthand name to new jquery object from template.
     var $comment = $(commentTemplate);
-    // include removal ability
-    // $comment.find()
-    // console.log(commentTemplate);
+
+    //---TO DO: create function to handle comment removal (by 'x' button).
+    //---var removeComment = function () { }; <-- remove jquery & array element.
+    //---$comment.find('.class-name-of-x-button').on('click', removeComment);
+
     return $comment;
   };
-  // ---
+
+  // handle click event on post comment button.
   $post.find('.comment-button').on('click', submitComment);
-  // ------------
 
   return $post;
-
-  // TO DO: create function to handle comment removal.
 };
 
-// [general] TO DO: clean up html (templates and index), work on css.
+//---TO DO (general): refine css & html (templates and index file); refactor code.
