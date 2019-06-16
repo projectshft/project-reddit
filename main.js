@@ -58,7 +58,8 @@ const posts = [];
  *                  commentText: 'someText',
  *                  commentAuthor: 'someAuthor
  *                }
- *              ] 
+ *              ],
+ *    commentsOpen: true/false
  * }
  */
 
@@ -304,3 +305,24 @@ $('#posts').on('click', '.remove-comment-button', removeCommentButtonClickHandle
 //add delegated keypress handler for comment textboxes so user can press enter
 $('#posts').on('keypress', '.new-comment-text', newCommentEnterKeypressHandler);
 $('#posts').on('keypress', '.new-comment-author', newCommentEnterKeypressHandler);
+
+//"run" script to save time for debugging
+posts.push({
+  postText: 'this is a test post',
+  postAuthor: 'debugger',
+  comments: [
+    {
+      commentText: 'this is a test comment',
+      commentAuthor: 'debugger'
+    },
+    {
+      commentText: 'this is also a test comment',
+      commentAuthor: 'debugger'
+    }
+  ],
+  commentsOpen: true
+});
+
+renderPosts();
+
+$('.edit-post').click();
