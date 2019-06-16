@@ -27,7 +27,7 @@
  /**
   * Extension 1 plan
   * 
-  * [ ] Add edit button on posts
+  * [X] Add edit button on posts
   * 
   * [ ] Click handler for edit button
   *   [ ] save current post text
@@ -78,7 +78,10 @@ const renderPosts = () => {
       `<div class="container" data-id="${postIndex}">
         <div class="row">
           <div class="post-container">
-            <button class="remove-post blue-link-button">remove</button><button class="comments-toggle blue-link-button">comments</button><p class="post-text mb-0 d-inline-block">${post.postText}</p>
+            <button class="remove-post blue-link-button">remove</button>
+            <button class="comments-toggle blue-link-button">comments</button>
+            <button class="edit-post blue-link-button">edit</button>
+            <p class="post-text mb-0 d-inline-block">${post.postText}</p>
           </div>
         </div>
         <div class="visibility-wrapper ${visibility}">
