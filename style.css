@@ -76,8 +76,8 @@
   margin-top: 6px;
 }
 
-.panel{
-  margin-top: 20px;
+#ul{
+  list-style-type: none;
 }
 
 .col-md-1{
@@ -89,4 +89,17 @@
 }
 .comment{
   display: none;
+}
+#comments{
+  display: show;
+}
+.page-header{
+  color: white;
+}
+body{
+  background-color: #526375;
+}
+.panel{
+  color: white;
+  background-color: #0f6775;
 }
