@@ -51,10 +51,10 @@
   /**
    * Extension 2 Plan
    * 
-   * [ ] Add click handler on individual posts
+   * [X] Add click handler on individual posts
    * 
    * [ ] Create renderIndividualPostPage function
-   *  [ ] set everything on main page invisible - class d-none?
+   *  [X] set everything on main page invisible - class d-none?
    *  [ ] Back button with click handler that calls renderPosts
    *  [ ] post text
    *  [ ] post author
@@ -148,6 +148,28 @@ const renderPosts = () => {
     $postsContainer.append(htmlString);
 
   });
+
+};
+
+const renderIndividualPostPage = (index) => {
+
+  console.log(`Rendering individual post #${index}`);
+
+  //remove everything - maybe refactor to visible/invisible
+  const $postsContainer = $('#posts');
+  const $addPostsContainer = $('#addPosts');
+  $postsContainer.empty();
+  $addPostsContainer.empty();
+
+  //back button
+
+  //post body
+
+  //post author
+
+  //comments
+
+  //add comment section in the $addPostsContainer section
 
 };
 
@@ -355,6 +377,8 @@ const goToPostPageClickHandler = function() {
 
   console.log(`Going to post #${index}`);
 
+  renderIndividualPostPage(index);
+
 };
 
 
@@ -408,7 +432,22 @@ posts.push({
   ],
   commentsOpen: true
 });
+posts.push({
+  postText: 'this is a test post #2',
+  postAuthor: 'debugger',
+  comments: [
+    {
+      commentText: 'this is a test comment #2',
+      commentAuthor: 'debugger'
+    },
+    {
+      commentText: 'this is also a test comment #2',
+      commentAuthor: 'debugger'
+    }
+  ],
+  commentsOpen: true
+})
 
 renderPosts();
 
-$('.edit-post').click();
+//$('.edit-post').click();
