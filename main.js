@@ -55,9 +55,10 @@
    * 
    * [ ] Create renderIndividualPostPage function
    *  [X] set everything on main page invisible - class d-none?
-   *  [ ] Back button with click handler that calls renderPosts
-   *  [ ] post text
-   *  [ ] post author
+   *  [X] Back button with click handler that calls renderPosts
+   *  [X] post text
+   *  [X] post author
+   *  [X] Back button also renders addpost section
    *  [ ] edit post button
    *  [ ] remove post button
    *  [ ] dynamic comments section
@@ -171,19 +172,18 @@ const renderIndividualPostPage = (index) => {
 
     $postsContainer.append(backButton);
 
-  //post body
+  //post body and post author
   const postBody =
     `<div class="container">
       <div class="row">
         <div class="post-container">
           <h1 class="post-text">${posts[index].postText}</h1>
+          <p class="post-author">Posted by: <b>${posts[index].postAuthor}</b></p>
         </div>
       </div>
     </div>`;
 
     $postsContainer.append(postBody);
-
-  //post author
 
   //comments
 
@@ -399,6 +399,40 @@ const goToPostPageClickHandler = function() {
 
 };
 
+const goToMainPage = function() {
+
+  console.log('Going to main page');
+
+  renderPosts();
+
+  //redraw addPost section
+  const $addPosts = $('#addPosts');
+
+  $addPosts.empty();
+
+  const addPostsForm =
+    `<form class="col-md-6 mt-1">
+      <h3>Add a New Post</h3>
+
+      <div class="form-group">
+        <textarea id="new-post-text" type="text"
+          class="form-control"
+          placeholder="Post Text"></textarea>
+      </div>
+
+      <div class="form-group">
+        <input id="new-post-author" type="text"
+          class="form-control"
+         placeholder="Your Name"></input>
+      </div>
+    
+      <button id="new-post-button" type="buton" class="btn btn-primary">Post</button>
+    </form>`;
+
+  $addPosts.append(addPostsForm);
+
+};
+
 
 //post button for part 1
 $('#new-post-button').click(newPostButtonClickHandler);
@@ -425,7 +459,7 @@ $('#posts').on('keypress', '.new-comment-author', newCommentEnterKeypressHandler
 
 //handlers for extension 2 - will probably not use above handlers after
 $('#posts').on('click', '.post-container', goToPostPageClickHandler);
-
+$('#posts').on('click', '.back-button', goToMainPage);
 
 
 
