@@ -28,6 +28,8 @@ var submitPost = function() {
   // create jquery object and add to post list DOM element.
   var $newPost = createPost(post);
   $postList.append($newPost);
+
+  $('#post-form').trigger('reset');
 };
 
 // handle click event on post button.
@@ -36,33 +38,34 @@ $postButton.on('click', submitPost);
 // create function to make jquery object (and methods) for submitted post.
 var createPost = function(post) {
 
-  // set template to display name/message of new post, using the unique post
-  // number in the IDs of the main div, remove button, comments button, and
-  // toggled comments content (list div and inline submission form).
+  var postNumber = post.number;
+
+  // set template to display name/message of new post with unique post number,
+  // including toggled comments content (list div and inline submission form).
   var template =
-    '  <div class="post-unit border-bottom text-justify" id="post-unit-' + post.number + '">' +
+    '  <div class="post-unit border-bottom text-justify" id="post-unit-' + postNumber + '">' +
     '    <div class="row">' +
     '    <div class="col">' +
     '      <div class="post-message-row">' +
     '    <div class="btn-group" role="group" aria-label="post actions">' +
-    '      <button type="button" class="btn btn-link remove-post" id="' + post.number + '">remove</button>' +
-    '      <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#comment-list-' + post.number + '">comments</button>' +
+    '      <button type="button" class="btn btn-link remove-post">remove</button>' +
+    '      <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#comment-list-' + postNumber + '">comments</button>' +
     '    </div>' +
     '    <span>' + post.message + '</span>' +
     '    </div></div></div>' +
     '  <div class="row">' +
     '  <div class="col">' +
-    '      <div id="comment-list-' + post.number + '" class="collapse">' +
-    '          <div id="comments-div-' + post.number + '">' +
+    '      <div id="comment-list-' + postNumber + '" class="collapse">' +
+    '          <div id="comments-div-' + postNumber + '">' +
     '  </div>' +
-    '    <form class="form-inline">' +
+    '    <form class="form-inline" id="comment-form-' + postNumber + '">' +
     '        <div class="form-group">' +
-    '            <input type="text" class="form-control mr-sm-2" id="comment-message-' + post.number + '" placeholder="Comment Text">' +
+    '            <input type="text" class="form-control mr-sm-2" id="comment-message-' + postNumber + '" placeholder="Comment Text">' +
     '            </div>' +
     '  <div class="form-group">' +
-    '      <input type="text" class="form-control mr-sm-2" id="comment-name-' + post.number + '" placeholder="User Name">' +
+    '      <input type="text" class="form-control mr-sm-2" id="comment-name-' + postNumber + '" placeholder="User Name">' +
     '      </div>' +
-    '        <button type="button" class="btn btn-primary comment-button" id="' + post.number + '.0">Post Comment</button>' +
+    '        <button type="button" class="btn btn-primary comment-button">Post Comment</button>' +
     '        </form>' +
     '        </div></div></div>' +
     '      <div class="row">' +
@@ -78,13 +81,11 @@ var createPost = function(post) {
   var removePost = function() {
 
     // remove post from DOM element using unique post number.
-    var postNumber = $(this).attr("id");
-    var $parentRow = $('#post-unit-' + postNumber);
-    $parentRow.remove();
+    var $postUnit = $('#post-unit-' + postNumber);
+    $postUnit.remove();
 
     // remove post from array of posts.
-    var arrayPost = posts.find(post => post.number === Number(postNumber));
-    var postIndex = posts.indexOf(arrayPost);
+    var postIndex = posts.indexOf(post);
     posts.splice(postIndex, 1);
   };
 
@@ -97,8 +98,7 @@ var createPost = function(post) {
   // create function to handle comment submission.
   var submitComment = function() {
 
-    // retrieve post number and comments div by id of post comment button.
-    var postNumber = Number($(this).attr("id"));
+    // select comments div using unique post number.
     var $commentsDiv = $('#comments-div-' + postNumber);
 
     // retrieve name and message input values.
@@ -112,9 +112,8 @@ var createPost = function(post) {
       commentNumber: commentCount,
     };
 
-    // add comment object to comments array of appropriate post object in posts array.
-    var arrayPost = posts.find(post => post.number === postNumber);
-    var postIndex = posts.indexOf(arrayPost);
+    // add comment object to comments array of post object in posts array.
+    var postIndex = posts.indexOf(post);
     posts[postIndex].comments.push(comment);
 
     // increment comment count.
@@ -123,16 +122,17 @@ var createPost = function(post) {
     // create jquery object and add to comments div DOM element.
     var $newComment = createComment(comment);
     $commentsDiv.append($newComment);
+
+    $('#comment-form-' + postNumber).trigger('reset');
   };
 
   // create function to make jquery object (and methods) for submitted comment.
-  var pN = post.number;
   var createComment = function(comment) {
 
     // set template to display name/message of new comment with 'x' button.
     var commentTemplate =
-      '<div class="post-' + pN + '-comment-' + comment.commentNumber + '">' + comment.commentMessage +
-      ' Posted By: <strong>' + comment.commentName + '</strong>' +
+      '<div class="post-' + postNumber + '-comment-' + comment.commentNumber + '">' + comment.commentMessage +
+      ' - Posted By: <strong>' + comment.commentName + '</strong>' +
       '<a class="close" data-comment-number="' + comment.commentNumber + '" href="#" role="button">&times;</a>' +
       '</div>';
 
@@ -143,14 +143,13 @@ var createPost = function(post) {
     var removeComment = function () {
 
       // remove comment from DOM element using unique comment number.
-      var commentNumber = $(this).attr('data-comment-number');
-      var $parentDiv = $('.post-' + pN + '-comment-' + commentNumber);
+      var removeCommentNumber = $(this).attr('data-comment-number');
+      var $parentDiv = $('.post-' + postNumber + '-comment-' + removeCommentNumber);
       $parentDiv.remove();
 
       // remove comment from array of comments.
-      var arrayPost = posts.find(post => post.number === Number(pN));
-      var postIndex = posts.indexOf(arrayPost);
-      var arrayComment = posts[postIndex].comments.find(comment => comment.commentNumber === Number(commentNumber));
+      var postIndex = posts.indexOf(post);
+      var arrayComment = posts[postIndex].comments.find(comment => comment.commentNumber === Number(removeCommentNumber));
       var commentIndex = posts[postIndex].comments.indexOf(arrayComment);
       posts[postIndex].comments.splice(commentIndex, 1);
     };
@@ -166,5 +165,3 @@ var createPost = function(post) {
 
   return $post;
 };
-
-//---TO DO: refine css & html (templates and index file); refactor code.
