@@ -3,13 +3,14 @@ var postNumber = 0;
 //function that handles posting creation
 var createPost = function(postContent, userName, postNumber) {
 
+	//creates html format for all comments
     var commentForm =
 
         '<form class="form-inline comment-form">' +
         '<input type="text" class="form-control mb-2 mr-sm-2" id="commentText-' + postNumber + '" placeholder="Comment Text" required>' +
         '<input type="text" class="form-control mb-2 mr-sm-2" id="commentUserName-' + postNumber + '" placeholder="User Name" required>' +
         '<button type="button" class="btn btn-primary btn-sm mb-2 comment-form-btn">Post Comment</button></form>';
-
+  //html format for modal to edit posts
     var editPostModal =
         '<div class="modal fade" id="postModal-' + postNumber + '" tabindex="-1" role="dialog" aria-labelledby="postModalLabel" aria-hidden="true">' +
         '<div class="modal-dialog" role="document">' +
@@ -28,6 +29,7 @@ var createPost = function(postContent, userName, postNumber) {
         '<button type="button" class="btn btn-primary update-post">Update Post</button>' +
         '</div></div></div></div>';
 
+  //html format for posts
     var postTemplate =
         '<div class="user-post grey-separator top-padded" data-post-number="' + postNumber + '">' +
         '<p><button type="button" class="btn btn-link btn-sm remove-post">Remove</button>' +
