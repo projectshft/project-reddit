@@ -133,7 +133,7 @@ var createPost = function(post) {
     var commentTemplate =
       '<div class="post-' + postNumber + '-comment-' + comment.commentNumber + '">' + comment.commentMessage +
       ' - Posted By: <strong>' + comment.commentName + '</strong>' +
-      '<a class="close" data-comment-number="' + comment.commentNumber + '" href="#" role="button">&times;</a>' +
+      '<button class="btn close" data-comment-number="' + comment.commentNumber + '" type="button">&times;</button>' +
       '</div>';
 
     // assign shorthand name to new jquery object from template.
