@@ -9,14 +9,17 @@ var Post = function(name, message) {
 }
 
 // Function to add a post to the post div
-var createPost = function(postNumber, post) {
+var createPost = function(post) {
   var template =
-    '<div class="post-item" data-post-number= "' + postNumber + '">' +
-    '<p>Message: ' + post.message + '</p>' +
+    '<div class="post-item">' +
+    '<p>' + '<a class="btn btn-primary btn-sm" href="#comments">' + 'Comments' + '</a> ' + 'Message: ' + post.message + '</p>' +
     '<p>Posted by: ' + post.name + '</p>' +
-    '</div>';
+    '</div>' +
+    '<div class = "comments">' + 'This is a comment' + '<div>';
   return template;
 }
+
+//<a class="btn btn-primary" href="#" role="button">Link</a>
 
 // Separating the functionality of the model and the view
 var renderPosts = function() {
@@ -26,15 +29,36 @@ var renderPosts = function() {
     $postList.firstElementChild.remove();
   }
   for (i = 0; i < posts.length; i++) {
-    $('.posts').append(createPost(i, posts[i]));
+    $('.posts').append(createPost(posts[i]));
   }
 }
 
+// Creating a function to toggle comment content
+var commentToggle = function() {
+  var $comment = $('.comments');
+  if ($comment === undefined) {
+    return true;
+  }
+  if ($comment.css('display') === "none") {
+    $comment.css('display', 'block');
+  } else {
+    $comment.css('display', 'none');
+  }
+  return true;
+}
+
+//Creating a button click event to toggle comments along with a text box to post
+//comments
+var $commentButton = $('.btn-sm');
+$commentButton.on('click', commentToggle());
+
+
 // Creating a button click event to post a message when the user fills out the
 // name and the message
-var $postButton = $('.btn-primary');
+var $postButton = $('.post-button');
 
 $postButton.on('click', function() {
+
   var $name = $('#name').val();
   var $message = $('#message').val();
   var newPost = new Post($name, $message);
