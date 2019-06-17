@@ -351,7 +351,9 @@ const cancelEditButtonClickHandler = function() {
 
 const goToPostPageClickHandler = function() {
 
-  console.log('Going to post #');
+  const index = $(this).closest('.container').data().id;
+
+  console.log(`Going to post #${index}`);
 
 };
 
