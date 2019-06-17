@@ -3,6 +3,6 @@
 }
 
 button.close {
-  float: left;
-  color: #007bff; 
+  float: none;
+  color: #007bff;
 }

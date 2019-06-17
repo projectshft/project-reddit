@@ -132,7 +132,7 @@ var createPost = function(post) {
     // set template to display name/message of new comment with 'x' button.
     var commentTemplate =
       '<div class="post-' + postNumber + '-comment-' + comment.commentNumber + '">' + comment.commentMessage +
-      ' - Posted By: <strong>' + comment.commentName + '</strong>' +
+      ' - Posted By: <strong>' + comment.commentName + '</strong> ' +
       '<button class="btn close" data-comment-number="' + comment.commentNumber + '" type="button">&times;</button>' +
       '</div>';
 
@@ -140,7 +140,7 @@ var createPost = function(post) {
     var $comment = $(commentTemplate);
 
     // create function to handle comment removal.
-    var removeComment = function () {
+    var removeComment = function() {
 
       // remove comment from DOM element using unique comment number.
       var removeCommentNumber = $(this).attr('data-comment-number');
