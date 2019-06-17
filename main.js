@@ -24,14 +24,16 @@
    //when the comment button is a comment and username input boxes appear under the post along with a post comment button
    //one the comment button is clicked again the form to add a comment is toggled off
    var commentClick = function() {
-     $posts.find('#post-box').after(commentFormTemplate);
-     $posts.find('#comment-button').on('click', function () {
-       $posts.find('.commentBox').toggle();
+     $(this).parent('#all-post-content').after(commentFormTemplate);
+     //toggle feature stil needs to be worked on (it works the first time)
+     // $(this).on('click', function () {
+     //   console.log("toggle check");
+     //   $('form').toggle();//ends up deleting all form need to get id
+     //
+     // });
 
-     });
      //when the post-comment button is clicked the post comment funciton runs
-     $posts.find('#post-comment-button').on('click', postComment)
-     //toggling the display
+     $('#post-comment-button').on('click', postComment)
 
 
 
@@ -46,11 +48,18 @@
 
    //when post comment button is clicked the comment and then username of commenter is posted direclty underneath the post
    var postComment = function () {
+     console.log('test comment button')
      var commentText = $('#comment-text').val();
      var commentName = $('#comment-name').val();
      var commentTextTemplate = '<p class = "commentBox" id = "comment">' + commentText + ' Posted By: ' + '<b>' + commentName + ' ' + '</b><i class="fas fa-trash-alt"></i></p>';
-     $posts.find('#post-box').after(commentTextTemplate);
-     $posts.find('i').on('click', function () {
+
+     //adds individual comment underneath each posts
+     $(this).closest('.commentBox').prepend(commentTextTemplate);
+
+
+     //when the trash icon is clicked the comment closest to it is deleted
+     $('#comment').find('i').on('click', function () {
+       console.log('check trash button')
        $(this).closest('#comment').remove();
      })
 
