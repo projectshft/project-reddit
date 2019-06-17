@@ -1,7 +1,9 @@
 
-
 .input-area {
   margin-top: 10px
+}
+#post-box {
+  font-size: 20px;
 }
 
 .post-button {
