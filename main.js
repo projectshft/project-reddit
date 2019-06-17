@@ -186,6 +186,20 @@ const renderIndividualPostPage = (index) => {
     $postsContainer.append(postBody);
 
   //comments
+  posts[index].comments.forEach( (comment, commentIndex) => {
+
+    const commentBody =
+      `<div class="container">
+        <div class="row">
+          <div class="comment-container">
+            <p class="comment-text mb-0">${posts[index].comments[commentIndex].commentText} Commented by: <b>${posts[index].comments[commentIndex].commentAuthor}</b></p>
+          </div>
+        </div>
+      </div>`;
+
+    $postsContainer.append(commentBody);
+
+  })
 
   //add comment section in the $addPostsContainer section
 
