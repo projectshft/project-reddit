@@ -162,6 +162,14 @@ const renderIndividualPostPage = (index) => {
   $addPostsContainer.empty();
 
   //back button
+  const backButton = 
+    `<div class="container">
+      <div class="row">
+        <button class="back-button blue-link-button">Back</button>
+      </div>
+    </div>`;
+
+    $postsContainer.append(backButton);
 
   //post body
 

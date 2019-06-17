@@ -1,4 +1,4 @@
-.post-container .blue-link-button {
+.blue-link-button {
 
   background-color: transparent;
   color: blue;
@@ -8,7 +8,7 @@
 
 }
 
-.post-container .blue-link-button:focus {
+.blue-link-button:focus {
   outline: 0;
 }
 
