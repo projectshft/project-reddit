@@ -1,5 +1,4 @@
-// set the template to be able to take in two parameters and hold their values as strings
-
+// set the template to be able to take in three parameters and hold their values as strings
 var newPost = function($userNameInput, $userPostInput, date){
 var postTemplate =
 '<article class="row comment-section">' +
@@ -37,7 +36,7 @@ var postTemplate =
 ;
 return postTemplate;
 }
-
+// comment template that takes in two parameters of the user who is commenting, name and input.
 var newComment = function($commentNameInput, $commentPostInput){
   var commentTemplate =
   '<article class="row comments"><br><br>' +
@@ -84,60 +83,38 @@ $btnCreatePost.on('click', function(){
 
   // Gets the template of reply info boxes from reply function so that when btnReply is clicked
   // the boxes to enter name and comment are toggled
-  var $btnComments = $('#btnComments');
-  $btnComments.on('click', function(e){
-    e.preventDefault();
-    $(this).siblings('div.comment').toggle();
-    $(this).siblings('form.comment').toggle();
-  });
+    var $btnComments = $('#btnComments');
+    $btnComments.on('click', function(e){
+      e.preventDefault();
+      $(this).siblings('div.comment').toggle();
+      $(this).siblings('form.comment').toggle();
+    });
 
-  var $btnDeletePost = $('#btnDeletePost');
-  $btnDeletePost.on('click', function(e){
-    e.preventDefault();
-    var post = this.parentNode.parentNode;
-    var targetPost = post.parentNode;
-    targetPost.removeChild(post);
-  });
+    // allows user to delete individual posts
+    var $btnDeletePost = $('#btnDeletePost');
+    $btnDeletePost.on('click', function(e){
+      e.preventDefault();
+      var post = this.parentNode.parentNode;
+      var targetPost = post.parentNode;
+      targetPost.removeChild(post);
+    });
 
-  var $btnPostComment = $('#btnPostComment');
-  $btnPostComment.on('click', function(e){
-    e.preventDefault();
-    var ul = $('#ul');
-    var $commentNameInput = $('#commentName').val();
-    var $commentPostInput = $('#commentMessage').val();
-    var callNewComment = newComment($commentNameInput, $commentPostInput);
-    ul.append('<li>'+callNewComment+'</li>');
+    // Gets the template of a new comment and creates it with the comment user's name and input.
+    // appends it into an unordered list without any bullets
+    var $btnPostComment = $('#btnPostComment');
+    $btnPostComment.on('click', function(e){
+      e.preventDefault();
+      var ul = $('#ul');
+      var $commentNameInput = $('#commentName').val();
+      var $commentPostInput = $('#commentMessage').val();
+      var callNewComment = newComment($commentNameInput, $commentPostInput);
+      ul.append('<li>'+callNewComment+'</li>');
 
+    // allows user to toggle the entire comment section
     var $btnComments = $('#btnComments');
     $btnComments.on('click', function(e){
       e.preventDefault();
       $(this).siblings('div.comments').toggle();
-    });
-  });
-
-
-});
-
-//onclick="var li = this.parentNode.parentNode; var ul = li.parentNode; ul.removeChild(li);"
-
-// var $btnDelete = $('#btnDelete');
-// $btnDelete.on('click', function(e){
-//   e.preventDefault();
-//
-//   $('li').remove()
-//
-// });
-
-//   var $btnPostComment = $('#btnPostComment');
-//   $btnPostComment.on('click', function(e){
-//     e.preventDefault();
-//     var $commentNameInput = $('#commentName').val();
-//     var $commentPostInput = $('#commentMessage').val();
-//     var callNewComment = newComment($commentNameInput, $commentPostInput);
-//     var li = document.createElement('li');
-//     var ul = $('.ul').val();
-//     li.setAttribute('id',$commentNameInput);
-//     li.appendChild(document.createTextNode($commentNameInput));
-//
-//     ul.appendChild(li);
-// });
+    });// end Comments toggle
+  });// end new comment creation
+});// end new post creation
