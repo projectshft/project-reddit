@@ -172,6 +172,16 @@ const renderIndividualPostPage = (index) => {
     $postsContainer.append(backButton);
 
   //post body
+  const postBody =
+    `<div class="container">
+      <div class="row">
+        <div class="post-container">
+          <h1 class="post-text">${posts[index].postText}</h1>
+        </div>
+      </div>
+    </div>`;
+
+    $postsContainer.append(postBody);
 
   //post author
 
