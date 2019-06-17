@@ -202,6 +202,26 @@ const renderIndividualPostPage = (index) => {
   })
 
   //add comment section in the $addPostsContainer section
+  const addCommentForms =
+    `<form class="col-md-6 mt-1">
+     <h3>Add a New Comment</h3>
+
+      <div class="form-group">
+        <textarea id="new-comment-text" type="text"
+          class="form-control"
+          placeholder="Comment Text"></textarea>
+      </div>
+
+      <div class="form-group">
+        <input id="new-comment-author" type="text"
+          class="form-control"
+          placeholder="Your Name"></input>
+      </div>
+    
+      <button id="new-comment-button" class="btn btn-primary">Post</button>
+    </form>`;
+
+  $addPostsContainer.append(addCommentForms);
 
 };
 
