@@ -61,13 +61,13 @@
    *  [X] Back button also renders addpost section
    *  [ ] edit post button
    *  [ ] remove post button
-   *  [ ] dynamic comments section
-   *  [ ] add new comments section
+   *  [X] dynamic comments section
+   *  [X] add new comments section
    * 
    * [ ] When done remove commentsOpen from post objects
    * 
    * [ ] Change renderPosts()
-   *  [ ] remove comments and add comment section
+   *  [X] remove comments and add comment section
    *  [ ] remove edit and remove buttons
    */
 
@@ -203,7 +203,8 @@ const renderIndividualPostPage = (index) => {
 
   //add comment section in the $addPostsContainer section
   const addCommentForms =
-    `<form class="col-md-6 mt-1">
+    `<hr/>
+    <form class="col-md-6 mt-1">
      <h3>Add a New Comment</h3>
 
       <div class="form-group">
@@ -440,6 +441,7 @@ const goToMainPage = function() {
   renderPosts();
 
   //redraw addPost section
+  //could probably be added to renderposts
   const $addPosts = $('#addPosts');
 
   $addPosts.empty();
