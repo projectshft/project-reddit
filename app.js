@@ -1,18 +1,19 @@
 //Create page with functions postPost and yourName to add post to the DOM and tie postPost to the clickEvent on the "Post" button. I used .append to add the .val of the filled in forms to the page and created a blank comment button.
-
-var postText = $('#postText').val();
-var postName = $('#yourName').val();
-var postedPostsSelector = $('.postedPosts');
-var createPost = function (postedPostsSelector, postText, postName) {
-  var template= "<div> postedPostsSelector.append('<hr>' + postText + '<br> Posted By: <b>' + postName + '</b></br></hr>')</div>";
-
-  
  
-  $('button').click(template);
-};
 
-console.log(postText)
-console.log(postName)
+
+//All the vars relating to the post are in the function because we need to define them when the function runs. Outside of this will return undefined. 
+var postedPostsSelector = $('.postedPosts');
+var createPost = function () {
+  var postText = $('#postText').val();
+  var postName = $('#postName').val();
+  var template= "<div> <hr>" + postText + "<br> Posted By: <b>" + postName + "</b></br></hr></div>";
+  // console.log(template);
+  // Appending the template to postedPosts jQuery element. 
+  postedPostsSelector.append(template);
+};
+//Apply clickhandler to DOM by running createPost.
+$('#postButton').on("click", createPost);
 
 
   // var commentButton = '<button id="comment-button">comment</button>';
