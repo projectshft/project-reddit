@@ -1,19 +1,28 @@
 //Create page with functions postPost and yourName to add post to the DOM and tie postPost to the clickEvent on the "Post" button. I used .append to add the .val of the filled in forms to the page and created a blank comment button.
  
+var deletePost = function() {
+  console.log("deletePost");
 
+};
 
 //All the vars relating to the post are in the function because we need to define them when the function runs. Outside of this will return undefined. 
 var postedPostsSelector = $('.postedPosts');
 var createPost = function () {
   var postText = $('#postText').val();
   var postName = $('#postName').val();
-  var template= "<div> <hr>" + postText + "<br> Posted By: <b>" + postName + "</b></br></hr></div>";
+  var template= "<div> <hr> <a href='#' id='delete'>delete </a>" +  postText + "<br> Posted By: <b>" + postName + "</b></br></hr></div>";
   // console.log(template);
   // Appending the template to postedPosts jQuery element. 
   postedPostsSelector.append(template);
+  $('#delete').on("click", deletePost);
 };
 //Apply clickhandler to DOM by running createPost.
 $('#postButton').on("click", createPost);
+// Delete Posts
+
+
+//Now I need to get the post comments to work within the individual posts. 
+
 
 
   // var commentButton = '<button id="comment-button">comment</button>';
