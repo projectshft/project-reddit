@@ -1,27 +1,59 @@
 //Create page with functions postPost and yourName to add post to the DOM and tie postPost to the clickEvent on the "Post" button. I used .append to add the .val of the filled in forms to the page and created a blank comment button.
 var postNumber = 0;
+var commentNumber = 1000;
+
 var deletePost = function(e) {
   console.log(e.target.id)
+  console.log($(`#postDiv${e.target.id}`));
   $(`#postDiv${e.target.id}`).remove()
+};
+var deleteComment = function(e) {
+  console.log(e.target.id)
+  console.log($(`#commentDiv${e.target.id}`));
+  $(`#commentDiv${e.target.id}`).remove()
+};
+var createComment = function(e) {
+  var commentText = $('#commentText').val();
+  var commentName = $('#commentName').val();
+  console.log(e.target.parentNode.id)
+   var template = `<div id=commentDiv${commentNumber}>`+ 
+   "<div>" + commentText + "</div><div>" + 
+   "<b>Name " +commentName + "</b>"+
+   `<a href='#' id='${commentNumber}'>delete comment</a>`
+   "</div></div>" ;
+   $(`#${e.target.parentNode.id}`).append(template);
+   $(`#${commentNumber}`).on("click", deleteComment);
+   commentNumber ++;
 };
 
 //All the vars relating to the post are in the function because we need to define them when the function runs. Outside of this will return undefined. 
 var postedPostsSelector = $('.postedPosts');
+
 var createPost = function () {
   var postText = $('#postText').val();
   var postName = $('#postName').val();
   
-  var template= `<div id='postDiv${postNumber}'> <hr> <a href='#' id='${postNumber}'>delete </a>` +  postText + "<br> Posted By: <b>" + postName + "</b></br></hr></div>";
+  var template= `<div id='postDiv${postNumber}'> <hr>` +
+   `<a href='#' id='${postNumber}'>delete </a>` +  
+    postText + 
+    "<input type='text' id='commentName' placeholder='Your Name'></input>" +
+    "<input type='text' id='commentText' placeholder='Your Comment'></input>" +
+    "<button id='postCommentButton' class='btn btn-info '>Post Comment</button>" +
+    "<br> Posted By: <b>" +
+    postName + 
+    "</b></br></hr></div>";
   // console.log(template);
   // Appending the template to postedPosts jQuery element. 
   postedPostsSelector.append(template);
   $(`#${postNumber}`).on("click", deletePost);
+  $('#postCommentButton').on("click", createComment);
   postNumber ++;
 };
 
 //Apply clickhandler to DOM by running createPost.
 $('#postButton').on("click", createPost);
 // Delete Posts
+{/* <input type="text" style="margin-bottom: 15px" id="postText" placeholder="Post Text" class="form-control"></input>     */}
 
 
 //Now I need to get the post comments to work within the individual posts. 
