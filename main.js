@@ -45,8 +45,9 @@ let updatePostView = function(postsArray){
 }
 
 let updateCommentView = function(context, comment){
-  $(context).siblings('.comments').append('<li class="list-unstyled">' + comment.attributes.text + " Posted by: " + comment.attributes.name + '<i class="fas fa-times"></i></li>')
+  $(context).siblings('.comments').append(`<li class="list-unstyled" data-key=${comment.attributes.commentId}>` + comment.attributes.text + " Posted by: " + comment.attributes.name + '<i class="fas fa-times"></i></li>')
 }
+
 
 let removePost = function(post){
 //find index of post that was clicked and use index to determine which post to delete from array
@@ -58,12 +59,30 @@ posts.splice(index, 1);
 updatePostView(posts);
 }
 
+let removeComment = function(clickedComment){
+  //identify index of post comment belongs to
+  let thisPost = $(clickedComment).closest('.list-group-item');
+ 
+  let postIndex = posts.findIndex(function(item){
+    return item.attributes.id == thisPost[0].dataset.key;
+  })
+// idenitfy comment to remove from array of that post
+  let thisComment = $(clickedComment).closest('.list-unstyled');
+  let commentIndex = posts[postIndex].attributes.comments.findIndex(function(comment){
+    return comment.attributes.commentId == thisComment[0].dataset.key
+  });
+ //remove item from array
+ posts[postIndex].attributes.comments.splice(commentIndex, 1);
+//remove element from the dom
+thisComment.remove();
+}
+
 let toggleComments = function(clickedPost){
   let $clickedPost = $(clickedPost).closest('.list-group-item');
   $clickedPost.find('.comments-section').toggle();
 }
 
-// let addNewComment = function(comment)
+
 
 //event listeners
 $('.post-button').click(function(){
@@ -100,42 +119,8 @@ $('.posts-list').on('click', '.post-comment', function(e){
   updateCommentView(this, newComment);
 })
 
-//post click function, adds hidden comment area that can be toggled with comment button and is later appended with post comments function
-// $('.post-button').click(function() {
-//   var $postText = $('#user-post-text').val();
-//   var $userName = $('#user-post-name').val();
-//   $('.posts-list').append('<li class = "list-group-item">' +
-//     '<button type="button" class="btn btn-primary btn-sm remove-button"> remove</button>' +
-//     '<button type="button" class="btn btn-primary btn-sm comment-button"> comments</button>' +
-//     $postText + '<br>' + "Posted By: " +
-//     '<b>' + $userName + '</b>' +
-//     '<div class = "collapse comments-display card card-body">' +
-//     '<ul class="comments">' + '</ul>' +
-//     '<input type="text" class ="comment-text" placeholder="Comment Text"> <input type="text" placeholder="User Name" class="comment-user">' +
-//     '<button type="button" class="btn btn-primary btn-sm post-comment-button"> Post Comment</button>' +
-//     '</div>' + '</li>');
-// });
+$('.posts-list').on('click', '.fa-times', function(){
 
+  removeComment(this);
+})
 
-
-//event listeners - remove post, comment toggle, post comment
-// $('.posts-list').on('click', '.remove-button', function() {
-//   var $postToDelete = $(this).closest('.list-group-item');
-//   $postToDelete.remove();
-// });
-
-// $('.posts-list').on('click', '.comment-button', function() {
-//   var $commentsToToggle = $(this).siblings('.comments-display');
-//   $commentsToToggle.toggle();
-// });
-
-// $('.posts-list').on('click', '.post-comment-button', function() {
-//   $(this).siblings('.comments').append('<li class="list-unstyled">' + $(this).siblings('.comment-text').val() +
-//     " Posted By: " + $(this).siblings('.comment-user').val() +
-//     '<i class="fas fa-times"></i>' + '</li>');
-// });
-// //add remove functionality to x icon for each comment
-// $('.posts-list').on('click', '.fa-times', function() {
-//   var $commentToDelete = $(this).closest('.list-unstyled');
-//   $commentToDelete.remove();
-// });
