@@ -2,6 +2,14 @@ h1 {
   text-align: left;
 }
 
+.noshow{
+  display: none;
+}
+
+.show{
+  display: block;
+}
+
 #post-item {
   padding: 0px;
 }
