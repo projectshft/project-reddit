@@ -106,9 +106,11 @@ $('.posts-list').on('click', '.comments-button', function(){
 })
 
 $('.posts-list').on('click', '.post-comment', function(e){
+  // console.log(this);
+  // console.log(e);
   let commentId = generateId();
-  let $commentText = $('.comment-text').val();
-  let $commentUser = $('.comment-user').val();
+  let $commentText = $(this).siblings('.comment-text').val();
+  let $commentUser = $(this).siblings('.comment-user').val();
   let newComment = CommentModel(commentId, $commentText, $commentUser);
   //find which post to add it to
   let index = posts.findIndex(function(item){
