@@ -1,16 +1,28 @@
 
 
 //create post model
-var PostModel = function(id, userPost, userName){
+var PostModel = function(id, userPost, userName, comments){
   var attributes = {
     id: id,
     userPost: userPost,
-    userName: userName
+    userName: userName,
+    comments: []
   }
   return{
     attributes: attributes
   }
 };
+
+let CommentModel = function(commentId, text, name){
+  let attributes = {
+    commentId: commentId, 
+    text: text, 
+    name: name
+  }
+  return{
+    attributes: attributes
+  }
+}
 
 //store post models in array
 let posts = [];
@@ -32,6 +44,10 @@ let updatePostView = function(postsArray){
   })
 }
 
+let updateCommentView = function(context, comment){
+  $(context).siblings('.comments').append('<li class="list-unstyled">' + comment.attributes.text + " Posted by: " + comment.attributes.name + '<i class="fas fa-times"></i></li>')
+}
+
 let removePost = function(post){
 //find index of post that was clicked and use index to determine which post to delete from array
 let index = posts.findIndex(function(item){
@@ -44,8 +60,10 @@ updatePostView(posts);
 
 let toggleComments = function(clickedPost){
   let $clickedPost = $(clickedPost).closest('.list-group-item');
-  let comments = $clickedPost.find('.comments-section').toggle();
+  $clickedPost.find('.comments-section').toggle();
 }
+
+// let addNewComment = function(comment)
 
 //event listeners
 $('.post-button').click(function(){
@@ -66,6 +84,20 @@ $('.posts-list').on('click', '.remove-button', function(e){
 
 $('.posts-list').on('click', '.comments-button', function(){
   toggleComments(this);
+})
+
+$('.posts-list').on('click', '.post-comment', function(e){
+  let commentId = generateId();
+  let $commentText = $('.comment-text').val();
+  let $commentUser = $('.comment-user').val();
+  let newComment = CommentModel(commentId, $commentText, $commentUser);
+  //find which post to add it to
+  let index = posts.findIndex(function(item){
+    return item.attributes.id == e.target.parentElement.parentElement.getAttribute('data-key');
+    });
+  //add it to that post's comments array
+  posts[index].attributes.comments.push(newComment);
+  updateCommentView(this, newComment);
 })
 
 //post click function, adds hidden comment area that can be toggled with comment button and is later appended with post comments function
