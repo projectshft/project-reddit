@@ -32,8 +32,23 @@ let generateId = function(){
   return uniqueId = Date.now() + Math.random();
 }
 
+let updateCommentsView = function(commentArray, postIndex){
+  // console.log(commentArray);
+  // console.log(postIndex);
+  //context equals the list item at the index passed in from the function call to attach it to the correct post
+  let $context = $(`.post-item:eq(${postIndex})`);
+  console.log($context);
+  //only empty the comments div associated with this post
+  $context.find('.comments').empty();
+  commentArray.forEach(function(comment){
+    let source = $('#comment-template').html();
+    let template = Handlebars.compile(source);
+    let newHtml = template(comment);
+    $context.find('.comments-section').append(newHtml);
+  })
+}
+
 let updatePostView = function(postsArray){
-  console.log(posts);
   // first empty the div
   $('.posts-list').empty();
   //iterate through array and render each post 
@@ -42,21 +57,9 @@ let updatePostView = function(postsArray){
     let template = Handlebars.compile(source);
     let newHTML = template(post);
     this.$('.posts-list').append(newHTML);
-  })
-}
-
-// let updateCommentView = function(context, comment){
-  // $(context).siblings('.comments').append(`<li class="list-unstyled" data-key=${comment.attributes.commentId}>` + comment.attributes.text + " Posted by: " + comment.attributes.name + '<i class="fas fa-times"></i></li>')
-// }
-
-let renderComments = function(commentArray){
-  console.log(commentArray);
-  $('.comments').empty();
-  commentArray.forEach(function(comment){
-    let source = $('#comment-template').html();
-    let template = Handlebars.compile(source);
-    let newHtml = template(comment);
-    this.$('.comments').append(newHtml);
+    let index = posts.indexOf(post);
+    //re-render comments
+    updateCommentsView(post.attributes.comments, index);
   })
 }
 
@@ -86,7 +89,7 @@ let removeComment = function(clickedComment){
  //remove item from array
  posts[postIndex].attributes.comments.splice(commentIndex, 1);
 //remove element from the dom
-thisComment.remove();
+updateCommentsView(posts[postIndex].attributes.comments,postIndex)
 }
 
 let toggleComments = function(clickedPost){
@@ -101,11 +104,16 @@ $('.post-button').click(function(){
   let id = generateId();
   var $userPost = $('.user-post-text').val();
   var $userName = $('.user-post-name').val();
-  var newPost = PostModel(id, $userPost, $userName);
-  //store new post in post array
-  posts.push(newPost);
-  //update view in response to model change
-  updatePostView(posts);
+  //don't allow empty post or user fields
+  if($userPost.length === 0 || $userName.length === 0){
+    alert('Please enter post text and user name.')
+  } else {
+    var newPost = PostModel(id, $userPost, $userName);
+    //store new post in post array
+    posts.push(newPost);
+    //update view in response to model change
+    updatePostView(posts);
+  }
 })
 
 $('.posts-list').on('click', '.remove-button', function(e){
@@ -118,26 +126,26 @@ $('.posts-list').on('click', '.comments-button', function(){
 })
 
 $('.posts-list').on('click', '.post-comment', function(e){
-  // console.log(this);
   // console.log(e);
   let commentId = generateId();
   let $commentText = $(this).siblings('.comment-text').val();
   let $commentUser = $(this).siblings('.comment-user').val();
-  let newComment = CommentModel(commentId, $commentText, $commentUser);
-  //find which post to add it to
-  let index = posts.findIndex(function(item){
-    return item.attributes.id == e.target.parentElement.parentElement.getAttribute('data-key');
-    });
-  //add it to that post's comments array
-  posts[index].attributes.comments.push(newComment);
-  // updateCommentView(this, newComment);
-  renderComments(posts[index].attributes.comments);
-  
-  // updatePostView(posts)
+ 
+  if($commentText.length === 0 || $commentUser.length === 0){
+    alert('Please enter comment text and a user name.')
+  } else {
+    let newComment = CommentModel(commentId, $commentText, $commentUser);
+    //find which post to add it to
+    let index = posts.findIndex(function(item){
+      return item.attributes.id == e.target.parentElement.parentElement.getAttribute('data-key');
+      });
+    //add it to that post's comments array
+    posts[index].attributes.comments.push(newComment);
+    updateCommentsView(posts[index].attributes.comments, index);  
+  }
 })
 
 $('.posts-list').on('click', '.fa-times', function(){
-
   removeComment(this);
 })
 

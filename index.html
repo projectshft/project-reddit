@@ -63,13 +63,13 @@
   </div>
 <script id="post-template" type="text/x-handlebars-template">
   <div>
-    <li data-key = {{attributes.id}} class="list-group-item">
+    <li data-key = {{attributes.id}} class="post-item list-group-item">
     <button type="input" class="btn btn-primary remove-button">Remove</button>
     <button type="input" class="btn btn-primary comments-button">Comments</button>
     <p>{{attributes.userPost}} <em> Posted by: {{attributes.userName}} </em> </p>
     <div class="comments-section card card-body collapse">
-      <ul class="comments">
-      </ul>
+      <!-- <ul class="comments">
+      </ul> -->
       <input type="text" class="comment-text" placeholder="Comment Text" required>
       <input type="text" class="comment-user" placeholder="User Name" required>
       <button type="input" class="btn btn-primary post-comment">Post Comment</button>
@@ -80,7 +80,11 @@
 </script>
 <script id="comment-template" type="text/x-handlebars-template">
   <div>
-  <li class="list-unstyled" data-key={{attributes.commentId}}>{{attributes.text}} Posted By: {{attributes.name}}</li>
+    <ul class="comments">
+   
+  <li class="list-unstyled" data-key={{attributes.commentId}}>{{attributes.text}} Posted By: {{attributes.name}}<i class="fas fa-times"></i></li>
+    
+</ul>
 </div> 
 </script>
 <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
