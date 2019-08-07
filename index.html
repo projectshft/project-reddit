@@ -48,14 +48,15 @@
     <div class="row">
       <div class="col"></div>
       <div class="col-10">
-
+      
         <div class="form-group">
           <input type="text" class='form-control user-post-text' placeholder="Post Text">
 
           <input type="text" class='form-control user-post-name' placeholder="Your Name">
 
-        <button type="input" class="btn btn-primary post-button">Post</button>
+        <button type="submit" class="btn btn-primary post-button">Post</button>
         </div>
+     
       </div>
       <div class="col"></div>
     </div>
@@ -67,13 +68,20 @@
     <button type="input" class="btn btn-primary comments-button">Comments</button>
     <p>{{attributes.userPost}} <em> Posted by: {{attributes.userName}} </em> </p>
     <div class="comments-section card card-body collapse">
-      <ul class="comments"></ul>
-      <input type="text" class="comment-text" placeholder="Comment Text">
-      <input type="text" class="comment-user" placeholder="User Name">
+      <ul class="comments">
+      </ul>
+      <input type="text" class="comment-text" placeholder="Comment Text" required>
+      <input type="text" class="comment-user" placeholder="User Name" required>
       <button type="input" class="btn btn-primary post-comment">Post Comment</button>
     </div>
+    
   </li>
  </div>
+</script>
+<script id="comment-template" type="text/x-handlebars-template">
+  <div>
+  <li class="list-unstyled" data-key={{attributes.commentId}}>{{attributes.text}} Posted By: {{attributes.name}}</li>
+</div> 
 </script>
 <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
 <script type="text/javascript" src="main.js"></script>

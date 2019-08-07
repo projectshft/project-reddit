@@ -33,6 +33,7 @@ let generateId = function(){
 }
 
 let updatePostView = function(postsArray){
+  console.log(posts);
   // first empty the div
   $('.posts-list').empty();
   //iterate through array and render each post 
@@ -44,8 +45,19 @@ let updatePostView = function(postsArray){
   })
 }
 
-let updateCommentView = function(context, comment){
-  $(context).siblings('.comments').append(`<li class="list-unstyled" data-key=${comment.attributes.commentId}>` + comment.attributes.text + " Posted by: " + comment.attributes.name + '<i class="fas fa-times"></i></li>')
+// let updateCommentView = function(context, comment){
+  // $(context).siblings('.comments').append(`<li class="list-unstyled" data-key=${comment.attributes.commentId}>` + comment.attributes.text + " Posted by: " + comment.attributes.name + '<i class="fas fa-times"></i></li>')
+// }
+
+let renderComments = function(commentArray){
+  console.log(commentArray);
+  $('.comments').empty();
+  commentArray.forEach(function(comment){
+    let source = $('#comment-template').html();
+    let template = Handlebars.compile(source);
+    let newHtml = template(comment);
+    this.$('.comments').append(newHtml);
+  })
 }
 
 
@@ -118,7 +130,10 @@ $('.posts-list').on('click', '.post-comment', function(e){
     });
   //add it to that post's comments array
   posts[index].attributes.comments.push(newComment);
-  updateCommentView(this, newComment);
+  // updateCommentView(this, newComment);
+  renderComments(posts[index].attributes.comments);
+  
+  // updatePostView(posts)
 })
 
 $('.posts-list').on('click', '.fa-times', function(){
