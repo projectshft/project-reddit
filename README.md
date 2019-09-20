@@ -1,5 +1,7 @@
 ## Project Reddit
 
-This project has been created by a student at Project Shift, a software engineering fellowship located in Downtown Durham.  The work in this repository is wholly of the student based on a sample starter project that can be accessed by looking at the repository that this project forks.
+This is a shallow copy of Reddit for the purpose of learning programming fundamentals.  This project uses bootstrap to format the website nicely and jQuery to manipulate the DOM.
 
-If you have any questions about this project or the program in general, visit projectshift.io or email hello@projectshift.io.
+---
+
+Posts can be added, edited, and deleted along with comments on those posts.  The state is not saved locally so reloading the page brings up a fresh, blank page.
