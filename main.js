@@ -13,7 +13,7 @@ postClicked = function() {
                   '<form class="comment-form">' +
                   '<input id="comment-text" type="text" placeholder="Comment Text">' +
                   '<input id="comment-user" type="text" placeholder="Name">' +
-                  '<button class="btn btn-primary comment-button">Add Comment</button>' +
+                  '<button class="btn btn-primary comment-button" type="button">Add Comment</button>' +
                   '</form></div>'
 
   // Add our saved inputs to the page and clear form
@@ -23,4 +23,15 @@ postClicked = function() {
   //$(".comment-form").hide();
 }
 
+commentClicked = function() {
+  $(".comment-form").toggleClass('hidden');
+  // if ($(".hidden")) {
+  //   $(".comment-form").removeClass('hidden');
+  // }
+  // else {
+  //   $(".comment-form").addClass('hidden');
+  // }
+}
+
 $(".post-button").on("click", postClicked);
+$("a").on("click", commentClicked)
