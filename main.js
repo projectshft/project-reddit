@@ -9,14 +9,18 @@ postClicked = function() {
 
   let postHtml  = '<div class="page-header">' +
                   '<p>'+ postInput + '</p>' +
-  '<p>Posted By: <span><strong>' + nameInput + '</strong></span></p>' +
-    '</div>'
+                  '<p>Posted By: <span><strong>' + nameInput + '</strong></span></p>' +
+                  '<form class="comment-form">' +
+                  '<input id="comment-text" type="text" placeholder="Comment Text">' +
+                  '<input id="comment-user" type="text" placeholder="Name">' +
+                  '<button class="btn btn-primary comment-button">Add Comment</button>' +
+                  '</form></div>'
 
-// Add our saved inputs to the page
+  // Add our saved inputs to the page and clear form
   $("#post-container").prepend(postHtml);
-
   $("#post-form")[0].reset();
+
+  //$(".comment-form").hide();
 }
 
-$(".btn").on("click", postClicked);
-
+$(".post-button").on("click", postClicked);
