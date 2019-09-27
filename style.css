@@ -22,3 +22,17 @@
 .navbar-text {
   margin-top: 6px;
 }
+
+.col-md-2 {
+}
+
+.col-md-8 {
+}
+
+hr {
+  border-top: 1px solid #8c8b8b;
+}
+
+.post-text {
+margin-bottom: 5px;
+}
