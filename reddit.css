@@ -1,0 +1,19 @@
+.middle-column {
+  align: center;
+}
+
+.page-title {
+  text-align: center;
+}
+
+.page-subtitle {
+  text-align: center;
+}
+
+.comment-delete-buttons {
+  display: none;
+}
+
+.invisible {
+  visibility: hidden;
+}
