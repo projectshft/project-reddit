@@ -22,14 +22,21 @@ postClicked = function() {
 }
 
 // Check for comment link click and only open comments for that post on click
-$("#post-container").on("click", function (e) {
-  var $clickedElement = $(e.target)
-  if ($clickedElement.hasClass('comment-link')) {
-    $(this).siblings(".page-header").children(".comment-form").toggleClass("hidden")
+checkCommentClick = function(event) {
+  if ($(event.target).hasClass('comment-link')) {
+    $(event.target).next(".page-header").children(".comment-form").toggleClass("hidden")
     console.log('comment toggled')
   }
-})
+}
+
+// $("#post-container").on("click", function (e) {
+//   var $clickedElement = $(e.target)
+//   if ($clickedElement.hasClass('comment-link')) {
+//     $clickedElement.siblings(".page-header").children(".comment-form").toggleClass("hidden")
+//     console.log('comment toggled')
+//   }
+// })
 
 
 $(".post-button").on("click", postClicked);
-// $("a").on("click", commentClicked)
+$("#post-container").on("click", checkCommentClick)
