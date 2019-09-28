@@ -5,3 +5,7 @@ body {
 .page-header {
   margin-top: 20px;
 }
+
+.comment-form {
+  padding-left: 30px;
+}

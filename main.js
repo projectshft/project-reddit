@@ -11,8 +11,8 @@ postClicked = function() {
                   '<p>'+ postInput + '</p>' +
                   '<p>Posted By: <span><strong>' + nameInput + '</strong></span></p>' +
                   '<form class="comment-form hidden">' +
-                  '<input id="comment-text" type="text" placeholder="Comment Text">' +
-                  '<input id="comment-user" type="text" placeholder="Name">' +
+                  '<input class="comment-text" type="text" placeholder="Comment Text">' +
+                  '<input class="comment-user" type="text" placeholder="Name">' +
                   '<button class="btn btn-primary comment-button" type="button">Add Comment</button>' +
                   '</form></div>'
 
@@ -22,20 +22,20 @@ postClicked = function() {
 }
 
 // Check for comment link click and only open comments for that post on click
+// Add comment to it's parent post on 'Add Comment'
 checkCommentClick = function(event) {
   if ($(event.target).hasClass('comment-link')) {
     $(event.target).next(".page-header").children(".comment-form").toggleClass("hidden")
-    console.log('comment toggled')
   }
-}
 
-// $("#post-container").on("click", function (e) {
-//   var $clickedElement = $(e.target)
-//   if ($clickedElement.hasClass('comment-link')) {
-//     $clickedElement.siblings(".page-header").children(".comment-form").toggleClass("hidden")
-//     console.log('comment toggled')
-//   }
-// })
+  if ($(event.target).hasClass("comment-button")) {
+    console.log($(event.target).prev('.comment-user').val());
+    console.log($(event.target).prevAll('.comment-text').val());
+    console.log('add comment clicked')
+    
+  }
+
+}
 
 
 $(".post-button").on("click", postClicked);
