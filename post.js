@@ -12,7 +12,7 @@ UserContent.prototype = {
         return '<div class="post-body">Posted By: <b>' + this.username + '</b></div>';
     },
     contentHTML: function () {
-        return '<div>' + this.textHTML() + this.userHTML() + '</div>';
+        return '<div>' + this.textHTML() + this.userHTML() + '</div><hr>';
     }
 };
 
@@ -30,5 +30,5 @@ Post.prototype.titleHTML = function () {
 
 //overriding Post's contentHTML to add Title
 Post.prototype.contentHTML = function () {
-    return '<div>' + this.titleHTML() + this.textHTML() + this.userHTML() + '</div>';
+    return '<div>' + this.titleHTML() + this.textHTML() + this.userHTML() + '</div><hr>';
 };
