@@ -45,6 +45,12 @@ hr {
   resize: none;
 }
 
+.comment-text-input {
+  height: 200px;
+  width: 100%;
+  resize: none;
+}
+
 textarea.form-control {
   height: 200px;
 }
@@ -61,4 +67,8 @@ textarea.form-control {
 
 .btn-warning:focus, .btn-warning:hover {
   background-color: #FF4500;
+}
+
+.new-comment {
+  display: none;
 }

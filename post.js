@@ -30,7 +30,9 @@ Post.prototype.titleHTML = function () {
 };
 
 Post.prototype.numCommentsHTML = function () {
-    return this.comments.length > 0 ? ('<div class="post-comments">' + (this.comments.length > 1 ? (this.comments + ' comments') : '1 comment') + '</div>') : '';
+    return this.comments.length > 0 
+    ? ('<div class="post-comments">' + (this.comments.length > 1 ? (this.comments.length + ' comments') 
+    : '1 comment') + '</div>') : '';
 }
 
 //overriding Post's contentHTML to add Title
