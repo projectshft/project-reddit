@@ -13,13 +13,38 @@ let posts = [];
 
 let $postButton = $('.submit-post');
 let $postBoard = $('.post-board');
-let $userName = $('.user-name');
+let $postCard = $('.card-style');
+let $cardTitle = $('.card-title');
+let $postNumber = $('.post-num');
+let $postName = $('.post-name');
+let $postText = $('.card-text');
+let $cardTemplate = $('.card-style');
+let $formText = $('.post-text');
+let $myForm = $('.myform')
 
-//add click event to submit material
+
+
+
+//add click event to submit post material
 $postButton.click(function(event) {
+  //prevent html from sending the form
   event.preventDefault();
-  $postBoard.append('<li><strong>Name: ' + $('.user-name').val() + '</strong><br>' + '<strong>Post: </strong>' + $('.post-text').val() + '<br>' + '<button type="button" class="btn btn-secondary btn-sm">Comment</button></li>');
-  //$postBoard.append('<li><strong>Post: </strong>' + $('.post-text').val() + '</li>');
+
+  let obj = {
+     name: $('.user-name').val(),
+     post: $('.post-text').val()
+   };
+
+   console.log(obj.name, obj.post);
+
+   posts.push(obj);
+   console.log(posts);
+   for (var i = 0; i < posts.length; i++) {
+     $cardTemplate.append();
+     $postName.append(posts[i].name);
+     $postNumber.append('Post Number: ' + [i+1]);
+     $postText.append(posts[i].post);
+   };
+   $('.user-name').val('')
+   $('.post-text').val('')
 });
-// $postBoard.append('<li><strong>Name: </strong>' + $('.user-name').val() + '</li>');
-// $postBoard.append('<li><strong>Post: </strong>' + $('.post-text').val() + '</li>');
