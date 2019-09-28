@@ -25,7 +25,20 @@ var updatePostDisplay = function () {
   
   setOfPosts.forEach((post) => {
     $postDisplay.append(post.contentHTML());
-  })
+  });
+
+  let $userPosts = $('.user-post');
+
+  for(i = 0 ; i < $userPosts.length; i++)
+  {
+    $userPosts[i].setAttribute("data-postid", i);
+  };
+  
+  $userPosts.on('click', navigateToPost);
+}
+
+var navigateToPost = function () {
+  console.log("Post " + $(this).data().postid + " clicked.");
 }
 
 $postForm.submit(handlePostSubmit);
