@@ -7,10 +7,10 @@ postClicked = function() {
     return;
   }
 
-  let postHtml  = '<div class="page-header">' +
+  let postHtml =  '<a href="#" class="comment-link" role="button">Comments</a>' + '<div class="page-header">' +
                   '<p>'+ postInput + '</p>' +
                   '<p>Posted By: <span><strong>' + nameInput + '</strong></span></p>' +
-                  '<form class="comment-form">' +
+                  '<form class="comment-form hidden">' +
                   '<input id="comment-text" type="text" placeholder="Comment Text">' +
                   '<input id="comment-user" type="text" placeholder="Name">' +
                   '<button class="btn btn-primary comment-button" type="button">Add Comment</button>' +
@@ -19,19 +19,17 @@ postClicked = function() {
   // Add our saved inputs to the page and clear form
   $("#post-container").prepend(postHtml);
   $("#post-form")[0].reset();
-
-  //$(".comment-form").hide();
 }
 
-commentClicked = function() {
-  $(".comment-form").toggleClass('hidden');
-  // if ($(".hidden")) {
-  //   $(".comment-form").removeClass('hidden');
-  // }
-  // else {
-  //   $(".comment-form").addClass('hidden');
-  // }
-}
+// Check for comment link click and only open comments for that post on click
+$("#post-container").on("click", function (e) {
+  var $clickedElement = $(e.target)
+  if ($clickedElement.hasClass('comment-link')) {
+    $(this).siblings(".page-header").children(".comment-form").toggleClass("hidden")
+    console.log('comment toggled')
+  }
+})
+
 
 $(".post-button").on("click", postClicked);
-$("a").on("click", commentClicked)
+// $("a").on("click", commentClicked)
