@@ -30,10 +30,10 @@ Post.prototype.titleHTML = function () {
 };
 
 Post.prototype.numCommentsHTML = function () {
-    return this.comments > 0 ? '<div class="post-comments">' + (this.comments > 1 ? (this.comments + ' comments') : '1 comment') + '</div>' : '';
+    return this.comments.length > 0 ? ('<div class="post-comments">' + (this.comments.length > 1 ? (this.comments + ' comments') : '1 comment') + '</div>') : '';
 }
 
 //overriding Post's contentHTML to add Title
 Post.prototype.contentHTML = function () {
-    return '<div class="user-post">' + this.titleHTML() + this.textHTML() + this.userHTML() + +this.numCommentsHTML() + '</div><hr>';
+    return '<div class="user-post">' + this.titleHTML() + this.textHTML() + this.userHTML() +this.numCommentsHTML() + '</div><hr>';
 };

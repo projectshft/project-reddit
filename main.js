@@ -20,6 +20,7 @@ var handlePostSubmit = function () {
     updatePostDisplay();
   };
 
+//render the main section of the page with posts
 var updatePostDisplay = function () {
   $postDisplay.empty();
   
@@ -29,6 +30,7 @@ var updatePostDisplay = function () {
 
   let $userPosts = $('.user-post');
 
+  //set index for later
   for(i = 0 ; i < $userPosts.length; i++)
   {
     $userPosts[i].setAttribute("data-postid", i);
