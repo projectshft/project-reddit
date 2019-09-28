@@ -29,10 +29,11 @@ checkCommentClick = function(event) {
   }
 
   if ($(event.target).hasClass("comment-button")) {
-    console.log($(event.target).prev('.comment-user').val());
-    console.log($(event.target).prevAll('.comment-text').val());
-    console.log('add comment clicked')
-    
+    let commentUserInput = $(event.target).prev('.comment-user').val()
+    let commentTextInput = $(event.target).prevAll('.comment-text').val()
+
+    let commentHtml = '<p>' + commentTextInput + ' <em>' + 'Commented By: <strong>' + commentUserInput + '</strong></em></p>';
+    $(event.target).prevAll(".comment-text").before(commentHtml)
   }
 
 }
