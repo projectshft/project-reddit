@@ -1,0 +1,25 @@
+
+.center-block {
+  width:500px;
+  padding:10px;
+  background-color:hsl(0, 10%, 98%);
+  color: black
+}
+
+.input-larger {
+  width: 100%;
+  
+}
+
+.form {
+  padding-bottom: 5px;
+}
+
+.comments {
+  padding-right: 5px;
+}
+
+
+
+
+
