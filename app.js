@@ -7,7 +7,7 @@ const buttonEl = $('button')[0];
 // create/append DOM elements 
 const renderPosts = (posts) => {
   // debugger;
-
+  
   // clear posts container before rendering
   let postEl = $('#posts');
   postEl.remove();
@@ -19,11 +19,12 @@ const renderPosts = (posts) => {
   postContainer.append(postEl);
  
   // create elements
-  posts.forEach((post) => {
-
+  posts.forEach((post, idx) => {
+    // debugger;
+    
     // create container for each post
     const postContainer = document.createElement('div');
-    postContainer.setAttribute('id', post.text);
+    postContainer.setAttribute('id', idx);
 
     // set up post elements
   
@@ -40,9 +41,9 @@ const renderPosts = (posts) => {
     divEl.setAttribute('class', `${post.name}: ${post.text}`);
     divEl.setAttribute('style', 'display: none');
     postedByEl.prepend(divEl);
-    
-    const commentFormText = createCommentForm('Comment Text');
-    const commentFormName = createCommentForm('User Name');
+
+    const commentFormText = createCommentForm('Comment Text', `${post.name}: ${post.text}`);
+    const commentFormName = createCommentForm('User Name', `${post.name}: ${post.text}`);
     divEl.appendChild(commentFormText);
     divEl.appendChild(commentFormName);
 
@@ -56,6 +57,73 @@ const renderPosts = (posts) => {
       else divEl.style.display = 'none';
     });
     commentsEl.innerText = 'comments';
+
+    const commentsButton = document.createElement('button');
+    commentsButton.setAttribute('class', "btn btn-primary");
+    commentsButton.setAttribute('style', 'margin-left: 5px')
+    commentsButton.innerText = 'Post Comment';
+
+    // add event listener to comments button
+    commentsButton.addEventListener('click', function () {
+      // debugger;
+      // add to posts if not blank text
+      if (commentFormText.value) {
+        if (commentFormName.value == '') commentFormName.value = 'Anonymous';
+        if (!post.hasOwnProperty('comments')) var comments = [];
+        else comments = post.comments;
+        comments.unshift({ name: commentFormName.value, text: commentFormText.value });
+        post.comments = comments;
+        renderComments(comments, post, idx, textEl);
+        commentFormText.value = '';
+        commentFormName.value = '';
+        commentsEl.click();
+      }
+    })
+    
+    const renderComments = (comments, post, idx, textEl) => {
+      //debugger;
+      // clear current comments container
+      
+      let container = document.querySelector(`#${CSS.escape(idx+post.text)}`);
+      console.log(container)
+
+      if (container) container.remove();
+      
+      // create comments container for rendering comments
+      const commentsSection = document.createElement('div');
+      commentsSection.setAttribute('id', idx+post.text);
+      textEl.append(commentsSection);
+      
+      console.log(Array.isArray(comments));
+      for (let i=0; i < comments.length; i++) {
+        let text = comments[i].text;
+        let name = comments[i].name;
+    
+        let commentLine = document.createElement('p');
+        commentLine.setAttribute('id', idx);
+        commentLine.innerText = `${text} Posted By: ${name}`;
+    
+        commentsSection.append(commentLine);
+      }
+      // comments.forEach((comment, idx) => {
+      //   let text = comment.text;
+      //   let name = comment.name;
+    
+      //   let commentLine = document.createElement('p');
+      //   commentLine.setAttribute('id', idx);
+      //   commentLine.innerText = `${text} Posted By: ${name}`;
+    
+      //   commentsSection.append(commentLine);
+    
+      // })
+
+      const postTextEl = $('#post-text')[0];
+      const postNameEl = $('#post-name')[0];
+      postTextEl.value = '';
+      postNameEl.value = '';
+    };
+
+    divEl.append(commentsButton);
 
 
     const nameEl = document.createElement('strong');
@@ -71,6 +139,8 @@ const renderPosts = (posts) => {
     postContainer.append(nameEl);
     postContainer.append(horizontalLine);
     postEl.append(postContainer);
+    renderComments(post.comments, post, idx, textEl);
+    
   })
 }
 
@@ -80,7 +150,7 @@ const checkIfFormReturnIsPressed = (event) => {
     buttonEl.click();
     return false;
   }
-}
+};
 
 buttonEl.addEventListener('click', function () {
   // select form text and name
@@ -89,6 +159,7 @@ buttonEl.addEventListener('click', function () {
 
   // add to posts if not blank text
   if (postTextEl.value) {
+    if (postNameEl.value == '') postNameEl.value = 'Anonymous';
     posts.push({ name: postNameEl.value, text: postTextEl.value });
     renderPosts(posts);
     postTextEl.value = '';
@@ -96,12 +167,14 @@ buttonEl.addEventListener('click', function () {
   }
 });
 
-const createCommentForm = (placeholder) => {
+const createCommentForm = (placeholder, id) => {
   const commentInputEl = document.createElement('input');
-  commentInputEl.setAttribute('class', 'commentInput');
+  commentInputEl.setAttribute('id', id);
   commentInputEl.setAttribute('placeholder', placeholder);  
   return commentInputEl;
-}
+};
+
+
 
 
 
