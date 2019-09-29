@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <link href="https://fonts.googleapis.com/css?family=Big+Shoulders+Text|Quicksand&display=swap" rel="stylesheet" type='text/css'>
+  <title>Project Reddit</title>
+  <h1>Project Reddit</h1>
+</head>
+  <body>  
+        <section id="post"></section>
+        <form>
+                <fieldset>
+                <legend>Project Reddit</legend>
+                  <h2>Add a New Post</h2>
+                  <p><textarea class="newPost"></textarea></p>
+                  <p><textarea class="name"></textarea></p>
+                  <p><button><input type="submit" value="POST" /></button></p>
+                </fieldset>
+        </form>
+  </body>
+        
+
+  <script>
+    window.onclick = function(e)
+    {   var id =  e.target.id;   
+     if (id === 'sent')  
+     { var txt = document.getElementById('example').value    
+       $( "#para" ).empty().append( txt );
+     }
+    }
+  </script>
+</html>

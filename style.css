@@ -1,0 +1,22 @@
+
+legend {
+    background-color: #fff;
+    color: #000;
+    padding: 3px 6px;
+    font-family: 'Big Shoulders Text', cursive;
+}
+h1 {
+    font-family: 'Big Shoulders Text', cursive;
+}
+h2 {
+    font-family: 'Quicksand', sans-serif;
+}
+
+.output {
+    font-family: 'Quicksand', sans-serif;
+}
+
+input {
+    margin: .4rem;
+}
+
