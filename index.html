@@ -12,20 +12,22 @@
   </head>
   <body>
  	
+
  <div class="container">
 
-    <h1>Project Reddit</h1>
+ 	<div class="pb-2 mt-4 mb-2 border-bottom">Project Reddit</div>
 
       <p class='added-post'></p>
-
+      
       	<p class='user-name'></p>
-      	
+
     	 <div class="add-posts">
 
  	         <h3 class="new-post">Add a New Post</h3>
 
-        <form>
+        <form id='configform'>
             <div class="form-group row">
+    		    <label for="postText" class="col-sm-2 col-form-label"></label>
     		    <label for="postText" class="col-sm-2 col-form-label"></label>
      	        <input type="text" class="form-control" id="postText" placeholder="Post Text">
             </div>
@@ -35,7 +37,7 @@
 		    </div>
     	</form>
 
-		<button type="submit" class="btn btn-primary" id="postbtn">Post</button>
+		<button type="submit" class="btn btn-primary" id="postBtn">Post</button>
 	 </div>
     </div>
 
