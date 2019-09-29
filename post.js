@@ -1,6 +1,7 @@
 var UserContent = function (text, username) {
     this.text = text;
     this.username = username;
+    this.contentType = "comment";
 };
 
 //object helper functions for adding HTML
@@ -11,14 +12,18 @@ UserContent.prototype = {
     userHTML: function () {
         return '<div class="post-body">Posted By: <b>' + this.username + '</b></div>';
     },
+    removeHTML: function () {
+        return '<div><a href="#" class="remove-link">remove ' + this.contentType + '</a></div>';
+    },
     contentHTML: function () {
-        return '<div>' + this.textHTML() + this.userHTML() + '</div><br>';
+        return '<div>' + this.textHTML() + this.userHTML()  + '</div>' + this.removeHTML() + '<br>';
     }
 };
 
 //Post object that contains Title in addition to UserContent properties and functions
 function Post(title, text, username) {
     UserContent.call(this, text, username);
+    this.contentType = "post";
     this.title = title;
     this.comments = [];
 }
@@ -37,5 +42,5 @@ Post.prototype.numCommentsHTML = function () {
 
 //overriding Post's contentHTML to add Title
 Post.prototype.contentHTML = function () {
-    return '<div class="user-post">' + this.titleHTML() + this.textHTML() + this.userHTML() +this.numCommentsHTML() + '</div><hr>';
+    return '<div class="user-post">' + this.titleHTML() + this.textHTML() + this.userHTML() +this.numCommentsHTML() + '</div>' + this.removeHTML() + '<hr>';
 };

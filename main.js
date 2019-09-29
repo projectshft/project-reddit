@@ -27,6 +27,7 @@ var handleCommentSubmit = function () {
   //this stops refresh
   event.preventDefault()
   console.log("successful comment submission");
+
   let text = $('.comment-text-input')[0].value;
   let username = $('.comment-username-input')[0].value;
 
@@ -41,12 +42,10 @@ var handleCommentSubmit = function () {
 
 //render the main section of the page with posts
 var updatePostDisplay = function () {
-  
   //toggle the visibility of the new post vs new comment box
   $('.new-post').css('display', 'block');
   $('.new-comment').css('display', 'none');
-
-  //TODO: Add remove clicks somewhere on post/comments
+  
   $postDisplay.empty();
   
   setOfPosts.forEach((post) => {
@@ -62,11 +61,37 @@ var updatePostDisplay = function () {
   };
   
   $userPosts.on('click', navigateToPost);
+
+  wireRemoveEvents();
+
+  activePostNum = -1;
+}
+
+//set remove button click events
+var wireRemoveEvents = function () {
+  $removeLinks = $('.remove-link');
+
+  $removeLinks.each(function(index) {
+    console.log($(this));
+    $(this).on('click', removeContent);
+  });
+  
+  //leaving this in to discuss later with someone
+  //why does => operator change $(this) to window?
+  // $removeLinks.each((index) => {
+  //   console.log($(this));
+  //   $(this).on('click', removeContent);
+  // })
+}
+
+var removeContent = function () {
+  console.log('remove clicked');
 }
 
 var navigateToPost = function () {
-  console.log("Post " + $(this).data().postid + " clicked.");
-
+  activePostNum = $(this).data().postid;
+  console.log("Post " + activePostNum + " clicked.");
+  
   //toggle the visibility of the new post vs new comment box
   $('.new-post').css('display', 'none');
   $('.new-comment').css('display', 'block');
@@ -88,9 +113,11 @@ var updatePostWithCommentsDisplay = function () {
   setOfPosts[activePostNum].comments.forEach((comment) => {
     $postDisplay.append(comment.contentHTML());
   });
+
+  wireRemoveEvents();
 }
 
-let activePostNum = 0;
+let activePostNum = -1;
 
 $postForm.submit(handlePostSubmit);
 $commentForm.submit(handleCommentSubmit);
