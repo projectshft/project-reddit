@@ -42,6 +42,10 @@ var handleCommentSubmit = function () {
 //render the main section of the page with posts
 var updatePostDisplay = function () {
   
+  //toggle the visibility of the new post vs new comment box
+  $('.new-post').css('display', 'block');
+  $('.new-comment').css('display', 'none');
+
   //TODO: Add remove clicks somewhere on post/comments
   $postDisplay.empty();
   
@@ -64,19 +68,21 @@ var navigateToPost = function () {
   console.log("Post " + $(this).data().postid + " clicked.");
 
   //toggle the visibility of the new post vs new comment box
-  $newPostSection = $('.new-post');
-  $newCommentSection = $('.new-comment');
-
-  $newPostSection.css('display', 'none');
-  $newCommentSection.css('display', 'block');
+  $('.new-post').css('display', 'none');
+  $('.new-comment').css('display', 'block');
 
   updatePostWithCommentsDisplay();
 }
 
 var updatePostWithCommentsDisplay = function () {
-  //TODO: Setup back button and click event
+
   //TODO: Add remove clicks somewhere on post/comments
   $postDisplay.empty();
+  //add back link
+  $postDisplay.append('<a href="#"><u>&lt;&lt; BACK</u></a> ');
+  
+  $('a').on('click', updatePostDisplay);
+
   $postDisplay.append(setOfPosts[activePostNum].contentHTML());
   
   setOfPosts[activePostNum].comments.forEach((comment) => {
