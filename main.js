@@ -1,8 +1,12 @@
 let setOfPosts = [];
-
 let $postForm = $('.new-post-form');
 let $commentForm = $('.new-comment-form');
 let $postDisplay = $('.posts-display');
+let activePostNum = -1;
+const POST_ID_ATTR = 'data-postid';
+const COMMENT_ID_ATTR = 'data-commentid';
+$postForm.submit(handlePostSubmit);
+$commentForm.submit(handleCommentSubmit);
 
 //when post is submitted successfuly, add to posts and refresh html
 var handlePostSubmit = function () {
@@ -26,7 +30,7 @@ var handlePostSubmit = function () {
 var handleCommentSubmit = function () {
   //this stops refresh
   event.preventDefault()
-  console.log("successful comment submission");
+  console.log("successful comment submission on post " + activePostNum);
 
   let text = $('.comment-text-input')[0].value;
   let username = $('.comment-username-input')[0].value;
@@ -42,6 +46,8 @@ var handleCommentSubmit = function () {
 
 //render the main section of the page with posts
 var updatePostDisplay = function () {
+  activePostNum = -1;
+
   //toggle the visibility of the new post vs new comment box
   $('.new-post').css('display', 'block');
   $('.new-comment').css('display', 'none');
@@ -63,19 +69,28 @@ var updatePostDisplay = function () {
   $userPosts.on('click', navigateToPost);
 
   wireRemoveEvents();
-
-  activePostNum = -1;
 }
 
 //set remove button click events
 var wireRemoveEvents = function () {
-  $removeLinks = $('.remove-link');
+  $removePostLinks = $("a:contains(post)");
+  $removeCommentLinks = $("a:contains(comment)");
 
-  $removeLinks.each(function(index) {
-    console.log($(this));
-    $(this).on('click', removeContent);
-  });
+  //set index for later
+  for(i = 0 ; i < $removePostLinks.length; i++)
+  {
+    $removePostLinks[i].setAttribute("data-postid", i);
+  };
+
+  //set index for later
+  for(i = 0 ; i < $removeCommentLinks.length; i++)
+  {
+    $removeCommentLinks[i].setAttribute("data-commentid", i);
+  };
   
+  $removePostLinks.on('click', removeContent);
+  $removeCommentLinks.on('click', removeContent);
+
   //leaving this in to discuss later with someone
   //why does => operator change $(this) to window?
   // $removeLinks.each((index) => {
@@ -84,8 +99,26 @@ var wireRemoveEvents = function () {
   // })
 }
 
+
 var removeContent = function () {
-  console.log('remove clicked');
+  //determine if what we clicked was a remove for a post or a comment
+  let postId = activePostNum;
+
+  //if its a post with data-postid attribute remove the post from setOfPosts
+  if($(this)[0].hasAttribute(POST_ID_ATTR))
+  {
+    postId = $(this).attr(POST_ID_ATTR);
+    setOfPosts.splice(postId, 1);
+    console.log('removing post ' + postid);
+    updatePostDisplay();
+  }
+  else if ($(this)[0].hasAttribute(COMMENT_ID_ATTR)){
+    //otherwise if it has data-commentid remove it from active posts comment set
+    let commentId = $(this).attr(COMMENT_ID_ATTR);
+    setOfPosts[postId].comments.splice(commentId, 1);
+    console.log('removing comment ' + postid + '-' + commentId)
+    updatePostWithCommentsDisplay();
+  }
 }
 
 var navigateToPost = function () {
@@ -100,11 +133,9 @@ var navigateToPost = function () {
 }
 
 var updatePostWithCommentsDisplay = function () {
-
-  //TODO: Add remove clicks somewhere on post/comments
   $postDisplay.empty();
   //add back link
-  $postDisplay.append('<a href="#"><u>&lt;&lt; BACK</u></a> ');
+  $postDisplay.append('<a href="#"><u>&lt;&lt; BACK</u></a>');
   
   $('a').on('click', updatePostDisplay);
 
@@ -116,20 +147,3 @@ var updatePostWithCommentsDisplay = function () {
 
   wireRemoveEvents();
 }
-
-let activePostNum = -1;
-
-$postForm.submit(handlePostSubmit);
-$commentForm.submit(handleCommentSubmit);
-
-var test = new Post("title", "text", "username");
-console.log("text: " + test.text); //text: text
-console.log("username: " + test.username); //username: username
-console.log("contentHTML: " + test.contentHTML()); //titleHTML + textHTML + usernameHTML
-
-var test = new UserContent("text", "username");
-
-console.log("Title: " + test.title); //Title: undefined
-console.log("text: " + test.text); //text: text
-console.log("username: " + test.username); //username: username
-console.log("contentHTML: " + test.contentHTML()); //titleHTML + textHTML + usernameHTML
