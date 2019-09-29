@@ -19,17 +19,18 @@ var $postButtonClicked = function() {
   	}];
 
 //Variables that are able to take in and display the data that was previously stored in the array
-	var createPostRow = function (addPost) {
-  var template =
-     '<p>'
+  var template = '<p>'
    + '  <div class="added-post">' + $postText + '</div>'
-   + '  <div class="user-name">'+'Posted By: ' + '<b>' + $yourName + '</b>' + '</div>';
-   + '</p>'
-   ;
+   + '  <div class="user-name">' + 'Posted By: ' + '<b>' + $yourName + '</b>' + '</div>';
+   + '	<div class="pb-2 mt-4 mb-2 border-bottom"></div>';
+   + '  <div class="container">';
+   + '</p>' ;
 
- };
 
- 	  
+
+//This invokes the template variable and prepends the data to the site
+   $('.post-display').prepend(template);
+
 
 	// var $postDisplay = $('.added-post').prepend($postText);
 	// var $postNameDisplay = $('.user-name').prepend('Posted By: ' + '<b>' + $yourName + '</b>');
@@ -47,7 +48,7 @@ $(document).ready(function(){
     });
 });
 
-
+$('.post').append();
 
 
 
