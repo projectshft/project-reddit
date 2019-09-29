@@ -19,10 +19,20 @@ var $postButtonClicked = function() {
   	}];
 
 //Variables that are able to take in and display the data that was previously stored in the array
-	var $postDisplay = $('.added-post').prepend($postText);
-	var $postNameDisplay = $('.user-name').prepend('Posted By: ' + '<b>' + $yourName + '</b>');
+	var createPostRow = function (addPost) {
+  var template =
+     '<p>'
+   + '  <div class="added-post">' + $postText + '</div>'
+   + '  <div class="user-name">'+'Posted By: ' + '<b>' + $yourName + '</b>' + '</div>';
+   + '</p>'
+   ;
 
-	// var newPost = $postDisplay
+ };
+
+ 	  
+
+	// var $postDisplay = $('.added-post').prepend($postText);
+	// var $postNameDisplay = $('.user-name').prepend('Posted By: ' + '<b>' + $yourName + '</b>');
 
 };
 
