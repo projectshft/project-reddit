@@ -2,6 +2,7 @@
 postClicked = function() {
   let postInput = $("#post-text").val()
   let nameInput = $("#name-text").val()
+
   if (!postInput || !nameInput) {
     alert('Please fill in all fields')
     return;
@@ -41,9 +42,15 @@ postContainerClick = function(event) {
     let commentUserInput = $(event.target).prev('.comment-user').val()
     let commentTextInput = $(event.target).prevAll('.comment-text').val()
 
+    if (!commentUserInput || !commentTextInput) {
+      alert('Please fill in all fields')
+      return;
+    }
+
     let commentHtml = '<p class="comment">' + commentTextInput + ' <em>' + 'Comment By: <strong>' + commentUserInput + 
                       ' </strong></em><a class="btn remove-comment" href="#"><i class="far fa-times-circle fa-lg"></i></a></p>';
     $(event.target).prevAll(".comment-text").before(commentHtml)
+    $(event.target).parent(".comment-form")[0].reset();
   }
 
   // Remove post handler
@@ -52,8 +59,7 @@ postContainerClick = function(event) {
   }
 
   if($(event.target).parent().hasClass('remove-comment')) {
-    //alert("Click remove comment icon")
-    $(event.target).closest('p').remove();
+     $(event.target).closest('p').remove();
   }
 
 }
