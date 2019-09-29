@@ -24,12 +24,14 @@ let $myForm = $('.myform');
 let $postForum = $('.post-area');
 let $cardLink = $('.card-link');
 let $cardLink2 = $('.card-link2');
+let $cardComments = $('.card-comments');
 
 //teamplate for creating a new post based on entries passed in by the user
 let createNewCard = function(postNumber, name, post){
   let newCardTemplate =
       '<div class="card-style">'
     +  '<div class="card" style="width: 50rem;">'
+    +   '<div class="card-comments">'
     +   '<div class="card-body">'
     +        '<h5 class="card-title post-name">' + name + '</h5>'
     +        '<h6 class="card-subtitle mb-2 text-muted post-num">Post Number: '  + postNumber + '</h6>'
@@ -54,18 +56,11 @@ let createNewCard = function(postNumber, name, post){
 
 let createNewComment = function(name, post) {
   let newComment =
-  // '<div class="comment-style">'
-  // +  '<p>' + name + '</p>'
-  // +  '<p>' + post + '</p>'
-  // +  '<button type="button" name="button"></button>'
-
       '<div class="card-comment">'
-    +   '<div class="card-header">Comment</div>'
-    +     '<div class="card-body">'
-    +     '<h5 class="card-title">' + name + '</h5>'
-    +     '<p class="card-text">' + post + '</p>'
-    +     '<a href="#" class="btn btn-primary delete-comment">Delete</a>'
-    +   '</div>'
+    +   '<p>' + post + ' Posted By:<strong> ' + name + '</strong>'
+    +   '<button type="button" class="close close-this" aria-label="Close">'
+    +     '<span aria-hidden="true" class="close-this">&times;</span>'
+    +   '</button></p>'
     + '</div>'
   return newComment;
 }
@@ -89,38 +84,73 @@ $postButton.click(function(event) {
       //loops through the array of posts, posting them and comments
       for (var i = posts.length - 1; i < posts.length; i++) {
         let newPost = createNewCard([i + 1], posts[i].name, posts[i].post);
+        console.log(newPost)
         //adds post to the page
         $postForum.append(newPost);
-        //new click event for comment button on each post
-        $('.card-link').click(function(event) {
-          event.preventDefault();
-          //creates a new object to store comments on each post
-          let postComments = {
-            name: $('.comment-name').val(),
-            comment: $('.comment-remark').val()
-          };
-          //adds comment object to the comments array for that item
-          posts[i - 1].comments.push(postComments);
-          //loops through the comments for each post item
-          for (var j = posts[i - 1].comments.length - 1; j < posts[i - 1].comments.length; j++) {
-            //creates html string to add comment to the comments section
-            let userComment = createNewComment(posts[i - 1].comments[j].name, posts[i - 1].comments[j].comment);
-            //adds comment to the end of the post
-            $postForum.append(userComment)
-          }
-          //sets values in comment fields back to default
-          $('.comment-name').val(''),
-          $('.comment-remark').val('');
-          //adds click function to remove posts on delete
-          $('.card-link2').click(function() {
-            $('.card-style').remove();
-          });
-          //adds click function to remove comments on delete
-          $('.delete-comment').click(function() {
-            $('.card-comment').remove();
-          });
-         });
-       }
-       $('.user-name').val('');
-       $('.post-text').val('');
+
+      }
+      $('.user-name').val('');
+      $('.post-text').val('');
+})
+console.log(posts);
+
+$postForum.click(function(event) {
+  console.log(event.target.className);
+  if (event.target.className == 'btn btn-primary card-link') {
+    let postComments = {
+      name: $('.comment-name').val(),
+      comment: $('.comment-remark').val()
+    };
+    console.log(postComments);
+    //adds comment object to the comments array for that item
+    posts[0].comments.push(postComments);
+        let userComment = createNewComment(postComments.name, postComments.comment);
+        console.log(userComment);
+        //adds comment to the end of the post
+        $('.card-comments').prepend(userComment)
+      //  event.target.closest('div').prepend(userComment)
+  } else if (event.target.className == 'btn btn-primary card-link2'){
+    $('.card-style').remove();
+  }
 });
+
+$postForum.click(function(event) {
+  if (event.target.className == 'close-this') {
+  console.log('true');
+  event.target.closest('div').remove();
+}
+$('.comment-name').val(''),
+$('.comment-remark').val('');
+});
+
+
+//
+//         //new click event for comment button on each post
+//         $('.card-link').click(function(event) {
+//           event.preventDefault();
+//           //creates a new object to store comments on each post
+//           let postComments = {
+//             name: $('.comment-name').val(),
+//             comment: $('.comment-remark').val()
+//           };
+//           //adds comment object to the comments array for that item
+//           posts[i - 1].comments.push(postComments);
+//           //loops through the comments for each post item
+//           for (var j = posts[i - 1].comments.length - 1; j < posts[i - 1].comments.length; j++) {
+//             //creates html string to add comment to the comments section
+
+//           }
+//           //sets values in comment fields back to default
+
+//           //adds click function to remove posts on delete
+//           $('.card-link2').click(function() {
+//             $('.card-style').remove();
+//           });
+//           //adds click function to remove comments on delete
+//           $('.delete-comment').click(function() {
+//             $('.card-comment').remove();
+//           });
+//          });
+//        }
+
+// });
