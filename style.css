@@ -1,5 +1,12 @@
 body {
   font-family: 'Montserrat', sans-serif;
+  color:  silver;
+  background: url(https://livewallpaper.info/wp-content/uploads/2016/08/wallpaper-reddit2.jpg) no-repeat center center fixed;
+  background-size: cover;
+}
+
+a {
+  margin-right: 20px;
 }
 
 .page-header {
