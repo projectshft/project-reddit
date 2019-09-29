@@ -26,7 +26,7 @@ var $postButtonClicked = function() {
 
 };
 
-// Click listener that invokes postButtonClicked variable when click is heard
+// Click listener that invokes postButtonClicked function when click is heard
 $('#postBtn').click($postButtonClicked);
 
 
