@@ -30,7 +30,7 @@ buttonEl.addEventListener('click', function () {
 });
 
 function renderPosts(posts) {
-  debugger;
+  
   postsDivEl.innerHTML = '';
   for (let idx = 0; idx < posts.length; ++idx) {
     const post = posts[idx];
@@ -60,7 +60,7 @@ function renderPosts(posts) {
     firstLineOfPostComments.setAttribute('style', 'color: blue');
     firstLineOfPostComments.innerText = ' comments';
     firstLineOfPostComments.addEventListener('click', function () {
-      debugger;
+      
       if (commentsSection.style.display === 'none' || commentsSection.style.display == '') commentsSection.style.display = 'block';
       else commentsSection.style.display = 'none';
     })
@@ -111,7 +111,7 @@ function renderPosts(posts) {
 
           commentEl.innerHTML = comment.text + ' Posted By: ' + `<strong>${comment.name}</strong>` + `<strong style="color: blue"> x</strong>`;
           commentEl.children[1].addEventListener(('click'), function (e) {
-            debugger;
+            
             e.target.parentNode.remove();
 
             post.comments.splice(index, 1);
@@ -149,7 +149,7 @@ function renderPosts(posts) {
 
         commentEl.innerHTML = comment.text + ' Posted By: ' + `<strong>${comment.name}</strong>` + `<strong style="color: blue"> x</strong>`;
         commentEl.children[1].addEventListener(('click'), function (e) {
-          debugger;
+          
           e.target.parentNode.remove();
 
           post.comments.splice(index, 1);
@@ -169,6 +169,3 @@ const createCommentForm = (placeholder) => {
   commentInputEl.setAttribute('placeholder', placeholder);
   return commentInputEl;
 };
-
-
-
