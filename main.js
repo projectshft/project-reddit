@@ -107,14 +107,14 @@ var removeContent = function () {
   {
     postId = $(this).attr(POST_ID_ATTR);
     setOfPosts.splice(postId, 1);
-    console.log('removing post ' + postid);
+    console.log('removing post ' + postId);
     updatePostDisplay();
   }
   else if ($(this)[0].hasAttribute(COMMENT_ID_ATTR)){
     //otherwise if it has data-commentid remove it from active posts comment set
     let commentId = $(this).attr(COMMENT_ID_ATTR);
     setOfPosts[postId].comments.splice(commentId, 1);
-    console.log('removing comment ' + postid + '-' + commentId)
+    console.log('removing comment ' + postId + '-' + commentId)
     updatePostWithCommentsDisplay();
   }
 }
