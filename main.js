@@ -5,8 +5,6 @@ let $postDisplay = $('.posts-display');
 let activePostNum = -1;
 const POST_ID_ATTR = 'data-postid';
 const COMMENT_ID_ATTR = 'data-commentid';
-$postForm.submit(handlePostSubmit);
-$commentForm.submit(handleCommentSubmit);
 
 //when post is submitted successfuly, add to posts and refresh html
 var handlePostSubmit = function () {
@@ -147,3 +145,6 @@ var updatePostWithCommentsDisplay = function () {
 
   wireRemoveEvents();
 }
+
+$postForm.submit(handlePostSubmit);
+$commentForm.submit(handleCommentSubmit);
