@@ -20,7 +20,7 @@ buttonEl.addEventListener('click', function () {
   // add to posts if not blank text
   if (postTextEl.value) {
     if (postNameEl.value == '') postNameEl.value = 'Anonymous';
-    posts.unshift({ name: postNameEl.value, text: postTextEl.value, id: postNameEl.value + postTextEl.value, comments: [] });
+    posts.unshift({ name: postNameEl.value, text: postTextEl.value, id: postNameEl.value + postTextEl.value, comments: [], commentsVisible: false });
     sessionStorage['posts'] = JSON.stringify(posts);
     renderPosts(posts);
     postTextEl.value = '';
@@ -60,9 +60,18 @@ function renderPosts(posts) {
     firstLineOfPostComments.setAttribute('style', 'color: blue');
     firstLineOfPostComments.innerText = ' comments';
     firstLineOfPostComments.addEventListener('click', function () {
-
-      if (commentsSection.style.display === 'none' || commentsSection.style.display == '') commentsSection.style.display = 'block';
-      else commentsSection.style.display = 'none';
+      post.commentsVisible = !post.commentsVisible;
+      let commentsDiv = $('div[name*="comments-' + post.id + '"]')[0];
+      if (post.commentsVisible) {
+        commentsSection.style.display = 'block';
+        commentsDiv.parentNode.style.display = 'block';
+        commentsDiv.style.display = 'block';
+      }
+      else {
+        commentsSection.style.display = 'none';
+        commentsDiv.parentNode.style.display = 'none';
+        commentsDiv.style.display = 'none';
+      }
     })
 
     postContainerDiv.append(firstLineOfPostComments);
@@ -74,7 +83,7 @@ function renderPosts(posts) {
     // create COMMENTS section
     let commentsSection = document.createElement('div');
     commentsSection.setAttribute('name', `${post.id}`);
-    commentsSection.setAttribute('style', "display: block");
+    commentsSection.setAttribute('style', "display: none");
     commentsSection.innerHTML = `<div name="comments-${post.id}"></div>`;
     postContainerDiv.append(commentsSection);
 
@@ -158,8 +167,14 @@ function renderPosts(posts) {
           post.comments.splice(index, 1);
         })
         commentsDiv.append(commentEl);
-        commentsDiv.parentNode.style.display = 'block';
-        commentsDiv.style.display = 'block';
+        if (post.commentsVisible){
+          commentsDiv.parentNode.style.display = 'block';
+          commentsDiv.style.display = 'block';
+        } 
+        else {
+          commentsDiv.parentNode.style.display = 'none';
+          commentsDiv.style.display = 'none';
+        }
       }
     });
   }
