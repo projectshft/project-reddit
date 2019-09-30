@@ -13,7 +13,7 @@ var handlePostSubmit = function () {
     console.log("successful post submission");
     let title = $('.title-input')[0].value;
     let text = $('.text-input')[0].value;
-    let username = $('.text-input')[0].value;
+    let username = $('.username-input')[0].value;
 
     setOfPosts.push(new Post(title, text, username));
     console.log('post added: ' + JSON.stringify(setOfPosts[setOfPosts.length - 1]));
