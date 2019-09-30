@@ -28,6 +28,7 @@ postClicked = function() {
 ///////////////////////////////////////////////////
 /* MASTER CLICK HANDLER FOR ALL POST INTERACTION */
 ///////////////////////////////////////////////////
+
 // Check for comment link click and only open comments for that post on click
 // Add comment to it's parent post on 'Add Comment'
 // Remove entire post + comments on 'Remove'
@@ -58,6 +59,7 @@ postContainerClick = function(event) {
     $(event.target).closest('.post').remove();
   }
 
+  // Remove comment handler
   if($(event.target).parent().hasClass('remove-comment')) {
      $(event.target).closest('p').remove();
   }

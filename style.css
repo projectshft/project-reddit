@@ -13,6 +13,10 @@ input {
   color: black;
 }
 
+input::placeholder {
+  color: silver;
+}
+
 .page-header {
   margin-top: 20px;
 }
