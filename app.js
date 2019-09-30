@@ -30,7 +30,7 @@ buttonEl.addEventListener('click', function () {
 });
 
 function renderPosts(posts) {
-  
+
   postsDivEl.innerHTML = '';
   for (let idx = 0; idx < posts.length; ++idx) {
     const post = posts[idx];
@@ -50,7 +50,7 @@ function renderPosts(posts) {
 
     function removePost(idx) {
       posts.splice(idx, 1);
-      let postEl = $('div[id*="' + idx + post.name + post.text + '"]'); 
+      let postEl = $('div[id*="' + idx + post.name + post.text + '"]');
       postEl.remove();
     }
 
@@ -60,7 +60,7 @@ function renderPosts(posts) {
     firstLineOfPostComments.setAttribute('style', 'color: blue');
     firstLineOfPostComments.innerText = ' comments';
     firstLineOfPostComments.addEventListener('click', function () {
-      
+
       if (commentsSection.style.display === 'none' || commentsSection.style.display == '') commentsSection.style.display = 'block';
       else commentsSection.style.display = 'none';
     })
@@ -103,24 +103,27 @@ function renderPosts(posts) {
         commentFormName.value = '';
 
         // render comments
-        for (let index = 0; index < post.comments.length; ++index) {
-          const comment = post.comments[index];
-          let commentEl = document.createElement('p');
-          commentEl.setAttribute('name', comment.id);
-          commentEl.setAttribute('style', "list-style-type:none");
+        posts.forEach((post) => {
+          for (let index = 0; index < post.comments.length; ++index) {
+            const comment = post.comments[index];
+            let commentEl = document.createElement('p');
+            commentEl.setAttribute('name', comment.id);
+            commentEl.setAttribute('style', "list-style-type:none");
 
-          commentEl.innerHTML = comment.text + ' Posted By: ' + `<strong>${comment.name}</strong>` + `<strong style="color: blue"> x</strong>`;
-          commentEl.children[1].addEventListener(('click'), function (e) {
-            
-            e.target.parentNode.remove();
+            commentEl.innerHTML = comment.text + ' Posted By: ' + `<strong>${comment.name}</strong>` + `<strong style="color: blue"> x</strong>`;
+            commentEl.children[1].addEventListener(('click'), function (e) {
 
-            post.comments.splice(index, 1);
-          })
+              e.target.parentNode.remove();
 
-          let lineBreakEl = document.createElement('br');
-          let commentsDiv = $('div[name*="comments-' + post.id + '"]')[0];
-          if (commentsDiv) commentsDiv.append(commentEl);
-        }
+              post.comments.splice(index, 1);
+            })
+
+            let lineBreakEl = document.createElement('br');
+            let commentsDiv = $('div[name="comments-' + post.id + '"]')[0];
+            if (commentsDiv) commentsDiv.append(commentEl);
+
+          }
+        })
       }
     })
 
@@ -149,7 +152,7 @@ function renderPosts(posts) {
 
         commentEl.innerHTML = comment.text + ' Posted By: ' + `<strong>${comment.name}</strong>` + `<strong style="color: blue"> x</strong>`;
         commentEl.children[1].addEventListener(('click'), function (e) {
-          
+
           e.target.parentNode.remove();
 
           post.comments.splice(index, 1);
