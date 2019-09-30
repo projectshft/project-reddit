@@ -74,11 +74,15 @@ var wireRemoveEvents = function () {
   $removePostLinks = $("a:contains(post)");
   $removeCommentLinks = $("a:contains(comment)");
 
-  //set index for later
-  for(i = 0 ; i < $removePostLinks.length; i++)
-  {
-    $removePostLinks[i].setAttribute("data-postid", i);
-  };
+  if (activePostNum >= 0) {
+    $removePostLinks[0].setAttribute("data-postid", activePostNum);
+  }
+  else {
+    //set index for later
+    for (i = 0; i < $removePostLinks.length; i++) {
+      $removePostLinks[i].setAttribute("data-postid", i);
+    };
+  }
 
   //set index for later
   for(i = 0 ; i < $removeCommentLinks.length; i++)
