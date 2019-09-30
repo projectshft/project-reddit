@@ -13,10 +13,10 @@ var $postButtonClicked = function() {
 
 
 //Variable that stores in the users inputs
-    var addPost = [{
-    Name: $yourName,
-    Post: $postText
-  	}];
+   //  var addPost = [{
+   //  Name: $yourName,
+   //  Post: $postText
+  	// }];
 
 //Variables that are able to take in and display the data that was previously stored in the array
   var template = '<p>'
@@ -24,7 +24,6 @@ var $postButtonClicked = function() {
    + '  <div class="pb-3 mt-4 mb-2 border-bottom">' + 'Posted By: ' + '<b>' + $yourName + '</b>' + '</div>';
    + '  <div class="container">';
    + '</p>' ;
-
 
 //This invokes the template variable and prepends the data to the site
    $('.post-display').prepend(template);
@@ -43,7 +42,21 @@ $(document).ready(function(){
 });
 
 
+  // var template = '<p>'
+  //  + '	<form class="navbar-form navbar-left" role="search">';
+  //  + '  <div class="form-group">' + '</div>';
+  //  + '  <div class="added-post">' + $postText + '</div>';
+  //  + '  <div class="pb-3 mt-4 mb-2 border-bottom">' + 'Posted By: ' + '<b>' + $yourName + '</b>' + '</div>';
+  //  + '	<input type="text" class="form-control" placeholder="Search">';
+  //  + '  <button type="button" class="btn btn-primary">Primary</button>';
+  //  + '	</form>'
+  //  + '</p>' ;
 
+  // var template = '<p>'
+  //  + '  <div class="added-post">' + $postText + '</div>'
+  //  + '  <div class="pb-3 mt-4 mb-2 border-bottom">' + 'Posted By: ' + '<b>' + $yourName + '</b>' + '</div>';
+  //  + '  <div class="container">';
+  //  + '</p>' ;
 
 
 
