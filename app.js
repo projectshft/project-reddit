@@ -1,4 +1,4 @@
-// Project Reddit
+// Project Reddit - wk2 
 
 const posts = [];
 let JSONposts = '';
