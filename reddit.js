@@ -1,10 +1,24 @@
 //add post
-var button = document.getElementsByTagName("button")[0];
+var button = document.getElementsByTagName('button')[0];
 
-button.addEventListener("click", function( {
-    var userInput = document.getElementsByClassName('')
-})
-console.log(captured)
+button.addEventListener('click', function () {
+  var userInput = document.getElementsByClassName('name')[0].value;
+  var li = document.createElement('li');
+  var userInputElement = document.createTextNode(userInput);
+  
+  li.appendChild(userInputElement);
+  
+  document.getElementsByClassName('names')[0].append(li);
+});
+
+$('button').on('click', function () {
+    $('#newPostForm').val()
+  });
+
+  
+
+   
+
 
 
 /*<input type="text" id="userInput"=> give me input</input>
@@ -19,3 +33,9 @@ function test(){
     document.getElementById("demo").innerHTML = userInput;
 }
 </script>//
+
+
+// Display Post
+// Display all post
+// Add comment
+// Delete Comment
