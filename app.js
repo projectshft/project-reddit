@@ -20,7 +20,7 @@ buttonEl.addEventListener('click', function () {
   // add to posts if not blank text
   if (postTextEl.value) {
     if (postNameEl.value == '') postNameEl.value = 'Anonymous';
-    posts.push({ name: postNameEl.value, text: postTextEl.value, id: postNameEl.value + postTextEl.value, comments: [] });
+    posts.unshift({ name: postNameEl.value, text: postTextEl.value, id: postNameEl.value + postTextEl.value, comments: [] });
     sessionStorage['posts'] = JSON.stringify(posts);
     renderPosts(posts);
     postTextEl.value = '';
