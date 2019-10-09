@@ -1,12 +1,13 @@
 var postArray = [];
 
+
 // Captures user input values.
 // invokes create post function at click event.
 $("#postButton").on("click", function () {
   var text = $("#message").val()
   var name = $("#name").val()
   createPost(text, name);
-  renderPost();
+  renderPostInPostArray();
   
   // console.log(text, name)
 });
@@ -16,16 +17,38 @@ $("#postButton").on("click", function () {
 // to be capture
 // adding post to post array
 let createPost = function (message, user) {
-  var post = {
+  var postMade = {
     text: message,
     name: user
   };
 
-  postArray.push(post);
-  // console.log(postArray)
+  postArray.push(postMade)
+
+  
+  
+
 };
 
 // Rendering post
-let renderPost = function () {
-  console.log(postArray)
+// loop through input(postArray)
+// inside loop what will rendered view look lik
+let renderPostInPostArray = function () {
+  $("#post-view").empty();
+
+  for (var i = 0; i < postArray.length; i++) {
+    // append into HTLM
+    var removeButton = `<button type="button" class="btn btn-small btn-danger remove_button">Remove</button>`
+    var commentButton = `<button type="button" class="btn btn-primary comment_button">Comment</button>`
+    
+    var htmlPost = `<div><span>${commentButton}</span> <span>${removeButton}</span><p>${postArray[i].text}</p>
+      <p><strong>${postArray[i].name}</strong></p></div>`;
+    
+    $("#post-view").append(htmlPost);
+  }
+
 }
+$("#comment_button").on("click", function () {
+  var text = $("#message").val()
+  var name = $("#name").val()
+  createComment(text, name);
+  renderCommentInPostArray()
