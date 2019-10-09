@@ -1,41 +1,31 @@
-//add post
-var button = document.getElementsByTagName('button')[0];
+var postArray = [];
 
-button.addEventListener('click', function () {
-  var userInput = document.getElementsByClassName('name')[0].value;
-  var li = document.createElement('li');
-  var userInputElement = document.createTextNode(userInput);
+// Captures user input values.
+// invokes create post function at click event.
+$("#postButton").on("click", function () {
+  var text = $("#message").val()
+  var name = $("#name").val()
+  createPost(text, name);
+  renderPost();
   
-  li.appendChild(userInputElement);
-  
-  document.getElementsByClassName('names')[0].append(li);
+  // console.log(text, name)
 });
 
-$('button').on('click', function () {
-    $('#newPostForm').val()
-  });
+//todo:render post
+// Object created to store user input for values
+// to be capture
+// adding post to post array
+let createPost = function (message, user) {
+  var post = {
+    text: message,
+    name: user
+  };
 
-  
+  postArray.push(post);
+  // console.log(postArray)
+};
 
-   
-
-
-
-/*<input type="text" id="userInput"=> give me input</input>
-<button onclick="test()">Submit</button>
-
-<!-- add this line for function to write into -->
-<p id="demo"></p>   
-
-<script type="text/javascript">
-function test(){
-    var userInput = document.getElementById("userInput").value;
-    document.getElementById("demo").innerHTML = userInput;
+// Rendering post
+let renderPost = function () {
+  console.log(postArray)
 }
-</script>//
-
-
-// Display Post
-// Display all post
-// Add comment
-// Delete Comment

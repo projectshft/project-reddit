@@ -1,57 +1,15 @@
 
-section {
-    padding-top: 300px;
-    color: #fff;
-    background-color: #fff
-    font-family: 'Big Shoulders Text',      cursive;
-    font-size: 50px;
-    text-align: center;
+html {
+background: url(https://i0.wp.com/rsvpsobe.com/wp-content/uploads/2019/07/architecture-attractive-background-988873.jpg?ssl=1) no-repeat center fixed;
+background-size: cover;
+height: 700px;
 }
 
-  h1{
-    font-size: 50px;
-    text-align: center;
-    font-family: 'Big Shoulders Text', cursive;
-}
-  h2{
-    text-align: center;
-    font-family: 'Quicksand', sans-serif;
+h1 {
+text-align: center;
 }
 
-  legend {
-      background-color: rgb(0, 0, 0);
-      color: rgb(255, 255, 255);
-      padding: 3px 6px;
-      font size: 32px;
-      font-family: 'Big Shoulders Text', cursive;
-}
-  
-  .output {
-      font-family: 'Quicksand', sans-serif;
-}   
-    }
-}   
-  
-  input {
-      margin: .4rem;
-}
-  
-  button {
-      width: 50px
-      margin-left: auto
-      margin-right: auto
-      background-color: #fff
-}
-
-  html {
-  background: url(https://i0.wp.com/rsvpsobe.com/wp-content/uploads/2019/07/architecture-attractive-background-988873.jpg?ssl=1) no-repeat center fixed;
-  background-size: cover;
-  height: 700px;
-}
 form {
-        background-color: #fff
-}
-
-form{
-    text-align: center
+background-color: #fff;
+text-align: center;
 }
