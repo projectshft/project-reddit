@@ -6,6 +6,7 @@
     <title>repl.it</title>
     <link href="style.css" rel="stylesheet" type="text/cs" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
 
   </head>
   <body>
@@ -14,19 +15,39 @@
      <ul class="names">
 </ul>
 
+<div id="postsHTML"> 
 
+</div>
+
+ <script id="posts-template" type="text/x-handlebars-template">
+        <div class="post">
+              <div>Content: <strong>{{ content }}</strong></div>
+              <div>User Name:  <strong>{{ name }}</strong></div>
+              
+            </div>
+          </script>
+
+</div> 
+
+
+<div class="post-input">
+
+<h4>Add a New Post</h4>
 <input class="name" placeholder="User Name"/>
     </div>
 <input class="postText" placeholder="Post text here"/>
 
 <button type= "button" class="btn btn-primary">Post</button>
 
+</div>
 
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
-
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-
-    <script src="script.js"></script>
+<script src="script.js"></script>
   </body>
 </html>
+
+<!--1) grab user input and append it to posts div. Use jquery
+2)"Comment content" 
+  Posted by:UserName
