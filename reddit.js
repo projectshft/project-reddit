@@ -22,11 +22,8 @@ let createPost = function (message, user) {
     name: user
   };
 
+  
   postArray.push(postMade)
-
-  
-  
-
 };
 
 // Rendering post
@@ -36,7 +33,7 @@ let renderPostInPostArray = function () {
   $("#post-view").empty();
 
   for (var i = 0; i < postArray.length; i++) {
-    // append into HTLM
+    // append to HTLM
     var removeButton = `<button type="button" class="btn btn-small btn-danger remove_button">Remove</button>`
     var commentButton = `<button type="button" class="btn btn-primary comment_button">Comment</button>`
     
@@ -47,8 +44,10 @@ let renderPostInPostArray = function () {
   }
 
 }
-$("#comment_button").on("click", function () {
-  var text = $("#message").val()
-  var name = $("#name").val()
-  createComment(text, name);
-  renderCommentInPostArray()
+
+// When a user clicks 'comments'
+// it should toggle the comments and input box visible / hidden
+
+// May not be able to use template literal
+// append HTML different - making html a string
+

@@ -1,0 +1,12 @@
+ // append to HTLM
+    // var removeButton = `<button type="button" class="btn btn-small btn-danger remove_button">Remove</button>`
+    // var commentButton = `<button type="button" class="btn btn-primary comment_button">Comment</button>`
+    
+    // var htmlPost = `<div><span>${commentButton}</span> <span>${removeButton}</span><p>${postArray[i].text}</p>
+    //   <p><strong>${postArray[i].name}</strong></p></div>`;
+    
+    var commentButton = '<div class=comment_container></div>' + 
+      '<button class="btn btn-primary add-comment">Post Comment</button> </div>';
+  
+     $("#post-view").append(<html><ht);
+  }
