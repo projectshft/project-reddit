@@ -5,27 +5,45 @@ $('#submit-post').on('click', function () {
 		var $userName = $('#post-user').val();
 		
 		var newpostContainer = 
+		'<div class="post">' +
+		'<a href="#" class="remove-link" role="button">Remove</a>' + '<div>' + 
+		'<a href="#" class="comment-link" role="button">Add Comment</a>' + 
+		'<div class="page-header">' +
 		'<div class="new-post">' + $postText + '</div>' +
 		'Posted By: ' + '<b>' + $userName + '</b>' + '</div>';
-
-	$('.posts').prepend(newpostContainer);
+		'<form class="comment-form">' +
+		'<div class="comment">' +
+        '<input class="comment-text" type="text" placeholder="Enter Comment">' +
+        '<input class="comment-name" type="text" placeholder="Username">' +
+		'<button class="btn btn-primary comment-button" type="button">New Comment</button>' +
+		'</form>' +'<div>' +
+		'</div>'
+		
+	$('#posts').prepend(newpostContainer);
 	$('#post-text').val('');
 	$('#post-user').val('');
 
 	
   });
 
-// 	var newcommentContainer = 
-// 		'<p>' + 
-// 		'<div class="comments-container">' + '<div class=comments-list></div>' +
-// 		'<input type="text" class="comment-name" placeholder="Post Comment">' + '<input type="text" class="comment-user">' +
-// 		'<input type="text" class="post-user" placeholder="Username">' + '<input type="text" class="comment-user">'+
-// 		'<button type="button" class="btn btn-primary" id="commentButton">Post Comment</button>' + '</form>' +
-// 		'<p>';
-  
+commentClick = function(event) {
+	  
+	if ($(event.target).hasClass("comment-button")) {
+		let $commentText = $('.comment-text').val()
+		let $commentName = $('.comment-name').val()
+			
+		var newcommentContainer = '<p class="comment">' + $commentText + 'Comment By:' + $commentName + 
+								'<a class="btn remove-comment" href="#"><i class="far></i></a></p>';
+		$(event.target).prevAll(".comment-text").before(newcommentContainer)
+		
+	 
+		if($(event.target).hasClass('remove-link')) {
+		$(event.target).closest('.posts').remove();
+	}
+}
+		$("#posts").on("click", commentClick)	
+}
+	
+	  
 
-// 	$('.post-form').prepend(newpostContainer);
-// 	$('#submit-post').click($postButtonClicked);
-// 	$('.comment-form').prepend(newcommentContainer);
-// 	$('#commentButton').click($commentOnPost);
-// };
+	  
