@@ -4,18 +4,10 @@
 var $posts = $('.posts');
   
 var createPost = function (text, user) {
+	var text =$('text-post').value
+	var user =$('user-name').value
 
-	//demo comment 
-	  var demo = Model({ text: text, name: user, comments: []});
-  
-	  demo.change(function () {
-		app.renderComments();
-	  });
-  
-	  posts.add(demo);
-	  renderComments();
-	};
-
+}
 // To put the new post in the html so the user can see it.  i think the comments containter part is wrong
 var renderPosts = function () {
 	$posts.empty();
@@ -64,20 +56,6 @@ var createComment = function (text, name, postIndex) {
 	  posts.models[postIndex].get('comments').splice(commentIndex, 1);
 	}
   
-	
-//to render posts and invoke removing posts
-
-	  return createPost;
-
-	  return renderPosts;
-
-	  return removePost;
-
-//to render the comments, I think this part may need fixing
-  
-	  return createComment; 
-
-	  return renderComments;
 }
 
 };
