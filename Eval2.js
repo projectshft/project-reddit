@@ -29,19 +29,18 @@ var renderPosts = function () {
   }
 };
 
-//remove button 
-// var removePost = function (currentPost) {
-//   var $clickedPost = $(currentPost).closest('.post');
 
-//   var index = $clickedPost.index();
-
-//   posts.splice(index, 1);
-//   $clickedPost.remove();
-// };
 
 $('#postsHTML').on('click', '.bRemove', function() {
   console.log("You clicked remove")
+  var val = $(this).closest('post').find(".post").text();
+  console.log(val);
+  var index = posts.findIndex(function(item) {return item.post == val})
+  console.log(index)
+  posts.splice(index, 1)
+  console.log(posts);
 });
+
 
 
 $('#postsHTML').on('click', '.bComments', function() {
