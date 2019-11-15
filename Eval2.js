@@ -1,5 +1,5 @@
 var button = document.getElementsByTagName('button')[0];
-
+//create empty posts array
 var posts = []
 var $posts = $('.posts');
 
@@ -20,30 +20,67 @@ var renderPosts = function () {
     console.log(posts[i]);
 
     //use string template to create html friendly format for our user input
-    var HTMLposts = `<p>${posts[i].post}</p>
+    var HTMLposts = `<button type="button" class ="bComments">Comments</button>
+    <button type="button" class ="bRemove">Remove</button><p>${posts[i].post}</p> 
       <p><strong> Posted by: ${posts[i].author}</strong></p></div>`;
-
 
 
     $('#postsHTML').append(HTMLposts);
   }
 };
 
+//remove button 
+// var removePost = function (currentPost) {
+//   var $clickedPost = $(currentPost).closest('.post');
+
+//   var index = $clickedPost.index();
+
+//   posts.splice(index, 1);
+//   $clickedPost.remove();
+// };
+
+$('#postsHTML').on('click', '.bRemove', function() {
+  console.log("You clicked remove")
+});
+
+
+$('#postsHTML').on('click', '.bComments', function() {
+  console.log("You clicked comments")
+});
+
+
+//event listener to grab new post inputs
 button.addEventListener('click', function () {
 
   var userName = document.getElementsByClassName('name')[0].value;
 
   var userText = document.getElementsByClassName('postText')[0].value;
-
-  // var obj = document.createElement('obj');
+  
+  // if userName = null || userText = null  {
+  //   return "Please enter a valid response"
+  // }
+  // else {
+  
 
   addPost(userName, userText);
   renderPosts();
-  obj.appendChild(userInputElement);
+//   // obj.appendChild(userInputElement);
 
-  document.getElementsByClassName('names')[0].append(obj);
+//   document.getElementsByClassName('names')[0].append(obj);
 
-  console.log(postObject);
+//   console.log(postObject);
+// });
+
+
+//Adding comments- 
+//Every post by default has a "remove" button and a "comments" button 
+//   and an empty comments array.
+//On comments click, display comments and input field identical to posts
+//On "post comment" button click, append comment to the array on that post
+//Loop through and display comments on current post.
+// 
+
+
+
 });
 
-// var renderCurrentPost = function () {
