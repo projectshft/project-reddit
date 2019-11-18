@@ -18,12 +18,13 @@ $('#submit-post').on('click', function () {
 		'<button class="btn btn-primary comment-button" type="button">New Comment</button>' +
 		'</form>' +'<div>' +
 		'</div>'
+		//the posts are appended here
 		
 	$('#posts').prepend(newpostContainer);
 	$('#post-text').val('');
 	$('#post-user').val('');
 
-	
+
   });
 
 commentClick = function(event) {
@@ -44,6 +45,9 @@ commentClick = function(event) {
 		$("#posts").on("click", commentClick)	
 }
 	
-	  
+$(".btn-comment").click(function() {
+  	$(this).parents(".post"); 
+
+  });	  
 
 	  
