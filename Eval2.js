@@ -1,3 +1,11 @@
+$('#postsHTML').on('click', '.bRemove', function() {
+  console.log("You clicked remove")
+  removePost();
+});
+
+
+var projectRedditApp= function () {
+
 var button = document.getElementsByTagName('button')[0];
 //create empty posts array
 var posts = []
@@ -29,17 +37,16 @@ var renderPosts = function () {
   }
 };
 
-
-
 $('#postsHTML').on('click', '.bRemove', function() {
   console.log("You clicked remove")
-  var val = $(this).closest('post').find(".post").text();
-  console.log(val);
-  var index = posts.findIndex(function(item) {return item.post == val})
-  console.log(index)
-  posts.splice(index, 1)
-  console.log(posts);
+  removePost();
 });
+
+var removePost= function (currentPost) {
+    currentPost.parentNode.parentNode.removeChild(currentPost.parentNode);
+
+};
+
 
 
 
@@ -56,7 +63,7 @@ button.addEventListener('click', function () {
   var userText = document.getElementsByClassName('postText')[0].value;
   
   // if userName = null || userText = null  {
-  //   return "Please enter a valid response"
+  //   alert("Please enter a valid response!")
   // }
   // else {
   
@@ -83,3 +90,4 @@ button.addEventListener('click', function () {
 
 });
 
+};
