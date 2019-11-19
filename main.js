@@ -95,7 +95,6 @@ var addCommentToPost = function (postNumber) {
 };
 
 
-
 // function that resets form after submission
 $(document).ready(function () {
   drawPosts();
