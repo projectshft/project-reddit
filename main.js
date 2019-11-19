@@ -1,7 +1,8 @@
 // Array that stores in the users posts
-var posts = [];
+var posts = [{ text: 'hello', name: 'dave', comments: [{ name: 'Dude', text: 'Sup' }] }];
 
-//Function that takes in users post info from text fields when clicked and alerts user if fields are empty
+
+//This function takes in users post info from text fields when clicked and pushes it to posts array 
 var postButtonClicked = function () {
   var $postText = $('#postText').val();
 
@@ -17,23 +18,23 @@ var postButtonClicked = function () {
     return false;
   };
 
-
+  //This pushes new posts to the posts array 
   posts.push({ text: $postText, name: $yourName, comments: [] });
   drawPosts();
-  //Variables that are able to take in and display the data that was previously stored in the array
-
-  //This invokes the template variable and prepends the data to the site
 
 };
 
-
+// This function appends posts and comments to the page for the user to see 
 var drawPosts = function () {
 
+  //This clears all posts and comments from the page so that there are no duplicates 
   $('.post-display').empty();
 
   for (var i = 0; i < posts.length; i++) {
-
+    // This for loop cycles through all the posts and posts all of them to the page 
+    // when it recieves a new post 
     var template = '<div class="postpara">';
+    template += '  <button class=" btn btn-success show-comments" onclick = "toggleComments(' + i + ')">' + "comments" + '</button>';
     template += '   <button type="button" class="close closepost" aria-label="Close">'
     template += '    <span aria-hidden="true">&times;</span>'
     template += '     </button>'
@@ -43,133 +44,89 @@ var drawPosts = function () {
     template += '  <div class="form-group"></div>';
     template += ' <input type="text" class="comment-text" placeholder="Comment Text">';
     template += ' <input type="text" class="usernameInput" placeholder="Username">';
-    template += '  <button type="button" class="btn btn-primary" id="commentBtn">Post Comment</button>';
+    template += '  <button type="button" class="btn btn-primary commentBtn-' + i + '"  onclick = "addCommentToPost(' + i + ')">Post Comment</button>';
     template += ' </form>';
-    template += ' <div class="comments-container"></div>';
+    template += ' <div class="comments-container-' + i + '"></div>';
     template += '</div>';
 
 
 
     $('.post-display').append(template);
-
-    for (var j = 0; j < posts.comments; j++) {
-      var templateComment = '<p>' +
-        '<button type="button" class="close" aria-label="Close">' +
+    //This for-loop cycles through all the comments and posts all of them to the page 
+    //when it recieves a new comment 
+    for (var j = 0; j < posts[i].comments.length; j++) {
+      var templateComment = '<p class=commentBlock>' +
+        '<button type="button" class="close closecomment" aria-label="Close">' +
         '<span aria-hidden="true">&times;</span>' +
         '</button>' +
         ' <div class="add-post"></div>' +
-        '  <div class="added-post">' + commentText + '</div>' +
-        '  <div class="pb-3 mt-4 mb-2 border-bottom">' + 'Posted By: ' + '<b>' + usernameInput + '</b>' + '</div>'; +
+        '  <div class="added-post">' + posts[i].comments[j].text + '</div>' +
+        '  <div class="pb-3 mt-4 mb-2 border-bottom">' + 'Comment By: ' + '<b>' + posts[i].comments[j].name + '</b>' + '</div>'; +
           '  <div class="container">'; +
             '</p>';
 
-      $addCommentFormElement.find('.comments-container').append(templateComment);
-      drawPosts();
-
+      $(`.comments-container-${i}`).append(templateComment);
     }
   }
-  // get a reference to the comment container 
-
 };
-//function for add comment events
 
-var addCommentToPost = function () {
-  // #TODO: Add comment to post in post array 
-  $('.post-display').empty();
 
-  var comment = { name: usernameInput, text: commentText };
+// This function takes information from the comment fields and pushes it to the posts array 
+// within the right post that it recieved a comment on
+var addCommentToPost = function (postNumber) {
 
-  // var commentText = $addCommentFormElement.find$('.comment-text').val();
-  var $commentText = $('.comment-text').val();
+  var $commentText = $(`.commentBtn-${postNumber}`).siblings('.comment-text').val();
 
   if ($commentText.length < 1) {
     alert('Please enter text')
     return false;
   };
 
-  // var usernameInput = $addCommentFormElement.find('.usernameInput').val();
-  var $usernameInput = $('.usernameInput').val();
-  
+  var $usernameInput = $(`.commentBtn-${postNumber}`).siblings('.usernameInput').val();
+
   if ($usernameInput.length < 1) {
     alert('Please enter username')
     return false;
+
   };
-
-
-  // $('#commentBtn').click(function () {
-  //   posts.comments.push(comment);
-  //   drawPosts();
-  // })
-
-  var clicked = function () {
-    posts[0].comments.push({ comment });
-    drawPosts();
-  }
-  $('#commentBtn').click(clicked);
-
-  //figure out what post this comment is on
-  //add new comment object to posts[whateverpostnum].comments
-  //draw posts
-
-
-
-  // $clickedPost.find('.comments-container').push(templateComment).comment;
-
-
-  // $('.post-display').find('.postpara').eq(i).find('.comments-container').append()
-
-
-
-
-  $('.closepost').click(function () {
-    var index = $(this).closest('.postpara').index();
-    posts.splice(index, 1);
-    drawPosts();
-  });
-
-
-
-  // Click listener that invokes postButtonClicked function when click is heard
-
-
-
-  $('.post-display').on('click', $('#commentBtn'), function (e) {
-    e.preventDefault();
-    var $clickedCommentButton = $(e.currentTarget);
-    //   console.log('click');
-
-
-    //collapses the closet comment post to the click button 
-    var $addCommentFormElement = $clickedCommentButton.closest('#config-comment');
-    addCommentToPost($addCommentFormElement);
-
-
-  });
-
-
+  var comment = { name: $usernameInput, text: $commentText };
+  posts[postNumber].comments.push(comment);
+  drawPosts();
 };
 
 
 
 // function that resets form after submission
 $(document).ready(function () {
-  $("#postBtn").click(function () {
+  drawPosts();
+  $("#postBtn").click(function (e) {
+    e.preventDefault();
     postButtonClicked();
     $("#configform").trigger("reset");
   });
-});
 
+  // this function allows a user to close a particular post 
+  $('.closepost').click(function () {
+    var index = $(this).closest('.postpara').index();
+    posts.splice(index, 1);
+    drawPosts();
+  });
 
-
-
-// form reset for comment form
-$(document).ready(function () {
-  $("#commentBtn").click(function () {
-    addCommentToPost();
-    $("#config-comment").trigger("reset");
+  //This allows user to close a particular comment 
+  $('.closecomment').click(function () {
+    var postIndex = $(this).closest('.postpara').index();
+    var commentIndex = $(this).closest(`.commentBlock`).index();
+    posts[postIndex].comments.splice(commentIndex, 1);
+    drawPosts();
   });
 });
 
+//This function allows the user to toggle to show or hide commemts for each post
+var toggleComments = function (i) {
+  console.log('click comments')
+  $(`.comments-container-${i}`).toggle();
+
+}
 
 
 //HTML + CSS ------------------------check
@@ -181,6 +138,6 @@ $(document).ready(function () {
 // display posts---------------------check
 //add comment to post----------------check
 // display comments------------------check
-//delete a comment
+//delete a comment-------------------check
 // toggle comments box show/hide
-//delete a post
+//delete a post----------------------check

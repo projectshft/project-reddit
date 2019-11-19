@@ -13,3 +13,12 @@
 .added-post {
 	font-size: 15px;
 }
+
+.comments-container- {
+  display: none ;
+}
+
+.show {
+  display: block;
+}
+
