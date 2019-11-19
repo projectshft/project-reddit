@@ -1,10 +1,18 @@
-$('#postsHTML').on('click', '.bRemove', function() {
+
+//event listener for remove button
+$('#postsHTML').on('click', '.bRemove', function(currentPost) {
   console.log("You clicked remove")
-  removePost();
+  currentPost.parentNode.parentNode.removeChild(currentPost.parentNode);
+
 });
 
+//event listener for comments button
+$('#postsHTML').on('click', '.bComments', function() {
+  console.log("You clicked comments")
+});
 
-var projectRedditApp= function () {
+var ProjectRedditApp= function () {
+
 
 var button = document.getElementsByTagName('button')[0];
 //create empty posts array
@@ -28,31 +36,21 @@ var renderPosts = function () {
     console.log(posts[i]);
 
     //use string template to create html friendly format for our user input
-    var HTMLposts = `<button type="button" class ="bComments">Comments</button>
-    <button type="button" class ="bRemove">Remove</button><p>${posts[i].post}</p> 
+    var HTMLposts = `<button type="button" class ="bComments">Comments</button><button type="button" class ="bRemove">Remove</button><p>${posts[i].post}</p> 
       <p><strong> Posted by: ${posts[i].author}</strong></p></div>`;
-
-
-    $('#postsHTML').append(HTMLposts);
+      $('#postsHTML').append(HTMLposts);
   }
 };
 
-$('#postsHTML').on('click', '.bRemove', function() {
-  console.log("You clicked remove")
-  removePost();
-});
-
-var removePost= function (currentPost) {
-    currentPost.parentNode.parentNode.removeChild(currentPost.parentNode);
-
-};
 
 
+var HTMLcomments = function () {
+  $('#commentsHTML').append(HTMLcomments);
+}
 
-
-$('#postsHTML').on('click', '.bComments', function() {
-  console.log("You clicked comments")
-});
+var HTMLremove= function () {
+  $('#removeHTML').append(HTMLremove);
+}
 
 
 //event listener to grab new post inputs
@@ -63,7 +61,7 @@ button.addEventListener('click', function () {
   var userText = document.getElementsByClassName('postText')[0].value;
   
   // if userName = null || userText = null  {
-  //   alert("Please enter a valid response!")
+  //   return "Please enter a valid response"
   // }
   // else {
   
@@ -78,16 +76,11 @@ button.addEventListener('click', function () {
 // });
 
 
-//Adding comments- 
-//Every post by default has a "remove" button and a "comments" button 
-//   and an empty comments array.
-//On comments click, display comments and input field identical to posts
-//On "post comment" button click, append comment to the array on that post
-//Loop through and display comments on current post.
-// 
-
 
 
 });
 
 };
+
+
+const app = ProjectRedditApp();
