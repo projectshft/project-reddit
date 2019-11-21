@@ -1,27 +1,27 @@
-
-//event listener for remove button
-$('#postsHTML').on('click', '.bRemove', function(currentPost) {
-  console.log("You clicked remove")
-  currentPost.parentNode.parentNode.removeChild(currentPost.parentNode);
-
-});
-
-//event listener for comments button
-$('#postsHTML').on('click', '.bComments', function() {
-  console.log("You clicked comments")
-});
-
-var ProjectRedditApp= function () {
-
-
-var button = document.getElementsByTagName('button')[0];
 //create empty posts array
-var posts = []
+var posts = [
+  // { 
+  //   text: 'hey', 
+  //   author: 'bob', 
+  //   comments: [
+  //     { text: 'oh hi', author: 'linda'},
+  //     { text: 'oh hi', author: 'linda'}
+  //   ]
+  // },
+  // { 
+  //   text: 'hey', 
+  //   author: 'bob', 
+  //   comments: [
+  //     { text: 'oh hi', author: 'linda'},
+  //     { text: 'oh hi', author: 'linda'}
+  //   ]
+  // },
+]
 var $posts = $('.posts');
 
 var addPost = function (user, text) {
   var postObject = {
-    post: text,
+    text: text,
     author: user
   }
   posts.push(postObject);
@@ -33,12 +33,14 @@ var renderPosts = function () {
 
   //for loop to iterate through addposts
   for (let i = 0; i < posts.length; i++) {
-    console.log(posts[i]);
+    var post = posts[i];
 
-    //use string template to create html friendly format for our user input
-    var HTMLposts = `<button type="button" class ="bComments">Comments</button><button type="button" class ="bRemove">Remove</button><p>${posts[i].post}</p> 
-      <p><strong> Posted by: ${posts[i].author}</strong></p></div>`;
-      $('#postsHTML').append(HTMLposts);
+    var commentsContainer = '<div class="comments-container">' + '<div class=comments-list></div>' +
+      '<input type="text" class="comment-name" placeholder="Comment Text">' + '<input type="text" class="comment-user" placeholder="User Name"><button class="btn btn-primary add-comment">Post Comment</button> </div>';
+
+    $('#postsHTML').append('<div class="post">'
+      + '<a href="#" class="remove">remove</a> ' + '<a href="#" class="show-comments">comments</a> ' + post.text +
+      commentsContainer + '<div> Posted By: <strong>' + post.author + '</strong></div> <hr/> </div> ');
   }
 };
 
@@ -54,9 +56,9 @@ var HTMLremove= function () {
 
 
 //event listener to grab new post inputs
-button.addEventListener('click', function () {
+$('#bPost').on('click', function () {
 
-  var userName = document.getElementsByClassName('name')[0].value;
+  var userName = $('.name').val();
 
   var userText = document.getElementsByClassName('postText')[0].value;
   
@@ -68,19 +70,24 @@ button.addEventListener('click', function () {
 
   addPost(userName, userText);
   renderPosts();
-//   // obj.appendChild(userInputElement);
-
-//   document.getElementsByClassName('names')[0].append(obj);
-
-//   console.log(postObject);
-// });
-
-
-
-
 });
 
-};
 
+//event listener for remove button
+$('#postsHTML').on('click', '.remove', function (e) {
+  var postIndex = $(e.currentTarget).closest('.post').index();
 
-const app = ProjectRedditApp();
+  posts.splice(postIndex, 1);
+
+  renderPosts();
+});
+
+//event listener for comments button
+$('#postsHTML').on('click', '.bComments', function() {
+  postsHTML.innerHTML
+  console.log("You clicked comments")
+});
+
+renderPosts();
+// renderComments();
+
