@@ -1,28 +1,13 @@
 //create empty posts array
-var posts = [
-  // { 
-  //   text: 'hey', 
-  //   author: 'bob', 
-  //   comments: [
-  //     { text: 'oh hi', author: 'linda'},
-  //     { text: 'oh hi', author: 'linda'}
-  //   ]
-  // },
-  // { 
-  //   text: 'hey', 
-  //   author: 'bob', 
-  //   comments: [
-  //     { text: 'oh hi', author: 'linda'},
-  //     { text: 'oh hi', author: 'linda'}
-  //   ]
-  // },
-]
+var posts = []
 var $posts = $('.posts');
+
 
 var addPost = function (user, text) {
   var postObject = {
     text: text,
-    author: user
+    author: user,
+    comments: []
   }
   posts.push(postObject);
 };
@@ -44,30 +29,49 @@ var renderPosts = function () {
   }
 };
 
+var renderComments = function () {
+  $('.comments-list').empty();
+
+  for (var i = 0; i < posts.length; i += 1) {
+    // the current post in the iteration
+    var post = posts[i];
+
+    // finding the "post" element in the page that is equal to the
+    // current post we're iterating on
+    var $post = $('.posts').find('.post').eq(i);
+
+    // iterate through each comment in our post's comments array
+    for (var j = 0; j < post.comments.length; j += 1) {
+      // the current comment in the iteration
+      var comment = post.comments[j];
+
+      // append the comment to the post we wanted to comment on
+      $post.find('.comments-list').append(
+        '<div class="comment">' + comment.text +
+        ' Posted By: <strong>' + comment.name + ' </strong><a class="remove-comment"><i class="fa fa-times" aria-hidden="true"></i></a> ' +
+        '</div>'
+      );
+    };
+  };
+};
+
+var createComment = function (text, name, postIndex) {
+  var comment = { text: text, name: name };
+
+  // pushing the comment into the correct posts array
+  posts[postIndex].comments.push(comment);
+};
 
 
-var HTMLcomments = function () {
-  $('#commentsHTML').append(HTMLcomments);
-}
 
-var HTMLremove= function () {
-  $('#removeHTML').append(HTMLremove);
-}
+
 
 
 //event listener to grab new post inputs
 $('#bPost').on('click', function () {
 
   var userName = $('.name').val();
-
   var userText = document.getElementsByClassName('postText')[0].value;
-  
-  // if userName = null || userText = null  {
-  //   return "Please enter a valid response"
-  // }
-  // else {
-  
-
   addPost(userName, userText);
   renderPosts();
 });
@@ -76,18 +80,24 @@ $('#bPost').on('click', function () {
 //event listener for remove button
 $('#postsHTML').on('click', '.remove', function (e) {
   var postIndex = $(e.currentTarget).closest('.post').index();
-
   posts.splice(postIndex, 1);
-
   renderPosts();
 });
 
-//event listener for comments button
-$('#postsHTML').on('click', '.bComments', function() {
-  postsHTML.innerHTML
-  console.log("You clicked comments")
+//event listener for create comment
+$('#postsHTML').on('click', '.add-comment', function (e) {
+  console.log('add comment clicked')
+  var text = $(e.currentTarget).siblings('.comment-name').val();
+  var name = $(e.currentTarget).siblings('.comment-user').val();
+
+  // finding the index of the post in the page
+  var postIndex = $(e.currentTarget).closest('.post').index();
+
+  postsHTML.createComment(text, name, postIndex);
+  postsHTML.renderComments();
 });
 
+
 renderPosts();
-// renderComments();
+renderComments();
 
