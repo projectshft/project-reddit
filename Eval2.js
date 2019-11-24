@@ -21,7 +21,7 @@ var renderPosts = function () {
     var post = posts[i];
 
     var commentsContainer = '<div class="comments-container">' + '<div class=comments-list></div>' +
-      '<input type="text" class="comment-name" placeholder="Comment Text">' + '<input type="text" class="comment-user" placeholder="User Name"><button class="btn btn-primary add-comment">Post Comment</button> </div>';
+      '<input type="text" class="comment-name" placeholder="Comment Text" required>' + '<input type="text" class="comment-user" placeholder="User Name" required><button class="btn btn-primary add-comment">Post Comment</button> </div>';
 
     $('#postsHTML').append('<div class="post">'
       + '<a href="#" class="remove">remove</a> ' + '<a href="#" class="show-comments">comments</a> ' + post.text +
@@ -62,18 +62,19 @@ var createComment = function (text, name, postIndex) {
   posts[postIndex].comments.push(comment);
 };
 
-
-
-
-
-
 //event listener to grab new post inputs
 $('#bPost').on('click', function () {
-
+  
   var userName = $('.name').val();
-  var userText = document.getElementsByClassName('postText')[0].value;
+  var userText = $('.postText')[0].value;
+
+  //checking for blank inputs and not allowing them to post
+  if (userName == "" || userText == "") {
+    alert("Please enter a valid response")
+  } else {
   addPost(userName, userText);
   renderPosts();
+  }
 });
 
 
@@ -93,11 +94,10 @@ $('#postsHTML').on('click', '.add-comment', function (e) {
   // finding the index of the post in the page
   var postIndex = $(e.currentTarget).closest('.post').index();
 
-  postsHTML.createComment(text, name, postIndex);
-  postsHTML.renderComments();
+  createComment(text, name, postIndex);
+  renderComments();
 });
 
 
-renderPosts();
-renderComments();
+
 
