@@ -1,3 +1,15 @@
+//create empty array to store
+var posts = [];
+//defining jquery variables
+var $posts = $('.posts');
+//creating state for functions 
+var addcomment = {};
+var showPosts = {};
+var showComments = {};
+var deletePost = {};
+var deleteComment = {};
+
+
 
 $('#submit-post').on('click', function () {
 
@@ -27,14 +39,14 @@ $('#submit-post').on('click', function () {
 
   });
 
+
 commentClick = function(event) {
 	  
 	if ($(event.target).hasClass("comment-button")) {
 		let $commentText = $('.comment-text').val()
 		let $commentName = $('.comment-name').val()
 			
-		var newcommentContainer = '<p class="comment">' + $commentText + 'Comment By:' + $commentName + 
-								'<a class="btn remove-comment" href="#"><i class="far></i></a></p>';
+		var newcommentContainer = '<p class="comment">' + $commentText + 'Comment By:' + $commentName + '<a class="btn remove-comment" href="#"><i class="far></i></a></p>';
 		$(event.target).prevAll(".comment-text").before(newcommentContainer)
 		
 	 
