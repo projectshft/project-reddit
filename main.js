@@ -1,25 +1,6 @@
 //this is an array of objects containing the posts information
-
-var posts = [];
-// var posts = [
-//   //the text of the post
-//   {
-//     userMessage: 'userMessage',
-//     // the name of the poster
-//     userName: 'userName',
-//     //
-//     userComment: [{
-//       commenterMessage: 'commenterMessage',
-//       commenterName: 'commenterName'
-//     }]
-//   }
-// ]
-//the addPost function pushes new posts into the post array
-
-//
-// var post = $(this).closest('.post').data();
-// addPost(post);
-// console.log(posts);
+//empty array where we push in the objects
+var postsArray = [];
 
 //addPosts
 var addPost = $('.btn-primary').click(function() {
@@ -44,10 +25,35 @@ var addPost = $('.btn-primary').click(function() {
   });
 
   //pushes new posts in Posts array
-  posts.push({
+  postsArray.push({
     name: userName,
     message: userMessage,
-    comment: null
+    comment: [
+
+    ]
   });
-  console.log(posts);
+  console.log(postsArray);
+  //rerenders the post
+  renderPost();
 });
+
+
+//take as input this array objects
+//using
+
+var renderPost = function() {
+  $('.posts').empty();
+  $('.post').html('0');
+
+  var posts = '';
+  //looping through the array to find stuff
+  for (var i = 0; i < postsArray.length; i++) {
+    posts += '<div>' + postsArray[i].name +
+      ' - ' + postsArray[i].message + ' Comment - ' + postsArray[i].comment + '</div>';
+  }
+  $('.posts').append(posts)
+
+  console.log(posts);
+}
+
+renderPost();
