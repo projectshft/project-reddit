@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Project Reddit</title>
+  <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class= "header">
+    <h1 class="text-center">Project Reddit</h1>
+  </div>
+
+  <div class="row">
+    <div class="table">
+    <div class="posts"></div>
+    <div class="post"></div>
+    </div>
+
+
+    <div class="row">
+      <div class="container" >
+        <div class="col-md-6">
+          <form class="form" onsubmit="event.preventDefault();">
+            <h3>Add a new post</h3>
+            <div class="form-group">
+              <input id="name" type="text" class="form-control" placeholder="Name"></input>
+            </div>
+            <div class="form-group">
+              <textarea id="message" type="text" class="form-control" placeholder="Message"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Post</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+
+</html>
