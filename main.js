@@ -11,9 +11,15 @@ var posts = [
 ]
 
 $('.btn-primary').click(function () {
-  var message = $('#message').val();
-  $('.post').append('<p>' +  message + '</p>' );
+  var userMessage = $('#message').val();
+  $('.post').append('<div>' +  userMessage + '</div>' );
 
-  var name = $('#name').val();
-  $('.post').append('posted by'+'<p> <strong>'+ name +'</strong> </p>');
-  });
+  var userName = $('#name').val();
+  $('.post').append('Posted By:'+'<div> <strong>'+ userName +'</strong> </div>');
+
+  $('.post').on('click', 'div', function(){
+  $(this).remove();
+
+  })
+
+});
