@@ -1,9 +1,14 @@
 var posts = [
-  {name: '', message: '', comments: ''}
+  {name: '', message: '', comments: []},
 ]
 
+$('button').click(function () {
+  var userMessage = $('#message').val();
+  $('.post').append('<p>' +  userMessage + '</p>');
+});
 
 $('button').click(function () {
-  var name = $('#name').val();
-  $('.post').append('<p>' +  name + '</p>');
+  var userName = $('#name').val();
+  $('.post').append('<p>' +  'Posted By: ' + userName + '</p>');
+  $('userName').css("font-weight","Bold");
 });
