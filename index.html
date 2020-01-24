@@ -1,45 +1,43 @@
-<!DOCTYPE html>
 <html>
 
 <head>
-  <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-  <link rel="stylesheet" type="text/css" href="style.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-  <title>Project Reddit</title>
+  <title>Forum</title>
+  <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+
 </head>
 
 <body>
   <div class="row">
-    <!-- is this the best place for this-->
     <div class="col-md-6 col-md-offset-3">
+
       <div class="page-header">
         <h1>Project Reddit</h1>
       </div>
-      <!-- creates the original forum-->
 
+      <div class="posts">
+        <div class="post" data-name ="" data-message="" data-comment=""></div>
+      </div>
 
-      <form>
-        <!-- text-->
-        <h3>Add a New Post</h3>
-        <div class="row container posts" id="posts">
-          <div class="form-group">
-            <input type="text" class="form-control" id="userInput" placeholder="Post Text">
-          </div>
-          <div class="form-group">
-            <input type="name" class="form-control" id="userName" aria-describedby="userName" placeholder="Your Name">
-          </div>
+      <form style="margin-top:30px;" onsubmit="event.preventDefault();">
+        <h3>Add a new post</h3>
+
+        <div class="form-group">
+          <textarea id="message" type="text" class="form-control" placeholder="Post Text"></textarea>
         </div>
-        <button type="button" class="btn btn-primary">Post</button>
 
+        <div class="form-group">
+          <input id="name" type="text" class="form-control" placeholder="Your Name"></input>
+        </div>
+
+
+
+        <button id="submit" class="btn btn-primary">Post</button>
       </form>
+    </div>
 
-
-
-      <header>
-      </header>
-      <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
-      <script type="text/javascript" src="main.js"></script>
+  </div>
+  <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+  <script src="main.js"></script>
 </body>
 
 </html>

@@ -1,26 +1,19 @@
-$('.btn btn-primary').on('click', 'div', function () {
- $(".form-control").submit();
- debugger;
- console.log('is this working?')
-});
+//this is an array of objects containing the posts information
 
-// $("form").submit(function(){
-//   alert("Submitted");
-// });
+var posts = [
+  //the text of the post
+  {message: 'message',
+  // the name of the poster
+  name:'name',
+  //
+  comment: [{commentText:'commenttext', commentName:'commentname' }]
+  }
+]
 
-$('.btn btn-primary').click(function () {
-  var userName = $('.userName').val();
-  console.log('hi');
-  $('.posts').append('<div>' +  userName + '</div>');
-  var userInput = $('.userInput').val();
-  console.log('hi');
-  $('.posts').append('<div>' +  userInput + '</div>');
+$('.btn-primary').click(function () {
+  var message = $('#message').val();
+  $('.post').append('<p>' +  message + '</p>');
+  var name = $('#name').val();
+  $('.post').append('<p>' +  name + '</p>');
 
-
-  //two methods - click v. on click
-  // var deleteName = $('li').click(function () {
-  //   $(this).remove();
   });
-//
-// $('.students').on('click', 'li', function(){
-//  $(this).remove();
