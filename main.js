@@ -12,8 +12,8 @@ var posts = [
 
 $('.btn-primary').click(function () {
   var message = $('#message').val();
-  $('.post').append('<p>' +  message + '</p>');
-  var name = $('#name').val();
-  $('.post').append('<p>' +  name + '</p>');
+  $('.post').append('<p>' +  message + '</p>' );
 
+  var name = $('#name').val();
+  $('.post').append('posted by'+'<p> <strong>'+ name +'</strong> </p>');
   });
