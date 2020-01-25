@@ -59,9 +59,9 @@ var addPostToPage = function(post) {
   // creates a div in the comment button that will be hid
   //inside the div with be a 2 text inputs and an x button
   $('#commentbutton').append('<div class="commentinput" id="commentinput">' + '</div>');
-  $('.commentinput').append('<input class="commenttext" type="Text" placeholder="Comment Text">' + '</input>');
-  $('.commentinput').append('<input class="commentname" type="Text" placeholder="User Name">' + '</input>');
-  $('.commentinput').append('<button class="btn btn-primary" type="submit" id="postcomment"> Post Comment</button>');
+  $('.commentinput').append('<input class="commenttext" type="Text" placeholder="Comment Text">' + '</input>').hide();;
+  $('.commentinput').append('<input class="commentname" type="Text" placeholder="User Name">' + '</input>').hide();;
+  $('.commentinput').append('<button class="btn btn-primary" type="submit" id="postcomment"> Post Comment</button>').hide();;
 };
 
 //when the post button is clicked it adds the values to the PostArray
@@ -75,32 +75,14 @@ $('.posts').on('click', '.btn-default', function() {
 //when you hover over the comment text the comment input
 //toggle and show
 
-// $(".comments").click(function() {
-//   $(".commenttext").toggle(swing);
-// });
-$('.commentinput').on('click', '#commentbutton',function() {
-   $(this).children().css(  ).toggle(swing);
- });
-
- $('#commentbutton').on('click', function () {
-  $('.commentinput').css("display", "inline");
-});
-
-
 // $('#commentbutton').click(function() {
 //   $(this).siblings('.commentinput').toggle('show');
 // });
 
-//
-// $('#commentbutton').click(function(){
-//       var $comment = $(this);
-//       $(this).parent().next().slideToggle('slow', function() {
-//           if($(this).is(':visible')){
-//              $comment.find('p').html('+');
-//           }
-//           else{
-//              $comment.find('p').html('-');
-//           }
-//       });
-//
+// $('#commentbutton').click(function() {
+//   $(this).children(".commentinput").show("slow");
 // });
+
+$( "#commentbutton" ).click(function() {
+  $( ".commentinput" ).show( "slow" );
+});
