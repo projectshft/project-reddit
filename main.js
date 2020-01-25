@@ -105,6 +105,43 @@ var renderPosts = function(posts) {
     editPost($(this));
   })
 
+// write function to give comment button hide/display functionality
+var hideDisplayComments = function(commments) {
+  if(commments.next().attr('class') == "comments-section-hide") {
+    posts[commments.parent().attr('id')].displayComments = 1
+    commments.next().attr('class', 'comments-section-show')
+  } else {
+    posts[commments.parent().attr('id')].displayComments = 0
+    commments.next().attr('class', "comments-section-hide")
+  }
+}
+
+// write function to give delete comment icon functionality
+var deleteComment = function(comment) {
+  var commentPosition = comment.next().attr('id').slice(-1)
+  var postId = comment.parent().parent().attr('id')
+  var commentsBefore = posts[postId].postComments.slice(0,commentPosition)
+  var commentsAfter = posts[postId].postComments.slice(commentPosition,)
+  var commentsAfter = commentsAfter.slice(1,)
+  var editedComments = commentsBefore.concat(commentsAfter)
+  posts[postId].postComments = editedComments
+  renderPosts(posts)
+}
+
+// write function to give submit comment button functionality
+var submitComment = function(comment) {
+  if (comment.parent().children("textarea").val().length != 0 && comment.parent().children("textarea").next().val().length != 0) {
+    var commentUser = comment.parent().children("textarea").val();
+    var commentContent = comment.parent().children("textarea").next().val();
+    var commentUserContent = []
+    commentUserContent.push(commentUser)
+    commentUserContent.push(commentContent)
+    posts[comment.parent().parent().parent().attr('id')].postComments.push(commentUserContent);
+    renderPosts(posts)
+  } else {
+    alert("You cannot post an empty comment or a userless comment!")
+  }
+}
 
 var editPost = function(button) {
   $(".edit-post").off();
