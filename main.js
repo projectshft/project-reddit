@@ -31,23 +31,20 @@ removeAndComment()
 var addPost = function (post) {
   posts.push(post);
   console.log('this is the new posts array' + posts)
-  debugger;
   renderBoard()
 }
-//removes all post and comments when hiting the word remove
-//DOESNT WORK TODO
+//removes all post and comments when hiting the word remove and removes from posts array
 var removeAndComment = function(){
 $('.btn-remove').on('click', function (){
+    var postArrayIndex = $(this).closest(".post").index()
     $(this).closest(".post").remove()
-    console.log(posts)
-//// TODO: REMOVE BUTTON REMOVES FROM HTML BUT DOESNOT REMOVE FROM POST ARRAY******
+    posts.splice(postArrayIndex, 1);
 });
-
 //reveals the comment form when users presses the comment button
 //TODO
-$('.btn-comment').on('click','.btn-comment',function(){
-  console.log('The comment button works')
-  $(this).closest(".comment").toggleClass('show')
+$('.btn-comment').on('click',function(){
+  $(this).closest(".comment").toggleClass(' show')
+  console.log('comment button clicks')
 })
 }
 //renders the post at the start

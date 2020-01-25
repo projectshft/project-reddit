@@ -1,6 +1,7 @@
 /*Come back to. Cant figure out how to hide and reveal comment and remove posts*/
+
 .comment {
-    display: none;
+  display: none;
 }
 
 .show {
