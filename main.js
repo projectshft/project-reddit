@@ -24,7 +24,7 @@ var renderBoard = function() {
   for (var i = 0; i < posts.length; i++) {
     var newPost = posts[i];
     newPost.comments.forEach(function(array) {
-      commentsFormated = commentsFormated + '<p class = comment-message>' + array.message + 'Posted by:' + array.name + '</p>';
+      commentsFormated = commentsFormated + '<p class = "comment-message">' + array.message + 'Posted by:' + array.name + '</p><p class = "delete">X<p>';
       return commentsFormated
     })
     //if there are no comments it is not added to the html append
@@ -56,6 +56,12 @@ var removeAndComment = function() {
   $('.btn-comment').on('click', function() {
     $(this).closest(".comment").toggleClass(' show')
     console.log('comment button clicks')
+    //commentClickButton()
+  })
+//TODO delete button doesnt work!!!!
+  $('.delete').on('click', function() {
+    $(this).closest("comment-message").remove()
+    console.log('delete button clicks')
     //commentClickButton()
   })
   //allows user to click on comment button and adds them into and object. then calls the push function
