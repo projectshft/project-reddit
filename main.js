@@ -159,3 +159,31 @@ var editPost = function(button) {
     renderPosts(posts);
   })
 }
+
+// Add functionality to submit post button. When post is submitted add post data to posts object
+var addPost = function() {
+  if ($("#message").val().length !== 0 && $("#name").val().length !== 0) {
+    postCounter += 1;
+    var postContent = $("#message").val();
+    var postUser = $("#name").val();
+    var postId = "post" + postCounter;
+    postUpvotes = 1;
+    postComments = [];
+    displayComments = 0;
+
+    posts[postId] = {
+      postUser: postUser,
+      postContent: postContent,
+      postUpvotes: postUpvotes,
+      postComments: postComments,
+      displayComments: displayComments
+    };
+
+    $("#message").val("");
+    $("#name").val("");
+
+    renderPosts(posts);
+  } else {
+    alert("Your post must have a name and message!")
+  }
+}
