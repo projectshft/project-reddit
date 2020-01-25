@@ -24,7 +24,7 @@ var renderBoard = function() {
   for (var i = 0; i < posts.length; i++) {
     var newPost = posts[i];
     newPost.comments.forEach(function(array) {
-      commentsFormated = commentsFormated + '<p class = "comment-message">' + array.message + 'Posted by:' + array.name + '</p><p class = "delete">X<p>';
+      commentsFormated = commentsFormated + '<div><p class = "comment-message inline-text">' + array.message + 'Posted by:' + array.name + '</p><p class = "delete inline-text">X</p></div>';
       return commentsFormated
     })
     //if there are no comments it is not added to the html append

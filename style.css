@@ -3,10 +3,16 @@
 /*.comment-form {
   display: none;
 }
-
+*/
 .show {
   display: block;
 }
 .inline-text{
-  display:inline-block;
+  display:inline;
+  margin: 0
+}
+
+
+.delete, .btn-remove, .btn-comment{
+  color:blue;
 }
