@@ -10,7 +10,7 @@ var addToPostArrays = function() {
   //takes the values from the input field on the forum
   var userMessage = $('#message').val();
   var userName = $('#name').val();
-  var postComment = $()
+  var postComment = $('.comment').val();
   var postNumber = $()
   //pushes the values into Posts array
   postsArray.push({
@@ -21,7 +21,6 @@ var addToPostArrays = function() {
   });
   renderPost();
 };
-
 
 $('.btn-primary').click(function() {
   addToPostArrays();
@@ -34,40 +33,39 @@ var renderPost = function() {
 
   //looping through the array to find stuff
   for (var i = 0; i < postsArray.length; i++) {
-    //
     addPost(postsArray[i]);
+
   };
 };
 
 var addPost = function(post) {
-  var comments = $()
-  //creates a new remove button
-  var remove = $('<input class="remove" type="button" id="removeButton" value="remove"/>');
-  // //appends the remove button to the post
-  $('.posts').append(remove);
-
-  //posts user button
-  //appends the user message to the post
-  $('.posts').append('<div class="post" >' + post.message + '</div>')
-    //appends the user message to the post and bolds the user name
-  $('.posts').append('<div class="post" >' + 'Posted By:' + '<strong>' + post.name + '</strong></div>' + '<hr>');
-
-  //posted user Names
-  //appends the user name to the post
-  // $('.posts').append('<li>' + ' Posted By:' + '</li>' + '<li> <strong>' + post.name + '</strong> </li>');
-  //pushes new posts in Posts array
+  //creates a new div in the posts div for posts
+  $('.posts').append('<div class ="post">' + '</div>');
+  //adds a remove and comment button to the post
+  $('.post').append('<button class="remove"> remove </button> ' + '<button class=comments>comments</button>');
+  //adds the userInput (message + name ) to the post
+  $('.post').append('<p class="userinput">' + post.message + '<p>' + '<p class="userinput">' + ' Posted By: ' + '<strong>' + post.name + '</strong></p>' + '<hr>');
+  // adds text input values to the comment button
+  $('.comment').append('<input class="commenttext" type="Text" placeholder="Comment Text">'+'</input>');
 };
 
-//
-//
-//   //deletes the post when the remove button is clicked
-//   //TODO!! make it not delete every post when clicked
-//   //TODO!! make it text that when clicked deletes the entire post
-//   $('.remove').on('click', function() {
-//     $(this).closest('.zzzpost').remove();
-//   });
-//take as input this array objects
-//using
-// var toogleComments = $('.view-cart').on('click', function () {
-//   $('.shopping-cart').toggleClass('show');
+//when the post button is clicked it adds the values to the PostArray
+
+
+//when the remove button is clicked it removes the post
+$('.posts').on('click', '.remove', function() {
+  $(this).closest('.post').remove();
+});
+
+$( ".comments" ).click(function() {
+  $( ".commentinputvalues" ).toggle(swing);
+});
+// $('.comments').on('click', function () {
+//       $(this).next('.post').toggle(swing);
+
+// $(".comment").click(function () {
+// var text = $(this).text();
+// $("input").val(text);
+// $('.comments').on('click', function() {
+//   $('.comments').toggleClass('show');
 // });
