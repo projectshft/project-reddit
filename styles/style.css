@@ -1,0 +1,28 @@
+.post {
+  border-bottom: 1px solid #eee;
+  margin: 20px 0;
+  padding-bottom: 20px;
+}
+.remove-post, .show-comments{
+  color: blue;
+  margin: 0 5px 0 0;
+}
+
+.show-comments:hover, .remove-post:hover {
+  cursor: pointer;
+}
+
+.postCommentBtn {
+  margin-left: 5px;
+}
+
+.comments {
+  font-size: 11px;
+}
+
+.remove {
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: bold;
+  margin-left: 5px;
+}
