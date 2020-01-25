@@ -1,11 +1,11 @@
 /*Come back to. Cant figure out how to hide and reveal comment and remove posts*/
 
-/*.comment-form {
-  display: none;
+.hide {
+  display:none;
 }
-*/
+
 .show {
-  display: block;
+  display:block;
 }
 .inline-text{
   display:inline;
