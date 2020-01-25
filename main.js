@@ -1,7 +1,7 @@
 //this is an array of objects containing the posts information
 //empty array where we push in the objects
 var postsArray = [];
-var order = 0;
+var order = 1;
 
 
 //addPosts
@@ -11,7 +11,7 @@ var addToPostArrays = function() {
   var userMessage = $('#message').val();
   var userName = $('#name').val();
   var postComment = $()
-  var postNumber =$()
+  var postNumber = $()
   //pushes the values into Posts array
   postsArray.push({
     name: userName,
@@ -27,34 +27,37 @@ $('.btn-primary').click(function() {
   addToPostArrays();
 });
 
+//the render function where does x
 var renderPost = function() {
+  //
   $('.posts').empty();
 
-  var posts = '';
   //looping through the array to find stuff
   for (var i = 0; i < postsArray.length; i++) {
-    addPost(posts[i]);
-    $('.posts').append(posts);
+    //
+    addPost(postsArray[i]);
   };
 };
 
 var addPost = function(post) {
+  var comments = $()
   //creates a new remove button
-  // var remove = $('<input class="remove" type="button" id="removeButton" value="remove"/>');
+  var remove = $('<input class="remove" type="button" id="removeButton" value="remove"/>');
   // //appends the remove button to the post
-  // $('.post').append(remove);
-  // $('.post').append('<p>' + 'remove' + '</p>').addClass('remove');
+  $('.posts').append(remove);
+
   //posts user button
   //appends the user message to the post
-  $('.post').append('<p>' + userMessage + '</p>');
+  $('.posts').append('<div class="post" >' + post.message + '</div>')
+    //appends the user message to the post and bolds the user name
+  $('.posts').append('<div class="post" >' + 'Posted By:' + '<strong>' + post.name + '</strong></div>' + '<hr>');
+
   //posted user Names
   //appends the user name to the post
-  $('.post').append('<p>' + ' Posted By:' + '</p>' + '<p> <strong>' + userName + '</strong> </p>');
+  // $('.posts').append('<li>' + ' Posted By:' + '</li>' + '<li> <strong>' + post.name + '</strong> </li>');
   //pushes new posts in Posts array
 };
 
-console.log(addPost());
-console.log(postsArray);
 //
 //
 //   //deletes the post when the remove button is clicked
