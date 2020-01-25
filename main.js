@@ -32,6 +32,80 @@ $("#submit-post").click(function() {
   }
 });
 
+// renders posts with upvote, downvote, edit and remove createButtons
+var renderPosts = function(posts) {
+  $("ul").empty();
+
+  // Generate each post. Including post content, post buttons and comment sections
+  for (var i = 0; i < Object.keys(posts).length; i++) {
+    var postElement =
+    '<li id="' + Object.keys(posts)[i] + '">'
+    + posts[Object.keys(posts)[i]].postUser + ": " + posts[Object.keys(posts)[i]].postContent
+    + '</li>'
+    $('ul').append(postElement)
+
+    var remove = "<button class='remove-post'>Remove</button>";
+    var edit = "<button id=" + Object.keys(posts)[i] + '-edit' +" class='edit-post'>Edit</button>";
+    var upvote = "<button class='upvote-post'>+</button>";
+    var downvote = "<button class='downvote-post'>-</button>";
+    var comments = "<button class='comments'>Comments</button>"
+    if (posts[Object.keys(posts)[i]].displayComments == 0) {
+      var commentsSection = "<div id=" + Object.keys(posts)[i] + '-comments' +" class='comments-section-hide'></div>"
+    } else {
+      var commentsSection = "<div id=" + Object.keys(posts)[i] + '-comments' +" class='comments-section-show'></div>"
+    }
+
+    $("#"+Object.keys(posts)[i]).append("<br>")
+    $("#"+Object.keys(posts)[i]).append(remove)
+    $("#"+Object.keys(posts)[i]).append(edit)
+    $("#"+Object.keys(posts)[i]).append(upvote)
+    $("#"+Object.keys(posts)[i]).append(downvote)
+    $("#"+Object.keys(posts)[i]).append('<span>' + posts[Object.keys(posts)[i]].postUpvotes + '</span>')
+    $("#"+Object.keys(posts)[i]).append(comments)
+    $("#"+Object.keys(posts)[i]).append(commentsSection)
+
+    posts[Object.keys(posts)[i]].postComments.forEach(function(comment) {
+      $("#" + Object.keys(posts)[i] + "-comments").empty();
+      for (var j = 0; j < posts[Object.keys(posts)[i]].postComments.length; j ++) {
+        var commentId = Object.keys(posts)[i] + "-comment-" + j
+        var commentElement = "<span id='" + commentId + "'class='comment'>"+posts[Object.keys(posts)[i]].postComments[j][0]+": "+posts[Object.keys(posts)[i]].postComments[j][1]+"</span>";
+        $("#" + Object.keys(posts)[i] + "-comments").append("<span class='fa fa-window-close'></span>")
+        $("#" + Object.keys(posts)[i] + "-comments").append(commentElement)
+        $("#" + Object.keys(posts)[i] + "-comments").append("<br>")
+      }
+    })
+
+    var addCommentForm = "<form style='margin-top:30px' onsubmit='event.preventDefault()';>"
+    + "<textarea type='text' id='new-comment-user' class='form-control' placeholder='Comment User'></textarea>"
+    + "<textarea type='text' id='new-comment' class='form-control' placeholder='Add a comment'></textarea>"
+    + "<button type='submit' class='submit-comment btn btn-primary'>Post Comment</button>"
+    + "</form>";
+
+    $("#" + Object.keys(posts)[i] + "-comments").append(addCommentForm)
+  }
+
+  // Add on click functionality to remove-post, upvote-post, downvote-post and edit-post
+  $(".remove-post").click(function() {
+    delete posts[$(this).parent().attr("id")]
+    $(this).parent().remove();
+  })
+
+  $(".upvote-post").click(function() {
+    posts[$(this).parent().attr('id')].postUpvotes ++;
+    renderPosts(posts)
+  })
+
+  $(".downvote-post").click(function() {
+    posts[$(this).parent().attr('id')].postUpvotes --;
+    renderPosts(posts)
+  })
+
+  $(".edit-post").on("click", function() {
+    $(".edit-post").off();
+    editPost($(this));
+  })
+
+
 var editPost = function(button) {
   $(".edit-post").off();
 
