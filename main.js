@@ -30,10 +30,22 @@ var renderBoard = function() {
     })
     //if there are no comments it is not added to the html append
     if (commentsFormated == undefined) {
-      $('.posts').append('<div class = post> <p class = "btn-remove inline-text">Remove</p><p class = "btn-comment inline-text"> Comment </p><p class = "inline-text"> ' + newPost.message + ' <div class="hide"></p><form class = "form-inline comment-form"><input id = "comment-name" type = "text" class = "form-control" placeholder = "User Name"><input id="comment-message" type = "text" class = "form-control" placeholder = "Comment"><button id = "comment-post-btn" type="button" class = "comment-post-btn btn-primary">Post</button></form><p>Posted by:<strong>' + newPost.name + '</strong></p></div>');
+      $('.posts').append('<div class = post> <p class = "btn-remove inline-text">' +
+      'Remove</p><p class = "btn-comment inline-text"> Comment </p><p class = "inline-text"> '
+       + newPost.message + ' </p><div class="hide"><form class = "form-inline comment-form">'+
+       '<input id = "comment-name" type = "text" class = "form-control" placeholder = "User Name">'+
+       '<input id="comment-message" type = "text" class = "form-control" placeholder = "Comment">'
+       +'<button id = "comment-post-btn" type="button" class = "comment-post-btn btn-primary">'+
+       'Post</button></form><p>Posted by:<strong>' + newPost.name + '</strong></p></div>');
       //if there are comments its add to the posts
     } else {
-      $('.posts').append('<div class = post> <p class = "btn-remove inline-text">Remove</p><p class = "btn-comment inline-text"> Comment </p><p class = "inline-text"> ' + newPost.message + commentsFormated + ' </p><form class = "form-inline comment-form"><input id = "comment-name" type = "text" class = "form-control" placeholder = "User Name"><input id="comment-message" type = "text" class = "form-control" placeholder = "Comment"><button id = "comment-post-btn" type="button" class = "comment-post-btn btn btn-primary">Post</button></div></form><p>Posted by:<strong>' + newPost.name + '</strong></p>');
+      $('.posts').append('<div class = post> <p class = "btn-remove inline-text">'+
+      'Remove</p><p class = "btn-comment inline-text"> Comment </p><p class = "inline-text"> '
+      + newPost.message + commentsFormated + ' </p><div class="hide"><form class = "form-inline comment-form">'+
+      '<input id = "comment-name" type = "text" class = "form-control" placeholder = "User Name">'+
+      '<input id="comment-message" type = "text" class = "form-control" placeholder = "Comment">'+
+      '<button id = "comment-post-btn" type="button" class = "comment-post-btn btn btn-primary">'+
+      'Post</button></form></div><p>Posted by:<strong>' + newPost.name + '</strong></p></div>');
     }
   }
   removeAndComment();
