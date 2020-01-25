@@ -1,8 +1,11 @@
-/*Come back to. Cant figure out how to hide and reveal comment and remove posts
-.remove {
+/*Come back to. Cant figure out how to hide and reveal comment and remove posts*/
+.comment {
     display: none;
 }
 
 .show {
   display: block;
+}
+.inline-text{
+  display:inline-block;
 }
