@@ -25,27 +25,48 @@ var renderBoard = function() {
     var newPost = posts[i];
     var commentsFormated = "";
     newPost.comments.forEach(function(array) {
-      commentsFormated = commentsFormated + '<div class= "hide"><div><p class = "comment-message inline-text">' + array.message + '  Posted by:  ' + array.name + '</p><p class = "delete inline-text"><strong> X </strong></p></div>';
+      commentsFormated = commentsFormated +
+        '<div>' +
+        '<p class = "comment-message inline-text">' +
+        array.message + '  Posted by:  ' + array.name + '</p>' +
+        '<p class = "delete inline-text"><strong> X </strong></p>' +
+        '</div>';
       return commentsFormated;
     })
     //if there are no comments it is not added to the html append
     if (commentsFormated == undefined) {
-      $('.posts').append('<div class = post> <p class = "btn-remove inline-text">' +
-      'Remove</p><p class = "btn-comment inline-text"> Comment </p><p class = "inline-text"> '
-       + newPost.message + ' </p><div class="hide"><form class = "form-inline comment-form">'+
-       '<input id = "comment-name" type = "text" class = "form-control" placeholder = "User Name">'+
-       '<input id="comment-message" type = "text" class = "form-control" placeholder = "Comment">'
-       +'<button id = "comment-post-btn" type="button" class = "comment-post-btn btn-primary">'+
-       'Post</button></form><p>Posted by:<strong>' + newPost.name + '</strong></p></div>');
+      $('.posts').append(
+        '<div class = post>' +
+        '<p class = "btn-remove inline-text">Remove</p>' +
+        '<p class = "btn-comment inline-text"> Comment </p>' +
+        '<p class = "inline-text">' + newPost.message + ' </p>' +
+        '<div class="hide show">' +
+        '<form class = "form-inline">' +
+        '<input id = "comment-name" type = "text" class = "form-control" placeholder = "User Name">' +
+        '<input id="comment-message" type = "text" class = "form-control" placeholder = "Comment">' +
+        '<button id = "comment-post-btn" type="button" class = "comment-post-btn btn-primary">Post</button>' +
+        '</form>' +
+        '</div>' +
+        '<p>Posted by:<strong>' + newPost.name + '</strong></p>' +
+        '</div>');
       //if there are comments its add to the posts
     } else {
-      $('.posts').append('<div class = post> <p class = "btn-remove inline-text">'+
-      'Remove</p><p class = "btn-comment inline-text"> Comment </p><p class = "inline-text"> '
-      + newPost.message + commentsFormated + ' </p><div class="hide"><form class = "form-inline comment-form">'+
-      '<input id = "comment-name" type = "text" class = "form-control" placeholder = "User Name">'+
-      '<input id="comment-message" type = "text" class = "form-control" placeholder = "Comment">'+
-      '<button id = "comment-post-btn" type="button" class = "comment-post-btn btn btn-primary">'+
-      'Post</button></form></div><p>Posted by:<strong>' + newPost.name + '</strong></p></div>');
+      $('.posts').append(
+        '<div class = post>' +
+        '<p class = "btn-remove inline-text">Remove</p>' +
+        '<p class = "btn-comment inline-text"> Comment </p>' +
+        '<p class = "inline-text">' + newPost.message + ' </p>' +
+        '<div class="hide show">' +
+        commentsFormated +
+        '<p class="comment">' +
+        '<form class = "form-inline">' +
+        '<input id = "comment-name" type = "text" class = "form-control" placeholder = "User Name">' +
+        '<input id="comment-message" type = "text" class = "form-control" placeholder = "Comment">' +
+        '<button id = "comment-post-btn" type="button" class = "comment-post-btn btn-primary">Post</button>' +
+        '</form>' +
+        '</div>' +
+        '<p>Posted by:<strong>' + newPost.name + '</strong></p>' +
+        '</div>')
     }
   }
   removeAndComment();
@@ -65,8 +86,9 @@ var removeAndComment = function() {
   });
   //reveals the comment form when users presses the comment button
   //TODO
+
   $('.btn-comment').on('click', function() {
-    $(this).closest(".hide").toggleClass('show');
+    $(this).closest(".hide").toggleClass("show", "hide");
     console.log('comment button clicks');
     //commentClickButton()
   })
@@ -75,6 +97,7 @@ var removeAndComment = function() {
     $(this).closest("comment-message").remove();
     console.log('delete button clicks');
   })
+
   //allows user to click on comment button and adds them into and object. then calls the push function
   $('.comment-post-btn').on('click', function() {
     console.log('the comment post button clicks');
@@ -94,7 +117,6 @@ var removeAndComment = function() {
 var addComment = function(comment, postCommentedOnArrayIndex) {
   posts[postCommentedOnArrayIndex].comments.push(comment);
   console.log(posts);
-  //  posts.forEach(item => item.comments.forEach(array => console.log(array.message + "Posted by: " + array.name)))
   renderBoard();
 }
 
