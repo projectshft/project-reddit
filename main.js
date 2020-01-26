@@ -1,10 +1,160 @@
 var posts = {
-  post1: {postUser: "Paul", postContent: "Storm", postUpvotes: 1, postComments: []},
-  post2: {postUser: "Johanna", postContent: "Storm", postUpvotes: 1, postComments: []},
-  post3: {postUser: "Charles", postContent: "Storm", postUpvotes: 1, postComments: []},
-  post4: {postUser: "Hanna", postContent: "Storm", postUpvotes: 1, postComments: []}
+  post1: {postUser: "Paul", postContent: "The Oscars Should Acknowledge Stunt Professionals", postUpvotes: 18, postComments: [["Charles","The Oscars should acknowledge me first!"],["Hanna","I have never noticed an Oscar worthy stunt performance."],["Caroline","Tom Cruise does his own stunts. Should he get an Oscar?"]], displayComments: 0},
+  post2: {postUser: "Johanna", postContent: "Pope backs Iraqi call for its sovereignty to be respected", postUpvotes: 16, postComments: [["Charles","I think the Pope shouldn't meddle in politics"],["Hanna","Every nation should have its sovereignty respected"],["Caroline","That this is even a question is all Trump's fault. And all Bush's fault too."]], displayComments: 0},
+  post3: {postUser: "Charles", postContent: "Bookworms, what's a fantastic book you would recommend?", postUpvotes: 9, postComments: [["Hanna","Robin McKinely - Sunshine"],["Caroline","Why We Sleep"],["William", "Marcus Aurelius - Meditations"]], displayComments: 0},
+  post4: {postUser: "Hanna", postContent: "Did Russian nobles and intellectuals speak Latin?", postUpvotes: 12, postComments: [["Charles","Vini Vidi Commenti"],["Caroline","Well they used the term Czar, so..."],["William", "Should I learn Latin and then Spanish or Spanish then Latin?"]], displayComments: 0}
 };
 var postCounter = 4;
+
+// Add functionality to submit post button. When post is submitted add post data to posts object
+var addPost = function() {
+  if ($("#message").val().length !== 0 && $("#name").val().length !== 0) {
+    // Get all relevant data including post number, post content, post user
+    postCounter += 1;
+    var postContent = $("#message").val();
+    var postUser = $("#name").val();
+    var postId = "post" + postCounter;
+    postUpvotes = 1;
+    postComments = [];
+    displayComments = 0;
+
+    // Add all relevent data to an object within posts
+    posts[postId] = {
+      postUser: postUser,
+      postContent: postContent,
+      postUpvotes: postUpvotes,
+      postComments: postComments,
+      displayComments: displayComments
+    };
+
+    // Clear text form for next post
+    $("#message").val("");
+    $("#name").val("");
+
+    renderPosts(posts);
+  } else {
+    // Alert user if either post content or post user was left blank
+    alert("Your post must have a name and message!")
+  }
+}
+
+// Creates a page to hold posts and then adds each post in the posts object to page
+var renderPosts = function(posts) {
+  // use addPageLayout to clear page and add basic HTML structure
+  addPageLayout();
+
+  // Generate each post. Including post content, post buttons and comment sections
+  for (var i = 0; i < Object.keys(posts).length; i++) {
+    // Create basic post element and append it to ul which will hold all post related content
+    var postElement =
+    '<li id="' + Object.keys(posts)[i] + '">'
+    + '</li>'
+    $('ul').append(postElement)
+
+    var postContent = "<span class='post-content'>" + posts[Object.keys(posts)[i]].postUser + ": " + posts[Object.keys(posts)[i]].postContent + "</span>"
+    var remove = "<button class='remove-post'>Remove</button>";
+    var edit = "<button id=" + Object.keys(posts)[i] + '-edit' +" class='edit-post'>Edit</button>";
+    var upvote = "<button class='upvote-post'><i class='fas fa-dollar-sign'></i></button>";
+    var downvote = "<button class='downvote-post'><i class='fas fa-pound-sign'></i></button>";
+
+    // Generate comments section. If the displayComments value with the post object is 0, hide the post comments, otherwise display them
+    var comments = "<button class='comments'>Comments (" + posts[Object.keys(posts)[i]].postComments.length + ")</button>"
+    if (posts[Object.keys(posts)[i]].displayComments == 0) {
+      var commentsSection = "<div id=" + Object.keys(posts)[i] + '-comments' +" class='comments-section-hide'></div>"
+    } else {
+      var commentsSection = "<div id=" + Object.keys(posts)[i] + '-comments' +" class='comments-section-show'></div>"
+    }
+
+
+    // Append all post data, buttons and comments to the post
+    $("#"+Object.keys(posts)[i]).append(postContent)
+    $("#"+Object.keys(posts)[i]).append("<br>")
+    $("#"+Object.keys(posts)[i]).append(remove)
+    $("#"+Object.keys(posts)[i]).append(edit)
+    $("#"+Object.keys(posts)[i]).append(upvote)
+    $("#"+Object.keys(posts)[i]).append(downvote)
+    if (posts[Object.keys(posts)[i]].postUpvotes > 0) {
+      $("#"+Object.keys(posts)[i]).append('<span class="upvotes">' + posts[Object.keys(posts)[i]].postUpvotes + '</span>')
+    } else {
+      $("#"+Object.keys(posts)[i]).append('<span class="downvotes">' + posts[Object.keys(posts)[i]].postUpvotes + '</span>')
+    }
+    $("#"+Object.keys(posts)[i]).append(comments)
+    $("#"+Object.keys(posts)[i]).append()
+    $("#"+Object.keys(posts)[i]).append(commentsSection)
+    if (i != Object.keys(posts).length-1) {
+      $("#"+Object.keys(posts)[i]).append("<br>")
+      $("#"+Object.keys(posts)[i]).append("<br>")
+    }
+
+    // Generate comments sections
+    posts[Object.keys(posts)[i]].postComments.forEach(function(comment) {
+      $("#" + Object.keys(posts)[i] + "-comments").empty();
+      for (var j = 0; j < posts[Object.keys(posts)[i]].postComments.length; j ++) {
+        var commentId = Object.keys(posts)[i] + "-comment-" + j
+        var commentElement = "<span id='" + commentId + "'class='comment'>"+posts[Object.keys(posts)[i]].postComments[j][0]+": "+posts[Object.keys(posts)[i]].postComments[j][1]+"</span>";
+        $("#" + Object.keys(posts)[i] + "-comments").append("<span class='fa fa-window-close'></span>")
+        $("#" + Object.keys(posts)[i] + "-comments").append(commentElement)
+        $("#" + Object.keys(posts)[i] + "-comments").append("<br>")
+      }
+    })
+
+    // generate form for submitting new comments
+    var addCommentForm = "<form style='margin-top:15px' onsubmit='event.preventDefault()';>"
+    + "<textarea type='text' id='new-comment-user' class='form-control' placeholder='Comment User'></textarea>"
+    + "<textarea type='text' id='new-comment' class='form-control' placeholder='Add a comment'></textarea>"
+    + "<button type='submit' class='submit-comment btn btn-primary'>Post Comment</button>"
+    + "</form>";
+
+    $("#" + Object.keys(posts)[i] + "-comments").append(addCommentForm)
+  }
+
+
+  // Add click events for remove, edit, upvote and downvote buttons
+  $(".remove-post").click(function() {
+    delete posts[$(this).parent().attr("id")]
+    renderPosts(posts)
+  })
+
+
+  $(".upvote-post").click(function() {
+    posts[$(this).parent().attr('id')].postUpvotes ++;
+    renderPosts(posts)
+  })
+
+  $(".downvote-post").click(function() {
+    posts[$(this).parent().attr('id')].postUpvotes --;
+    renderPosts(posts)
+  })
+
+  $(".edit-post").on("click", function() {
+    $(".edit-post").off();
+    editPost($(this));
+  })
+
+  // If post text clicked, remove other elements from page and resize post
+  $(".post-content").click(function() {
+    expandPost($(this));
+  })
+
+  // If comments are hidden display them, if they are displayed hide them
+  $(".comments").on("click", function() {
+    hideDisplayComments($(this))
+  })
+
+  // Add functionality to submit comment button
+  $(".submit-comment").click(function() {
+    submitComment($(this));
+  })
+
+  // Add functionality to delete comment icon
+  $(".fa-window-close").click(function() {
+    deleteComment($(this));
+  })
+
+  $("#submit-post").click(function() {
+      addPost($(this))
+  });
+}
 
 // Function called in renderPosts used to create initial page layout when
 var addPageLayout = function() {
@@ -45,77 +195,22 @@ var addPageLayout = function() {
   $(".main-content").append(submissionForm);
 }
 
-// renders posts with upvote, downvote, edit and remove createButtons
-var renderPosts = function(posts) {
-  $("ul").empty();
+// editPost is called when the "edit-post" button is clicked. It disables all "edit-post" buttons
+// Then creates a form for the user to edit their post.
+var editPost = function(button) {
+  $(".edit-post").off();
 
-  // Generate each post. Including post content, post buttons and comment sections
-  for (var i = 0; i < Object.keys(posts).length; i++) {
-    var postElement =
-    '<li id="' + Object.keys(posts)[i] + '">'
-    + posts[Object.keys(posts)[i]].postUser + ": " + posts[Object.keys(posts)[i]].postContent
-    + '</li>'
-    $('ul').append(postElement)
+  var editForm =
+  "<form style='margin-top:15px' onsubmit='event.preventDefault()';>"
+  + "<textarea type='text' id='edited-content' class='form-control'>" + posts[button.parent().attr('id')].postContent + "</textarea>"
+  + "<button type='submit' id='submit-edit' class='btn btn-primary'>Submit Edit</button>"
+  + "</form>";
 
-    var remove = "<button class='remove-post'>Remove</button>";
-    var edit = "<button id=" + Object.keys(posts)[i] + '-edit' +" class='edit-post'>Edit</button>";
-    var upvote = "<button class='upvote-post'>+</button>";
-    var downvote = "<button class='downvote-post'>-</button>";
-    var comments = "<button class='comments'>Comments</button>"
-    if (posts[Object.keys(posts)[i]].displayComments == 0) {
-      var commentsSection = "<div id=" + Object.keys(posts)[i] + '-comments' +" class='comments-section-hide'></div>"
-    } else {
-      var commentsSection = "<div id=" + Object.keys(posts)[i] + '-comments' +" class='comments-section-show'></div>"
-    }
+  button.parent().append(editForm);
 
-    $("#"+Object.keys(posts)[i]).append("<br>")
-    $("#"+Object.keys(posts)[i]).append(remove)
-    $("#"+Object.keys(posts)[i]).append(edit)
-    $("#"+Object.keys(posts)[i]).append(upvote)
-    $("#"+Object.keys(posts)[i]).append(downvote)
-    $("#"+Object.keys(posts)[i]).append('<span>' + posts[Object.keys(posts)[i]].postUpvotes + '</span>')
-    $("#"+Object.keys(posts)[i]).append(comments)
-    $("#"+Object.keys(posts)[i]).append(commentsSection)
-
-    posts[Object.keys(posts)[i]].postComments.forEach(function(comment) {
-      $("#" + Object.keys(posts)[i] + "-comments").empty();
-      for (var j = 0; j < posts[Object.keys(posts)[i]].postComments.length; j ++) {
-        var commentId = Object.keys(posts)[i] + "-comment-" + j
-        var commentElement = "<span id='" + commentId + "'class='comment'>"+posts[Object.keys(posts)[i]].postComments[j][0]+": "+posts[Object.keys(posts)[i]].postComments[j][1]+"</span>";
-        $("#" + Object.keys(posts)[i] + "-comments").append("<span class='fa fa-window-close'></span>")
-        $("#" + Object.keys(posts)[i] + "-comments").append(commentElement)
-        $("#" + Object.keys(posts)[i] + "-comments").append("<br>")
-      }
-    })
-
-    var addCommentForm = "<form style='margin-top:30px' onsubmit='event.preventDefault()';>"
-    + "<textarea type='text' id='new-comment-user' class='form-control' placeholder='Comment User'></textarea>"
-    + "<textarea type='text' id='new-comment' class='form-control' placeholder='Add a comment'></textarea>"
-    + "<button type='submit' class='submit-comment btn btn-primary'>Post Comment</button>"
-    + "</form>";
-
-    $("#" + Object.keys(posts)[i] + "-comments").append(addCommentForm)
-  }
-
-  // Add on click functionality to remove-post, upvote-post, downvote-post and edit-post
-  $(".remove-post").click(function() {
-    delete posts[$(this).parent().attr("id")]
-    $(this).parent().remove();
-  })
-
-  $(".upvote-post").click(function() {
-    posts[$(this).parent().attr('id')].postUpvotes ++;
-    renderPosts(posts)
-  })
-
-  $(".downvote-post").click(function() {
-    posts[$(this).parent().attr('id')].postUpvotes --;
-    renderPosts(posts)
-  })
-
-  $(".edit-post").on("click", function() {
-    $(".edit-post").off();
-    editPost($(this));
+  $("#submit-edit").click(function(button) {
+    posts[$(this).parent().parent().attr('id')].postContent = $("#edited-content").val();
+    renderPosts(posts);
   })
 }
 
@@ -157,53 +252,9 @@ var submitComment = function(comment) {
   }
 }
 
-var editPost = function(button) {
-  $(".edit-post").off();
-
-  var editForm =
-  "<form style='margin-top:30px' onsubmit='event.preventDefault()';>"
-  + "<textarea type='text' id='edited-content' class='form-control'>" + posts[button.parent().attr('id')].postContent + "</textarea>"
-  + "<button type='submit' id='submit-edit' class='btn btn-primary'>Submit Edit</button>"
-  + "</form>";
-
-  button.parent().append(editForm);
-
-  $("#submit-edit").click(function(button) {
-    posts[$(this).parent().parent().attr('id')].postContent = $("#edited-content").val();
-    renderPosts(posts);
-  })
-}
-
-// Add functionality to submit post button. When post is submitted add post data to posts object
-var addPost = function() {
-  if ($("#message").val().length !== 0 && $("#name").val().length !== 0) {
-    postCounter += 1;
-    var postContent = $("#message").val();
-    var postUser = $("#name").val();
-    var postId = "post" + postCounter;
-    postUpvotes = 1;
-    postComments = [];
-    displayComments = 0;
-
-    posts[postId] = {
-      postUser: postUser,
-      postContent: postContent,
-      postUpvotes: postUpvotes,
-      postComments: postComments,
-      displayComments: displayComments
-    };
-
-    $("#message").val("");
-    $("#name").val("");
-
-    renderPosts(posts);
-  } else {
-    alert("Your post must have a name and message!")
-  }
-}
-
 // When a post is clicked remove other posts from page and enlarge clicked post content
 var expandPost = function(postText) {
+  // Get postId of the post who text element is clicked
   postId = postText.parent().attr('id')
 
   // Clear the page
@@ -212,13 +263,13 @@ var expandPost = function(postText) {
   $("#posts-title").remove();
   $(".fa-book-open").remove()
 
-  // Enlarge and display post comments
+  // Display large version of post and display post comments
   var postContent = "<h2 class='h2-post' id='" + postId+ "'>" + posts[postId].postUser + ": " + posts[postId].postContent
     + "<i class='fas fa-file-alt'></i>"
     + "</h2>"
   var backButton = "<button class='back btn btn-primary'>Back</button>"
 
-  // Add post comments
+  // Add post comments section
   var commentsTitle = "<h3>Comments<h3>"
   var commentsSection = "<h4 id='" + postId + "-comments" + "' class='comments-section-show'></h4>"
 
@@ -246,6 +297,7 @@ var expandPost = function(postText) {
 
   $("#" + postId + "-comments").append(addCommentForm)
 
+  // Create a back button which clears then page and then renders all posts
   $(".back").click(function() {
     $(".main-content").empty();
     renderPosts(posts);
@@ -280,3 +332,6 @@ var expandPost = function(postText) {
     expandPost($(this).parent())
 })
 }
+
+// Render intial posts
+renderPosts(posts);
