@@ -6,7 +6,7 @@ let $commentInput = $('');
 
 let renderComment = function(num, postNum, text, author) {
   let commentRow =
-   '<span>' + text + '</span>'
+   '<span contenteditable="true">' + text + '</span>'
     + '<span> Comment By: </span> <span class="userName">' + author + '</span>'
     + '<span id="remove-comment-'+ postNum + '-' + num + '" class="remove">x</span><br>';
 
@@ -20,8 +20,8 @@ let renderPost = function(postNumber, postText, postAuthor, comments) {
     let template =
      '<div class="post" id="'+ postNumber +'">'
    + '<div class="post-text"><span id="remove-post'+ postNumber +'" class="remove-post">remove</span>'
-   + '<span id="show-post-comments'+ postNumber +'" class="show-comments">comments</span>'
-   + postText + '</div>'
+   + '<span id="show-post-comments'+ postNumber +'" class="show-comments">comments</span><span contenteditable="true">'
+   + postText + '</span></div>'
    + '<div id="comments'+ postNumber +'" style="display: none"></div>'
    + '<div id="input'+ postNumber +'" style="display: none"></div>'
    + '<div id="post-comment-row'+ postNumber +'"></div>'
