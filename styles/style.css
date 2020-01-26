@@ -3,6 +3,11 @@
   margin: 20px 0;
   padding-bottom: 20px;
 }
+
+.userName {
+  font-weight: bold;
+}
+
 .remove-post, .show-comments{
   color: blue;
   margin: 0 5px 0 0;
