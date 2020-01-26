@@ -117,7 +117,7 @@ $('.posts').on('click', '.postCommentBtn', function(e) {
 
    let $commentText = $('#comment-text' + currentIndex).val();
    let $commentAuthor = $('#comment-user' + currentIndex).val();
-   //alert($commentText)
+
    //debugger;
    let comment = {};
    comment.text = $commentText;
@@ -128,6 +128,7 @@ $('.posts').on('click', '.postCommentBtn', function(e) {
 
    displayComments(currentIndex-1);
 
+   //clear input fields
    $commentText = $('#comment-text' + currentIndex).val('');
    $commentAuthor = $('#comment-user' + currentIndex).val('');
 })
@@ -146,8 +147,9 @@ $('.posts').on('click', '.remove-post', function(e) {
 //delet the comment of the post
 $('.posts').on('click', '.remove', function(e) {
   e.preventDefault();
-//debugger
-//get comment index to remove
+  //problem with removing a comment and rendering comments - work in progress!!
+  //debugger
+  //get comment index to remove
   let comment = $(this).attr('id').slice(-1);
   //console.log('Comment index: ' + comment);
 
@@ -157,7 +159,7 @@ $('.posts').on('click', '.remove', function(e) {
   let temp = postIndex.split('-');
   //console.log('Post index: ' + temp[2]);
 
-//remove the comment
+  //remove the comment
   posts[temp[2]].comments.splice(comment-1, 1);
 
   displayComments(temp[2]);
