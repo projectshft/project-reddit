@@ -187,3 +187,82 @@ var addPost = function() {
     alert("Your post must have a name and message!")
   }
 }
+
+// When a post is clicked remove other posts from page and enlarge clicked post content
+var expandPost = function(postText) {
+  postId = postText.parent().attr('id')
+
+  // Clear the page
+  $("ul").remove();
+  $(".submission-form").remove();
+  $("#posts-title").remove();
+  $(".fa-book-open").remove()
+
+  // Enlarge and display post comments
+  var postContent = "<h2 class='h2-post' id='" + postId+ "'>" + posts[postId].postUser + ": " + posts[postId].postContent
+    + "<i class='fas fa-file-alt'></i>"
+    + "</h2>"
+  var backButton = "<button class='back btn btn-primary'>Back</button>"
+
+  // Add post comments
+  var commentsTitle = "<h3>Comments<h3>"
+  var commentsSection = "<h4 id='" + postId + "-comments" + "' class='comments-section-show'></h4>"
+
+  $(".main-content").append(backButton)
+  $(".main-content").append(postContent)
+  $("#" + postId).append(commentsSection)
+
+  $("#" + postId + "-comments").append("<br>")
+
+  // Generate comment sections comments
+  for (var j = 0; j < posts[postId].postComments.length; j ++) {
+    var commentId = postId + "-comment-" + j
+    var commentElement = "<span id='" + commentId + "'class='comment'>"+posts[postId].postComments[j][0]+": "+posts[postId].postComments[j][1]+"</span>";
+    $("#" + postId + "-comments").append("<span class='fa fa-window-close'></span>")
+    $("#" + postId + "-comments").append(commentElement)
+    $("#" + postId + "-comments").append("<br>")
+  }
+
+  // generate form for submitting new comments
+  var addCommentForm = "<form style='margin-top:15px' onsubmit='event.preventDefault()';>"
+  + "<textarea type='text' id='new-comment-user' class='form-control' placeholder='Comment User'></textarea>"
+  + "<textarea type='text' id='new-comment' class='form-control' placeholder='Add a comment'></textarea>"
+  + "<button type='submit' class='submit-comment btn btn-primary'>Post Comment</button>"
+  + "</form>";
+
+  $("#" + postId + "-comments").append(addCommentForm)
+
+  $(".back").click(function() {
+    $(".main-content").empty();
+    renderPosts(posts);
+  })
+
+  // Add funcionality for submit comment button inside of expandPost
+  $(".submit-comment").click(function() {
+    if ($(this).parent().children("textarea").val().length != 0 && $(this).parent().children("textarea").next().val().length != 0) {
+      var commentUser = $(this).parent().children("textarea").val();
+      var commentContent = $(this).parent().children("textarea").next().val();
+      var commentUserContent = []
+      commentUserContent.push(commentUser)
+      commentUserContent.push(commentContent)
+      posts[$(this).parent().parent().parent().attr('id')].postComments.push(commentUserContent);
+      $(".main-content").empty()
+      expandPost($(this).parent().parent())
+    } else {
+      alert("You cannot post an empty comment or a userless comment!")
+    }
+  })
+
+  // Add functionality for window close icon inside of expandPost
+  $(".fa-window-close").click(function() {
+    var commentPosition = $(this).next().attr('id').slice(-1)
+    var postId = $(this).parent().parent().attr('id')
+    var commentsBefore = posts[postId].postComments.slice(0,commentPosition)
+    var commentsAfter = posts[postId].postComments.slice(commentPosition,)
+    var commentsAfter = commentsAfter.slice(1,)
+    var editedComments = commentsBefore.concat(commentsAfter)
+    posts[postId].postComments = editedComments
+    $(".main-content").empty()
+    expandPost($(this).parent())
+})
+}
