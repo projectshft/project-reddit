@@ -40,7 +40,7 @@ var renderBoard = function() {
         '<p class = "btn-remove inline-text">Remove</p>' +
         '<p class = "btn-comment inline-text"> Comment </p>' +
         '<p class = "inline-text">' + newPost.message + ' </p>' +
-        '<div class="hide show">' +
+        '<div class="hide">' +
         '<form class = "form-inline">' +
         '<input id = "comment-name" type = "text" class = "form-control" placeholder = "User Name">' +
         '<input id="comment-message" type = "text" class = "form-control" placeholder = "Comment">' +
@@ -56,7 +56,7 @@ var renderBoard = function() {
         '<p class = "btn-remove inline-text">Remove</p>' +
         '<p class = "btn-comment inline-text"> Comment </p>' +
         '<p class = "inline-text">' + newPost.message + ' </p>' +
-        '<div class="hide show">' +
+        '<div class="hide">' +
         commentsFormated +
         '<p class="comment">' +
         '<form class = "form-inline">' +
@@ -67,6 +67,7 @@ var renderBoard = function() {
         '</div>' +
         '<p>Posted by:<strong>' + newPost.name + '</strong></p>' +
         '</div>')
+        debugger;
     }
   }
   removeAndComment();
@@ -84,13 +85,11 @@ var removeAndComment = function() {
     $(this).closest(".post").remove();
     posts.splice(postArrayIndex, 1);
   });
-  //reveals the comment form when users presses the comment button
-  //TODO
+
 
   $('.btn-comment').on('click', function() {
-    $(this).closest(".hide").toggleClass("show", "hide");
+    $(this).siblings(".hide").toggleClass("show");
     console.log('comment button clicks');
-    //commentClickButton()
   })
   //TODO delete button doesnt work!!!!
   $('.delete').on('click', function() {
