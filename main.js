@@ -6,31 +6,44 @@ var posts = {
 };
 var postCounter = 4;
 
-// When user presses post the a new object is created which stores the post content, user name, comments and upvote count
-$("#submit-post").click(function() {
-    if ($("#message").val().length !== 0 && $("#name").val().length !== 0) {
-    postCounter += 1;
-    var postContent = $("#message").val();
-    var postUser = $("#name").val();
-    var postId = "post" + postCounter;
-    postUpvotes = 1;
-    postComments = [];
+// Function called in renderPosts used to create initial page layout when
+var addPageLayout = function() {
+  // Clear page
+  $("ul").remove();
+  $(".submission-form").remove();
+  $("#posts-title").remove();
+  $(".fa-book-open").remove();
 
-    posts[postId] = {
-      postUser: postUser,
-      postContent: postContent,
-      postUpvotes: postUpvotes,
-      postComments: postComments
-    };
+  // And posts title and ul for posts
+  $(".main-content").append("<h3 id='posts-title'>Posts</h3>");
+  $(".main-content").append("<i class='fas fa-book-open'></i>");
+  $(".main-content").append("<ul id='posts' class='posts'></ul>");
 
-    $("#message").val("");
-    $("#name").val("");
+  // Create form for submitting new posts
+  var submissionForm =
+     "<form class='submission-form' style='margin-top:0px;' onsubmit='event.preventDefault();'>"
+      + "<h2>New post</h2>"
+      + "<i class='fas fa-pen'></i>"
+      + "<br>"
+      + "<div class='form-group col-md-6 col-md-offset-1'>"
+        + "<input id='name' type='text'"
+          + "class='form-control'"
+          + "placeholder='Name'></input>"
+      + "</div>"
 
-    renderPosts(posts);
-  } else {
-    alert("Your post must have a name and message!")
-  }
-});
+      + "<div class='form-group col-md-6 col-md-offset-1'>"
+        + "<textarea id='message' type='text'"
+        + "class='form-control'"
+        + "placeholder='Message'></textarea>"
+      + "</div>"
+
+      + "<div class='col-md-6 col-md-offset-1'>"
+        + "<button id='submit-post' type='submit' class='btn btn-primary'>Post</button>"
+      + "</div>"
+    + "</form>"
+
+  $(".main-content").append(submissionForm);
+}
 
 // renders posts with upvote, downvote, edit and remove createButtons
 var renderPosts = function(posts) {
@@ -104,6 +117,7 @@ var renderPosts = function(posts) {
     $(".edit-post").off();
     editPost($(this));
   })
+}
 
 // write function to give comment button hide/display functionality
 var hideDisplayComments = function(commments) {
