@@ -1,5 +1,3 @@
-/*Come back to. Cant figure out how to hide and reveal comment and remove posts*/
-
 .hide {
   display:none;
 }
@@ -9,9 +7,7 @@
 }
 .inline-text{
   display:inline;
-
 }
-
 
 .delete, .btn-remove, .btn-comment{
   color:blue;

@@ -12,7 +12,6 @@ $('#post-btn').on('click', function() {
 });
 
 //Get user input from main post and stores in variables
-
 var posts = [];
 
 //appends the new html also called remove and comment to invoke the ability to click them
@@ -21,7 +20,6 @@ var renderBoard = function(postOrComment) {
   $('.posts').empty();
   console.log('renderboard function was called');
   //loops through the posts and comments to format them and add to html append line
-
   for (var i = 0; i < posts.length; i++) {
     var newPost = posts[i];
     var commentsFormated = "";
@@ -34,43 +32,32 @@ var renderBoard = function(postOrComment) {
         '</div>';
       return commentsFormated;
     })
+    var classThatChangesNextToHide = ""
+    var classThatChangesNextToPost = ""
     //conditon to check if the comments button had been clicked before rerendering the board
-    if (toggleTracker[i] === 'off') {
-      $('.posts').append(
-        '<div class = "post">' +
-        '<p class = "btn-remove inline-text">Remove</p>' +
-        '<p class = "btn-comment inline-text"> Comment </p>' +
-        '<p class = "inline-text">' + newPost.message + ' </p>' +
-        '<div class="hide">' +
-        commentsFormated +
-        '<p class="comment">' +
-        '<form class = "form-inline">' +
-        '<input id = "comment-name" type = "text" class = "form-control" placeholder = "User Name">' +
-        '<input id="comment-message" type = "text" class = "form-control" placeholder = "Comment">' +
-        '<button id = "comment-post-btn" type="button" class = "comment-post-btn btn-primary">Post</button>' +
-        '</form>' +
-        '</div>' +
-        '<p>Posted by:<strong>' + newPost.name + '</strong></p>' +
-        '</div>');
+    if (toggleTracker[i] === 'on') {
+      classThatChangesNextToHide = ' show"'
+      classThatChangesNextToPost = ' on"'
     } else {
-      $('.posts').append(
-        '<div class = "post on">' +
-        '<p class = "btn-remove inline-text">Remove</p>' +
-        '<p class = "btn-comment inline-text"> Comment </p>' +
-        '<p class = "inline-text">' + newPost.message + ' </p>' +
-        '<div class = "hide show">' +
-        commentsFormated +
-        '<p class="comment">' +
-        '<form class = "form-inline">' +
-        '<input id = "comment-name" type = "text" class = "form-control" placeholder = "User Name">' +
-        '<input id="comment-message" type = "text" class = "form-control" placeholder = "Comment">' +
-        '<button id = "comment-post-btn" type="button" class = "comment-post-btn btn-primary">Post</button>' +
-        '</form>' +
-        '</div>' +
-        '<p>Posted by:<strong>' + newPost.name + '</strong></p>' +
-        '</div>');
-
+      classThatChangesNextToHide = '"'
+      classThatChangesNextToPost = '"'
     }
+    $('.posts').append(
+      '<div class = "post' + classThatChangesNextToPost + '>' +
+      '<p class = "btn-remove inline-text">Remove</p>' +
+      '<p class = "btn-comment inline-text"> Comment </p>' +
+      '<p class = "inline-text">' + newPost.message + ' </p>' +
+      '<div class = "hide' + classThatChangesNextToHide + '>' +
+      commentsFormated +
+      '<p class="comment">' +
+      '<form class = "form-inline">' +
+      '<input id="comment-message" type = "text" class = "form-control" placeholder = "Comment">' +
+      '<input id = "comment-name" type = "text" class = "form-control" placeholder = "User Name">' +
+      '<button id = "comment-post-btn" type="button" class = "comment-post-btn btn-primary">Post Comment</button>' +
+      '</form>' +
+      '</div>' +
+      '<p>Posted by:<strong>' + newPost.name + '</strong></p>' +
+      '</div>');
   }
   allTheButtons();
 };
@@ -82,6 +69,7 @@ var addPost = function(post) {
 }
 //removes all post and comments when hiting the word remove and removes from posts array. also calls the click function for the comments post button
 var allTheButtons = function() {
+
   $('.btn-remove').on('click', function() {
     var postArrayIndex = $(this).closest(".post").index();
     $(this).closest(".post").remove();
@@ -104,9 +92,8 @@ var allTheButtons = function() {
 
   //allows user to click on comment button and adds them into and object. then calls the push function
   $('.comment-post-btn').on('click', function() {
-    console.log('the comment post button clicks');
-    var postedCommentUserName = $('#comment-name').val();
-    var postedComment = $('#comment-message').val();
+    var postedCommentUserName = $(this).siblings('#comment-name').val();
+    var postedComment = $(this).siblings('#comment-message').val();
     var postCommentedOnArrayIndex = $(this).closest(".post").index();
     console.log(postCommentedOnArrayIndex);
     var comment = {
@@ -126,16 +113,16 @@ var addComment = function(comment, postCommentedOnArrayIndex) {
 var toggleTracker = []
 //check to see if comments are hiden or not pushes anser into array to use when rendering the board
 var checkTheToggle = function() {
-toggleTracker = []
-posts.forEach(function(post, index) {
-  //  if($('.posts')(index).find('.hide')==true){
-  var toggleChecker = $(".post:eq(" + index + ")").hasClass('on')
-  if (toggleChecker == true) {
-    toggleTracker.push('on')
-  } else {
-    toggleTracker.push('off')
-  }
-});
+  toggleTracker = []
+  posts.forEach(function(post, index) {
+    //  if($('.posts')(index).find('.hide')==true){
+    var toggleChecker = $(".post:eq(" + index + ")").hasClass('on')
+    if (toggleChecker == true) {
+      toggleTracker.push('on')
+    } else {
+      toggleTracker.push('off')
+    }
+  });
 };
 //renders the post at the start
 renderBoard();
