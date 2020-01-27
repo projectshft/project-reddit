@@ -1,0 +1,11 @@
+body {
+    margin: 10px;
+}
+.comment-container{
+    display: none;
+}
+
+.post-text{
+    margin: 5px;
+    display: inline-block;
+}
