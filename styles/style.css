@@ -8,9 +8,13 @@
   font-weight: bold;
 }
 
-.remove-post, .show-comments{
+.remove-post, .show-comments {
   color: blue;
   margin: 0 5px 0 0;
+}
+
+.show-comments {
+  text-decoration: underline;
 }
 
 .show-comments:hover, .remove-post:hover {

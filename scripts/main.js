@@ -148,7 +148,7 @@ $('.posts').on('click', '.remove-post', function(e) {
 $('.posts').on('click', '.remove', function(e) {
   e.preventDefault();
   //problem with removing a comment and rendering comments - work in progress!!
-  debugger
+  //debugger
   //get comment index to remove
   let comment = $(this).attr('id').slice(-1);
   //console.log('Comment index: ' + comment);
