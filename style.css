@@ -1,0 +1,53 @@
+body {
+    background-color: whitesmoke;
+    margin-left: 1vh;
+}
+.form {
+    display: inline-block;
+    margin-left: 0vh;
+}
+.form-control {
+    display: inline-block;
+}
+
+.mainPost {
+    color: green;
+}
+.userPost {
+    height: 3vh;
+}
+.col {
+    position: float;
+    left: -30px;
+}
+.list-group-item {
+    display:  show;
+    background-color: lightgrey; 
+    font-size: small;
+    font-style: oblique;
+    line-height: 0vh;
+}
+.viewComment {
+    margin-top: 2vh;
+}
+
+.posts {
+    background-color: whitesmoke;
+}
+
+.mainPost {
+    background-color: lightgray;
+}
+.submitComment.form {
+    display: none;
+}
+.submitComment {
+    position: absolute;
+    right: 10px;
+    
+}
+.deleteComment {
+    position: absolute;
+    right: 10px;
+    top: 0.6vh;
+}
