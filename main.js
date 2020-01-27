@@ -1,29 +1,37 @@
+// Create an array to store post objects
 var posts = []
 
+var renderAllPosts = function() {
+  // Clear all of the posts
+  $('.posts').empty();
 
-var render = function () {
-    $('.posts').empty();
+  // Loop through the posts array and add all of the objects in the array + new posts
+  for (var i = 0; i < posts.length; i++) {
 
- for (var i = 0; i < posts.length; i ++) {
-   // for (var j = 0; j < posts.comments.length; j ++) {
-   //   if(posts[i] == comments[j]) {
+    $('.posts').append('<div class="post">' + '<a href="#" class="removes">remove</a> ' + '<button class="btn-comments">comments</button>' + ' ' + '<br>' +
+      posts[i].message + '<div class="comments-section hide">' + '<div class="comments"></div>' + '<input type="text" class="comment-input" placeholder="Comment">' +
+      '<input type="text" class="commenter-name" placeholder="Name"><button class="btn btn-primary submit-comment">Submit</button></div>' +
+      '<div> Posted By: <strong>' + posts[i].name + '</strong></div>' + '<br>' + '</div>');
+  };
+};
 
-   $('.posts').append(
-       '<div class="post">' + '<a href="#" class="removes">remove</a> ' + '<button class="btn-comments">comments</button>' + ' ' + '<br>' +
-       posts.message + '<div class="comments-container hide">' + '<input type="text" class="comment-input" placeholder="Comment">' +
-       '<input type="text" class="commenter-name" placeholder="Name"><button class="btn btn-primary submit-comment">Submit</button></div>' +
-       '<div> Posted By: <strong>' + posts.name + '</strong></div>' + '<hr>' + '</div>');
+var renderAllComments = function() {
+  // Clear all of the comments
+  $('.comments').empty();
 
-   $('.posts').append('<div class = "comments">' + posts.comments.comment + ' Posted By: <strong>' +
-      posts.comments.name + '</strong>' + '<button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>')
-      }
-    }
-  
-// Events
+  for (var i = 0; i < posts.length; i++) {
+    // Loop through the comments array of the corresponding post and find the current comment
+    for (var j = 0; j < posts[i].comments.length; j++) {
+
+      // Add the comment to the post it belongs to
+      $('.posts').find('.comments').append(posts[i].comments[j].comment + ' Posted By: <strong>' +
+        posts[i].comments[j].name + '</strong>' + '<button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>' + '<br>')
+    };
+  };
+};
 // Submit Post Event
-
 $('button').click(function() {
-// Edge cases for if user leaves post message blank, post name blank, or both blank
+  // Edge cases for if user leaves post message blank, post name blank, or both blank
   if ($('#message').val() == '' && $('#name').val() == '') {
     alert('Name and message can not be left blank')
   } else if ($('#message').val() == '') {
@@ -32,13 +40,16 @@ $('button').click(function() {
     alert('Name can not be left blank')
   } else {
 
-// Store user input to be accessed later in posts array
-  var userName = $('#name').val();
-  var userMessage = $('#message').val();
+    var userName = $('#name').val();
+    var userMessage = $('#message').val();
 
-  posts.push({ message: userMessage, name: userName, comments: []});
-  render()
-  }
+    posts.push({
+      message: userMessage,
+      name: userName,
+      comments: []
+    })
+    renderAllPosts();
+  };
 });
 
 // Remove Post Event
@@ -46,34 +57,27 @@ $('.posts').on('click', '.removes', function() {
   $(this).closest('.post').remove();
 });
 
-// Toggle Comments Open/Closed Event
+// Toggle Comments Open/Close Event
 $('.posts').on('click', '.btn-comments', function() {
   $(this).siblings(".hide").toggleClass("show")
 });
 
 // Submit Comment Event
 $('.posts').on('click', '.submit-comment', function() {
-// Edge cases for if user leaves comment input blank, comment name blank, or both blank
-  if ($('.comment-input').val() == '' && $('.commenter-name').val() == '') {
-    alert('Name and comment can not be left blank')
-  } else if ($('.comment-input').val() == '') {
-    alert('Comment can not be left blank');
-  } else if ($('.commenter-name').val() == '') {
-    alert('Name can not be left blank')
-  } else {
 
-// Store comment input to be accessed later in posts array
-  var userComment = $('.comment-input').val();
-  var commenterName = $('.commenter-name').val();
+    var userComment = $('.comment-input').val();
+    var commenterName = $('.commenter-name').val();
 
-// Add comments div containing, user comment, commenter name and close button
-// Publish comment on the page
-  // $('.posts').closest('.post').append('<div class = "comments">' + userComment + ' Posted By: <strong>' +
-  //   commenterName + '</strong>' + '<button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>')
-    posts.comments.push([{comment: userComment , name: userName}])
-    render()
-  }
-})
+    // Find the index of the closest post to push the comment into the correct comment array
+    var postIndex = $(this).closest('.post').index();
+
+    posts[postIndex].comments.push({
+      comment: userComment,
+      name: commenterName
+    });
+
+    renderAllComments();
+});
 
 // Remove Comment Event
 $('.posts').on('click', '.close', function() {
