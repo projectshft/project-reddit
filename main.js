@@ -69,7 +69,6 @@ var renderPost = function() {
     console.log("what is happening in the outer loop?" + postsArray[i]);
     ///looping through inner array to get the info from posts and append the new posts from the template
     for (var j = 0; j < postsArray[i].comment.length; j++) {
-
       var $postComments = createComments(postsArray[i].comment[j], j + 1);
 
     }
