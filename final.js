@@ -39,23 +39,24 @@ $('#submit').click(function() {
 });
 
 var addCommentsToPostsArray = function(postIndex) {
-  var commentIndex = $(this).closest($commentDiv).index();
   var $userCommentName = $('#commentname').val();
   var $userCommentText = $('#commentname').val();
   //shouldn't be postsArray.length-1 should somehow access each of the array indexes
-  postsArray[postIndex].comments[commentIndex].push({
+  postsArray[postIndex].comments.push({
     commenttext: $userCommentText,
     commentname: $userCommentName,
   });
-  return commentIndex
+
+  return postsArray[postIndex].comments.length - 1;
 };
 
 // this click handler adds the comments input the data structure
 // and renders the post which appends the html
 $posts.on('click', '#postcomment', function() {
   if ($('#commentname').val().length !== 0 && $('#commentname').val().length !== 0) {
-    addToPostsArray();
-    renderComments();
+    var postIndex = $(this).closest('.post').index();
+    var commentIndex = addCommentsToPostsArray(postIndex);
+    renderComments(postIndex, commentIndex);
   } else {
     //edge case for comments
     alert("you can't submit an empty comment! add your name or comment and then resubmit!")
@@ -74,6 +75,7 @@ var renderPost = function() {
   //
   for (var i = 0; i < postsArray.length; i++) {
     //loops through the array to posts info
+    //TODO fix this!!!
     addPostToPage(postsArray[i], i);
     //loops through to find comment info
   }
@@ -83,12 +85,11 @@ var renderComments = function(postIndex, commentIndex) {
   //
   $commentDiv.empty();
   //can't get my inner loop to extract data
-  if (postsArray[postIndex].comments === undefined) {
-    postsArray[postIndex].comments = 0;
+  // TODO Fix this !
     for (var j = 0; j < postsArray[postIndex].comments[commentIndex].length; j++) {
       addPostToPage(postsArray[postIndex].comments[commentIndex], j);
     }
-  }
+
 };
 
 //this function adds the posts to the webpage by creating new divs
@@ -111,7 +112,7 @@ var addPostToPage = function(post, postIndex, comment, commentIndex) {
 
   //
   $commentDiv.append('<button class="btn btn commentsinput" type="submit" id="deletecomment"> X </button>');
-  $commentDiv.append('<input id="commenttext" class="commentsinput" type="Text" placeholder="Comment Text">' +
+  $commentDiv.append('<input id="commenttext" class="commentsinput" type="Text" placeholder="Comment Text">'  +
     '</input>');
 
   $commentDiv.append('<input id="commentname" class= "commentsinput" type="Text" placeholder="User Name">' +
