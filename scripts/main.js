@@ -3,6 +3,11 @@ let posts = [];
 let $postsList = $('.posts');
 let $commentsList = $('');
 let $commentInput = $('');
+let comments = [];
+
+let source = $('#comments-template').html();
+const template = Handlebars.compile(source);
+
 
 let renderComment = function(num, postNum, text, author) {
   let commentRow =
@@ -70,26 +75,31 @@ $('#postBtn').on('click', function() {
   //get input values
   let $postText = $('#post-text').val();
   let $postAuthor = $('#author').val();
-  let post = {
-    text: '',
-    author: '',
-    comments: []
-  };
 
-  //post object to add to the posts array
-  post.text = $postText;
-  post.author = $postAuthor;
-  //post.comments = [];
+  if(($postText || $postAuthor) == '') {
+    alert('Please enter post and author.')
+  } else {
+    let post = {
+      text: '',
+      author: '',
+      comments: []
+    };
 
-  //add new post to a posts array
-  posts.push(post);
+    //post object to add to the posts array
+    post.text = $postText;
+    post.author = $postAuthor;
+    //post.comments = [];
 
-  displayPosts();
-  countPosts++;
+    //add new post to a posts array
+    posts.push(post);
 
-  //clear input fields
-  $('#post-text').val('');
-  $('#author').val('');
+    displayPosts();
+    countPosts++;
+
+    //clear input fields
+    $('#post-text').val('');
+    $('#author').val('');
+  }
 })
 
 $('.posts').on('click', '.show-comments', function(e) {
@@ -104,7 +114,17 @@ $('.posts').on('click', '.show-comments', function(e) {
   $('#comments' + currentIndex).toggle('slow');
   $('#input' + currentIndex).toggle('slow');
 
-  displayComments(currentIndex - 1);
+  //displayComments(currentIndex - 1);
+  if(posts[currentIndex-1].comments.length > 0) {
+    comments = Array.from(posts[currentIndex-1].comments);
+    console.log(comments);
+
+    var newHTML = template({comments:comments});
+
+    // append our new html to the page
+    $('#comments' + currentIndex).append(newHTML);
+  }
+
 });
 
 //add comments
@@ -125,8 +145,14 @@ $('.posts').on('click', '.postCommentBtn', function(e) {
 
    //add new comment to comments array for the post id = countPosts
    posts[currentIndex-1].comments.push(comment);
+//debugger
+   comments = Array.from(posts[currentIndex-1].comments);
+   console.log(comments);
+   //displayComments(currentIndex-1);
+   var newHTML = template(comments);
 
-   displayComments(currentIndex-1);
+   // append our new html to the page
+   $('#comments' + currentIndex).append(newHTML);
 
    //clear input fields
    $commentText = $('#comment-text' + currentIndex).val('');
@@ -147,7 +173,7 @@ $('.posts').on('click', '.remove-post', function(e) {
 //delet the comment of the post
 $('.posts').on('click', '.remove', function(e) {
   e.preventDefault();
-  //problem with removing a comment and rendering comments - work in progress!!
+  //problem with rendering comments - work in progress!!
   //debugger
   //get comment index to remove
   let comment = $(this).attr('id').slice(-1);
