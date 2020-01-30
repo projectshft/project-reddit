@@ -5,10 +5,6 @@ let $commentsList = $('');
 let $commentInput = $('');
 let comments = [];
 
-let source = $('#comments-template').html();
-const template = Handlebars.compile(source);
-
-
 let renderComment = function(num, postNum, text, author) {
   let commentRow =
    '<span contenteditable="true">' + text + '</span>'
@@ -117,12 +113,6 @@ $('.posts').on('click', '.show-comments', function(e) {
   //displayComments(currentIndex - 1);
   if(posts[currentIndex-1].comments.length > 0) {
     comments = Array.from(posts[currentIndex-1].comments);
-    console.log(comments);
-
-    var newHTML = template({comments:comments});
-
-    // append our new html to the page
-    $('#comments' + currentIndex).append(newHTML);
   }
 
 });
@@ -131,10 +121,15 @@ $('.posts').on('click', '.show-comments', function(e) {
 $('.posts').on('click', '.postCommentBtn', function(e) {
    e.preventDefault();
 
+   //clear comments div before we append additional comments
+   $commentsList.empty();
+
+   //get the index of the element we clicked so we can identify the post index to add comments to
    let currentIndex = $(this).attr('id').slice(-1);
    $commentsList = $('#comments' + currentIndex);
    $commentInput = $('#input' + currentIndex);
 
+   //save values of input fields in the variables to use them in the comment object
    let $commentText = $('#comment-text' + currentIndex).val();
    let $commentAuthor = $('#comment-user' + currentIndex).val();
 
@@ -143,15 +138,16 @@ $('.posts').on('click', '.postCommentBtn', function(e) {
    comment.text = $commentText;
    comment.author = $commentAuthor;
 
-   //add new comment to comments array for the post id = countPosts
+   //add new comment to comments array for the post id = currentIndex-1
    posts[currentIndex-1].comments.push(comment);
-//debugger
    comments = Array.from(posts[currentIndex-1].comments);
-   console.log(comments);
-   //displayComments(currentIndex-1);
-   var newHTML = template(comments);
 
-   // append our new html to the page
+  //using Handlebars to display comments
+   let source = $('#comments-template').html();
+   const template = Handlebars.compile(source);
+   var newHTML = template({comments});
+
+   // append our new html to the comments div on the page
    $('#comments' + currentIndex).append(newHTML);
 
    //clear input fields
@@ -182,11 +178,10 @@ $('.posts').on('click', '.remove', function(e) {
   let postIndex = $(this).attr('id');
 
   //get post index from the comment id
-  let temp = postIndex.split('-');
-  //console.log('Post index: ' + temp[2]);
+  let index = postIndex.split('-');
 
   //remove the comment
-  posts[temp[2]].comments.splice(comment-1, 1);
+  posts[index[2]].comments.splice(comment-1, 1);
 
-  displayComments(temp[2]);
+  displayComments(index[2]);
 });
