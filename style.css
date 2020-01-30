@@ -2,10 +2,12 @@ body {
     background-color: whitesmoke;
     margin-left: 1vh;
 }
+
 .form {
     display: inline-block;
     margin-left: 0vh;
 }
+
 .form-control {
     display: inline-block;
 }
@@ -13,22 +15,28 @@ body {
 .mainPost {
     color: green;
 }
+
 .userPost {
-    height: 3vh;
+    height: 5vh;
+    margin-top: 2vh;
+    margin-bottom: 1vh;
 }
+
 .col {
     position: float;
     left: -30px;
 }
+
 .list-group-item {
-    display:  show;
-    background-color: lightgrey; 
+    display: show;
+    background-color: lightgrey;
     font-size: small;
     font-style: oblique;
     line-height: 0vh;
 }
+
 .viewComment {
-    margin-top: 2vh;
+    margin-top: 0px;
 }
 
 .posts {
@@ -38,14 +46,17 @@ body {
 .mainPost {
     background-color: lightgray;
 }
-.submitComment.form {
-    display: none;
+
+.submitComment {
+    display: show;
 }
+
 .submitComment {
     position: absolute;
-    right: 10px;
-    
+    right: -80px;
+
 }
+
 .deleteComment {
     position: absolute;
     right: 10px;
