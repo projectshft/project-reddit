@@ -78,18 +78,20 @@
       addPostsToPage(postsArray[i]);
       //loops through to find comment info
     }
+    addCommentInputToPage();
   };
   // postDataModel -- one post object in the array
   var renderComments = function(postElement, postObject) {
     //TODO !! change it to just empty the comment relative to the element
     $('.comments').empty();
     //can't get my inner loop to extract data
-    // TODO Fix this !
+    
     //loops through to find comment info
     for (var position = 0; position < postObject.comments.length; position++) {
       //
       addCommentsToPage(postObject.comments[position]);
     }
+    addCommentInputToPage();
   };
 
   //and the nested comment posts
@@ -101,9 +103,10 @@
       '<p class="userinput" id="postmessage">' + postObject.message + '<p>' +
       '<p class="userinput" id="postname">' + ' Posted By: ' + '<strong>' + postObject.name +
       '</strong></p>' + '<hr>' + '</p>' + '</div>');
-
-    $('.post').append('<div class ="comments hide">' + '<input id="commenttext" class="commentsinput" type="Text" placeholder="Comment Text">' +
-      '</input>' + '<input id="commentname" class= "commentsinput" type="Text" placeholder="User Name">' +
+    };
+var addCommentInputToPage = function() {
+    $('.post').append('<div class ="comments hide">' + '<input id="commenttext" class="commenttext" type="Text" placeholder="Comment Text">' +
+      '</input>' + '<input id="commentname" class= "commentname" type="Text" placeholder="User Name">' +
       '</input>' + '<button class="btn btn-primary postcomment" type="submit" > Post Comment </button>' + '</div>');
   };
 
@@ -129,6 +132,6 @@ $('.posts').on('click', '.removes', function() {
   //deletes the comments when you hit x
   $('.posts').on('click', '.close', function() {
     console.log('this delete button works!');
-    $(this).closest('.comment').remove();
+    $(this).find('.comment').remove();
     //this also deletes the commment from the datastructure
   });
