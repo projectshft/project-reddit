@@ -4,25 +4,26 @@ $(document).ready(function() {
     var commentsToggle = '<p class="comments small">comments</p><div class="replies hidden"><input type="text" class ="comment-text" placeholder="Comment Text"><input type"text" class="commenter-name" placeholder="User Name"><button class="btn btn-primary post-comment">Post Comment</button></div>';
     var removeButton = '<button type="button" class="btn btn-danger btn-xs remove-button">Remove Post</button>'
     var post = $('.input-post').val();
-    var name = $('.input-name').val();
-   
+    var name = $('.input-name').val();   
+    
     if (post.trim().length == 0) { // Prevent empty strings
-       throw document.write ("Sorry you actually have to enter a post."); }
+      alert ("Sorry you actually have to enter a post.")
+    return  }
     if (name.trim().length == 0) { // Prevent empty strings
-        throw document.write ("Sorry, you have to actually enter your name to post.") }
+      alert ("Sorry, you have to actually enter your name to post.")
+    return }
+
+
 
     var editButton = '<button type="button" class="btn btn-info btn-xs edit-button">Edit Post</button>'
-    var fullPost = `<div class="full-post">${commentsToggle}<p class="post-text"><span class="post-text-span">${post}</span> </p><p class="post-byline border-bottom">Posted by: <strong>${name}</strong></p></div>`;
+    var fullPost = `<div class="full-post">${commentsToggle}<p class="post-text"><span class="post-text-span">${post}</span> ${editButton} ${removeButton}</p><p class="post-byline border-bottom">Posted by: <strong>${name}</strong></p></div>`;
     $('.posts').prepend(fullPost);
   });
 
-  $('.posts').on('click', '.remove-button', function () {
+//Reply handling functions
+  $('.posts').on('click', '.remove-button', function() {
     $(this).closest('div').remove();
-})
-
-
-
-  // Creating a comments box if a post has been made.  Creating the ability to hide after 
+  })
 
   $('.posts').on('click', '.comments', function() {
     var closestReplies = $(this).siblings('.replies');
@@ -33,9 +34,8 @@ $(document).ready(function() {
     }
   });
 
-  // Setting up the main properties for the comments section.  Creating the "X" trash can for deleted comments
-
   $('.posts').on('click', '.post-comment', function() {
+    // Creating a comments box if a post has been made.  Creating the ability to hide after 
     var commentInput = $(this).siblings('.comment-text');
     var commenterName = $(this).siblings('.commenter-name');
     var closestReplies = $(this).closest('.replies');
@@ -45,18 +45,13 @@ $(document).ready(function() {
     closestReplies.append(fullComment);
   })
 
-  // Setting up trash can for deleted comments
-
   $('.posts').on('click', '.x', function() {
     $(this).closest('div').remove();
   })
 
-
-})
-
 //Edit button function
 $('.posts').on('click', '.edit-button', function() {
-  
+
   //add textarea input, update button, and cancel button to appropriate div
     var $div = $(this).closest('div');
 
@@ -94,3 +89,10 @@ $('.posts').on('click', '.update-button', function() {
   $postText.html(newPost);
   endEdit.call(this); 
 })
+
+//Cancel edit function
+$('.posts').on('click', '.cancel-edit', endEdit);
+
+
+
+}) //end of document.ready function
