@@ -9,4 +9,8 @@ $('#post-button').click(function() {
   $('.delete').click(function() {
     $(this).closest('div').empty();
   })
+
+  $('.comment').click(function() {
+    alert($(this).val())
+  })
 });
