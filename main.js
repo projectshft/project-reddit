@@ -24,7 +24,7 @@ $("#submit").click(function () {
 
   // add event listeners for each newly appended post
   removePost();
-  seeComments();
+  addCommentsSectionWhenCommentsFirstClicked();
 });
 
 // Register a click event on each post's "remove" link
@@ -36,8 +36,10 @@ const removePost = function () {
 };
 
 // Register a click event on each post's "comments" link
-const seeComments = function () {
-  $(".view-comments-link").on("click", function () {
+const addCommentsSectionWhenCommentsFirstClicked = function () {
+  $(".view-comments-link").click(function () {
+    let $currentPost = $(this).closest(".post");
+
     let commentsSection =
       ' <div class="comments panel panel-default">' +
       '   <div class="panel-body">' +
@@ -47,23 +49,11 @@ const seeComments = function () {
 
     // if there is no comments section yet,
     // append the comments section to the closest post to target
-    if ($(this).closest(".post").find(".comments")[0] == undefined) {
-      $(this).closest(".post").append(commentsSection);
+    if ($currentPost.find(".comments")[0] == undefined) {
+      $currentPost.append(commentsSection);
     }
   });
-
-  // add event listener to remove comments from view
-  // hideComments();
 };
 
-// Register a click event on each post's comments if comments are visible
-// const hideComments = function () {
-//   if ($(this).closest(".comments")) {
-//     $(".view-comments-link").off(function () {
-//       $(this).closest(".post").find(".comments").hide();
-//     });
-//   }
-// };
-
 removePost();
-seeComments();
+addCommentsSectionWhenCommentsFirstClicked();
