@@ -6,7 +6,18 @@ $('#post-button').click(function() {
 
   //Create variable for message input
   var originalPosterMessage = $('#message').val();
-  
-  //Add post and name to posts section
-  $('#posts').append('<article><p class="post">' + originalPosterMessage + '</p><p class="username">Posted By: <strong>' + originalPosterName + '</strong></p></article>');
+
+  //Create variable for remove button
+  var removeButton = '<a id="remove-button" role="button" href="#">remove </a>'
+
+  //Create variable for comments button
+  var commentButton = '<a id="comment-button" role="button" href="#">comments </a>'
+
+  //Create element to hold post html
+  var originalPost = '<article><p class="post">' + removeButton + commentButton +
+    originalPosterMessage + '</p><p class="username">Posted By: <strong>' +
+    originalPosterName + '</strong></p></article>'
+
+  //Add post to posts section
+  $('#posts').append(originalPost);
 });
