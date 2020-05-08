@@ -37,11 +37,33 @@ const removePost = function () {
 
 // Register a click event on each post's "comments" link
 const seeComments = function () {
-  $(".view-comments-link").click(function () {
-    // traverse the dom to find which post this refers to
-    $(this).html("I got clicked and I'm a comment!");
+  $(".view-comments-link").on("click", function () {
+    let commentsSection =
+      ' <div class="comments panel panel-default">' +
+      '   <div class="panel-body">' +
+      "     I am the comments section" +
+      "   </div>" +
+      " </div>";
+
+    // if there is no comments section yet,
+    // append the comments section to the closest post to target
+    if ($(this).closest(".post").find(".comments")[0] == undefined) {
+      $(this).closest(".post").append(commentsSection);
+    }
   });
+
+  // add event listener to remove comments from view
+  // hideComments();
 };
+
+// Register a click event on each post's comments if comments are visible
+// const hideComments = function () {
+//   if ($(this).closest(".comments")) {
+//     $(".view-comments-link").off(function () {
+//       $(this).closest(".post").find(".comments").hide();
+//     });
+//   }
+// };
 
 removePost();
 seeComments();
