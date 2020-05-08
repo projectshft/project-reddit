@@ -1,0 +1,14 @@
+.heading {
+  text-align: center;
+}
+
+.short-input {
+  width: 200px;
+  display: inline-block;
+}
+
+.form-class {
+  background-color: blue;
+  display: none;
+  /* visibility: hidden; */
+}
