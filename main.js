@@ -6,4 +6,4 @@ $('button').on('click', function () {
 
   console.log($post);
   console.log($name);
-})
+});
