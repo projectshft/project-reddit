@@ -10,7 +10,7 @@ $("#submit").click(function () {
   let template =
     '<div class="post panel panel-default">' +
     ' <div class="panel-body">' +
-    '   <p class="post-meta"><a href="#" class="remove-post-link">Remove</a> | <a href="#" class="view-comments">Comments</a></p>' +
+    '   <p class="post-meta"><a href="#" class="remove-post-link">Remove</a> | <a href="#" class="view-comments-link">Comments</a></p>' +
     "    <p>" +
     $theNewMessage +
     "    </p>" +
@@ -24,14 +24,24 @@ $("#submit").click(function () {
 
   // add event listeners for each newly appended post
   removePost();
+  seeComments();
 });
 
-// Register a click event on each post's remove button
+// Register a click event on each post's "remove" link
 const removePost = function () {
   $(".remove-post-link").click(function () {
+    // remove the one we want by targeting the specific post using 'this'
+    $(this).closest(".post").remove();
+  });
+};
+
+// Register a click event on each post's "comments" link
+const seeComments = function () {
+  $(".view-comments-link").click(function () {
     // traverse the dom to find which post this refers to
-    $(this).html("I got clicked!");
+    $(this).html("I got clicked and I'm a comment!");
   });
 };
 
 removePost();
+seeComments();
