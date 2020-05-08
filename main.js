@@ -12,6 +12,6 @@ $('#submit').click(function() {
 
   postName.appendChild(userNameElement);
   postMessage.appendChild(userMessageElement);
-  $(".userPost").append(postMessage);
-  $(".userName").append(postName);
+  $(".userPosts").append(postMessage);
+  $(".userPosts").append(postName);
 });
