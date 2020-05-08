@@ -10,10 +10,11 @@ $("#submit").click(function () {
   let template =
     '<div class="post panel panel-default">' +
     ' <div class="panel-body">' +
-    "   <p>" +
+    '   <p class="post-meta"><a href="#">Remove</a> | <a href="#">Comments</a></p>' +
+    "    <p>" +
     $theNewMessage +
-    "   </p>" +
-    ' <div class="post-meta"><p>Posted By: <span class="author">' +
+    "    </p>" +
+    ' <div class="post-author"><p>Posted By: <span class="author">' +
     $theNewAuthor +
     " </span></p></div> </div></div>";
 
