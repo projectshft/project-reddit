@@ -10,16 +10,28 @@ $("#submit").click(function () {
   let template =
     '<div class="post panel panel-default">' +
     ' <div class="panel-body">' +
-    '   <p class="post-meta"><a href="#">Remove</a> | <a href="#">Comments</a></p>' +
+    '   <p class="post-meta"><a href="#" class="remove-post-link">Remove</a> | <a href="#" class="view-comments">Comments</a></p>' +
     "    <p>" +
     $theNewMessage +
     "    </p>" +
     ' <div class="post-author"><p>Posted By: <span class="author">' +
     $theNewAuthor +
     " </span></p></div> </div></div>";
-
   console.log("The new template to add to posts is \n" + template);
 
   // make a new post class for the grabbed values to be appended
   $("#posts").append(template);
+
+  // add event listeners for each newly appended post
+  removePost();
 });
+
+// Register a click event on each post's remove button
+const removePost = function () {
+  $(".remove-post-link").click(function () {
+    // traverse the dom to find which post this refers to
+    $(this).html("I got clicked!");
+  });
+};
+
+removePost();
