@@ -1,3 +1,7 @@
 .author {
   font-weight: bold;
 }
+
+.comments {
+  display: none;
+}
