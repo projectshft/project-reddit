@@ -20,5 +20,5 @@ $("#submit").click(function () {
   console.log("The new template to add to posts is \n" + template);
 
   // make a new post class for the grabbed values to be appended
-  $(".posts").append(template);
+  $("#posts").append(template);
 });
