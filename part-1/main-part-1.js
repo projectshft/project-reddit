@@ -6,7 +6,9 @@ $('button').on('click', function () {
   var userName = "<li>" + "<strong>Posted by:</strong> " + $('#name').val() + "</li>";
 
 
-  $('.post-list').append(userMessage);
-  $('.post-list').append(userName);
-  $('.post-list').append("<li class='divider'></li>");
+  $('.post-list').prepend(userMessage);
+  $('.post-list').prepend(userName);
+  $('.post-list').prepend('<hr>');
+
+
 });
