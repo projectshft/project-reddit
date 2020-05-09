@@ -14,21 +14,24 @@
           </div>
 
           <div class="userPosts">
+            <input id="commentName" type="text" class="form-control comment" placeholder="Name"></input>
+            <input id="commentMessage" type="text" class="form-control comment" placeholder="Comment"></input>
             <div class="postComments">
               </div>
+              <button id="comment" class="btn btn-primary">Comment</button>
           </div>
 
           <form style="margin-top:30px;" onsubmit="event.preventDefault();">
             <h3>Add a new post</h3>
 
             <div class="form-group">
-              <input id="name" type="text"
+              <input id="postName" type="text"
                 class="form-control"
                 placeholder="Name"></input>
             </div>
 
             <div class="form-group">
-              <textarea id="message" type="text"
+              <textarea id="postMessage" type="text"
               class="form-control"
               placeholder="Message"></textarea>
             </div>
