@@ -34,14 +34,13 @@ $('#post-button').click(function() {
 
   //Creating comment form object to append functional post comment button to it
   var $commentForm = $('<form/>', {
-    class: 'comment-form',
-    html: '<h3>Add a New Comment</h3>' +
+    class: 'comment-form form-inline',
+    html: '<div class="form-group">' +
+      '<input type="text" class="form-control comment-message" placeholder="Add New Comment" required>' +
+      '</div>  ' +
       '<div class="form-group">' +
-      '<textarea type="text" class="form-control comment-message" placeholder="Comment Text" required></textarea>' +
-      '</div>' +
-      '<div class="form-group">' +
-      '<input type="text" class="form-control comment-name" placeholder="Your Name" required></input>' +
-      '</div>'
+      '<input type="text" class="form-control comment-name" placeholder="Your Name" required>' +
+      '</div>  '
   });
 
   //Create object for comment button in order to attach click handler to it

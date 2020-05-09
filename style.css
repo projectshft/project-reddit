@@ -8,11 +8,19 @@ body {
   display: none;
 }
 
-a {
+a, {
   white-space: pre;
 }
 
 .comment-remove-button {
   font-weight: bolder;
-  color: blue;
+  color: #2874A6;
+}
+
+.form-inline > * {
+  margin-right: .5em;
+}
+
+.btn-primary {
+  background-color: #2874A6;
 }
