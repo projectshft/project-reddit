@@ -19,21 +19,17 @@ $('#submit').click(function () {
   let commentsFormTemplate =
     '<div class="form-inline comments-form">' +
     ' <div class="form-group">' +
-    '   <input type="text" type="text" class="form-control" id="comment-text-for-post-' +
-    postId +
-    '" placeholder="Comment Text">' +
+    '   <input type="text" type="text" class="form-control new-comment-text" placeholder="Comment Text">' +
     ' </div>' +
     '<div class="form-group"> ' +
-    ' <input type="text" type="text" class="form-control" id="comment-author-for-post-' +
-    postId +
-    '" placeholder="User name">' +
+    ' <input type="text" type="text" class="form-control new-comment-author" placeholder="User name">' +
     ' </div>' +
     '<button id="comments-button-for-post-' +
     postId +
     '" type="button" class="btn btn-primary comments-button">Post Comment</button>' +
     '</div>';
 
-  let commentsContainer = '<div class="comments-container">Hello</div>';
+  let commentsContainer = '<div class="comments-container"></div>';
 
   // Create a post template for the new post before it is appended
   // the event timeStamp is used to create a unique ID for the comments link
@@ -88,6 +84,7 @@ const toggleCommentsDisplay = () => {
       // the preexisting display attribute of the comments should determine what to set
       $commentsCSSDisplay = $currentPost.find('.comments').css('display');
 
+      // log in console css display status to verify click firing only once
       console.log(
         'Before click event fired at ' +
           event.timeStamp +
@@ -110,15 +107,17 @@ const renderComments = (postId) => {
     .off()
     .on('click', function () {
       // Grab the value of the message upon click
-      let $newComment = $('#comment-text-for-post-' + postId).val();
+      let $newComment = $(this)
+        .closest('.comments')
+        .find('.new-comment-text')
+        .val();
       console.log($newComment);
 
       // Grab the value of the author box upon click
-      let $commentAuthor = $('#comment-author-for-post-' + postId).val();
-
-      $currentCommentsContainer = $(this)
+      let $commentAuthor = $(this)
         .closest('.comments')
-        .find('.comments-container');
+        .find('.new-comment-author')
+        .val();
 
       // blank comments shouldn't post anything
       if (!$commentAuthor || !$newComment) {
@@ -131,8 +130,26 @@ const renderComments = (postId) => {
         $newComment +
         ' | Posted by: <span class="author">' +
         $commentAuthor +
-        '</span></div>';
+        '</span>' +
+        '<button type="button" class="btn-xs remove-comment-button"> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>' +
+        '</div>';
+
+      // traverse to find current comments container; assigning for legibility
+      // and then appending the new comment
+      $currentCommentsContainer = $(this)
+        .closest('.comments')
+        .find('.comments-container');
 
       $currentCommentsContainer.append(newCommentTemplate);
+
+      // each new comment needs to add listener to its remove button
+      listenForRemoveComment();
     });
+};
+
+const listenForRemoveComment = function () {
+  $('.remove-comment-button').click(function () {
+    // remove the one we want by targeting the specific post using 'this'
+    $(this).closest('.comment').remove();
+  });
 };
