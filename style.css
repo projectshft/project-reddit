@@ -1,26 +1,44 @@
-.heading {
-  text-align: center;
+
+.links {
+  margin-right: 8px;
+  margin-bottom: 20px;
 }
 
-.short-input {
-  width: 200px;
-  display: inline-block;
+.post-container {
+  padding-bottom: 9px;
+  margin: 10px 0;
+  border-bottom: 1px solid #eee;
 }
+ 
+.post-content {
+  margin-top: 10px;
+}
+
+.form-control-sm {
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
 
 .comments-section {
   display: none;
 }
 
-/* .remove-link {
-  display: inline-block;
-} */
-/* 
-.comment-span {
-  display: inline-block;
-} */
-
-/* this gets the post content to be on the same line as the remove/comments links, if it should end up needing to be on next line then just remove this selector */
-.post-content {
-  display: inline;
+.comment-row {
+  margin-top: 5px;
 }
+
+.comment-span {
+  margin-right: 10px;
+} 
+
+.glyphicon {
+  color: #337ab7;
+  margin-left: 5px;
+  padding-top: 3px;
+}
+/* this gets the post content to be on the same line as the remove/comments links, if it should end up needing to be on next line then just remove this selector */
+/* .post-content {
+  display: inline;
+} */
 

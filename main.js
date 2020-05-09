@@ -14,7 +14,7 @@ $('#submit').click(function() {
 
   //the post will contain the author name and post content, and 2 links to either remove or add comments
   //consider creating a comment section that will be part of the post template but hidden from view until the comments button is clicked
-  const postTemplate = '<div class="post-container"><a class="comments-link"><span>Comments   </span></a><a class="remove-link"><span>Remove</span></a><p class="post-content">' + postContent + '</p><section class="comments-section"><div class="comments-div"></div><form class="form-class" style="margin-top:10px;" onsubmit="event.preventDefault();"><input id="" type="text" class="form-control short-input comment-content" placeholder="Comment Text"></input><input id="" type="text" class="form-control short-input comment-author" placeholder="User Name"><button class="btn btn-primary comment-button">Post Comment</button></form></section><p class="post-author">Posted by: <strong>' + postAuthor + '</strong></p></div>';  
+  const postTemplate = '<div class="post-container"><a class="comments-link links"><span>Comments</span></a><a class="remove-link links"><span>Remove</span></a><p class="post-content">' + postContent + '</p><section class="comments-section"><div class="comments-div"></div><form class="form-class form-inline" style="margin-top:10px;" onsubmit="event.preventDefault();"><input type="text" class="form-control-sm comment-content" placeholder="Comment Text"></input><input type="text" class="form-control-sm comment-author" placeholder="User Name"><button class="btn btn-primary comment-button">Post Comment</button></form></section><p class="post-author">Posted by: <strong>' + postAuthor + '</strong></p></div>';  
 
   //create a variable that will point to the post template created for each post click. (we need this to specify which post we are manipulating and adding click events to)
   const $postTemplate = $(postTemplate);
@@ -44,7 +44,7 @@ $('#submit').click(function() {
     const commentContent = $(this).siblings('.comment-content').val();
     const commentAuthor = $(this).siblings('.comment-author').val();
     
-    const commentTemplate = '<div><span class="comment-span">' + commentContent + '</span><span>  Posted by: <strong>' + commentAuthor + '</strong></span><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></div>';
+    const commentTemplate = '<div class="comment-row"><span class="comment-span">' + commentContent + '</span><span>  Posted by: <strong>' + commentAuthor + '</strong></span><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></div>';
 
     //add the comment template to the comments div
     const $commentTemplate = $(commentTemplate);
@@ -55,8 +55,12 @@ $('#submit').click(function() {
       $(this).parent().remove();
     })
 
+    $(this).siblings('.comment-content').val('');
+    $(this).siblings('.comment-author').val('');
+
   })
-  
+  $('#message').val('');
+  $('#name').val('');
 })
 
 
@@ -116,7 +120,7 @@ $('#submit').click(function() {
 
 
 
-$('#submit').click();
+// $('#submit').click();
 
 
 
