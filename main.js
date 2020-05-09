@@ -34,8 +34,8 @@ $postButton.click(function() {
   //adding the words "remove" and "comments" to the user's post message from the form
   var $newMessage = $('.individualPostMessage').last();
   
-  $('<span class="addComments">comment </span>').prependTo($newMessage);
-  $('<span class="removeOption">remove </span>').prependTo($newMessage);
+  $('<span class="addComments">Comments </span>').prependTo($newMessage);
+  $('<span class="removeOption">Remove -- </span>').prependTo($newMessage);
   
   //adding css to "comments" and "remove" words to indicate actions available for user
   $('.removeOption, .addComments').css({
@@ -60,21 +60,27 @@ $postButton.click(function() {
   });
 
   //adding functionality to "comment" word in post to toggle comment reply form
-  $('.addComments').unbind('click').click(function(event) {
+  $('.addComments').off('click').click(function(event) {
     var $parentElement = $(event.currentTarget).closest('.individualPostMessage')
     
     $($parentElement).siblings('.replyComment').toggleClass('hidden');
   });
 
   //setting up functionality for users to reply to post with in the original post's comment form.
-  $('.postReply').unbind('click').click(function(event) {
-    var $replyInput = $('.replyCommentDetails').val();
-    var $replyUserName = $('.replyCommentUserName').val();
+  $('.postReply').off('click').click(function(event) {
+    //gathering input fields based on the "Post Comment" button that was clicked
+    var $replyInput = $(event.currentTarget).siblings('.replyCommentDetails').val();
+    var $replyUserName = $(event.currentTarget).siblings('.replyCommentUserName').val();
 
-    //adding user's reply comments to the post that the user filled the form in
+    //checking to see if form has a value in it and sending an error message to the user if one or both fields are empty
+    if ($replyInput === '' || $replyUserName === '') {
+      return alert('CANNOT POST AN EMPTY COMMENT; PLEASE ENTER NAME AND COMMENT');
+    };
+
+    //adding the user's reply comments to the post that the form was filled in from
     $(event.currentTarget).closest('.replyComment').prepend(`<p>${$replyInput} Posted By: <strong>${$replyUserName}</strong></p>`);
 
-    //clearing input values
+    //clearing input values for next input
     $('input').val('');
 
   })
