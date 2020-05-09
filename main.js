@@ -10,7 +10,7 @@ $('#post-button').click(function() {
     type: 'button',
     href: '#',
     class: 'remove-link',
-    text: 'remove ',
+    text: '(Remove) ',
     click: function() {
       $(this).parent().remove();
     },
@@ -21,9 +21,14 @@ $('#post-button').click(function() {
     type: 'button',
     href: '#',
     class: 'comment-link',
-    text: ' comments ',
+    text: ' (Show Comments) ',
     click: function() {
       $(this).siblings('.comment-section').toggleClass('hide');
+      if ($(this).siblings('.comment-section').hasClass('hide')) {
+        $(this).text(' (Show Comments) ');
+      } else {
+        $(this).text(' (Hide Comments) ');
+      }
     }
   });
 
@@ -43,7 +48,7 @@ $('#post-button').click(function() {
   var $commentButton = $('<button/>', {
     type: 'button',
     class: 'btn btn-primary comment-button',
-    text: 'Post',
+    text: 'Post Comment',
     click: function() {
       //find values of comment form input and add them to the comment section when post is clicked
       var commentName = $(this).siblings().find('.comment-name').val();
@@ -52,12 +57,12 @@ $('#post-button').click(function() {
       //Creating object to hold comment data which remove comment button can be appended to
       var $comment = $('<p/>', {
         class: 'comment',
-        html: commentMessage + ' <p><em>Comment By:</em> <strong>' + commentName + '</strong></p>'
+        html: commentMessage + ' | <em>Comment By: <strong>' + commentName + '</strong></em>'
       });
 
       //Create object to hold comment remove button and attach click event to it
       var $commentRemoveButton = $('<button/>', {
-        class: "comment-remove-button",
+        class: "comment-remove-button btn btn-default btn-xs",
         text: 'X',
         click: function() {
           $(this).parent().remove();
@@ -82,9 +87,9 @@ $('#post-button').click(function() {
 
   $commentSection.append('<section class="comments-container"><h4>Comments:</h4></section><hr>')
   $commentSection.append($commentForm);
+  $commentSection.append('<hr>');
 
-
-  //Creating jquery object for post in order to append remove and comment links to it before adding to DOM
+  //Creating object for post in order to append the remove and comment links to it before adding to DOM
   var $post = $('<article/>', {
     class: 'post',
     html: '<p class="user-message">' +
@@ -94,8 +99,9 @@ $('#post-button').click(function() {
 
   //adding functional comment and remove links to post
   $post.prepend($commentLink);
+  $post.prepend(' | ');
   $post.prepend($removeLink);
-  $post.append($commentSection).append('<hr>');
+  $post.append($commentSection)
 
   //adding post to posts section
   $('#posts').append($post);
