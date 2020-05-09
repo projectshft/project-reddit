@@ -2,6 +2,7 @@
 #new-post-title {
   font-size: 22px;
   font-weight: bold;
+
 }
 /* .post-item {
   border-bottom: 1px solid lightgray;
@@ -9,4 +10,15 @@
 
 .post-controls {
   display: none;
+
+}
+
+.special-word {
+  color: blue;
+
+}
+
+.special-word:hover {
+  color: red;
+  cursor: pointer;
 }
