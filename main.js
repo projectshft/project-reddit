@@ -12,22 +12,30 @@ $('#submit').click(function () {
 
   // defining the comments Template here, which will be used within postTemplate
   let commentsTemplate =
-    '<div class="form-group">' +
-    '<textarea id="message" type="text class="form-control" placeholder="Comment Text">' +
-    '</textarea>';
+    '<form class="form-inline comments-form">' +
+    ' <div class="form-group">' +
+    '   <input type="text" type="text" class="form-control" placeholder="Comment Text">' +
+    ' </div>' +
+    '<div class="form-group"> ' +
+    ' <input type="text" type="text" class="form-control" id="comment-author" placeholder="User name">' +
+    ' </div>' +
+    '<button type="button" class="btn btn-primary">Post Comment</button>' +
+    '</form>';
 
   // Create a post template for the new post before it is appended
+  // the event timeStamp is used to create a unique ID for the comments link
   let postTemplate =
     '<div class="post panel panel-default">' +
     ' <div class="panel-body">' +
-    '   <p class="post-meta"><a href="#" class="remove-post-link">Remove</a> | <a href="#" class="view-comments-link">Comments</a></p>' +
+    '   <p class="post-meta"><a href="#" class="remove-post-link">Remove</a>' +
+    '   | <a href="#" class="view-comments-link">Comments</a></p>' +
     '    <p>' +
     $theNewMessage +
     '</p>' +
     ' <div class="post-author"><p>Posted By: <span class="author">' +
     $theNewAuthor +
     ' </span></p></div>' +
-    ' <div class="comments">' +
+    ' <div class="comments" style="display:none">' +
     commentsTemplate +
     '</div>';
   (' </div></div>');
@@ -41,11 +49,10 @@ $('#submit').click(function () {
   $('#posts').append(postTemplate);
 
   // add event listeners for each newly appended post
+  toggleCommentsDisplay();
   listenForRemovePost();
-  toggleCommentsSection();
 });
 
-// Register a click event on each post's "remove" link
 const listenForRemovePost = function () {
   $('.remove-post-link').click(function () {
     // remove the one we want by targeting the specific post using 'this'
@@ -53,22 +60,30 @@ const listenForRemovePost = function () {
   });
 };
 
-const toggleCommentsSection = function () {
-  $('.view-comments-link').click(function () {
-    // we'll refer to this a lot; easier to traverse by initializing
-    let $currentPost = $(this).closest('.post');
+const toggleCommentsDisplay = () => {
+  // registering an event to the link to view comments
+  // off() is used immediately to prevent extra firings
+  $('.view-comments-link')
+    .off()
+    .on('click', function () {
+      // we need to find the closest post based on which link invoked toggle
+      $currentPost = $(this).closest('.post');
+      // the preexisting display attribute of the comments should determine what to set
+      $commentsCSSDisplay = $currentPost.find('.comments').css('display');
 
-    // if the comment class isn't visible, we want to make it visible
-    // using display rather than visibility so that it doesn't take up space when hidden
-    if ($currentPost.find('.comments').css('display') === 'none') {
-      $currentPost.find('.comments').css('display', 'inline-block');
-    } else {
-      // otherwise if the comment class is showing, we want to hide it upon click
-      console.log('Clicking comments link is setting comments to hidden');
-      $currentPost.find('.comments').css('display', 'none');
-    }
-  });
+      console.log(
+        'Before click event fired at ' +
+          event.timeStamp +
+          ", the comments' display was  " +
+          $commentsCSSDisplay
+      );
+
+      // if the comments are not displayed, let's display them
+      if ($commentsCSSDisplay === 'none') {
+        $currentPost.find('.comments').css('display', 'inline-block');
+      } else {
+        // if they are being displayed, we'll hide them
+        $currentPost.find('.comments').css('display', 'none');
+      }
+    });
 };
-
-listenForRemovePost();
-toggleCommentsSection();
