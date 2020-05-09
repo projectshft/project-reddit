@@ -97,7 +97,7 @@ const renderCommentsWhenPostCommentButtonPressed = () => {
         ' | Comment by: <span class="author">' +
         $commentAuthor +
         '</span>' +
-        '<button type="button" class="btn-xs remove-comment-button"> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>' +
+        '<button type="button" class="btn-xs btn-default btn remove-comment-button"> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>' +
         '</div>';
 
       // traverse to find current comments container; assigning for legibility
