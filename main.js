@@ -14,7 +14,7 @@ $('#submit').click(function() {
 
   //the post will contain the author name and post content, and 2 links to either remove or add comments
   //consider creating a comment section that will be part of the post template but hidden from view until the comments button is clicked
-  const postTemplate = '<div class="post-container"><a class="comments-link"><span>Comments   </span></a><a class="remove-link"><span>Remove</span></a><p class="post-content">' + postContent + '</p><form class="form-class" style="margin-top:10px;" onsubmit="event.preventDefault();"><input id="" type="text" class="form-control short-input" placeholder="Comment Text"></input><input id="" type="text" class="form-control short-input" placeholder="User Name"><button class="btn btn-primary comment-button">Post Comment</button></form><p class="post-author">Posted by: <strong>' + postAuthor + '</strong></p></div>';  
+  const postTemplate = '<div class="post-container"><a class="comments-link"><span>Comments   </span></a><a class="remove-link"><span>Remove</span></a><p class="post-content">' + postContent + '</p><form class="form-class" style="margin-top:10px;" onsubmit="event.preventDefault();"><input id="" type="text" class="form-control short-input comment-content" placeholder="Comment Text"></input><input id="" type="text" class="form-control short-input comment-author" placeholder="User Name"><button class="btn btn-primary comment-button">Post Comment</button></form><p class="post-author">Posted by: <strong>' + postAuthor + '</strong></p></div>';  
 
 
   const $postTemplate = $(postTemplate);
@@ -44,7 +44,15 @@ $('#submit').click(function() {
   $('.posts').append($postTemplate);
 
    //if the comment button is clicked the comments/commenter will appear under the post with an "x", top to bottom. 
-
+  $postTemplate.find('.comment-button').click(function() {
+    //using $(this) might cause an issue
+    const commentContent = $(this).siblings('.comment-content').val();
+    const commentAuthor = $(this).siblings('.comment-author').val();
+    //use span?
+    const commentTemplate = '<span>' + commentContent + '</span><span>  Posted by: ' + commentAuthor + '</span>';
+    const $commentTemplate = $(commentTemplate);
+    $postTemplate.find('.post-content').append($commentTemplate);
+  })
   
 
   //if the "x" is clicked, the comment will be removed
@@ -61,8 +69,8 @@ $('#submit').click(function() {
     <a class="remove-link"><span>Remove</span></a> 
     <p class="post-content">' + postContent + '</p>
     <form class="form-class" style="margin-top:30px;" onsubmit="event.preventDefault();">
-      <input id="" type="text" class="form-control short-input" placeholder="Comment Text"></input>
-      <input id="" type="text" class="form-control short-input" placeholder="User Name">
+      <input id="" type="text" class="form-control short-input comment-content" placeholder="Comment Text"></input>
+      <input id="" type="text" class="form-control short-input comment-author" placeholder="User Name">
       <button class="btn btn-primary comment-button">Post Comment</button></form>
     <p class="post-author">Posted by: <strong>' + postAuthor + '</strong></p>
   </div>';
