@@ -55,6 +55,18 @@ $('#post-button').click(function() {
         html: commentMessage + ' <p><em>Comment By:</em> <strong>' + commentName + '</strong></p>'
       });
 
+      //Create object to hold comment remove button and attach click event to it
+      var $commentRemoveButton = $('<button/>', {
+        class: "comment-remove-button",
+        text: 'X',
+        click: function() {
+          $(this).parent().remove();
+        }
+      });
+
+      //Add remove button to comment
+      $comment.append($commentRemoveButton);
+
       //Adding comment to comment section on click
       $(this).parent().siblings('.comments-container').append($comment);
     }
