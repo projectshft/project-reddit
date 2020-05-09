@@ -1,14 +1,10 @@
-var button = document.getElementsByTagName('button')[0];
+var button = $('button');
 
-button.addEventListener('click', function () {
-  var userMessage = document.getElementById('message').value;
-  var userName = document.getElementById('name').value;
-  var p = document.createElement('p');
-  var userNameElement = document.createTextNode("   --" + userName);
-  var userMessageElement = document.createTextNode(userMessage);
+$('button').on('click', function () {
 
-  p.appendChild(userMessageElement);
-  p.appendChild(userNameElement);
+  var userMessage = $('#message').val();
+  var userName = "<strong>Posted by:</strong>" + $('#name').val();
 
-  document.getElementsByClassName('posts')[0].appendChild(p);
+  $('.posts').prepend(userMessage);
+  $('.posts').prepend(userName);
 });
