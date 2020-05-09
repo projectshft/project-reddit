@@ -2,16 +2,34 @@ var $postButton = $('#post');
 var userPostNumber = 0;
 
 $postButton.click(function() {
+  //checking to ensure fields are entered not blank
+  if ($('#name').val() === '' || $('#message').val() === '') {
+    return alert('Please enter a name & post text');
+  };
+  
   var $userName = $('#name').val();
-  var $userMessage = $('#message').val()
+  var $userMessage = $('#message').val();
   //add a user count to make a unique post number for the class
   userPostNumber ++;
 
-  //creating a div element for each post that will contain the form details inside.
-  $('.posts').append('<div class="userPost"></div>');
-  //append message and name to newly created userPost div
+  //creating a parent div element for each user post that will contain the form details inside.
+  $('.posts').append('<div class="userPost"></div><hr />');
+  
+  //append message to newly created userPost div
   $('.userPost').last().append('<div class="individualPostMessage" id="message' + userPostNumber +'">' + $userMessage + '</div>');
+  
+  //add form that is hidden by default to newly created userPost div
+  //first setting up variables to make append jQuery more readable
+  var replyForm = '<form class="replyCommentForm form-inline hidden" onsubmit="event.preventDefault();">';
+  var replyComment = '<input type="text" class="form-control mb-2 mr-sm-2" placeholder="Comment Text">'
+  var replyUserName = '<input type="text" class="form-control"  placeholder="Username">'
+  var postReplyCommentButton = '<button id="post" class="btn btn-primary">Post Comment</button>'
+
+  $('.userPost').last().append(replyForm + replyComment + replyUserName + postReplyCommentButton + '</form>');
+  
+  //append name to newly created userPost div
   $('.userPost').last().append('<div class="individualPostName" id="name' + userPostNumber +'"> Posted By: <strong>' + $userName + '</strong></div>');
+  
 
   //adding "remove" and "comments" to the user's post message
   var $newMessage = $('.individualPostMessage').last();
@@ -33,10 +51,16 @@ $postButton.click(function() {
     $(event.currentTarget).css('text-decoration', 'none');
   });
 
-  //adding delete functionality to the "remove" option in each post
+  /*adding delete functionality to the "remove" option in each post. 
+  The following removes the div element containing the post the user is selecting to remove.
+  */
   $('.removeOption').click(function(event) {
     $(event.currentTarget).closest('.userPost').remove();
-  })
+    $(event.currentTarget).closest('hr').remove();
+  });
+
+  //clearing form fields for next user input
+  $('input').val('');
 
 });
 
