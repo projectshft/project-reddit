@@ -15,10 +15,11 @@
   <hr>
 
   <main>
-    <section id="posts">POSTS
+    <section id="posts">
+      <h4>Posts:</h4>
     </section>
 
-    <form id="post-form">
+    <form id="post-form" onsubmit="event.preventDefault();">
       <h3>Add a New Post</h3>
 
       <div class="form-group">
@@ -29,7 +30,7 @@
 
       </div>
 
-      <button type="button" id="post-button" class="btn btn-primary">Post</button>
+      <button type="submit" id="post-button" class="btn btn-primary">Post</button>
     </form>
   </main>
 

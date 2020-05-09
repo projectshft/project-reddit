@@ -11,3 +11,7 @@ body {
 a {
   white-space: pre;
 }
+
+.comment-remove-button {
+  font-weight: bolder;
+}
