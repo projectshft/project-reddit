@@ -94,7 +94,7 @@ const renderCommentsWhenPostCommentButtonPressed = () => {
       let newCommentTemplate =
         '<div class="comment">' +
         $newComment +
-        ' | Posted by: <span class="author">' +
+        ' | Comment by: <span class="author">' +
         $commentAuthor +
         '</span>' +
         '<button type="button" class="btn-xs remove-comment-button"> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>' +
