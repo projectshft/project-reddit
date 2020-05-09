@@ -1,0 +1,54 @@
+<html>
+
+<head>
+  <title>Forum</title>
+  <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+
+      <div class="page-header">
+        <h1>Project Reddit</h1>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+
+      <div class="posts">
+        <ul class="post-list"></ul>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+
+      <form style="margin-top:30px;" onsubmit="event.preventDefault();">
+        <h3>Add a new post</h3>
+
+        <div class="form-group">
+          <input id="name" type="text" class="form-control" placeholder="Name"></input>
+        </div>
+
+        <div class="form-group">
+          <input id="message" type="text" class="form-control" placeholder="Your Post"></textarea>
+        </div>
+
+        <button id="submit" class="btn btn-primary">Post</button>
+      </form>
+
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+  <script src="main-part-1.js"></script>
+</body>
+
+</html>
