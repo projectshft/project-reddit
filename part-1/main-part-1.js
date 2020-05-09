@@ -2,9 +2,11 @@ var button = $('button');
 
 $('button').on('click', function () {
 
-  var userMessage = $('#message').val();
-  var userName = "<strong>Posted by:</strong>" + $('#name').val();
+  var userMessage = "<li>" + $('#message').val() + "</li>";
+  var userName = "<li>" + "<strong>Posted by:</strong> " + $('#name').val() + "</li>";
 
-  $('.posts').prepend(userMessage);
-  $('.posts').prepend(userName);
+
+  $('.post-list').append(userMessage);
+  $('.post-list').append(userName);
+  $('.post-list').append("<li class='divider'></li>");
 });
