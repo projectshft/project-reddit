@@ -14,14 +14,15 @@ $('#submit').click(function() {
   postMessage.appendChild(userMessageElement);
   $(".userPosts").append(postMessage);
   $(".userPosts").append(postName);
-  $()
+  //When submitted the comment section will become visible
+  
 });
 
 //Every post will be able to have comments
 $('#comment').click(function() {
   var commentUserName = "Posted By: " + $('#commentName').val();
   var userMessage = $('#commentMessage').val();
-//The comments will need to be unique to each post
+//The comments will need to be appended to and unique to each post
 
   //The comments will have the commentor's name and their message
 
