@@ -1,32 +1,21 @@
-//There should be a button to submit a post
-$('#submit').click(function() {
-  //The post should contain the user's name and their message
-  var userName = "Posted By: " + $('#postName').val();
-  var userMessage = $('#postMessage').val();
-  //The post will need an area for the text to be displayed
-  var postMessage = document.createElement('p');
-  var postName = document.createElement('p');
-  //In that area there will need to be separate spaces for the name and the message
-  var userNameElement = document.createTextNode(userName);
-  var userMessageElement = document.createTextNode(userMessage);
 
-  postName.appendChild(userNameElement);
-  postMessage.appendChild(userMessageElement);
-  $(".userPosts").append(postMessage);
-  $(".userPosts").append(postName);
-  //When submitted the comment section will become visible
-  
+//A post userMessage will need to be submitted when the button is clicked
+$('#submit').click(function () {
+  var userMessageInput = $('#postMessage').val();
+  $('.userPosts').append('<p>' + userMessageInput + '</p>');
+});
+//A post userName will need to be submitted when the button is clicked
+$('#submit').click(function () {
+  var userNameInput = $('#postName').val();
+  $('.userPosts').append('<p>' + 'Posted By: ' + userNameInput + '</p>');
+});
+//A unique comment section with commentorName and commentorMessage will need to be appended to each post
+$('#comment').click(function () {
+  var commentMessage = $('#commentMessage').val();
+  $('.userPosts').append('<p>' + commentMessage + '</p>');
 });
 
-//Every post will be able to have comments
-$('#comment').click(function() {
-  var commentUserName = "Posted By: " + $('#commentName').val();
-  var userMessage = $('#commentMessage').val();
-//The comments will need to be appended to and unique to each post
-
-  //The comments will have the commentor's name and their message
-
-  //The comment will need an area for text to be dispaled
-
-  //In that area there will need to be separate spaces for the name and the message
+$('#comment').click(function () {
+  var commentName = $('#commentName').val();
+  $('.userPosts').append('<p>' + 'Posted By: ' + commentName + '</p>');
 });
