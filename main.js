@@ -3,7 +3,12 @@
  *   the message, the author, and a comments template
  */
 
+let postId = 0;
+
 $('#submit').click(function () {
+  // unique Post ID used for comment button
+  postId++;
+
   // Grab the value of the message upon click
   let $theNewMessage = $('#message').val();
 
@@ -11,16 +16,24 @@ $('#submit').click(function () {
   let $theNewAuthor = $('#name').val();
 
   // defining the comments Template here, which will be used within postTemplate
-  let commentsTemplate =
-    '<form class="form-inline comments-form">' +
+  let commentsFormTemplate =
+    '<div class="form-inline comments-form">' +
     ' <div class="form-group">' +
-    '   <input type="text" type="text" class="form-control" placeholder="Comment Text">' +
+    '   <input type="text" type="text" class="form-control" id="comment-text-for-post-' +
+    postId +
+    '" placeholder="Comment Text">' +
     ' </div>' +
     '<div class="form-group"> ' +
-    ' <input type="text" type="text" class="form-control" id="comment-author" placeholder="User name">' +
+    ' <input type="text" type="text" class="form-control" id="comment-author-for-post-' +
+    postId +
+    '" placeholder="User name">' +
     ' </div>' +
-    '<button type="button" class="btn btn-primary">Post Comment</button>' +
-    '</form>';
+    '<button id="comments-button-for-post-' +
+    postId +
+    '" type="button" class="btn btn-primary comments-button">Post Comment</button>' +
+    '</div>';
+
+  let commentsContainer = '<div class="comments-container">Hello</div>';
 
   // Create a post template for the new post before it is appended
   // the event timeStamp is used to create a unique ID for the comments link
@@ -36,7 +49,8 @@ $('#submit').click(function () {
     $theNewAuthor +
     ' </span></p></div>' +
     ' <div class="comments" style="display:none">' +
-    commentsTemplate +
+    commentsContainer +
+    commentsFormTemplate +
     '</div>';
   (' </div></div>');
 
@@ -51,6 +65,9 @@ $('#submit').click(function () {
   // add event listeners for each newly appended post
   toggleCommentsDisplay();
   listenForRemovePost();
+
+  // for as many posts as we have, we need a new comment post button listener
+  renderComments(postId);
 });
 
 const listenForRemovePost = function () {
@@ -85,5 +102,37 @@ const toggleCommentsDisplay = () => {
         // if they are being displayed, we'll hide them
         $currentPost.find('.comments').css('display', 'none');
       }
+    });
+};
+
+const renderComments = (postId) => {
+  $('#comments-button-for-post-' + postId)
+    .off()
+    .on('click', function () {
+      // Grab the value of the message upon click
+      let $newComment = $('#comment-text-for-post-' + postId).val();
+      console.log($newComment);
+
+      // Grab the value of the author box upon click
+      let $commentAuthor = $('#comment-author-for-post-' + postId).val();
+
+      $currentCommentsContainer = $(this)
+        .closest('.comments')
+        .find('.comments-container');
+
+      // blank comments shouldn't post anything
+      if (!$commentAuthor || !$newComment) {
+        return;
+      }
+
+      // we need a template for each new comment
+      let newCommentTemplate =
+        '<div class="comment">' +
+        $newComment +
+        ' | Posted by: <span class="author">' +
+        $commentAuthor +
+        '</span></div>';
+
+      $currentCommentsContainer.append(newCommentTemplate);
     });
 };
