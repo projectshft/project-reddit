@@ -1,15 +1,20 @@
 body {
   width: 80%;
-  margin: 0 auto;
-  font-family: Calibri, sans-serif;
+  margin: 20px auto;
+  font-family: 'Quicksand', sans-serif;
+}
+
+a {
+  white-space: pre;
+}
+
+h1, h2, h3, h4 {
+  font-weight: 700;
+  color: #404040;
 }
 
 .hide {
   display: none;
-}
-
-a, {
-  white-space: pre;
 }
 
 .comment-remove-button {

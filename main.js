@@ -96,7 +96,7 @@ $('#post-button').click(function() {
       postName + '</strong></p><hr>'
   });
 
-  //adding functional comment and remove links to post
+  //adding functional comment link and remove link to post
   $post.prepend($commentLink);
   $post.prepend(' | ');
   $post.prepend($removeLink);
