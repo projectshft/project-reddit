@@ -1,9 +1,12 @@
-<html>
+<!doctype html>
+
+<html lang="en">
 
 <head>
-  <title>Forum</title>
+  <meta charset="utf-8">
   <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
   <link href="style.css" rel="stylesheet">
+  <title>Forum</title>
 </head>
 
 <body>
@@ -11,7 +14,7 @@
     <div class="col-md-6 col-md-offset-3">
 
       <div class="page-header">
-        <h1>Project Reddit</h1>
+        <h1><strong>Project Reddit</strong></h1>
       </div>
 
     </div>
@@ -30,15 +33,15 @@
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
 
-      <form style="margin-top:30px;" onsubmit="event.preventDefault();">
-        <h3>Add a new post</h3>
+      <form onsubmit="event.preventDefault();">
+        <h3><strong>Add a new post</strong></h3>
 
         <div class="form-group">
-          <input id="name" type="text" class="form-control" placeholder="Name"></input>
+          <input id="message" type="text" class="form-control" placeholder="Post Text">
         </div>
 
         <div class="form-group">
-          <input id="message" type="text" class="form-control" placeholder="Your Post"></textarea>
+          <input id="name" type="text" class="form-control" placeholder="Your Name"></input>
         </div>
 
         <button id="submit" class="btn btn-primary">Post</button>
