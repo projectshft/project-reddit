@@ -8,7 +8,18 @@
 }
 
 .form-class {
-  background-color: blue;
   display: none;
-  
+}
+
+/* .remove-link {
+  display: inline-block;
+} */
+/* 
+.comment-span {
+  display: inline-block;
+} */
+
+/* this gets the post content to be on the same line as the remove/comments links, if it should end up needing to be on next line then just remove this selector */
+.post-content {
+  display: inline;
 }

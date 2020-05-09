@@ -49,14 +49,17 @@ $('#submit').click(function() {
     const commentContent = $(this).siblings('.comment-content').val();
     const commentAuthor = $(this).siblings('.comment-author').val();
     //use span?
-    const commentTemplate = '<span>' + commentContent + '</span><span>  Posted by: ' + commentAuthor + '</span>';
+    const commentTemplate = '<div class="comment-div"><span class="comment-span">' + commentContent + '</span><span>  Posted by: <strong>' + commentAuthor + '</strong></span><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></div>';
     const $commentTemplate = $(commentTemplate);
     $postTemplate.find('.post-content').append($commentTemplate);
+
+    //if the "x" is clicked, the comment will be removed
+    $commentTemplate.find('.glyphicon-remove').click(function() {
+      $(this).closest('.comment-div').remove();
+    })
+
   })
   
-
-  //if the "x" is clicked, the comment will be removed
-
 
 
 
