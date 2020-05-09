@@ -16,10 +16,27 @@ $postButton.click(function() {
   //adding "remove" and "comments" to the user's post message
   var $newMessage = $('.individualPostMessage').last();
   
-  $('<span class="addComments">comments </span>').prependTo($newMessage);
+  $('<span class="addComments">comment </span>').prependTo($newMessage);
   $('<span class="removeOption">remove </span>').prependTo($newMessage);
   
-  //adding css to "comments" and "remove" class
-  $('.removeOption, .addComments').css('color', 'blue');
+  //adding css to "comments" and "remove" words to indicate actions available for user
+  $('.removeOption, .addComments').css({
+    'color': 'blue',
+    'cursor': 'pointer'
+  });
+
+  //adding css text-decoration to "comments" and "remove" on hover
+  $('.removeOption, .addComments').on('mouseenter', function(event) {
+    $(event.currentTarget).css('text-decoration', 'underline');
+    $(event.currentTarget).css('text-decoration', 'underline');
+  }).on('mouseleave', function(event) {
+    $(event.currentTarget).css('text-decoration', 'none');
+  });
+
+  //adding delete functionality to the "remove" option in each post
+  $('.removeOption').click(function(event) {
+    $(event.currentTarget).closest('.userPost').remove();
+  })
 
 });
+
