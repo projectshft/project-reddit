@@ -60,14 +60,14 @@ $postButton.click(function() {
   });
 
   //adding functionality to "comment" word in post to toggle comment reply form
-  $('.addComments').click(function(event) {
+  $('.addComments').unbind('click').click(function(event) {
     var $parentElement = $(event.currentTarget).closest('.individualPostMessage')
     
     $($parentElement).siblings('.replyComment').toggleClass('hidden');
-  })
+  });
 
   //setting up functionality for users to reply to post with in the original post's comment form.
-  $('.postReply').click(function(event) {
+  $('.postReply').unbind('click').click(function(event) {
     var $replyInput = $('.replyCommentDetails').val();
     var $replyUserName = $('.replyCommentUserName').val();
 
