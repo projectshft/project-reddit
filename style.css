@@ -9,3 +9,7 @@
 .post-text {
   display: inline;
 }
+
+.delete-comment-btn {
+  display: inline;
+}

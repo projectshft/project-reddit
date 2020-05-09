@@ -38,7 +38,7 @@ var renderPosts = function() {
     $postsContainer.append($postTemplate);
   }
   $(".remove-post").click(removePost);
-//  $(".show-comments").click(showComments);
+  $(".show-comments").click(showComments);
   $(".comment-form-btn").click(addComment);
 }
 
@@ -46,7 +46,7 @@ var renderPosts = function() {
 var buildPostTemplate = function(postID, postText, postName) {
   var commentsTemplate =
   '<div class="comments-container">' +
-      '<div class="comment-messages-container"</div>' +
+      '<div class="comment-messages-container"></div>' +
       '<div class="form-group comment-form">' +
       '<input type="text" class="form-control comment-form-name" placeholder="Your Name">' +
       '<input type="text" class="form-control comment-form-text" placeholder="Comment Text">' +
@@ -83,6 +83,46 @@ var resetPostIDs = function() {
   }
 }
 
+var addComment = function() {
+  var postID = $(this).closest(".list-group-item").attr("id");
+  var commentName = $(this).siblings(".comment-form-name").val();
+  var commentText = $(this).siblings(".comment-form-text").val();
+  var myComment = Object.create(commentObj);
+  myComment.commentName = commentName;
+  myComment.commentText = commentText;
+  var myPost = posts.find(post => post.postID === postID);
+  myPost.comments.push(myComment);
+  renderComments(postID, myPost);
+}
+
+//removes all comments from comment-messages-container, then loops through comments array
+// to update comments in the container
+var renderComments = function(postID, myPost) {
+  var $commentContainer = $('#'+postID).find(".comment-messages-container");
+  $commentContainer.empty();
+  for(let i = 0; i < myPost.comments.length; i++) {
+    var commentName = myPost.comments[i].commentName;
+    var commentText = myPost.comments[i].commentText;
+    myPost.comments[i].commentID = "comment" + i;
+    var $commentTemplate = buildCommentTemplate(commentText, commentName);
+    $commentContainer.append($commentTemplate);
+  }
+  //$(".delete-comment-btn").click(removeComment);
+}
+
+//builds jquery dom object for comment template, taking in values passed by renderComments
+var buildCommentTemplate = function(commentText, commentName) {
+  var commentTemplate =
+  '<p>' + commentText + ' Posted By: ' + commentName +
+  '<button type="button" class="close delete-comment-btn" aria-label="Close">' +
+  '<span aria-hidden="true">&times;</span></button>' + '</p>';
+  return $(commentTemplate);
+}
+
+//togles comment section visibility on a post
+var showComments = function() {
+  $(this).siblings(".comments-container").toggle();
+}
 
 $(".post-button").click(addPost);
 console.log("end of program reached");
