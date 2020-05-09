@@ -1,12 +1,18 @@
 const listenForSubmitAndRenderPost = () => {
   $('#submit').click(function () {
     // Grab the value of the message upon click and empty input box
-    let $theNewMessage = $('#message').val();
+    let $newMessage = $('#message').val();
     $('#message').val('');
 
     // Grab the value of the author box upon click and empty input box
-    let $theNewAuthor = $('#name').val();
+    let $newPostAuthor = $('#name').val();
     $('#name').val('');
+
+    // blank posts shouldn't post anything
+    if (!$newMessage || !$newPostAuthor) {
+      alert('Fill out both input boxes of post form to submit');
+      return;
+    }
 
     // defining the comments Template here, which will be used within postTemplate
     let commentsFormTemplate =
@@ -28,10 +34,10 @@ const listenForSubmitAndRenderPost = () => {
       '   <p class="post-meta"><a href="#" class="remove-post-link">Remove</a>' +
       '   | <a href="#" class="view-comments-link">Comments</a></p>' +
       '    <p>' +
-      $theNewMessage +
+      $newMessage +
       '   </p>' +
       ' <div class="post-author"><p>Posted By: <span class="author">' +
-      $theNewAuthor +
+      $newPostAuthor +
       ' </span></p></div>' +
       ' <div class="comments" style="display:none">' +
       commentsContainer +
@@ -65,7 +71,6 @@ const renderCommentsWhenPostCommentButtonPressed = () => {
         .closest('.comments')
         .find('.new-comment-text')
         .val();
-      console.log($newComment);
 
       // Reset the value of the message box
       $(this).closest('.comments').find('.new-comment-text').val('');
@@ -81,6 +86,7 @@ const renderCommentsWhenPostCommentButtonPressed = () => {
 
       // blank comments shouldn't post anything
       if (!$commentAuthor || !$newComment) {
+        alert('Fill out both input boxes of comment form to submit');
         return;
       }
 
