@@ -53,13 +53,13 @@ $('#post-button').click(function() {
       var commentName = $(this).siblings().find('.comment-name').val();
       var commentMessage = $(this).siblings().find('.comment-message').val();
 
-      //Creating object to hold comment data which remove comment button can be appended to
+      //Creating object to hold comment data which the remove comment button can be appended to
       var $comment = $('<p/>', {
         class: 'comment',
         html: commentMessage + ' | <em>Comment By: <strong>' + commentName + '</strong></em>'
       });
 
-      //Create object to hold comment remove button and attach click event to it
+      //Create object to hold comment remove button and attach click event to it to delete the comment
       var $commentRemoveButton = $('<button/>', {
         class: "comment-remove-button btn btn-default btn-xs",
         text: 'X',
@@ -104,6 +104,5 @@ $('#post-button').click(function() {
 
   //adding post to posts section
   $('#posts').append($post);
-
 
 });
