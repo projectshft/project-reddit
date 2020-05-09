@@ -1,10 +1,12 @@
 const listenForSubmitAndRenderPost = () => {
   $('#submit').click(function () {
-    // Grab the value of the message upon click
+    // Grab the value of the message upon click and empty input box
     let $theNewMessage = $('#message').val();
+    $('#message').val('');
 
-    // Grab the value of the author box upon click
+    // Grab the value of the author box upon click and empty input box
     let $theNewAuthor = $('#name').val();
+    $('#name').val('');
 
     // defining the comments Template here, which will be used within postTemplate
     let commentsFormTemplate =
@@ -65,11 +67,17 @@ const renderCommentsWhenPostCommentButtonPressed = () => {
         .val();
       console.log($newComment);
 
+      // Reset the value of the message box
+      $(this).closest('.comments').find('.new-comment-text').val('');
+
       // Grab the value of the author box upon click
       let $commentAuthor = $(this)
         .closest('.comments')
         .find('.new-comment-author')
         .val();
+
+      // Reset the value of the author box
+      $(this).closest('.comments').find('.new-comment-author').val('');
 
       // blank comments shouldn't post anything
       if (!$commentAuthor || !$newComment) {
@@ -139,3 +147,5 @@ const listenForRemovePost = () => {
     $(this).closest('.post').remove();
   });
 };
+
+listenForSubmitAndRenderPost();
