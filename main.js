@@ -18,14 +18,15 @@ $postButton.click(function() {
   //append message to newly created userPost div
   $('.userPost').last().append('<div class="individualPostMessage" id="message' + userPostNumber +'">' + $userMessage + '</div>');
   
-  //add form that is hidden by default to newly created userPost div
-  //first setting up variables to make append jQuery more readable
-  var replyForm = '<form class="replyCommentForm form-inline hidden" onsubmit="event.preventDefault();">';
+  //add reply comment form that is hidden by default to newly created userPost div
+  //first setting up variables to make jQuery more readable for adding reply comment form
+  var replyForm = '<div class="replyComment hidden"><form class="replyCommentForm form-inline" onsubmit="event.preventDefault();">';
   var replyComment = '<input type="text" class="form-control mb-2 mr-sm-2" placeholder="Comment Text">'
   var replyUserName = '<input type="text" class="form-control"  placeholder="Username">'
   var postReplyCommentButton = '<button id="post" class="btn btn-primary">Post Comment</button>'
 
-  $('.userPost').last().append(replyForm + replyComment + replyUserName + postReplyCommentButton + '</form>');
+
+  $('.userPost').last().append(replyForm + replyComment + replyUserName + postReplyCommentButton + '</form></div>');
   
   //append name to newly created userPost div
   $('.userPost').last().append('<div class="individualPostName" id="name' + userPostNumber +'"> Posted By: <strong>' + $userName + '</strong></div>');
@@ -59,8 +60,17 @@ $postButton.click(function() {
     $(event.currentTarget).closest('hr').remove();
   });
 
+  //adding functionality to "comment" word in post to toggle comment reply form
+  $('.addComments').click(function(event) {
+    var $parentElement = $(event.currentTarget).closest('.individualPostMessage')
+    
+    $($parentElement).siblings('.replyComment').toggleClass('hidden');
+    //console.log($(event.currentTarget).parent('.replyCommentForm').toggle())
+  })
+
+ 
+
   //clearing form fields for next user input
   $('input').val('');
-
 });
 
