@@ -51,16 +51,18 @@ $('#post-button').click(function() {
     class: 'edit-link',
     text: '(Edit) ',
     click: function() {
-      var editMessage = $(event.target).siblings('.user-message').val();
-      var editName = $(event.target).siblings('.username').val();
+      var editMessage = $(event.target).siblings('.user-message').text();
+      var editName = $(event.target).siblings().find('.username').text();
+      console.log(`name value: ${editName}, message value: ${editMessage}`);
+
       var $editInput = $('<form/>',
         {
           class: 'form-inline edit-input',
           html: '<div class="form-group">' +
-            '<input type="text" class="form-control edit-message" value=' + editMessage + '>' +
+            '<input type="text" class="form-control edit-message" value="' + editMessage + '">' +
             '</div>  ' +
             '<div class="form-group">' +
-            '<input type="text" class="form-control edit-name" value=' + editName + '></input>' +
+            '<input type="text" class="form-control edit-name" value="' + editName + '"></input>' +
             '</div>  '
         });
       var $editInputButton = $('<button/>', {
@@ -87,7 +89,6 @@ $('#post-button').click(function() {
           console.log('else');
           $(event.target).closest('.post').find('hr').before($editInput);
         }
-
     },
   })
 
@@ -151,8 +152,8 @@ $('#post-button').click(function() {
   var $post = $('<article/>', {
     class: 'post',
     html: '<p class="user-message">' +
-      postMessage + '</p>' + '<p class="username">Posted By: <strong>' +
-      postName + '</strong></p><hr>'
+      postMessage + '</p>' + '<p>Posted By: <span class="username"><strong>' +
+      postName + '</strong></span></p><hr>'
   });
 
   //adding functional comment link and remove link to post
