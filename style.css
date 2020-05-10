@@ -2,13 +2,13 @@
   width: 50%;
   height: 17px;
   padding: 3px 6px;
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1;
 }
 
 #comment {
   padding: 3px 6px;
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1;
   display: inline-block;
 }

@@ -26,25 +26,20 @@ $('#submit').click(function () {
     '<button id="comment" class="btn btn-primary">' + 'Comment' + '</button>')
 }});
 
+//A (TODO: unique) comment section with commentorName and commentorMessage will need to be appended to each post
+$('.userPosts').on('click', '#comment', (function () {
+  var commentMessage = $('#commentMessage').val();
+  var commentName = $('#commentName').val();
+  if (commentMessage.length === 0 || commentName.length === 0) {
+    alert('You must enter your name and a message to post a comment.')
+  } else {
+  $('.postComments').append('<p>' + commentMessage + '</p>' + '<p>' + 'Posted By: ' + commentName + '</p>');
+}}));
+
+
 //A user should be able to remove the post
-$('.delete').click(function() {
-  $(this).closest('.userPosts').remove();
-});
-
-
-
-
-
-
-
-
-//A unique comment section with commentorName and commentorMessage will need to be appended to each post
-// $('#comment').click(function () {
-//   var commentMessage = $('#commentMessage').val();
-//   $('.userPosts').append('<p>' + commentMessage + '</p>');
+// $('.delete').click(function() {
+//   $(this).closest('.userPosts').remove();
 // });
-//
-// $('#comment').click(function () {
-//   var commentName = $('#commentName').val();
-//   $('.userPosts').append('<p>' + 'Posted By: ' + commentName + '</p>');
-// });
+
+//A user should be able to hide/show comments
