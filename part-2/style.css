@@ -4,8 +4,8 @@ ul {
   margin: 0;
 }
 
-.comments{
-  display: inline-block;
+p {
+    margin: 0;
 }
 
 #comment-section {
