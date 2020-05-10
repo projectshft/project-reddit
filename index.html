@@ -8,30 +8,37 @@
   </head>
   <body>
     <!-- this is the title -->
-    <div class="container">
+    <section class="container">
       <div class="page-header">
         <h1>Project Reddit</h1>
       </div>
-    </div>
+    </section>
 
     <!-- this is where comments are stored -->
 
-    <div class="container">
+    <section id="post-board" class="container">
 
-       <ul class="list-group" style="list-style: none">
-<!-- I need a place to store the comment section that will be toggled  -->
-       </ul>
+       <div class="list-group" style="list-style: none">
+         <!-- <div class="post-item comment-form">
+             <span class="remove special-word">remove</span>
+             <span class="comment special-word">comments</span>
+              <p></p>
+             <span>post</span>
 
-       <div class="post-controls">
-         <form class="form-inline">
-          <label class="sr-only" for="inlineFormInputName2">Comment Text</label>
-            <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Jane Doe">
-          <label class="sr-only" for="inlineFormInputGroupUsername2">User Name</label>
-            <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputGroupUsername2" placeholder="Username">
-          <button type="submit" class="btn btn-primary mb-2">Post Comment</button>
-       </form>
-      </div>
-    </div>
+             <div class="post-controls">
+               <form class="form-inline">
+                <label class="sr-only" for="inlineFormInputName2">Comment Text</label>
+                  <input type="text" class="mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Comment">
+                <label class="sr-only" for="inlineFormInputGroupUsername2">User Name</label>
+                  <input type="text" class="mb-2 mr-sm-2" id="inlineFormInputGroupUsername2" placeholder="User Name">
+                <button type="submit" class="btn btn-primary mb-2">Post Comment</button>
+             </form>
+            </div>
+
+             <p> Posted By <strong> name </strong></p>
+          </div>
+       </div> -->
+    </section>
 
     <!-- this is the add a new post section -->
 
@@ -50,10 +57,15 @@
           <input type="text" class="form-control" id="name-input" placeholder="Your Name"></input>
         </div>
         <div>
-          <button type="button" class="btn btn-primary">POST</button>
+          <button type="button" class="btn btn-primary" id="post-btn">POST</button>
         </div>
       </div>
     </form>
+
+
+
+    <!-- testing this out -->
+
 
 
 
