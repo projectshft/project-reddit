@@ -4,10 +4,10 @@ var userPostNumber = 0;
 $postButton.click(function() {
   //checking to ensure fields are entered not blank
   if ($('#name').val() === '' || $('#message').val() === '') {
-    return alert('Please enter a name & post text');
+    return alert('Please enter text into the "Post Text" & "Your Name" fields');
   };
   
-  //retrieving values of the form.
+  //retrieving values of the form
   var $userName = $('#name').val();
   var $userMessage = $('#message').val();
   //add a user count to make a unique post number for the class
@@ -39,7 +39,7 @@ $postButton.click(function() {
   
   //adding css to "comments" and "remove" words to indicate actions available for user
   $('.removeOption, .addComments').css({
-    'color': 'blue',
+    'color': '#45aeff',
     'cursor': 'pointer'
   });
 
@@ -56,7 +56,6 @@ $postButton.click(function() {
   */
   $('.removeOption').click(function(event) {
     $(event.currentTarget).closest('.userPost').remove();
-    $(event.currentTarget).closest('hr').remove();
   });
 
   //adding functionality to "comment" word in post to toggle comment reply form
@@ -71,19 +70,21 @@ $postButton.click(function() {
     //gathering input fields based on the "Post Comment" button that was clicked
     var $replyInput = $(event.currentTarget).siblings('.replyCommentDetails').val();
     var $replyUserName = $(event.currentTarget).siblings('.replyCommentUserName').val();
-
     //checking to see if form has a value in it and sending an error message to the user if one or both fields are empty
     if ($replyInput === '' || $replyUserName === '') {
       return alert('CANNOT POST AN EMPTY COMMENT; PLEASE ENTER NAME AND COMMENT');
     };
 
     //adding the user's reply comments to the post that the form was filled in from
-    $(event.currentTarget).closest('.replyComment').prepend(`<p>${$replyInput} Posted By: <strong>${$replyUserName}</strong></p>`);
+    $(event.currentTarget).closest('.replyComment').prepend(`<p class="individualReplyPost">${$replyInput} Posted By: <strong>${$replyUserName}</strong><span class="deleteSymbol glyphicon glyphicon-remove" role="button"></span></p>`);
 
+    //adding functionality to "X" button to delete user's reply comment
+    $('.glyphicon-remove').click(function(event) {
+      $(event.currentTarget).closest('.individualReplyPost').remove();
+    })
     //clearing input values for next input
     $('input').val('');
-
-  })
+  });
 
   //clearing form fields for next user input
   $('input').val('');
