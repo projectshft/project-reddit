@@ -1,16 +1,20 @@
-var button = $('button');
-var
+var postButton = $('button');
+//var commentButton = $('#comments')
 var allPosts = [];
 
 // On submitting the form, the user's post stacks
-$('button').on('click', function () {
+$(postButton).on('click', function () {
 
-  var userMessage = "<li>" + $('#message').val() + "</li>";
-  var userName = "<li>" + "Posted by: <strong> " + $('#name').val() + "</strong></li>";
-  var postComments = "<li><p onclick=>comments</p></li>"; // on same <li> as userMessage
-  var postRemove = null; // on same <li> as userMessage
+  var userMessage = '<li>' + $('#message').val() + '</li>'; // on same line as postComments, note closing tag
+  var userName = '<li>' + 'Posted by: <strong> ' + $('#name').val() + '</strong></li>';
 
-  var post = '<li><ul>' + userMessage + userName + '<hr>' + '<ul><li>';
+  var post = '<li><ul class="post">' + userMessage + userName + '<hr>' + '<ul><li>';
+
+  var postComments = $('<li><a data-target="#comments" data-toggle="collapse" id="comment-button">comments</a>').find('#comment-button').click(function() {alert('click');}).end();
+
+  $('.post').prepend(postComments);
+  //var commentSection = '<li class="collapse in" id="comments"><p>Dummy text.</p></li>';
 
   $('.post-list').prepend(post);
+
 });
