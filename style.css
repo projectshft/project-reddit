@@ -8,4 +8,6 @@ h1 {
   margin-top: 10%;
 }
 
-.form-inline {}
+.comment-section {
+  display: none;
+}
