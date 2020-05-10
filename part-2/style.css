@@ -4,6 +4,10 @@ ul {
   margin: 0;
 }
 
+.comments{
+  display: inline-block;
+}
+
 #comment-section {
   display: none;
 }
