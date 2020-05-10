@@ -44,6 +44,17 @@ $('#post-button').click(function() {
       // }
     });
 
+  //new link to allow for editing post
+  var $editLink = $('<a/>', {
+    type: 'button',
+    href: '#',
+    class: 'edit-link',
+    text: '(Edit) ',
+    // click: function() {
+    //   $(this).
+    // },
+  })
+
   //Creating comment form object to append functional post comment button to it
   var $commentForm = $('<form/>', {
     class: 'comment-form form-inline',
@@ -112,6 +123,8 @@ $('#post-button').click(function() {
   $post.prepend($commentsPageLink);
   $post.prepend(' | ');
   $post.prepend($commentLink);
+  $post.prepend(' | ');
+  $post.prepend($editLink);
   $post.prepend(' | ');
   $post.prepend($removeLink);
   $post.append($commentSection)
