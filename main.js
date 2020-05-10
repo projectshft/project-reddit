@@ -10,7 +10,8 @@ $('#submit').click(function () {
     alert('You must enter your name and a message to post.')
   } else {
     //Post the name and message to the website
-    $('.userPosts').append('<p>' + userMessageInput + '</p>' + '<p class="userName">' + 'Posted by: ' + userNameInput + '</p>');
+    // TODO: add a remove button
+    $('.userPosts').append('<p>' + userMessageInput + '</p>' + '<p class="userName">' + 'Posted by: ' + userNameInput + '</p>' + '<button class="delete">' + '&#10007' + '</button>');
     //push the userMessage, userName, and a comment area(to be filled later) into $userPosts
     $userPosts.push({
         message: userMessageInput,
@@ -23,10 +24,12 @@ $('#submit').click(function () {
     '<input id="commentMessage" type="text" class="form-control comment" placeholder="Comment">' + '</input>' +
     '<input id="commentName" type="text" class="form-control comment" placeholder="Name">' + '</input>' + '</div>' +
     '<button id="comment" class="btn btn-primary">' + 'Comment' + '</button>')
-
-    console.log($userPosts);
 }});
 
+//A user should be able to remove the post
+$('.delete').click(function() {
+  $(this).closest('.userPosts').remove();
+});
 
 
 
