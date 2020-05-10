@@ -78,7 +78,7 @@ $('#post-button').click(function() {
 
           $(this).closest('.post').find('.username').text(editedName);
           $(this).closest('.post').find('.user-message').text(editedMessage);
-
+          $(this).closest('.edit-input').remove();
         }
       });
 
