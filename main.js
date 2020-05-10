@@ -1,18 +1,14 @@
-
-
-////create a global object that keeps the posts, maybe
-//const posts = {};
-// const postTemplate = '<div class="post-container"><p class="post-content">Test</p><p class="post-author">Test</p></div>';
-
-//when the user clicks Post button.. 
-  //create a div for the entire post and child divs for the message. 
-  //add the post name and content to the object, maybe
+/* when the user clicks Post button.. 
+    create a div for the entire post and child elemnents for the comments link, 
+    remove post link and post content  */
 
 $('#submit').click(function() {
   const postContent = $('#message').val();
   const postAuthor = $('#name').val();
 
-  //the post will contain the author name and post content, and 2 links to either remove or add comments. Comment section will be part of the post template but hidden from view until the comments button is clicked
+  /* the post will contain the author name and post content, and 2 links to either 
+  remove or add comments. Comment section will be part of the post template but hidden
+  from view until the comments button is clicked (see style.css) */
   const postTemplate = 
   '<div class="post-container">' + 
     '<a class="comments-link links"><span>Comments</span></a>' +
@@ -27,25 +23,29 @@ $('#submit').click(function() {
       '</form></section>' + 
     '<p class="post-author">Posted by: <strong>' + postAuthor + '</strong></p></div>';  
 
-  //create a variable that will point to the post template created for each post click. (we need this to specify which post we are manipulating and adding click events to)
+  /* create a variable that will point to the post template created for each post 
+  click. (we need this for binding click events that are specific to the post) */
   const $postTemplate = $(postTemplate);
   
  
-   //if the remove link is clicked, the post will be removed from the page 
+  // if the remove link is clicked, the post will be removed from the page 
   $postTemplate.find('.remove-link').click(function() {
     $(this).parent().remove();
   });
 
-  //if the comments link is clicked, the comments, comment input fields and comment button will toggle (hide/show)
+  /* when the comments link is clicked, the comments, comment input fields and comment 
+  button will toggle (hide/show)  */
   $postTemplate.find('.comments-link').click(function() {
     $(this).nextAll('.comments-section').toggle();
   })
 
-  //the post will the child of the .posts div and above the form, each new post will be added below the prevoius post
+  /* the post template will be the child of the .posts div (see index.html), each new 
+  post will be added below the previous post */
   $('.posts').append($postTemplate);
 
 
-  //if the comments button is clicked the comments/commenter will be added under the post, with an "x" for comment deletion, comments listed top to bottom. 
+  /* when the comment button is clicked the comment/comment author will be added
+   under the post, with an "x" for comment deletion, comments listed top to bottom. */
   $postTemplate.find('.comment-button').click(function() {
     
     const commentContent = $(this).siblings('.comment-content').val();
@@ -58,7 +58,7 @@ $('#submit').click(function() {
       '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' +
     '</div>';
 
-    //add the comment template to the comments div
+    // add the comment template to the comments div
     const $commentTemplate = $(commentTemplate);
     $postTemplate.find('.comments-div').append($commentTemplate);
 
