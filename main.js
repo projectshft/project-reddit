@@ -32,6 +32,18 @@ $('#post-button').click(function() {
     }
   });
 
+  //create new link to navigate to what looks like a separate comments page
+  var $commentsPageLink = $('<a/>',
+    {
+      type: 'button',
+      href: '#',
+      class: 'comments-page-link',
+      text: ' (Go to Comments Page -->) ',
+      // click: function() {
+      //
+      // }
+    });
+
   //Creating comment form object to append functional post comment button to it
   var $commentForm = $('<form/>', {
     class: 'comment-form form-inline',
@@ -97,6 +109,8 @@ $('#post-button').click(function() {
   });
 
   //adding functional comment link and remove link to post
+  $post.prepend($commentsPageLink);
+  $post.prepend(' | ');
   $post.prepend($commentLink);
   $post.prepend(' | ');
   $post.prepend($removeLink);
