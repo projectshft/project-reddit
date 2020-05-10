@@ -50,9 +50,45 @@ $('#post-button').click(function() {
     href: '#',
     class: 'edit-link',
     text: '(Edit) ',
-    // click: function() {
-    //   $(this).
-    // },
+    click: function() {
+      var editMessage = $(event.target).siblings('.user-message').val();
+      var editName = $(event.target).siblings('.username').val();
+      var $editInput = $('<form/>',
+        {
+          class: 'form-inline edit-input',
+          html: '<div class="form-group">' +
+            '<input type="text" class="form-control edit-message" value=' + editMessage + '>' +
+            '</div>  ' +
+            '<div class="form-group">' +
+            '<input type="text" class="form-control edit-name" value=' + editName + '></input>' +
+            '</div>  '
+        });
+      var $editInputButton = $('<button/>', {
+        type: 'button',
+        class: 'btn btn-primary comment-button',
+        text: 'Submit',
+        // click: function() {
+        //   //find values of comment form input and add them to the comment section when post is clicked
+        //   var commentName = $(this).siblings().find('.comment-name').val();
+        //   var commentMessage = $(this).siblings().find('.comment-message').val();
+        //
+        //   //Creating object to hold comment data which the remove comment button can be appended to
+        //   var $comment = $('<p/>', {
+        //     class: 'comment',
+        //     html: commentMessage + ' | <em>Comment By: <strong>' + commentName + '</strong></em>'
+          });
+        $editInput.append($editInputButton);
+
+        //when edit is clicked, show edit form, when clicked again, remove form
+        if ($(event.target).siblings().hasClass('edit-input')) {
+          console.log('if');
+          $(event.target).siblings('.edit-input').remove();
+        } else {
+          console.log('else');
+          $(event.target).closest('.post').find('hr').before($editInput);
+        }
+
+    },
   })
 
   //Creating comment form object to append functional post comment button to it
