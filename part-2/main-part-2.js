@@ -11,7 +11,7 @@ $(postButton).on('click', function () {
   //
   var formForComments = '<form class="form-inline comments" style="display:none;"><input id="message" type="text" class="form-control" placeholder="Post Text"></input><input id="name" type="text" class="form-control" placeholder="Your Name"></input><button id="submit" class="btn btn-primary">Post Comment</button></form>';
 
-  var postHTML = $('#message').val() +  formForComments + 'Posted by: <strong> ' + $('#name').val() + '</strong><br><hr>';
+  var postHTML = $('#message').val() +  formForComments + '<p>Posted by: <strong> ' + $('#name').val() + '</strong><br><hr>';
 
   // I want this button to be bound to only its list item.
   // I can't let go of this test case!
@@ -20,6 +20,7 @@ $(postButton).on('click', function () {
         text: 'comment ',
         click: function () { $(".comments").toggle(); }
     });
+
 
     var post = $('<li><p id="comment-1">' + postHTML).find('#comment-1').prepend(postComments).end();
 
