@@ -1,6 +1,14 @@
 //Create array to maintain userPosts
 var $userPosts = []
 
+var show$userPostsAndComments = function() {
+  for (postIndex = 0; postIndex < $userPosts.length; postIndex++) {
+    for (commentIndex = 0; commentIndex < $userPosts.length; commentIndex++) {
+      $('.userPosts').find('.postComments').append('Posted by: ' + '#commentName' + '#commentMessage');
+    }
+  }
+}
+
 //A post including userMessage and userName will need to be submitted when the button is clicked
 $('#submit').click(function () {
   var userMessageInput = $('#postMessage').val();
@@ -34,6 +42,8 @@ $('.userPosts').on('click', '#comment', (function () {
     alert('You must enter your name and a message to post a comment.')
   } else {
   $('.postComments').append('<p>' + commentMessage + '</p>' + '<p>' + 'Posted By: ' + commentName + '</p>');
+  //push the commentName and commentMessage into $userPosts at the postIndex to match comment with post
+  // $userPosts[postIndex].push(commentMessage, commentName);
 }}));
 
 
