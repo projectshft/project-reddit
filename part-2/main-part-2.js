@@ -5,18 +5,24 @@ var allPosts = [];
 // On submitting the form, the user's post stacks
 $(postButton).on('click', function () {
 
-  var post = $('<li id="comment"></li>');
+  // This is where we would empty $(.post-list)
 
-var postHTML = $('#message').val() + '<br>Posted by: <strong> ' + $('#name').val() + '<strong><br><hr>';
+
+  // Getting user input into HTML format
+  var post = $('<ul><li id="comment"></li></ul>');
+
+  var postHTML = $('#message').val() + '<br>Posted by: <strong> ' + $('#name').val() + '<strong><br><hr>';
 
   $('#comment').html(postHTML);
 
-  var postComments = $('<li><a data-target="#comments" data-toggle="collapse" id="comment-button">comments</a>').find('#comment-button').click(function() {
+  // I want this button to be bound to only its list item.
+  var postComments = $('<a data-target="#comments" data-toggle="collapse" id="comment-button">comments </a>').find('#comment-button').click(function() {
     alert('click');
   }).end();
 
   $('#comment').prepend(postComments);
-
+  // This is where using allPosts might come in handy. We create a separate ID above using a for loop,
+  // and then prepend in a loop down here.
   $('.post-list').prepend(post);
 
 
