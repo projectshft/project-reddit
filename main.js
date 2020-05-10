@@ -32,6 +32,7 @@ $('#post-button').click(function() {
     }
   });
 
+/*
   //create new link to navigate to what looks like a separate comments page
   var $commentsPageLink = $('<a/>', {
     type: 'button',
@@ -42,6 +43,7 @@ $('#post-button').click(function() {
     //
     // }
   });
+  */
 
   //new link to allow for editing post
   var $editLink = $('<a/>', {
@@ -67,7 +69,7 @@ $('#post-button').click(function() {
       //button for submitting edited post
       var $editInputButton = $('<button/>', {
         type: 'button',
-        class: 'btn btn-primary comment-button',
+        class: 'btn btn-primary edit-button',
         text: 'Submit',
         click: function() {
           //find values of edit input form
@@ -76,7 +78,7 @@ $('#post-button').click(function() {
 
           $(this).closest('.post').find('.username').text(editedName);
           $(this).closest('.post').find('.user-message').text(editedMessage);
-          
+
         }
       });
 
@@ -86,7 +88,7 @@ $('#post-button').click(function() {
       if ($(this).siblings().hasClass('edit-input')) {
         $(this).siblings('.edit-input').remove();
       } else {
-        $(this).closest('.post').find('hr').before($editInput);
+        $(this).closest('.post').find('.posted-by').after($editInput);
       }
     }
   })
@@ -151,12 +153,12 @@ $('#post-button').click(function() {
   var $post = $('<article/>', {
     class: 'post',
     html: '<p class="user-message">' +
-      postMessage + '</p>' + '<p>Posted By: <span class="username">' +
+      postMessage + '</p>' + '<p class="posted-by">Posted By: <span class="username">' +
       postName + '</span></p><hr>'
   });
 
   //adding functional comment link and remove link to post
-  $post.prepend($commentsPageLink);
+  // $post.prepend($commentsPageLink);
   $post.prepend(' | ');
   $post.prepend($commentLink);
   $post.prepend(' | ');
