@@ -13,3 +13,7 @@
 .delete-comment-btn {
   display: inline;
 }
+
+.comments-container {
+  display: none;
+}
