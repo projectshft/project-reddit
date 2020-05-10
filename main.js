@@ -6,18 +6,17 @@ var $userPosts = [
 //A post userMessage will need to be submitted when the button is clicked
 $('#submit').click(function () {
   var userMessageInput = $('#postMessage').val();
-  if (userMessageInput.length === 0) {
-    alert('You must enter a message to post.')
-  } else {
-  $('.userPosts').append('<p>' + userMessageInput + '</p>');
-}});
-//A post userName will need to be submitted when the button is clicked
-$('#submit').click(function () {
   var userNameInput = $('#postName').val();
-  if (userNameInput.length === 0) {
-    alert('You must enter a name to post.')
+  //Edge cases for if userName or userMessage are empty
+  if (userMessageInput.length === 0 || userNameInput.length === 0) {
+    alert('You must enter your name and a message to post.')
   } else {
-  $('.userPosts').append('<p>' + 'Posted by: ' + userNameInput + '</p>');
+    //Post the name and message to the website
+    $('.userPosts').append('<p>' + userMessageInput + '</p>');
+    $('.userPosts').append('<p>' + 'Posted by: ' + userNameInput + '</p>');
+    //push the userMessage and userName into $userPosts
+    $userPosts.push(userMessageInput);
+    $userPosts.push(userNameInput);
 }});
 
 
