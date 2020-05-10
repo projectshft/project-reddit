@@ -1,0 +1,69 @@
+<!--
+
+
+__X__ Use Bootstrap (version 3 or 4 is fine)
+__?__ Write clean and pretty HTML, CSS and JavaScript
+__X__ Utilize patterns to organize your JavaScript if necessary
+__X__ Use jQuery
+_____ We now want users to be able to leave comments on each post.
+_____ When a user clicks 'comments' (above each post) it should toggle the comments and input box visible/hidden.
+_____ When a user clicks the 'x' next to a comment, it should delete it.
+_____ When a user fills out the two comment inputs and clicks 'Post Comment' it should immediately add the comment to the list of comments.
+_____ Lastly, when a user clicks 'remove' above a post, it should remove the post too.
+
+
+-->
+
+
+
+<html>
+
+<head>
+  <title>Forum</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@500&family=Open+Sans&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+  <section>
+    <article>
+  <div class="container">
+
+
+    <div class="page-header">
+
+      <h1><strong>Project Reddit</strong></h1>
+    </div>
+    <div>
+      <ul class="user-posts" style="list-style-type:none">
+      </ul>
+
+    </div>
+    <div class="chatbox">
+      <form style="margin-top:30px;" onsubmit="event.preventDefault();">
+        <h2><strong>Add a New Post</strong></h2>
+
+        <div class="form-group">
+          <textarea id="message" type="text" class="form-control" placeholder="Post Text"></textarea>
+        </div>
+
+        <div class="form-group">
+          <input id="name" type="text" class="form-control" placeholder="Name"></input>
+        </div>
+
+        <button id="submit" class="btn btn-primary">Post</button>
+      </form>
+    </div>
+  </div>
+
+  </div>
+  </section>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script type="text/javascript" src="main.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+body {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+
+ul {
+  padding-inline-start: 0px;
+}
+
+
+
+.message {
+
+}
+
+
+.container {
+  margin: center;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.chatbox {
+  width: 60%;
+  display: inline-block;
+}
+
+
+.page-header {
+  font-family: 'Kanit', sans-serif;
+  margin: auto;
+  padding-bottom: 20px;
+}
+
+
+.text-post {
+  width: 60%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
