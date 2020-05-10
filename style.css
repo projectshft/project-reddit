@@ -29,3 +29,7 @@ h4 {
 .btn-primary {
   background-color: #2874A6;
 }
+
+.username {
+  font-weight: bold;
+}

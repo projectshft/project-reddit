@@ -33,16 +33,15 @@ $('#post-button').click(function() {
   });
 
   //create new link to navigate to what looks like a separate comments page
-  var $commentsPageLink = $('<a/>',
-    {
-      type: 'button',
-      href: '#',
-      class: 'comments-page-link',
-      text: ' (Go to Comments Page -->) ',
-      // click: function() {
-      //
-      // }
-    });
+  var $commentsPageLink = $('<a/>', {
+    type: 'button',
+    href: '#',
+    class: 'comments-page-link',
+    text: ' (Go to Comments Page -->) ',
+    // click: function() {
+    //
+    // }
+  });
 
   //new link to allow for editing post
   var $editLink = $('<a/>', {
@@ -51,45 +50,45 @@ $('#post-button').click(function() {
     class: 'edit-link',
     text: '(Edit) ',
     click: function() {
-      var editMessage = $(event.target).siblings('.user-message').text();
-      var editName = $(event.target).siblings().find('.username').text();
-      console.log(`name value: ${editName}, message value: ${editMessage}`);
+      //values of original post
+      var originalMessage = $(this).siblings('.user-message').text();
+      var originalName = $(this).siblings().find('.username').text();
 
-      var $editInput = $('<form/>',
-        {
-          class: 'form-inline edit-input',
-          html: '<div class="form-group">' +
-            '<input type="text" class="form-control edit-message" value="' + editMessage + '">' +
-            '</div>  ' +
-            '<div class="form-group">' +
-            '<input type="text" class="form-control edit-name" value="' + editName + '"></input>' +
-            '</div>  '
-        });
+      var $editInput = $('<form/>', {
+        class: 'form-inline edit-input',
+        html: '<div class="form-group">' +
+          '<input type="text" class="form-control edit-message" value="' + originalMessage + '">' +
+          '</div>  ' +
+          '<div class="form-group">' +
+          '<input type="text" class="form-control edit-name" value="' + originalName + '"></input>' +
+          '</div>  '
+      });
+
+      //button for submitting edited post
       var $editInputButton = $('<button/>', {
         type: 'button',
         class: 'btn btn-primary comment-button',
         text: 'Submit',
-        // click: function() {
-        //   //find values of comment form input and add them to the comment section when post is clicked
-        //   var commentName = $(this).siblings().find('.comment-name').val();
-        //   var commentMessage = $(this).siblings().find('.comment-message').val();
-        //
-        //   //Creating object to hold comment data which the remove comment button can be appended to
-        //   var $comment = $('<p/>', {
-        //     class: 'comment',
-        //     html: commentMessage + ' | <em>Comment By: <strong>' + commentName + '</strong></em>'
-          });
-        $editInput.append($editInputButton);
+        click: function() {
+          //find values of edit input form
+          var editedName = $(this).siblings().find('.edit-name').val();
+          var editedMessage = $(this).siblings().find('.edit-message').val();
 
-        //when edit is clicked, show edit form, when clicked again, remove form
-        if ($(event.target).siblings().hasClass('edit-input')) {
-          console.log('if');
-          $(event.target).siblings('.edit-input').remove();
-        } else {
-          console.log('else');
-          $(event.target).closest('.post').find('hr').before($editInput);
+          $(this).closest('.post').find('.username').text(editedName);
+          $(this).closest('.post').find('.user-message').text(editedMessage);
+          
         }
-    },
+      });
+
+      $editInput.append($editInputButton);
+
+      //when edit is clicked, show edit form, when clicked again, remove form
+      if ($(this).siblings().hasClass('edit-input')) {
+        $(this).siblings('.edit-input').remove();
+      } else {
+        $(this).closest('.post').find('hr').before($editInput);
+      }
+    }
   })
 
   //Creating comment form object to append functional post comment button to it
@@ -152,8 +151,8 @@ $('#post-button').click(function() {
   var $post = $('<article/>', {
     class: 'post',
     html: '<p class="user-message">' +
-      postMessage + '</p>' + '<p>Posted By: <span class="username"><strong>' +
-      postName + '</strong></span></p><hr>'
+      postMessage + '</p>' + '<p>Posted By: <span class="username">' +
+      postName + '</span></p><hr>'
   });
 
   //adding functional comment link and remove link to post
