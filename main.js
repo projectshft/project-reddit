@@ -2,12 +2,18 @@
     create a div for the entire post and child elemnents for the comments link, 
     remove post link and post content  */
 
-$('#submit').click(function() {
+$('#submit').click(function(event) {
+
   const postContent = $('#message').val();
   const postAuthor = $('#name').val();
 
-  /* the post will contain the author name and post content, and 2 links to either 
-  remove or add comments. Comment section will be part of the post template but hidden
+  // this checks if the user has entered both their name and message in input fields
+  if (!postContent || !postAuthor) {
+    return;
+  }
+  
+  /* the post will contain the author name and post content, and 2 links to remove the
+  post and view comments. Comment section will be part of the post template but hidden
   from view until the comments button is clicked (see style.css) */
   const postTemplate = 
   '<div class="post-container">' + 
@@ -16,10 +22,10 @@ $('#submit').click(function() {
     '<p class="post-content">' + postContent + '</p>' + 
     '<section class="comments-section">' + 
       '<div class="comments-div"></div>' +
-      '<form class="form-class form-inline" style="margin-top:10px;" onsubmit="event.preventDefault();">' +
-        '<input type="text" class="form-control-sm comment-content" placeholder="Comment Text"></input>' + 
-        '<input type="text" class="form-control-sm comment-author" placeholder="User Name">' + 
-        '<button class="btn btn-primary comment-button">Post Comment</button>' +
+      '<form class="form-class form-inline" style="margin-top:10px" onsubmit="event.preventDefault();">' +
+        '<input type="text" class="form-control-sm comment-content" placeholder="Comment Text" required>' + 
+        '<input type="text" class="form-control-sm comment-author" placeholder="User Name" required>' + 
+        '<button type="submit" class="btn btn-primary comment-button">Post Comment</button>' +
       '</form></section>' + 
     '<p class="post-author">Posted by: <strong>' + postAuthor + '</strong></p></div>';  
 
@@ -46,10 +52,15 @@ $('#submit').click(function() {
 
   /* when the comment button is clicked the comment/comment author will be added
    under the post, with an "x" for comment deletion, comments listed top to bottom. */
-  $postTemplate.find('.comment-button').click(function() {
-    
+  $postTemplate.find('.comment-button').click(function(event) {
+
     const commentContent = $(this).siblings('.comment-content').val();
     const commentAuthor = $(this).siblings('.comment-author').val();
+
+    //this checks if the commenter has entered both their name and comment in input fields
+    if (!commentContent || !commentAuthor) {
+      return;
+    }
     
     const commentTemplate = 
     '<div class="comment-row">' +
@@ -67,11 +78,18 @@ $('#submit').click(function() {
       $(this).parent().remove();
     })
 
+    //this will stop the browser pop-ups for empty input fields
+    event.preventDefault();
+
     //clear the comment input fields after clicking Comment button
     $(this).siblings('.comment-content').val('');
     $(this).siblings('.comment-author').val('');
 
   })
+
+  //this will stop the browser pop-ups for empty input fields
+  event.preventDefault();
+
   //clear the post input fields after clicking Post button
   $('#message').val('');
   $('#name').val('');
