@@ -3,36 +3,34 @@ var $userPosts = []
 
 var show$userPostsAndComments = function() {
   for (postIndex = 0; postIndex < $userPosts.length; postIndex++) {
-    for (commentIndex = 0; commentIndex < $userPosts.length; commentIndex++) {
-      $('.userPosts').find('.postComments').append('Posted by: ' + '#commentName' + '#commentMessage');
+    //publish the post userName and userMessage to the html
+    // TODO: add a FUNCTIONAL remove button
+    $('.userPosts').append('<p>' + userMessageInput + '</p>' + '<p class="userName">' + 'Posted by: ' + userNameInput + '</p>'
+    + '<button class="delete">' + '&#10007' + '</button>');
     }
   }
-}
 
 //A post including userMessage and userName will need to be submitted when the button is clicked
-$('#submit').click(function () {
+//Edge cases for if userName or userMessage are empty will alert
+if ($('#postMessage').val() === 0 || $('#postName').val() === 0) {
+  alert('You must enter your name and a message to post.')
+} else {
+  //Save the name and message to the $userPosts array
   var userMessageInput = $('#postMessage').val();
   var userNameInput = $('#postName').val();
-  //Edge cases for if userName or userMessage are empty will alert
-  if (userMessageInput.length === 0 || userNameInput.length === 0) {
-    alert('You must enter your name and a message to post.')
-  } else {
-    //Post the name and message to the website
-    // TODO: add a remove button
-    $('.userPosts').append('<p>' + userMessageInput + '</p>' + '<p class="userName">' + 'Posted by: ' + userNameInput + '</p>' + '<button class="delete">' + '&#10007' + '</button>');
-    //push the userMessage, userName, and a comment area(to be filled later) into $userPosts
-    $userPosts.push({
-        message: userMessageInput,
-        name: userNameInput,
-        comments: []
-      })
-
+  //push the userMessage, userName, and a comment area(to be filled later) into $userPosts
+  $userPosts.push({
+    message: userMessageInput,
+    name: userNameInput,
+    comments: []
+  })
     //add a (TODO: UNIQUE) comment section for each post
-    $('.userName').append('<div class="postComments">' +
-    '<input id="commentMessage" type="text" class="form-control comment" placeholder="Comment">' + '</input>' +
-    '<input id="commentName" type="text" class="form-control comment" placeholder="Name">' + '</input>' + '</div>' +
-    '<button id="comment" class="btn btn-primary">' + 'Comment' + '</button>')
-}});
+    // $('.userName').append('<div class="postComments">' +
+    // '<input id="commentMessage" type="text" class="form-control comment" placeholder="Comment">' + '</input>' +
+    // '<input id="commentName" type="text" class="form-control comment" placeholder="Name">' + '</input>' + '</div>' +
+    // '<button id="comment" class="btn btn-primary">' + 'Comment' + '</button>')
+}
+show$userPostsAndComments();
 
 //A (TODO: unique) comment section with commentorName and commentorMessage will need to be appended to each post
 $('.userPosts').on('click', '#comment', (function () {
