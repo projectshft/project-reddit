@@ -13,10 +13,17 @@ $('#submit').click(function () {
   } else {
     //Post the name and message to the website
     $('.userPosts').append('<p>' + userMessageInput + '</p>');
-    $('.userPosts').append('<p>' + 'Posted by: ' + userNameInput + '</p>');
+    $('.userPosts').append('<p class="userName">' + 'Posted by: ' + userNameInput + '</p>');
     //push the userMessage and userName into $userPosts
     $userPosts.push(userMessageInput);
     $userPosts.push(userNameInput);
+
+    $('.userName').append('<div class="postComments">' +
+    '<input id="commentMessage" type="text" class="form-control comment" placeholder="Comment">' + '</input>' +
+    '<input id="commentName" type="text" class="form-control comment" placeholder="Name">' + '</input>' + '</div>' +
+    '<button id="comment" class="btn btn-primary">' + 'Comment' + '</button>')
+
+    console.log($userPosts);
 }});
 
 
