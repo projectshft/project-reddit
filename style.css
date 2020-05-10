@@ -16,4 +16,5 @@ h1 {
   opacity: inherit;
   background-color: #337bb7;
   color: #337bb7;
+  float: none;
 }
