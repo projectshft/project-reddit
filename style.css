@@ -11,3 +11,9 @@ h1 {
 .comment-section {
   display: none;
 }
+
+.close {
+  opacity: inherit;
+  background-color: #337bb7;
+  color: #337bb7;
+}
