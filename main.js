@@ -8,7 +8,7 @@ $('#submit').click(function () {
   } else {
     //Post the name and message to the website with a delete button and a comment section
     $('.userPosts').append('<p>' + userMessageInput + '</p>' +
-    '<p class="userName">' + 'Posted by: ' + userNameInput + '</p>' +
+    '<p class="userName">' + '<strong> Posted by: ' + userNameInput + '</strong> </p>' +
     '<button id="comment" class="btn btn-primary">' + 'Comment' + '</button>' +
     '<button id="delete-post" class="btn btn-primary">' + 'Delete' + '</button>' +
     '<input id="commentMessage" type="text" class="form-control comment" placeholder="Comment">' + '</input>' +
@@ -24,7 +24,7 @@ $('.userPosts').on('click', '#comment', (function () {
     alert('You must enter your name and a message to post a comment.')
   } else {
   $(this).parent().append('<p>' + commentMessage + '</p>' +
-  '<p>' + 'Posted By: ' + commentName + '</p>' +
+  '<p>' + '<strong> Posted By: ' + commentName + '</strong> </p>' +
   '<button id="toggle-comments" class="btn btn-primary">' + 'Toggle Comments' + '</button>' +
   '<button id="delete-comment" class="btn btn-primary">' + 'Delete comment' + '</button>');
 }}));
