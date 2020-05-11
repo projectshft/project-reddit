@@ -7,8 +7,7 @@ $('#submit').click(function () {
     alert('You must enter your name and a message to post.')
   } else {
     //Post the name and message to the website with a delete button and a comment section
-    $('.userPosts').append('<p>' + userMessageInput + '</p>' +
-    '<p class="userName">' + '<strong> Posted by: ' + userNameInput + '</strong> </p>' +
+    $('.userPosts').append('<p>' + userMessageInput + '<strong> | Posted by: ' + userNameInput + '</strong> </p>' +
     '<button id="comment" class="btn btn-primary">' + 'Comment' + '</button>' +
     '<button id="delete-post" class="btn btn-primary">' + 'Delete' + '</button>' +
     '<input id="commentMessage" type="text" class="form-control comment" placeholder="Comment">' + '</input>' +
@@ -23,8 +22,7 @@ $('.userPosts').on('click', '#comment', (function () {
   if (commentMessage.length === 0 || commentName.length === 0) {
     alert('You must enter your name and a message to post a comment.')
   } else {
-  $(this).parent().append('<p>' + commentMessage + '</p>' +
-  '<p>' + '<strong> Posted By: ' + commentName + '</strong> </p>' +
+  $(this).parent().append('<p>' + commentMessage + '<strong> | Posted By: ' + commentName + '</strong> </p>' +
   '<button id="toggle-comments" class="btn btn-primary">' + 'Toggle Comments' + '</button>' +
   '<button id="delete-comment" class="btn btn-primary">' + 'Delete comment' + '</button>');
 }}));
@@ -37,7 +35,7 @@ $('#delete-post').on('click', function () {
 
 //toggle comment section
 $('#toggle-comments').on('click', function () {
-  $(this).parent().toggle();
+  $(this).toggle(display);
 });
 
 //delete comment
