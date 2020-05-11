@@ -12,7 +12,7 @@ $('#post-button').click(function() {
     class: 'remove-link',
     text: '(Remove) ',
     click: function() {
-      $(this).parent().remove();
+      $(this).closest('.post').remove();
     },
   })
 
@@ -23,8 +23,8 @@ $('#post-button').click(function() {
     class: 'comment-link',
     text: ' (Show Comments) ',
     click: function() {
-      $(this).siblings('.comment-section').toggleClass('hide');
-      if ($(this).siblings('.comment-section').hasClass('hide')) {
+      $(this).closest('.post').find('.comment-section').toggleClass('hide');
+      if ($(this).closest('.post').find('.comment-section').hasClass('hide')) {
         $(this).text(' (Show Comments) ');
       } else {
         $(this).text(' (Hide Comments) ');
@@ -32,18 +32,55 @@ $('#post-button').click(function() {
     }
   });
 
-/*
   //create new link to navigate to what looks like a separate comments page
   var $commentsPageLink = $('<a/>', {
     type: 'button',
     href: '#',
     class: 'comments-page-link',
     text: ' (Go to Comments Page -->) ',
-    // click: function() {
-    //
-    // }
+    click: function() {
+
+      //hide everything but header
+      $('main').addClass('hide-all');
+
+      //if comments are toggled closed, open them
+      if ($(this).closest('.post').find('.comment-section').hasClass('hide')) {
+        $(this).closest('.post').find('.comment-section').removeClass('hide');
+        $(this).closest('.post').find('.comment-link').text('Hide Comments')
+      }
+
+      //hide the other links on post
+      $(this).closest('.post').find('.post-links').addClass('hide-all');
+
+      //turn inline comment form into full form
+      $(this).closest('.post').find('.comment-form').removeClass('form-inline');
+
+      var originalPost = $(this).closest('.post')
+
+      //back button will make main content reappear, and undo other temporary changes
+      var $backButton = $('<a/>', {
+        class: 'back-button',
+        href: '#',
+        type: 'button',
+        text: 'Back',
+        click: function() {
+          $(originalPost).append(postClone);
+          $('main').removeClass('hide-all');
+          $(originalPost).find('.post-links').removeClass('hide-all');
+          $(originalPost).find('.comment-form').addClass('form-inline');
+          $(this).remove();
+        }
+
+      });
+
+      $(originalPost).prepend($backButton);
+
+      var postCloneThatIsNotActuallyACloneBecauseItIsPassingByReference = originalPost.contents();
+
+      $('main').after(postCloneThatIsNotActuallyACloneBecauseItIsPassingByReference);
+
+    }
   });
-  */
 
   //new link to allow for editing post
   var $editLink = $('<a/>', {
@@ -53,9 +90,10 @@ $('#post-button').click(function() {
     text: '(Edit) ',
     click: function() {
       //values of original post
-      var originalMessage = $(this).siblings('.user-message').text();
-      var originalName = $(this).siblings().find('.username').text();
+      var originalMessage = $(this).closest('.post').find('.user-message').text();
+      var originalName = $(this).closest('.post').find('.username').text();
 
+      //creating form for user to edit post
       var $editInput = $('<form/>', {
         class: 'form-inline edit-input',
         html: '<div class="form-group">' +
@@ -76,6 +114,7 @@ $('#post-button').click(function() {
           var editedName = $(this).siblings().find('.edit-name').val();
           var editedMessage = $(this).siblings().find('.edit-message').val();
 
+          //apply edits
           $(this).closest('.post').find('.username').text(editedName);
           $(this).closest('.post').find('.user-message').text(editedMessage);
           $(this).closest('.edit-input').remove();
@@ -157,15 +196,22 @@ $('#post-button').click(function() {
       postName + '</span></p><hr>'
   });
 
-  //adding functional comment link and remove link to post
-  // $post.prepend($commentsPageLink);
-  $post.prepend(' | ');
-  $post.prepend($commentLink);
-  $post.prepend(' | ');
-  $post.prepend($editLink);
-  $post.prepend(' | ');
-  $post.prepend($removeLink);
-  $post.append($commentSection)
+  var $postLinks = $('<p/>', {
+    class: "post-links"
+  });
+
+  //adding functional links to container with formatting
+  $postLinks.append($removeLink);
+  $postLinks.append(' | ');
+  $postLinks.append($editLink);
+  $postLinks.append(' | ');
+  $postLinks.append($commentLink);
+  $postLinks.append(' | ');
+  $postLinks.append($commentsPageLink);
+
+  //adding links and comment section to post
+  $post.prepend($postLinks);
+  $post.append($commentSection);
 
   //adding post to posts section
   $('#posts').append($post);
