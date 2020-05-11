@@ -6,27 +6,41 @@ $('#submit').click(function () {
   if (userMessageInput.length === 0 || userNameInput.length === 0) {
     alert('You must enter your name and a message to post.')
   } else {
-    //Post the name and message to the website
-    // TODO: add a remove button
+    //Post the name and message to the website with a delete button and a comment section
     $('.userPosts').append('<p>' + userMessageInput + '</p>' +
     '<p class="userName">' + 'Posted by: ' + userNameInput + '</p>' +
-    '<button class="delete">' + '&#10007' + '</button>');
-
-    //add a (TODO: UNIQUE) comment section for each post
-    $('.userName').append('<div class="postComments">' +
+    '<button id="comment" class="btn btn-primary">' + 'Comment' + '</button>' +
+    '<button id="delete-post" class="btn btn-primary">' + 'Delete' + '</button>' +
     '<input id="commentMessage" type="text" class="form-control comment" placeholder="Comment">' + '</input>' +
-    '<input id="commentName" type="text" class="form-control comment" placeholder="Name">' + '</input>' + '</div>' +
-    '<button id="comment" class="btn btn-primary">' + 'Comment' + '</button>')
-}});
+    '<input id="commentName" type="text" class="form-control comment" placeholder="Name">' + '</input>')
+  }});
 
-//A (TODO: unique) comment section with commentorName and commentorMessage will need to be appended to each post
+
+//A comment section with commentorName and commentorMessage will need to be appended to each post
 $('.userPosts').on('click', '#comment', (function () {
   var commentMessage = $('#commentMessage').val();
   var commentName = $('#commentName').val();
   if (commentMessage.length === 0 || commentName.length === 0) {
     alert('You must enter your name and a message to post a comment.')
   } else {
-  $('.postComments').append('<p>' + commentMessage + '</p>'
-  + '<p>' + 'Posted By: ' + commentName + '</p>');
-  //push the commentName and commentMessage into $userPosts at the postIndex to match comment with post
+  $(this).parent().append('<p>' + commentMessage + '</p>' +
+  '<p>' + 'Posted By: ' + commentName + '</p>' +
+  '<button id="toggle-comments" class="btn btn-primary">' + 'Toggle Comments' + '</button>' +
+  '<button id="delete-comment" class="btn btn-primary">' + 'Delete comment' + '</button>');
 }}));
+
+
+//Remove a post
+$('#delete-post').on('click', function () {
+  $(this).userPosts().remove();
+});
+
+//toggle comment section
+$('#toggle-comments').on('click', function () {
+  $(this).next().toggle();
+});
+
+//delete comment
+$('#delete-comment').on('click', function () {
+  $(this).userPosts().remove();
+});

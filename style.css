@@ -6,7 +6,7 @@
   line-height: 1;
 }
 
-#comment {
+#comment, #delete-post, #delete-comment, #toggle-comments {
   padding: 3px 6px;
   font-size: 12px;
   line-height: 1;
