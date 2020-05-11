@@ -37,7 +37,7 @@ $('#post-button').click(function() {
     type: 'button',
     href: '#',
     class: 'comments-page-link',
-    text: ' (Go to Comments Page -->) ',
+    text: ' (Go to Comments Page) ',
     click: function() {
 
       //hide everything but header
@@ -64,7 +64,7 @@ $('#post-button').click(function() {
         type: 'button',
         text: 'Back',
         click: function() {
-          $(originalPost).append(postClone);
+          $(originalPost).append(postCloneThatIsNotActuallyAClone);
           $('main').removeClass('hide-all');
           $(originalPost).find('.post-links').removeClass('hide-all');
           $(originalPost).find('.comment-form').addClass('form-inline');
@@ -75,9 +75,9 @@ $('#post-button').click(function() {
 
       $(originalPost).prepend($backButton);
 
-      var postCloneThatIsNotActuallyACloneBecauseItIsPassingByReference = originalPost.contents();
+      var postCloneThatIsNotActuallyAClone = originalPost.contents();
 
-      $('main').after(postCloneThatIsNotActuallyACloneBecauseItIsPassingByReference);
+      $('main').after(postCloneThatIsNotActuallyAClone);
 
     }
   });
@@ -130,7 +130,7 @@ $('#post-button').click(function() {
         $(this).closest('.post').find('.posted-by').after($editInput);
       }
     }
-  })
+  });
 
   //Creating comment form object to append functional post comment button to it
   var $commentForm = $('<form/>', {
