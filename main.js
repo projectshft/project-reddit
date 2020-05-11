@@ -32,15 +32,15 @@ $('.userPosts').on('click', '#comment', (function () {
 
 //Remove a post
 $('#delete-post').on('click', function () {
-  $(this).userPosts().remove();
+  $(this).parent().remove();
 });
 
 //toggle comment section
 $('#toggle-comments').on('click', function () {
-  $(this).next().toggle();
+  $(this).parent().toggle();
 });
 
 //delete comment
 $('#delete-comment').on('click', function () {
-  $(this).userPosts().remove();
+  $(this).parent().remove();
 });
