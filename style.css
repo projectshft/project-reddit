@@ -8,7 +8,9 @@ ul {
   padding-inline-start: 0px;
 }
 
-
+h1 {
+  font-size: 48px;
+}
 
 .message {
 
@@ -28,8 +30,14 @@ ul {
 }
 
 
+.button-editPost {
+  padding: 0px;
+
+}
+
+
 .page-header {
-  font-family: 'Kanit', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   margin: auto;
   padding-bottom: 20px;
 }
