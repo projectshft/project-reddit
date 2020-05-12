@@ -88,14 +88,14 @@ $('#submit').click(function() {
         });
 
       } else {
-        alert('please add comment and name')
+        alert('Please fill out comment and name fields to add comment')
       }
 
 
     });
 
   } else {
-    alert('please add post and name')
+    alert('Please fill out post and name fields to add post')
   };
 
 
