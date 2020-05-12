@@ -1,13 +1,3 @@
-$('h2').css({
-  'font-weight': 'bold',
-  'text-align': 'center'
-});
-
-// creating a list in the posts section for the posts submitted
-$('.posts').append("<ul class='post-list'></ul>");
-
-
-
 // creating a vairable to hold comment section div
 var userComments =
   "<form class='comment-submit-form row' style='margin-top:10px;' onsubmit='event.preventDefault();'>" +
