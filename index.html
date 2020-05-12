@@ -10,8 +10,10 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.js"></script>
-  <script id="post-template" type="text/x-handlebars-template" <div class="individual-post">
-    <p>{{text}}</p>
+  <script id="post-template" type="text/x-handlebars-template">
+    <div class="individual-post">
+      <p><a id="remove" href="#">remove</a> <a id="comments" href="#">comments</a></p>
+      <p>{{text}}</p>
       <div class="comment-section">
       </div>
       <p>Posted By: <strong>{{author}}</strong></p>
@@ -28,33 +30,35 @@
 
 <body>
   <div class="row">
-    <div class="col-lg-3 col-md-2 col-xs-1"></div>
-    <div class="col-lg-6 col-md-8 col-xs-10">
+    <div class="col-lg-4 col-md-3 col-sm-3 col-xs-1"></div>
+    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-10">
       <h1>Project Reddit</h1>
       <div id="post-section">
+        <!-- STRUCTURE OF HANDLEBARS HTML
         <div class="individual-post">
+          <p><a id="remove" href="#">remove</a> <a id="comments" href="#">comments</a></p>
           <p>{{text}}</p>
-          <div class="comment-section">
-            <div class="comment">
+          <div class="comment-group">
+            <div class="comment-section">
               <p>{{commentText}} By: <strong>{{commentAuthor}}</strong><button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button></p>
             </div>
-            <form class="form-inline">
-              <input type="email" class="form-control form-group" id="exampleInputEmail3" placeholder="Email">
-              <input type="password" class="form-control form-group" id="exampleInputPassword3" placeholder="Password">
-              <button type="submit" class="btn btn-default">Sign in</button>
+            <form class="form-inline form-group">
+              <input type="text" class="form-control form-group" id="commentText" placeholder="Comment Text">
+              <input type="text" class="form-control form-group" id="commentUser" placeholder="User Name">
+              <button type="button" class="btn btn-primary">Post Comment</button>
             </form>
           </div>
           <p>Posted By: <strong>{{author}}</strong></p>
-        </div>
+        </div> -->
       </div>
       <h3>Add a New Post </h3>
       <form id="post-form">
         <input type="text" class="form-control form-group" id="postText" placeholder="Post Text">
-        <input type="user" class="form-control form-group" id="postUser" placeholder="Your Name">
+        <input type="text" class="form-control form-group" id="postUser" placeholder="Your Name">
         <button type="button" class="btn btn-primary">Post</button>
       </form>
     </div>
-    <div class="col-lg-3 col-md-4 col-xs-1"></div>
+    <div class="col-lg-4 col-md-3 col-sm-3 col-xs-1"></div>
   </div>
   <script src="main.js"></script>
 </body>
