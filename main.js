@@ -6,7 +6,6 @@ var posts = [];
 
 //take user input, store it in object, and push into post array
 var createPost = function() {
-  console.log($('#name').val());
   var postName = $('#name').val();
   var postMessage = $('#message').val();
   var post = { name: postName, text: postMessage, comments: [] };
@@ -15,8 +14,39 @@ var createPost = function() {
 
 //iterate through posts array and append html with data from each post
 var renderPost = function() {
+  //clear current content from posts div
+  $('#posts').empty();
 
-}
+  //get data from posts array and append it to #posts html
+  posts.forEach(function(post) {
+    //values for post name and message
+    var username = post.name;
+    var postText = post.text;
+
+    //formatting post html
+    var $post = $('<article/>', {
+      class: 'post',
+      html: '<p class="user-message">' +
+        postText + '</p>' + '<p class="posted-by">Posted By: <span class="username">' +
+        username + '</span></p><hr>'
+    });
+
+    //element for links
+    var $postLinks = $('<p/>', {
+      class: "post-links",
+      html: '<a href="#" class="remove-link" type="button"> (Remove) </a> ' +
+        '<a href="#" class="comment-link" type="button"> (Show Comments) </a>'
+    });
+
+    //adding links and comment section to post
+    $post.prepend($postLinks);
+    // $post.append($commentSection);
+
+    //adding post to posts section
+    $('#posts').append($post);
+
+  })
+};
 
 
 
@@ -39,21 +69,15 @@ var toggleComments = function() {
   }
 };
 
-//click events for links
+//click events for links and buttons
 $('#posts').on('click', '.remove-link', removePost);
 $('#posts').on('click', '.comment-link', toggleComments);
 
 $('#post-button').click(createPost);
-
+$('#post-button').click(renderPost);
 
 //Creating post element when post button is clicked
 $('#post-button').click(function() {
-  //
-  var postName = $('#name').val();
-
-  var postMessage = $('#message').val();
-
-
 
   //Creating comment form object to append functional post comment button to it
   var $commentForm = $('<form/>', {
@@ -110,33 +134,6 @@ $('#post-button').click(function() {
   $commentSection.append($commentForm);
   $commentSection.append('<hr>');
 
-  //Creating object for post in order to append the remove and comment links to it before adding to DOM
-  var $post = $('<article/>', {
-    class: 'post',
-    html: '<p class="user-message">' +
-      postMessage + '</p>' + '<p class="posted-by">Posted By: <span class="username">' +
-      postName + '</span></p><hr>'
-  });
 
-  //element for links
-  var $postLinks = $('<p/>', {
-    class: "post-links",
-    html: '<a href="#" class="remove-link" type="button"> (Remove) </a> ' +
-      '<a href="#" class="comment-link" type="button"> (Show Comments) </a>'
-  });
-
-
-
-
-
-
-
-
-  //adding links and comment section to post
-  $post.prepend($postLinks);
-  $post.append($commentSection);
-
-  //adding post to posts section
-  $('#posts').append($post);
 
 });
