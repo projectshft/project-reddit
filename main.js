@@ -23,111 +23,12 @@ $('#post-button').click(function() {
     class: 'comment-link',
     text: ' (Show Comments) ',
     click: function() {
-      $(this).closest('.post').find('.comment-section').toggleClass('hide');
-      if ($(this).closest('.post').find('.comment-section').hasClass('hide')) {
+      var currentPostComments = $(this).closest('.post').find('.comment-section');
+      currentPostComments.toggleClass('hide');
+      if (currentPostComments.hasClass('hide')) {
         $(this).text(' (Show Comments) ');
       } else {
         $(this).text(' (Hide Comments) ');
-      }
-    }
-  });
-
-  //create new link to navigate to what looks like a separate comments page
-  var $commentsPageLink = $('<a/>', {
-    type: 'button',
-    href: '#',
-    class: 'comments-page-link',
-    text: ' (Go to Comments Page) ',
-    click: function() {
-
-      //hide everything but header
-      $('main').addClass('hide-all');
-
-      //if comments are toggled closed, open them
-      if ($(this).closest('.post').find('.comment-section').hasClass('hide')) {
-        $(this).closest('.post').find('.comment-section').removeClass('hide');
-        $(this).closest('.post').find('.comment-link').text('Hide Comments')
-      }
-
-      //hide the other links on post
-      $(this).closest('.post').find('.post-links').addClass('hide-all');
-
-      //turn inline comment form into full form
-      $(this).closest('.post').find('.comment-form').removeClass('form-inline');
-
-      var originalPost = $(this).closest('.post')
-
-      //back button will make main content reappear, and undo other temporary changes
-      var $backButton = $('<a/>', {
-        class: 'back-button',
-        href: '#',
-        type: 'button',
-        text: 'Back',
-        click: function() {
-          $(originalPost).append(postCloneThatIsNotActuallyAClone);
-          $('main').removeClass('hide-all');
-          $(originalPost).find('.post-links').removeClass('hide-all');
-          $(originalPost).find('.comment-form').addClass('form-inline');
-          $(this).remove();
-        }
-
-      });
-
-      $(originalPost).prepend($backButton);
-
-      var postCloneThatIsNotActuallyAClone = originalPost.contents();
-
-      $('main').after(postCloneThatIsNotActuallyAClone);
-
-    }
-  });
-
-  //new link to allow for editing post
-  var $editLink = $('<a/>', {
-    type: 'button',
-    href: '#',
-    class: 'edit-link',
-    text: '(Edit) ',
-    click: function() {
-      //values of original post
-      var originalMessage = $(this).closest('.post').find('.user-message').text();
-      var originalName = $(this).closest('.post').find('.username').text();
-
-      //creating form for user to edit post
-      var $editInput = $('<form/>', {
-        class: 'form-inline edit-input',
-        html: '<div class="form-group">' +
-          '<input type="text" class="form-control edit-message" value="' + originalMessage + '">' +
-          '</div>  ' +
-          '<div class="form-group">' +
-          '<input type="text" class="form-control edit-name" value="' + originalName + '"></input>' +
-          '</div>  '
-      });
-
-      //button for submitting edited post
-      var $editInputButton = $('<button/>', {
-        type: 'button',
-        class: 'btn btn-primary edit-button',
-        text: 'Submit',
-        click: function() {
-          //find values of edit input form
-          var editedName = $(this).siblings().find('.edit-name').val();
-          var editedMessage = $(this).siblings().find('.edit-message').val();
-
-          //apply edits
-          $(this).closest('.post').find('.username').text(editedName);
-          $(this).closest('.post').find('.user-message').text(editedMessage);
-          $(this).closest('.edit-input').remove();
-        }
-      });
-
-      $editInput.append($editInputButton);
-
-      //when edit is clicked, show edit form, when clicked again, remove form
-      if ($(this).siblings().hasClass('edit-input')) {
-        $(this).siblings('.edit-input').remove();
-      } else {
-        $(this).closest('.post').find('.posted-by').after($editInput);
       }
     }
   });
@@ -203,11 +104,8 @@ $('#post-button').click(function() {
   //adding functional links to container with formatting
   $postLinks.append($removeLink);
   $postLinks.append(' | ');
-  $postLinks.append($editLink);
-  $postLinks.append(' | ');
   $postLinks.append($commentLink);
-  $postLinks.append(' | ');
-  $postLinks.append($commentsPageLink);
+
 
   //adding links and comment section to post
   $post.prepend($postLinks);
