@@ -1,8 +1,6 @@
 var posts = [];
-//
 
-//
-// var renderPost;
+//functions for events
 
 //take user input, store it in object, and push into post array
 var createPost = function() {
@@ -15,12 +13,13 @@ var createPost = function() {
   posts.push(post);
 };
 
-//iterate through posts array and append html with data from each post
+//append html with data from each post in posts array !NEED TO ADD COMMENTS
 var renderPost = function() {
+  createPost();
   //clear current content from posts div
   $('#posts').empty();
 
-  //get data from posts array and append it to #posts html
+  //iterate through posts and append them to page with html formatting
   posts.forEach(function(post) {
     //values for post name and message
     var username = post.name;
@@ -41,9 +40,34 @@ var renderPost = function() {
         '<a href="#" class="comment-link" type="button"> (Show Comments) </a>'
     });
 
+    //hidden section to hold comments
+    var $commentSection = $('<section/>', {
+      class: 'comment-section hide',
+      html: '<section class="comments-container"><h4>Comments:</h4></section><hr>'
+    });
+
+    //Create comment section object in order to be able to append comment form to it
+    var $commentSection = $('<section/>', {
+      class: 'comment-section hide'
+    });
+
+    //form to submit comments on post
+    var $commentForm = $('<form/>', {
+      class: 'comment-form form-inline',
+      html: '<div class="form-group">' +
+        '<input type="text" class="form-control comment-message" placeholder="Add New Comment" required>' +
+        '</div>  ' +
+        '<div class="form-group">' +
+        '<input type="text" class="form-control comment-name" placeholder="Your Name" required>' +
+        '</div>  ' +
+        '<button class="btn btn-primary comment-button" type="button">Post Comment</button>'
+    });
+
+    $commentSection.append($commentForm);
+
     //adding links and comment section to post
     $post.prepend($postLinks);
-    // $post.append($commentSection);
+    $post.append($commentSection);
 
     //adding post to posts section
     $('#posts').append($post);
@@ -51,9 +75,7 @@ var renderPost = function() {
   })
 };
 
-
-
-//functions for events
+//remove targeted post from page and posts array !FIX REMOVING FROM ARRAY
 var removePost = function() {
   console.log(posts);
   currentPost = $(this).closest('.post');
@@ -64,10 +86,12 @@ var removePost = function() {
   console.log(posts);
 };
 
+//remove targeted comment from page !NEED TO REMOVE FROM ARRAY
 var removeComment = function() {
   $(this).closest('.comment').remove()
 };
 
+//show/hide comments section
 var toggleComments = function() {
   var currentPostComments = $(this).closest('.post').find('.comment-section');
   currentPostComments.toggleClass('hide');
@@ -78,27 +102,24 @@ var toggleComments = function() {
   }
 };
 
+// var createComment = function() {
+//   //values of comment text and username
+//   var commentText = $(this).
+// };
+
+
+
 //click events for links and buttons
 $('#posts').on('click', '.remove-link', removePost);
 $('#posts').on('click', '.comment-link', toggleComments);
 
-$('#post-button').click(createPost);
+// $('#post-button').click(createPost);
 $('#post-button').click(renderPost);
 
 //Creating post element when post button is clicked
 $('#post-button').click(function() {
 
-  //Creating comment form object to append functional post comment button to it
-  var $commentForm = $('<form/>', {
-    class: 'comment-form form-inline',
-    html: '<div class="form-group">' +
-      '<input type="text" class="form-control comment-message" placeholder="Add New Comment" required>' +
-      '</div>  ' +
-      '<div class="form-group">' +
-      '<input type="text" class="form-control comment-name" placeholder="Your Name" required>' +
-      '</div>  ' +
-      '<button'
-  });
+
 
   //Create object for comment button in order to attach click handler to it
   var $commentButton = $('<button/>', {
@@ -131,17 +152,7 @@ $('#post-button').click(function() {
     }
   });
 
-  //Attach comment button to comment form
-  $commentForm.append($commentButton);
 
-  //Create comment section object in order to be able to append comment form to it
-  var $commentSection = $('<section/>', {
-    class: 'comment-section hide'
-  });
-
-  $commentSection.append('<section class="comments-container"><h4>Comments:</h4></section><hr>')
-  $commentSection.append($commentForm);
-  $commentSection.append('<hr>');
 
 
 
