@@ -1,3 +1,36 @@
+// var messageBoard = [];
+//
+// var createPost;
+//
+// var renderPost;
+
+
+//functions for events
+var removePost = function() {
+  $(this).closest('.post').remove();
+};
+
+var removeComment = function() {
+  $(this).closest('.comment').remove()
+};
+
+var toggleComments = function() {
+  var currentPostComments = $(this).closest('.post').find('.comment-section');
+  currentPostComments.toggleClass('hide');
+  if (currentPostComments.hasClass('hide')) {
+    $(this).text(' (Show Comments) ');
+  } else {
+    $(this).text(' (Hide Comments) ');
+  }
+};
+
+//click events for links
+$('#posts').on('click', '.remove-link', removePost);
+$('#posts').on('click', '.comment-link', toggleComments);
+
+
+
+
 //Creating post element when post button is clicked
 $('#post-button').click(function() {
 
@@ -5,33 +38,7 @@ $('#post-button').click(function() {
 
   var postMessage = $('#message').val();
 
-  //Using jquery object to hold data for remove link in order to bind click event to it
-  var $removeLink = $('<a/>', {
-    type: 'button',
-    href: '#',
-    class: 'remove-link',
-    text: '(Remove) ',
-    click: function() {
-      $(this).closest('.post').remove();
-    },
-  })
 
-  //Using jquery object to hold data for comment link in order to bind click event to it
-  var $commentLink = $('<a/>', {
-    type: 'button',
-    href: '#',
-    class: 'comment-link',
-    text: ' (Show Comments) ',
-    click: function() {
-      var currentPostComments = $(this).closest('.post').find('.comment-section');
-      currentPostComments.toggleClass('hide');
-      if (currentPostComments.hasClass('hide')) {
-        $(this).text(' (Show Comments) ');
-      } else {
-        $(this).text(' (Hide Comments) ');
-      }
-    }
-  });
 
   //Creating comment form object to append functional post comment button to it
   var $commentForm = $('<form/>', {
@@ -64,9 +71,7 @@ $('#post-button').click(function() {
       var $commentRemoveButton = $('<button/>', {
         class: "comment-remove-button btn btn-default btn-xs",
         text: 'X',
-        click: function() {
-          $(this).parent().remove();
-        }
+        click: removeComment
       });
 
       //Add remove button to comment
@@ -97,14 +102,18 @@ $('#post-button').click(function() {
       postName + '</span></p><hr>'
   });
 
+  //element for links
   var $postLinks = $('<p/>', {
-    class: "post-links"
+    class: "post-links",
+    html: '<a href="#" class="remove-link" type="button"> (Remove) </a> ' +
+      '<a href="#" class="comment-link" type="button"> (Show Comments) </a>'
   });
 
-  //adding functional links to container with formatting
-  $postLinks.append($removeLink);
-  $postLinks.append(' | ');
-  $postLinks.append($commentLink);
+
+
+
+
+
 
 
   //adding links and comment section to post
