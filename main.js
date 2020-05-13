@@ -8,6 +8,9 @@ var posts = [];
 var createPost = function() {
   var postName = $('#name').val();
   var postMessage = $('#message').val();
+  if (!postName || !postMessage) {
+    throw "Invalid: Must fill out all fields";
+  }
   var post = { name: postName, text: postMessage, comments: [] };
   posts.push(post);
 };
@@ -52,7 +55,13 @@ var renderPost = function() {
 
 //functions for events
 var removePost = function() {
+  console.log(posts);
+  currentPost = $(this).closest('.post');
+  currentPostIndex = posts.indexOf(currentPost);
+  console.log(currentPostIndex);
+  posts.splice(currentPostIndex, 1);
   $(this).closest('.post').remove();
+  console.log(posts);
 };
 
 var removeComment = function() {
