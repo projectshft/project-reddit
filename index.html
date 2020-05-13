@@ -11,16 +11,15 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.js"></script>
   <script id="post-template" type="text/x-handlebars-template">
-    <div class="individual-post">
-      <p><a id="remove" href="#">remove</a> <a id="comments" href="#">comments</a></p>
-      {{#each posts}}
-      <p>{{text}}</p>
-      <div class="comment-section">
+    {{#each posts}}
+      <div class="individual-post">
+        <p><a id="remove" href="#">remove</a> <a id="comments" href="#">comments</a></p>
+        <p>{{text}}</p>
+        <div class="comment-section">
+        </div>
+        <p>Posted By: <strong>{{author}}</strong><button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button></p>
       </div>
-      <p>Posted By: <strong>{{author}}</strong></p>
-      {{/each}}
-      <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-    </div>
+    {{/each}}
   </script>
   <script id="comment-template" type="text/x-handlebars-template">
     <div class="comment">
