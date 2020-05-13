@@ -1,6 +1,6 @@
 var posts = [];
 
-//functions for events
+//Functions for events:
 
 //take user input, store it in object, and push into post array
 var createPost = function() {
@@ -46,11 +46,6 @@ var renderPost = function() {
       html: '<section class="comments-container"><h4>Comments:</h4></section><hr>'
     });
 
-    //Create comment section object in order to be able to append comment form to it
-    var $commentSection = $('<section/>', {
-      class: 'comment-section hide'
-    });
-
     //form to submit comments on post
     var $commentForm = $('<form/>', {
       class: 'comment-form form-inline',
@@ -63,6 +58,7 @@ var renderPost = function() {
         '<button class="btn btn-primary comment-button" type="button">Post Comment</button>'
     });
 
+    //attaching comment form to comment section
     $commentSection.append($commentForm);
 
     //adding links and comment section to post
@@ -102,20 +98,47 @@ var toggleComments = function() {
   }
 };
 
-// var createComment = function() {
-//   //values of comment text and username
-//   var commentText = $(this).
+//add comment to posts array !NEED TO FIGURE OUT HOW TO CHECK WHICH POST IN ARRAY === CURRENT POST
+var createComment = function() {
+  //values of comment text and username
+  var currentPostComments = $(this).closest('.comment-section');
+  var commentText = currentPostComments.find('.comment-message').val();
+  var commentName = currentPostComments.find('.comment-name').val();
+
+  //create object for comment
+  var comment = { commentName: commentName, commentText: commentText };
+
+  //push comment into comments array within current post
+  posts[/*currentPostIndex*/].comments.push(comment);
+
+}
+
+// //May need to combine with render post function
+// var renderComment = function() {
+//   var commentText =
+//
+//   //template for comment
+//   var $comment = $('<p/>', {
+//     class: 'comment',
+//     html: commentText + ' | <em>Comment By: <strong>' + commentName + '</strong></em>'
+//   });
+//
+//   //adding comment to comment section with html formatting
+//   currentPostComments.find('.comments-container').append($comment);
 // };
 
 
 
-//click events for links and buttons
+//Click events for links and buttons:
+
 $('#posts').on('click', '.remove-link', removePost);
 $('#posts').on('click', '.comment-link', toggleComments);
-
-// $('#post-button').click(createPost);
 $('#post-button').click(renderPost);
+$('#posts').on('click', '.comment-button', createComment);
 
+
+
+/////////////////////////////////////////////////////
 //Creating post element when post button is clicked
 $('#post-button').click(function() {
 
