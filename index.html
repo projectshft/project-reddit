@@ -13,10 +13,12 @@
   <script id="post-template" type="text/x-handlebars-template">
     <div class="individual-post">
       <p><a id="remove" href="#">remove</a> <a id="comments" href="#">comments</a></p>
+      {{#each posts}}
       <p>{{text}}</p>
       <div class="comment-section">
       </div>
       <p>Posted By: <strong>{{author}}</strong></p>
+      {{/each}}
       <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
     </div>
   </script>
@@ -55,7 +57,7 @@
       <form id="post-form">
         <input type="text" class="form-control form-group" id="postText" placeholder="Post Text">
         <input type="text" class="form-control form-group" id="postUser" placeholder="Your Name">
-        <button type="button" class="btn btn-primary">Post</button>
+        <button type="button" id="post-button" class="btn btn-primary">Post</button>
       </form>
     </div>
     <div class="col-lg-4 col-md-3 col-sm-3 col-xs-1"></div>
