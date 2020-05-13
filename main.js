@@ -1,8 +1,23 @@
-// var messageBoard = [];
+var posts = [];
 //
-// var createPost;
+
 //
 // var renderPost;
+
+//take user input, store it in object, and push into post array
+var createPost = function() {
+  console.log($('#name').val());
+  var postName = $('#name').val();
+  var postMessage = $('#message').val();
+  var post = { name: postName, text: postMessage, comments: [] };
+  posts.push(post);
+};
+
+//iterate through posts array and append html with data from each post
+var renderPost = function() {
+
+}
+
 
 
 //functions for events
@@ -28,12 +43,12 @@ var toggleComments = function() {
 $('#posts').on('click', '.remove-link', removePost);
 $('#posts').on('click', '.comment-link', toggleComments);
 
-
+$('#post-button').click(createPost);
 
 
 //Creating post element when post button is clicked
 $('#post-button').click(function() {
-
+  //
   var postName = $('#name').val();
 
   var postMessage = $('#message').val();
@@ -48,7 +63,8 @@ $('#post-button').click(function() {
       '</div>  ' +
       '<div class="form-group">' +
       '<input type="text" class="form-control comment-name" placeholder="Your Name" required>' +
-      '</div>  '
+      '</div>  ' +
+      '<button'
   });
 
   //Create object for comment button in order to attach click handler to it
