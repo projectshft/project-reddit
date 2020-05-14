@@ -13,11 +13,17 @@
   <script id="post-template" type="text/x-handlebars-template">
     {{#each posts}}
       <div class="individual-post">
-        <p><a id="remove" href="#">remove</a> <a id="comments" href="#">comments</a></p>
-        <p>{{text}}</p>
-        <div class="comment-section">
+        <p><a id="remove" href="#">remove</a> <a id="comments" href="#">comments</a><span id="postTextParagraph"> {{text}}</span></p>
+        <div class="comment-group">
+          <div class="comment-section">
+          </div>
+          <form class="form-inline form-group">
+            <input type="text" class="form-control form-group" id="commentText" placeholder="Comment Text">
+            <input type="text" class="form-control form-group" id="commentUser" placeholder="User Name">
+            <button type="button" class="btn btn-primary">Post Comment</button>
+          </form>
         </div>
-        <p>Posted By: <strong>{{author}}</strong><button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button></p>
+        <p id="postAuthorParagraph">Posted By: <strong>{{author}}</strong></p>
       </div>
     {{/each}}
   </script>

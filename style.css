@@ -2,3 +2,7 @@
   float: none;
   margin-left: 5px;
 }
+
+.comment-group {
+  display: none;
+}
