@@ -9,7 +9,11 @@ var createPost = function() {
   if (!postName || !postMessage) {
     throw "Invalid: Must fill out all fields";
   }
-  var post = { name: postName, text: postMessage, comments: [] };
+  var post = {
+    name: postName,
+    text: postMessage,
+    comments: []
+  };
   posts.push(post);
 };
 
@@ -75,8 +79,7 @@ var renderPost = function() {
 var removePost = function() {
   console.log(posts);
   currentPost = $(this).closest('.post');
-  currentPostIndex = posts.indexOf(currentPost);
-  console.log(currentPostIndex);
+  currentPostIndex = currentPost.index();
   posts.splice(currentPostIndex, 1);
   $(this).closest('.post').remove();
   console.log(posts);
@@ -98,34 +101,51 @@ var toggleComments = function() {
   }
 };
 
-//add comment to posts array !NEED TO FIGURE OUT HOW TO CHECK WHICH POST IN ARRAY === CURRENT POST
+//add comment to posts array
 var createComment = function() {
+
   //values of comment text and username
-  var currentPostComments = $(this).closest('.comment-section');
-  var commentText = currentPostComments.find('.comment-message').val();
-  var commentName = currentPostComments.find('.comment-name').val();
+  var currentPost = $(this).closest('.post');
+  var commentText = currentPost.find('.comment-message').val();
+  var commentName = currentPost.find('.comment-name').val();
 
   //create object for comment
-  var comment = { commentName: commentName, commentText: commentText };
+  var comment = {
+    commentName: commentName,
+    commentText: commentText
+  };
 
   //push comment into comments array within current post
-  posts[/*currentPostIndex*/].comments.push(comment);
-
+  currentPostIndex = currentPost.index();
+  posts[currentPostIndex].comments.push(comment);
 }
 
-// //May need to combine with render post function
-// var renderComment = function() {
-//   var commentText =
-//
-//   //template for comment
-//   var $comment = $('<p/>', {
-//     class: 'comment',
-//     html: commentText + ' | <em>Comment By: <strong>' + commentName + '</strong></em>'
-//   });
-//
-//   //adding comment to comment section with html formatting
-//   currentPostComments.find('.comments-container').append($comment);
-// };
+//append comments to the page
+var renderComments = function() {
+
+  //clear out current post's comments from html container
+  var currentPost = $(this).closest('.post');
+  currentPost.find('.comment-container').empty();
+
+  //iterate through current post's comments and render them to the page
+  posts[currentPost.index()].comments.forEach(function(comment) {
+    console.log(`comment: ${comment}`)
+    //values of username and message for each comment
+    var commentText = comment.commentText;
+    var commentName = comment.commentName;
+
+    //html template for comment
+    var $comment = $('<p/>', {
+      class: 'comment',
+      html: commentText + ' | <em>Comment By: <strong>' + commentName + '</strong></em>'
+    });
+
+    //add comment to comment section with html formatting
+    currentPost.find('.comments-container').append($comment);
+  });
+}
+
+
 
 
 
@@ -135,7 +155,7 @@ $('#posts').on('click', '.remove-link', removePost);
 $('#posts').on('click', '.comment-link', toggleComments);
 $('#post-button').click(renderPost);
 $('#posts').on('click', '.comment-button', createComment);
-
+$('#posts').on('click', '.comment-button', renderComments);
 
 
 /////////////////////////////////////////////////////
@@ -144,21 +164,6 @@ $('#post-button').click(function() {
 
 
 
-  //Create object for comment button in order to attach click handler to it
-  var $commentButton = $('<button/>', {
-    type: 'button',
-    class: 'btn btn-primary comment-button',
-    text: 'Post Comment',
-    click: function() {
-      //find values of comment form input and add them to the comment section when post is clicked
-      var commentName = $(this).siblings().find('.comment-name').val();
-      var commentMessage = $(this).siblings().find('.comment-message').val();
-
-      //Creating object to hold comment data which the remove comment button can be appended to
-      var $comment = $('<p/>', {
-        class: 'comment',
-        html: commentMessage + ' | <em>Comment By: <strong>' + commentName + '</strong></em>'
-      });
 
       //Create object to hold comment remove button and attach click event to it to delete the comment
       var $commentRemoveButton = $('<button/>', {
