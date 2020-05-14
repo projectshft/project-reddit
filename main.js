@@ -1,25 +1,32 @@
+//array to hold all user posts / comments
 var posts = [];
 
 //Functions for events:
 
-//take user input, store it in object, and push into post array
+//take user input, create object with data, and push into post array
 var createPost = function() {
+  //value of user input
   var postName = $('#name').val();
   var postMessage = $('#message').val();
+
+  //if input fields are empty, print error and stop function
   if (!postName || !postMessage) {
     throw "Invalid: Must fill out all fields";
   }
+
+  //creating post with user input data
   var post = {
     name: postName,
     text: postMessage,
     comments: []
   };
+
+  //adding post to posts array
   posts.push(post);
 };
 
-//append html with data from each post in posts array !NEED TO ADD COMMENTS
+//append html with data from each post in posts array
 var renderPost = function() {
-  createPost();
   //clear current content from posts div
   $('#posts').empty();
 
@@ -162,40 +169,11 @@ var removeComment = function() {
   $(this).closest('.comment').remove()
 };
 
-
-
-
-
 //Click events for links and buttons:
-
 $('#posts').on('click', '.remove-link', removePost);
 $('#posts').on('click', '.comment-link', toggleComments);
+$('#post-button').click(createPost);
 $('#post-button').click(renderPost);
 $('#posts').on('click', '.comment-button', createComment);
 $('#posts').on('click', '.comment-button', renderComments);
 $('#posts').on('click', '.comment-remove-button', removeComment);
-
-
-/////////////////////////////////////////////////////
-//Creating post element when post button is clicked
-// $('#post-button').click(function() {
-//
-//
-//
-//
-//       //Create object to hold comment remove button and attach click event to it to delete the comment
-//       var $commentRemoveButton = $('<button/>', {
-//         class: "comment-remove-button btn btn-default btn-xs",
-//         text: 'X',
-//         click: removeComment
-//       });
-//
-//       //Add remove button to comment
-//       $comment.append($commentRemoveButton);
-//
-//       //Adding comment to comment section on click
-//       $(this).parent().siblings('.comments-container').append($comment);
-//     }
-//   });
-//
-// });
