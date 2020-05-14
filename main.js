@@ -51,14 +51,14 @@ var renderPost = function() {
     //element for links
     var $postLinks = $('<p/>', {
       class: "post-links",
-      html: '<a href="#" class="remove-link" type="button"> (Remove) </a> ' +
+      html: '<hr><a href="#" class="remove-link" type="button"> (Remove) </a> ' +
         '<a href="#" class="comment-link" type="button"> (Show Comments) </a>'
     });
 
     //hidden section to hold comments
     var $commentSection = $('<section/>', {
       class: 'comment-section hide',
-      html: '<section class="comments-container"><h4>Comments:</h4></section><hr>'
+      html: '<section class="comments-container"><h4>Comments:</h4></section>'
     });
 
     //form to submit comments on post
