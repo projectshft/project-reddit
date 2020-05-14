@@ -23,6 +23,10 @@ var createPost = function() {
 
   //adding post to posts array
   posts.push(post);
+
+  //clear input fields
+  $('#name').val("");
+  $('#message').val("");
 };
 
 //append html with data from each post in posts array
@@ -132,6 +136,10 @@ var createComment = function() {
   //push comment into comments array within current post
   currentPostIndex = currentPost.index();
   posts[currentPostIndex].comments.push(comment);
+
+  //clear comment input fields
+  currentPost.find('.comment-message').val("");
+  currentPost.find('.comment-name').val("");
 }
 
 //append comments to the page
