@@ -82,18 +82,28 @@ var renderPost = function() {
   })
 };
 
-//remove targeted post from page and posts array !FIX REMOVING FROM ARRAY
+//remove targeted post from page and posts array
 var removePost = function() {
+  //find current post
   currentPost = $(this).closest('.post');
   currentPostIndex = currentPost.index();
+
+  //remove post from array
   posts.splice(currentPostIndex, 1);
+
+  //remove post from page
   $(this).closest('.post').remove();
 };
 
 //show/hide comments section
 var toggleComments = function() {
+  //find targeted comment section
   var currentPostComments = $(this).closest('.post').find('.comment-section');
+
+  //change class (display) when hidden
   currentPostComments.toggleClass('hide');
+
+  //change display text when class changes
   if (currentPostComments.hasClass('hide')) {
     $(this).text(' (Show Comments) ');
   } else {
@@ -108,6 +118,7 @@ var createComment = function() {
   var commentText = currentPost.find('.comment-message').val();
   var commentName = currentPost.find('.comment-name').val();
 
+  //if comment form is empty, return error
   if (!commentText || !commentName) {
     throw "Invalid: Must fill out all fields";
   }
