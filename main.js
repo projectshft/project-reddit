@@ -77,25 +77,10 @@ var renderPost = function() {
 
 //remove targeted post from page and posts array !FIX REMOVING FROM ARRAY
 var removePost = function() {
-  console.log(posts);
   currentPost = $(this).closest('.post');
   currentPostIndex = currentPost.index();
   posts.splice(currentPostIndex, 1);
   $(this).closest('.post').remove();
-  console.log(posts);
-};
-
-//remove targeted comment from page
-var removeComment = function() {
-  // find targeted comment in current post's comments array
-  var currentPostIndex = $(this).closest('.post').index();
-  var currentCommentIndex = $(this).closest('.comment').index();
-
-  //remove comment from array
-  posts[currentPostIndex].comments.splice(currentCommentIndex, 1);
-
-  // remove comment from page
-  $(this).closest('.comment').remove()
 };
 
 //show/hide comments section
@@ -116,6 +101,10 @@ var createComment = function() {
   var commentText = currentPost.find('.comment-message').val();
   var commentName = currentPost.find('.comment-name').val();
 
+  if (!commentText || !commentName) {
+    throw "Invalid: Must fill out all fields";
+  }
+
   //create object for comment
   var comment = {
     commentName: commentName,
@@ -124,9 +113,7 @@ var createComment = function() {
 
   //push comment into comments array within current post
   currentPostIndex = currentPost.index();
-  console.log(posts[currentPostIndex].comments);
   posts[currentPostIndex].comments.push(comment);
-  console.log(posts[currentPostIndex].comments);
 }
 
 //append comments to the page
@@ -161,6 +148,19 @@ var renderComments = function() {
     currentPost.find('.comments-container').append($comment);
   });
 }
+
+//remove targeted comment from page
+var removeComment = function() {
+  // find targeted comment in current post's comments array
+  var currentPostIndex = $(this).closest('.post').index();
+  var currentCommentIndex = $(this).closest('.comment').index();
+
+  //remove comment from array
+  posts[currentPostIndex].comments.splice(currentCommentIndex, 1);
+
+  // remove comment from page
+  $(this).closest('.comment').remove()
+};
 
 
 
