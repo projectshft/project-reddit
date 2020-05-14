@@ -85,8 +85,16 @@ var removePost = function() {
   console.log(posts);
 };
 
-//remove targeted comment from page !NEED TO REMOVE FROM ARRAY
+//remove targeted comment from page
 var removeComment = function() {
+  // find targeted comment in current post's comments array
+  var currentPostIndex = $(this).closest('.post').index();
+  var currentCommentIndex = $(this).closest('.comment').index();
+
+  //remove comment from array
+  posts[currentPostIndex].comments.splice(currentCommentIndex, 1);
+
+  // remove comment from page
   $(this).closest('.comment').remove()
 };
 
@@ -103,7 +111,6 @@ var toggleComments = function() {
 
 //add comment to posts array
 var createComment = function() {
-
   //values of comment text and username
   var currentPost = $(this).closest('.post');
   var commentText = currentPost.find('.comment-message').val();
@@ -117,19 +124,20 @@ var createComment = function() {
 
   //push comment into comments array within current post
   currentPostIndex = currentPost.index();
+  console.log(posts[currentPostIndex].comments);
   posts[currentPostIndex].comments.push(comment);
+  console.log(posts[currentPostIndex].comments);
 }
 
 //append comments to the page
 var renderComments = function() {
-
   //clear out current post's comments from html container
   var currentPost = $(this).closest('.post');
-  currentPost.find('.comment-container').empty();
+  currentPost.find('.comments-container').empty();
 
   //iterate through current post's comments and render them to the page
-  posts[currentPost.index()].comments.forEach(function(comment) {
-    console.log(`comment: ${comment}`)
+  posts[currentPost.index()].comments.forEach(function(comment, index, array) {
+
     //values of username and message for each comment
     var commentText = comment.commentText;
     var commentName = comment.commentName;
@@ -139,6 +147,15 @@ var renderComments = function() {
       class: 'comment',
       html: commentText + ' | <em>Comment By: <strong>' + commentName + '</strong></em>'
     });
+
+    //add remove button to comment
+    var $commentRemoveButton = $('<button/>', {
+      class: "comment-remove-button btn btn-default btn-xs",
+      text: 'X'
+    });
+
+    //Add remove button to comment
+    $comment.append($commentRemoveButton);
 
     //add comment to comment section with html formatting
     currentPost.find('.comments-container').append($comment);
@@ -156,32 +173,29 @@ $('#posts').on('click', '.comment-link', toggleComments);
 $('#post-button').click(renderPost);
 $('#posts').on('click', '.comment-button', createComment);
 $('#posts').on('click', '.comment-button', renderComments);
+$('#posts').on('click', '.comment-remove-button', removeComment);
 
 
 /////////////////////////////////////////////////////
 //Creating post element when post button is clicked
-$('#post-button').click(function() {
-
-
-
-
-      //Create object to hold comment remove button and attach click event to it to delete the comment
-      var $commentRemoveButton = $('<button/>', {
-        class: "comment-remove-button btn btn-default btn-xs",
-        text: 'X',
-        click: removeComment
-      });
-
-      //Add remove button to comment
-      $comment.append($commentRemoveButton);
-
-      //Adding comment to comment section on click
-      $(this).parent().siblings('.comments-container').append($comment);
-    }
-  });
-
-
-
-
-
-});
+// $('#post-button').click(function() {
+//
+//
+//
+//
+//       //Create object to hold comment remove button and attach click event to it to delete the comment
+//       var $commentRemoveButton = $('<button/>', {
+//         class: "comment-remove-button btn btn-default btn-xs",
+//         text: 'X',
+//         click: removeComment
+//       });
+//
+//       //Add remove button to comment
+//       $comment.append($commentRemoveButton);
+//
+//       //Adding comment to comment section on click
+//       $(this).parent().siblings('.comments-container').append($comment);
+//     }
+//   });
+//
+// });
