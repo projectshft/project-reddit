@@ -34,7 +34,7 @@ var appFunctions = function() {
   return {
     createPost: createPost,
     renderPosts: renderPosts,
-    removePost: removePost
+    removePost: removePost,
   }
 }
 
@@ -50,4 +50,8 @@ $('#post-button').click(function(){
 $('#post-section').on('click', '.remove', function() {
   controls.removePost($(this));
   controls.renderPosts();
+})
+
+$('#post-section').on('click', '.comments', function() {
+  $(this).closest('p').closest('div').find('div').toggle()
 })
