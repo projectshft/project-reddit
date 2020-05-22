@@ -11,21 +11,19 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.js"></script>
   <script id="post-template" type="text/x-handlebars-template">
-    {{#each posts}}
-      <div class="individual-post">
-        <p><a id="remove" href="#">remove</a> <a id="comments" href="#">comments</a><span id="postTextParagraph"> {{text}}</span></p>
+    <div class="individual-post">
+        <p><a class="remove" href="#">remove</a> <a class="comments" href="#">comments</a><span class="postTextParagraph"> {{postText}}</span></p>
         <div class="comment-group">
           <div class="comment-section">
           </div>
           <form class="form-inline form-group">
-            <input type="text" class="form-control form-group" id="commentText" placeholder="Comment Text">
-            <input type="text" class="form-control form-group" id="commentUser" placeholder="User Name">
-            <button type="button" class="btn btn-primary">Post Comment</button>
+            <input type="text" class="form-control form-group commentText" placeholder="Comment Text">
+            <input type="text" class="form-control form-group commentUser" placeholder="User Name">
+            <button type="button" class="post-comment btn btn-primary">Post Comment</button>
           </form>
         </div>
-        <p id="postAuthorParagraph">Posted By: <strong>{{author}}</strong></p>
+        <p class="postAuthorParagraph">Posted By: <strong>{{postUser}}</strong></p>
       </div>
-    {{/each}}
   </script>
   <script id="comment-template" type="text/x-handlebars-template">
     <div class="comment">
@@ -37,8 +35,8 @@
 
 <body>
   <div class="row">
-    <div class="col-lg-4 col-md-3 col-sm-3 col-xs-1"></div>
-    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-10">
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-1"></div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-10">
       <h1>Project Reddit</h1>
       <div id="post-section">
         <!-- STRUCTURE OF HANDLEBARS HTML
@@ -65,7 +63,7 @@
         <button type="button" id="post-button" class="btn btn-primary">Post</button>
       </form>
     </div>
-    <div class="col-lg-4 col-md-3 col-sm-3 col-xs-1"></div>
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-1"></div>
   </div>
   <script src="main.js"></script>
 </body>
