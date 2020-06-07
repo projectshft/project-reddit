@@ -4,16 +4,11 @@ var allPosts = [];
 
 $(postButton).on('click', function () {
 
-  $('.post-list').empty();
-
-  var removeButton = '<a href="#" id="remove-button">remove </a>'
-
-  var commentButton = '<a href="#" id="comment-button">comment </a>'
-
-  var postMessage = $('#message').val();
-
+  var removeButton = '<a href="#" id="remove-button">remove </a>';
+  var commentButton = '<a href="#" id="comment-button">comment </a>';
   var commentForm = '<form class="form-inline comments" onsubmit="event.preventDefault();" style="display:none;"><input id="message-comment" type="text" class="form-control" placeholder="Comment Text"></input><input id="name-comment" type="text" class="form-control" placeholder="User Name"></input><button id="submit-comment" class="btn btn-primary">Post Comment</button></form>';
 
+  var postMessage = $('#message').val();
   var postName = $('#name').val();
 
   // This is where using allPosts might come in handy. We create a separate ID above using a for loop,
