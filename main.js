@@ -1,57 +1,61 @@
 var postButton = $('#submit-post');
-
 var allPosts = [];
 
 // Creating Post objects
-var PostModule = function(message, name) {
-
-  var post = {
-    message: message,
-    name: name
-  }
-
+var PostModule = function(message, name, id) {
   return {
-    post: post
-  };
+    message: message,
+    name: name,
+    id: id,
+    listElementId: null,
+    removeButton: null,
+    commentButton: null,
+    submitComment: null
+  }
 }
+
+var postIndex = 0;
 
 $(postButton).on('click', function() {
 
-  var removeButton = '<a href="#" class="remove-button">remove </a>';
-  var commentButton = '<a href="#" class="comment-button">comment </a>';
-  var commentForm = '<form class="form-inline comments" onsubmit="event.preventDefault();" style="display:none;">' + '<ul class="comment-list"></ul>' + '<input type="text" class="form-control comment-message" placeholder="Comment Text"></input>' + '<input type="text" class="form-control comment-name" placeholder="User Name"></input>' + '<button id="submit-comment" class="btn btn-primary">Post Comment</button>' + '</form>';
-
   var postMessage = $('#message').val();
   var postName = $('#name').val();
+  allPosts.push(PostModule(postMessage, postName, postIndex));
+  console.log(allPosts)
+  postIndex++;
 
-  allPosts.push(PostModule(postMessage, postName));
-
+  var removeButtonHTML = '<a href="#" class="remove-button">remove </a>';
+  var commentButtonHTML = '<a href="#" class="comment-button">comment </a>';
+  var commentFormHTML = '<form class="form-inline comments" onsubmit="event.preventDefault();" style="display:none;">' + '<ul class="comment-list"></ul>' + '<input type="text" class="form-control comment-message" placeholder="Comment Text"></input>' + '<input type="text" class="form-control comment-name" placeholder="User Name"></input>' + '<button id="submit-comment" class="btn btn-primary">Post Comment</button>' + '</form>';
 
   $('.post-list').empty();
 
-  //
-  for (i = 0; i < allPosts.length; i++) {
+  allPosts.forEach (function (post) {
 
-    $('.post-list').append('<li class="post">' + '<p>' + removeButton + commentButton + allPosts[i].post.message + '</p>' + commentForm + '<p>Posted by: <strong>' + allPosts[i].post.name + '</strong></p><hr></li>');
+    $('.post-list').append('<li id="' + post.id + '" class="post">' + '<p>' + removeButtonHTML + commentButtonHTML + post.message + '</p>' + commentFormHTML + '<p>Posted by: <strong>' + post.name + '</strong></p><hr></li>');
 
-    var commentButton = $('.comment-button');
-    $(commentButton).on('click', function() {
+    post.listElementId = '#' + post.id;
+
+    post.commentButton = $(post.listElementId).find('.comment-button');
+    $(post.commentButton).on('click', function() {
       $(".comments").toggle();
     });
 
-    var removeButton = $('.remove-button');
-    $(removeButton).on('click', function() {
+    post.removeButton = $('.remove-button');
+    $(post.removeButton).on('click', function() {
       $(".post").remove();
+      // delete from the array
     });
 
-    var submitComment = $('#submit-comment');
-    $(submitComment).on('click', function() {
+    post.submitComment = $('#submit-comment');
+    $(post.submitComment).on('click', function() {
       // $('.comment-list').empty();
       var commentMessage = $('.comment-message').val();
       var commentName = $('.comment-name').val();
 
       $('.comment-list').append('<li><p id="comment">' + '<p>' + commentMessage + ' Posted by: <strong>' + commentName + '</strong></p></li>')
     });
-  }
+
+  });
 
 });
