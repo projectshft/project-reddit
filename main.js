@@ -4,20 +4,20 @@ var allPosts = [];
 
 $(postButton).on('click', function () {
 
-//$('.post-list').empty();
+$('.post-list').empty();
 
   var removeButton = '<a href="#" id="remove-button">remove </a>'
   var commentButton = '<a href="#" id="comment-button">comment </a>'
 
   var postMessage = $('#message').val();
 
-  var commentForm = '<form class="form-inline comments" onsubmit="event.preventDefault();" style="display:none;"><input id="message-comment" type="text" class="form-control" placeholder="Comment Text"></input><input id="name-comment" type="text" class="form-control" placeholder="User Name"></input><button id="submit-comment" class="btn btn-primary">Post Comment</button></form>';
+  var commentForm = '<form class="form-inline comments" onsubmit="event.preventDefault();" style="display:none;">' + '<ul class="comment-list"></ul>' + '<input id="message-comment" type="text" class="form-control" placeholder="Comment Text"></input>' + '<input id="name-comment" type="text" class="form-control" placeholder="User Name"></input>' + '<button id="submit-comment" class="btn btn-primary">Post Comment</button>' + '</form>';
 
   var postName = $('#name').val();
 
   // This is where using allPosts might come in handy. We create a separate ID above using a for loop,
   // and then prepend in a loop down here. The ID woul+ d be for matching dropdowns.
-  $('.post-list').append('<li class="post"><p id="post-1">' + '<p>' + removeButton + commentButton + postMessage + '</p>' + '<ul class="comment-list"><ul>' + commentForm + '<p>Posted by: <strong>' + postName + '</strong></p><hr></li>');
+  $('.post-list').append('<li class="post">' + '<p>' + removeButton + commentButton + postMessage + '</p>' + commentForm  + '<p>Posted by: <strong>' + postName + '</strong></p><hr></li>');
 
   var commentButton = $('#comment-button');
   $(commentButton).on('click', function () {
@@ -37,7 +37,7 @@ $(postButton).on('click', function () {
 
      alert(commentMessage + ' Posted by: ' + commentName);
 
-    $('.comment-list').prepend('<li><p id="comment-1">' + '<p>' + commentMessage + ' Posted by: <strong>' + commentName + '</strong></p></li>')
+    $('.comment-list').append('<li><p id="comment">' + '<p>' + commentMessage + ' Posted by: <strong>' + commentName + '</strong></p></li>')
   });
 
 });
