@@ -41,10 +41,14 @@ $(postButton).on('click', function() {
       $(post.listElementId).find(".comments").toggle();
     });
 
-    post.removeButton = $('.remove-button');
+    post.removeButton = $(post.listElementId).find('.remove-button');
     $(post.removeButton).on('click', function() {
-      $(".post").remove();
-      // delete from the array
+      $(post.listElementId).remove();
+      allPosts = allPosts.filter(function(item) {
+          if (item.id !== post.id) {
+            return item
+          }
+        })
     });
 
     post.submitComment = $('#submit-comment');
