@@ -38,7 +38,7 @@ $(postButton).on('click', function() {
 
     post.commentButton = $(post.listElementId).find('.comment-button');
     $(post.commentButton).on('click', function() {
-      $(".comments").toggle();
+      $(post.listElementId).find(".comments").toggle();
     });
 
     post.removeButton = $('.remove-button');
