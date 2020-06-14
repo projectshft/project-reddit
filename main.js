@@ -21,7 +21,6 @@ $(postButton).on('click', function() {
   var postMessage = $('#message').val();
   var postName = $('#name').val();
   allPosts.push(PostModule(postMessage, postName, postIndex));
-  console.log(allPosts)
   postIndex++;
 
   var removeButtonHTML = '<a href="#" class="remove-button">remove </a>';
@@ -34,6 +33,7 @@ $(postButton).on('click', function() {
 
     $('.post-list').append('<li id="' + post.id + '" class="post">' + '<p>' + removeButtonHTML + commentButtonHTML + post.message + '</p>' + commentFormHTML + '<p>Posted by: <strong>' + post.name + '</strong></p><hr></li>');
 
+    //
     post.listElementId = '#' + post.id;
 
     post.commentButton = $(post.listElementId).find('.comment-button');
@@ -51,13 +51,13 @@ $(postButton).on('click', function() {
         })
     });
 
-    post.submitComment = $('#submit-comment');
+    post.submitComment = $(post.listElementId).find('#submit-comment');
     $(post.submitComment).on('click', function() {
       // $('.comment-list').empty();
       var commentMessage = $('.comment-message').val();
       var commentName = $('.comment-name').val();
 
-      $('.comment-list').append('<li><p id="comment">' + '<p>' + commentMessage + ' Posted by: <strong>' + commentName + '</strong></p></li>')
+      $(post.listElementId).find('.comment-list').append('<li><p id="comment">' + '<p>' + commentMessage + ' Posted by: <strong>' + commentName + '</strong></p></li>')
     });
 
   });
