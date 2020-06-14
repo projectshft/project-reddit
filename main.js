@@ -1,55 +1,44 @@
-
-var postCount = 0;
-var allPosts = [];
-
 var postButton = $('#submit-post');
+
+var allPosts = [];
 
 $(postButton).on('click', function () {
 
   $('.post-list').empty();
 
+  var removeButton = '<a href="#" id="remove-button">remove </a>'
+  var commentButton = '<a href="#" id="comment-button">comment </a>'
+
   var postMessage = $('#message').val();
+
+  var commentForm = '<form class="form-inline comments" onsubmit="event.preventDefault();" style="display:none;"><input id="message-comment" type="text" class="form-control" placeholder="Comment Text"></input><input id="name-comment" type="text" class="form-control" placeholder="User Name"></input><button id="submit-comment" class="btn btn-primary">Post Comment</button></form>';
+
   var postName = $('#name').val();
 
-
-  var postObject = {
-    message: postMessage,
-    name: postName,
-    id: postCount,
-
-    removeButtonHTML: '<a href="#" id="remove-button-' + postCount + '">remove </a>',
-    commentButtonHTML: '<a href="#" id="comment-button-' + postCount + '">comment </a>',
-    commentFormHTML: '<form class="form-inline comments" id="form-' + postCount+ '" onsubmit="event.preventDefault();" style="display:none;"><input id="message-comment-'+ postCount + '" type="text" class="form-control" placeholder="Comment Text"></input><input id="name-comment" type="text" class="form-control" placeholder="User Name"></input><button id="submit-comment-'+ postCount + '" class="btn btn-primary">Post Comment</button></form>',
-
-    removeButtonIdentifier: '#remove-button-' + postCount,
-    commentButtonIdentifier: '#comment-button-' + postCount,
-    commentFormIdentifier: '#form-' + postCount
-  }
-
-  // dynamically creating properties outside the object literal
-  postObject['commentButton'] = $(postObject.commentButtonIdentifier);
-  $(postObject.commentButton).on('click', function () {
-     $(postObject.commentFormIdentifier).toggle();
-  });
-
-  allPosts.push(postObject);
-  postCount += 1;
   // This is where using allPosts might come in handy. We create a separate ID above using a for loop,
   // and then prepend in a loop down here. The ID woul+ d be for matching dropdowns.
+  $('.post-list').append('<li class="post"><p id="post-1">' + '<p>' + removeButton + commentButton + postMessage + '</p>' + '<ul class="comment-list"><ul>' + commentForm + '<p>Posted by: <strong>' + postName + '</strong></p><hr></li>');
 
-  for (i = 0; i < allPosts.length; i++) {
-    $('.post-list').append('<li>' + allPosts[i].removeButtonHTML + allPosts[i].commentButtonHTML + allPosts[i].message + '</p>' + '<ul class="comment-list"><ul>' + allPosts[i].commentFormHTML + '<p>Posted by: <strong>' + allPosts[i].name + '</strong></p><hr></li>');
+  var commentButton = $('#comment-button');
 
+  $(commentButton).on('click', function () {
+     $(".comments").toggle();
+  });
 
-    // var submitComment = $('#submit-comment');
-    //
-    // $(submitComment).on('click', function() {
-    //    var commentMessage = $('#message-comment').val();
-    //    var commentName = $('#name-comment').val();
-    //
-    //    $('')
-    // });
+  var removeButton = $('#remove-button');
+  $(removeButton).on('click', function () {
+     $(".post").remove();
+  });
 
-  } // end for loop
+  var submitComment = $('#submit-comment');
+
+  $(submitComment).on('click', function() {
+
+    $('.comment-list').empty();
+     var commentMessage = $('#message-comment').val();
+     var commentName = $('#name-comment').val();
+
+     $('comment-list').append('<li><p id="comment-1">' + '<p>' + commentMessage + '</p>' + + '<p>Posted by: <strong>' + commentName + '</strong></p><hr></li>')
+  });
 
 });
