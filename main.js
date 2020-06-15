@@ -1,9 +1,10 @@
-var postButton = $('#submit-post');
 
 var allPosts = [];
 var postIndex = 0;
 
-// Creating Post objects
+// Using this module to create Post objects
+// Aside from the paremeters passed in, each
+// post
 var PostModule = function(message, name, id) {
   return {
     message: message,
@@ -13,7 +14,7 @@ var PostModule = function(message, name, id) {
     removeButton: null,
     commentButton: null,
     submitComment: null,
-    allComments: [],
+    allComments: [], // We keep track of
     commentIndex: 0
   }
 }
@@ -29,6 +30,8 @@ var CommentModule = function(message, name, id) {
   }
 }
 
+
+var postButton = $('#submit-post');
 
 $(postButton).on('click', function() {
 
@@ -51,16 +54,37 @@ $(postButton).on('click', function() {
     //
     post.postListElementId = '#' + post.id;
 
+    post.allComments.forEach(function(comment) {
+      $(post.postListElementId).find('.comment-list').append('<li id="' + comment.id + '" class="comment">' + comment.message + ' Posted by: <strong>' + comment.name + ' </strong><i class="fa fa-times remove-comment-button"></i></li>');
+
+      comment.commentListElementId = '#' + comment.id;
+
+      comment.deleteComment =  $(post.postListElementId).find('.comment-list').find(comment.commentListElementId).find('.remove-comment-button');
+      // On click, removes post from DOM and the selected post from allPosts
+      $(comment.deleteComment).on('click', function() {
+
+        post.allComments = post.allComments.filter(function(item) {
+          if (item.id !== comment.id) {
+            return item
+          }
+        })
+
+        $(post.postListElementId).find('.comment-list').find(comment.commentListElementId).remove();
+      });
+    });
+
     // Dynamically creates commentButton based on listElementId
     post.commentButton = $(post.postListElementId).find('.comment-button');
     // Toggles .comments (child of selected post)
     $(post.commentButton).on('click', function() {
       $(post.postListElementId).find(".comments").toggle();
+      console.log("Post" + post.postListElementId + " was clicked on toggle");
     });
 
     // Dynamically creates removeButton based on listElementId
     post.removeButton = $(post.postListElementId).find('.remove-button');
     // On click, removes post from DOM and the selected post from allPosts
+
     $(post.removeButton).on('click', function() {
 
       allPosts = allPosts.filter(function(item) {
@@ -70,6 +94,7 @@ $(postButton).on('click', function() {
       })
 
       $('.post-list').find(post.postListElementId).remove();
+      console.log("Post" + post.postListElementId + " was clicked on remove")
     });
 
     post.submitComment = $(post.postListElementId).find('#submit-comment');
@@ -83,7 +108,7 @@ $(postButton).on('click', function() {
       // Emptying before for loop
       // Is this necessary?!
       // Do I need to empty this and then run a for loop everytime?
-      
+
       $(post.postListElementId).find('.comment-list').empty();
 
       post.allComments.forEach(function(comment) {
@@ -110,3 +135,18 @@ $(postButton).on('click', function() {
   })
 
 })
+
+// Weird bug...
+// If the first existing post has more comments, we can't get toggle to work
+// and it takes two clicks to delete the post wiht fewer commetns
+
+// It's like that extra comment throws off the comment toggle and the remove button
+// Clicks are being registered though
+
+
+// And if I delete the number of comments on the first post, such that
+// it is less than or equal to the number of comments on the post below it,
+// it works
+
+
+// I think the way I'm doing it, I have to refresh the whole page
