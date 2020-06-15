@@ -1,4 +1,5 @@
 var postButton = $('#submit-post');
+
 var allPosts = [];
 var postIndex = 0;
 
@@ -12,7 +13,8 @@ var PostModule = function(message, name, id) {
     removeButton: null,
     commentButton: null,
     submitComment: null,
-    allComments: []
+    allComments: [],
+    commentIndex: 0
   }
 }
 
@@ -24,7 +26,6 @@ var CommentModule = function(message, name, id) {
     id: id,
     listElementId: null,
     removeButton: null,
-    commentIndex: 0
   }
 }
 
@@ -73,28 +74,27 @@ $(postButton).on('click', function() {
 
       var commentMessage = $(post.listElementId).find('.comment-message').val();
       var commentName = $(post.listElementId).find('.comment-name').val();
-      post.allComments.push(CommentModule(commentMessage, commentName, post.commentIndex));
+      post.allComments.push(CommentModule(commentMessage, commentName, post.commentIndex)); // 0
       post.commentIndex++;
 
       // Emptying before for loop
       $(post.listElementId).find('.comment-list').empty();
 
       post.allComments.forEach(function(comment) {
-        $(post.listElementId).find('.comment-list').append('<li id="' + comment.id + '" class="comment">' + '<p>' + comment.message + ' Posted by: <strong>' + comment.name + ' </strong><i class="fa fa-times"></i></p></li>');
+        $(post.listElementId).find('.comment-list').append('<li id="' + comment.id + '" class="comment">' + comment.message + ' Posted by: <strong>' + comment.name + ' </strong><i class="fa fa-times remove-comment-button"></i></li>');
 
         comment.listElementId = '#' + comment.id;
 
-        comment.removeButton = $(comment.listElementId).find('.fa-times');
+        comment.removeButton = $(comment.listElementId).find('.remove-comment-button');
         // On click, removes post from DOM and the selected post from allPosts
         $(comment.removeButton).on('click', function() {
           $(comment.listElementId).remove();
           post.allComments = post.allComments.filter(function(item) {
             if (item.id !== comment.id) {
-              return item;
+              return item
             }
           })
         });
-
       });
 
     });
