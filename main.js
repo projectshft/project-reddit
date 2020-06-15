@@ -2,6 +2,13 @@
 var allPosts = [];
 var postIndex = 0;
 
+// HTML we reuse a lot
+var removeButtonHTML = '<a href="#" class="remove-button">remove </a>';
+var commentButtonHTML = '<a href="#" class="comment-button">comment </a>';
+var commentListHTML = '<ul class="comment-list"></ul>';
+var commentFormHTML = '<form class="form-inline comments" onsubmit="event.preventDefault();" style="display:none;">' + '<input type="text" class="form-control comment-message" placeholder="Comment Text"></input>' + '<input type="text" class="form-control comment-name" placeholder="User Name"></input>' + '<button id="submit-comment" class="btn btn-primary">Post Comment</button>' + '</form>';
+
+
 // Using this module to create Post objects
 // Aside from the paremeters passed in, each
 // post
@@ -39,11 +46,6 @@ $(postButton).on('click', function() {
   var postName = $('#name').val();
   allPosts.push(PostModule(postMessage, postName, postIndex));
   postIndex++;
-
-  var removeButtonHTML = '<a href="#" class="remove-button">remove </a>';
-  var commentButtonHTML = '<a href="#" class="comment-button">comment </a>';
-  var commentListHTML = '<ul class="comment-list"></ul>';
-  var commentFormHTML = '<form class="form-inline comments" onsubmit="event.preventDefault();" style="display:none;">' + '<input type="text" class="form-control comment-message" placeholder="Comment Text"></input>' + '<input type="text" class="form-control comment-name" placeholder="User Name"></input>' + '<button id="submit-comment" class="btn btn-primary">Post Comment</button>' + '</form>';
 
   $('.post-list').empty();
 
@@ -150,3 +152,9 @@ $(postButton).on('click', function() {
 
 
 // I think the way I'm doing it, I have to refresh the whole page
+
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// The delete button HIDES the first comment on the first postName
+// the second time deletes the post it was clicked on.
+
+// Something's not being dynamically created when the second comment is made
