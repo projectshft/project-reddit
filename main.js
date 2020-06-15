@@ -72,35 +72,40 @@ $(postButton).on('click', function() {
       $('.post-list').find(post.postListElementId).remove();
     });
 
-    // post.submitComment = $(post.postListElementId).find('#submit-comment');
-    // $(post.submitComment).on('click', function() {
-    //
-    //   var commentMessage = $(post.postListElementId).find('.comment-message').val();
-    //   var commentName = $(post.postListElementId).find('.comment-name').val();
-    //   post.allComments.push(CommentModule(commentMessage, commentName, post.commentIndex)); // 0
-    //   post.commentIndex++;
-    //
-    //   // Emptying before for loop
-    //   $(post.postListElementId).find('.comment-list').empty();
-    //
-    //   post.allComments.forEach(function(comment) {
-    //     $(post.postListElementId).find('.comment-list').append('<li id="' + comment.id + '" class="comment">' + comment.message + ' Posted by: <strong>' + comment.name + ' </strong><i class="fa fa-times remove-comment-button"></i></li>');
-    //
-    //     comment.commentListElementId = '#' + comment.id;
-    //
-    //     comment.deleteComment = $(comment.commentListElementId).find('.remove-comment-button');
-    //     // On click, removes post from DOM and the selected post from allPosts
-    //     $(comment.deleteComment).on('click', function() {
-    //       $(comment.commentListElementId).remove();
-    //       post.allComments = post.allComments.filter(function(item) {
-    //         if (item.id !== comment.id) {
-    //           return item
-    //         }
-    //       })
-    //     });
-    //   });
-    //
-    // });
+    post.submitComment = $(post.postListElementId).find('#submit-comment');
+    $(post.submitComment).on('click', function() {
+
+      var commentMessage = $(post.postListElementId).find('.comment-message').val();
+      var commentName = $(post.postListElementId).find('.comment-name').val();
+      post.allComments.push(CommentModule(commentMessage, commentName, post.commentIndex)); // 0
+      post.commentIndex++;
+
+      // Emptying before for loop
+      // Is this necessary?!
+      // Do I need to empty this and then run a for loop everytime?
+      
+      $(post.postListElementId).find('.comment-list').empty();
+
+      post.allComments.forEach(function(comment) {
+        $(post.postListElementId).find('.comment-list').append('<li id="' + comment.id + '" class="comment">' + comment.message + ' Posted by: <strong>' + comment.name + ' </strong><i class="fa fa-times remove-comment-button"></i></li>');
+
+        comment.commentListElementId = '#' + comment.id;
+
+        comment.deleteComment =  $(post.postListElementId).find('.comment-list').find(comment.commentListElementId).find('.remove-comment-button');
+        // On click, removes post from DOM and the selected post from allPosts
+        $(comment.deleteComment).on('click', function() {
+
+          post.allComments = post.allComments.filter(function(item) {
+            if (item.id !== comment.id) {
+              return item
+            }
+          })
+
+          $(post.postListElementId).find('.comment-list').find(comment.commentListElementId).remove();
+        });
+      });
+
+    });
 
   })
 
