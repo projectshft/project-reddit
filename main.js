@@ -1,3 +1,7 @@
+// allPosts keeps track of all post objects
+// created from user entry. postIndex is used
+// to generate unique ids for posts
+// and comments.
 var allPosts = [];
 var postIndex = 0;
 
@@ -14,7 +18,7 @@ var PostModule = function(message, name, id) {
     message: message,
     name: name,
     id: "post-" + id,
-    postListElementId: "#post-" + id,
+    idHTML: "#post-" + id,
     removeButton: null,
     commentButton: null,
     submitComment: null,
@@ -23,13 +27,15 @@ var PostModule = function(message, name, id) {
   }
 }
 
-// Creating Comment objects
+// Using this module to create comment objects
+// Note that the idea of the comment's associated post
+// is passed in to create the id
 var CommentModule = function(message, name, postId, commentId) {
   return {
     message: message,
     name: name,
     id: "post-" + postId + "-comment-" + commentId,
-    commentListElementId: "#post-" + postId + "-comment-" + commentId,
+    idHTML: "#post-" + postId + "-comment-" + commentId,
     deleteComment: null,
   }
 }
@@ -49,7 +55,7 @@ var renderPosts = function(post) {
 // and filters it from allPosts
 var renderRemoveButton = function(post) {
 
-  post.removeButton = $(post.postListElementId).find('.remove-button');
+  post.removeButton = $(post.idHTML).find('.remove-button');
   $(post.removeButton).on('click', function() {
 
     allPosts = allPosts.filter(function(item) {
@@ -58,16 +64,16 @@ var renderRemoveButton = function(post) {
       }
     })
 
-    $('.post-list').find(post.postListElementId).remove();
+    $('.post-list').find(post.idHTML).remove();
   });
 }
 
 // On click, this button toggles the comment form
 var renderCommentButton = function(post) {
-  post.commentButton = $(post.postListElementId).find('.comment-button');
+  post.commentButton = $(post.idHTML).find('.comment-button');
 
   $(post.commentButton).on('click', function() {
-    $(post.postListElementId).find(".comments").toggle();
+    $(post.idHTML).find(".comments").toggle();
   });
 }
 
@@ -76,9 +82,9 @@ var renderCommentButton = function(post) {
 var renderComments = function(post) {
 
   post.allComments.forEach(function(comment) {
-    $(post.postListElementId).find('.comment-list').append('<li id="' + comment.id + '" class="comment">' + comment.message + ' Posted by: <strong>' + comment.name + ' </strong><i class="fa fa-times remove-comment-button"></i></li>');
+    $(post.idHTML).find('.comment-list').append('<li id="' + comment.id + '" class="comment">' + comment.message + ' Posted by: <strong>' + comment.name + ' </strong><i class="fa fa-times remove-comment-button"></i></li>');
 
-    comment.deleteComment = $(post.postListElementId).find('.comment-list').find(comment.commentListElementId).find('.remove-comment-button');
+    comment.deleteComment = $(post.idHTML).find('.comment-list').find(comment.idHTML).find('.remove-comment-button');
 
     // On click, removes post from DOM and the selected post from allPosts
     $(comment.deleteComment).on('click', function() {
@@ -88,7 +94,7 @@ var renderComments = function(post) {
         }
       })
 
-      $(post.postListElementId).find('.comment-list').find(comment.commentListElementId).remove();
+      $(post.idHTML).find('.comment-list').find(comment.idHTML).remove();
     });
   });
 }
@@ -100,26 +106,26 @@ var renderComments = function(post) {
 // comments for that post only.
 var renderSubmitCommentButton = function(post) {
 
-  post.submitComment = $(post.postListElementId).find('#submit-comment');
+  post.submitComment = $(post.idHTML).find('#submit-comment');
   $(post.submitComment).on('click', function() {
 
-      var commentMessage = $(post.postListElementId).find('.comment-message').val();
-      var commentName = $(post.postListElementId).find('.comment-name').val();
+    var commentMessage = $(post.idHTML).find('.comment-message').val();
+    var commentName = $(post.idHTML).find('.comment-name').val();
 
-      // User must fill in all fields
-      if (commentMessage === "" || commentName === "") {
-        alert("Please enter all fields")
-      } else {
-        // creates unique comment id based on the original post's id and the post's commentIndex
-        post.allComments.push(CommentModule(commentMessage, commentName, post.id, post.commentIndex));
-        post.commentIndex++;
+    // User must fill in all fields
+    if (commentMessage === "" || commentName === "") {
+      alert("Please enter all fields")
+    } else {
+      // creates unique comment id based on the original post's id and the post's commentIndex
+      post.allComments.push(CommentModule(commentMessage, commentName, post.id, post.commentIndex));
+      post.commentIndex++;
 
-        $(post.postListElementId).find('.comment-list').empty();
-        renderComments(post);
-
-      });
-  }
+      $(post.idHTML).find('.comment-list').empty();
+      renderComments(post);
+    }
+  })
 }
+
 
 var postButton = $('#submit-post');
 // On click, create new post with user entry
