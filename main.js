@@ -13,8 +13,8 @@ var PostModule = function(message, name, id) {
   return {
     message: message,
     name: name,
-    id: id,
-    postListElementId: "#" + id,
+    id: "post-" + id,
+    postListElementId: "#post-" + id,
     removeButton: null,
     commentButton: null,
     submitComment: null,
@@ -28,8 +28,8 @@ var CommentModule = function(message, name, id) {
   return {
     message: message,
     name: name,
-    id: id,
-    commentListElementId: "#" + id,
+    id: "comment" + id,
+    commentListElementId: "#comment" + id,
     deleteComment: null,
   }
 }
@@ -37,14 +37,14 @@ var CommentModule = function(message, name, id) {
 var renderPosts = function (post) {
   $('.post-list').append('<li id="' + post.id + '" class="post">' + removeButtonHTML + commentButtonHTML + post.message  + commentListHTML + commentFormHTML + 'Posted by: <strong>' + post.name + '</strong><hr></li>');
 
-  // Dynamically creates removeButton based on listElementId
+  // Dynamically creates buttons based on listElementId
   renderRemoveButton(post);
-  // Dynamically creates commentButton based on listElementId
   renderCommentButton(post);
   renderComments(post);
   renderSubmitCommentButton(post);
 }
 
+//
 var renderRemoveButton = function (post) {
 
   post.removeButton = $(post.postListElementId).find('.remove-button');
@@ -72,11 +72,9 @@ var renderCommentButton = function (post) {
 
 
 var renderComments = function (post) {
-  $(post.postListElementId).find('.comment-list').empty();
+
   post.allComments.forEach(function(comment) {
     $(post.postListElementId).find('.comment-list').append('<li id="' + comment.id + '" class="comment">' + comment.message + ' Posted by: <strong>' + comment.name + ' </strong><i class="fa fa-times remove-comment-button"></i></li>');
-
-    //comment.commentListElementId = '#' + comment.id;
 
     comment.deleteComment =  $(post.postListElementId).find('.comment-list').find(comment.commentListElementId).find('.remove-comment-button');
     // On click, removes post from DOM and the selected post from allPosts
@@ -93,6 +91,11 @@ var renderComments = function (post) {
   });
 }
 
+// Dynamically creates comment submission button.
+// Creates new comment from CommentModule and adds
+// it to the post's allComments array, creating unique id
+// based on the posts commentIndex. Then, re-renders
+// comments for that post only.
 var renderSubmitCommentButton = function(post) {
   post.submitComment = $(post.postListElementId).find('#submit-comment');
   $(post.submitComment).on('click', function() {
@@ -102,15 +105,18 @@ var renderSubmitCommentButton = function(post) {
     post.allComments.push(CommentModule(commentMessage, commentName, post.commentIndex)); // 0
     post.commentIndex++;
 
+    $(post.postListElementId).find('.comment-list').empty();
     renderComments(post);
 
   });
 }
 
 
-
 var postButton = $('#submit-post');
-// On submission, we *try* to re-render the entire DOM.
+// On click, create new post with user entry
+// add post to allPosts with unique id based on
+// postIndex, increase post index, then empty
+// .post-list and rerendr DOM.
 $(postButton).on('click', function() {
 
   var postMessage = $('#message').val();
