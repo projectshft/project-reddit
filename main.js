@@ -14,7 +14,7 @@ var PostModule = function(message, name, id) {
     message: message,
     name: name,
     id: id,
-    postListElementId: null,
+    postListElementId: "#" + id,
     removeButton: null,
     commentButton: null,
     submitComment: null,
@@ -29,16 +29,13 @@ var CommentModule = function(message, name, id) {
     message: message,
     name: name,
     id: id,
-    commentListElementId: null,
+    commentListElementId: "#" + id,
     deleteComment: null,
   }
 }
 
 var renderPosts = function (post) {
   $('.post-list').append('<li id="' + post.id + '" class="post">' + removeButtonHTML + commentButtonHTML + post.message  + commentListHTML + commentFormHTML + 'Posted by: <strong>' + post.name + '</strong><hr></li>');
-
-  //
-  post.postListElementId = '#' + post.id;
 
   // Dynamically creates removeButton based on listElementId
   renderRemoveButton(post);
@@ -65,7 +62,6 @@ var renderRemoveButton = function (post) {
 }
 
 var renderCommentButton = function (post) {
-
   post.commentButton = $(post.postListElementId).find('.comment-button');
   // Toggles .comments (child of selected post)
   $(post.commentButton).on('click', function() {
@@ -76,29 +72,24 @@ var renderCommentButton = function (post) {
 
 
 var renderComments = function (post) {
-
+  $(post.postListElementId).find('.comment-list').empty();
   post.allComments.forEach(function(comment) {
     $(post.postListElementId).find('.comment-list').append('<li id="' + comment.id + '" class="comment">' + comment.message + ' Posted by: <strong>' + comment.name + ' </strong><i class="fa fa-times remove-comment-button"></i></li>');
 
-    comment.commentListElementId = '#' + comment.id;
+    //comment.commentListElementId = '#' + comment.id;
 
-    renderDeleteCommentButton(comment, post);
+    comment.deleteComment =  $(post.postListElementId).find('.comment-list').find(comment.commentListElementId).find('.remove-comment-button');
+    // On click, removes post from DOM and the selected post from allPosts
+    $(comment.deleteComment).on('click', function() {
 
-  });
-}
+      post.allComments = post.allComments.filter(function(item) {
+        if (item.id !== comment.id) {
+          return item
+        }
+      })
 
-var renderDeleteCommentButton = function(comment, post) {
-  comment.deleteComment =  $(comment.commentListElementId).find('.remove-comment-button');
-  // On click, removes post from DOM and the selected post from allPosts
-  $(comment.deleteComment).on('click', function() {
-
-    post.allComments = post.allComments.filter(function(item) {
-      if (item.id !== comment.id) {
-        return item
-      }
-    })
-
-    $(comment.commentListElementId).remove();
+      $(post.postListElementId).find('.comment-list').find(comment.commentListElementId).remove();
+    });
   });
 }
 
@@ -111,13 +102,11 @@ var renderSubmitCommentButton = function(post) {
     post.allComments.push(CommentModule(commentMessage, commentName, post.commentIndex)); // 0
     post.commentIndex++;
 
-    $('.post-list').empty();
+    renderComments(post);
 
-    allPosts.forEach(function(p) {
-      renderPosts(p);
-    });
   });
 }
+
 
 
 var postButton = $('#submit-post');
@@ -132,13 +121,15 @@ $(postButton).on('click', function() {
 
   $('.post-list').empty();
 
-  allPosts.forEach(function(p) {
-    renderPosts(p);
+  allPosts.forEach(function(post) {
+    renderPosts(post);
   });
 
 });
 
 
+
+//
 // Weird bug...
 // If the first existing post has more comments, we can't get toggle to work
 // and it takes two clicks to delete the post wiht fewer commetns
