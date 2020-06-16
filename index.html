@@ -14,7 +14,7 @@
     <div class="individual-post">
         <p><a class="remove" href="#">remove</a> <a class="comments" href="#">comments</a><span class="postTextParagraph"> {{postText}}</span></p>
         <div class="comment-group">
-          <div class="comment-section">
+          <div class="comments-section">
           </div>
           <form class="form-inline form-group">
             <input type="text" class="form-control form-group commentText" placeholder="Comment Text">
@@ -27,7 +27,7 @@
   </script>
   <script id="comment-template" type="text/x-handlebars-template">
     <div class="comment">
-      <p>{{commentText}} By: <strong>{{commentAuthor}}</strong><button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button></p>
+      <p>{{commentText}} By: <strong>{{commentUser}}</strong><button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button></p>
     </div>
   </script>
   <title>Project Reddit</title>
