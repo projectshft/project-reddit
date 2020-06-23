@@ -8,8 +8,12 @@ var appFunctions = function() {
     var postText = $('#postText').val();
     var postUser = $('#postUser').val();
     counter ++
-    // also pust in a comments array for use in posting and deleting comments
-    posts.push({postText: postText, postUser: postUser, postID: counter, comments: []})
+    if (postText && postUser) {
+      // also pust in a comments array for use in posting and deleting comments
+      posts.push({postText: postText, postUser: postUser, postID: counter, comments: []})
+    } else {
+      alert('Please make sure all post fields are filled out before posting.')
+    }
   }
 
   var renderPosts = function() {
@@ -37,9 +41,13 @@ var appFunctions = function() {
     // set up input values
     var $commentText = form.find('.commentText').val()
     var $commentUser = form.find('.commentUser').val();
-    // find index of post to locate it to add comments to it
-    var index = $('.individual-post').index(eventButton.closest('.individual-post'))
-    posts[index].comments.push({commentText: $commentText, commentUser: $commentUser})
+    if ($commentText && $commentUser) {
+      // find index of post to locate it to add comments to it
+      var index = $('.individual-post').index(eventButton.closest('.individual-post'))
+      posts[index].comments.push({commentText: $commentText, commentUser: $commentUser})
+    } else {
+      alert('Please make sure all comment fields are filled out before attempting to post comment.')
+    }
   }
 
   var renderComment = function() {
@@ -59,8 +67,11 @@ var appFunctions = function() {
     });
   }
 
-  var deleteComment = function() {
-
+  var removeComment = function(eventButton) {
+    var postIndex = $('.individual-post').index(eventButton.closest('.individual-post'))
+    var commentIndex = eventButton.closest('.comment-group').find('.comment').index(eventButton.closest('.comment'))
+    posts[postIndex].comments.splice(commentIndex, 1)
+    // console.log(commentIndex)
   }
 
   return {
@@ -98,7 +109,7 @@ $('#post-section').on('click', '.post-comment', function() {
   controls.renderComment();
 })
 
-$('#post-section').on('click', '.post-comment', function() {
+$('#post-section').on('click', '.close', function() {
   controls.removeComment($(this));
   controls.renderComment();
 })
