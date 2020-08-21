@@ -17,16 +17,31 @@ let arrayOfPostsAndNames = [];
 $('button').click(function () {
   let userPost = $('#post-text').val();
   let userName = $('#post-name').val();
-  let userPostAndName = {
-    post: userPost,
-    name: userName,
-  };
-  arrayOfPostsAndNames.push(userPostAndName);
 
-  // $('.candy').append('<strong>Chocolate</strong>'); //how to add to innerHTML of a class
+  if (userPost == 0 || userName == 0) {
+    alert('Please add both a post and your name.');
+  } else {
+    $('.post-list-items').append(
+      '<li>' +
+        userPost +
+        '<br>' +
+        'Posted by: ' +
+        '<strong>' +
+        userName +
+        '</strong>' +
+        '<hr>' +
+        '</li>'
+    );
 
-  // <li data-id="5">cigar</li>  
+    let userPostAndName = {
+      post: userPost,
+      name: userName,
+    };
+    arrayOfPostsAndNames.push(userPostAndName);
+
+    $('#post-text').val('');
+    $('#post-name').val('');
+  }
+  // <li data-id="5">cigar</li>
   // $('li').data().id; // returns {id: 5}
-  
 });
-
