@@ -28,6 +28,23 @@ implement comments on each post.
 
 'x' bootstrap glyph deletes a comment
 user & comment fields + button click immediately adds comment to list
-click on 'remove' a post removes it (  <span class="glyphicon glyphicon-remove )
-check CSS colors, formatting, fonts etc conform to spec
+click on 'remove' a post removes it (  <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button> )
+check CSS colors, formatting, fonts etc conform to spec -- comment form
 move in-line css to own sheet? override with bootstrap?
+
+
+
+
+------spare code------
+        <div class="row form-group hidden">
+          <div class="col-xs-3 col-sm-3">
+            <input id="comment-text" type="text" class="form-control input-sm" placeholder="Comment Text"></input>
+          </div>
+          <div class="col-xs-3 col-sm-3">
+            <input id="comment-name" type="text" class="form-control input-sm" placeholder="User Name"></input>
+          </div>
+          <div class="col-xs-3 col-sm-3">
+            <button id="post-comment" class="btn btn-primary">Post Comment</button>
+          </div>
+          <div class="col-xs-3 col-sm-3">
+          </div>
