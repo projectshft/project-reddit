@@ -1,3 +1,4 @@
+// once post button is clicked, the message and name is posted to the page
 $('button').click( function() {
     let nameInput = $('#name').val();
     let messageInput = $('#message').val();
