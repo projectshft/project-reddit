@@ -1,9 +1,6 @@
-$('button').click(function() {
-    let input = $('#my-input').val();
-    $('ul').append('<li>' + input + '</li>')
-    
-  })
-  
-  $('.students').on('click', 'li', function () {
-    $(this).remove();
-  })
+$('button').click( function() {
+    let nameInput = $('#name').val();
+    let messageInput = $('#message').val();
+    $('.posts').append('<p>' + messageInput + '</p>')
+    $('.posts').append('<p>' + 'Posted By: <b>' + nameInput + '</b></p>')
+})

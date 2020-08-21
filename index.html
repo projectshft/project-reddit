@@ -7,31 +7,36 @@
         <title>Reddit Look-A-Like</title>
     </head>
     <body>
-        <section id='title'>
-            <div class='container'>
-                <div class='row text-center'>
-                    <div class='col-md-12'>
-                        <h1>Project Reddit</h1>
-                    </div>
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+        
+              <div class="page-header">
+                <h1>Project Reddit</h1>
+              </div>
+        
+              <div class="posts">
+              </div>
+        
+              <form style="margin-top:30px;" onsubmit="event.preventDefault();">
+                <h3>Add a new post</h3>
+                
+                <div class="form-group">
+                  <input id="name" type="text"
+                    class="form-control"
+                    placeholder="Name"></input>
                 </div>
+                
+                <div class="form-group">
+                  <input id="message" type="text"
+                  class="form-control"
+                  placeholder="Message"></input>
+                </div>
+                
+                <button id="submit" class="btn btn-primary">Post</button>
+              </form>
+        
             </div>
-        </section>
-        <form>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Add a New Post</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-              <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-            </div>
-            <div class="form-group">
-              <label for="exampleInputPassword1">Password</label>
-              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-            </div>
-            <div class="form-check">
-              <input type="checkbox" class="form-check-input" id="exampleCheck1">
-              <label class="form-check-label" for="exampleCheck1">Check me out</label>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </form>
+          </div>
         <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
         <script src="main.js"></script>
     </body>
