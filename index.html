@@ -9,40 +9,44 @@
   <link href='style.css' type='text/css' rel='stylesheet'>
 </head>
 
+
 <body>
 
+  <div class="col-md-offset-3 col-md-6">
+    <h1><strong>Project Reddit</strong></h1>
+  </div>
+
   <!-- The table that lists posts & authors; centered in grid and 4 cols wide -->
-  <div class='container col-md-offset-4 col-md-4'>
-    <h2><strong>Project Reddit</strong></h2>
+  <div class='container col-md-offset-3 col-md-6'>
     <table class="table">
       <tr>
-        <td id="description"> There's a cat in the hat on the mat. Scat! <br /> Posted by: <strong>Dr. Seuss</strong>
+        <td id="postAndName"> There's a cat in the hat on the mat. Scat! <br/> Posted by: <strong>Dr. Seuss</strong>
         </td>
       </tr>
       <tr>
-        <td id="description"> Another extremely long post that I'm writing because I am a philopher and I love to
-          write.<br /> Posted by: <strong>Sartre</strong></td>
+        <td id="postAndName"> Another extremely long post that I'm writing because I am a philopher and I love to write.<br/> Posted by: <strong>Sartre</strong></td>
       </tr>
     </table>
+    <hr>
   </div>
 
   <!-- The 'add a post' form; centered in grid and 4 cols wide -->
   <form class="form-horizontal">
     <div class="form-group">
-      <div class="col-md-offset-4 col-md-4">
+      <div class="col-md-offset-3 col-md-6">
         <h3><strong>Add a New Post</strong></h3>
         <input type="text" class="form-control" id="post-text" placeholder="Post Text">
       </div>
     </div>
     <div class="form-group">
-      <div class="col-md-offset-4 col-md-4">
+      <div class="col-md-offset-3 col-md-6">
         <input type="text" class="form-control" id="post-name" placeholder="Your Name">
       </div>
     </div>
 
     <!--The 'post' button -->
     <div class="form-group">
-      <div class="col-md-offset-4 col-md-4">
+      <div class="col-md-offset-3 col-md-6">
         <button type="submit" class="btn btn-primary">Post</button>
       </div>
     </div>
