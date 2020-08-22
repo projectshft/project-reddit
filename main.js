@@ -1,7 +1,7 @@
 
 
-var deletePost;
-var tweetCount = 0;  // check if we need this still
+var deletePost;  // needed?
+var postCount = 0; 
 var removeCommentsHtml = `<a class="remove-post">remove</a>&nbsp;<a class="comment-toggle">comments</a>`;
 var commentsFormHtml = `<div class="row form-group">
 <div class="col-xs-3 col-sm-3">
@@ -31,13 +31,16 @@ var addNewPostEntry = function () {
   console.log($postText);
   var $postersName = $('#name').val();
   console.log($postersName);
-  $('.posts').append('<p>' + removeCommentsHtml + ' ' + $postText + '</p>').addClass('post-entry');
+  var postEntryNumber = 'post-entry' + postCount;
+  $('.posts').append('<p>' + removeCommentsHtml + ' ' + $postText + '</p>').addClass(postEntryNumber);
   $('.posts').append('<div class="comments"></div>');  // find me by nearest?
   $('.posts').append('Posted By: <b>' + $postersName + '</b><hr>');
+  // add events to all relevant classes
   $('.remove-post').click(removePostEntry);
   $('.comment-toggle').click(togglePostComments);
   $('.remove-comment').click(removePostComment);
-
+  // increase post counter
+  postCount++;
 };  
 
 var removePostEntry = function () {
@@ -46,7 +49,9 @@ var removePostEntry = function () {
 
 var togglePostComments = function () {
   console.log('togglePostComments() entered');
-  $('.comments').append(commentsFormHtml);
+  console.log(this);
+  $(this).closest('p').append(commentsFormHtml);
+  // $('.comments').append(commentsFormHtml);
 };
 
 var removePostComment = function () {

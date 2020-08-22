@@ -31,8 +31,9 @@ user & comment fields + button click immediately adds comment to list
 click on 'remove' a post removes it (  <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button> )
 check CSS colors, formatting, fonts etc conform to spec -- comment form
 move in-line css to own sheet? override with bootstrap?
+reset input fields to placeholder text? https://stackoverflow.com/questions/28896937/jquery-restore-changed-placeholder
 
-
+Attribute Contains Selector [name*=”value”]
 
 
 ------spare code------
