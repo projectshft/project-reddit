@@ -9,4 +9,6 @@ $('button').click( function() {
     else {
     $('.posts').append('<p>' + messageInput + '</p>')
     $('.posts').append('<p>' + 'Posted By: <b>' + nameInput + '</b></p>')}
+    //once text is posted, resets the default value of the form
+    $('form').find('input').val('');
 })
