@@ -27,7 +27,7 @@ const renderListofPostsAndName = (arrayWithNestedObjToDisplay) => {
   console.log('rendering!');
 
   //To clear the display of posts before re-rendering:
-  //Assign parent node (ul) to postList.
+  //Assign parent node (ol) to postList.
   //While parent has child nodes (li), remove them one by one
   var postList = $('.post-list-items')[0];
   while (postList.hasChildNodes()) {
@@ -35,58 +35,71 @@ const renderListofPostsAndName = (arrayWithNestedObjToDisplay) => {
   }
 
   // Render the list of posts by looping through the array's nested objects
-  let counter = 0;
   for (let i = 0; i < arrayWithNestedObjToDisplay.length; i++) {
-    counter++;
-    let listItem = $('<li>' + 
-    '<a id="remover">' +
-    'remove ' +
-    '</a>' +
-    '<a id="commenter">' +
-    ' comment ' +
-    '</a>' +
-    '<br>' +
-    arrayWithNestedObjToDisplay[i].post +
-    '<br>' +
-    'Posted by: ' +
-    '<b>' +
-    arrayWithNestedObjToDisplay[i].name +
-    '</b>' +
-    '<hr>' +
-    '</li>');
-
-    listItem.className = counter;
-    console.log(listItem);
+    //build the content of the list item
+    let listItem = $(
+      '<li id=anItem class=post-list>' +
+        '<a class="remover">' +
+        'remove ' +
+        '</a>' +
+        '<a class="commenter">' +
+        ' comment ' +
+        '</a>' +
+        '<br>' +
+        arrayWithNestedObjToDisplay[i].post +
+        '<br>' +
+        'Posted by: ' +
+        '<b>' +
+        arrayWithNestedObjToDisplay[i].name +
+        '</b>' +
+        '<hr>' +
+        '</li>'
+    );
 
     $('.post-list-items').append(listItem);
-      
-    
-   
-
-    arrayWithNestedObjToDisplay[i].postNumber = counter;
-    // console.log(arrayWithNestedObjToDisplay);
   }
 
   //Clear the text boxes
   $('#post-text').val('');
   $('#post-name').val('');
 
-  // Add onclick function to ul of posts
-  $('.post-list-items').click(function (event) {
-    console.log('removing');
+  
+  $('.remover').on('click', function () {
+    console.log('clicked');
 
-    //If the remove button is clicked, delete the parent li.
-    if ((event.target || event.srcElement).id === 'remover') {
-      console.log('removing step2');
-      console.log(event.target.parentElement);
-      // event.target.parentElement.remove();
-    
-    }
+    let listItemNumber = $(event.target.parentElement).index();
+    Number(listItemNumber);
+
+    console.log(listItemNumber);
+    console.log(arrayWithNestedObjToDisplay[listItemNumber]);
+
+    arrayWithNestedObjToDisplay.splice(listItemNumber, 1);
+    event.target.parentElement.remove();
   });
 
 
 
-  $('#commenter').click(function () {
-    console.log('commenting!');
-  });
+  
+  // // Add onclick function to ol of posts
+  //   $('.post-list-items').one('click', function(event) {
+  //     console.log('removing');
+
+  //     //If the remove button is clicked, delete the parent li.
+  //     if ((event.target).id === 'remover') {
+  //       console.log('removing step2');
+  //       let listItemNumber = $(event.target.parentElement).index();
+  //       Number(listItemNumber);
+  //       // console.log(listItemNumber);
+  //       // console.log(arrayWithNestedObjToDisplay[listItemNumber]);
+  //       arrayWithNestedObjToDisplay.splice(listItemNumber, 1);
+  //       event.target.parentElement.remove();
+  //       // arrayWithNestedObjToDisplay);
+  //     }
+  // });
 };
+
+// document.getElementsByTagName('li')[0].addEventListener('click', function (e) {
+//   if ((e.target || e.srcElement).id == 'remover') {
+//     console.log('click');
+//   }
+// });
