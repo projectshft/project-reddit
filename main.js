@@ -13,15 +13,24 @@ $('button').click( function() {
     $('form').find('input').val('');
 })
 // the below adds functionality that when comment is clicked, a box for a comment and username pops up as well as a post comment button
+// need to make this a div child of the original post so it is only associated with that post
 $('.posts').on( 'click', '#comment', function (){
     $('.posts').append('<input id="comment-text" type="text" class="form-control" placeholder="Comment Text"></input>' + 
-    '<input id="name" type="text" class="form-control" placeholder="User Name"></input>' + 
+    '<input id="comment-name" type="text" class="form-control" placeholder="User Name"></input>' + 
     '<button id="submit-comment" class="btn btn-primary">Post Comment</button>')
 })
 // when post comment button is clicked, comment text and username text appears
 $('.posts').on( 'click', '#submit-comment', function (){
-    console.log('hi');
-} ) 
+    let commentMessageInput = $('#comment-text').val();
+    let commentNameInput = $('#comment-name').val();
+    //checks to make sure commentNameInput and commentMessageInput have a value so user can't post a blank comment
+    if (commentMessageInput == '' || commentNameInput == '') {
+        alert('You need to enter a user name and message before posting a comment')
+    }
+    else {
+        $('.posts').append('<p>' + commentMessageInput + '</p>' + '<p>' + commentNameInput + '</p>');
+    }
+}) 
 
 
 
