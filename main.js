@@ -21,27 +21,33 @@ $('button').click(function () {
   if (userPost == 0 || userName == 0) {
     alert('Please add both a post and your name.');
   } else {
-    $('.post-list-items').append(
-      '<li>' +
-        userPost +
-        '<br>' +
-        'Posted by: ' +
-        '<strong>' +
-        userName +
-        '</strong>' +
-        '<hr>' +
-        '</li>'
-    );
-
     let userPostAndName = {
       post: userPost,
       name: userName,
     };
     arrayOfPostsAndNames.push(userPostAndName);
+    $('.post-list-items').append(
+      '<li>' + '<a href="#" class="remover">' + 'remove '  + '</a>'
+      + '<a href="#" class="commenter">' + ' comment ' + '</a>' + '<br>' +
+      userPostAndName.post +
+        '<br>' +
+        'Posted by: ' +
+        '<b>' +
+        userPostAndName.name +
+        '</b>' +
+        '<hr>' +
+        '</li>'
+    );
 
     $('#post-text').val('');
     $('#post-name').val('');
   }
+  return arrayOfPostsAndNames;
   // <li data-id="5">cigar</li>
   // $('li').data().id; // returns {id: 5}
+  //$(this).closest('.box').children('.something1')
+
+  /*$('selector').click(function(){
+    alert($('selector').index(this));*/
 });
+
