@@ -18,23 +18,27 @@ DONE  <hr> line
 message if both are not filled?
 ----part 2 below -----
 implement comments on each post.
-'comments' link toggles input box
+'comments' link toggles input box  (hidden looks to be wrong way)
   DONE add div for comments
-  inject 'remove comments' links before message append
-  how to identify these with jQ?
+  DONE  inject 'remove comments' links before message append
+  DONE  how to identify these with jQ?
   reveal or append comment and user fields with button?
   Posted By byline stays at end of comments
   comments div line-height ok?
 
 'x' bootstrap glyph deletes a comment
-user & comment fields + button click immediately adds comment to list
+DONE user & comment fields + button click immediately adds comment to list
 click on 'remove' a post removes it (  <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button> )
 check CSS colors, formatting, fonts etc conform to spec -- comment form
-move in-line css to own sheet? override with bootstrap?
+any in-line css to own sheet? override with bootstrap?
 reset input fields to placeholder text? https://stackoverflow.com/questions/28896937/jquery-restore-changed-placeholder
-
+post-entry div's not properly wrapping?  Something still seems amiss
+format of comments fields and button
 Attribute Contains Selector [name*=”value”]
-
+maybe track down $(this) traversals by adding bootstrap highlights? on barebones html
+if post or comment is empty, ignore - optional
+comments not at end of comments
+comments going inside form
 
 ------spare code------
         <div class="row form-group hidden">
@@ -48,4 +52,5 @@ Attribute Contains Selector [name*=”value”]
             <button id="post-comment" class="btn btn-primary">Post Comment</button>
           </div>
           <div class="col-xs-3 col-sm-3">
+          </div>
           </div>

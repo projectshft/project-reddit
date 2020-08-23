@@ -17,15 +17,7 @@ var commentsFormHtml = `<form onsubmit="event.preventDefault();">
 <div class="col-xs-3 col-sm-3">
 </div></div></form>`;
 
-// var button = document.getElementById('submit')[0];  
-//var $postButton = $('#submit');  // needed?
 
-
-// lots of lifting here in addNewPostEntry()
-// define or get vars for html links to remove/comments
-// define or get vars for html comment form entry.
-// concat remove/comments link html and post text from .val() in form
-// set up event listeners on these new elements
 var addNewPostEntry = function () {
   
   var $postText = $('#message').val();
@@ -50,6 +42,8 @@ var addNewPostEntry = function () {
 
 var removePostEntry = function () {
   console.log('removePostEntry() entered');
+  $(this).closest('div').css('background-color', 'yellow');
+  $(this).closest('div').fadeOut();
 };
 
 var togglePostComments = function () {
@@ -57,59 +51,41 @@ var togglePostComments = function () {
   // $(this).hasClass('.hidden').toggle();   ///aaaargh
 };
 
-var addCommentToPost = function (element) {
-  console.log(element);
+var addCommentToPost = function () {
+  $otherThing = $(this).closest('form').find('.comment-name').val();
   console.log('addCommentToPost() entered');
+  $(this).closest('form').find('.comment-name').css('background-color', 'yellow');
+  $(this).closest('form').css('background-color', 'yellow');
+  console.log('thing: ',$(this).closest('input').has('.comment-name').val());
+  console.log('other thing: ', $otherThing);
   var closeGlyph = `<a href="#" class = "comment-delete"><span class="glyphicon glyphicon-remove"></span></a>`;
   var $commentText = $(this).has('.comment-text').val();
   var $commentName = $(this).has('.comment-name').val();
   console.log($commentText);
   console.log($commentName);
-  $(this).parent().parent().parent().parent().prepend('<span class="comment-single">' + $commentText + ' Posted By: <b>' + $commentName + '</b> '+ closeGlyph + '</span><br/>');
+  $(this).parent().parent().parent().parent().find('.comment-single').last().append('<span class="comment-single">' + $commentText + ' Posted By: <b>' + $commentName + '</b> '+ closeGlyph + '<br/></span>');
   $('.comment-delete').off();
   $('.comment-delete').click(removePostComment);
+  $('.comment-post').off();
+  $('.comment-post').click(addCommentToPost);
 };
 
 var removePostComment = function () {
   console.log('removePostComment() entered');
   console.log($(this));
-  // $(this).css('background-color', 'yellow');
+$(this).closest('.comment-single').css('background-color', 'yellow');
+$(this).closest('.comment-single').fadeOut();
+//$(this).closest('.comment-single').detach();
 };
-
+// $('.remove-post').off();
+// $('.comment-toggle').off();
+// $('.comment-post').off();
+$('.comment-delete').click(removePostComment);
+$('.remove-post').click(removePostEntry);
+$('.comment-toggle').click(togglePostComments);
+$('.comment-post').click(addCommentToPost);
 $('#submit').click(addNewPostEntry);
 
 
-
-/*   var userName = document.getElementById('name').value;  // needs [0]?
-  var userTextNode = document.createTextNode(userName);
-  var userElementP = document.createElement('p');
-  userElementP.appendChild(userTextNode);
-  userElementP.setAttribute('class', 'user-name');
-  var postText = document.getElementById('message').value;
-  var postTextNode = document.createTextNode(postText);
-  var postElementP = document.createElement('p');
-  postElementP.appendChild(postTextNode);
-  postElementP.setAttribute('class', 'tweet');
-  var delBtnTextNode = document.createTextNode('Delete Post');
-  var delBtnElementBtn = document.createElement('button');
-  delBtnElementBtn.appendChild(delBtnTextNode);
-  delBtnElementBtn.setAttribute('class', 'deleter');
-
-
-  document.getElementsByTagName('form')[0].append(userElementP);
-  document.getElementsByTagName('form')[0].append(postElementP);
-  document.getElementsByClassName('tweet')[tweetCount].append(delBtnElementBtn);
-  deletePost = document.getElementsByClassName('deleter')[tweetCount];
-  makeEvents();
-  tweetCount++; */
-
-/* var makeEvents = function() {
-deletePost.addEventListener('click', function () {
-console.log('working');
-document.getElementsByClassName('tweet')[0].remove();
-document.getElementsByClassName('user-name')[0].remove();
-//document.getElementsByClassName('deleter')[0].remove();  // surprise! it deletes itself
-});
-} */
 
 
