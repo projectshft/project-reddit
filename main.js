@@ -21,7 +21,7 @@ $('.posts').on('click', '#remove', function () {
    })
    
 // the below adds functionality that when comment is clicked, a box for a comment and username pops up as well as a post comment button
-$('.posts').one( 'click', '#comment-toggle', function (){
+$('.posts').on( 'click', '#comment-toggle', function (){
     // creates a variable so that comment and remove buttons are children of the comment div
     let redditCommentData = '<input id="comment-text" type="text" class="form-control" placeholder="Comment Text"></input>' + 
     '<input id="comment-name" type="text" class="form-control" placeholder="User Name"></input>' + 
