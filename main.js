@@ -96,16 +96,23 @@ const renderListofPostsAndName = (arrayWithNestedObjToDisplay) => {
 
   $('.commenter').on('click', function (event) {
     console.log('commenter clicked');
-    // console.log($('#addAComment'));
+    //PLAN: This mini-module should 1) make comments visible or not.
+    //2) store the index of the parent that was clicked.
+    //3) possibly create a ol child linked to the parent li?
 
+    //TO FIX: obviously I don't want a new ol each time I click. 
+    //HOW TO LINK THE CHILD ITEMS?
     $(event.target.parentElement).append($('<ol class=comment-list-items>'));
 
     postIndex = $(event.target.parentElement).index();
     Number(postIndex);
 
+    //give the parent element a unique ID property
     $(event.target.parentElement).prop('id', postIndex);
-    // console.log($(event.target.parentElement));
 
+    // $(event.target.firstChild).prop('id', postIndex);
+
+    //toggle the comment block visible or hidden
     if ($('#addAComment').css('display') === 'none') {
       $('#addAComment').css('display', 'block');
     } else {
@@ -116,7 +123,7 @@ const renderListofPostsAndName = (arrayWithNestedObjToDisplay) => {
 
   $('#commentButton').unbind().on('click', function () {
       console.log('comment button clicked');
-
+    
       let userCommentText = $('.commentText').val();
       let userCommentName = $('.commentName').val();
 
@@ -145,7 +152,7 @@ const renderListofPostsAndName = (arrayWithNestedObjToDisplay) => {
 
   renderComments = (commentsArrayToRender) => {
     console.log('rendering comments');
-    
+
     //append a new ordered list (for comments) to the posts (list items w/ class='post-list')
     // $('.post-list').append($('<ol class=comment-list-items>'));
 
