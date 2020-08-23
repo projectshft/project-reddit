@@ -20,7 +20,14 @@ $('.posts').on('click', '#remove', function () {
     $('.selected').remove();
    })
    
-
+// the below adds functionality that when comment is clicked, a box for a comment and username pops up as well as a post comment button
+$('.posts').on( 'click', '#comment', function (){
+    $(this).parent().addClass('selected')
+    $('.selected').append('<input id="comment-text" type="text" class="form-control" placeholder="Comment Text"></input>' + 
+    '<input id="comment-name" type="text" class="form-control" placeholder="User Name"></input>' + 
+    '<button id="submit-comment" class="btn btn-primary">Post Comment</button>')
+    $(this).parent().removeClass('selected')
+})
 
 
 
