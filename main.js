@@ -1,7 +1,7 @@
 //An array to store posts and names
 const arrayOfPostsAndNames = [];
 
-$('button').click(function () {
+$('#postButton').click(function () {
   //Onclick, assign the text box values to variables
   let userPost = $('#post-text').val();
   let userName = $('#post-name').val();
@@ -45,61 +45,87 @@ const renderListofPostsAndName = (arrayWithNestedObjToDisplay) => {
         '<a class="commenter">' +
         ' comment ' +
         '</a>' +
-        '<br>' +
         arrayWithNestedObjToDisplay[i].post +
         '<br>' +
+        '<ol class=comment-list-items>' +
+        '<li id=aComment class=comment-list>' +
+        '</li>' +
         'Posted by: ' +
         '<b>' +
         arrayWithNestedObjToDisplay[i].name +
         '</b>' +
-        '<hr>' +
         '</li>'
     );
 
     $('.post-list-items').append(listItem);
   }
 
-  //Clear the text boxes
+  //Clear the text and boxes
   $('#post-text').val('');
   $('#post-name').val('');
+  $('.commentText').val('');
+  $('.commentName').val('');
 
-  
-  $('.remover').on('click', function () {
+  //Plan: If 'remove' is clicked, delete post from list and
+  //remove object from array
+  $('.remover').on('click', function (event) {
     console.log('clicked');
 
-    let listItemNumber = $(event.target.parentElement).index();
-    Number(listItemNumber);
+    //get the index of the post (value of the ol[index]) to associate w/ array index
+    let removePostItemNumber = $(event.target.parentElement).index();
+    Number(removePostItemNumber);
 
-    console.log(listItemNumber);
-    console.log(arrayWithNestedObjToDisplay[listItemNumber]);
-
-    arrayWithNestedObjToDisplay.splice(listItemNumber, 1);
+    //Use array .splice method to delete associated object from array
+    arrayWithNestedObjToDisplay.splice(removePostItemNumber, 1);
+    //Remove the list item from the ordered list
     event.target.parentElement.remove();
   });
 
+  $('.commenter').on('click', function (event) {
+    console.log('clicked');
+    // console.log($('#addAComment'));
+
+    let commentPostItemNumber = $(event.target.parentElement).index();
+    Number(commentPostItemNumber);
+
+    //append a new ordered list to the index of the list item
+    // $(event.target.parentElement).append()
+
+    if ($('#addAComment').css('display') === 'none') {
+      $('#addAComment').css('display', 'block');
+    } else {
+      $('#addAComment').css('display', 'none');
+    }
+
+    $('#commentButton').click(function () {
+      console.log('commenting');
+      
+      let arrayOfComments = [];
+
+      let userCommentText = $('.commentText').val();
+      let userCommentName = $('.commentName').val();
+
+      if (userCommentText == 0 || userCommentName == 0) {
+        alert('Please add both a comment and your name.');
+      } else {
+        let userCommentAndName = {
+          commText: userCommentText,
+          commName: userCommentName,
+        };
+
+        console.log(userCommentAndName);
+
+        arrayOfComments.push(userCommentAndName);
+        console.log(arrayOfComments);
 
 
-  
-  // // Add onclick function to ol of posts
-  //   $('.post-list-items').one('click', function(event) {
-  //     console.log('removing');
+        arrayWithNestedObjToDisplay[
+          commentPostItemNumber].comment = arrayOfComments;
 
-  //     //If the remove button is clicked, delete the parent li.
-  //     if ((event.target).id === 'remover') {
-  //       console.log('removing step2');
-  //       let listItemNumber = $(event.target.parentElement).index();
-  //       Number(listItemNumber);
-  //       // console.log(listItemNumber);
-  //       // console.log(arrayWithNestedObjToDisplay[listItemNumber]);
-  //       arrayWithNestedObjToDisplay.splice(listItemNumber, 1);
-  //       event.target.parentElement.remove();
-  //       // arrayWithNestedObjToDisplay);
-  //     }
-  // });
+        console.log(arrayWithNestedObjToDisplay);
+
+        // renderListofPostsAndName(arrayWithNestedObjToDisplay);
+      }
+    });
+  });
 };
-
-// document.getElementsByTagName('li')[0].addEventListener('click', function (e) {
-//   if ((e.target || e.srcElement).id == 'remover') {
-//     console.log('click');
-//   }
-// });

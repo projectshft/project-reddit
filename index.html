@@ -17,14 +17,25 @@
     <hr>
   </div>
 
-  <!-- An ordered list of posts -->
-  <div class="col-sm-offset-3 col-sm-6">
-    <ol class="post-list-items">
+  <!-- An ordered list of posts. Nested comments will be added dyamically -->
+  <div>
+    <ol class="post-list-items col-sm-offset-3 col-sm-6">
     </ol>
   </div>
 
+
+
+  <!-- The 'add a comment' form' -->
+  <form id="addAComment" class="form-inline">
+    <input id="inlineFormInputCommentText" type="text" class="commentText form-control-sm mb-0 mr-sm-1" placeholder="Comment text">
+    <div class="input-group mb-0 mr-sm-1">
+      <input id="inlineFormInputCommentName" type="text" class="commentName form-control-sm"  placeholder="Your name">
+    </div>
+    <button id="commentButton" type="submit" class="btn btn-primary btn-sm mb-0">Post Comment</button>
+  </form>
+
   <!-- The 'add a post' form; centered in grid and 4 cols wide -->
-  <form class="form-horizontal">
+  <form id="addAPost" class="form-horizontal">
     <div class="form-group">
       <div class="col-sm-offset-3 col-sm-6">
         <h3><strong>Add a New Post</strong></h3>
@@ -40,10 +51,11 @@
     <!--The 'post' button -->
     <div class="form-group">
       <div class="col-sm-offset-3 col-sm-6">
-        <button class="btn btn-primary" type="button">Post</button>
+        <button id="postButton" class="btn btn-primary" type="button">Post</button>
       </div>
     </div>
   </form>
+
 
 
   <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
