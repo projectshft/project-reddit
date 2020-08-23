@@ -1,8 +1,13 @@
 //An array to store posts and names
 const arrayOfPostsAndNames = [];
 const arrayOfCommentsAndNames = [];
+let renderComments;
 
 $('#postButton').click(function () {
+  //TOFIX: after comments have been entered, if new
+  //post is added and Post button clicked, the posts are rendered
+  //correctly but all comments disappear. Need to re-render them.
+
   console.log('post button clicked!');
   //Onclick, assign the text box values to variables
   let userPost = $('#post-text').val();
@@ -41,7 +46,7 @@ const renderListofPostsAndName = (arrayWithNestedObjToDisplay) => {
     //build the content of the list item
 
     let listItem = $(
-      '<li id=anItem class=post-list data-parent:post-list-items>' +
+      '<li class=post-list data-parent:post-list-items>' +
         '<a class="remover">' +
         'remove ' +
         '</a>' +
@@ -87,32 +92,29 @@ const renderListofPostsAndName = (arrayWithNestedObjToDisplay) => {
     }
   });
 
-  let commentPostItemNumber;
+  let postIndex;
 
   $('.commenter').on('click', function (event) {
     console.log('commenter clicked');
     // console.log($('#addAComment'));
 
-    commentPostItemNumber = $(event.target.parentElement).index() + 1;
-    Number(commentPostItemNumber);
+    $(event.target.parentElement).append($('<ol class=comment-list-items>'));
 
-    //append a new ordered list to the index of the list item
-    // $(event.target.parentElement).append()
+    postIndex = $(event.target.parentElement).index();
+    Number(postIndex);
 
-    //fix needed: toggle on and off only if current post.
-    //If new post and comments are open, keep open with new
-    //commentPostItemNumber
+    $(event.target.parentElement).prop('id', postIndex);
+    // console.log($(event.target.parentElement));
+
     if ($('#addAComment').css('display') === 'none') {
       $('#addAComment').css('display', 'block');
     } else {
       $('#addAComment').css('display', 'none');
     }
-    return commentPostItemNumber;
+    return postIndex;
   });
 
-  $('#commentButton')
-    .unbind()
-    .click(function () {
+  $('#commentButton').unbind().on('click', function () {
       console.log('comment button clicked');
 
       let userCommentText = $('.commentText').val();
@@ -122,7 +124,7 @@ const renderListofPostsAndName = (arrayWithNestedObjToDisplay) => {
         alert('Please add both a comment and your name.');
       } else {
         let userCommentAndName = {
-          parentListNumber: commentPostItemNumber,
+          postIndex: postIndex,
           commText: userCommentText,
           commName: userCommentName,
         };
@@ -130,8 +132,6 @@ const renderListofPostsAndName = (arrayWithNestedObjToDisplay) => {
         // console.log(userCommentAndName);
 
         arrayOfCommentsAndNames.push(userCommentAndName);
-
-        console.log(arrayOfCommentsAndNames);
 
         renderComments(arrayOfCommentsAndNames);
         // arrayWithNestedObjToDisplay[
@@ -143,13 +143,11 @@ const renderListofPostsAndName = (arrayWithNestedObjToDisplay) => {
       }
     });
 
-  const renderComments = (arrayToRender) => {
+  renderComments = (commentsArrayToRender) => {
     console.log('rendering comments');
-    console.log(arrayToRender);
-
-     //append a new ordered list (for comments) to the posts (list items w/ class='post-list')
-    $('.post-list').append($('<ol class=comment-list-items>'));
-
+    
+    //append a new ordered list (for comments) to the posts (list items w/ class='post-list')
+    // $('.post-list').append($('<ol class=comment-list-items>'));
 
     //To clear the display of comments before re-rendering:
     //Assign parent node (ol) to listOfCommentsToClear.
@@ -159,19 +157,20 @@ const renderListofPostsAndName = (arrayWithNestedObjToDisplay) => {
       listOfCommentsToClear.removeChild(listOfCommentsToClear.firstChild);
     }
 
-   
+    console.log(arrayWithNestedObjToDisplay); //posts
+    console.log(commentsArrayToRender); //comments
+    console.log(arrayWithNestedObjToDisplay[0]); //matching 0 post
 
-    for (let i = 0; i < arrayToRender.length; i++) {
+    for (let i = 0; i < commentsArrayToRender.length; i++) {
       //build the content of the list item
+
       let commentItem = $(
-        '<li id=Comments class=comments-list data-parent=comment-list-items>' +
-          'Comment for post #' +
-          ' ' +
-          arrayToRender[i].parentListNumber + '  ' +
-          arrayToRender[i].commText + '  ' +
+        '<li class=comment-list data-parent:comment-list-items>' +
+          commentsArrayToRender[i].commText +
+          '  ' +
           ' Posted by: ' +
           '<b>' +
-          arrayToRender[i].commName +
+          commentsArrayToRender[i].commName +
           '</b>' +
           '</li>'
       );
