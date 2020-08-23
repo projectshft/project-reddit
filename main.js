@@ -8,8 +8,8 @@ $('button').click( function() {
     }
     else {
     //creates a variable inorder to insure that each new post created is within it's own div element in the DOM
-    let redditPostData = '<button id="remove" class="btn">remove</button><button id="comment" class="btn">comment</button><p>' + messageInput + '</p><p>Posted By: <b>' + nameInput + '</b></p>'
-    $('.posts').append('<div class="new-div">' + redditPostData + '</div>')}
+    let redditPostData = '<button id="remove" class="btn">remove</button><button id="comment" class="btn">comment</button><p class="post-text">' + messageInput + '</p><p>Posted By: <b>' + nameInput + '</b></p>'
+    $('.posts').append('<div class="new-post">' + redditPostData + '</div>')}
     //once text is posted, resets the default value of the form
     $('form').find('input').val('');
 })
@@ -22,10 +22,12 @@ $('.posts').on('click', '#remove', function () {
    
 // the below adds functionality that when comment is clicked, a box for a comment and username pops up as well as a post comment button
 $('.posts').on( 'click', '#comment', function (){
-    $(this).parent().addClass('selected')
-    $('.selected').append('<input id="comment-text" type="text" class="form-control" placeholder="Comment Text"></input>' + 
+    // creates a variable so that comment and remove buttons are children of the comment div
+    let redditCommentData = '<input id="comment-text" type="text" class="form-control" placeholder="Comment Text"></input>' + 
     '<input id="comment-name" type="text" class="form-control" placeholder="User Name"></input>' + 
-    '<button id="submit-comment" class="btn btn-primary">Post Comment</button>')
+    '<button id="submit-comment" class="btn btn-primary">Post Comment</button>'
+    $(this).parent().addClass('selected')
+    $('.selected').children('.post-text').append('<div class="comment-div">' + redditCommentData + '</div')
     $(this).parent().removeClass('selected')
 })
 
