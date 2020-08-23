@@ -1,7 +1,3 @@
-
-
-var deletePost;  // needed?
-var postCount = 0; 
 var removeCommentsHtml = `<a class="remove-post">remove</a>&nbsp;<a class="comment-toggle">comments</a>`;
 var commentsFormHtml = `<form onsubmit="event.preventDefault();">
 <div class="row form-group" >
@@ -17,57 +13,67 @@ var commentsFormHtml = `<form onsubmit="event.preventDefault();">
 <div class="col-xs-3 col-sm-3">
 </div></div></form>`;
 
-// var button = document.getElementById('submit')[0];  
-//var $postButton = $('#submit');  // needed?
-
-
 // lots of lifting here in addNewPostEntry()
-// define or get vars for html links to remove/comments
-// define or get vars for html comment form entry.
+// get vars for html with links to remove/comments (template)
+// get vars for html comment template form entry.
 // concat remove/comments link html and post text from .val() in form
 // set up event listeners on these new elements
 var addNewPostEntry = function () {
-  
+  // these are the only ID'd form text elements on the screen, so it's straightforward
+  // to grab the val()'s
   var $postText = $('#message').val();
-  console.log($postText);
+  // console.log($postText);
   var $postersName = $('#name').val();
-  console.log($postersName);
-  // var postEntryNumber = 'post-entry' + postCount;
+  // console.log($postersName);
+  // Build a new post, appending to the .posts div and wrapping in .post-single div
   $('.posts').append('<div class="post-single"><p>' + removeCommentsHtml + ' ' + $postText + '</p>');
-  $('.posts').append('<div class="comments">' + commentsFormHtml + '</div>');  // find me by nearest?
-  $('.posts').append('Posted By: <b>' + $postersName + '</b><hr /></div>');  // end .post-single, but it is not working 
-  // add events to all relevant classes -- maybe move to own func
-  // first, kill existing event handlers everywhere to prevent multi-firing of event
+  // create the div for comments. start hidden so it can be toggled on click
+  $('.posts').append('<div class="comments" hidden>' + commentsFormHtml + '</div>');  
+  $('.posts').append('Posted By: <b>' + $postersName + '</b><hr /></div>');  
+  // /div above ends .post-single
+  // Prepare for events...
+  // first, kill existing event handlers everywhere to prevent multi-firing of events
   $('.remove-post').off();
   $('.comment-toggle').off();
   $('.comment-post').off();
+  // add new events to comments
   $('.remove-post').click(removePostEntry);
   $('.comment-toggle').click(togglePostComments);
   $('.comment-post').click(addCommentToPost);
-  // increase post counter
-  postCount++;
 };  
 
+// remove an entire post by selecting its div
 var removePostEntry = function () {
-  console.log('removePostEntry() entered');
+  //console.log('removePostEntry() entered');
+  $(this).closest('div').fadeOut();
+  // why blink out when you can fade away?
 };
 
+// select the .comments div, which is in same post div
 var togglePostComments = function () {
-  console.log('togglePostComments() entered');
-  // $(this).hasClass('.hidden').toggle();   ///aaaargh
+  //console.log('togglePostComments() entered');
+  $(this).siblings('.comments').first().toggle(400);  
 };
 
-var addCommentToPost = function (element) {
-  console.log(element);
-  console.log('addCommentToPost() entered');
+
+var addCommentToPost = function () {
+  //console.log('addCommentToPost() entered');
   var closeGlyph = `<a href="#" class = "comment-delete"><span class="glyphicon glyphicon-remove"></span></a>`;
-  var $commentText = $(this).has('.comment-text').val();
-  var $commentName = $(this).has('.comment-name').val();
-  console.log($commentText);
-  console.log($commentName);
-  $(this).parent().parent().parent().parent().prepend('<span class="comment-single">' + $commentText + ' Posted By: <b>' + $commentName + '</b> '+ closeGlyph + '</span><br/>');
+  var $commentText = $(this).closest('form').find('.comment-text').val();
+  var $commentName = $(this).closest('form').find('.comment-name').val();
+  // console.log($commentText);
+  // console.log($commentName);
+  // put the comment in the .comments div  wrap in own div for easy deletion later
+  // (this is a messy selection, but accurate). .find() and .last() appears to be ignored
+  // or throw no error when not finding or filtering to a result. 
+  // This is great for adding comments to end of existing ones
+  $(this).parent().parent().parent().parent().find('.comment-single').last().append('<span class="comment-single">' + $commentText + ' Posted By: <b>' + $commentName + '</b> '+ closeGlyph + '<br/></span>');
+  
+  // reset comment events as count has changed. Probably not neccesary, but good to be tidy.
   $('.comment-delete').off();
+  $('.comment-post').off();
   $('.comment-delete').click(removePostComment);
+  $('.comment-post').click(addCommentToPost);
 };
 
 var removePostComment = function () {

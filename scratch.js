@@ -48,6 +48,8 @@ var removePostEntry = function () {
 
 var togglePostComments = function () {
   console.log('togglePostComments() entered');
+  // $(this).siblings('.comments').first().css('background-color', 'yellow');
+  $(this).siblings('.comments').first().toggle(400);
   // $(this).hasClass('.hidden').toggle();   ///aaaargh
 };
 
