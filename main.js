@@ -7,11 +7,15 @@ $('button').click( function() {
         alert('You need to enter a name and message before posting')
     }
     else {
-    $('.posts').append('<button id="remove" class="btn">remove</button>' + '<button id="comment" class="btn">comment</button>' + '<p>' + messageInput + '</p>')
-    $('.posts').append('<p>' + 'Posted By: <b>' + nameInput + '</b></p>')}
+    //creates a variable inorder to insure that each new post created is within it's own div element in the DOM
+    let redditPostData = '<button id="remove" class="btn">remove</button><button id="comment" class="btn">comment</button><p>' + messageInput + '</p><p>Posted By: <b>' + nameInput + '</b></p>'
+    $('.posts').append('<div class="new-div">' + redditPostData + '</div>')}
     //once text is posted, resets the default value of the form
     $('form').find('input').val('');
 })
+
+
+
 // the below adds functionality that when comment is clicked, a box for a comment and username pops up as well as a post comment button
 // need to make this a div child of the original post so it is only associated with that post
 $('.posts').on( 'click', '#comment', function (){
