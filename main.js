@@ -39,6 +39,7 @@ const renderListofPostsAndName = (arrayWithNestedObjToDisplay) => {
   // Render the list of posts by looping through the array's nested objects
   for (let i = 0; i < arrayWithNestedObjToDisplay.length; i++) {
     //build the content of the list item
+
     let listItem = $(
       '<li id=anItem class=post-list data-parent:post-list-items>' +
         '<a class="remover">' +
@@ -146,6 +147,10 @@ const renderListofPostsAndName = (arrayWithNestedObjToDisplay) => {
     console.log('rendering comments');
     console.log(arrayToRender);
 
+     //append a new ordered list (for comments) to the posts (list items w/ class='post-list')
+    $('.post-list').append($('<ol class=comment-list-items>'));
+
+
     //To clear the display of comments before re-rendering:
     //Assign parent node (ol) to listOfCommentsToClear.
     //While parent has child nodes (li), remove them one by one
@@ -153,6 +158,8 @@ const renderListofPostsAndName = (arrayWithNestedObjToDisplay) => {
     while (listOfCommentsToClear.hasChildNodes()) {
       listOfCommentsToClear.removeChild(listOfCommentsToClear.firstChild);
     }
+
+   
 
     for (let i = 0; i < arrayToRender.length; i++) {
       //build the content of the list item
