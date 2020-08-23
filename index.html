@@ -12,29 +12,34 @@
 
 <body>
 
-  <div class="col-sm-offset-3 col-sm-6">
+  <div class="container header col-sm-offset-3 col-sm-6">
     <h1><strong>Project Reddit</strong></h1>
     <hr>
   </div>
 
   <!-- An ordered list of posts. Nested comments will be added dyamically -->
-  <div>
-    <ol class="post-list-items col-sm-offset-3 col-sm-6">
+  <div class='container the-posts col-sm-offset-3 col-sm-6'>
+    <ol class="post-list-items">
     </ol>
   </div>
 
 
 
   <!-- The 'add a comment' form' -->
-  <form id="addAComment" class="form-inline">
-    <input id="inlineFormInputCommentText" type="text" class="commentText form-control-sm mb-0 mr-sm-1" placeholder="Comment text">
-    <div class="input-group mb-0 mr-sm-1">
-      <input id="inlineFormInputCommentName" type="text" class="commentName form-control-sm"  placeholder="Your name">
+
+  <form id="addAComment" class="form-inline form-group  ">
+    <div class="input-group col-sm-offset-3 col-sm-6">
+      <input id="inlineFormInputCommentText" type="text" class="commentText form-control-sm" placeholder="Comment text">
+      <div class="input-group ">
+        <input id="inlineFormInputCommentName" type="text" class="commentName form-control-sm" placeholder="Your name">
+      </div>
+      <button id="commentButton" type="button" class="comment-btn btn btn-primary btn-sm">Post Comment</button>
     </div>
-    <button id="commentButton" type="submit" class="btn btn-primary btn-sm mb-0">Post Comment</button>
   </form>
 
+
   <!-- The 'add a post' form; centered in grid and 4 cols wide -->
+  <div class='container post-form col-sm-offset-3 col-sm-6'></div>
   <form id="addAPost" class="form-horizontal">
     <div class="form-group">
       <div class="col-sm-offset-3 col-sm-6">

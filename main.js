@@ -1,5 +1,6 @@
 //An array to store posts and names
 const arrayOfPostsAndNames = [];
+const arrayOfCommentsAndNames = [];
 
 $('#postButton').click(function () {
   //Onclick, assign the text box values to variables
@@ -63,13 +64,13 @@ const renderListofPostsAndName = (arrayWithNestedObjToDisplay) => {
   //Clear the text and boxes
   $('#post-text').val('');
   $('#post-name').val('');
-  $('.commentText').val('');
-  $('.commentName').val('');
+  // $('.commentText').val('');
+  // $('.commentName').val('');
 
   //Plan: If 'remove' is clicked, delete post from list and
   //remove object from array
   $('.remover').on('click', function (event) {
-    console.log('clicked');
+    console.log('remover clicked');
 
     //get the index of the post (value of the ol[index]) to associate w/ array index
     let removePostItemNumber = $(event.target.parentElement).index();
@@ -79,53 +80,72 @@ const renderListofPostsAndName = (arrayWithNestedObjToDisplay) => {
     arrayWithNestedObjToDisplay.splice(removePostItemNumber, 1);
     //Remove the list item from the ordered list
     event.target.parentElement.remove();
+
+    //Remove the comment box if displayed
+    if ($('#addAComment').css('display') === 'block') {
+      $('#addAComment').css('display', 'none');
+    }
+
   });
 
+  let commentPostItemNumber;
+
   $('.commenter').on('click', function (event) {
-    console.log('clicked');
+    console.log('commenter clicked');
     // console.log($('#addAComment'));
 
-    let commentPostItemNumber = $(event.target.parentElement).index();
+    commentPostItemNumber = $(event.target.parentElement).index();
     Number(commentPostItemNumber);
 
     //append a new ordered list to the index of the list item
     // $(event.target.parentElement).append()
 
+    //fix needed: toggle on and off only if current post.
+    //If new post and comments are open, keep open with new
+    //commentPostItemNumber
     if ($('#addAComment').css('display') === 'none') {
       $('#addAComment').css('display', 'block');
     } else {
       $('#addAComment').css('display', 'none');
     }
-
-    $('#commentButton').click(function () {
-      console.log('commenting');
-      
-      let arrayOfComments = [];
-
-      let userCommentText = $('.commentText').val();
-      let userCommentName = $('.commentName').val();
-
-      if (userCommentText == 0 || userCommentName == 0) {
-        alert('Please add both a comment and your name.');
-      } else {
-        let userCommentAndName = {
-          commText: userCommentText,
-          commName: userCommentName,
-        };
-
-        console.log(userCommentAndName);
-
-        arrayOfComments.push(userCommentAndName);
-        console.log(arrayOfComments);
-
-
-        arrayWithNestedObjToDisplay[
-          commentPostItemNumber].comment = arrayOfComments;
-
-        console.log(arrayWithNestedObjToDisplay);
-
-        // renderListofPostsAndName(arrayWithNestedObjToDisplay);
-      }
-    });
+    return commentPostItemNumber;
   });
+
+  $('#commentButton').unbind().click(function () {
+    console.log('comment button clicked');
+
+    let userCommentText = $('.commentText').val();
+    let userCommentName = $('.commentName').val();
+
+    if (userCommentText == 0 || userCommentName == 0) {
+      alert('Please add both a comment and your name.');
+    } else {
+      let userCommentAndName = {
+        parentID: commentPostItemNumber,
+        commText: userCommentText,
+        commName: userCommentName,
+      };
+
+      // console.log(userCommentAndName);
+
+      arrayOfCommentsAndNames.push(userCommentAndName);
+
+      console.log(arrayOfCommentsAndNames);
+
+      renderComments(arrayOfCommentsAndNames);
+      // arrayWithNestedObjToDisplay[
+      //   commentPostItemNumber
+      // ].comment = arrayOfComments;
+
+      // console.log(arrayWithNestedObjToDisplay);
+      // // renderListofPostsAndName(arrayWithNestedObjToDisplay);
+    } 
+  });
+
+  const renderComments = (arrayToRender) => {
+    console.log('rendering comments');
+    console.log(arrayToRender);
+  };
+
+
 };
