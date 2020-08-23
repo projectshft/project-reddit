@@ -46,11 +46,9 @@ const renderListofPostsAndName = (arrayWithNestedObjToDisplay) => {
         '<a class="commenter">' +
         ' comment ' +
         '</a>' +
+        '<br>' +
         arrayWithNestedObjToDisplay[i].post +
         '<br>' +
-        '<ol class=comment-list-items>' +
-        '<li id=aComment class=comment-list>' +
-        '</li>' +
         'Posted by: ' +
         '<b>' +
         arrayWithNestedObjToDisplay[i].name +
@@ -85,7 +83,6 @@ const renderListofPostsAndName = (arrayWithNestedObjToDisplay) => {
     if ($('#addAComment').css('display') === 'block') {
       $('#addAComment').css('display', 'none');
     }
-
   });
 
   let commentPostItemNumber;
@@ -111,41 +108,64 @@ const renderListofPostsAndName = (arrayWithNestedObjToDisplay) => {
     return commentPostItemNumber;
   });
 
-  $('#commentButton').unbind().click(function () {
-    console.log('comment button clicked');
+  $('#commentButton')
+    .unbind()
+    .click(function () {
+      console.log('comment button clicked');
 
-    let userCommentText = $('.commentText').val();
-    let userCommentName = $('.commentName').val();
+      let userCommentText = $('.commentText').val();
+      let userCommentName = $('.commentName').val();
 
-    if (userCommentText == 0 || userCommentName == 0) {
-      alert('Please add both a comment and your name.');
-    } else {
-      let userCommentAndName = {
-        parentID: commentPostItemNumber,
-        commText: userCommentText,
-        commName: userCommentName,
-      };
+      if (userCommentText == 0 || userCommentName == 0) {
+        alert('Please add both a comment and your name.');
+      } else {
+        let userCommentAndName = {
+          parentID: commentPostItemNumber,
+          commText: userCommentText,
+          commName: userCommentName,
+        };
 
-      // console.log(userCommentAndName);
+        // console.log(userCommentAndName);
 
-      arrayOfCommentsAndNames.push(userCommentAndName);
+        arrayOfCommentsAndNames.push(userCommentAndName);
 
-      console.log(arrayOfCommentsAndNames);
+        console.log(arrayOfCommentsAndNames);
 
-      renderComments(arrayOfCommentsAndNames);
-      // arrayWithNestedObjToDisplay[
-      //   commentPostItemNumber
-      // ].comment = arrayOfComments;
+        renderComments(arrayOfCommentsAndNames);
+        // arrayWithNestedObjToDisplay[
+        //   commentPostItemNumber
+        // ].comment = arrayOfComments;
 
-      // console.log(arrayWithNestedObjToDisplay);
-      // // renderListofPostsAndName(arrayWithNestedObjToDisplay);
-    } 
-  });
+        // console.log(arrayWithNestedObjToDisplay);
+        // // renderListofPostsAndName(arrayWithNestedObjToDisplay);
+      }
+    });
 
   const renderComments = (arrayToRender) => {
     console.log('rendering comments');
     console.log(arrayToRender);
+
+    for (let i = 0; i < arrayToRender.length; i++) {
+      //build the content of the list item
+      let commentItem = $(
+        '<ol class=comment-list-items data-parent=".a-post">' +
+        '<li id=Comments class=comments-list>' +
+        'Post index: ' + ' ' + arrayToRender[i].parentID +
+          arrayToRender[i].commText +
+          'Posted by: ' +
+          '<b>' +
+          arrayToRender[i].commName +
+          '</b>' +
+          '</li>' +
+          '</ol>'
+      );
+
+      $('.comment-list-items').append(commentItem);
+    }
+
+    //Clear the comment boxes
+
+    $('.commentText').val('');
+    $('.commentName').val('');
   };
-
-
 };

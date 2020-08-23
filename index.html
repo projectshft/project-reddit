@@ -17,18 +17,25 @@
     <hr>
   </div>
 
-  <!-- An ordered list of posts. Nested comments will be added dyamically -->
-  <div class='container the-posts col-sm-offset-3 col-sm-6'>
+  <!-- An ordered list of posts. Attempt to nest comments -->
+  <div class='container the-posts-and-comments col-sm-offset-3 col-sm-5'>
     <ol class="post-list-items">
+      <!-- <li class="a-post"></li> -->
+      <!-- <ol class="comment-list-items" data-parent=".a-post"></ol> -->
     </ol>
   </div>
 
+ <!-- An ordered list of comments.  -->
+  <div class='container the-comments col-sm-offset-8 col-sm-4'>
+    <ol class="comment-list-items" data-parent=".a-post">
+    </ol>
+  </div>
 
 
   <!-- The 'add a comment' form' -->
 
   <form id="addAComment" class="form-inline form-group  ">
-    <div class="input-group col-sm-offset-3 col-sm-6">
+    <div class="input-group col-sm-offset-3 col-sm-5">
       <input id="inlineFormInputCommentText" type="text" class="commentText form-control-sm" placeholder="Comment text">
       <div class="input-group ">
         <input id="inlineFormInputCommentName" type="text" class="commentName form-control-sm" placeholder="Your name">
@@ -38,24 +45,24 @@
   </form>
 
 
-  <!-- The 'add a post' form; centered in grid and 4 cols wide -->
-  <div class='container post-form col-sm-offset-3 col-sm-6'></div>
+  <!-- The 'add a post' form-->
+  <div class='container post-form col-sm-offset-3 col-sm-5'></div>
   <form id="addAPost" class="form-horizontal">
     <div class="form-group">
-      <div class="col-sm-offset-3 col-sm-6">
+      <div class="col-sm-offset-3 col-sm-5">
         <h3><strong>Add a New Post</strong></h3>
         <input type="text" class="form-control" id="post-text" placeholder="Post Text">
       </div>
     </div>
     <div class="form-group">
-      <div class="col-sm-offset-3 col-sm-6">
+      <div class="col-sm-offset-3 col-sm-5">
         <input type="text" class="form-control" id="post-name" placeholder="Your Name">
       </div>
     </div>
 
     <!--The 'post' button -->
     <div class="form-group">
-      <div class="col-sm-offset-3 col-sm-6">
+      <div class="col-sm-offset-3 col-sm-5">
         <button id="postButton" class="btn btn-primary" type="button">Post</button>
       </div>
     </div>
