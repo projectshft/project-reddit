@@ -30,25 +30,8 @@ $('.posts').on( 'click', '#comment', function (){
 })
 
 
-
-
-
-
-
-
-
-
-/*
-
-// the below adds functionality that when comment is clicked, a box for a comment and username pops up as well as a post comment button
-// need to make this a div child of the original post so it is only associated with that post
-$('.posts').on( 'click', '#comment', function (){
-    $('.posts').append('<input id="comment-text" type="text" class="form-control" placeholder="Comment Text"></input>' + 
-    '<input id="comment-name" type="text" class="form-control" placeholder="User Name"></input>' + 
-    '<button id="submit-comment" class="btn btn-primary">Post Comment</button>')
-})
 // when post comment button is clicked, comment text and username text appears
-$(this).on( 'click', '#submit-comment', function (){
+$('.posts').on( 'click', '#submit-comment', function (){
     let commentMessageInput = $('#comment-text').val();
     let commentNameInput = $('#comment-name').val();
     //checks to make sure commentNameInput and commentMessageInput have a value so user can't post a blank comment
@@ -56,15 +39,15 @@ $(this).on( 'click', '#submit-comment', function (){
         alert('You need to enter a user name and message before posting a comment')
     }
     else {
-        $('.posts').append('<p>' + commentMessageInput + '</p>' + '<p>' + commentNameInput + '</p>');
+        $(this).parent().addClass('selected')
+        $('.selected').append('<button id="remove-comment" class="btn">x</button><p class=commented-text>' + commentMessageInput + '</p>' + '<p class=commented-text>Commented By: <b>' + commentNameInput + '</b></p>');
+        $(this).parent().removeClass('selected')
     }
 }) 
+// removes a comment from a certain post
+$('.posts').on('click', '#remove-comment', function () {
+    $(this).siblings('.commented-text').addClass('selected')
+    $('.selected').remove();
+   })
 
 
-
-$('.posts').on('click', '#remove', function () {
- //$(this).remove($('.posts.children'));
- console.log('hi');
-})
-
-*/
