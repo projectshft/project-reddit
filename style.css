@@ -1,14 +1,7 @@
 ul, ol {  
   margin:0;
   padding:0;
-  list-style-type: none;
 }
-
-#anItem {
-  margin: 25;
-  padding: 25;
-}
-
 
 #addAComment {
   display: none;

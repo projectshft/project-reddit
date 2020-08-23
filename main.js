@@ -3,6 +3,7 @@ const arrayOfPostsAndNames = [];
 const arrayOfCommentsAndNames = [];
 
 $('#postButton').click(function () {
+  console.log('post button clicked!');
   //Onclick, assign the text box values to variables
   let userPost = $('#post-text').val();
   let userName = $('#post-name').val();
@@ -28,18 +29,18 @@ const renderListofPostsAndName = (arrayWithNestedObjToDisplay) => {
   console.log('rendering!');
 
   //To clear the display of posts before re-rendering:
-  //Assign parent node (ol) to postList.
+  //Assign parent node (ol) to listOfPostsToClear.
   //While parent has child nodes (li), remove them one by one
-  var postList = $('.post-list-items')[0];
-  while (postList.hasChildNodes()) {
-    postList.removeChild(postList.firstChild);
+  var listOfPostsToClear = $('.post-list-items')[0];
+  while (listOfPostsToClear.hasChildNodes()) {
+    listOfPostsToClear.removeChild(listOfPostsToClear.firstChild);
   }
 
   // Render the list of posts by looping through the array's nested objects
   for (let i = 0; i < arrayWithNestedObjToDisplay.length; i++) {
     //build the content of the list item
     let listItem = $(
-      '<li id=anItem class=post-list>' +
+      '<li id=anItem class=post-list data-parent:post-list-items>' +
         '<a class="remover">' +
         'remove ' +
         '</a>' +
@@ -91,7 +92,7 @@ const renderListofPostsAndName = (arrayWithNestedObjToDisplay) => {
     console.log('commenter clicked');
     // console.log($('#addAComment'));
 
-    commentPostItemNumber = $(event.target.parentElement).index();
+    commentPostItemNumber = $(event.target.parentElement).index() + 1;
     Number(commentPostItemNumber);
 
     //append a new ordered list to the index of the list item
@@ -120,7 +121,7 @@ const renderListofPostsAndName = (arrayWithNestedObjToDisplay) => {
         alert('Please add both a comment and your name.');
       } else {
         let userCommentAndName = {
-          parentID: commentPostItemNumber,
+          parentListNumber: commentPostItemNumber,
           commText: userCommentText,
           commName: userCommentName,
         };
@@ -145,19 +146,27 @@ const renderListofPostsAndName = (arrayWithNestedObjToDisplay) => {
     console.log('rendering comments');
     console.log(arrayToRender);
 
+    //To clear the display of comments before re-rendering:
+    //Assign parent node (ol) to listOfCommentsToClear.
+    //While parent has child nodes (li), remove them one by one
+    var listOfCommentsToClear = $('.comment-list-items')[0];
+    while (listOfCommentsToClear.hasChildNodes()) {
+      listOfCommentsToClear.removeChild(listOfCommentsToClear.firstChild);
+    }
+
     for (let i = 0; i < arrayToRender.length; i++) {
       //build the content of the list item
       let commentItem = $(
-        '<ol class=comment-list-items data-parent=".a-post">' +
-        '<li id=Comments class=comments-list>' +
-        'Post index: ' + ' ' + arrayToRender[i].parentID +
-          arrayToRender[i].commText +
-          'Posted by: ' +
+        '<li id=Comments class=comments-list data-parent=comment-list-items>' +
+          'Comment for post #' +
+          ' ' +
+          arrayToRender[i].parentListNumber + '  ' +
+          arrayToRender[i].commText + '  ' +
+          ' Posted by: ' +
           '<b>' +
           arrayToRender[i].commName +
           '</b>' +
-          '</li>' +
-          '</ol>'
+          '</li>'
       );
 
       $('.comment-list-items').append(commentItem);
@@ -167,5 +176,6 @@ const renderListofPostsAndName = (arrayWithNestedObjToDisplay) => {
 
     $('.commentText').val('');
     $('.commentName').val('');
+    $('#addAComment').css('display', 'none');
   };
 };
