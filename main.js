@@ -33,13 +33,14 @@ var addNewPostEntry = function () {
   var $postText = $('#message').val();
   // console.log($postText);
   var $postersName = $('#name').val();
+  if ($postText && $postersName) {
   // console.log($postersName);
   // Build a new post, appending to the .posts div and wrapping in .post-single div
   $('.posts').append('<div class="post-single"><p>' + removeCommentsHtml + ' ' + $postText + '</p>');
   // create the div for comments. start hidden so it can be toggled on click
-  $('.post-single').last().append('<div class="comments" hidden>' + commentsFormHtml + '</div><p>Posted By: <b>' + $postersName + '</b></p><hr /></div>');  
+  $('.post-single').last().append('<div class="comments" hidden>' + commentsFormHtml + '</div><p>Posted By: <b>' + $postersName + '</b></p><hr /></div>');
   // /div above ends .post-single
-  
+
   // Prepare for events...
   // first, kill existing event handlers everywhere to prevent multi-firing of events
   $('.remove-post').off();
@@ -49,7 +50,12 @@ var addNewPostEntry = function () {
   $('.remove-post').click(removePostEntry);
   $('.comment-toggle').click(togglePostComments);
   $('.comment-post').click(addCommentToPost);
-};  
+  } else {
+    console.log('empty field detected');
+    $('.posts').append('<p class="bg-danger warn"><br />Kindly fill out both fields to post.<br /></p>');
+    $('.warn').fadeOut(4000);
+  }
+};
 
 // remove an entire post by selecting its div
 var removePostEntry = function () {
@@ -64,7 +70,7 @@ var removePostEntry = function () {
 var togglePostComments = function () {
   console.log('togglePostComments() entered');
   //move up then back to .comments div
-  $(this).parent().parent().find('.comments').toggle(400); 
+  $(this).parent().parent().find('.comments').toggle(400);
 };
 
 
@@ -77,20 +83,28 @@ var addCommentToPost = function () {
   var $commentName = $(this).closest('form').find('.comment-name').val();
   // console.log($commentText);
   // console.log($commentName);
+  
+  if ($commentText && $commentName) {
+  
   // put the comment in the .comments div.  wrap in own span for easy deletion later
   // .find() and .last() will find pre-seeded .comment-single empty span
   // using last() ensures we are adding comments to end of existing ones
   // use .after rather than .append to make sure each span stands alone, and not nested
-  $(this).closest('.comments').find('.comment-single').last().after('<span class="comment-single">' + $commentText + ' Posted By: <b>' + $commentName + '</b> '+ closeGlyph + '<br/></span>');
-  
+  $(this).closest('.comments').find('.comment-single').last().after('<span class="comment-single">' + $commentText + ' Posted By: <b>' + $commentName + '</b> ' + closeGlyph + '<br/></span>');
+
   // reset comment events as DOM has changed. Probably not neccesary, but good to be tidy.
   $('.comment-delete').off();
   $('.comment-post').off();
   $('.comment-delete').click(removePostComment);
   $('.comment-post').click(addCommentToPost);
+  } else {
+    console.log('empty field detected');
+    $(this).closest('.comments').find('.comment-single').last().after('<p class="bg-danger warn"><br />Kindly fill out both fields to comment on this post.<br /></p>');
+    $('.warn').fadeOut(4000);
+  }
 };
 
-  //since the individual comments are in their own .comment-single span, this is fairly straightforward
+//since the individual comments are in their own .comment-single span, this is fairly straightforward
 var removePostComment = function () {
   //console.log('removePostComment() entered');
   $(this).closest('.comment-single').first().fadeOut();
@@ -100,7 +114,3 @@ var removePostComment = function () {
 // then all the additional magic happens in each function
 
 $('#submit').click(addNewPostEntry);
-
-
-
-
