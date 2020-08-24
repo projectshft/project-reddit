@@ -71,7 +71,6 @@ const renderListofPostsAndName = (arrayWithNestedObjToDisplay) => {
   //Clear the text and boxes
   $('#post-text').val('');
   $('#post-name').val('');
- 
 
   $('.remover').on('click', function (event) {
     console.log('remover clicked');
@@ -103,7 +102,7 @@ const renderListofPostsAndName = (arrayWithNestedObjToDisplay) => {
 
     //TO FIX: obviously I don't want to generate a new ol each time I click.
     //HOW TO LINK THE CHILD ITEMS?
-    $(event.target.parentElement).append($('<ol class=comment-list-items>'));
+    $(event.target.parentElement).append($('<ol class="comment-list-items">'));
 
     // Possibly try an if loop to see whether children === 1, else add child.?
     //($(event.target.parent).children()); //returns one
@@ -125,8 +124,6 @@ const renderListofPostsAndName = (arrayWithNestedObjToDisplay) => {
     }
     return postIndex; //again, in case it might be useful elsewhere
   });
-
-
 
   $('#commentButton').unbind().on('click', function (event) {
       console.log('comment button clicked');
@@ -158,7 +155,7 @@ const renderListofPostsAndName = (arrayWithNestedObjToDisplay) => {
     console.log('rendering comments');
 
     //append a new ordered list (for comments) to the posts here?
-    // $('.post-list').append($('<ol class=comment-list-items>'));
+    // $('.post-list').append($('<ol class="comment-list-items">'));
 
     //To clear the display of comments before re-rendering:
     //Assign parent node (ol) to listOfCommentsToClear.
@@ -183,8 +180,10 @@ const renderListofPostsAndName = (arrayWithNestedObjToDisplay) => {
           '<b>' +
           commentsArrayToRender[i].commName +
           ' ' +
-          '</b>' + '<span class="glyphicon glyphicon-remove">' + '</span>' +
-          '</li>' 
+          '</b>' +
+          '<span class="glyphicon glyphicon-remove">' +
+          '</span>' +
+          '</li>'
       );
 
       //append this comment as a list item to the ordered list w class=comment-list-item
@@ -199,10 +198,19 @@ const renderListofPostsAndName = (arrayWithNestedObjToDisplay) => {
     $('#addAComment').css('display', 'none');
   };
 
-console.log( )
+  $('.glyphicon-remove').on('click', function () {
+    console.log('glyphicon clicked!'); //no result
+    //TO FIX: cannot get to an action when clicking the glyph!
+    //PLAN: will delete comments individually when clicked.
+    //Model code on 'remover' code above, line 75, copied below.
 
-  
-  $('.glyphicon').on('click', function () {
-    console.log("glyphicon clicked!");
-  })
+    //get the index of the comment (value of the ol[index]) to associate w/ array index
+    let removeCommentItemNumber = $(event.target.parentElement).index();
+    Number(removeCommentItemNumber);
+
+    //Use array .splice method to delete associated object from array
+    commentsArrayToRender.splice(removeCommentItemNumber, 1);
+    //Remove the list item from the ordered list
+    event.target.parentElement.remove();
+  });
 };
