@@ -1,19 +1,19 @@
-//An array to store posts and names
+//Arrays to store posts and names
 const arrayOfPostsAndNames = [];
 const arrayOfCommentsAndNames = [];
 let renderComments;
 
-$('#postButton').click(function () {
+$('#postButton').on('click', function () {
+  console.log('post button clicked!');
   //TOFIX: after comments have been entered, if new
   //post is added and Post button clicked, the posts are rendered
   //correctly but all comments disappear. Need to re-render them.
 
-  console.log('post button clicked!');
-  //Onclick, assign the text box values to variables
+  //On click, assign the text box values to variables
   let userPost = $('#post-text').val();
   let userName = $('#post-name').val();
 
-  //Alert an error if either text box is empty
+  //Alert an error if either post text box is empty
   if (userPost == 0 || userName == 0) {
     alert('Please add both a post and your name.');
   } else {
@@ -22,7 +22,8 @@ $('#postButton').click(function () {
       post: userPost,
       name: userName,
     };
-    //Push object into array
+
+    //Push object into array of posts
     arrayOfPostsAndNames.push(userPostAndName);
 
     //goto Render!
@@ -32,10 +33,10 @@ $('#postButton').click(function () {
 
 const renderListofPostsAndName = (arrayWithNestedObjToDisplay) => {
   console.log('rendering!');
-
-  //To clear the display of posts before re-rendering:
+  //Plan: clear the display of posts before re-rendering.
   //Assign parent node (ol) to listOfPostsToClear.
   //While parent has child nodes (li), remove them one by one
+
   var listOfPostsToClear = $('.post-list-items')[0];
   while (listOfPostsToClear.hasChildNodes()) {
     listOfPostsToClear.removeChild(listOfPostsToClear.firstChild);
@@ -44,9 +45,8 @@ const renderListofPostsAndName = (arrayWithNestedObjToDisplay) => {
   // Render the list of posts by looping through the array's nested objects
   for (let i = 0; i < arrayWithNestedObjToDisplay.length; i++) {
     //build the content of the list item
-
     let listItem = $(
-      '<li class=post-list data-parent:post-list-items>' +
+      '<li class="post-list">' +
         '<a class="remover">' +
         'remove ' +
         '</a>' +
@@ -63,19 +63,20 @@ const renderListofPostsAndName = (arrayWithNestedObjToDisplay) => {
         '</li>'
     );
 
+    //Append this post to the ordered list w/ class 'post-list-items'
+    //Note: list numbers are displayed so nested comments can be debugged.
     $('.post-list-items').append(listItem);
   }
 
   //Clear the text and boxes
   $('#post-text').val('');
   $('#post-name').val('');
-  // $('.commentText').val('');
-  // $('.commentName').val('');
+ 
 
-  //Plan: If 'remove' is clicked, delete post from list and
-  //remove object from array
   $('.remover').on('click', function (event) {
     console.log('remover clicked');
+    //Plan: If 'remove' is clicked, delete post from list and
+    //remove object from array. Remove all associated comments.
 
     //get the index of the post (value of the ol[index]) to associate w/ array index
     let removePostItemNumber = $(event.target.parentElement).index();
@@ -96,18 +97,22 @@ const renderListofPostsAndName = (arrayWithNestedObjToDisplay) => {
 
   $('.commenter').on('click', function (event) {
     console.log('commenter clicked');
-    //PLAN: This mini-module should 1) make comments visible or not.
-    //2) store the index of the parent that was clicked.
-    //3) possibly create a ol child linked to the parent li?
+    //PLAN: This mini-module should 1) make the comments box visible or not.
+    //2) Store the index of the parent that was clicked (in case that helps with nested list creation).
+    //3) Possibly create a ordered list child linked to the parent li?
 
-    //TO FIX: obviously I don't want a new ol each time I click. 
+    //TO FIX: obviously I don't want to generate a new ol each time I click.
     //HOW TO LINK THE CHILD ITEMS?
     $(event.target.parentElement).append($('<ol class=comment-list-items>'));
 
+    // Possibly try an if loop to see whether children === 1, else add child.?
+    //($(event.target.parent).children()); //returns one
+
+    // Store the index of the post in case it can be used to link to child
     postIndex = $(event.target.parentElement).index();
     Number(postIndex);
 
-    //give the parent element a unique ID property
+    //give the parent element a unique ID property in case it can be used to link to child
     $(event.target.parentElement).prop('id', postIndex);
 
     // $(event.target.firstChild).prop('id', postIndex);
@@ -118,42 +123,41 @@ const renderListofPostsAndName = (arrayWithNestedObjToDisplay) => {
     } else {
       $('#addAComment').css('display', 'none');
     }
-    return postIndex;
+    return postIndex; //again, in case it might be useful elsewhere
   });
 
-  $('#commentButton').unbind().on('click', function () {
+
+
+  $('#commentButton').unbind().on('click', function (event) {
       console.log('comment button clicked');
-    
+
+      //On click, assign the text box values to variables
       let userCommentText = $('.commentText').val();
       let userCommentName = $('.commentName').val();
 
+      //Alert an error if either comment text box is empty.
       if (userCommentText == 0 || userCommentName == 0) {
         alert('Please add both a comment and your name.');
       } else {
+        //if not empty, store values in an object.
         let userCommentAndName = {
           postIndex: postIndex,
           commText: userCommentText,
           commName: userCommentName,
         };
 
-        // console.log(userCommentAndName);
-
+        //Push object into array of comments
         arrayOfCommentsAndNames.push(userCommentAndName);
 
+        //goto comment-rendering mini-module.
         renderComments(arrayOfCommentsAndNames);
-        // arrayWithNestedObjToDisplay[
-        //   commentPostItemNumber
-        // ].comment = arrayOfComments;
-
-        // console.log(arrayWithNestedObjToDisplay);
-        // // renderListofPostsAndName(arrayWithNestedObjToDisplay);
       }
     });
 
   renderComments = (commentsArrayToRender) => {
     console.log('rendering comments');
 
-    //append a new ordered list (for comments) to the posts (list items w/ class='post-list')
+    //append a new ordered list (for comments) to the posts here?
     // $('.post-list').append($('<ol class=comment-list-items>'));
 
     //To clear the display of comments before re-rendering:
@@ -164,24 +168,27 @@ const renderListofPostsAndName = (arrayWithNestedObjToDisplay) => {
       listOfCommentsToClear.removeChild(listOfCommentsToClear.firstChild);
     }
 
-    console.log(arrayWithNestedObjToDisplay); //posts
-    console.log(commentsArrayToRender); //comments
-    console.log(arrayWithNestedObjToDisplay[0]); //matching 0 post
+    // console.log(arrayWithNestedObjToDisplay); //posts
+    // console.log(commentsArrayToRender); //comments
+    // console.log(arrayWithNestedObjToDisplay[0]); //matching 0 post
 
     for (let i = 0; i < commentsArrayToRender.length; i++) {
-      //build the content of the list item
+      //build the content of the comment list item <li>
 
       let commentItem = $(
-        '<li class=comment-list data-parent:comment-list-items>' +
+        '<li class="comment-list data-parent:comment-list-items">' +
           commentsArrayToRender[i].commText +
           '  ' +
           ' Posted by: ' +
           '<b>' +
           commentsArrayToRender[i].commName +
-          '</b>' +
-          '</li>'
+          ' ' +
+          '</b>' + '<span class="glyphicon glyphicon-remove">' + '</span>' +
+          '</li>' 
       );
 
+      //append this comment as a list item to the ordered list w class=comment-list-item
+      //FIX: unable to link this to the correct post.
       $('.comment-list-items').append(commentItem);
     }
 
@@ -191,4 +198,11 @@ const renderListofPostsAndName = (arrayWithNestedObjToDisplay) => {
     $('.commentName').val('');
     $('#addAComment').css('display', 'none');
   };
+
+console.log( )
+
+  
+  $('.glyphicon').on('click', function () {
+    console.log("glyphicon clicked!");
+  })
 };
