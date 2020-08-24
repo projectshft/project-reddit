@@ -1,5 +1,6 @@
 var removeCommentsHtml = `<a class="remove-post">remove</a>&nbsp;<a class="comment-toggle">comments</a>`;
-var commentsFormHtml = `<form onsubmit="event.preventDefault();">
+var commentsFormHtml = `<div class="comment-single"></div>
+<form onsubmit="event.preventDefault();">
 <div class="row form-group" >
 <div class="col-xs-3 col-sm-3">
   <input type="text" class="form-control input-sm comment-text" placeholder="Comment Text"></input>
@@ -28,8 +29,8 @@ var addNewPostEntry = function () {
   // Build a new post, appending to the .posts div and wrapping in .post-single div
   $('.posts').append('<div class="post-single"><p>' + removeCommentsHtml + ' ' + $postText + '</p>');
   // create the div for comments. start hidden so it can be toggled on click
-  $('.posts').append('<div class="comments" hidden>' + commentsFormHtml + '</div>');  
-  $('.posts').append('Posted By: <b>' + $postersName + '</b><hr /></div>');  
+  $('.post-single').last().append('<div class="comments" hidden>' + commentsFormHtml + '</div><p>Posted By: <b>' + $postersName + '</b></p><hr /></div>');  
+  // $(this).closest('.comments').append('Posted By: <b>' + $postersName + '</b><hr /></div>');  
   // /div above ends .post-single
   // Prepare for events...
   // first, kill existing event handlers everywhere to prevent multi-firing of events
@@ -45,14 +46,15 @@ var addNewPostEntry = function () {
 // remove an entire post by selecting its div
 var removePostEntry = function () {
   //console.log('removePostEntry() entered');
-  $(this).closest('div').fadeOut();
+  $(this).closest('.post-single').css('background-color', 'yellow');
+  $(this).closest('.post-single').fadeOut();
   // why blink out when you can fade away?
 };
 
 // select the .comments div, which is in same post div
 var togglePostComments = function () {
-  //console.log('togglePostComments() entered');
-  $(this).siblings('.comments').first().toggle(400);  
+  console.log('togglePostComments() entered');
+  $(this).parent().parent().first().find('.comments').toggle(400); 
 };
 
 
@@ -67,7 +69,9 @@ var addCommentToPost = function () {
   // (this is a messy selection, but accurate). .find() and .last() appears to be ignored
   // or throw no error when not finding or filtering to a result. 
   // This is great for adding comments to end of existing ones
-  $(this).parent().parent().parent().parent().find('.comment-single').last().append('<span class="comment-single">' + $commentText + ' Posted By: <b>' + $commentName + '</b> '+ closeGlyph + '<br/></span>');
+  $(this).find('.comment-single').css('background-color', 'yellow');
+  $(this).closest('.comments').find('.comment-single').last().after('<span class="comment-single">' + $commentText + ' Posted By: <b>' + $commentName + '</b> '+ closeGlyph + '<br/></span>');
+  // $(this).parent().parent().parent().find('.comment-single').last().append('<span class="comment-single">' + $commentText + ' Posted By: <b>' + $commentName + '</b> '+ closeGlyph + '<br/></span>');
   
   // reset comment events as count has changed. Probably not neccesary, but good to be tidy.
   $('.comment-delete').off();
@@ -75,47 +79,16 @@ var addCommentToPost = function () {
   $('.comment-delete').click(removePostComment);
   $('.comment-post').click(addCommentToPost);
 };
-
+  //since the individual comments are in their own .comment-single span, this is fairly straightforward
 var removePostComment = function () {
-  console.log('removePostComment() entered');
-  console.log($(this));
-  // $(this).css('background-color', 'yellow');
+  //console.log('removePostComment() entered');
+  $(this).closest('.comment-single').first().fadeOut();
 };
+// and, finally, the main execution starts with setting up an event to add a new post,
+// then all the additional magic happens in each function
 
 $('#submit').click(addNewPostEntry);
 
 
-
-/*   var userName = document.getElementById('name').value;  // needs [0]?
-  var userTextNode = document.createTextNode(userName);
-  var userElementP = document.createElement('p');
-  userElementP.appendChild(userTextNode);
-  userElementP.setAttribute('class', 'user-name');
-  var postText = document.getElementById('message').value;
-  var postTextNode = document.createTextNode(postText);
-  var postElementP = document.createElement('p');
-  postElementP.appendChild(postTextNode);
-  postElementP.setAttribute('class', 'tweet');
-  var delBtnTextNode = document.createTextNode('Delete Post');
-  var delBtnElementBtn = document.createElement('button');
-  delBtnElementBtn.appendChild(delBtnTextNode);
-  delBtnElementBtn.setAttribute('class', 'deleter');
-
-
-  document.getElementsByTagName('form')[0].append(userElementP);
-  document.getElementsByTagName('form')[0].append(postElementP);
-  document.getElementsByClassName('tweet')[tweetCount].append(delBtnElementBtn);
-  deletePost = document.getElementsByClassName('deleter')[tweetCount];
-  makeEvents();
-  tweetCount++; */
-
-/* var makeEvents = function() {
-deletePost.addEventListener('click', function () {
-console.log('working');
-document.getElementsByClassName('tweet')[0].remove();
-document.getElementsByClassName('user-name')[0].remove();
-//document.getElementsByClassName('deleter')[0].remove();  // surprise! it deletes itself
-});
-} */
 
 
