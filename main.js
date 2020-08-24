@@ -8,7 +8,7 @@ $('#submit').click( function() {
     }
     else {
     //creates a variable inorder to insure that each new post created is within it's own div element in the DOM
-    let redditPostData = '<button id="remove" class="btn">remove post</button><button id="comment-toggle" class="btn">comment</button><p class="post-text">' + messageInput + '</p><p>Posted By: <b>' + nameInput + '</b></p>'
+    let redditPostData = '<button id="remove" class="btn btn-link">remove post</button><button id="comment-toggle" class="btn btn-link">comment</button><p class="post-text">' + messageInput + '</p><p>Posted By: <b>' + nameInput + '</b></p>'
     $('.posts').append('<div class="new-post">' + redditPostData + '</div>')}
     //once text is posted, resets the default value of the form
     $('form').find('input').val('');
@@ -33,7 +33,6 @@ $('.posts').on( 'click', '#comment-toggle', function (){
     
 })
 
-
 // when post comment button is clicked, comment text and username text appears
 $('.posts').on( 'click', '#submit-comment', function (){
     let commentMessageInput = $('#comment-text').val();
@@ -49,6 +48,7 @@ $('.posts').on( 'click', '#submit-comment', function (){
         $(this).parent().removeClass('selected')
     }
 }) 
+
 // removes a comment from a certain post
 $('.posts').on('click', '#remove-comment', function () {
     $(this).siblings('.commented-text').addClass('selected')
