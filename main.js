@@ -1,4 +1,4 @@
-// once post button is clicked, the message and name is posted to the page
+//once post button is clicked, the message and name is posted to the page
 $('#submit').click( function() {
     let nameInput = $('#name').val();
     let messageInput = $('#message').val();
@@ -14,26 +14,30 @@ $('#submit').click( function() {
     $('form').find('input').val('');
 })
 
-// removes the post that has the class 'selected'
+//removes the post that has the class 'selected'
 $('.posts').on('click', '#remove', function () {
     $(this).parent().addClass('selected')
     $('.selected').remove();
-   })
+})
    
-// the below adds functionality that when comment is clicked, a box for a comment and username pops up as well as a post comment button
+//toggles the comment section , toggle works but it only works for the first comment and break all the other comments
+//additionally you have to change the other comment toggle function below to .one('click)
+//$('.posts').on( 'click', '#comment-toggle', function (){
+//     $('.comment-div').toggle();
+// })
+
+//the below adds functionality that when comment is clicked, a box for a comment and username pops up as well as a post comment button
 $('.posts').on( 'click', '#comment-toggle', function (){
     // creates a variable so that comment and remove buttons are children of the comment div
-    let redditCommentData = '<input id="comment-text" type="text" class="form-control" placeholder="Comment Text"></input>' + 
-    '<input id="comment-name" type="text" class="form-control" placeholder="User Name"></input>' + 
-    '<button id="submit-comment" class="btn btn-primary">Post Comment</button>'
+    let redditCommentData = '<input id="comment-text" type="text" class="form-control" placeholder="Comment Text"></input><input id="comment-name" type="text" class="form-control" placeholder="User Name"></input><button id="submit-comment" class="btn btn-primary">Post Comment</button>'
     $(this).parent().addClass('selected')
     //ensures that the comment div is a child of the original message so the comments show up correctly on the page
-    $('.selected').children('.post-text').append('<div class="comment-div">' + redditCommentData + '</div')
+    $('.selected').children('.post-text').append('<div class="comment-div input-group row-center">' + redditCommentData + '</div')
     $(this).parent().removeClass('selected')
     
 })
 
-// when post comment button is clicked, comment text and username text appears
+//when post comment button is clicked, comment text and username text appears
 $('.posts').on( 'click', '#submit-comment', function (){
     let commentMessageInput = $('#comment-text').val();
     let commentNameInput = $('#comment-name').val();
@@ -42,7 +46,7 @@ $('.posts').on( 'click', '#submit-comment', function (){
         alert('You need to enter a user name and message before posting a comment')
     }
     else {
-        // if both fields havea value , posts the comment under the original message
+        //if both fields have a value, posts the comment under the original message
         $(this).parent().addClass('selected')
         $('.selected').append('<button id="remove-comment" class="close" aria-label="close"><span aria-hidden="true">&times;</span></button> <p class=commented-text>' + commentMessageInput + '</p>' + '<p class=commented-text>Commented By: <b>' + commentNameInput + '</b></p>');
         $(this).parent().removeClass('selected')
@@ -53,6 +57,6 @@ $('.posts').on( 'click', '#submit-comment', function (){
 $('.posts').on('click', '#remove-comment', function () {
     $(this).siblings('.commented-text').addClass('selected')
     $('.selected').remove();
-   })
+})
 
 
