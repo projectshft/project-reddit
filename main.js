@@ -2,15 +2,18 @@
 var redditModule = () => {
     // data scruture to hold all our posts
     var posts = [];
-    //grab input from our html
-    let nameInput = $('#name').val();
-    let messageInput = $('#message').val();
     // push these values to our posts array
-    if (nameInput && messageInput) {
-        posts.push({nameInput: nameInput, postUser: postUser, comments: []})
-    }
-    else {
-        alert('You need to enter a name and message before posting.')
+    var createPosts = function () {
+    //grab input from our html
+        let nameInput = $('#name').val();
+        let messageInput = $('#message').val();
+        if (nameInput && messageInput) {
+            posts.push({nameInput: nameInput, postUser: postUser, comments: []})
+            console.log('posts array is now: ' + posts);
+        }
+        else {
+            alert('You need to enter a name and message before posting.')
+        }
     }
 }
 
