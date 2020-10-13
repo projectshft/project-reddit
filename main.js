@@ -1,3 +1,19 @@
+//incapsulate the project reddit app into one function 
+var redditModule = () => {
+    // data scruture to hold all our posts
+    var posts = [];
+    //grab input from our html
+    let nameInput = $('#name').val();
+    let messageInput = $('#message').val();
+    // push these values to our posts array
+    if (nameInput && messageInput) {
+        posts.push({nameInput: nameInput, postUser: postUser, comments: []})
+    }
+    else {
+        alert('You need to enter a name and message before posting.')
+    }
+}
+
 //once post button is clicked, the message and name is posted to the page
 $('#submit').click( function() {
     let nameInput = $('#name').val();
