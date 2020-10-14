@@ -8,8 +8,9 @@ var redditModule = () => {
         let nameInput = $('#name').val();
         let messageInput = $('#message').val();
         if (nameInput && messageInput) {
+            console.log('posts should be empty : ' + posts)
             posts.push({nameInput: nameInput, messageInput:messageInput, comments: []})
-            console.log('posts array is now: ' + posts);
+            console.log('posts array is now: ' + posts.length);
         }
         else {
             alert('You need to enter a name and message before posting.')
@@ -27,9 +28,15 @@ var redditModule = () => {
         $('form').find('input').val('');
         })
     }
-
-    var removePost = function () {
-
+    //function to remove a specific post
+    var removePost = function (postToRemove) {
+        $closestPost = $(postToRemove).closest('.new-post');
+        console.log('this is the postToRemove : ' + postToRemove)
+        console.log('this is the closest post: ' + $closestPost);
+        index = $closestPost.index();
+        posts.splice(index, 1);
+        $closestPost.remove();
+        console.log('this is the posts array after removing: ' + posts.length)
     }
 
     return {
@@ -44,6 +51,10 @@ var reddit = redditModule();
 $('#submit').click( function() {
     reddit.createPosts();
     reddit.displayPosts();
+});
+
+$('.posts').on('click', '#remove', function () {
+    reddit.removePost(this);
 });
 
 // //once post button is clicked, the message and name is posted to the page
