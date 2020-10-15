@@ -53,14 +53,26 @@ var redditModule = () => {
         console.log(indexOfPost)
         console.log(comment)
         if (comment.text === '' || comment.name === '') {
-            alert('Please fill out all fields for your comment')
-        }else {
+            alert('Please fill out all fields before trying to post your comment')
+        } else {
             posts[indexOfPost].comments.push(comment);
         }       
         console.log(posts)
     }
     // render comment to a specific post
     var renderComment = function(){
+        // find specific post and use its index to find the comment section
+        posts.forEach(function(post, index) {
+            var $commentList = $('.new-post').eq(index).find('.comment-list')
+            // empty out comment list in order to not have multiple comments posted after one another
+            $commentList.empty();
+            console.log($commentList)
+            console.log('post is ' + post)
+        for (i = 0; i <post.comments.length; i++) {
+            var comment = post.comments[i];
+            $('.new-post').find('.comment-list').append('<button id="remove-comment" class="close" aria-label="close"><span aria-hidden="true">&times;</span></button> <p class=commented-text>' + comment.text + '</p>' + '<p class=commented-text>Commented By: <b>' + comment.name + '</b></p>')
+        }
+        })
 
     }
 
@@ -69,7 +81,8 @@ var redditModule = () => {
         displayPosts: displayPosts,
         removePost: removePost,
         toggleComments: toggleComments,
-        addComment: addComment
+        addComment: addComment,
+        renderComment: renderComment
     }
 }
 
@@ -98,6 +111,7 @@ $('.posts').on('click', '#submit-comment', function () {
     var indexOfPost = $(this).closest('.new-post').index();
 
     reddit.addComment(indexOfPost, text, name);
+    reddit.renderComment();
 });
 // //once post button is clicked, the message and name is posted to the page
 // $('#submit').click( function() {
