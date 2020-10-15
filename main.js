@@ -22,7 +22,7 @@ var redditModule = () => {
         $('.posts').empty();
         posts.forEach(function(post) {
         //creates a variable inorder to insure that each new post created is within it's own div element in the DOM
-        var commentInfo = '<input id="comment-text" type="text" class="form-control" placeholder="Comment Text"></input><input id="comment-name" type="text" class="form-control" placeholder="User Name"></input><button id="submit-comment" class="btn btn-primary">Post Comment</button>'
+        let commentInfo = '<div class="comment-info"><input id="comment-text" type="text" class="form-control" placeholder="Comment Text"></input><input id="comment-name" type="text" class="form-control" placeholder="User Name"></input><button id="submit-comment" class="btn btn-primary">Post Comment</button></div>'
         var redditPostData = '<button id="remove" class="btn btn-link">remove post</button><button id="comment-toggle" class="btn btn-link">comment</button>' + commentInfo + '<p class="post-text">' + post.messageInput + '</p><p>Posted By: <b>' + post.nameInput + '</b></p>'
         $('.posts').append('<div class="new-post">' + redditPostData + '</div>')
         //once text is posted, resets the default value of the form
@@ -40,10 +40,17 @@ var redditModule = () => {
         console.log('this is the posts array after removing: ' + posts.length)
     }
 
+    var toggleComments = function (currentPost) {
+        $closestPost = $(currentPost).closest('.new-post');
+        $closestPost.find('.comment-info').toggle();
+
+    }
+
     return {
         createPosts: createPosts,
         displayPosts: displayPosts,
-        removePost: removePost
+        removePost: removePost,
+        toggleComments: toggleComments
     }
 }
 
@@ -58,6 +65,10 @@ $('.posts').on('click', '#remove', function () {
     reddit.removePost(this);
 });
 
+$('.posts').on('click', '#comment-toggle', function () {
+    console.log('clicked')
+    reddit.toggleComments(this);
+  });
 // //once post button is clicked, the message and name is posted to the page
 // $('#submit').click( function() {
 //     let nameInput = $('#name').val();
