@@ -68,12 +68,19 @@ var redditModule = () => {
             $commentList.empty();
             console.log($commentList)
             console.log('post is ' + post)
-        for (i = 0; i <post.comments.length; i++) {
-            var comment = post.comments[i];
-            $('.new-post').find('.comment-list').append('<button id="remove-comment" class="close" aria-label="close"><span aria-hidden="true">&times;</span></button> <p class=commented-text>' + comment.text + '</p>' + '<p class=commented-text>Commented By: <b>' + comment.name + '</b></p>')
-        }
+            for (i = 0; i <post.comments.length; i++) {
+                var comment = post.comments[i];
+                $('.new-post').find('.comment-list').append('<button id="remove-comment" class="close" aria-label="close"><span aria-hidden="true">&times;</span></button> <p class=commented-text>' + comment.text + '</p>' + '<p class=commented-text>Commented By: <b>' + comment.name + '</b></p>')
+            }
         })
+    }
 
+    // delete a specific comment 
+    var deleteComment = function(commentToRemove) {
+        var postIndex = $('.new-post').index(commentToRemove.closest('.new-post'));
+        var commentIndex = commentToRemove.closest('.comment-list').find('.comment-info').index(commenToRemove.closest('.comment-info'))
+        posts[postIndex].comments.splice(commentIndex, 1)
+        console.log(commentIndex);
     }
 
     return {
@@ -82,7 +89,8 @@ var redditModule = () => {
         removePost: removePost,
         toggleComments: toggleComments,
         addComment: addComment,
-        renderComment: renderComment
+        renderComment: renderComment,
+        deleteComment: deleteComment
     }
 }
 
@@ -111,8 +119,14 @@ $('.posts').on('click', '#submit-comment', function () {
     var indexOfPost = $(this).closest('.new-post').index();
 
     reddit.addComment(indexOfPost, text, name);
-    reddit.renderComment();
+    reddit.renderComment(this);
 });
+
+$('.posts').on('click', '#remove-comment', function () {
+    console.log('clicked');
+    reddit.deleteComment();
+});
+
 // //once post button is clicked, the message and name is posted to the page
 // $('#submit').click( function() {
 //     let nameInput = $('#name').val();
