@@ -5,8 +5,8 @@ var redditModule = () => {
     // push these values to our posts array
     var createPosts = function () {
     //grab input from our html
-        let nameInput = $('#name').val();
-        let messageInput = $('#message').val();
+        var nameInput = $('#name').val();
+        var messageInput = $('#message').val();
         if (nameInput && messageInput) {
             console.log('posts should be empty : ' + posts)
             posts.push({nameInput: nameInput, messageInput:messageInput, comments: []})
@@ -22,7 +22,8 @@ var redditModule = () => {
         $('.posts').empty();
         posts.forEach(function(post) {
         //creates a variable inorder to insure that each new post created is within it's own div element in the DOM
-        let redditPostData = '<button id="remove" class="btn btn-link">remove post</button><button id="comment-toggle" class="btn btn-link">comment</button><p class="post-text">' + post.messageInput + '</p><p>Posted By: <b>' + post.nameInput + '</b></p>'
+        var commentInfo = '<input id="comment-text" type="text" class="form-control" placeholder="Comment Text"></input><input id="comment-name" type="text" class="form-control" placeholder="User Name"></input><button id="submit-comment" class="btn btn-primary">Post Comment</button>'
+        var redditPostData = '<button id="remove" class="btn btn-link">remove post</button><button id="comment-toggle" class="btn btn-link">comment</button>' + commentInfo + '<p class="post-text">' + post.messageInput + '</p><p>Posted By: <b>' + post.nameInput + '</b></p>'
         $('.posts').append('<div class="new-post">' + redditPostData + '</div>')
         //once text is posted, resets the default value of the form
         $('form').find('input').val('');
