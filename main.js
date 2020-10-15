@@ -22,7 +22,7 @@ var redditModule = () => {
         $('.posts').empty();
         posts.forEach(function(post) {
         //creates a variable inorder to insure that each new post created is within it's own div element in the DOM
-        let commentInfo = '<div class="comment-info"><div class="comment-list"></div><input id="comment-text" type="text" placeholder="Comment Text"></input><input id="comment-name" type="text" placeholder="User Name"></input><button id="submit-comment" class="btn btn-primary">Post Comment</button></div>'
+        let commentInfo = '<div class="comment-info"><div class="comment-list"></div><input class="comment-text" type="text" placeholder="Comment Text"></input><input class="comment-name" type="text" placeholder="User Name"></input><button id="submit-comment" class="btn btn-primary">Post Comment</button></div>'
         var redditPostData = '<button id="remove" class="btn btn-link">remove post</button><button id="comment-toggle" class="btn btn-link">comment</button>' + commentInfo + '<p class="post-text">' + post.messageInput + '</p><p>Posted By: <b>' + post.nameInput + '</b></p>'
         $('.posts').append('<div class="new-post">' + redditPostData + '</div>')
         //once text is posted, resets the default value of the form
@@ -39,10 +39,24 @@ var redditModule = () => {
         $closestPost.remove();
         console.log('this is the posts array after removing: ' + posts.length)
     }
-
+    // toggle comments div on and off 
     var toggleComments = function (currentPost) {
         $closestPost = $(currentPost).closest('.new-post');
         $closestPost.find('.comment-info').toggle();
+
+    }
+    // add a comment to our array
+    var addComment = function (indexOfPost, text, name) {
+        var comment = { text: text, name: name };
+  
+        // pushes the comment into the correct comments array
+        console.log(indexOfPost)
+        console.log(comment)
+        posts[indexOfPost].comments.push(comment);
+        console.log(posts)
+    }
+    // render comment to a specific post
+    var renderComment = function(){
 
     }
 
@@ -50,7 +64,8 @@ var redditModule = () => {
         createPosts: createPosts,
         displayPosts: displayPosts,
         removePost: removePost,
-        toggleComments: toggleComments
+        toggleComments: toggleComments,
+        addComment: addComment
     }
 }
 
@@ -69,6 +84,17 @@ $('.posts').on('click', '#comment-toggle', function () {
     console.log('clicked')
     reddit.toggleComments(this);
   });
+
+$('.posts').on('click', '#submit-comment', function () {
+    //grab the values from text and username fields of comments
+    var text = $(this).siblings('.comment-name').val();
+    var name = $(this).siblings('.comment-text').val();
+    
+    // get index of post inorder to push the correct comment into it
+    var indexOfPost = $(this).closest('.new-post').index();
+
+    reddit.addComment(indexOfPost, text, name);
+});
 // //once post button is clicked, the message and name is posted to the page
 // $('#submit').click( function() {
 //     let nameInput = $('#name').val();
