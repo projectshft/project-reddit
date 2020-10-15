@@ -22,7 +22,7 @@ var redditModule = () => {
         $('.posts').empty();
         posts.forEach(function(post) {
         //creates a variable inorder to insure that each new post created is within it's own div element in the DOM
-        let commentInfo = '<div class="comment-info"><input id="comment-text" type="text" placeholder="Comment Text"></input><input id="comment-name" type="text" placeholder="User Name"></input><button id="submit-comment" class="btn btn-primary">Post Comment</button></div>'
+        let commentInfo = '<div class="comment-info"><div class="comment-list"></div><input id="comment-text" type="text" placeholder="Comment Text"></input><input id="comment-name" type="text" placeholder="User Name"></input><button id="submit-comment" class="btn btn-primary">Post Comment</button></div>'
         var redditPostData = '<button id="remove" class="btn btn-link">remove post</button><button id="comment-toggle" class="btn btn-link">comment</button>' + commentInfo + '<p class="post-text">' + post.messageInput + '</p><p>Posted By: <b>' + post.nameInput + '</b></p>'
         $('.posts').append('<div class="new-post">' + redditPostData + '</div>')
         //once text is posted, resets the default value of the form
@@ -110,7 +110,7 @@ $('.posts').on('click', '#comment-toggle', function () {
 
 // //when post comment button is clicked, comment text and username text appears
 // $('.posts').on( 'click', '#submit-comment', function (){
-//     let commentMessageInput = $('#comment-text').val();
+//     let commentMessageInput = $('#comment-tpext').val();
 //     let commentNameInput = $('#comment-name').val();
 //     //checks to make sure commentNameInput and commentMessageInput have a value so user can't post a blank comment
 //     if (commentMessageInput == '' || commentNameInput == '') {
