@@ -52,7 +52,11 @@ var redditModule = () => {
         // pushes the comment into the correct comments array
         console.log(indexOfPost)
         console.log(comment)
-        posts[indexOfPost].comments.push(comment);
+        if (comment.text === '' || comment.name === '') {
+            alert('Please fill out all fields for your comment')
+        }else {
+            posts[indexOfPost].comments.push(comment);
+        }       
         console.log(posts)
     }
     // render comment to a specific post
