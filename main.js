@@ -70,17 +70,23 @@ var redditModule = () => {
             console.log('post is ' + post)
             for (i = 0; i <post.comments.length; i++) {
                 var comment = post.comments[i];
-                $('.new-post').find('.comment-list').append('<button id="remove-comment" class="close" aria-label="close"><span aria-hidden="true">&times;</span></button> <p class=commented-text>' + comment.text + '</p>' + '<p class=commented-text>Commented By: <b>' + comment.name + '</b></p>')
+                $('.new-post').find('.comment-list').append('<div class="comment"><button id="remove-comment" class="close" aria-label="close"><span aria-hidden="true">&times;</span></button> <p class=commented-text>' + comment.name + '</p>' + '<p class=commented-text>Commented By: <b>' + comment.text + '</b></p></div>')
             }
         })
     }
 
     // delete a specific comment 
-    var deleteComment = function(commentToRemove) {
-        var postIndex = $('.new-post').index(commentToRemove.closest('.new-post'));
-        var commentIndex = commentToRemove.closest('.comment-list').find('.comment-info').index(commenToRemove.closest('.comment-info'))
-        posts[postIndex].comments.splice(commentIndex, 1)
+    var deleteComment = function(commentToRemoveButton) {
+        var postIndex = $('.new-post').index(commentToRemoveButton.closest('.new-post'));
+        console.log(postIndex);
+        var $commentToDelete = $(commentToRemoveButton).closest('.comment');
+        var commentIndex = $commentToDelete.index();
         console.log(commentIndex);
+
+        // remove comment from array
+        posts[postIndex].comments.splice(commentIndex, 1);
+        // remove from page
+        $commentToDelete.remove();
     }
 
     return {
@@ -124,7 +130,7 @@ $('.posts').on('click', '#submit-comment', function () {
 
 $('.posts').on('click', '#remove-comment', function () {
     console.log('clicked');
-    reddit.deleteComment();
+    reddit.deleteComment($(this));
 });
 
 // //once post button is clicked, the message and name is posted to the page
