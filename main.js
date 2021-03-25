@@ -17,8 +17,8 @@ $postButton.on('click', function() {
 
 var renderPosts = function () {
   var postsHTML = posts.reduce(function (htmlString, post) {
-    htmlString += '<p>' + post.content + ' - Posted By: ' + post.author + '</p>';
+    htmlString += '<p>' + post.content + ' - Posted By: ' + post.author + '</p><hr>';
     return htmlString;
-  }, '')
+  }, '<hr>')
   $('.posts').html(postsHTML);
 }

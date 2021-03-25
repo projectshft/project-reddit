@@ -14,25 +14,32 @@
     <title>ReReddit</title>
   </head>
   <body>
-    <div class="container page-title">
-      <h1>ReReddit</h1>
+    <div class="container row">
+      <div class="col-md-6 col-md-offset-3">
+        <div class="page-title">
+          <h1>ReReddit</h1>
+        </div>
+        <div class="posts">
+          <hr />
+        </div>
+        <div class="create-post">
+          <input
+            type="text"
+            class="form-control post-text"
+            placeholder="Post Text"
+          />
+          <br />
+          <input
+            type="text"
+            class="form-control post-author"
+            placeholder="Your Name"
+          />
+          <br />
+          <button class="btn btn-primary submit-post">Submit Post</button>
+        </div>
+      </div>
     </div>
-    <div class="container posts"></div>
-    <div class="container create-post">
-      <input
-        type="text"
-        class="form-control post-text"
-        placeholder="Post Text"
-      />
-      <br />
-      <input
-        type="text"
-        class="form-control post-author"
-        placeholder="Your Name"
-      />
-      <br />
-      <button class="btn btn-primary submit-post">Submit Post</button>
-    </div>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="main.js"></script>
   </body>
