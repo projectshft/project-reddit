@@ -19,11 +19,13 @@ var addPost = function (author, content) {
 var renderPosts = function () {
   var postsHTML = posts.reduce(function (htmlString, post, index) {
     htmlString += `<div class="post" data-post="${index.toString()}">
-      <p><span role="button" tabindex="0" class="remove-button remove-post">remove</span> 
+      <div class="main-post">
+      <p class="my-1"><span role="button" tabindex="0" class="remove-button remove-post">remove</span> 
       <span role="button" tabindex="0" class="edit-button">edit</span> 
       <span role="button" tabindex="0" class="comments-button">comments</span> 
       ${post.content} - Posted By: ${post.author}</p>
-      <div class="create-edit d-none">
+      </div>
+      <div class="create-edit d-none mb-3">
       <input type="text" class="form-control edit-content" placeholder="Edited Post"/><br />
       <button class="btn btn-primary submit-edit">Edit Post</button>
       </div>
@@ -64,7 +66,7 @@ $posts.on('click', '.remove-comment', function(e) {
 var createCommentsHTML = function (postIndex) {
   var commentsHTML = '<div class="comments d-none">'
   commentsHTML += posts[postIndex].comments.reduce(function (htmlString, comment, index) {
-    htmlString += `<p>
+    htmlString += `<p class="my-1">
       <span role="button" tabindex="0" class="remove-button remove-comment" data-comment="${index}">remove</span> 
       ${comment.content} - Posted By: ${comment.author}
       </p>`;
@@ -105,11 +107,6 @@ $posts.on('click', '.submit-comment', function (e) {
   var $selectedPost = $(e.target).closest('.post')
   addComment($selectedPost.find('.comment-author').val(), $selectedPost.find('.comment-text').val(), postNumber);
   renderPosts();
-})
-
-//Edit button toggles edit display
-$posts.on('click', '.edit-button', function(e) {
-
 })
 
 //Edits Post
