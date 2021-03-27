@@ -4,6 +4,7 @@ var $postButton = $('.submit-post');
 var $textInput = $('.post-text');
 var $authorInput = $('.post-author');
 var $posts = $('.posts');
+var $individualPost = $('.individual-post');
 
 //Add post to posts array
 var addPost = function (author, content) {
@@ -15,28 +16,65 @@ var addPost = function (author, content) {
   posts.push(postObj);
 }
 
+
+{/* <a class="remove-post" href="#" role="button">remove</a>  */}
 //renders posts array to page
-var renderPosts = function () {
-  var postsHTML = posts.reduce(function (htmlString, post, index) {
+var renderPosts = function (postNum = -1) {
+  if (postNum === -1) {
+    $('.page-title').toggleClass('d-none', false);
+    $('.create-post').toggleClass('d-none', false);
+    $posts.toggleClass('d-none', false);
+    $individualPost.toggleClass('d-none', true);
+      var postsHTML = posts.reduce(function (htmlString, post, index) {
     htmlString += `<div class="post" data-post="${index.toString()}">
-      <div class="main-post">
-      <p class="my-1"><span role="button" tabindex="0" class="remove-button remove-post">remove</span> 
-      <span role="button" tabindex="0" class="edit-button">edit</span> 
-      <span role="button" tabindex="0" class="comments-button">comments</span> 
-      ${post.content} - Posted By: ${post.author}</p>
+      <div class="main-post" role="button">
+      <p class="my-1">
+      <button type="button" class="close remove-post" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <a class="edit-button" href="#" role="button">edit</a> 
+      ${post.content} - Posted By: ${post.author} - ${post.comments.length} comments</p>
       </div>
       <div class="create-edit d-none mb-3">
       <input type="text" class="form-control edit-content" placeholder="Edited Post"/><br />
       <button class="btn btn-primary submit-edit">Edit Post</button>
       </div>
-      ${createCommentsHTML(index)}
       <hr></div>`
+      // ${createCommentsHTML(index)}
     return htmlString;
   }, '<hr>')
   $posts.html(postsHTML);
+  } else {
+    $('.page-title').toggleClass('d-none', true);
+    $('.create-post').toggleClass('d-none', true);
+    $posts.toggleClass('d-none', true);
+    $individualPost.toggleClass('d-none', false);
+        var postsHTML = `<hr><div class="post" data-post="${postNum.toString()}">
+    <h2>${posts[postNum].content} - Posted By: ${posts[postNum].author}</h2>
+    <p class="my-1">
+    <a class="remove-post" href="#" role="button">remove</a> 
+    <a class="edit-button" href="#" role="button">edit</a> 
+    <div class="create-edit d-none mb-3">
+    <input type="text" class="form-control edit-content" placeholder="Edited Post"/><br />
+    <button class="btn btn-primary submit-edit">Edit Post</button>
+    </div>
+    <p class="mb-1">${posts[postNum].comments.length} comments:</p>
+    ${createCommentsHTML(postNum)}
+    <hr>
+    <button class="btn btn-primary main-page-return">Go Back to Main Page</button>
+    <button class="btn btn-primary add-comment">Add Comment</button>
+    </div>`
+    $individualPost.html(postsHTML);
+  }
+
 }
 
-//Updates page with new post
+{/* <span role="button" tabindex="0" class="comments-button">comments</span>  */}
+{/* <span role="button" tabindex="0" class="edit-button">edit</span>  */}
+{/* <div class="main-post"> */}
+    // <span role="button" tabindex="0" class="comments-button">comments</span> 
+
+//Updates page with new post (Good)
 $postButton.on('click', function() {
   //Only creates new post if user has actually filled out both boxes
   if($authorInput.val() && $textInput.val()) {
@@ -47,32 +85,61 @@ $postButton.on('click', function() {
   }
 })
 
+// Removes Post
+// $posts.on('click', function(e) {
+//   var $clickedElement = $(e.target);
+//   var $selectedPost = $clickedElement.closest('.post');
+//   var postNumber = parseInt($selectedPost.data().post);
+//   if($clickedElement.hasClass('remove-post')) {
+//     posts.splice(postNumber, 1);
+//     renderPosts();
+//     e.stopPropagation();
+//   }
+// })
+
+
+// else if ($clickedElement.hasClass('edit-button')) {
+//   $selectedPost.find('.create-edit').toggleClass('d-none');
+//   e.stopPropagation();
+// }
+//Toggles Edits display
+$posts.on('click', '.edit-button', function (e) {
+  var $selectedPost = $(e.target).closest('.post');
+  var $editSection = $selectedPost.find('.create-edit');
+  e.stopPropagation();
+  $editSection.toggleClass('d-none')
+})
+var goToIndividualPost = function (e) {
+  var postNumber = parseInt($(e.target).closest('.post').data().post);
+  renderPosts(postNumber)
+  // $posts.off('click', '.post')
+}
+// Changes to individual post page
+$posts.on('click', '.main-post', goToIndividualPost)
+
 //Removes Post
 $posts.on('click', '.remove-post', function(e) {
   var postNumber = $(e.target).closest('.post').data().post;
   posts.splice(postNumber,1);
+  e.stopPropagation();
   renderPosts();
 })
 
-// Removes Comment
-$posts.on('click', '.remove-comment', function(e) {
-  var postNumber = $(e.target).closest('.post').data().post;
-  var commentNumber = $(e.target).data().comment;
-  posts[postNumber].comments.splice(commentNumber,1);
-  renderPosts();
-})
+
 
 //Creates HTML for comments section
 var createCommentsHTML = function (postIndex) {
-  var commentsHTML = '<div class="comments d-none">'
+  var commentsHTML = '<div class="comments">'
   commentsHTML += posts[postIndex].comments.reduce(function (htmlString, comment, index) {
     htmlString += `<p class="my-1">
-      <span role="button" tabindex="0" class="remove-button remove-comment" data-comment="${index}">remove</span> 
       ${comment.content} - Posted By: ${comment.author}
+      <button type="button" class="close remove-comment" data-comment="${index}" aria-label="Close">
+       <span aria-hidden="true">&times;</span>
+      </button>
       </p>`;
     return htmlString;
   }, '')
-  commentsHTML += `<div class="create-comment">
+  commentsHTML += `<div class="create-comment d-none">
     <input type="text" class="form-control comment-text" placeholder="Comment Text"/><br />
     <input type="text" class="form-control comment-author" placeholder="Your Name"/><br />
     <button class="btn btn-primary submit-comment">Submit Comment</button>
@@ -80,19 +147,12 @@ var createCommentsHTML = function (postIndex) {
   return commentsHTML;
 }
 
-//Toggles comments display
-//REfactor to utilize bootstrap instead of vanilla CSS
-$posts.on('click', '.comments-button', function (e) {
-  var $selectedPost = $(e.target).closest('.post');
-  var $comments = $selectedPost.find('.comments');
-  $comments.toggleClass('d-none')
-  // if ($comments.css('display') === 'none') {
-  //   $comments.css('display', 'block');
-  // } else {
-  //   $comments.css('display', 'none');
-  // }
-})
+{/* <a class="remove-comment" href="#" role="button" data-comment="${index}">remove</a>  */}
+{/* <span role="button" tabindex="0" class="remove-button remove-comment" data-comment="${index}">remove</span> */}
 
+
+
+//Adds comment to posts array
 var addComment = function (author, content, postNum) {
   var commentObj = {
     author: author,
@@ -101,25 +161,14 @@ var addComment = function (author, content, postNum) {
   posts[postNum].comments.push(commentObj);
 }
 
-//Updates page with new comment
-$posts.on('click', '.submit-comment', function (e) {
-  var postNumber = $(e.target).closest('.post').data().post;
-  var $selectedPost = $(e.target).closest('.post')
-  addComment($selectedPost.find('.comment-author').val(), $selectedPost.find('.comment-text').val(), postNumber);
-  renderPosts();
-})
 
-//Edits Post
+
+//Edits post in post array
 var editPost = function (newContent, postNum) {
   posts[postNum].content = newContent;
 }
 
-//Toggles Edits display
-$posts.on('click', '.edit-button', function (e) {
-  var $selectedPost = $(e.target).closest('.post');
-  var $editSection = $selectedPost.find('.create-edit');
-  $editSection.toggleClass('d-none')
-})
+
 
 //Updates Page with Edited Post
 $posts.on('click', '.submit-edit', function (e) {
@@ -128,3 +177,71 @@ $posts.on('click', '.submit-edit', function (e) {
   editPost($selectedPost.find('.edit-content').val(), postNumber);
   renderPosts();
 })
+
+//Returns to Main Page
+$individualPost.on('click', '.main-page-return', function (e) {
+  renderPosts();
+  e.stopPropagation()
+})
+
+//Individual Post Events
+// Require Edit input for edit button
+$individualPost.on('click', function (e) {
+  var $clickedElement = $(e.target);
+  var $selectedPost = $clickedElement.closest('.post');
+  var postNumber = parseInt($selectedPost.data().post);
+
+  if($clickedElement.hasClass('edit-button')) {
+    $selectedPost.find('.create-edit').toggleClass('d-none');
+  } else if($clickedElement.hasClass('submit-edit')) {
+    editPost($selectedPost.find('.edit-content').val(), postNumber);
+    renderPosts(postNumber);
+  } else if($clickedElement.hasClass('remove-post')) {
+    posts.splice(postNumber,1);
+    renderPosts();
+  } else if ($clickedElement.hasClass('add-comment')) {
+    $selectedPost.find('.create-comment').toggleClass('d-none');
+  } else if ($clickedElement.hasClass('submit-comment')) {
+    addComment($selectedPost.find('.comment-author').val(), $selectedPost.find('.comment-text').val(), postNumber);
+    renderPosts(postNumber);
+  }
+})
+
+
+// else if ($clickedElement.hasClass('remove-comment')) {
+//   var commentNumber = $clickedElement.data().comment;
+//   posts[postNumber].comments.splice(commentNumber, 1);
+//   renderPosts(postNumber);
+// }
+// Removes Comment
+$individualPost.on('click', '.remove-comment', function(e) {
+  var $clickedElement = $(e.target);
+  var $selectedPost = $clickedElement.closest('.post');
+  var postNumber = parseInt($selectedPost.data().post);
+  var commentNumber = $clickedElement.closest('.remove-comment').data().comment;
+  posts[postNumber].comments.splice(commentNumber, 1);
+  renderPosts(postNumber);
+})
+// // Removes Comment
+// // NOT NEEDED ANYMORE
+// $posts.on('click', '.remove-comment', function(e) {
+//   var postNumber = $(e.target).closest('.post').data().post;
+//   var commentNumber = $(e.target).data().comment;
+//   posts[postNumber].comments.splice(commentNumber,1);
+//   renderPosts();
+// })
+// //Updates page with new comment
+// // NOT NEEDED ANYMORE
+// $posts.on('click', '.submit-comment', function (e) {
+//   var postNumber = $(e.target).closest('.post').data().post;
+//   var $selectedPost = $(e.target).closest('.post')
+//   addComment($selectedPost.find('.comment-author').val(), $selectedPost.find('.comment-text').val(), postNumber);
+//   renderPosts();
+// })
+// //Toggles comments display
+// //Need to change with new page functionality (NOT NEEDED ANYMORE)
+// $posts.on('click', '.comments-button', function (e) {
+//   var $selectedPost = $(e.target).closest('.post');
+//   var $comments = $selectedPost.find('.comments');
+//   $comments.toggleClass('d-none')
+// })
