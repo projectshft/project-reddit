@@ -76,21 +76,21 @@ var renderPost = function (postNum) {
   $('.create-post').toggleClass('d-none', true);
   $posts.toggleClass('d-none', true);
   $individualPost.toggleClass('d-none', false);
-      var postsHTML = `<hr><div class="post" data-post="${postNum.toString()}">
-  <h2>${posts[postNum].content} - Posted By: ${posts[postNum].author}</h2>
-  <p class="my-1">
-  <a class="remove-post" href="#" role="button">remove</a> 
-  <a class="edit-button" href="#" role="button">edit</a> 
-  <div class="create-edit d-none mb-3">
-  <input type="text" class="form-control edit-content" placeholder="Edited Post"/><br />
-  <button class="btn btn-primary submit-edit">Edit Post</button>
-  </div>
-  <p class="mb-1">${posts[postNum].comments.length} comments:</p>
-  ${createCommentsHTML(postNum)}
-  <hr>
-  <button class="btn btn-primary main-page-return">Go Back to Main Page</button>
-  <button class="btn btn-primary add-comment">Add Comment</button>
-  </div>`
+    var postsHTML = `<hr><div class="post" data-post="${postNum.toString()}">
+      <h2>${posts[postNum].content} - Posted By: ${posts[postNum].author}</h2>
+      <p class="my-1">
+      <a class="remove-post" href="#" role="button">remove</a> 
+      <a class="edit-button" href="#" role="button">edit</a> 
+      <div class="create-edit d-none mb-3">
+      <input type="text" class="form-control edit-content" placeholder="Edited Post"/><br />
+      <button class="btn btn-primary submit-edit">Edit Post</button>
+      </div>
+      <p class="mb-1">${posts[postNum].comments.length} comments:</p>
+      ${createCommentsHTML(postNum)}
+      <hr>
+      <button class="btn btn-primary main-page-return">Go Back to Main Page</button>
+      <button class="btn btn-primary add-comment">Add Comment</button>
+      </div>`
   $individualPost.html(postsHTML);
 }
 
@@ -99,10 +99,10 @@ var createCommentsHTML = function (postIndex) {
   var commentsHTML = '<div class="comments">'
   commentsHTML += posts[postIndex].comments.reduce(function (htmlString, comment, index) {
     htmlString += `<p class="my-1">
-      ${comment.content} - Posted By: ${comment.author}
       <button type="button" class="close remove-comment" data-comment="${index}" aria-label="Close">
-       <span aria-hidden="true">&times;</span>
+        <span aria-hidden="true">&times;</span>
       </button>
+      ${comment.content} - Posted By: ${comment.author}
       </p>`;
     return htmlString;
   }, '')
