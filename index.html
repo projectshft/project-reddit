@@ -1,90 +1,83 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Posts and comments</title>
-  <link
-  rel="stylesheet"
-  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-  integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-  crossorigin="anonymous"
-/>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<link rel="stylesheet" href="style.css">
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="main.js"></script>
 
+    <title>ReReddit</title>
+  </head>
+  <body>
+    <h1>ReReddit</h1>
 
-<meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Posts and Comments</title>
-</head>
-
-<body>
-
-<!----------------------HEADING--------------------------->
-  <div class="row">
-    <div class="col-md-6 col-md-offset-3">
-
-      <div class="page-header">
-        <h1 class="text-center">ReReddit</h1>
-      </div>
-
-      <section class="post-container">
-        <ul class='post-lists'>
-
+    <div class="list-group posts">
+      <a class="list-group-item list-group-item-action post-item">
+        <h5 class="mb-1">List group item heading</h5>
+        <p class="mb-1">Some placeholder content in a paragraph.</p>
+        <ul class="list-group comments">
+          <li class="list-group-item comment">
+            An item<button
+              type="button"
+              class="btn btn-outline-danger delete-comment btn-sm"
+            >
+              Delete Comment
+            </button>
+          </li>
         </ul>
-      </section>
 
-      <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-        <div class="modal-dialog modal-lg" role="document">
-          <div class="modal-content">
-          <p class="post"></p>
-          <form>
-            <input class="comment-name" type="text" placeholder="Name" class="form-control"></input>
-            <br>
-            <textarea class='comment-message' placeholder="Message" class="form-control"></textarea>
-          </form>
-          <button>Delete</button>
+        <form>
+          <div class="mb-3">
+            <label for="comment" class="form-label">Comment</label>
+            <input class="form-control" id="comment" />
           </div>
-        </div>
+          <div class="mb-3">
+            <label for="comment-name" class="form-label">Name</label>
+            <input class="form-control" id="comment-name" />
+          </div>
+
+          <button type="submit" class="btn btn-primary add-comment">
+            Add Comment
+          </button>
+        </form>
+
+        <button type="button" class="btn btn-danger delete-post">Delete</button>
+      </a>
+    </div>
+
+    <div class="add-form card">
+      <h5 class="card-header">Add a Post</h5>
+      <div class="card-body">
+        <form>
+          <div class="mb-3">
+            <label for="post" class="form-label">Post</label>
+            <input class="form-control" id="post" />
+          </div>
+          <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input class="form-control" id="name" />
+          </div>
+
+          <button type="submit" class="btn btn-primary add-post">Submit</button>
+        </form>
       </div>
-
-      <form style="margin-top:30px;" onsubmit="event.preventDefault();">
-        <br>
-        <h3 class="text-center add-new-post">Add a new post</h3>
-        
-        <div class="form-group">
-          <input id="name" type="text"
-            class="form-control"
-            placeholder="Name"></input>
-        </div>
-        
-        <div class="form-group">
-          <textarea id="message" type="text"
-          class="form-control"
-          placeholder="Message"></textarea>
-        </div>
-        
-        <button type="button" class="btn btn-primary btn-md active btn-post ">Add Post</button>
-      </form>
-
     </div>
-  </div>
 
-  <div id="myModal" class="modal">
-
-    <!-- Modal content -->
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <p>Some text in the Modal..</p>
-    </div>
-  
-  </div>
-  
-  <script src="main.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-</body>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
