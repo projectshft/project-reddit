@@ -1,91 +1,66 @@
 $(document).ready(function () {
-  console.log('hello world');
-  $('.add-post').on('click', function () {
+  $('.btn-post').on('click', function () {
     const $name = $('#name').val();
-    const $post = $('#post').val();
+    const $message = $('#message').val();
 
-    console.log('adding post', $name, $post);
+    const $parentLi = $('<li></li>').addClass('parent-li');
 
-    const $newPost = $('<h5></h5>').text($post).addClass('mb-1');
-    const $newName = $('<p></p>').text($name).addClass('mb-1');
-    const $deletePostBtn = $('<button></button>')
-      .text('Delete')
-      .addClass('btn btn-danger delete-post');
-    const $newPostToAdd = $('<a></a>').addClass(
-      'list-group-item list-group-item-action post-item'
+    const $pTagPost = $(`<li></li>`)
+      .html(`<h5 class='lead'>${$message} —— Posted By:${$name}</h5>`)
+      .addClass('child-li');
+
+    const $deletePost = $('<button></button>')
+      .text('Delete Post')
+      .addClass('btn btn-link delete-btn');
+    const $commentInput = $('<form></form>')
+      .html(
+        `<h4 class='text-center'>Add a comment</h4><input id="name" type="text" class="form-control comment-name" placeholder="add comment name here" ><br>
+    <textarea id="comment-message" type="text" class="form-control comment-message" placeholder="comment message" ></textarea>`
+      )
+      .addClass('comment-input');
+    const $viewComments = $('<button></button>')
+      .text('Add Comment')
+      .addClass('btn btn-link view-comment-btn');
+
+    $parentLi.appendTo('.post-lists');
+    $pTagPost.appendTo('.parent-li');
+
+    $deletePost.appendTo('.parent-li');
+
+    $viewComments.appendTo('.parent-li');
+    $commentInput.appendTo('.child-li');
+
+    $('.delete-btn').on('click', function (e) {
+      console.log(e);
+      const $remove = $(e.target.parentElement);
+      $remove.remove();
+    });
+  });
+
+  $('.post-container').on('click', '.view-comment-btn', function () {
+    const $commentName = $('.comment-name').val();
+    const $commentMessage = $('.comment-message').val();
+    const $removeCommentBtn = $('<button></button>')
+      .html('Delete Comment')
+      .addClass('btn btn-link delete-comment');
+
+    const $commentText = $(`<p><p>`).html(
+      `${$commentMessage} ——Posted By: ${$commentName} `
     );
-
-    $newPostToAdd.append($newPost, $newName, $deletePostBtn);
-
-    $('.posts').append($newPostToAdd);
+    $removeCommentBtn.appendTo($commentText);
+    $commentText.insertBefore('.comment-input');
   });
-  $('.posts').on('click', '.delete-post', (e) => {
-    console.log('deleting post');
+
+  $('.post-container').on('click', '.delete-comment', function (e) {
+    console.log(e.target.parentElement);
     const $remove = $(e.target.parentElement);
     $remove.remove();
-  });
-
-  $('.posts').on('click', '.delete-comment', (e) => {
-    console.log('deleting comment');
-    const $remove = $(e.target.parentElement);
-    $remove.remove();
-  });
-
-  $('.posts').on('click', '.add-comment', () => {
-    const $commentName = $('#comment-name').val();
-    const $comment = $('#comment').val();
-    console.log('adding  comment', $comment, $commentName);
-    const $addComment = $('<li></li>').text('new comment');
-    const $currentComments = $(this).closest('ul');
-
-    $currentComments.append($addComment);
   });
 });
 
-/* <li class="list-group-item comment">
-An item<button
-  type="button"
-  class="btn btn-outline-danger delete-comment btn-sm"
->
-  Delete Comment
-</button>
-</li> */
-
-/* <button type="button" class="btn btn-danger delete-post">Delete</button> */
-
-/* <h5 class="mb-1">List group item heading</h5>
-        <p class="mb-1">Some placeholder content in a paragraph.</p> */
-
-// $('.btn-post').on('click', function () {
-//   const $name = $('#name').val();
-//   const $message = $('#message').val();
-
-//   const $parentLi = $('<li></li>').addClass('parent-li');
-
-//   const $pTagPost = $(`<p></p>`).text(`${$message} —— Posted By:${$name}`);
-
-//   const $viewComments = $('<button></button>')
-//     .text('View Comments')
-//     .addClass('btn btn-link view-comment-btn');
-
-//   const $deletePost = $('<button></button>')
-//     .text('Delete Post')
-//     .addClass('btn btn-link delete-btn');
-
-//   $parentLi.appendTo('.post-lists');
-//   $pTagPost.appendTo('.parent-li');
-
-//   $deletePost.appendTo('.parent-li');
-
-//   $viewComments.appendTo('.parent-li');
-
-//   $('.view-comment-btn').on('click', function (e) {
-//     alert(e.target.innerHTML);
-//   });
-
-//   $('.delete-btn').on('click', function (e) {
-//     console.log(e);
-//     const $remove = $(e.target.parentElement);
-//     $remove.remove();
-//   });
-// });
+//  <form>comm
+//   <label for="name">Name:</label><br>
+//   <input type="text" id="comment-name" name="fname"><br>
+//   <label for="comment">Comment:</label><br>
+//   <input type="text" id="comment-message" name="comment">
+// </form>
