@@ -1,0 +1,13 @@
+ul, ol {  
+  margin:0;
+  padding:0;
+}
+
+.comment-list-items {
+  list-style-type: lower-alpha;
+  padding-left: 10px;
+}
+
+#addAComment {
+  display: none;
+}
