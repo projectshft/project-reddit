@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <title>ReReddit Eval</title>
+  </head>
+  <body>
+    <div class="row" style="margin-left: 10px">
+      <div class="col-md-6">
+        <div class="page-header">
+          <h1>ReReddit</h1>
+        </div>
+        <div class="posts">
+          <!-- <div class="post">
+            <div class="comments">
+              
+            </div>
+          </div>     -->
+        </div>
+        
+        <form id="commentForm" style="margin-top:30px; display:none;" onsubmit="event.preventDefault();">
+          <h4>Add a comment</h4>
+        
+          <div class="form-group">
+            <input id="commentName" type="text"
+              class="form-control"
+              placeholder="Your Name"></input>
+          </div>
+          
+          <div class="form-group">
+            <textarea id="commentText" type="text"
+            class="form-control"
+            placeholder="Comment Text"></textarea>
+          </div>
+          <button id="submitComment" class="btn btn-primary">Submit Comment</button>
+        </form>
+        <form id="create" style="margin-top:30px;" onsubmit="event.preventDefault();">
+          <h3>Add a new post</h3>
+        
+          <div class="form-group">
+            <input id="postName" type="text"
+              class="form-control"
+              placeholder="Your Name"></input>
+          </div>
+          
+          <div class="form-group">
+            <textarea id="post" type="text"
+            class="form-control"
+            placeholder="Post Text"></textarea>
+          </div>
+          <button id="submitButton" class="btn btn-primary">Submit Post</button>
+        </form>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
