@@ -1,4 +1,4 @@
-//i had a difficult time with this. talked/worked with my mentor several times and spent all of sunday working on it. I wasnt able to get some of the functionality 
+
 
 var redditPosts = [];
 
@@ -11,13 +11,31 @@ var renderPage = function () {
       comments += `<div class="comment " id="comment-${i}"><p><button class="btn btn-xs btn-danger" id="delete-comment-${i}">Delete</button> ${comment.name} - Posted By: ${comment.text}</p></div>`
       
     }
-    $('.posts').append(`<div class="post"><p><button class="btn btn-xs btn-danger" class="delete" id="delete-${index}">Delete</button> <button class="btn btn-xs btn-info" id="commentButton">Comment</button> <a>${redditPosts[index].message}</a> - Posted By: ${redditPosts[index].name} <a id="editPost">(Edit post)</a></p><div class="comments">${comments}</div></div><hr>`);
+    $('.posts').append(`<div class="post"><div class="btn btn-xs btn-danger delete" id="delete-${index}">Delete</div> <button class="btn btn-xs btn-info comment" id="commentButton">Comment</button> <a>${redditPosts[index].message}</a> - Posted By: ${redditPosts[index].name} <a id="editPost">(Edit post)</a><div class="comments-wrapper" style="display:none;"><div class="comments">${comments}</div>
+    
+    <form id="commentForm" style="margin-top:30px;" onsubmit="event.preventDefault();">
+          <h4>Add a comment</h4>
+        
+          <div class="form-group">
+            <input id="commentName" type="text"
+              class="form-control"
+              placeholder="Your Name"></input>
+          </div>
+          
+          <div class="form-group">
+            <textarea id="commentText" type="text"
+            class="form-control"
+            placeholder="Comment Text"></textarea>
+          </div>
+          <button id="submitComment" class="btn btn-primary">Submit Comment</button>
+        </form>
+    </div>
+    <hr></div>`);
     
   }
-  $('#commentButton').on('click', function() {
-    $('#commentForm').toggle();
-  });
-  
+  // $('#commentButton').on('click', function() {
+  //   $('#commentForm').toggle();
+  // });
 };
 
 
@@ -41,28 +59,38 @@ $('#submitButton').on('click', function() {
   renderPage(); 
   
 });
-$(`#delete`).on('click', function () {
-    //wasnt able to find way to delete unique id or proper syntax to access it
-  });
-$('#submitComment').on('click', function() {
-  var $commentName = $('#commentName').val();
-  var $commentText = $('#commentText').val();
 
-
-  if ($commentName === '') {
-    alert('Commenter name is empty. Please enter your name');
-  } else if ($commentText === '') {
-    alert('Comment field is empty. Please enter a comment')
-  } else {
-    redditPosts.push( {comments: [{name: $commentName, text: $commentText}]})
-  };
-
-  var clearComment = function() {
-    $('#commentName').val('');
-    $('#commentText').val('');
-  }
-  clearComment();
-  renderPage();  
+$('.posts').on('click', '.delete', function () {
+  var postIndex = $(this).closest('.post').index();
+  redditPosts.splice(postIndex, 1);
+  renderPage();
 });
+
+$('.posts').on('click', '.comment', function () {
+  $(this).closest('.comments-wrapper').toggle();
+  // var form = $(this).closest('#commentForm');
+  // console.log(form);
+});
+  
+// $('#submitComment').on('click', function() {
+//   var $commentName = $('#commentName').val();
+//   var $commentText = $('#commentText').val();
+
+
+//   if ($commentName === '') {
+//     alert('Commenter name is empty. Please enter your name');
+//   } else if ($commentText === '') {
+//     alert('Comment field is empty. Please enter a comment')
+//   } else {
+//     redditPosts.push( {comments: [{name: $commentName, text: $commentText}]})
+//   };
+
+//   var clearComment = function() {
+//     $('#commentName').val('');
+//     $('#commentText').val('');
+//   }
+//   clearComment();
+//   renderPage();  
+// });
 
 renderPage();
