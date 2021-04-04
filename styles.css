@@ -1,3 +1,16 @@
 .comments-div {
   display: none;
 }
+
+.comments {
+  color: rgb(69, 69, 210);
+}
+
+.comments-posts p {
+  padding-left: 10px;
+  padding-top: 5px;
+}
+
+.remove {
+  color: rgb(237, 64, 64);
+}

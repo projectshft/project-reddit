@@ -12,15 +12,15 @@ $( document ).ready(function() {
     var $hr = $('<hr></hr>');
     var $editDiv = $('<div class="editDiv"></div>');
     var $editDivComments = $('<span class="comments"></span>');
-    var $editDivDelete = $('<span class="delete"></span>');
+    var $editDivRemove = $('<span class="remove"></span>');
     var $commentsDiv = $('<div class=comments-div></div>');
     
     $editDivComments.text('Comments ');
-    $editDivDelete.text('Delete');
+    $editDivRemove.text('Remove');
     $newPost.text($message + ' - Posted By: ' + $name);
 
     $editDiv.append($editDivComments);
-    $editDiv.append($editDivDelete);
+    $editDiv.append($editDivRemove);
     $newPostDiv.append($newPost);
     $newPostDiv.append($editDiv);
     createCommentsSection($commentsDiv);
@@ -38,6 +38,10 @@ $( document ).ready(function() {
     $editDivComments.on("click", function() {
       $commentsDiv.toggle();
     });
+
+    $editDivRemove.on("click", function () {
+      $newPostDiv.remove();
+    });    
 
   });
 
@@ -72,10 +76,16 @@ $( document ).ready(function() {
     // Collect comment input from user //
     var $commentName = $commentNameInput.val();
     var $commentMessage = $commentTextInput.val();
-
+   
     var $newCommentPost = $('<p></p>');
+    var $commentEditDiv = $('<div class="editDiv"></div>');
+    var $commentEditDivRemove = $('<span class="remove"></span>');
+    $commentEditDivRemove.text('Remove');
+    
     $newCommentPost.text($commentMessage + ' - Posted By: ' + $commentName);
+    $commentEditDiv.append($commentEditDivRemove);
     $commentsPosts.append($newCommentPost);
+    $newCommentPost.append($commentEditDiv);
 
     // Reset input fields //
     $('form :input').val('');
