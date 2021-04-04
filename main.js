@@ -15,8 +15,8 @@ $( document ).ready(function() {
     var $editDivRemove = $('<span class="remove"></span>');
     var $commentsDiv = $('<div class=comments-div></div>');
     
-    $editDivComments.text('Comments ');
-    $editDivRemove.text('Remove');
+    $editDivComments.text('Comments');
+    $editDivRemove.text(' Remove');
     $newPost.text($message + ' - Posted By: ' + $name);
 
     $editDiv.append($editDivComments);
@@ -39,9 +39,23 @@ $( document ).ready(function() {
       $commentsDiv.toggle();
     });
 
+    // Remove Div when 'Remove' is clicked
     $editDivRemove.on("click", function () {
       $newPostDiv.remove();
-    });    
+    });
+
+    // Change mouse hovering over 'Remove' and 'Comments'
+    $editDivRemove.hover(function() {
+      $(this).css('cursor','pointer');
+    }, function() {
+        $(this).css('cursor','auto');
+    });
+
+    $editDivComments.hover(function() {
+      $(this).css('cursor','pointer');
+    }, function() {
+        $(this).css('cursor','auto');
+    });
 
   });
 
@@ -77,6 +91,7 @@ $( document ).ready(function() {
     var $commentName = $commentNameInput.val();
     var $commentMessage = $commentTextInput.val();
    
+    var $newCommentDiv = $('<div class="newCommentDiv"></div>');
     var $newCommentPost = $('<p></p>');
     var $commentEditDiv = $('<div class="editDiv"></div>');
     var $commentEditDivRemove = $('<span class="remove"></span>');
@@ -84,13 +99,26 @@ $( document ).ready(function() {
     
     $newCommentPost.text($commentMessage + ' - Posted By: ' + $commentName);
     $commentEditDiv.append($commentEditDivRemove);
-    $commentsPosts.append($newCommentPost);
-    $newCommentPost.append($commentEditDiv);
+
+    $newCommentDiv.append($newCommentPost);
+    $newCommentDiv.append($commentEditDivRemove);
+    $commentsPosts.append($newCommentDiv);
+
+    // Remove Div when 'Remove' is clicked
+    $commentEditDivRemove.on("click", function () {
+      $newCommentDiv.remove();
+    });
+
+    // Change mouse hovering over 'Remove'
+    $commentEditDivRemove.hover(function() {
+      $(this).css('cursor','pointer');
+    }, function() {
+        $(this).css('cursor','auto');
+    });
 
     // Reset input fields //
     $('form :input').val('');
   })
   };
-
   
 });
