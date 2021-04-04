@@ -34,14 +34,14 @@ $( document ).ready(function() {
     // Reset input fields //
     $('form :input').val('');
 
+    // Hide/Show Comments Section
     $editDivComments.on("click", function() {
       $commentsDiv.toggle();
     });
 
-
   });
 
-  // Create/View comments //
+  // Generate Comments Section //
   var createCommentsSection = function ($commentsDiv) {
     var $commentsPosts = $('<div class="comments-posts"></div>');
     var $commentForm = $('<form style="margin-top:30px;" onsubmit="event.preventDefault();"></form>');
@@ -53,6 +53,7 @@ $( document ).ready(function() {
     // Comment Form Name Input //
     var $commentNameDiv = $('<div class="form-group"></div>');
     var $commentNameInput = $('<input id="comment-name" type="text" class="form-control" placeholder="Your Name"></input>');
+
   // Comment Form Submit Button //
     var $submitCommentButton = $('<button id="submit-comment" class="btn btn-primary">Submit Comment</button>');
     
@@ -66,7 +67,4 @@ $( document ).ready(function() {
     $commentsDiv.append($commentsPosts);
     $commentsDiv.append($commentForm);
   };
-
- 
-
 });
