@@ -11,8 +11,8 @@ $( document ).ready(function() {
     var $newPost = $('<p></p>');
     var $hr = $('<hr></hr>');
     var $editDiv = $('<div class="editDiv"></div>');
-    var $editDivComments = $('<span class="comments"></span>');
-    var $editDivRemove = $('<span class="remove"></span>');
+    var $editDivComments = $('<span class="comments" style="cursor: pointer"></span>');
+    var $editDivRemove = $('<span class="remove" style="cursor: pointer"></span>');
     var $commentsDiv = $('<div class=comments-div></div>');
     
     $editDivComments.text('Comments');
@@ -42,19 +42,6 @@ $( document ).ready(function() {
     // Remove Div when 'Remove' is clicked
     $editDivRemove.on("click", function () {
       $newPostDiv.remove();
-    });
-
-    // Change mouse hovering over 'Remove' and 'Comments'
-    $editDivRemove.hover(function() {
-      $(this).css('cursor','pointer');
-    }, function() {
-        $(this).css('cursor','auto');
-    });
-
-    $editDivComments.hover(function() {
-      $(this).css('cursor','pointer');
-    }, function() {
-        $(this).css('cursor','auto');
     });
 
   });
@@ -94,7 +81,7 @@ $( document ).ready(function() {
     var $newCommentDiv = $('<div class="newCommentDiv"></div>');
     var $newCommentPost = $('<p></p>');
     var $commentEditDiv = $('<div class="editDiv"></div>');
-    var $commentEditDivRemove = $('<span class="remove"></span>');
+    var $commentEditDivRemove = $('<span class="remove" style="cursor: pointer"></span>');
     $commentEditDivRemove.text('Remove');
     
     $newCommentPost.text($commentMessage + ' - Posted By: ' + $commentName);
@@ -107,13 +94,6 @@ $( document ).ready(function() {
     // Remove Div when 'Remove' is clicked
     $commentEditDivRemove.on("click", function () {
       $newCommentDiv.remove();
-    });
-
-    // Change mouse hovering over 'Remove'
-    $commentEditDivRemove.hover(function() {
-      $(this).css('cursor','pointer');
-    }, function() {
-        $(this).css('cursor','auto');
     });
 
     // Reset input fields //

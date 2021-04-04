@@ -1,3 +1,11 @@
+body {
+  margin: 0;
+}
+
+.newPostDiv p {
+  margin-bottom: 0px;
+}
+
 .comments-div {
   display: none;
 }
@@ -9,6 +17,15 @@
 .comments-posts p {
   padding-left: 10px;
   padding-top: 5px;
+}
+
+.newCommentDiv {
+  display: flex;
+  align-items: center;
+}
+
+.newCommentDiv p {
+  margin-bottom: 5px;
 }
 
 .remove {
