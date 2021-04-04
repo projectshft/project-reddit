@@ -66,5 +66,21 @@ $( document ).ready(function() {
     $commentForm.append($submitCommentButton);
     $commentsDiv.append($commentsPosts);
     $commentsDiv.append($commentForm);
+
+    // Create new comment //
+  $submitCommentButton.on('click', function() {
+    // Collect comment input from user //
+    var $commentName = $commentNameInput.val();
+    var $commentMessage = $commentTextInput.val();
+
+    var $newCommentPost = $('<p></p>');
+    $newCommentPost.text($commentMessage + ' - Posted By: ' + $commentName);
+    $commentsPosts.append($newCommentPost);
+
+    // Reset input fields //
+    $('form :input').val('');
+  })
   };
+
+  
 });
