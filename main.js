@@ -63,6 +63,7 @@ $( document ).ready(function() {
 
     $editDivEdit.click(function(){
       $newPostMessage.attr("contenteditable", "true");
+      $newPostMessage.css("min-width", "250px");
       $newPostMessage.focus();
       $editDivEdit.hide();
       $editDivSave.show();
@@ -70,6 +71,7 @@ $( document ).ready(function() {
 
     $editDivSave.click(function(){
       $newPostMessage.attr("contenteditable", "false");
+      $newPostMessage.css("min-width", "");
       $editDivEdit.show();
       $editDivSave.hide();
     });
