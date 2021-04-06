@@ -1,0 +1,73 @@
+@import url("//use.fontawesome.com/releases/v5.6.1/css/all.css");
+
+body {
+  margin: 0;
+}
+
+h1 {
+  font-size: 40px;
+}
+
+.newPostDiv p {
+  margin-bottom: 0px;
+}
+
+.postDiv {
+  display: flex;
+  align-items: center;
+}
+
+#post-message {
+  padding-right: 4px;
+}
+
+#submit {
+  background-color: #007effeb;
+}
+
+.edit-post {
+  color: #007effeb;
+  cursor: pointer;
+  padding-right: 10px;
+}
+
+.save-post {
+  color: #8bd8a9ec;
+  cursor: pointer;
+  padding-right: 10px;
+}
+
+.newCommentDiv {
+  display: flex;
+  align-items: center;
+}
+
+.newCommentDiv p {
+  margin-bottom: 5px;
+  margin-right: 10px;
+}
+
+.comments-div {
+  display: none;
+}
+
+.comments-posts p {
+  padding-left: 10px;
+  padding-top: 5px;
+}
+
+.comments {
+  color: #007effeb;
+  cursor: pointer;
+  padding-right: 10px;
+}
+
+#submit-comment {
+  background-color: #007effeb;
+  cursor: pointer;
+}
+
+.remove {
+  color: rgb(237, 64, 64);
+  cursor: pointer;
+}
