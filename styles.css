@@ -10,6 +10,15 @@ h1 {
   margin-bottom: 0px;
 }
 
+.postDiv {
+  display: flex;
+  align-items: center;
+}
+
+#post-message {
+  padding-right: 4px;
+}
+
 #submit {
   background-color: #007effeb;
 }
@@ -21,6 +30,19 @@ h1 {
 .comments {
   color: #007effeb;
   cursor: pointer;
+  padding-right: 10px;
+}
+
+.edit-post {
+  color: #007effeb;
+  cursor: pointer;
+  padding-right: 10px;
+}
+
+.save-post {
+  color: #8bd8a9ec;
+  cursor: pointer;
+  padding-right: 10px;
 }
 
 .comments-posts p {
@@ -44,6 +66,5 @@ h1 {
 
 .remove {
   color: rgb(237, 64, 64);
-  padding-left: 10px;
   cursor: pointer;
 }

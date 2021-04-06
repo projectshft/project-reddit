@@ -1,3 +1,5 @@
+// contentEditable = true
+
 $( document ).ready(function() {
 
   // Create new post //
@@ -8,20 +10,32 @@ $( document ).ready(function() {
 
     // Create new div for post //
     var $newPostDiv = $('<div class="newPostDiv"></div>');
-    var $newPost = $('<p></p>');
+    var $postDiv = $('<div class="postDiv"></div>');
+    var $newPostMessage = $('<p id="post-message"></p>');
+    var $newPostName = $('<p id="post-name"></p>');
     var $hr = $('<hr></hr>');
     var $editDiv = $('<div class="editDiv"></div>');
     var $editDivComments = $('<span class="comments"></span>');
+    var $editDivEdit = $('<span class="edit-post"></span>');
+    var $editDivSave = $('<span class="save-post"></span>');
     var $editDivRemove = $('<span class="remove"></span>');
     var $commentsDiv = $('<div class=comments-div></div>');
     
     $editDivComments.text('Comments');
-    $editDivRemove.text(' Remove');
-    $newPost.text($message + ' - Posted By: ' + $name);
+    $editDivEdit.text('Edit');
+    $editDivSave.text('Save');
+    $editDivRemove.text('Remove');
+    $newPostMessage.text($message);
+    $newPostName.text( ' - Posted By: ' + $name);
 
     $editDiv.append($editDivComments);
+    $editDiv.append($editDivEdit);
+    $editDiv.append($editDivSave);
     $editDiv.append($editDivRemove);
-    $newPostDiv.append($newPost);
+    $postDiv.append($newPostMessage);
+    $postDiv.append($newPostName);
+    $newPostDiv.append($postDiv);
+
     $newPostDiv.append($editDiv);
     createCommentsSection($commentsDiv);
     $newPostDiv.append($commentsDiv);
@@ -43,6 +57,23 @@ $( document ).ready(function() {
     $editDivRemove.on("click", function () {
       $newPostDiv.remove();
     });
+  
+    // Make Post Editable
+    $editDivSave.hide();
+
+    $editDivEdit.click(function(){
+      $('#post-message').attr("contenteditable", "true");
+      $newPostMessage.focus();
+      $editDivEdit.hide();
+      $editDivSave.show();
+    });
+
+    $editDivSave.click(function(){
+      $newPostMessage.attr("contenteditable", "false");
+      $editDivEdit.show();
+      $editDivSave.hide();
+    });
+  
   });
 
   // Generate Comments Section //
