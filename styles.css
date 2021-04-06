@@ -25,16 +25,6 @@ h1 {
   background-color: #007effeb;
 }
 
-.comments-div {
-  display: none;
-}
-
-.comments {
-  color: #007effeb;
-  cursor: pointer;
-  padding-right: 10px;
-}
-
 .edit-post {
   color: #007effeb;
   cursor: pointer;
@@ -47,11 +37,6 @@ h1 {
   padding-right: 10px;
 }
 
-.comments-posts p {
-  padding-left: 10px;
-  padding-top: 5px;
-}
-
 .newCommentDiv {
   display: flex;
   align-items: center;
@@ -60,6 +45,21 @@ h1 {
 .newCommentDiv p {
   margin-bottom: 5px;
   margin-right: 10px;
+}
+
+.comments-div {
+  display: none;
+}
+
+.comments-posts p {
+  padding-left: 10px;
+  padding-top: 5px;
+}
+
+.comments {
+  color: #007effeb;
+  cursor: pointer;
+  padding-right: 10px;
 }
 
 #submit-comment {
