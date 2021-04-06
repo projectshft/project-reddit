@@ -62,7 +62,7 @@ $( document ).ready(function() {
     $editDivSave.hide();
 
     $editDivEdit.click(function(){
-      $('#post-message').attr("contenteditable", "true");
+      $newPostMessage.attr("contenteditable", "true");
       $newPostMessage.focus();
       $editDivEdit.hide();
       $editDivSave.show();
