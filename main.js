@@ -21,10 +21,10 @@ $( document ).ready(function() {
     var $editDivRemove = $('<span class="remove"></span>');
     var $commentsDiv = $('<div class=comments-div></div>');
     
-    $editDivComments.text('Comments');
-    $editDivEdit.text('Edit');
-    $editDivSave.text('Save');
-    $editDivRemove.text('Remove');
+    $editDivComments.html('<i class="fas fa-comments"></i> Comments');
+    $editDivEdit.html('<i class="fas fa-edit"></i> Edit');
+    $editDivSave.html('<i class="fas fa-save"></i> Save');
+    $editDivRemove.html('<i class="fas fa-trash-alt"></i> Remove');
     $newPostMessage.text($message);
     $newPostName.text( ' - Posted By: ' + $name);
 
@@ -112,7 +112,7 @@ $( document ).ready(function() {
       var $newCommentPost = $('<p></p>');
       var $commentEditDiv = $('<div class="editDiv"></div>');
       var $commentEditDivRemove = $('<span class="remove"></span>');
-      $commentEditDivRemove.text('Remove');
+      $commentEditDivRemove.html('<i class="fas fa-trash-alt"></i> Remove');
       
       $newCommentPost.text($commentMessage + ' - Posted By: ' + $commentName);
       $commentEditDiv.append($commentEditDivRemove);
