@@ -2,8 +2,16 @@ body {
   margin: 0;
 }
 
+h1 {
+  font-size: 40px;
+}
+
 .newPostDiv p {
   margin-bottom: 0px;
+}
+
+#submit {
+  background-color: #007effeb;
 }
 
 .comments-div {
@@ -11,7 +19,8 @@ body {
 }
 
 .comments {
-  color: rgb(69, 69, 210);
+  color: #007effeb;
+  cursor: pointer;
 }
 
 .comments-posts p {
@@ -28,7 +37,13 @@ body {
   margin-bottom: 5px;
 }
 
+#submit-comment {
+  background-color: #007effeb;
+  cursor: pointer;
+}
+
 .remove {
   color: rgb(237, 64, 64);
   padding-left: 10px;
+  cursor: pointer;
 }
