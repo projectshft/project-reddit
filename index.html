@@ -22,9 +22,31 @@
           </div>
           
           <div class="posts">
+            <form action="" class="form-group" id="comments-form" onsubmit="event.preventDefault();">
+              <div class="form-group">
+                <input
+                  id="post-comment"
+                  type="text"
+                  class="form-control"
+                  placeholder="Post Comment"
+                >
+              </input>
+              </div>
+  
+              <div class="form-group">
+                <input
+                  id="name-comment"
+                  type="text"
+                  class="form-control"
+                  placeholder="Your Name"
+                ></input>
+              </div>
+  
+              <button id="submit-comment" class="btn btn-primary btn-lg">Submit Comment</button>
+            </form>
           </div>
-
-          <form action="" onsubmit="event.preventDefault();">
+          <!--main post form-->
+          <form action="" class="main-form" onsubmit="event.preventDefault();">
             <div class="form-group">
               <input
                 id="post-text"

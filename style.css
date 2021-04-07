@@ -12,3 +12,11 @@ h1 {
   padding-left: 0px;
   margin-left: 0px;
 }
+
+#submit-comment {
+  background-color: rgb(0, 132, 255);
+}
+
+#comments-form {
+  display: none;
+}
