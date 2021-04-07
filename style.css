@@ -5,3 +5,7 @@
 .post-row {
   margin-bottom: 15px;
 }
+
+.comment-container {
+  display: none;
+}
