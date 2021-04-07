@@ -4,7 +4,7 @@
 //put that in posts div
   //'I like cheese - Posted By: Aaron'
 
-
+//POSTS
 $('#submit').on('click', function () {
   var userText = $('#post-text').val();
   var userName = $('#name').val(); 
@@ -27,7 +27,6 @@ $('#submit').on('click', function () {
 //onClick event listener for the comment and remove
   //changes 'comment' to 'comments'
   //opens up comments if there are comments
-    //add a new div <div 'id="comments">
     //has a form with posts and name boxes
     //submit comment button 
       //onClick event listener that posts a comment 
@@ -47,17 +46,26 @@ $('.posts').on('click', 'p', function (e) {
 //comment button
 $('.posts').on('click', 'p', function (e) {
   var $element = $(e.target);
+  //console.log($element)
   
   if($element.attr('id') === 'comment') {
-   $(this).append('<div id="comments-element">');
-   //$('#comments-form').css("display", "block"); 
-   $('#comments-element').append($('#comments-form').show());
+   $element.closest('p').append($('#comments-form'));
+   //$element.closest('p').append('<div id="comment-form-el">');
+   $('#comments-form').show();
   };
 });
 
+
 //submit comment 
 $('#comments-form').on('click', 'button', function (e) {
+  var $element = $(e.target);
 
-})
+  var userComment = $('#post-comment').val();
+  var userCommentName = $('#name-comment').val();
 
+  $element.closest('p').append('<p id="comment">' + '<button type="button" class="btn btn-link" id="remove">remove</button>' + userComment + ' - Posted by: ' + userCommentName + '</p>');
+
+  $('#comments-form').hide();
+});
+//not working great 
 
