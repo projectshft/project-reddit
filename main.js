@@ -40,18 +40,16 @@ $('.posts').on('click', 'p', function (e) {
   } else if($element.attr('id') === 'remove-comment') {
     $element.closest('p').remove();
   }
-}); //needs work now that i've added the posts to a div
+}); //not working great. when you remove comments, it won't let you add more???
 
 
 //comment button
-
 $('.posts').on('click', 'p', function (e) {
   var $element = $(e.target);
   //console.log($element)
   
   if($element.attr('id') === 'comment') {
-   $element.closest('p').append($('#comments-form'));
-   //$element.closest('p').append('<div id="comment-form-el">');
+   $element.closest('p').append($('#comments-form'));   
    $('#comments-form').show();
   };
 });
