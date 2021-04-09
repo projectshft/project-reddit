@@ -17,14 +17,22 @@ h1 {
   background-color: rgb(0, 132, 255);
 }
 
+.comment-button {
+  display: inline;
+}
+
+.comments-button {
+  display: none;
+}
+
 #comments-form {
   display: none;
 }
 
-#posted-comment {
+.posted-comment {
   margin: 0px;
 }
 
-#comments-el {
+.comment-el {
   display: none;
 }
