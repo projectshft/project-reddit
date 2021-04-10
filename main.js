@@ -1,5 +1,5 @@
-//named functions
 var posts = [];
+var edits = []; 
 
 var emptyPosts = function () {
   posts = [];
@@ -8,6 +8,10 @@ var emptyPosts = function () {
 var emptyComments = function () {
   posts[0]['comment'] = [];
 };
+
+var emptyEdits = function () {
+  edits = []; 
+}; 
 
 var newPost = function () {
   emptyPosts();
@@ -26,21 +30,9 @@ var newPost = function () {
 };
 
 var renderPost = function () {
-  $('.posts').append('<div class="post-el"><p class="post">' + '<button type="button" class="btn btn-link edit-button">edit</button>' + '<button type="button" class="btn btn-link remove-button">remove</button>' + '<button type="button" class="btn btn-link comment-button">comment</button><button type="button" class="btn btn-link comments-button">comments</button>'  + posts[0].post + ' - Posted By: ' + posts[0].name +'<hr></p></div>'); 
+  $('.posts').append('<div class="post-el"><p class="post">' + '<button type="button" class="btn btn-link edit-button">edit</button>' + '<button type="button" class="btn btn-link remove-button">remove</button>' + '<button type="button" class="btn btn-link comment-button">comment</button><button type="button" class="btn btn-link comments-button">comments</button>'  + '<span class="post-text">' + posts[0].post + '</span>' + '<span class="name-text">' + ' - Posted By: ' + posts[0].name + '</span>' + '<hr></p></div>'); 
 
   $('form :input').val(''); //resets inputs in main form  
-  //$('.posts').append($('#comments-form')); 
-}
-
-var openEditPost = function () {
-  //console.log('edit')
-  $(this).parent().append(('<input type="text" placeholder="Edit post" class="edit-post form-control"/>'));
-  $(this).parent().append(("<button type=\"button\" class=\"btn btn-primary btn-xs save-edit-button\">Submit Edit</button>")); 
-};
-
-var submitEdits = function () {
-  var $edits = $('.edit-post').val();
-  $(this).parent().replaceWith('<div class="post-el"><p class="post">' + '<button type="button" class="btn btn-link edit-button">edit</button>' + '<button type="button" class="btn btn-link remove-button">remove</button>' + '<button type="button" class="btn btn-link comment-button">comment</button><button type="button" class="btn btn-link comments-button">comments</button>'  + $edits + ' - Posted by: ' + posts[0].name + '</p></div>');
 };
 
 var removePost = function () {
@@ -94,7 +86,35 @@ var toggleComments = function () {
   $('#comments-form').toggle();
 };
 
+var openEditPost = function () { 
+  //opens/adds edit form and grabs post content that gets edited
+  emptyEdits(); 
+
+  $content = $(this).siblings('.post-text').text();
+  $name = $(this).siblings('.name-text').text();
+
+  var post = {
+    content: $content,
+    name: $name
+  }; 
+
+  edits.push(post); 
+  console.log(edits)
+
+  $(this).parent().append(('<input type="text" placeholder="Edit post" class="edit-post form-control"/>'));
+  $(this).parent().append(("<button type=\"button\" class=\"btn btn-primary btn-xs save-edit-button\">Submit Edit</button>")); 
+
+  renderEdits();
+};
+
+var renderEdits = function () {
+  var $edits = $('.edit-post').val();
+
+  $(this).parent().replaceWith('<div class="post-el"><p class="post">' + '<button type="button" class="btn btn-link edit-button">edit</button>' + '<button type="button" class="btn btn-link remove-button">remove</button>' + '<button type="button" class="btn btn-link comment-button">comment</button><button type="button" class="btn btn-link comments-button">comments</button>'  + '<span class="post-text">' + $edits + '</span>' + '<span class="name-text">' + edits[0].name + '</span>'+ '</p></div>');
+};
+
 //event listeners
+
 //adds new posts on submit button and renders them
 //prevents empty submissions
 $('#submit').on('click', function () {
@@ -107,12 +127,6 @@ $('#submit').on('click', function () {
     };
   });
 });
-
-//open edit posts
-$('.posts').on('click', '.edit-button', openEditPost); 
-
-//submit edit posts
-$('.posts').on('click', '.save-edit-button', submitEdits); 
 
 //removes posts
 $('.posts').on('click', '.remove-button', removePost); 
@@ -129,6 +143,11 @@ $('.posts').on('click', '.remove-comment', removeComment);
 //toggles comments and opens comment form
 $('.posts').on('click', '.comments-button', toggleComments);
 
+//opens and adds edit form--also grabs post content and name 
+$('.posts').on('click', '.edit-button', openEditPost); 
+
+//submit edit posts
+$('.posts').on('click', '.save-edit-button', renderEdits); 
 
 
 
