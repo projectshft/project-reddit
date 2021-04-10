@@ -36,3 +36,11 @@ h1 {
 .comment-el {
   display: none;
 }
+
+.edit-post {
+  margin-bottom: 3px;
+}
+.save-edit-button {
+  background-color: rgb(0, 132, 255);
+  font-weight: bold;
+}
