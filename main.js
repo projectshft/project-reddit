@@ -1,13 +1,36 @@
 //named functions
-var submitPost = function () {
+var posts = [];
+
+var emptyPosts = function () {
+  posts = [];
+};
+
+var emptyComments = function () {
+  posts[0]['comment'] = [];
+};
+
+var newPost = function () {
+  emptyPosts();
+
   var $userText = $('#post-text').val();
   var $userName = $('#name').val(); 
 
-  $('.posts').append('<div class="post-el"><p class="post">' + '<button type="button" class="btn btn-link edit-button">edit</button>' + '<button type="button" class="btn btn-link remove-button">remove</button>' + '<button type="button" class="btn btn-link comment-button">comment</button><button type="button" class="btn btn-link comments-button">comments</button>'  + $userText + ' - Posted By: ' + $userName +'<hr></p></div>'); 
+  var post = {
+    post: $userText,
+    name: $userName,
+    comment: []
+  };
+
+  posts.push(post); 
+  renderPost();
+};
+
+var renderPost = function () {
+  $('.posts').append('<div class="post-el"><p class="post">' + '<button type="button" class="btn btn-link edit-button">edit</button>' + '<button type="button" class="btn btn-link remove-button">remove</button>' + '<button type="button" class="btn btn-link comment-button">comment</button><button type="button" class="btn btn-link comments-button">comments</button>'  + posts[0].post + ' - Posted By: ' + posts[0].name +'<hr></p></div>'); 
 
   $('form :input').val(''); //resets inputs in main form  
   //$('.posts').append($('#comments-form')); 
-};
+}
 
 var openEditPost = function () {
   //console.log('edit')
@@ -17,7 +40,7 @@ var openEditPost = function () {
 
 var submitEdits = function () {
   var $edits = $('.edit-post').val();
-  $(this).parent(':not(button, input)').html($edits);
+  $(this).parent().replaceWith('<div class="post-el"><p class="post">' + '<button type="button" class="btn btn-link edit-button">edit</button>' + '<button type="button" class="btn btn-link remove-button">remove</button>' + '<button type="button" class="btn btn-link comment-button">comment</button><button type="button" class="btn btn-link comments-button">comments</button>'  + $edits + ' - Posted by: ' + posts[0].name + '</p></div>');
 };
 
 var removePost = function () {
@@ -34,24 +57,35 @@ var removeComment = function () {
   $(this).parents('.comment-el').remove();
 };
 
-var submitComment = function () {
+var newComment = function () {
+
+  emptyComments(); 
 
   var $userComment = $('#post-comment').val();
   var $userCommentName = $('#name-comment').val();
 
-  //adds comments
-  $(this).parents('.post').append('<div class="comment-el"><p class="posted-comment">' + '<button type="button" class="btn btn-link remove-comment">remove</button>' + $userComment + ' - Posted by: ' + $userCommentName + '</p></div>');
+  var commentObj = {
+    userComment: $userComment,
+    userName: $userCommentName
+  };
+
+  posts[0]['comment'].push(commentObj); 
+  renderComments();
+};
+
+var renderComments = function () {
+  $submitCommentButton = $('#submit-comment');
+  $submitCommentButton.parents('.post').append('<div class="comment-el"><p class="posted-comment">' + '<button type="button" class="btn btn-link remove-comment">remove</button>' + posts[0]["comment"][0].userComment + ' - Posted by: ' + posts[0]["comment"][0].userName + '</p></div>');
 
   $('form :input').val(''); //resets input in comment form
 
-  $(this).parents('.post').children('.comments-button').css('display', 'inline'); 
-  $(this).parents('.post').children('.comment-button').css('display', 'none'); 
-  $(this).parents('.post').children('.comment-el').hide(); 
+  $submitCommentButton.parents('.post').children('.comments-button').css('display', 'inline'); 
+  $submitCommentButton.parents('.post').children('.comment-button').css('display', 'none'); 
+  $submitCommentButton.parents('.post').children('.comment-el').hide(); 
 
   $('#comments-form').hide();
   //moves comment form 
-  $('.posts').append($('#comments-form')); 
-
+  $('.posts').append($('#comments-form'));
 };
 
 var toggleComments = function () {
@@ -61,14 +95,15 @@ var toggleComments = function () {
 };
 
 //event listeners
-//submits posts
+//adds new posts on submit button and renders them
+//prevents empty submissions
 $('#submit').on('click', function () {
   $('#main-form').submit(function(e) {
     if ($.trim($("#post-text").val()) === "" || $.trim($("#name").val()) === "") {
         e.preventDefault();
         return false;
     } else {
-      submitPost(); 
+      newPost(); 
     };
   });
 });
@@ -85,8 +120,8 @@ $('.posts').on('click', '.remove-button', removePost);
 //opens initial comments button
 $('.posts').on('click', '.comment-button', openComment);
 
-//submits comments
-$('#submit-comment').on('click', submitComment);
+//adds new comments and renders them
+$('#submit-comment').on('click', newComment);
 
 //removes comments
 $('.posts').on('click', '.remove-comment', removeComment); 
