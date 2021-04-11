@@ -1,27 +1,15 @@
-document.getElementById('submit').addEventListener('click', function () {
+$('#submit').on('click', function () {
   //Gets the user input for both the name and message boxes.
   var $name = $('#name').val();
   var $text = $('#message').val();
 
-  //Selects the posts div and creates a new div inside of it to hold the new post.
-  var postsDiv = $('.posts').append('<div></div>');
+  //Creates a div, then one paragraph element to contain the message, a second paragraph element
+  //to contain the poster name, then adds on a button for Removing the Comment and a buttong for
+  //adding a comment to that specific comment.
+  $('.posts').append('<div class="post"><p>' + $text + '<p>Posted By: ' + $name + '<p><button class="remove-button" id="removeButton">Delete Comment</button>' + '<button class="add-comments-button" id="removeButton">Add Comment</button>' + '</p></p></p><hr></div>');
 
-  //Appends the message typed in the message box to the posts div
-  $('.posts').append('<p>' + $text + '</p>');
-
-  //Appends the name of the poster to the posts div
-  $('.posts').append('<p>Posted By: ' + $name + '</p>');
-
-  //Adds a button labeled "Delete Comment" to the posts div
-  $('.posts').append('<button class="remove-button" id="removeButton">Delete Comment</button>');
-
-  //Adds a button labeled "Add Comment" to the posts div
-  $('.posts').append('<button class="add-comments-button" id="removeButton">Add Comment</button>');
-
-  //Draws a horizontal line after the new post is created.
-  $('.posts').append('<hr></hr>');
 });
 
 $('.posts').on('click', 'button', function (e) {
-  this.parentNode.remove();
+  $(this).closest('.post').remove();
 });
