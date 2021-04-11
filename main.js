@@ -1,45 +1,25 @@
 document.getElementById('submit').addEventListener('click', function () {
   //Gets the user input for both the name and message boxes.
-  var name = document.getElementById('name').value;
-  var text = document.getElementById('message').value;
+  var $name = $('#name').val();
+  var $text = $('#message').val();
 
   //Selects the posts div and creates a new div inside of it to hold the new post.
-  var postsDiv = document.querySelector('.posts');
-  var newPostDiv = document.createElement('div');
+  var postsDiv = $('.posts').append('<div></div>');
 
-  //Creates a new paragraph element, text node within that paragraph element
-  //and appends the text node to the paragraph element.
-  var newPostTextP = document.createElement('p');
-  var newPostTextNode = document.createTextNode(text);
-  newPostTextP.appendChild(newPostTextNode);
+  //Appends the message typed in the message box to the posts div
+  $('.posts').append('<p>' + $text + '</p>');
 
-  //Creates a new paragraph element, text node to show the name of the poster
-  //and appends that text to the paragraph element.
-  var newPostNameP = document.createElement('p');
-  var newPostNameNode = document.createTextNode('Posted By: ' + name);
-  newPostNameP.appendChild(newPostNameNode);
+  //Appends the name of the poster to the posts div
+  $('.posts').append('<p>Posted By: ' + $name + '</p>');
 
-  //Creates a button element, labels it with the text 'Delete Post'
-  var removeButton = document.createElement('BUTTON');
-  removeButton.innerHTML = 'Delete Post';
+  //Adds a button labeled "Delete Comment" to the posts div
+  $('.posts').append('<button class="remove-button" id="removeButton">Delete Comment</button>');
 
-  //Creates a button element, labels it with the text 'Add Comments to This Post'
-  var addCommentsButton = document.createElement('BUTTON');
-  addCommentsButton.innerHTML = 'Add comments to this post';
+  //Adds a button labeled "Add Comment" to the posts div
+  $('.posts').append('<button class="add-comments-button" id="removeButton">Add Comment</button>');
 
   //Draws a horizontal line after the new post is created.
-  var newPostHR = document.createElement('hr');
-
-  //Adds the new posts text, poster name, remove button, add comments button and
-  // horizontal line to the newPosts div. 
-  newPostDiv.append(newPostTextP);
-  newPostDiv.append(newPostNameP);
-  newPostDiv.append(removeButton);
-  newPostDiv.append(addCommentsButton);
-  newPostDiv.append(newPostHR);
-
-  //Adds on the new post Div to the posts div. 
-  postsDiv.append(newPostDiv);
+  $('.posts').append('<hr></hr>');
 });
 
 $('.posts').on('click', 'button', function (e) {
