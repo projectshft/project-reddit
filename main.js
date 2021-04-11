@@ -1,10 +1,9 @@
 var posts = [];
 var currentIndex;
-var currentPost; 
+var currentPost;  
 
-//adds new posts based on inputs in main-form and renders them
+//adds new posts based on inputs in main-form and renders them-also stores inputs in posts array with unique id
 var newPost = function () {
-  //emptyPosts();
   var $userText = $('#post-text').val();
   var $userName = $('#name').val(); 
 
@@ -17,17 +16,18 @@ var newPost = function () {
 
   posts.push(post); 
 
+  //each new post is the last post in the posts array
   $postText = posts[posts.length-1].post;  
   $postName = posts[posts.length-1].name; 
   $postId = posts[posts.length-1].id;
 
   renderPost();
  
+  //adds uniqu id to each post-el div 
   $post = $('.post-el'); 
   $post.last().attr('id', $postId); 
 };
 
-//adds html and appropriate data inputs to dom
 var renderPost = function () {
   //$('#submit').unbind(); 
    $('.posts').append('<div class="post-el"><p class="post">' + '<button type="button" class="btn btn-link edit-button">edit</button>' + '<button type="button" class="btn btn-link remove-button">remove</button>' + '<button type="button" class="btn btn-link comment-button">comment</button><button type="button" class="btn btn-link comments-button">comments</button>'  + '<span class="post-text">' + $postText + '</span>' + '<span class="name-text">' + ' - Posted By: ' + $postName + '</span>' + '<hr></p></div>'); 
@@ -35,8 +35,21 @@ var renderPost = function () {
   $('form :input').val(''); //resets main form  
 };
 
+var removeItemsFromPosts = function (array1) {
+  for (let i = 0; i < array1.length; i++) {
+    const element = array1[i]; 
+
+    if ($currentPostId === element.id) {
+      currentIndex = array1.indexOf(element); 
+    };
+  };
+  array1.splice(currentIndex, 1); 
+};
 
 var removePost = function () {
+  $currentPostId = $(this).parents('.post-el').attr('id'); 
+  removeItemsFromPosts(posts); 
+
   $('.posts').append($('#comments-form')); //moves comment-form so it doesn't get deleted
   $(this).parents('.post-el').remove(); 
 };
@@ -47,14 +60,12 @@ var openComment = function () {
 };
 
 var removeComment = function () {
-  $(this).parents('.comment-el').remove();
   $(this).parent('.post').append($('#comments-form'));
+  $(this).parents('.comment-el').remove();
 };
 
-
-//adds new comments based on inputs in comments-form and renders them
+//adds new comments to posts array based on inputs in comments-form and renders them
 var newComment = function () {
-
   var $userComment = $('#post-comment').val();
   var $userCommentName = $('#name-comment').val();
   
@@ -62,26 +73,27 @@ var newComment = function () {
     userComment: $userComment,
     userName: $userCommentName
   };
-
+//finds current post based on unique id of element being clicked
   $currentPostId = $(this).parents('.post-el').attr('id'); 
- 
+  
   for (let i = 0; i < posts.length; i++) {
     const element = posts[i]; 
-
     if ($currentPostId === element.id) {
       currentIndex = posts.indexOf(element); 
       posts[currentIndex]['comment'].push(commentObj);
       currentPost = posts[currentIndex]; 
-      
     };
   };
+  
+  commentArray = currentPost['comment'];
+  currentComment = commentArray[commentArray.length-1];
+
   renderComments();
 };
 
-//adds html and appropriate data inputs to dom--changes comment to comments after a comment is made
 var renderComments = function () {
   $submitCommentButton = $('#submit-comment');
-  $submitCommentButton.parents('.post').append('<div class="comment-el"><p class="posted-comment">' + '<button type="button" class="btn btn-link remove-comment">remove</button>' + currentPost['comment'].userComment + ' - Posted by: ' + currentPost['comment'].userCommentName + '</p></div>');
+  $submitCommentButton.parents('.post').append('<div class="comment-el"><p class="posted-comment">' + '<button type="button" class="btn btn-link remove-comment">remove</button>' + currentComment.userComment + ' - Posted by: ' + currentComment.userName + '</p></div>');
 
   $('form :input').val(''); //resets form
 
@@ -90,7 +102,6 @@ var renderComments = function () {
   $submitCommentButton.parents('.post').children('.comment-el').hide(); 
 
   $('#comments-form').hide();
-  //moves comment form 
   $('.posts').append($('#comments-form'));
 };
 
@@ -102,16 +113,13 @@ var toggleComments = function () {
 
 //adds and opens edit form when edit button clicked
 var openEditPost = function () { 
-
   $(this).parent().append(('<input type="text" placeholder="Edit post" class="edit-post form-control"/>'));
   $(this).parent().append(("<button type=\"button\" class=\"btn btn-primary btn-xs save-edit-button\">Submit Edit</button>")
   ); 
 };
 
-//grabs post content from edit-post input
+//grabs post content from posts array and renders them
 var newEdit = function () {
-  //emptyEdits(); 
-
   $currentPostId = $(this).parents('.post-el').attr('id'); 
  
   for (let i = 0; i < posts.length; i++) {
@@ -142,7 +150,6 @@ var renderEdits = function () {
 };
 
 //event listeners
-
 //adds posts
 $('#submit').on('click', function () {
   $('#main-form').submit(function(e) {
