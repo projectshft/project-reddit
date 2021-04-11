@@ -2,10 +2,16 @@
 <html lang="en">
   <head>
     <title>ReReddit</title>
-    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
-    <link rel=stylesheet href="style.css"/> 
+    <link
+      href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -17,30 +23,48 @@
         <div class="page-header">
           <h1>ReReddit</h1>
         </div>
-          
+
         <!-- have the whole class="Posts" be repeatable by index -->
-        <div id="posts"></div>
-          <div id='post1'><!-- if top p of group, add "remove" and "comments"-->
-            <p>I like cheese - Posted By: Aaron</p>
-            <hr>
+        <div id="posts">
+          <div id="post1">
+            <!-- here on should be data attributes-->
+            <span id="remove-post">remove </span>
+            <span id="show-or-hide-comments">comments </span>
+            I like cheese - Posted By: Aaron
+            <div id="comments">
+              <ul id="comments-list"></ul>
+              <div id="comments-list-form"></div>
+            </div>
+            <hr />
           </div>
-          
-          <!-- unlimited extra "p" comments get added here with option to "remove" -->
-          <form style="margin-top:30px;" onsubmit="event.preventDefault();">
-            <div class="form-group">
-              <input id="postInput" class="form-control" type="text" placeholder="Post Text">
-            </div>
-            <div class="form-group">
-              <input id="nameInput" class="form-control" type="text" placeholder="Your Name">
-            </div>
-        
-            <button id="submit" class="btn btn-primary">Submit Post</button>
-          </form>
         </div>
+
+        <!-- new comments get prepened here so the form stays on bottom -->
+        <form style="margin-top: 30px" onsubmit="event.preventDefault();">
+          <div class="form-group">
+            <input
+              id="post-input"
+              class="form-control"
+              type="text"
+              placeholder="Post Text"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              id="name-input"
+              class="form-control"
+              type="text"
+              placeholder="Your Name"
+            />
+          </div>
+
+          <button id="submit" class="btn btn-primary">Submit Post</button>
+        </form>
+
         <!-- end of repeatable by index -->
       </div>
     </div>
-    
+
     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
     <script src="main.js"></script>
   </body>

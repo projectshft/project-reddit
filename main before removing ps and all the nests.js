@@ -1,6 +1,3 @@
-// global variable to keep track of which posts/comments are being accessed 
-var postId = 1;
-
 // submit post when button (id = submit) clicked
 $('#submit').click(function () {
   var postName = $("#name-input").val();
@@ -18,7 +15,7 @@ $('#submit').click(function () {
   if (postName != '' && postMsg != '') {
     var $newHTML =`
       <div id="post1">
-        <span id="remove-post">remove </span><span id="show-or-hide-comments">comments </span>` + postMsg + ` - Posted By: ` + postName + `<hr></div>
+        <p><span id="remove-post">remove </span><span id="show-or-hide-comments">comments </span>` + postMsg + ` - Posted By: ` + postName + `</p><hr></div>
     `;
 
     $("#posts").append($newHTML);
@@ -29,7 +26,7 @@ $('#submit').click(function () {
   }
 });
 
-$("#posts").on("click", "#show-or-hide-comments", function () {
+$("#posts").on("click", "#show-or-hid-comments", function () {
   // toggle show comments and input forms for "Comment Text" and "Your Name"
   var $commentFormHTML = `
   <form  id="comments-form" style="margin-top:30px;" onsubmit="event.preventDefault();">
@@ -53,10 +50,10 @@ $("#posts").on("click", "#show-or-hide-comments", function () {
   }
 });
 
-$("#posts").on("click", "#remove-post", function() {
+$("#remove-post").click(function() {
   console.log('remove-post clicked')
   // remove post or comment
-  // remove this post - the div 1 level (parent) up 
+  // remove this post - the div 1 level up
   $(this).parent().remove();
 });
 
