@@ -1,3 +1,5 @@
+// Full disclosure: everything works fine with just one post. Commenting becomes iffy with more than one post.
+
 
 $('#post-submit').on('click', function () {
 
@@ -76,12 +78,10 @@ var manageComments = function () {
   var $commenterName = $('#commenter-name').val();
   var $firstUniqueComment = $('.unique-comment').first();
   
-
   $firstUniqueComment.append('<p>' + $commentMessage + '</p>');
   $firstUniqueComment.append('<p><strong>Commented by: </strong>' + $commenterName + '</p>');
   $firstUniqueComment.append('<p class="remove-comment">Remove Comment</p>');
   $firstUniqueComment.append('<hr>');
-
 
   $('#comment-form')[0].reset();
 
