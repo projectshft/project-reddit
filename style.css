@@ -1,0 +1,43 @@
+h1 {
+  font-size: 40px;
+}
+
+#submit {
+  background-color: rgb(0, 132, 255);
+}
+
+.btn-link {
+  color: rgb(0, 132, 255);
+  padding-right: 5px;
+  padding-left: 0px;
+  margin-left: 0px;
+}
+
+#submit-comment {
+  background-color: rgb(0, 132, 255);
+}
+
+.comments-button {
+  display: none;
+}
+
+#comments-form {
+  display: none;
+}
+
+.posted-comment {
+  margin: 0px;
+}
+
+.comment-el {
+  display: none;
+}
+
+.edit-post {
+  margin-bottom: 3px;
+}
+
+.save-edit-button {
+  background-color: rgb(0, 132, 255);
+  font-weight: bold;
+}
