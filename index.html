@@ -21,22 +21,46 @@
           <h1>Re-Reddit</h1>
         </div>
   
-        <div class="posts">
+        <div id="posts">
         </div>
+
+        <div id="post-form-section">
+
+          <h3>Add a New Post</h3>
   
-        <form id="post-form" style="margin-top:30px;" onsubmit="event.preventDefault();">
-          
-          <div class="form-group">
-            <input id="name" type="text" class="form-control" placeholder="Your Name">
-            </input>
-          </div>
-          
-          <div class="form-group">
-            <textarea id="message" type="text" class="form-control" placeholder="Write your message here."></textarea>
-          </div>
-          
-          <button id="submit" class="btn btn-primary">Submit Post</button>
-        </form>
+          <form id="post-form" style="margin-top:30px;" onsubmit="event.preventDefault();">
+            
+            <div class="form-group">
+              <textarea id="post-message" type="text" class="form-control" placeholder="Write your post message here."></textarea>
+            </div>
+
+            <div class="form-group">
+              <input id="poster-name" type="text" class="form-control" placeholder="Your Name">
+              </input>
+            </div>
+            
+            <button id="post-submit" class="btn btn-primary">Submit Post</button>
+          </form>
+
+        </div>
+
+        <div class="comment-form-storage hidden">
+
+          <form id="comment-form" style="margin-top:30px;" onsubmit="event.preventDefault();">
+                    
+            <div class="form-group">
+              <input id="comment-message" type="text" class="form-control" placeholder="Write your comment here."></input>
+            </div>
+
+            <div class="form-group">
+              <input id="commenter-name" type="text" class="form-control" placeholder="Your Name">
+              </input>
+            </div>
+      
+            <button id="comment-submit" class="btn btn-primary">Submit Comment</button>
+
+          </form>
+        </div>
   
       </div>
     </div>

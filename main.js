@@ -1,26 +1,97 @@
 
-// all of the code in submitNewPost is happening when the submit button is clicked
+$('#post-submit').on('click', function () {
 
-var submitNewPost = function () {
-  $('#submit').on('click', function () {
-  var $postMessage = $('#message').val();
-  var $posterName = $('#name').val();
+  var newUniquePost = '<div class="unique-post"></div>'
+  $('#posts').append(newUniquePost);
 
-  // not sure if this needs to be a function or not
-  var createPost = function () {
-    $('.posts').append('<div class="postContent"></div>');
+  var newCommentSection = '<div class="comment-section"><div class="form-holder"></div></div>'
     
-    $('.postContent').last().append('<p>' + $postMessage + '</p>')
-    $('.postContent').last().append('<p><strong>Posted by: </strong>' + $posterName + '</p>')
-    $('.postContent').last().append('<hr>')
-  }
+  var $postMessage = $('#post-message').val();
+  var $posterName = $('#poster-name').val();
+  var $lastUniquePost = $('.unique-post').last();
 
-  createPost();
+  $lastUniquePost.append('<p>' + $postMessage + '</p>');
+  $lastUniquePost.append('<p><strong>Posted by: </strong>' + $posterName + '</p>');
+  $lastUniquePost.append('<p class="remove-post">Remove Post</p>')
+  $lastUniquePost.append('<p class="toggle-comments">Show Comments >></p>')
+  
+    
+  $lastUniquePost.append(newCommentSection);
 
+  $lastUniquePost.append('<hr>');
+  
   $('#post-form')[0].reset();
 
+  manageComments();
+  toggleCommentSection();
+  removePost();
+
+});
+
+var removePost = function() {
+  $('.remove-post').on('click', function (e) {
+    var eventTarget = $(e.target);
+    eventTarget.parents('.unique-post').remove();
 });
 };
 
-submitNewPost();
+var toggleCommentSection = function () {
+  $('.toggle-comments').on('click', function(e) {
+    var $eventTarget = $(e.target);
+    var $element = $(this);
+    var $currentCommentSection = $eventTarget.next('.comment-section')
+    var $formHolder = $('.form-holder');
+
+    if ($currentCommentSection.css('display') === 'none') {
+  
+      $currentCommentSection.css('display', 'block');
+
+      $element.text('<< Hide Comments');
+      $('#comment-form').appendTo($formHolder);
+
+    } else if ($currentCommentSection.css('display') === 'block') {
+      
+      $currentCommentSection.css('display', 'none');
+      $element.text('Show Comments >>');
+      $('#comment-form').appendTo($('.comment-form-storage'));
+
+    };
+
+  });
+  
+};
+
+
+
+var manageComments = function () {
+  $('#comment-submit').on('click', function (e) {
+  var $eventTarget = $(e.target);
+  var $commentSection = $('.comment-section');
+  var $closestCommentSection = $eventTarget.closest($commentSection);
+
+  var newUniqueComment = '<div class="unique-comment"></div>'
+  $closestCommentSection.prepend(newUniqueComment);
+  
+  var $commentMessage = $('#comment-message').val();
+  var $commenterName = $('#commenter-name').val();
+  var $firstUniqueComment = $('.unique-comment').first();
+  
+
+  $firstUniqueComment.append('<p>' + $commentMessage + '</p>');
+  $firstUniqueComment.append('<p><strong>Commented by: </strong>' + $commenterName + '</p>');
+  $firstUniqueComment.append('<p class="remove-comment">Remove Comment</p>');
+  $firstUniqueComment.append('<hr>');
+
+
+  $('#comment-form')[0].reset();
+
+  $('.remove-comment').on('click', function (e) {
+    var eventTarget = $(e.target);
+    eventTarget.parents('.unique-comment').remove();
+  });
+});
+
+};
+
+
 

@@ -1,0 +1,26 @@
+.toggle-comments {
+  color: blue;
+  font-weight: bold;
+}
+
+.comment-section {
+  display: none;
+  padding-left: 50px;
+  margin-top: 20px;
+}
+
+.remove-comment {
+  color: red;
+  font-weight: bold;
+  font-style: normal;
+}
+
+.remove-post {
+  color: red;
+  font-weight: bold;
+}
+
+.unique-comment {
+  color: darkolivegreen;
+  font-style: italic;
+}
