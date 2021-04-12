@@ -25,3 +25,8 @@ line 29: div id="post1"  		should add data attribute
 - - this should be outside and have a new data attribute
 
 
+The only thing missing is keeping the comment with the post, everything else is nicely dynamic
+
+USE CLOSEST!!!
+
+$(this).closest('div[comments-list-form]');

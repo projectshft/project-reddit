@@ -1,6 +1,3 @@
-// global variable to keep track of which posts/comments are being accessed 
-var postId = 1;
-
 // submit post when button (id = submit) clicked
 $('#submit').click(function () {
   var postName = $("#name-input").val();
@@ -16,9 +13,18 @@ $('#submit').click(function () {
   }
 
   if (postName != '' && postMsg != '') {
-    var $newHTML =`
+    var $newHTML =
+      `
       <div id="post1">
-        <span id="remove-post">remove </span><span id="show-or-hide-comments">comments </span>` + postMsg + ` - Posted By: ` + postName + `<hr></div>
+        <span id="remove-post">remove </span><span id="show-or-hide-comments">comments </span>` +
+      postMsg +
+      ` - Posted By: ` +
+      postName +
+      `<div id="comments">
+              <ul id="comments-list"></ul>
+              <div id="comments-list-form"></div>
+            </div>
+            <hr /></div>
     `;
 
     $("#posts").append($newHTML);
@@ -42,27 +48,28 @@ $("#posts").on("click", "#show-or-hide-comments", function () {
   </form>
   <button id="submit-comment" class="btn btn-primary">Submit Comment</button>
   `;
+
   // if comments form exists, remove it, otherwise, add it
+
   // still need to make sure it sticks with the proper post
- 
+  // use closest div with class attribute comments-list-form
+  console.log($(this).closest('div[comments-list-form]'));  // can't quite tell how to use this
+
   if ($("#comments-form").length) {
     $("#comments-form").remove();
     $("#submit-comment").remove();
   } else {
-    $('#comments-list-form').html($commentFormHTML);
+    $('#comments-list-form').html($commentFormHTML);  
   }
 });
 
 $("#posts").on("click", "#remove-post", function() {
-  console.log('remove-post clicked')
   // remove post or comment
   // remove this post - the div 1 level (parent) up 
   $(this).parent().remove();
 });
 
 $("#comments-list-form").on("click", "button", function () {
-  console.log('submit-comment clicked');
-
   // add an li to the ul
   var commentName = $("#comment-name-input").val();
   var commentMsg = $("#comment-text-input").val();
@@ -86,12 +93,10 @@ $("#comments-list-form").on("click", "button", function () {
       `</li>
     `;
 
-    $("#comments-list").append($newCommentHTML);
+    $("#comments-list").closest('ul').append($newCommentHTML);
 
     // clear inputs
     $("#comment-name-input").val("");
     $("#comment-text-input").val("");
   }
 });
-
-// remove should remove post and all comments under it
