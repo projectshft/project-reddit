@@ -46,7 +46,7 @@ var toggleComments = function (e) {
 };
 
 var removePost = function () {
-  $("#blank-comment-form").show();
+  
 };
 
 //When Post button is clicked, this will post the message as a parent thread.
@@ -66,7 +66,7 @@ $("#submit-comment").on("click", function () {
   var $commentName = $("#comment-name").val();
   var $commentText = $("#comment-message").val();
 
-  createPost($commentName, $commentText);
+  createComment($commentName, $commentText);
 
   //Adds on a blank comment form to the comment but hides it.
   $("#blank-comment-form").hide();
@@ -74,12 +74,13 @@ $("#submit-comment").on("click", function () {
 });
 
 //Deletes the entire thread when the delete button is removed.
-$(".posts").on("click", ".remove-button", function (e) {
+$(".posts").on("click", ".remove-button", function () {
   $(this).closest(".post").remove();
 });
 
 //When the Add Comment button is clicked, this adds a blank comment form below the current thread
 //so the user can add a new comment to thread.
 $(".posts").on("click", ".add-comments-button", function (e) {
-  removePost();
+  $("#blank-comment-form").show();
 });
+
