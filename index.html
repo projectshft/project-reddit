@@ -15,7 +15,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>ReReddit</title>
   </head>
   <body>
     <div class="row">
@@ -33,7 +33,35 @@
             I like cheese - Posted By: Aaron
             <div id="comments" data-id="1">
               <ul id="comments-list"></ul>
-              <div id="comments-list-form"></div>
+              <div id="comments-list-form">
+                <div id="comments-list-form">
+                  <form
+                    id="comments-form"
+                    style="margin-top: 30px"
+                    onsubmit="event.preventDefault();"
+                  >
+                    <div class="form-group">
+                      <input
+                        id="comment-text-input"
+                        class="form-control"
+                        type="text"
+                        placeholder="Comment Text"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <input
+                        id="comment-name-input"
+                        class="form-control"
+                        type="text"
+                        placeholder="Your Name"
+                      />
+                    </div>
+                  </form>
+                  <button id="submit-comment" class="btn btn-primary">
+                    Submit Comment
+                  </button>
+                </div>
+              </div>
             </div>
             <hr />
           </div>

@@ -12,7 +12,7 @@ $('#submit').click(function () {
     alert('Please post something first');
   }
 
-  if (postName != '' && postMsg != '') {
+  if (postName && postMsg) {
     var $newHTML =
       `
       <div id="post1">
@@ -21,10 +21,20 @@ $('#submit').click(function () {
       ` - Posted By: ` +
       postName +
       `<div id="comments">
-              <ul id="comments-list"></ul>
-              <div id="comments-list-form"></div>
+        <ul id="comments-list"></ul>
+        <div id="comments-list-form">
+          <form  id="comments-form" style="margin-top:30px;" onsubmit="event.preventDefault();">
+            <div class="form-group">
+              <input id="comment-text-input" class="form-control" type="text" placeholder="Comment Text">
             </div>
-            <hr /></div>
+              <div class="form-group">
+              <input id="comment-name-input" class="form-control" type="text" placeholder="Your Name">
+              </div>
+          </form>
+          <button id="submit-comment" class="btn btn-primary">Submit Comment</button>
+        </div>
+      </div>
+      <hr /></div>
     `;
 
     $("#posts").append($newHTML);
@@ -37,30 +47,8 @@ $('#submit').click(function () {
 
 $("#posts").on("click", "#show-or-hide-comments", function () {
   // toggle show comments and input forms for "Comment Text" and "Your Name"
-  var $commentFormHTML = `
-  <form  id="comments-form" style="margin-top:30px;" onsubmit="event.preventDefault();">
-    <div class="form-group">
-      <input id="comment-text-input" class="form-control" type="text" placeholder="Comment Text">
-    </div>
-    <div class="form-group">
-      <input id="comment-name-input" class="form-control" type="text" placeholder="Your Name">
-    </div>
-  </form>
-  <button id="submit-comment" class="btn btn-primary">Submit Comment</button>
-  `;
-
-  // if comments form exists, remove it, otherwise, add it
-
-  // still need to make sure it sticks with the proper post
-  // use closest div with class attribute comments-list-form
-  console.log($(this).closest('div[comments-list-form]'));  // can't quite tell how to use this
-
-  if ($("#comments-form").length) {
-    $("#comments-form").remove();
-    $("#submit-comment").remove();
-  } else {
-    $('#comments-list-form').html($commentFormHTML);  
-  }
+  console.log(this);
+  $(this).parent().hide();  // removes too much!!!
 });
 
 $("#posts").on("click", "#remove-post", function() {
@@ -93,7 +81,7 @@ $("#comments-list-form").on("click", "button", function () {
       `</li>
     `;
 
-    $("#comments-list").closest('ul').append($newCommentHTML);
+    $("#comments-list").closest('ul').append($newCommentHTML);  // per Aaron: which comments-list, you should have as many of those as you do posts
 
     // clear inputs
     $("#comment-name-input").val("");
