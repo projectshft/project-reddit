@@ -1,0 +1,13 @@
+body {
+  font-family: "Montserrat", sans-serif;
+}
+
+span {
+  color: blue;
+  cursor: pointer;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
