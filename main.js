@@ -1,15 +1,15 @@
 // submit post when button (id = submit) clicked
-$('#submit').click(function () {
+$("#submit").click(function () {
   var postName = $("#name-input").val();
   var postMsg = $("#post-input").val();
 
-  // make sure msg or name aren't blank
-  if (postName === '') {
-    alert('Please include your name');
+  // make sure msg or name aren"t blank
+  if (postName === "") {
+    alert("Please include your name");
   };
 
-  if (postMsg === '') {
-    alert('Please post something first');
+  if (postMsg === "") {
+    alert("Please post something first");
   }
 
   if (postName && postMsg) {
@@ -40,27 +40,27 @@ $('#submit').click(function () {
     $("#posts").append($newHTML);
 
     // clear inputs
-    $("#name-input").val('');
-    $("#post-input").val('');
+    $("#name-input").val("");
+    $("#post-input").val("");
   }
 });
 
 $("#posts").on("click", "#show-or-hide-comments", function () {
-  // toggle show comments and input forms for "Comment Text" and "Your Name"
-  console.log(this);
-  $(this).parent().hide();  // removes too much!!!
+  console.log($(this).find('#comments'));
+  $(this).closest('div').find('#comments').toggle();
 });
 
 $("#posts").on("click", "#remove-post", function() {
   // remove post or comment
   // remove this post - the div 1 level (parent) up 
+  console.log($(this).parent());
   $(this).parent().remove();
 });
 
-$("#comments-list-form").on("click", "button", function () {
+$("#posts").on("click", "#submit-comment", function () {
   // add an li to the ul
-  var commentName = $("#comment-name-input").val();
-  var commentMsg = $("#comment-text-input").val();
+  var commentName = $(this).closest("#comments-list-form").find("#comment-name-input").val();
+  var commentMsg = $(this).closest("#comments-list-form").find("#comment-text-input").val();
 
   if (commentName === "") {
     alert("Please include your name");
@@ -81,10 +81,10 @@ $("#comments-list-form").on("click", "button", function () {
       `</li>
     `;
 
-    $("#comments-list").closest('ul').append($newCommentHTML);  // per Aaron: which comments-list, you should have as many of those as you do posts
+    $(this).closest("#comments").find("ul").append($newCommentHTML);  
 
     // clear inputs
-    $("#comment-name-input").val("");
-    $("#comment-text-input").val("");
+    $(this).closest("#comments-list-form").find("#comment-name-input").val("");
+    $(this).closest("#comments-list-form").find("#comment-text-input").val("");
   }
 });

@@ -31,36 +31,34 @@
             <span id="remove-post">remove </span>
             <span id="show-or-hide-comments">comments </span>
             I like cheese - Posted By: Aaron
-            <div id="comments" data-id="1">
+            <div id="comments">
               <ul id="comments-list"></ul>
               <div id="comments-list-form">
-                <div id="comments-list-form">
-                  <form
-                    id="comments-form"
-                    style="margin-top: 30px"
-                    onsubmit="event.preventDefault();"
-                  >
-                    <div class="form-group">
-                      <input
-                        id="comment-text-input"
-                        class="form-control"
-                        type="text"
-                        placeholder="Comment Text"
-                      />
-                    </div>
-                    <div class="form-group">
-                      <input
-                        id="comment-name-input"
-                        class="form-control"
-                        type="text"
-                        placeholder="Your Name"
-                      />
-                    </div>
-                  </form>
-                  <button id="submit-comment" class="btn btn-primary">
-                    Submit Comment
-                  </button>
-                </div>
+                <form
+                  id="comments-form"
+                  style="margin-top: 30px"
+                  onsubmit="event.preventDefault();"
+                >
+                  <div class="form-group">
+                    <input
+                      id="comment-text-input"
+                      class="form-control"
+                      type="text"
+                      placeholder="Comment Text"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <input
+                      id="comment-name-input"
+                      class="form-control"
+                      type="text"
+                      placeholder="Your Name"
+                    />
+                  </div>
+                </form>
+                <button id="submit-comment" class="btn btn-primary">
+                  Submit Comment
+                </button>
               </div>
             </div>
             <hr />
