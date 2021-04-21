@@ -1,0 +1,29 @@
+.add-form {
+  margin: auto;
+  width: 500px;
+}
+
+.delete-comment {
+  float: right;
+}
+
+.delete-post {
+  margin-top: 10px;
+}
+
+.delete-all-comments {
+  margin-top: 10px;
+}
+
+.toggle-comments {
+  margin-top: 10px;
+}
+
+.btn {
+  margin-right: 5px;
+}
+
+.form-control {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
