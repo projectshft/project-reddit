@@ -12,10 +12,6 @@ var createPost = function ($name, $text) {
       "</p></p></p><hr></div>"
   );
 
-  //Adds on a blank comment form to the comment but hides it.
-  //$("#blank-comment-form").hide();
-  //$(".post").append($("#blank-comment-form"));
-
   toggleComments();
 
   //Resets the form fields back to blank
@@ -24,29 +20,28 @@ var createPost = function ($name, $text) {
 
 var createComment = function ($commentName, $commentText) {
   //Creates a div, then one paragraph element to contain the message, a second paragraph element
-  //to contain the poster name, then adds on a button for Removing the Comment and a buttong for
+  //to contain the poster name, then adds on a button for Removing the Comment and a button for
   //adding a comment to that specific comment.
-  $(".post").append(
-    '<div class="sub-post"><p>' +
+  $('#submit-comment').parents(".post").append(
+    '<div class="sub-post"<div class = "comment-post"><p>' +
       $commentText +
       "<p>Posted By: " +
       $commentName +
       '<p><button class="remove-button" id="removeButton">Delete Comment</button>' +
       '<button class="add-comments-button" id="addCommentsButton">Add Comment</button>' +
-      "</p></p></p></div>"
+      "</p></p></p></div></div>"
   );
 
   //Resets the form fields back to blank
   $("form :input").val("");
 };
 
-var toggleComments = function (e) {
-  console.log($(e.target));
-  $("#blank-comment-form").toggle();
-};
-
-var removePost = function () {
-  
+var toggleComments = function () {
+  //console.log($(e.target));
+  //$("#blank-comment-form").toggle();
+  $(this).parent('.post').children('.sub-post').toggle();
+  $(this).parent('.post').append($('#blank-comments-form'));
+  $('#blank-comments-form').toggle();
 };
 
 //When Post button is clicked, this will post the message as a parent thread.
@@ -69,8 +64,8 @@ $("#submit-comment").on("click", function () {
   createComment($commentName, $commentText);
 
   //Adds on a blank comment form to the comment but hides it.
-  $("#blank-comment-form").hide();
-  $(".post").append($("#blank-comment-form"));
+  //$("#blank-comment-form").hide();
+  //$(".post").append($("#blank-comment-form"));
 });
 
 //Deletes the entire thread when the delete button is removed.
