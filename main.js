@@ -12,8 +12,6 @@ var createPost = function ($name, $text) {
       "</p></p></p><hr></div>"
   );
 
-  toggleComments();
-
   //Resets the form fields back to blank
   $("form :input").val("");
 };
@@ -22,14 +20,14 @@ var createComment = function ($commentName, $commentText) {
   //Creates a div, then one paragraph element to contain the message, a second paragraph element
   //to contain the poster name, then adds on a button for Removing the Comment and a button for
   //adding a comment to that specific comment.
-  $('#submit-comment').parents(".post").append(
-    '<div class="sub-post"<div class = "comment-post"><p>' +
+  $('#submit-comment').parent(".post").append(
+    '<div class="sub-post"<p>' +
       $commentText +
       "<p>Posted By: " +
       $commentName +
       '<p><button class="remove-button" id="removeButton">Delete Comment</button>' +
       '<button class="add-comments-button" id="addCommentsButton">Add Comment</button>' +
-      "</p></p></p></div></div>"
+      "</p></p></p></div>"
   );
 
   //Resets the form fields back to blank
@@ -58,6 +56,7 @@ $("#submit").on("click", function () {
 
 //When Post Reply button is clicked, this will post the message as reply to the specific comment.
 $("#submit-comment").on("click", function () {
+
   var $commentName = $("#comment-name").val();
   var $commentText = $("#comment-message").val();
 
@@ -75,7 +74,7 @@ $(".posts").on("click", ".remove-button", function () {
 
 //When the Add Comment button is clicked, this adds a blank comment form below the current thread
 //so the user can add a new comment to thread.
-$(".posts").on("click", ".add-comments-button", function (e) {
-  $("#blank-comment-form").show();
+$(".posts").on("click", ".add-comments-button", function () {
+  $(this).append($('#blank-comments-form'));
+  $('#blank-comments-form').toggle();
 });
-
