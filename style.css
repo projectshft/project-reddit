@@ -1,7 +1,12 @@
 .show {
   display: block;
-}
+};
 
 .hide {
   display: none;
-}
+};
+
+#comments {
+  margin-top:10px;
+};
+
