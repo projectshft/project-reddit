@@ -1,0 +1,19 @@
+#block {
+  display: block;
+}
+
+.comment-area {
+  display: none;
+}
+
+#new-post-input-field {
+  display: none;
+}
+
+#delete-post-button-template {
+  display: none;
+}
+
+#delete-comment-button-template {
+  display: none;
+}
