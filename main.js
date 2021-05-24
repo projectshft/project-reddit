@@ -1,6 +1,12 @@
-
-
-var redditPosts = [];
+var redditPosts = [
+  {
+    name: "Ian",
+    message: "Hardcoded message",
+    comments: [
+      {name:'john', text:'hello'}
+    ]
+  }
+];
 
 var renderPage = function () {
   $('.posts').empty();
@@ -8,34 +14,37 @@ var renderPage = function () {
     var comments = '';
     for (var i = 0; i < redditPosts[index].comments.length; i++) {
       var comment = redditPosts[index].comments[i];
-      comments += `<div class="comment " id="comment-${i}"><p><button class="btn btn-xs btn-danger" id="delete-comment-${i}">Delete</button> ${comment.name} - Posted By: ${comment.text}</p></div>`
+      comments += `<div class="comment " id="comment-${i}"><p><button class="btn btn-xs btn-danger" id="delete-comment-${i}">Delete</button> ${comment.text} - Posted By: ${comment.name}</p></div>`
       
     }
-    $('.posts').append(`<div class="post"><div class="btn btn-xs btn-danger delete" id="delete-${index}">Delete</div> <button class="btn btn-xs btn-info comment" id="commentButton">Comment</button> <a>${redditPosts[index].message}</a> - Posted By: ${redditPosts[index].name} <a id="editPost">(Edit post)</a><div class="comments-wrapper" style="display:none;"><div class="comments">${comments}</div>
+    $('.posts').append(`
+    <div class="post">
+      <div class="btn btn-xs btn-danger delete" id="delete-${index}">Delete</div> 
+      <button class="btn btn-xs btn-info comment" id="commentButton">Comment</button> 
+      <a>${redditPosts[index].message}</a> - Posted By: ${redditPosts[index].name}
+      
+      <div class="comments-wrapper" style="display:none">
+        <div class="comments">${comments}</div>
     
-    <form id="commentForm" style="margin-top:30px;" onsubmit="event.preventDefault();">
-          <h4>Add a comment</h4>
-        
-          <div class="form-group">
-            <input id="commentName" type="text"
-              class="form-control"
-              placeholder="Your Name"></input>
+          <form id="commentForm" style="margin-top:30px" onsubmit="event.preventDefault();">
+                <h4>Add a comment</h4>
+              
+                <div class="form-group">
+                  <input id="commentName" type="text"
+                    class="form-control"
+                    placeholder="Your Name"></input>
+                </div>
+                
+                <div class="form-group">
+                  <textarea id="commentText" type="text"
+                  class="form-control"
+                  placeholder="Comment Text"></textarea>
+                </div>
+                <button id="submitComment" class="btn btn-primary">Submit Comment</button>
+              </form>
           </div>
-          
-          <div class="form-group">
-            <textarea id="commentText" type="text"
-            class="form-control"
-            placeholder="Comment Text"></textarea>
-          </div>
-          <button id="submitComment" class="btn btn-primary">Submit Comment</button>
-        </form>
-    </div>
-    <hr></div>`);
-    
+          <hr></div>`);
   }
-  // $('#commentButton').on('click', function() {
-  //   $('#commentForm').toggle();
-  // });
 };
 
 
@@ -67,30 +76,31 @@ $('.posts').on('click', '.delete', function () {
 });
 
 $('.posts').on('click', '.comment', function () {
-  $(this).closest('.comments-wrapper').toggle();
-  // var form = $(this).closest('#commentForm');
-  // console.log(form);
+  var form = $(this).closest('.post');
+  form.children('.comments-wrapper').toggle();
 });
   
-// $('#submitComment').on('click', function() {
-//   var $commentName = $('#commentName').val();
-//   var $commentText = $('#commentText').val();
+$('.posts').on('click', '#submitComment', function() {
+  var form = $(this).closest('.post');
+  var index = form.index();
 
+  var $commentName = form.find('#commentName').val();
+  var $commentText = form.find('#commentText').val();
 
-//   if ($commentName === '') {
-//     alert('Commenter name is empty. Please enter your name');
-//   } else if ($commentText === '') {
-//     alert('Comment field is empty. Please enter a comment')
-//   } else {
-//     redditPosts.push( {comments: [{name: $commentName, text: $commentText}]})
-//   };
+  if ($commentName === '') {
+    alert('Commenter name is empty. Please enter your name');
+  } else if ($commentText === '') {
+    alert('Comment field is empty. Please enter a comment')
+  } else {
+    redditPosts[index].comments.push({name: $commentName, text: $commentText})
+  };
 
-//   var clearComment = function() {
-//     $('#commentName').val('');
-//     $('#commentText').val('');
-//   }
-//   clearComment();
-//   renderPage();  
-// });
+  var clearComment = function() {
+    $('#commentName').val('');
+    $('#commentText').val('');
+  }
+  clearComment();
+  renderPage();  
+});
 
 renderPage();
