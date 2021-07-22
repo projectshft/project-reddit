@@ -1,0 +1,15 @@
+body {
+  font-family: ubuntu;
+}
+
+.intro-text {
+  font-family: "Zen Tokyo Zoo";
+}
+
+.input-area {
+  margin: 20px 0px;
+}
+
+.comments {
+  margin-left: 90px;
+}
