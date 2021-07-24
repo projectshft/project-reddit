@@ -16,7 +16,16 @@ var Post = function (id, name, message) {
   }
 
   this.toggleComments = function () {
-    $('#' + this.id).find('.comment-section').toggle();
+    var $post = $('#' + this.id);
+
+    $post.siblings().toggle();    
+    $('#post-form, a:not(.show-comments)').toggle();
+    $post.find('.comment-section').toggle();
+
+    var $editForm = $post.find('.edit-post-form');
+
+    if ($editForm.css('display') != 'none')
+      this.toggleEditForm();
   }
 
   this.editMessage = function (newMessage) {
@@ -98,9 +107,9 @@ $('#submit').on('click', function () {
 
     var postComments = 
      '<div class="comment-section" style="display: none;">'
+      +'<h4><strong>Comments:</strong></h4>'
       +'<div class="comments"></div>'
       +'<form id="comment-form-' + id + '" style="margin-top:30px;" onsubmit="event.preventDefault();">'
-            
         +'<div class="form-group">'
           +'<input id="comment-' + id + '" type="text"'
           +'class="form-control"'
@@ -119,12 +128,12 @@ $('#submit').on('click', function () {
     
     $('.posts').append(
         '<div class="post" id="' + id + '">'
-        + '<p class="post-message">' + message + ' - ' + '<strong>Posted By:</strong> ' + name + '</p>'
-        + '<a class="edit-post">edit post</a><span> --- </span>'
-        + '<a class="remove-post">remove</a><span> --- </span>'
-        + '<a class="show-comments">comments</a>'
-        + editPost
-        + postComments + '<hr>'
+          + '<p class="post-message">' + message + ' - ' + '<strong>Posted By:</strong> ' + name + '</p>'
+          + '<a class="edit-post">edit post</a><span> --- </span>'
+          + '<a class="remove-post">remove</a><span> --- </span>'
+          + '<a class="show-comments">toggle comments</a>'
+          + editPost
+          + postComments + '<hr>'
         +'</div>'
     );
 
