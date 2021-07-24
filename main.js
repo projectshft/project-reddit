@@ -8,8 +8,29 @@ var Post = function (id, name, message) {
   this.currCommentId = 1;
   this.comments = [];
 
+  this.toggleEditForm = function () {
+    var $editForm = $('#' + this.id).find('.edit-post-form');
+    $editForm.find('#edit-' + this.id).attr('value', this.message);
+
+    $('#' + this.id).find('.edit-post-form').toggle();
+  }
+
   this.toggleComments = function () {
     $('#' + this.id).find('.comment-section').toggle();
+  }
+
+  this.editMessage = function (newMessage) {
+    if (newMessage && newMessage != this.message) {
+      var edit = '<p class="post-message">' + newMessage + '<em> (edited)</em> - ' + '<strong>Posted By:</strong> ' + this.name + '</p>';
+      var $post = $('#' + this.id);
+
+      $post.find('.post-message').remove();
+      $post.prepend(edit);
+      this.message = newMessage;
+
+      $('#edit-form-' + this.id)[0].reset();
+      this.toggleEditForm();
+    }
   }
 
   this.newComment = function (comment, commenter, $commentSection) {
@@ -19,7 +40,7 @@ var Post = function (id, name, message) {
     if (comment && commenter) {
       $commentSection.find('.comments').append(
         '<div class="comment" id="' + this.id + '-' + newId + '">'
-        + '<hr><p>' + comment + ' - ' + 'Posted By: ' + commenter + '</p>'
+        + '<hr><p>' + comment + ' - ' + '<strong>Posted By:</strong> ' + commenter + '</p>'
         + '<a class="remove-comment">remove comment</a>'
         +'</div>'
       );
@@ -55,7 +76,7 @@ var getPost = function (id) {
   });
 }
 
-// ----- Create new post -----
+// ----- Create new Post -----
 $('#submit').on('click', function () {
   var message = $('#message').val();
   var name = $('#name').val();
@@ -63,6 +84,18 @@ $('#submit').on('click', function () {
   currId++;
 
   if (message && name) {
+    var editPost = 
+    '<div class="edit-post-form" style="display: none;">'
+      +'<form id="edit-form-' + id + '" style="margin-top:30px;" onsubmit="event.preventDefault();">'
+        +'<div class="form-group">'
+          +'<input id="edit-' + id + '" type="text"'
+          +'class="form-control">'
+          +'</input>'
+        +'</div>'
+        +'<button class="btn btn-primary">Save Changes</button>'
+      +'</form><hr>'
+    +'</div>'
+
     var postComments = 
      '<div class="comment-section" style="display: none;">'
       +'<div class="comments"></div>'
@@ -80,15 +113,17 @@ $('#submit').on('click', function () {
           +'placeholder="Your name"></input>'
         +'</div>'
       
-        +'<button id="submit-comment-' + id + '" class="btn btn-primary">Post Comment</button>'
+        +'<button class="btn btn-primary">Post Comment</button>'
       +'</form><hr>'
     +'</div>';
-
+    
     $('.posts').append(
         '<div class="post" id="' + id + '">'
-        + '<p>' + message + ' - ' + 'Posted By: ' + name + '</p>'
+        + '<p class="post-message">' + message + ' - ' + '<strong>Posted By:</strong> ' + name + '</p>'
+        + '<a class="edit-post">edit post</a><span> --- </span>'
         + '<a class="remove-post">remove</a><span> --- </span>'
         + '<a class="show-comments">comments</a>'
+        + editPost
         + postComments + '<hr>'
         +'</div>'
     );
@@ -100,7 +135,23 @@ $('#submit').on('click', function () {
   }
 })
 
- // ----- Remove post -----
+// ----- Toggle Post edit form -----
+$('body').on('click', '.edit-post', function () {
+  var post = getPost($(this).closest('.post').attr('id'));
+  post.toggleEditForm(); 
+})
+
+// ----- Edit Post -----
+$('body').on('click', '.edit-post-form button', function () {
+  var post = getPost($(this).closest('.post').attr('id'));
+
+  var $editForm = $(this).closest('.edit-post-form');
+  var newMessage = $editForm.find('#edit-' + post.id).val();
+
+  post.editMessage(newMessage); 
+})
+
+ // ----- Remove Post -----
 $('body').on('click', '.remove-post', function () {
   var $postDiv = $(this).closest('.post');
   var index = posts.indexOf(getPost($postDiv.attr('id')));
