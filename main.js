@@ -1,22 +1,58 @@
 var posts = [];
 var currId = 1;
 
-// ----- Returns the corresponding post -----
-var getPost = function (id) {
-  for (var i = 0; i < posts.length; i++) {
-    var curr = posts[i];
-    if (curr.id == id)
-      return curr;
+var Post = function (id, name, message) {
+  this.id = id;
+  this.name = name;
+  this.message = message;
+  this.currCommentId = 1;
+  this.comments = [];
+
+  this.toggleComments = function () {
+    $('#' + this.id).find('.comment-section').toggle();
+  }
+
+  this.newComment = function (comment, commenter, $commentSection) {
+    var newId = this.currCommentId;
+    this.currCommentId++;
+
+    if (comment && commenter) {
+      $commentSection.find('.comments').append(
+        '<div class="comment" id="' + this.id + '-' + newId + '">'
+        + '<hr><p>' + comment + ' - ' + 'Posted By: ' + commenter + '</p>'
+        + '<a class="remove-comment">remove comment</a>'
+        +'</div>'
+      );
+
+      $('#comment-form-' + this.id)[0].reset();
+
+      this.comments.push(
+        {
+          id: this.id + '-' + newId,
+          commenter: commenter,
+          comment: comment
+        }
+      );
+    }
+  }
+
+  this.removeComment = function (commentId) {
+    var index = this.comments.findIndex(function (comment) {
+      return comment.id === commentId;
+    });
+
+    var $commentDiv = $('#' + commentId);
+
+    this.comments.splice(index, 1);
+    $commentDiv.remove();
   }
 }
 
-// ----- Returns the corresponding comment -----
-var getComment = function(post, commentId) {
-  for (var i = 0; i < post.comments.length; i++) {
-    var curr = post.comments[i];
-    if (curr.id == commentId)
-      return curr;
-  }
+// ----- Returns the corresponding post -----
+var getPost = function (id) {
+  return posts.find(function (post) {
+    return post.id == id;
+  });
 }
 
 // ----- Create new post -----
@@ -59,15 +95,8 @@ $('#submit').on('click', function () {
 
     $('#post-form')[0].reset();
 
-    posts.push(
-      {
-        id: id,
-        name: name,
-        message: message,
-        commentId: 1,
-        comments: []
-      }
-    );
+    var newPost = new Post(id, name, message);
+    posts.push(newPost);
   }
 })
 
@@ -76,57 +105,30 @@ $('body').on('click', '.remove-post', function () {
   var $postDiv = $(this).closest('.post');
   var index = posts.indexOf(getPost($postDiv.attr('id')));
 
-  if (index > -1)
-    posts.splice(index, 1);
-  
+  posts.splice(index, 1);
   $postDiv.remove(); 
 })
 
 // ----- Toggle comment section -----
 $('body').on('click', '.show-comments', function () {
-  $(this).closest('.post').find('.comment-section').toggle();
+  var post = getPost($(this).closest('.post').attr('id'));
+  post.toggleComments();
 })
 
 // ----- Post new comment -----
 $('body').on('click', '.comment-section button', function () {
-  var $postDiv = $(this).closest('.post');
-  var $commentSection = $postDiv.find('.comment-section');
+  var post = getPost($(this).closest('.post').attr('id'));
+  var $commentSection = $('#' + post.id).find('.comment-section');
 
-  var postId = $postDiv.attr('id');
-  var post = getPost(postId);
-  var newId = post.commentId;
-  post.commentId++;
+  var comment = $commentSection.find('#comment-' + post.id).val();
+  var commenter = $commentSection.find('#comment-name-' + post.id).val();
 
-  var comment = $commentSection.find('#comment-' + postId).val();
-  var name = $commentSection.find('#comment-name-' + postId).val();
-
-  if (comment && name) {
-    $postDiv.find('.comments').append(
-      '<div class="comment" id="' + postId + '-' + newId + '">'
-      + '<hr><p>' + comment + ' - ' + 'Posted By: ' + name + '</p>'
-      + '<a class="remove-comment">remove comment</a>'
-      +'</div>'
-    )
-
-    $('#comment-form-' + postId)[0].reset();
-
-    post.comments.push(
-      {
-        id: postId + '-' + newId,
-        name: name,
-        comment: comment
-      }
-    )
-  }
+  post.newComment(comment, commenter, $commentSection);
 })
 
 // ----- Remove comment -----
 $('body').on('click', '.remove-comment', function () {
-  var $commentDiv = $(this).closest('.comment');
-
-  var post = getPost($commentDiv.closest('.post').attr('id'));
-  var index = post.comments.indexOf(getComment(post, $commentDiv.attr('id')));
-
-  post.comments.splice(index, 1);
-  $commentDiv.remove();
+  var commentId = $(this).closest('.comment').attr('id');
+  var post = getPost($(this).closest('.post').attr('id'));
+  post.removeComment(commentId);
 })
