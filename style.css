@@ -4,3 +4,11 @@
   font-size: 12px;
   margin-right: 3px;
 }
+
+.hide-element {
+  display: none;
+}
+
+.commenter {
+  width: 50%;
+}
