@@ -1,4 +1,8 @@
 $('#submit').on('click', function () {
-  console.log('clicked');
+  var textInput = $('#message').val();
+  var nameInput = $('#name').val();
+  
+  $('.posts').append('<li>' + textInput + ' - Posted By: ' + nameInput + '</li>');
+  //debugger;
 });
 
