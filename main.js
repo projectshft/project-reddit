@@ -5,21 +5,32 @@ var newPostTemplate = function(postText,nameText) {
   var commentSubmitButton = '<button type="button" class="btn btn-info submit-comment-btn">Submit Comment</button></div>';
   var combinedCommentDisplay = commentFormDisplay + commentSubmitButton;
 
-  var insertPost = '<p><h4><strong>'+ postRemoveButton + postCommentButton + postText + '<small> - Posted by: ' + nameText + '</small></strong></h4></p>' + combinedCommentDisplay + '<hr>';
+  var insertPost = '<h4><p>'+ postRemoveButton + postCommentButton + '<strong>'+ postText + '</strong><small> - Posted by: ' + nameText + '</small></p></h4>' + combinedCommentDisplay + '<hr>';
 
   $('.posts').append(insertPost);
-  
-  //make into own func
-  $('.view-comms-btn').click(function(){
-    console.log('click!');
-    $('.toggler').toggleClass("hide-element");
-  });
+  initCommentListener();
 
-}
+};
+
+var initCommentListener = function() {
+  $('.view-comms-btn').off('click');
+  $('.view-comms-btn').on('click', function() {
+  console.log('click');
+
+  var $associatedCommentDiv = $(this).closest('h4').next('.toggler');
+  $associatedCommentDiv.toggleClass('hide-element');
+
+})
+};
 
 $('.submit-post-btn').click(function() {
   var postInput = $('#input-post').val();
   var nameInput = $('#input-name').val();
-  $('form')[0].reset();
+  for(i=0; i < $('form').length; i++) {
+    $('form')[i].reset();
+    };
   newPostTemplate(postInput,nameInput);
 });
+
+
+
