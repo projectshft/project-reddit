@@ -1,0 +1,43 @@
+body {
+  background-color: #fff;
+}
+
+#comment-box {
+  display: none;
+}
+
+#comment-name-box {
+  display: none;
+}
+
+#comment-submit-button {
+  display: none;
+}
+
+textarea {
+  margin-top: 10px;
+}
+
+input {
+  margin-top: 10px;
+}
+
+button {
+  margin-top: 10px;
+}
+
+#remove {
+  color: blue;
+}
+
+#comment {
+  color: blue;
+}
+
+a:hover {
+  font-weight: bold;
+}
+
+.remove-test {
+  color: blue;
+}
