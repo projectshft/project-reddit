@@ -1,0 +1,14 @@
+.btn-link {
+  padding-right: 6px;
+  padding-left: 1px;
+  font-size: 12px;
+  margin-right: 3px;
+}
+
+.hide-element {
+  display: none;
+}
+
+.comment-width-adj {
+  width: 75%;
+}
