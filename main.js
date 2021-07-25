@@ -8,20 +8,16 @@ var postsAndCommentsArray = [
 
 var loadPosts = {
   initial: function() {
-    var $li = $('li');
+    var $posts = $('.posts');
     if (postsAndCommentsArray.length == 1) {
-      $li.append('<li>' + postsAndCommentsArray[0].originalPost + ' -  Posted by: ' + postsAndCommentsArray[0].author + '</li>');
+      $posts.append('<li>' + postsAndCommentsArray[0].originalPost + ' -  Posted by: ' + postsAndCommentsArray[0].author + '</li>');
     };
   },
 
   allPosts: function() {
-    var $li = $('li');
-    if (postsAndCommentsArray.length > 1) {
-      postsAndCommentsArray.forEach(obj => {
-        console.log(obj.originalPost);
-        $li.append('<li>' + obj.originalPost + ' -  Posted by: ' + obj.author + '</li>');
-      });
-    }
+    var $posts = $('.posts');
+    var i = postsAndCommentsArray.length - 1;
+    $posts.append('<a>remove </a><a> comments</a><li>' + postsAndCommentsArray[i].originalPost + ' -  Posted by: ' + postsAndCommentsArray[i].author + '</li>');
   }
 };
 
@@ -49,8 +45,10 @@ var submitPost = function() {
 
     console.log(postsAndCommentsArray);
     loadPosts.allPosts();
+
   });
-};
+}
+
 loadPosts.initial();
 submitPost();
 
