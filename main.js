@@ -3,11 +3,7 @@ var postsAndCommentsArray = [
     originalPost: 'i enjoy cherries',
     author: 'nina',
     comments: []
-  },
-  {originalPost: '',
-  author: '',
-  comments: []
-  },
+  }
 ]
 
 var loadPosts = function() {
@@ -17,18 +13,15 @@ var loadPosts = function() {
 
 var submitPost = function() {
   $('#submit').on('click', function () {
-    var numPosts = postsAndCommentsArray.length;
-    console.log(numPosts);
-
     var $userMessage = $('#message').val();
     var $userName = $('#name').val();
+
+    console.log(postsAndCommentsArray[numPosts-1]);
       
-      postsAndCommentsArray[numPosts].originalPost = $userMessage;
+      postsAndCommentsArray.push({originalPost: $userMessage, author: $userName});
 
-      postsAndCommentsArray[numPosts].author = $userName;
+      
 
-      numPosts++;
-      console.log(numPosts);
   
       console.log(postsAndCommentsArray);
   });
