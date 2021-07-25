@@ -27,8 +27,6 @@ var loadPosts = {
   }
 };
 
-
-
 var bindEvents = {
   removePosts: function () {
     $('.remove').on('click', function (e) {
@@ -39,33 +37,30 @@ var bindEvents = {
 
   viewComments: function () {
     $('.comments').on('click', function (e) {
-     var $commentBox = $('div.commentBox')[0];
-     console.log($commentBox);
+    var dataId = $(e.target).data('id');
+    console.log('clicked the comment box of ' + dataId + '!');
+
+    var formTemplate = '<form data-id="' + dataId + '" id="commentInput" style="margin-top: 30px" onsubmit="event.preventDefault();"><div class="form-group"><textarea id="commentMessage" type="text"class="form-control"placeholder="comment text"></textarea><div class="form-group"><input id="commentName" type="text"class="form-control"placeholder="your name"></input></div><button id="submitComment" class="btn btn-primary">submit comment</button></form>';
+
     
-     $commentBox.html(formTemplate);
-
-      var dataId = $(e.target).data('id');
-
-      console.log('clicked the comment box of ' + dataId + '!');
+    // grab the div we just clicked
+      var $clickedPostDiv = $('div[data-id="' + dataId + '"');
+    // append that div with the formTemplate containing the dataId
+      $clickedPostDiv.append(formTemplate);
+    
+      // grab the comment form of the div with our dataId
+      var $currentComments = $('form[data-id="' + dataId + '"');
+    
+    // if form does not contain 'show' class, toggle class
+    if ($currentComments.hasClass('show')) {
+      $currentComments.removeClass('show');
+    } else {
+      $currentComments.addClass('show');
+    };
     });
   }
 }
 
-
-
-
-// var loadPosts = function() {
-//   var $li = $('li');
-//   if (postsAndCommentsArray.length == 1) {
-//     $li.append('<li>' + postsAndCommentsArray[0].originalPost + ' -  Posted by: ' + postsAndCommentsArray[0].author + '</li>');
-//   } else {
-//     postsAndCommentsArray.forEach(obj => {
-//       console.log(obj.originalPost);
-//       $li.append('<li>' + obj.originalPost + ' -  Posted by: ' + obj.author + '</li>');
-//     });
-//   }
-  
-// };
 
 var submitPost = function() {
   $('#submit').on('click', function () {
@@ -84,12 +79,9 @@ var submitPost = function() {
 loadPosts.initial();
 submitPost();
 
-var formTemplate = '<form id="commentInput" style="margin-top: 30px" onsubmit="event.preventDefault();"><div class="form-group"><textarea id="commentMessage" type="text"class="form-control"placeholder="comment text"></textarea><div class="form-group"><input id="commentName" type="text"class="form-control"placeholder="your name"></input></div><button id="submitComment" class="btn btn-primary">submit comment</button></form>';
 
 
 
-
-// When a user clicks 'comments' (above each post) it should toggle the comments and input box visible/hidden.
 
 
 
