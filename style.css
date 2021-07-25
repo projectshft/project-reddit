@@ -1,0 +1,19 @@
+h1 {
+  text-align: left;
+}
+
+.form-control {
+  margin-bottom: 10px;
+}
+
+button {
+  margin: 5px;
+}
+
+.remove:hover {
+  color: red;
+}
+
+.comments:hover {
+  color: red;
+}
