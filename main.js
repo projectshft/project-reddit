@@ -7,29 +7,29 @@ var postsAndCommentsArray = [
 ]
 
 var loadPosts = function() {
-  var $li = $('li');
-  $li.append(postsAndCommentsArray[0].originalPost + ' -  Posted by: ' + postsAndCommentsArray[0].author);
+  postsAndCommentsArray.forEach(obj => {
+    console.log(obj.originalPost);
+    var $li = $('li');
+    $li.append(obj.originalPost + ' -  Posted by: ' + obj.author);
+
+  });
+  
 };
 
 var submitPost = function() {
   $('#submit').on('click', function () {
     var $userMessage = $('#message').val();
-    var $userName = $('#name').val();
+    var $userName = $('#name').val();      
+    
+    postsAndCommentsArray.push({originalPost: $userMessage, author: $userName});
 
-    console.log(postsAndCommentsArray[numPosts-1]);
-      
-      postsAndCommentsArray.push({originalPost: $userMessage, author: $userName});
+    console.log(postsAndCommentsArray);
 
-      
-
-  
-      console.log(postsAndCommentsArray);
+    loadPosts();
   });
 };
-
 loadPosts();
 submitPost();
-
 
 
 
