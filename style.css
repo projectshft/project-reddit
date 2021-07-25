@@ -1,0 +1,14 @@
+li {
+  background-color: green;
+  color: blue;
+  list-style-type: none;
+  margin-bottom: 1em;
+}
+
+#commentInput {
+  display: none;
+}
+
+.show {
+  display: block;
+}
