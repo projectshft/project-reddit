@@ -11,9 +11,6 @@ $("#submit-post").click(function () {
   $("#new-post").append('<p class="post">' + remove + comments + text + " - Posted By: " + author  + '</p>' + comment_section );
 
   $("form").trigger("reset");
-
-//need to reset form after submission
- //$('#new-post').reset(); --doesnt work
 });
 
 //removes post
