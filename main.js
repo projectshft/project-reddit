@@ -61,16 +61,16 @@ var initCommentSubmitListener = function() {
 var initPostRemoveListener = function() {
   $('.rem-post-btn').off('click');
   $('.rem-post-btn').on('click', function() {
-    var removedPost = $(this).closest('.new-pst');
-    removedPost.remove();
+    var $removedPost = $(this).closest('.new-pst');
+    $removedPost.remove();
   });
 };
 
 var initCommentRemoveListener = function() {
   $('.rem-comm-btn').off('click');
   $('.rem-comm-btn').on('click', function() {
-  var removedComment = $(this).closest('.new-com');
-  removedComment.remove();
+  var $removedComment = $(this).closest('.new-com');
+  $removedComment.remove();
   });
 };
 
