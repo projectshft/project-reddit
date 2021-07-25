@@ -1,0 +1,19 @@
+h1 {
+  font-weight: bold;
+  font-size: xxx-large;
+  color: #ff4500;
+}
+
+sub {
+  font-weight: 100;
+  font-size: 7px;
+  color: indigo;
+}
+
+.posts {
+  font-weight: 700;
+}
+
+.form-group {
+  font-weight: 600;
+}
