@@ -10,16 +10,31 @@ var loadPosts = {
   initial: function() {
     var $posts = $('.posts');
     if (postsAndCommentsArray.length == 1) {
-      $posts.append('<li>' + postsAndCommentsArray[0].originalPost + ' -  Posted by: ' + postsAndCommentsArray[0].author + '</li>');
+      $posts.append('<a data-id="0" class="remove">remove </a><a class="comments"> comments</a><li data-id="0">' + postsAndCommentsArray[0].originalPost + ' -  Posted by: ' + postsAndCommentsArray[0].author + '</li>');
+      bindEvents.removePosts();
     };
   },
 
   allPosts: function() {
     var $posts = $('.posts');
     var i = postsAndCommentsArray.length - 1;
-    $posts.append('<a>remove </a><a> comments</a><li>' + postsAndCommentsArray[i].originalPost + ' -  Posted by: ' + postsAndCommentsArray[i].author + '</li>');
+    $posts.append('<a data-id="' + i + '" class="remove">remove </a><a class="comments"> comments</a><li data-id="' + i + '">' + postsAndCommentsArray[i].originalPost + ' -  Posted by: ' + postsAndCommentsArray[i].author + '</li>');
+    bindEvents.removePosts();
+
   }
 };
+
+var bindEvents = {
+  removePosts: function () {
+    $('.remove').on('click', function (e) {
+      // console.log($('li').data().id);
+      console.log($(e.target).data('id'));
+      var dataId = $(e.target).data('id'); 
+      $('li[data-id="' + dataId + '"]').remove();
+    }) 
+  }
+}
+
 
 
 
@@ -45,6 +60,7 @@ var submitPost = function() {
 
     console.log(postsAndCommentsArray);
     loadPosts.allPosts();
+    $('#postForm')[0].reset();
 
   });
 }
