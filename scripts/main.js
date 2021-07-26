@@ -16,9 +16,12 @@ $('#submit').on('click', function () {
     })
     $newPost.find('.comment-submit').on('click', handleCommentSubmit);
   }
-  
+   //  Code to delete comments
+   $('#target').on('click', '.removePost', handleDelete);
 });
 
+
+//  function to "handle" submission of comments
 function handleCommentSubmit () {
   var $form = $(this).closest('.comment-form');
   var yourName = $form.find('#commentAuthorName').val().trim();
@@ -31,19 +34,23 @@ function handleCommentSubmit () {
   }  
 };
 
+
+//  create a function that serves as the template for the comments
 function commentTemplate (commentText, yourName) {
   return "<div>\
     <a class='removePost' href = '#'>Remove</a> " + commentText + " - Posted By: " + yourName + "</div>";
 };
 
 
-
+//  create a function that serves as the template for the posts
 function postTemplate (postMessage, authorName) {
   return "<div>\
     <a class='removePost' href = '#'>Remove</a> <a class='comments' href = '#'>Comments</a> " + postMessage + " - Posted By: " + authorName + commentInputTemplate + 
     "</div>";
 };
 
+
+//  variable to add in all the information from a comment (will be appended to the DOM)
 var commentInputTemplate = '<form class="comment-form" style="margin-top:30px;" onsubmit="event.preventDefault();">\
 <div class="comments"></div>\
 <div class="form-group">\
@@ -58,3 +65,12 @@ var commentInputTemplate = '<form class="comment-form" style="margin-top:30px;" 
 </div>\
 <button class="btn btn-primary comment-submit">Submit Comment</button>\
 </form>';
+
+
+//  add in a function to remove comments after posted
+function handleDelete() {
+  console.log('clicked delete');
+  $(this).closest('.removePost').remove();
+  $(this).closest('.comments').remove();
+}
+
