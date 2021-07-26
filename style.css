@@ -1,3 +1,11 @@
-.li {
+.posts {
   list-style-type: none;
+}
+
+.comment-edit {
+  display: none;
+}
+
+.show {
+  display: block;
 }
