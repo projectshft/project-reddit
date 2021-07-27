@@ -9,39 +9,41 @@ var postsAndCommentsArray = [
 var loadPosts = {
  
   allPosts: function() {
-
+    // i think this function if what's messing it up. it's dependent on the length of the array, and i think my setting of the iterator variable is not helping..... how can i do this better 😣
     var $posts = $('.posts');
 
     if (postsAndCommentsArray.length == 1) {
       $posts.append('<div data-id="0"><a data-id="0" class="remove">remove </a><a class="comments" data-id="0"> comments</a><li data-id="0">' + postsAndCommentsArray[0].originalPost + ' -  Posted by: ' + postsAndCommentsArray[0].author + '</li></div>');
-      // this.attachComments();
+      this.attachComments();
       bindEvents.viewComments();
     } else {
+      // this iterator qurl right here.... god
       for (let i = (postsAndCommentsArray.length-1); i < postsAndCommentsArray.length; i++) {
         $posts.append('<div data-id="' + i + '"><a data-id="' + i + '"class="remove"> remove </a><a class="comments" data-id="' + i + '"> comments</a><li data-id="' + i + '">' + postsAndCommentsArray[i].originalPost + ' -  Posted by: ' + postsAndCommentsArray[i].author + '</li>');
         // this.attachComments();
-        bindEvents.viewComments();
+        // bindEvents.viewComments();
 
         
 
       }
     }
-    this.attachComments();
-    bindEvents.viewComments();
+    // this.attachComments();
+    // bindEvents.viewComments();
     bindEvents.removePosts();
   },
 
+    
+    
+  
   attachComments: function() {
-    // for (let i = 0; i < postsAndCommentsArray.length; i++) {
-
+    
     var i = postsAndCommentsArray.length - 1;
     var formTemplate = '<form data-id="' + i + '" id="commentInput" style="margin-top: 30px" onsubmit="event.preventDefault();"><div class="form-group"><textarea id="commentMessage" type="text"class="form-control"placeholder="comment text"></textarea><div class="form-group"><input id="commentName" type="text"class="form-control"placeholder="your name"></input></div><button id="submitComment" class="btn btn-primary">submit comment</button></form>';
 
     var $postCommentDiv = $('div[data-id="' + i + '"');
     $postCommentDiv.append(formTemplate);
+    // debugger;
     bindEvents.viewComments();
-
-    // var i = postsAndCommentsArray.length - 1;
   
   }
 };
@@ -81,12 +83,15 @@ var submitPost = function() {
     loadPosts.allPosts();
     loadPosts.attachComments();
 
+
   });
 };
 
-
-submitPost();
 loadPosts.allPosts();
+submitPost();
+ bindEvents.viewComments();
+// loadPosts.attachComments();
+
 
 
 
