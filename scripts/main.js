@@ -36,7 +36,8 @@ function handleCommentSubmit () {
     
     var $newComment = $(commentTemplate(commentText, yourName)).appendTo($comments);
   }  
-  
+  $('#commentAuthorName').val('');
+  $('#commentMessage').val('');
 };
 
 
