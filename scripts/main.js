@@ -15,9 +15,12 @@ $('#submit').on('click', function () {
       }
     })
     $newPost.find('.comment-submit').on('click', handleCommentSubmit);
+    $('#authorName').val('');
+    $('#postMessage').val('');
   }
    //  Code to delete comments
    $('#target').on('click', '.removePost', handleDelete);
+   //  Code to delete posts
 });
 
 
@@ -30,8 +33,10 @@ function handleCommentSubmit () {
     alert('Need to add a value!');
   } else {
     var $comments = $form.find('.comments');
+    
     var $newComment = $(commentTemplate(commentText, yourName)).appendTo($comments);
   }  
+  
 };
 
 
