@@ -1,0 +1,71 @@
+textarea {
+  resize: none;
+}
+
+.submit-post {
+  margin-top: 12px;
+}
+
+.post {
+  background-color: #e1e1e1;
+  margin-bottom: 16px;
+}
+
+.form-rounded {
+  border-radius: 1rem;
+}
+
+.user-avatar {
+  font-size: 37px;
+  color: #8080804d;
+  padding: 0;
+  margin-right: 8px;
+}
+
+.comment-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.editable-text-input {
+  border-radius: 0px;
+  padding: 0px;
+  background-color: #e1e1e1;
+  padding: none;
+  border: none;
+  border-bottom: 1px solid #adb2b7;
+}
+
+.editable-text-input:focus {
+  border: none;
+  background-color: #ecebeb;
+  box-shadow: none;
+  border-bottom: 1px solid #adb2b7;
+}
+
+.editable-user-text {
+  /* height: 24px; */
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.edit-prompt {
+  background: white;
+  padding-left: 19px;
+  margin-bottom: 13px;
+  color: grey;
+  display: inline-block;
+}
+
+.back-to-posts {
+  display: inline-block;
+  margin-top: 12px;
+}
+
+.back-to-posts:hover {
+  cursor: pointer;
+}
+
+.edited-post {
+  margin: 0;
+}
