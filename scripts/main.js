@@ -18,9 +18,12 @@ $('#submit').on('click', function () {
     $('#authorName').val('');
     $('#postMessage').val('');
   }
-   //  Code to delete comments
-   $('#target').on('click', '.removePost', handleDelete);
    //  Code to delete posts
+   $('#target').on('click', '.removePost', handleDelete);
+   //  Code to delete comments
+   $newPost.find('.removePost').on('click', function () {
+     $newPost.remove();
+   });
 });
 
 
@@ -53,7 +56,8 @@ function postTemplate (postMessage, authorName) {
   return "<div>\
     <a class='removePost' href = '#'>Remove</a> <a class='comments' href = '#'>Comments</a> " + postMessage + " - Posted By: " + authorName + commentInputTemplate + 
     "</div>";
-};
+}
+    
 
 
 //  variable to add in all the information from a comment (will be appended to the DOM)
@@ -79,4 +83,9 @@ function handleDelete() {
   $(this).closest('.removePost').remove();
   $(this).closest('.comments').remove();
 }
+
+$('.comments').on('click').remove();
+$('.removePost').on('click').remove();
+
+
 
