@@ -1,0 +1,17 @@
+.remove-link {
+    color: blue;
+    font-weight: bold;
+}
+
+.remove-link:hover {
+    text-decoration: underline;
+}
+
+.comments-link {
+    color: blue;
+    font-weight: bold;
+}
+
+.comments-link:hover {
+    text-decoration: underline;
+}
