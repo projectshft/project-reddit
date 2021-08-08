@@ -12,12 +12,29 @@
         <h1>ReReddit</h1>
       </div>
     
-
       <div class="posts">
         <div>
-          <p><span class="remove-link">Remove </span><span class="comments-link">Comments </span>Posted By: <strong>Name</strong></p>
-                   
+          <p></p>                   
+        </div> 
+      
+        <div class="comments" id=comments>            
+            <div class="form-group">
+                <textarea id="comment" type="text"
+                class="form-control"
+                placeholder="Comment Text"></textarea>
+              </div>
+      
+              <div class="form-group">
+                <input id="comment-name" type="text"
+                  class="form-control"
+                  placeholder="Your Name"></input>
+              </div>
+
+              <button id="submit-comment" class="btn btn-primary">Submit Comment</button>
+
+
         </div>
+        
       </div>
 
       <form style="margin-top:30px;" onsubmit="event.preventDefault();">             
