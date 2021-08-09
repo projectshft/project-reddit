@@ -1,6 +1,6 @@
 var removeLinkClass = 'remove-link';
 var commentsLinkClass = 'comments-link';
-var commentsIdCounter = 0;
+var commentsIdCounter = 1;
 
 var clicked = function () {    
     var userName = $('#name').val();
@@ -38,17 +38,43 @@ var clicked = function () {
     $('#comments').clone().attr('id', 'comments' + commentsIdCounter++).insertAfter('#comments').appendTo(newPostDiv);
 
     //Add new div to the HTML file
-    postsDiv.append(newPostDiv);   
-     
-    
-    
-    
-
-    
+    postsDiv.append(newPostDiv);       
 
     //Call click functions for remove and comment links
     $('.remove-link').on('click', removed);
     $('.comments-link').on('click', comments);
+
+}
+
+var commentClick = function () {
+    var userName = $('#comment-name').val();
+    var comment = $('#comment').val();     
+    
+    
+    //Comment variables for new HTML nodes
+    var commentsDiv = $(this).closest('.comments');
+    var newCommentDiv = document.createElement('div');
+    var newCommentP = document.createElement('p');
+    var newCommentSpan = document.createElement('span');
+
+    //Assinging class names to comment class
+    newCommentSpan.className = removeLinkClass;
+
+    //Comment Variables for new text and links
+    var commentClassText = document.createTextNode('Remove ');
+    var commentTextNode = document.createTextNode(comment + ' - Posted By: ' + userName);
+
+    newCommentSpan.appendChild(commentClassText);  
+
+
+    newCommentP.appendChild(newCommentSpan);    
+    newCommentP.appendChild(commentTextNode);
+
+    newCommentDiv.append(newCommentP);  
+    
+    commentsDiv.append(newCommentDiv); 
+
+    $('.remove-link').on('click', removed);
 
 }
 
@@ -58,40 +84,17 @@ var removed = function () {
 }
 
 var comments = function () {
-    if ($(this).closest('.posts').children().hide()) {
-        $(this).closest('.posts').children().show();
-    } else {
-        $(this).closest('.posts').children().hide();
+    if ($(this).closest('.posts').children('.comments').show()) {
+        $(this).closest('.posts').children('.comments').hide();
+    } else if ($(this).closest('.posts').children('.comments').hide()) { 
+        $(this).closest('.posts').children('.comments').show();
     }
-    
-    
-
 }
 
+$('#submit-comment').on('click', commentClick);
 $('#submit-post').on('click', clicked);
 $('.remove-link').on('click', removed);
 $('.comments-link').on('click', comments);
 
 
-/* Comment box for comment code
-//Comment variables for new HTML nodes
-var commentsDiv = document.querySelector('.comments');
-var newCommentDiv = document.createElement('div');
-var newCommentP = document.createElement('p');
-var newCommentSpan = document.createElement('span');
 
-//Assinging class names to comment class
-newCommentSpan.className = removeLinkClass;
-
-//Comment Variables for new text and links
-    var commentClassText = document.createTextNode('Remove ');
-    var commentTextNode = document.createTextNode(comment + ' - Posted By: ' + commentName);
-
-     newCommentSpan.appendChild(commentClassText);  
-
-     newCommentP.appendChild(commentClassText);
-    newCommentP.appendChild(commentTextNode);
-
-    newCommentDiv.append(newCommentP);  
-    
-    commentsDiv.append(newCommentDiv); */
