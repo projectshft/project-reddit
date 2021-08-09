@@ -16,5 +16,13 @@
     text-decoration: underline;
 }
 
+.comments {
+    visibility: show;
+}
+
+#template-comment{
+    display:none;
+}
+
 
 

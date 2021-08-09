@@ -84,11 +84,8 @@ var removed = function () {
 }
 
 var comments = function () {
-    if ($(this).closest('.posts').children('.comments').show()) {
-        $(this).closest('.posts').children('.comments').hide();
-    } else if ($(this).closest('.posts').children('.comments').hide()) { 
-        $(this).closest('.posts').children('.comments').show();
-    }
+    $(this).closest('.posts').children('.comments').toggle();
+        
 }
 
 $('#submit-comment').on('click', commentClick);
