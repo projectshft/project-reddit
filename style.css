@@ -1,0 +1,30 @@
+html {
+  background-color: #e2e2e2;
+}
+
+body {
+  background-color: #e2e2e2;
+  font-family: "Gotham", "Helvetica Neue", sans-serif;
+  font-size: 20px;
+}
+
+textarea {
+  resize: none;
+}
+
+.container {
+  background-color: #fff;
+  padding: 15px 50px 25px 50px;
+}
+
+.intro-heading {
+  text-align: left;
+  font-family: "Gotham", "Helvetica Neue", sans-serif;
+  font-weight: 700;
+  font-size: 75px;
+  padding-top: 25px;
+}
+
+.row {
+  padding: 0 15px 0 15px;
+}
