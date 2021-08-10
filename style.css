@@ -5,7 +5,7 @@ html {
 body {
   background-color: #e2e2e2;
   font-family: "Gotham", "Helvetica Neue", sans-serif;
-  font-size: 20px;
+  font-size: 16px;
 }
 
 textarea {
@@ -14,7 +14,7 @@ textarea {
 
 .container {
   background-color: #fff;
-  padding: 15px 50px 25px 50px;
+  padding: 15px 50px 15px 50px;
 }
 
 .intro-heading {
@@ -27,4 +27,71 @@ textarea {
 
 .row {
   padding: 0 15px 0 15px;
+}
+
+.form-control {
+  font-size: 16px;
+  padding: 10px 12px;
+  height: auto;
+}
+
+.col-sm-10 {
+  padding: 0px;
+  margin: 0px;
+}
+
+.each-post {
+  border: 1px solid #e2e2e2;
+  border-left: 5px solid #e2e2e2;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+}
+
+.btn {
+  font-size: 16px;
+}
+
+.removePost {
+  background-color: white;
+  color: #d9534f;
+  width: 100px;
+  margin-top: 10px;
+}
+
+.editPost {
+  background-color: white;
+  color: #f0ad4e;
+  width: 100px;
+  margin-top: 10px;
+}
+
+#user-name {
+  width: 50%;
+}
+
+#post-form {
+  padding: 16px;
+  background-color: #e2e2e2;
+  border-radius: 4px;
+  margin-top: 30px;
+  margin-bottom: 40px;
+}
+
+#edit-form {
+  padding: 16px;
+  background-color: #e2e2e2;
+  border-color: #f0ad4e;
+  border-style: solid;
+  border-radius: 4px;
+  margin-top: 30px;
+  margin-bottom: 40px;
+}
+
+#edit-comment {
+  display: none;
+}
+
+#post-comment {
+  display: inline;
 }
