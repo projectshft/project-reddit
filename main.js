@@ -35,45 +35,52 @@ var clicked = function () {
     
     //Add the new post to the div
     newPostDiv.append(newPostP);   
-    $('#comments').clone().attr('id', 'comments' + commentsIdCounter++).insertAfter('#comments').appendTo(newPostDiv);
-
+    $('#template-comment').clone().attr('id', 'comments' + commentsIdCounter++).appendTo(newPostDiv);
+    
+    
     //Add new div to the HTML file
     postsDiv.append(newPostDiv);       
 
     //Call click functions for remove and comment links
     $('.remove-link').on('click', removed);
     $('.comments-link').on('click', comments);
-
+    $('#submit-comment').on('click', commentClick);
+    
 }
 
 var commentClick = function () {
-    var userName = $('#comment-name').val();
-    var comment = $('#comment').val();     
+    var userName = $(this).closest('.comments').find('#comment-name:first').val();
+    var comment = $(this).closest('.comments').find('#comment:first').val();     
     
     
     //Comment variables for new HTML nodes
-    var commentsDiv = $(this).closest('.comments');
-    var newCommentDiv = document.createElement('div');
+    var commentsDiv = $(this).closest('.comments').find('.comments-section:first');   
+    var newCommentsDiv = document.createElement('div');
     var newCommentP = document.createElement('p');
     var newCommentSpan = document.createElement('span');
 
-    //Assinging class names to comment class
+    //Assigning class names to comment classes
     newCommentSpan.className = removeLinkClass;
 
     //Comment Variables for new text and links
-    var commentClassText = document.createTextNode('Remove ');
-    var commentTextNode = document.createTextNode(comment + ' - Posted By: ' + userName);
+    var classOneTextNode = document.createTextNode('Remove ');
+    var newCommentTextNode = document.createTextNode(comment + ' - Posted By: ' + userName);
 
-    newCommentSpan.appendChild(commentClassText);  
+    //Put text into span(s)
+    newCommentSpan.appendChild(classOneTextNode);
 
+    //Put <span> into <p>
+    newCommentP.appendChild(newCommentSpan);
+    newCommentP.appendChild(newCommentTextNode);
 
-    newCommentP.appendChild(newCommentSpan);    
-    newCommentP.appendChild(commentTextNode);
+    //Add new comment to the div
+    newCommentsDiv.append(newCommentP);
 
-    newCommentDiv.append(newCommentP);  
-    
-    commentsDiv.append(newCommentDiv); 
+    //Add new div to the HTML file
+    commentsDiv.append(newCommentsDiv);   
 
+     
+    $('.comments-link').on('click', comments);
     $('.remove-link').on('click', removed);
 
 }
@@ -84,7 +91,8 @@ var removed = function () {
 }
 
 var comments = function () {
-    $(this).closest('.posts').children('.comments').toggle();
+     $(this).closest('div').find('.comments:first').toggle();      
+    
         
 }
 

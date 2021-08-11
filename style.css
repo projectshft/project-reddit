@@ -17,12 +17,13 @@
 }
 
 .comments {
-    visibility: show;
+    display: none;
 }
 
-#template-comment{
-    display:none;
+#template-comment {
+    display: none;
 }
+
 
 
 
