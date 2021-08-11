@@ -1,0 +1,33 @@
+.remove-link {
+    color: red;
+    font-weight: bold;
+}
+
+.remove-link:hover {
+    text-decoration: underline;
+}
+
+.comments-link {
+    color: blue;
+    font-weight: bold;
+}
+
+.comments-link:hover {
+    text-decoration: underline;
+}
+
+.comments {
+    display: none;
+}
+
+#template-comment {
+    display: none;
+}
+
+.submit-comment {
+    color: blue;
+}
+
+
+
+
