@@ -45,7 +45,7 @@ var clicked = function () {
     //Call click functions for remove and comment links
     $('.remove-link').on('click', removed);
     $('.comments-link').unbind('click').on('click', comments);
-    $('#submit-comment').on('click', commentClick);
+    $('.submit-comment').unbind('click').on('click', commentClick);
     
     
 }
