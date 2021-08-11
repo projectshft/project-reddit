@@ -2,6 +2,7 @@ var removeLinkClass = 'remove-link';
 var commentsLinkClass = 'comments-link';
 var commentsIdCounter = 1;
 
+
 var clicked = function () {    
     var userName = $('#name').val();
     var post = $('#message').val();     
@@ -43,8 +44,9 @@ var clicked = function () {
 
     //Call click functions for remove and comment links
     $('.remove-link').on('click', removed);
-    $('.comments-link').on('click', comments);
+    $('.comments-link').unbind('click').on('click', comments);
     $('#submit-comment').on('click', commentClick);
+    
     
 }
 
@@ -80,26 +82,28 @@ var commentClick = function () {
     commentsDiv.append(newCommentsDiv);   
 
      
-    $('.comments-link').on('click', comments);
+       
     $('.remove-link').on('click', removed);
 
 }
 
 var removed = function () {    
     $(this).parent().parent().remove();
-    //not removing comment text boxes as it should
+    
 }
 
 var comments = function () {
-     $(this).closest('div').find('.comments:first').toggle();      
-    
+     $(this).closest('div').find('.comments:first').toggle();  
+     console.log('comment link clicked')    
+     
         
 }
 
 $('#submit-comment').on('click', commentClick);
 $('#submit-post').on('click', clicked);
 $('.remove-link').on('click', removed);
-$('.comments-link').on('click', comments);
+
+
 
 
 
