@@ -70,6 +70,10 @@ textarea {
   width: 50%;
 }
 
+#edited-by {
+  width: 50%;
+}
+
 #post-form {
   padding: 16px;
   background-color: #e2e2e2;
@@ -84,14 +88,10 @@ textarea {
   border-color: #f0ad4e;
   border-style: solid;
   border-radius: 4px;
-  margin-top: 30px;
+  margin-top: -10px;
   margin-bottom: 40px;
 }
 
-#edit-comment {
-  display: none;
-}
-
-#post-comment {
-  display: inline;
+#cancel-edit-button {
+  margin-left: 10px;
 }
