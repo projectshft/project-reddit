@@ -44,7 +44,7 @@ textarea {
   border: 1px solid #e2e2e2;
   border-left: 5px solid #e2e2e2;
   padding: 15px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   border-radius: 4px;
 }
 
@@ -62,6 +62,35 @@ textarea {
 .editPost {
   background-color: white;
   color: #f0ad4e;
+  width: 100px;
+  margin-top: 10px;
+}
+
+.leave-comment-button {
+  margin-top: 10px;
+  color: #46b8da;
+  background-color: white;
+  float: right;
+}
+
+.show-comments-button {
+  margin-top: 10px;
+  color: #46b8da;
+  background-color: white;
+  float: right;
+  display: none;
+}
+
+.hide-comments-button {
+  display: none;
+  color: white;
+  background-color: #46b8da;
+  float: right;
+}
+
+.removeComment {
+  background-color: white;
+  color: #d9534f;
   width: 100px;
   margin-top: 10px;
 }
@@ -88,10 +117,35 @@ textarea {
   border-color: #f0ad4e;
   border-style: solid;
   border-radius: 4px;
-  margin-top: -10px;
+  margin-top: -15px;
   margin-bottom: 40px;
+}
+
+#comment-form {
+  padding: 16px;
+  background-color: #e2e2e2;
+  border-color: #46b8da;
+  border-style: solid;
+  border-radius: 4px;
+  margin-left: 50px;
+  margin-top: -15px;
+  margin-bottom: 40px;
+}
+
+#cancel-comment-button {
+  margin-left: 10px;
 }
 
 #cancel-edit-button {
   margin-left: 10px;
+}
+
+#comment {
+  padding: 16px;
+  background-color: #f7f7f7;
+  margin-left: 50px;
+  margin-top: -15px;
+  border: 1px solid #e2e2e2;
+  border-left: 5px solid #e2e2e2;
+  margin-bottom: 15px;
 }
