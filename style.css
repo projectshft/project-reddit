@@ -1,0 +1,19 @@
+.inline {
+  display: inline;
+}
+
+.comment {
+  display: none;
+}
+
+.comment-input-row {
+  display: none;
+}
+
+.comment-row {
+  display: none;
+}
+
+.show {
+  display: inline;
+}
