@@ -23,3 +23,12 @@ h1 {
   font-size: 40px;
   margin: 0;
 }
+
+span {
+  color: blue;
+}
+
+span:hover {
+  text-decoration: underline;
+  color: black;
+}
