@@ -24,6 +24,10 @@ h1 {
   margin: 0;
 }
 
+.comments {
+  visibility: hidden;
+}
+
 span {
   color: blue;
 }

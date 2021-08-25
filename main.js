@@ -5,8 +5,10 @@ $('#submit').click(function () {
  
 });
 
-$('#comment').click(function () {
-
+$('#comments').click(function () {
+  var comment = $('#comment').val();
+  var commentName = $('#commentName').val();
+  $('#postContainer').append(comment + ' - Posted By: ' + commentName);
 });
 
 $('.posts').on('click', '#remove', function (e) {
