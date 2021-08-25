@@ -1,0 +1,25 @@
+.container-fluid {
+  text-align: center;
+  width: 500px;
+  margin: auto;
+}
+
+.ReReddit {
+  padding: 2.5px 0;
+  text-align: left;
+}
+
+.input {
+  padding: 2.5px 0;
+  text-align: left;
+}
+
+.button {
+  padding: 10px 0;
+  text-align: left;
+}
+
+h1 {
+  font-size: 40px;
+  margin: 0;
+}
