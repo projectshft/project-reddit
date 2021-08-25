@@ -1,7 +1,10 @@
-$('#submit').click(function () {
+$('#submitPost').click(function () {
   var post = $('#post').val();
   var name = $('#name').val();
-  $('.posts').append("<div id='postContainer'><span id='remove'>Remove</span>" + " " + "<span id='comment'>Comment</span>" +  " " + post + ' - Posted By: ' + name + "</div>");
+  $('.posts').append(
+    "<div id='postContainer'><span id='remove'>Remove</span>" + " " +  "<span id='comment'>Comment</span>" +  " " +
+    post + ' - Posted By: ' + name + 
+    "<div class='comments'><input type='text' id='comment' placeholder='Comment Text'></input><br/><br/><input type='text' id='commentName' placeholder='Your Name'></input><div class='button'><a class='btn btn-primary btn-md' href='#' role='button' id='submitComment'>Submit Comment</a></div></div></div>");
  
 });
 
@@ -17,3 +20,4 @@ $('.posts').on('click', '#remove', function (e) {
   
   $element.remove();
 });
+

@@ -19,13 +19,18 @@
   text-align: left;
 }
 
+.comments {
+  padding: 2.5px 0;
+  text-align: left;
+}
+
 h1 {
   font-size: 40px;
   margin: 0;
 }
 
 .comments {
-  visibility: hidden;
+  visibility: visible;
 }
 
 span {
