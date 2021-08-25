@@ -1,6 +1,6 @@
 .container-fluid {
   text-align: center;
-  width: 500px;
+  width: 800px;
   margin: auto;
 }
 
@@ -23,6 +23,12 @@
   display: none;
   padding: 2.5px 0;
   text-align: left;
+}
+
+.commentContainer {
+  padding: 5px;
+  text-align: center;
+  color: blueviolet;
 }
 
 .show {

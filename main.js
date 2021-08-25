@@ -1,10 +1,10 @@
 $('#submitPost').click(function () {
+  var timeStamp = new Date();
   var post = $('#post').val();
   var name = $('#name').val();
   $('.posts').append(
-    "<div class='post'><span class='remove'>Remove</span>" + " " +  "<span class='commentButton'>Comment</span>" +  " " +
-    post + ' - Posted By: ' + name + "<div class='comments'><div class='commentContainer'></div><input type='text' class='comment' placeholder='Comment Text'></input><br/><br/><input type='text' class='commentName' placeholder='Comment Name'></input><div class='button'><a class='btn btn-primary btn-md submit-comment' href='#' role='button' id='submitComment'>Submit Comment</a></div></div>");
-
+    "<div class='post'><span class='remove'>Remove</span>" + " " +  "<span class='commentButton'>Comments</span>" +  " " +
+    post + ' - Posted By: ' + name + " at: " + timeStamp.toLocaleString() + "<div class='comments'><div class='commentContainer'></div><input type='text' class='comment' placeholder='Comment Text'></input><br/><br/><input type='text' class='commentName' placeholder='Comment Name'></input><div class='button'><a class='btn btn-primary btn-md submit-comment' href='#' role='button' id='submitComment'>Submit Comment</a></div></div>");
 });
 
 $('.posts').on('click', '.remove', function (e) {
@@ -22,9 +22,10 @@ $('.posts').on('click', '.commentButton', function (e){
 })
 
 $('.posts').on('click', '.submit-comment', function (e) {
+  var timeStamp = new Date();
+  var $element = $(e.target);
+  var comment = $element.closest(".post").find(".comment").val();
+  var commentName = $element.closest(".post").find(".commentName").val();
 
-  var comment = $('.comment').val();
-  var commentName = $('.commentName').val();
-
-  $(e.target).closest('.post').find('.commentContainer').append(comment + ' - Posted By: ' + commentName);
+  $element.closest('.post').find('.commentContainer').append(comment + ' - Comment By: ' + commentName + " at: " + timeStamp.toLocaleString() + "<br/>");
 });
