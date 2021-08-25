@@ -2,27 +2,21 @@ $('#submitPost').click(function () {
   var post = $('#post').val();
   var name = $('#name').val();
   $('.posts').append(
-    "<div id='postContainer'><span id='remove'>Remove</span>" + " " +  "<span id='comment'>Comment</span>" +  " " +
-    post + ' - Posted By: ' + name + "</div>");
- 
+    "<div class='post'><span class='remove'>Remove</span>" + " " +  "<span class='comment'>Comment</span>" +  " " +
+    post + ' - Posted By: ' + name + "<div class='comments'><input type='text' id='comment' placeholder='Comment Text'></input><br/><br/><input type='text' id='commentName' placeholder='Comment Name'></input><div class='button'><a class='btn btn-primary btn-md' href='#' role='button' id='submitComment'>Submit Comment</a></div></div>");
+
 });
 
-$('#comment').click(function () {
-  var comment = $('#comment').val();
-  var commentName = $('#commentName').val();
-  $('#postContainer').append("<div class='comments'><input type='text' id='comment' placeholder='Comment Text'></input><br/><br/><input type='text' id='commentName' placeholder='Your Name'></input><div class='button'><a class='btn btn-primary btn-md' href='#' role='button' id='submitComment'>Submit Comment</a></div></div>" + comment + ' - Posted By: ' + commentName);
-});
-
-$('.posts').on('click', '#remove', function (e) {
+$('.posts').on('click', '.remove', function (e) {
   
   var $element = $(e.target);
   
-  $element.remove();
+  $element.closest('.post').remove();
 });
 
-$('.postContainer').on('click' , '#comment', function (f){
+$('.posts').on('click', '.comment', function (e){
   
-  var $element = $(f.target);
+  var $element = $(e.target);
 
+  $element.find('.comments').toggleClass('show');
 })
-

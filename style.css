@@ -20,17 +20,18 @@
 }
 
 .comments {
+  display: none;
   padding: 2.5px 0;
   text-align: left;
+}
+
+.show {
+  display: block;
 }
 
 h1 {
   font-size: 40px;
   margin: 0;
-}
-
-.comments {
-  visibility: visible;
 }
 
 span {
