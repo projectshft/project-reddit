@@ -1,0 +1,50 @@
+.container-fluid {
+  text-align: center;
+  width: 800px;
+  margin: auto;
+}
+
+.ReReddit {
+  padding: 2.5px 0;
+  text-align: left;
+}
+
+.input {
+  padding: 2.5px 0;
+  text-align: left;
+}
+
+.button {
+  padding: 10px 0;
+  text-align: left;
+}
+
+.comments {
+  display: none;
+  padding: 2.5px 0;
+  text-align: left;
+}
+
+.commentContainer {
+  padding: 5px;
+  text-align: center;
+  color: blueviolet;
+}
+
+.show {
+  display: block;
+}
+
+h1 {
+  font-size: 40px;
+  margin: 0;
+}
+
+span {
+  color: blue;
+}
+
+span:hover {
+  text-decoration: underline;
+  color: black;
+}
