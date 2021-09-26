@@ -1,0 +1,151 @@
+html {
+  background-color: #e2e2e2;
+}
+
+body {
+  background-color: #e2e2e2;
+  font-family: "Gotham", "Helvetica Neue", sans-serif;
+  font-size: 16px;
+}
+
+textarea {
+  resize: none;
+}
+
+.container {
+  background-color: #fff;
+  padding: 15px 50px 15px 50px;
+}
+
+.intro-heading {
+  text-align: left;
+  font-family: "Gotham", "Helvetica Neue", sans-serif;
+  font-weight: 700;
+  font-size: 75px;
+  padding-top: 25px;
+}
+
+.row {
+  padding: 0 15px 0 15px;
+}
+
+.form-control {
+  font-size: 16px;
+  padding: 10px 12px;
+  height: auto;
+}
+
+.col-sm-10 {
+  padding: 0px;
+  margin: 0px;
+}
+
+.each-post {
+  border: 1px solid #e2e2e2;
+  border-left: 5px solid #e2e2e2;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 4px;
+}
+
+.btn {
+  font-size: 16px;
+}
+
+.removePost {
+  background-color: white;
+  color: #d9534f;
+  width: 100px;
+  margin-top: 10px;
+}
+
+.editPost {
+  background-color: white;
+  color: #f0ad4e;
+  width: 100px;
+  margin-top: 10px;
+}
+
+.leave-comment-button {
+  margin-top: 10px;
+  color: #46b8da;
+  background-color: white;
+  float: right;
+}
+
+.show-comments-button {
+  margin-top: 10px;
+  color: #46b8da;
+  background-color: white;
+  float: right;
+  display: none;
+}
+
+.hide-comments-button {
+  display: none;
+  color: white;
+  background-color: #46b8da;
+  float: right;
+}
+
+.removeComment {
+  background-color: white;
+  color: #d9534f;
+  width: 100px;
+  margin-top: 10px;
+}
+
+#user-name {
+  width: 50%;
+}
+
+#edited-by {
+  width: 50%;
+}
+
+#post-form {
+  padding: 16px;
+  background-color: #e2e2e2;
+  border-radius: 4px;
+  margin-top: 30px;
+  margin-bottom: 40px;
+}
+
+#edit-form {
+  padding: 16px;
+  background-color: #e2e2e2;
+  border-color: #f0ad4e;
+  border-style: solid;
+  border-radius: 4px;
+  margin-top: -15px;
+  margin-bottom: 40px;
+}
+
+#comment-form {
+  padding: 16px;
+  background-color: #e2e2e2;
+  border-color: #46b8da;
+  border-style: solid;
+  border-radius: 4px;
+  margin-left: 50px;
+  margin-top: -15px;
+  margin-bottom: 40px;
+}
+
+#cancel-comment-button {
+  margin-left: 10px;
+}
+
+#cancel-edit-button {
+  margin-left: 10px;
+}
+
+#comment {
+  padding: 16px;
+  background-color: #f7f7f7;
+  margin-left: 50px;
+  margin-top: -15px;
+  border: 1px solid #e2e2e2;
+  border-left: 5px solid #e2e2e2;
+  margin-bottom: 15px;
+}
