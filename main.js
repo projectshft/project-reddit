@@ -41,9 +41,7 @@ var submitNewPost = () => {
     + `<button id="submit" class="btn btn-primary" data-id = ${id} onclick="submitNewComment(this);">Post</button>`
     + '</form>'
     + '</div>'
-    + '</div'
-    
-    ;
+    + '</div';
 
 
   // Append posts div with newest Post.
@@ -56,7 +54,7 @@ var submitNewPost = () => {
 var getPost = (event) => {
   var dataId = $(event).data();
   return dataId;
-}
+};
 
 var submitNewComment = (event) => {
   // Use helper function to get corresponding post id.
@@ -103,7 +101,7 @@ var submitNewComment = (event) => {
 var resetForm = (id) => {
   $("#comment-text[data-id='" + id + "']").val('');
   $("#comment-author[data-id='" + id + "']").val('');
-}
+};
 
 var toggleComments = (event) => {
   // Use clicked toggle icon to obtain data-id.
@@ -127,7 +125,7 @@ var deletePost = (event) => {
   // Remove the deleted element from the DOM.
   $(".post-section[data-id='" + id + "']").remove();
 
-}
+};
 
 var deleteComment = (event) => {
   // Grab comment id from clicked event.
@@ -148,25 +146,4 @@ var deleteComment = (event) => {
   // Remove the deleted element from the DOM.
   $(".comment-section[comment-id='" + commentId + "']").remove();
 
-
-
-  // var post = posts.find(p => p.id == id);
-  // console.log(post.comments);
-
-  // // How to get comment-id?
-  // console.log(postInfo);
-
-
-
-  // var post = posts.filter(p => p.id == id);
-
-  // Obtain the corresponding post's comments array.
-  // var comments = post[0].comments;
-
-
-  // console.log($(event.target));
-
-
-  // var p = $("[data-id = " + id + "]");
-
-}
+};

@@ -110,10 +110,6 @@ li {
 .comment-section {
   cursor: pointer;
   padding: 1em;
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
-  /* margin-top: 1em; */
 }
 
 #comment-form {
