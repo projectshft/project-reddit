@@ -28,7 +28,7 @@ var submitNewPost = () => {
 
   // Create post structure html.
   var postStructure = 
-    `<div class="post-section" data-id=${id}><li><i class="bi bi-x-circle" data-id = ${id} onclick='deletePost(this)' ></i><strong>${text}</strong> - ${name}</li><i data-id = ${id} onclick='toggleComments(this)' class="bi bi-chat-text-fill" alt="toggle-comments"></i>
+    `<div class="post-section" data-id=${id}><li><i id="delete-post" class="bi bi-x-circle" data-id = ${id} onclick='deletePost(this)' ></i><strong>${text}</strong> - ${name}</li><i id="toggle-comments" data-id = ${id} onclick='toggleComments(this)' class="bi bi-chat-text-fill" alt="toggle-comments"></i>
   `
 
   // Create post comments html.
@@ -72,18 +72,22 @@ var submitNewComment = (event) => {
   // Obtain comment form inputs.
   var comment = $("#comment-text[data-id='" + id + "']").val();
   var author = $("#comment-author[data-id='" + id + "']").val();
+  var commentId = comments.length+1;
 
   // Store comment form inputs into newComment object.
   var newComment = {
     comment: comment,
-    author: author
+    author: author,
+    id: comments.length+1
   };
 
   // Push newComment to comments array.
   comments.push(newComment);
+  
+  
 
   // Create commentStructure containing new comment.
-  var commentStructure = `<li class="comment-section">${comment} - ${author}</li>`
+  var commentStructure = `<li comment-id=${commentId} class="comment-section">${comment} - ${author}<div data-id=${id} comment-id=${commentId} onclick=deleteComment(this)><i id="delete-comment" class="bi bi-x-circle comment"></i></div></li>`
 
   // Find comment section of corresponding post using the id.
   var $commentSection = $(".comments[data-id='" + id + "']")
@@ -123,6 +127,46 @@ var deletePost = (event) => {
   // Remove the deleted element from the DOM.
   $(".post-section[data-id='" + id + "']").remove();
 
+}
 
+var deleteComment = (event) => {
+  // Grab comment id from clicked event.
+  var commentId = event.getAttribute("comment-id");
+
+  // Grab post id from clicked event.
+  var postId = event.getAttribute("data-id");
+
+  // Obtain the post using the postId.
+  var post = posts.find(p => p.id == postId);
+
+  // Obtain the comments for the selected post.
+  var comments = post.comments;
+
+  // Delete the comment with the corresponding commentId.
+  comments.splice(commentId-1, 1);
+
+  // Remove the deleted element from the DOM.
+  $(".comment-section[comment-id='" + commentId + "']").remove();
+
+
+
+  // var post = posts.find(p => p.id == id);
+  // console.log(post.comments);
+
+  // // How to get comment-id?
+  // console.log(postInfo);
+
+
+
+  // var post = posts.filter(p => p.id == id);
+
+  // Obtain the corresponding post's comments array.
+  // var comments = post[0].comments;
+
+
+  // console.log($(event.target));
+
+
+  // var p = $("[data-id = " + id + "]");
 
 }
