@@ -1,0 +1,125 @@
+body {
+  background-color: #fde4cf;
+  font-family: "Fugaz One", cursive;
+}
+
+.page-header {
+  margin: 2em auto;
+  text-align: center;
+}
+
+#postForm {
+  margin: 0 auto;
+  width: 50%;
+  text-align: center;
+}
+
+.post-section {
+  border-radius: 1em;
+  background-color: #f1c0e8;
+  color: black;
+  text-align: center;
+  margin: 3em auto;
+  width: 80%;
+  padding: 1em;
+}
+
+#postForm input,
+textarea {
+  margin: 2em;
+  padding: 1em;
+  resize: none;
+}
+
+#submit {
+  margin: 0 auto;
+  text-align: center;
+  background-color: #cfbaf0;
+  border: none;
+}
+
+li {
+  list-style-type: none;
+  display: block;
+}
+
+#commentInput {
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
+.comment {
+  color: purple;
+}
+
+.posts {
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin: auto;
+}
+
+.post {
+  border-radius: 0.5em;
+  border: 1px solid blue;
+  padding: 2px;
+  margin: 1em auto;
+  width: 50%;
+  display: block;
+}
+
+.postText {
+  text-align: center;
+  margin: auto;
+}
+
+.bi-chat-text-fill {
+  font-size: 2em;
+  color: green;
+}
+
+.bi-x-circle {
+  font-size: 2em;
+  color: red;
+}
+
+#delete-post {
+  position: relative;
+  left: 400px;
+  margin-top: 0.5em;
+}
+
+#delete-comment {
+  font-size: 1em;
+  position: relative !important;
+  left: 400px;
+  color: black;
+}
+
+#toggle-comments {
+  color: #b9fbc0;
+}
+
+.show-comments {
+  display: none;
+}
+
+.comment-section {
+  cursor: pointer;
+  padding: 1em;
+}
+
+#comment-form {
+  margin: 1em 1em;
+}
+
+#comment-text {
+  margin: 0 1em;
+}
+
+#comment-author {
+  margin: 0 1em;
+}
