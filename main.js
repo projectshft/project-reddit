@@ -1,102 +1,128 @@
-var postsAndCommentsArray = [
-  {
-    originalPost: 'i enjoy cherries',
-    author: 'nina',
-    comments: []
-  }
-]
+var posts = [];
+var currId = 0;
 
-var loadPosts = {
- 
-  allPosts: function() {
-    // i think this function if what's messing it up. it's dependent on the length of the array, and i think my setting of the iterator variable is not helping..... how can i do this better 😣
-    var $posts = $('.posts');
-
-    if (postsAndCommentsArray.length == 1) {
-      $posts.append('<div data-id="0"><a data-id="0" class="remove">remove </a><a class="comments" data-id="0"> comments</a><li data-id="0">' + postsAndCommentsArray[0].originalPost + ' -  Posted by: ' + postsAndCommentsArray[0].author + '</li></div>');
-      this.attachComments();
-      bindEvents.viewComments();
-    } else {
-      // this iterator qurl right here.... god
-      for (let i = (postsAndCommentsArray.length-1); i < postsAndCommentsArray.length; i++) {
-        $posts.append('<div data-id="' + i + '"><a data-id="' + i + '"class="remove"> remove </a><a class="comments" data-id="' + i + '"> comments</a><li data-id="' + i + '">' + postsAndCommentsArray[i].originalPost + ' -  Posted by: ' + postsAndCommentsArray[i].author + '</li>');
-        // this.attachComments();
-        // bindEvents.viewComments();
-
-        
-
-      }
-    }
-    // this.attachComments();
-    // bindEvents.viewComments();
-    bindEvents.removePosts();
-  },
-
-    
-    
-  
-  attachComments: function() {
-    
-    var i = postsAndCommentsArray.length - 1;
-    var formTemplate = '<form data-id="' + i + '" id="commentInput" style="margin-top: 30px" onsubmit="event.preventDefault();"><div class="form-group"><textarea id="commentMessage" type="text"class="form-control"placeholder="comment text"></textarea><div class="form-group"><input id="commentName" type="text"class="form-control"placeholder="your name"></input></div><button id="submitComment" class="btn btn-primary">submit comment</button></form>';
-
-    var $postCommentDiv = $('div[data-id="' + i + '"');
-    $postCommentDiv.append(formTemplate);
-    // debugger;
-    bindEvents.viewComments();
-  
-  }
+var Post = function(text, author, id, comments) {
+  this.text = text;
+  this.author = author;
+  this.id = id;
+  this.comments = comments;
 };
 
-var bindEvents = {
+// On submit, create new Post with user input.
+var submitNewPost = () => {
+  var name = $("#name").val();
+  var text = $("#text").val();
+  var id = currId;
+  var comments = [];
+  currId++;
 
-  removePosts: function () {
-    $('.remove').on('click', function (e) {
-      var dataId = $(e.target).data('id'); 
-      $('div[data-id="' + dataId + '"]').remove();
-    }); 
-  },
+  var newPost = new Post(text, name, id, comments);
 
-  viewComments: function () {
-    $('.comments').on('click', function (e) {
-    var dataId = $(e.target).data('id');
-    console.log('clicked the comment box of ' + dataId + '!');
+  // Push newPost to posts array.
+  posts.push(newPost);
 
-    // grab the comment form of the div with our dataId
-    var $currentComments = $('form[data-id="' + dataId + '"');    
-    console.log('this is ' + dataId);
-    // if form does not contain 'show' class, toggle class
-    $currentComments.toggleClass('show');
-    });
-  }
+  // Reset inputs.
+  $("#name").val('');
+  $("#text").val('');
+
+
+  // Create post structure html.
+  var postStructure = 
+    `<div class="post-section" data-id=${id}><li><i class="bi bi-x-circle" data-id = ${id} onclick='deletePost(this)' ></i><strong>${text}</strong> - ${name}</li><i data-id = ${id} onclick='toggleComments(this)' class="bi bi-chat-text-fill" alt="toggle-comments"></i>
+  `
+
+  // Create post comments html.
+  var postComments = 
+  `<div data-id = ${id} class="comment-section show-comments"><h6><strong>Comments:</strong></h4>`
+    + `<div data-id = ${id} class="comments"></div>`
+    + '<form id="comment-form-' + id + '" onsubmit="event.preventDefault();">'
+    + `<input type="text" id="comment-text" data-id = ${id} placeholder="comment" >`
+    + `<input type="text" id="comment-author" data-id = ${id} placeholder="comment author">`
+    + `<button id="submit" class="btn btn-primary" data-id = ${id} onclick="submitNewComment(this);">Post</button>`
+    + '</form>'
+    + '</div>'
+    + '</div'
+    
+    ;
+
+
+  // Append posts div with newest Post.
+  $('.posts').append(
+    postStructure + postComments
+  );
+};
+
+// Helper function to get id of post
+var getPost = (event) => {
+  var dataId = $(event).data();
+  return dataId;
 }
 
+var submitNewComment = (event) => {
+  // Use helper function to get corresponding post id.
+  var postId = getPost(event);
+  var id = postId.id;
 
-var submitPost = function() {
-  $('#submit').on('click', function () {
-    var $userMessage = $('#message').val();
-    var $userName = $('#name').val();      
-    
-    postsAndCommentsArray.push({originalPost: $userMessage, author: $userName});
-    console.log(postsAndCommentsArray.length);
-    $('#postForm')[0].reset();
-    loadPosts.allPosts();
-    loadPosts.attachComments();
+  // Find post with same id in posts array.
+  var post = posts.filter(p => p.id == id);
 
+  // Obtain the corresponding post's comments array.
+  var comments = post[0].comments;
 
-  });
+  // Obtain comment form inputs.
+  var comment = $("#comment-text[data-id='" + id + "']").val();
+  var author = $("#comment-author[data-id='" + id + "']").val();
+
+  // Store comment form inputs into newComment object.
+  var newComment = {
+    comment: comment,
+    author: author
+  };
+
+  // Push newComment to comments array.
+  comments.push(newComment);
+
+  // Create commentStructure containing new comment.
+  var commentStructure = `<li class="comment-section">${comment} - ${author}</li>`
+
+  // Find comment section of corresponding post using the id.
+  var $commentSection = $(".comments[data-id='" + id + "']")
+
+  // Append comment section with commentStructure containing new comment.
+  $commentSection.append(commentStructure);
+
+  // Reset form.
+  resetForm(id);
 };
 
-loadPosts.allPosts();
-submitPost();
- bindEvents.viewComments();
-// loadPosts.attachComments();
+// Reset comment form inputs.
+var resetForm = (id) => {
+  $("#comment-text[data-id='" + id + "']").val('');
+  $("#comment-author[data-id='" + id + "']").val('');
+}
+
+var toggleComments = (event) => {
+  // Use clicked toggle icon to obtain data-id.
+  var postId = getPost(event);
+  var id = postId.id;
+
+  // Find div with data-id = post and toggleClass of 'show-comments'
+  var $commentSection = $(".comment-section[data-id='" + id + "']")
+  $commentSection.toggleClass('show-comments');
+
+};
+
+var deletePost = (event) => {
+  // Use helper function to get corresponding post id.
+  var postId = getPost(event);
+  var id = postId.id;
+
+  // Remove post from posts array using splice, which will alter the original array
+  posts.splice(id, 1);
+
+  // Remove the deleted element from the DOM.
+  $(".post-section[data-id='" + id + "']").remove();
 
 
 
-
-
-
-
-
-
+}
