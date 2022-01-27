@@ -1,0 +1,67 @@
+<html>
+  <head>
+    <title>ReReddit</title>
+    <link href="https://file.myfontastic.com/YHj87qYW6TJu8pdgdEsPUU/icons.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+      integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>ReReddit</h1>
+    </header>
+    <main>
+      
+      <div class="comment-box">
+        <h2 class="comment-heading">Comments</h2>
+        <hr class="comment-separator">
+        <div class="post-comment">
+          <p class="selected-post"></p>
+        </div>
+        <div class="comments"></div>
+        <div class="comment-form"></div>
+      </div>
+      <div class="container border-top w-75">
+        <div class="post-container"></div>
+        <form class="mt-5" onsubmit="event.preventDefault()"">
+          <div class="form-group">
+            <textarea
+              class="form-control form-control-lg"
+              id="post-input"
+              placeholder="Post Here"
+              rows="3"
+            ></textarea>
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              class="form-control form-control-lg"
+              id="name-input"
+              placeholder="Your Name"
+            />
+          </div>
+          <div class="submit-btn-div">
+            <button type="submit" class="btn btn-primary btn-lg submit-btn submit-btn-main">
+              Submit Post
+            </button>
+          </div>
+        </form>
+      </div>
+      
+    </main>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
