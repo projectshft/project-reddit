@@ -18,17 +18,28 @@
   </head>
   <body>
     <header>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+       
+        <!-- <div class="collapse navbar-collapse" id="navbarNav">ml-auto class  -->
+          <a class="navbar-brand" href="#">
+            <img src="./images/logo.png" width="50" height="50" class="d-inline-block align-top" overflow="hidden" alt="ReReddit Logo">
+          </a>
+         
+          <ul class="navbar-nav justify-content-end ">
+            <button type="submit" class="btn btn-lg return-btn">Return to Posts</button>
+            </ul>
+          </nav>
       <h1>ReReddit</h1>
     </header>
     <main>
-      
+     
       <div class="comment-box">
         <h2 class="comment-heading">Comments</h2>
         <hr class="comment-separator">
         <div class="post-comment">
           <p class="selected-post"></p>
         </div>
-        <div class="comments"></div>
+        <div class="comments"><em class="no-comment-text">There are no comments on this post yet.</em></div>
         <div class="comment-form"></div>
       </div>
       <div class="container border-top w-75">
@@ -56,6 +67,7 @@
             </button>
           </div>
         </form>
+        <p class="error-msg">Hey, you can do better than an empty post. C'mon, tell us what you think!</p>
       </div>
       
     </main>
