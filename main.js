@@ -20,8 +20,9 @@ var createNewPost = function(username, post) {
 
   $('.posts').append($newPost);
 
-  // bind comments link
+  // bind comments and remove link
   $newPost.find('.show-comments').on('click', onCommentClick);
+  $newPost.find('.remove-comments').on('click', onRemoveClick);
   createCommentSection($newPost);
 };
 
@@ -79,6 +80,13 @@ var onCommentClick = function() {
   } else {
     $currCommentSection.hide();
   }
+}
+
+var onRemoveClick = function() {
+  // this is a span
+  // use closest and then find?
+  var $currPost = $(this).closest('.post');
+  $currPost.remove();
 }
 
 var onRemoveCommentClick = function() {
