@@ -37,7 +37,7 @@ $(submitBtn).on("click", function (e) {
   if (postInputVal !== "") {
     var post = $("<p></p>").html(
       `<div><span class="icon-trash"></span><span class="icon-chat"></span>
-      <span class="post-input-val">${postInputVal}</span> - Posted By: <span class="name-input-val">${nameInputVal}</span></div>`
+      <span class="post-input-val">${postInputVal}</span> - Posted By: <span class="name-input-val">${nameInputVal}</span><div class="like-div"><span class="icon-like"></span></div><p class="like-count">0</p><div class="dislike-div"><span class="icon-dislike"></span></div><p class="dislike-count">0</p></div>`
     );
 
     ///Adding new post with a unique ID so we can locate it later
@@ -51,6 +51,8 @@ $(submitBtn).on("click", function (e) {
       name: nameInputVal,
       post: postInputVal,
       comments: [],
+      likes: 0,
+      dislikes: 0,
     };
 
     allPosts.push(postData);
@@ -101,6 +103,9 @@ $(".post-container").click(function (e) {
 
     $(".selected-post").html(clonePost);
     $(".selected-post .separator-line").remove();
+    //I am greying out the like/dislikes here as I'm not making them functional on this page
+    $(".selected-post .icon-like").css("color", "lightgrey");
+    $(".selected-post .icon-dislike").css("color", "lightgrey");
 
     //Showing post comments that had been put before (if they exists) OR the general "no-comments-yet" text
     var postId = $(clonePost).attr("id");
@@ -110,10 +115,13 @@ $(".post-container").click(function (e) {
       for (var i = 0; i < allPosts[arrayIndex].comments.length; i++) {
         var name = allPosts[arrayIndex].comments[i].name;
         var post = allPosts[arrayIndex].comments[i].post;
+        var likes = allPosts[arrayIndex].comments[i].likes;
+        var dislikes = allPosts[arrayIndex].comments[i].dislikes;
         var comment = $("<p></p>").html(
-          `<div"><span class="icon-trash"></span><span class="post-input-val">${post}</span> - Posted By: <span class="name-input-val">${name}</span></div>`
+          `<div"><span class="icon-trash"></span><span class="post-input-val">${post}</span> - Posted By: <span class="name-input-val">${name}</span><div class="like-div"><span class="icon-like"></span></div><p class="like-count">${likes}</p><div class="dislike-div"><span class="icon-dislike"></span></div><p class="dislike-count">${dislikes}</p></div>`
         );
         $(".comments").append(comment);
+        $(comment).attr("id", allPosts[arrayIndex].comments[i].id);
       }
     } else if (allPosts[arrayIndex].comments.length === 0) {
       $(".comments").html(
@@ -134,7 +142,7 @@ $(commentForm).on("click", function (e) {
     $(".no-comment-text").css("display", "none");
 
     var comment = $("<p></p>").html(
-      `<div"><span class="icon-trash"></span><span class="post-input-val">${postInputVal}</span> - Posted By: <span class="name-input-val">${nameInputVal}</span></div>`
+      `<div"><span class="icon-trash"></span><div class="post-input"><span class="post-input-val">${postInputVal}</span></div> - Posted By: <span class="name-input-val">${nameInputVal}</span><div class="like-div"><span class="icon-like"></span></div><p class="like-count">0</p><div class="dislike-div"><span class="icon-dislike"></span></div><p class="dislike-count">0</p></div>`
     );
 
     var id = "id" + Math.random().toString(16).slice(2);
@@ -147,6 +155,8 @@ $(commentForm).on("click", function (e) {
       id,
       name: nameInputVal,
       post: postInputVal,
+      likes: 0,
+      dislikes: 0,
     };
     var postId = $(".active").attr("id");
     var arrayIndex = allPosts.findIndex((post) => post.id === postId);
@@ -204,4 +214,70 @@ $(".return-btn").click(function () {
   $(".comments").html("");
 
   $(".post").css("display", "block");
+});
+
+//////////////////////////////////////////////
+//EXTRA
+//////////////////////////////////////////
+//Implemented a like/dislikes button on the posts/comments
+//Event listeners for those below - changing fields in the global array of post objects and updating the DOM
+//First for the main post page (like/dislike)
+$(".post-container").on("click", function (e) {
+  if ($(e.target).hasClass("like-div") || $(e.target).hasClass("icon-like")) {
+    var target = $(e.target).closest("p.post");
+    var targetID = $(target).attr("id");
+    var arrayIndex = allPosts.findIndex((post) => post.id === targetID);
+    allPosts[arrayIndex].likes++;
+    $(`#${targetID} .like-count`).html(allPosts[arrayIndex].likes);
+  }
+});
+
+//AND a dislike button
+$(".post-container").on("click", function (e) {
+  if (
+    $(e.target).hasClass("dislike-div") ||
+    $(e.target).hasClass("icon-dislike")
+  ) {
+    var target = $(e.target).closest("p.post");
+    var targetID = $(target).attr("id");
+    var arrayIndex = allPosts.findIndex((post) => post.id === targetID);
+    allPosts[arrayIndex].dislikes++;
+    $(`#${targetID} .dislike-count`).html(allPosts[arrayIndex].dislikes);
+  }
+});
+
+//Now for comment updates for likes/dislikes
+$(".comments").on("click", function (e) {
+  if ($(e.target).hasClass("like-div") || $(e.target).hasClass("icon-like")) {
+    var targetPcomment = $(e.target).closest("p");
+    var targetID = $(targetPcomment).attr("id");
+    var targetPostID = $(".post-comment .selected-post .post").attr("id");
+    var arrayIndex = allPosts.findIndex((post) => post.id === targetPostID);
+    var commentIndex = allPosts[arrayIndex].comments.findIndex(
+      (post) => post.id === targetID
+    );
+    allPosts[arrayIndex].comments[commentIndex].likes++;
+    $(`#${targetID} .like-count`).html(
+      allPosts[arrayIndex].comments[commentIndex].likes
+    );
+  }
+});
+
+$(".comments").on("click", function (e) {
+  if (
+    $(e.target).hasClass("dislike-div") ||
+    $(e.target).hasClass("icon-dislike")
+  ) {
+    var targetPcomment = $(e.target).closest("p");
+    var targetID = $(targetPcomment).attr("id");
+    var targetPostID = $(".post-comment .selected-post .post").attr("id");
+    var arrayIndex = allPosts.findIndex((post) => post.id === targetPostID);
+    var commentIndex = allPosts[arrayIndex].comments.findIndex(
+      (post) => post.id === targetID
+    );
+    allPosts[arrayIndex].comments[commentIndex].dislikes++;
+    $(`#${targetID} .dislike-count`).html(
+      allPosts[arrayIndex].comments[commentIndex].dislikes
+    );
+  }
 });

@@ -109,6 +109,24 @@ input[type="text"] {
   font-size: 2.5rem;
 }
 
+.edit-div,
+.post-input,
+.like-div,
+.like-count,
+.dislike-div,
+.dislike-count {
+  display: inline-block;
+}
+
+.icon-like,
+.icon-dislike {
+  padding: 0 0.5rem 0 1.5rem;
+}
+
+.icon-dislike {
+  padding-left: 2rem;
+}
+
 .posts,
 .selected-post {
   padding: 2rem;
@@ -134,7 +152,7 @@ input[type="text"] {
 }
 
 .btn-primary {
-  background-color: rgb(51, 142, 228);
+  background-color: #338ee4;
   border: none;
 }
 
@@ -165,8 +183,9 @@ input[type="text"] {
 
 .comments .no-comment-text {
   text-align: center;
-  /* margin-left: -20% auto; */
   padding: 0;
+  display: inline-block;
+  margin-left: 7%;
   font-size: 1.6rem;
   color: rgb(168, 165, 165);
 }
