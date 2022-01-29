@@ -30,10 +30,10 @@ var createCommentSection = function($post) {
     '<div class="comments"> </div>' +
     '<form class="comments-form">' +
     '<div class="form-group">' +
-    '<input type="text" class="form-control" id="comment-text" placeholder="Comment Text"/>' + 
+    '<input type="text" class="comment-text form-control" placeholder="Comment Text"/>' + 
     '</div>' +
     '<div class="form-group">' +
-    '<input type="text" class="form-control" id="username-comment" placeholder="Your Name"/>' + 
+    '<input type="text" class="username-comment form-control" placeholder="Your Name"/>' + 
     '</div>' +
     '<button type="button" class="submit-comment btn btn-primary">Submit Comment</button>' +
     '</form>' + 
@@ -61,8 +61,9 @@ var createNewComment = function(username, comment, $commentSection) {
 };
 
 var onSubmitComment = function() {
-  var username = $('#username-comment').val();
-  var comment = $('#comment-text').val();
+  
+  var username = $(this).closest('.comments-form').find('.comment-text').val();
+  var comment = $(this).closest('.comments-form').find('.username-comment').val();
   var $currCommentSection = $(this).closest('.comments-section');
 
   createNewComment(username, comment, $currCommentSection);
@@ -82,7 +83,6 @@ var onCommentClick = function() {
 
 var onRemoveCommentClick = function() {
   // this is remove span
-  // remove the spans comment div  
   $(this).closest('.comment').remove();
 }
 
