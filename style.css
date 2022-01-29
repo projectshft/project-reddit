@@ -2,7 +2,15 @@
   margin: 5px 0 5px 0;
 }
 
-#post-message,
-#post-author {
+.post-message,
+.post-author,
+.comment-message,
+.comment-author {
   width: 100%;
+}
+
+.hide_ {
+}
+
+.comments-1 {
 }

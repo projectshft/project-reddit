@@ -22,26 +22,76 @@
       </div>
     </header>
     <main>
-      <section>
+      <section class="post-area">
         <div class="container">
-          <div class="post-container row">
+          <div class="row">
             <div class="posts col-sm-8 col-offset-6">
-              <p>
-                Beep Boop Bleepity Blork -
-                <span class="author text">Posted By: R2D2</span>
-              </p>
+              <div class="post-1">
+                <p>
+                  Beep Boop Bleepity Blork -
+                  <span>Posted By: R2D2</span>
+                </p>
+                <button class="btn btn-primary">Comments</button>
+                <button class="btn btn-danger">Delete</button>
+                <hr />
+              </div>
+
+              <div class="hide_">
+                <div class="comments-1">
+                  <p>
+                    R2! Language! -
+                    <span>Posted By: C3PO</span>
+                  </p>
+                  <button class="btn btn-danger">Delete</button>
+                  <hr />
+                </div>
+                <div class="comments-input-1">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-sm-7 col-offset-6">
+                        <textarea
+                          name="message"
+                          class="comment-message"
+                          placeholder="Comment Text"
+                        ></textarea>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="container">
+                    <div class="row post-author-row">
+                      <div class="col-sm-7 col-offset-6">
+                        <input
+                          type="text"
+                          name="author"
+                          class="comment-author"
+                          placeholder="Your Name"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-sm-7 col-offset-6">
+                        <button class="btn btn-primary comment-button">
+                          Submit Comment
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <div class="submit-post-area">
+      <section class="post-input">
         <div class="container">
-          <div class="row post-message-row">
+          <div class="row">
             <div class="col-sm-8 col-offset-6">
               <textarea
                 name="message"
-                id="post-message"
+                class="post-message"
                 placeholder="Post Text"
               ></textarea>
             </div>
@@ -49,12 +99,12 @@
         </div>
 
         <div class="container">
-          <div class="row post-author-row">
+          <div class="row">
             <div class="col-sm-8 col-offset-6">
               <input
                 type="text"
                 name="author"
-                id="post-author"
+                class="post-author"
                 placeholder="Your Name"
               />
             </div>
@@ -62,15 +112,15 @@
         </div>
 
         <div class="container">
-          <div class="row post-submit-row">
+          <div class="row">
             <div class="col-sm-8 col-offset-6">
-              <button class="btn btn-primary" id="post-button">
+              <button class="btn btn-primary" class="post-button">
                 Submit Post
               </button>
             </div>
           </div>
         </div>
-      </div>
+      </section>
     </main>
     <script
       src="https://code.jquery.com/jquery-3.6.0.js"

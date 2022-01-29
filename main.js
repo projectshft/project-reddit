@@ -1,6 +1,6 @@
-var $postSubButton = $('#post-button');
-var $authorInput = $('#post-author');
-var $messageInput = $('#post-message');
+var $postSubButton = $('.post-button');
+var $authorInput = $('.post-author');
+var $messageInput = $('.post-message');
 var $posts = $('.posts');
 
 
