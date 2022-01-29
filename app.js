@@ -281,3 +281,12 @@ $(".comments").on("click", function (e) {
     );
   }
 });
+
+//LQUESTION- I wanted to do something like this below to clean up the repetitive code (for accessing clicked-on post and comments) but it didn't work. The target parameter here was a variable representing e.target in the function in which it was called. FOR NOW, LEAVING as above but will refactor once I figure out how to do this better.
+// Didn't work so still looking to further understand how to make functions that use. Input on this would be appreciated.
+
+// function commentPTarget(target) {
+//   var targetPcomment = $(target).closest("p");
+//   var targetID = $(targetPcomment).attr("id");
+//   return targetID;
+// }
