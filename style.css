@@ -1,0 +1,8 @@
+.row {
+  margin: 5px 0 5px 0;
+}
+
+#post-message,
+#post-author {
+  width: 100%;
+}
