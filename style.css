@@ -1,0 +1,8 @@
+.newPost {
+  border-bottom: 1px solid #eee;
+}
+
+.comment {
+  margin-left: 5%;
+  background-color: blue;
+}
