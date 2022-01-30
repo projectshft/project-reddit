@@ -1,26 +1,40 @@
-const $submitBtn = $('#submit');
+const $submitPostBtn = $('#submit-post');
 const $postsDiv = $('.posts');
 const $nameInput = $('#name');
 const $messageInput = $('#message');
 
-const submitFunc = () => {
+const submitPost = () => {
   const nameVal = $nameInput.val();
   const messageVal = $messageInput.val();
 
-  // checks that input fields are not blank, creates post otherwise
+  // checks that input fields are not blank
   if (!nameVal || !messageVal) {
     alert('Input fields cannot be blank.');
-  } else {
-    const newPost = createPost(nameVal, messageVal);
-    $postsDiv.append(newPost);
-
-    const $posts = $('post');
-    $posts.on('click', '.delete-btn', e => $(e.target).parent().remove());
-
-    // clears input fields on submit
-    $nameInput.val('');
-    $messageInput.val('');
+    return;
   }
+  
+  // creates post and displays it
+  const newPost = `<post>${createPost(nameVal, messageVal)}</post>`
+  $postsDiv.append(newPost);
+
+  // clears input fields on submit
+  $nameInput.val('');
+  $messageInput.val('');
+  
+  // delete post functionality
+  const $post = $('post');
+  $post.on('click', '.delete-btn', e => $(e.target).parent().remove());
+
+  // comment functionality
+  $post.on('click', '.comment-btn', () => $post.append(commentFormHtml));
+  // const commentNameVal = $post.find('.name').val();
+  // const commentMessageVal = null;
+  // const newComment = `<comment>${createPost(commentNameVal, commentMessageVal)}</comment>`;
+  // const $submitCommentBtn = $('#submit-comment');
+  // $submitCommentBtn.on('click', () => $post.append(newComment));
+  
+  // edit functionality
+  // $post.on('click', '.edit-btn', () => $post.append(editFormHtml));
 }
 
 const createPost = (nameVal, messageVal) => {
@@ -34,7 +48,7 @@ const createPost = (nameVal, messageVal) => {
   const deleteBtn = buttonPrefix + ' delete-btn">Delete</button>';
 
   // returns a string that creates the entire post
-  return '<post>' + messageP + nameP + commentBtn + editBtn + deleteBtn + '<hr></post>';
+  return messageP + nameP + commentBtn + editBtn + deleteBtn + '<hr>';
 }
 
-$submitBtn.on('click', submitFunc);
+$submitPostBtn.on('click', submitPost);
