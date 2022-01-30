@@ -2,6 +2,7 @@ const $submitPostBtn = $('#submit-post');
 const $postsDiv = $('.posts');
 const $nameInput = $('#name');
 const $messageInput = $('#message');
+const $postForm = $('.post-form');
 
 function submitPost() {
   const nameVal = $nameInput.val();
@@ -18,25 +19,15 @@ function submitPost() {
   $postsDiv.append(newPost);
 
   // clears input fields on submit
-  $nameInput.val('');
-  $messageInput.val('');
+  $postForm.trigger('reset');
 
   // delete post functionality
   const $post = $('post');
   $post.on('click', '.delete-btn', e => $(e.target).parent().remove());
 
   // comment functionality
-  $('.comment-btn').on('click', function(e) {
-    $(e.target).parent().append(commentFormHtml);
-  });``
-
-  // const commentNameVal = $post.find('.name').val();
-  // const commentMessageVal = null;
-  // const newComment = `<comment>${createPost(commentNameVal, commentMessageVal)}</comment>`;
-  // const $submitCommentBtn = $('#submit-comment');
-  // $submitCommentBtn.on('click', () => $post.append(newComment));
-  // edit functionality
-  // $post.on('click', '.edit-btn', () => $post.append(editFormHtml));
+  // const $commentForm = $('.comment-form');
+  $post.on('click', '.comment-btn', () => $post.find('.comment-form').toggle());
 }
 
 const createPost = (nameVal, messageVal) => {
@@ -50,7 +41,7 @@ const createPost = (nameVal, messageVal) => {
   const deleteBtn = buttonPrefix + ' delete-btn">Delete</button>';
 
   // returns a string that creates the entire post
-  return messageP + nameP + commentBtn + editBtn + deleteBtn + '<hr>';
+  return messageP + nameP + commentBtn + editBtn + deleteBtn + '<hr>' + commentFormHtml;
 }
 
 $submitPostBtn.on('click', submitPost);

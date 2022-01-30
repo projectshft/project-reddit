@@ -1,5 +1,5 @@
 const commentFormHtml = `
-  <form class="comment-edit-form" onsubmit="event.preventDefault();">
+  <form class="comment-form" onsubmit="event.preventDefault();">
     <h4>Add a comment</h4>
 
     <div class="form-group">
@@ -18,7 +18,7 @@ const commentFormHtml = `
 </form>`;
 
 const editFormHtml = `
-  <form class="comment-edit-form" onsubmit="event.preventDefault();">
+  <form class="edit-form" onsubmit="event.preventDefault();">
     <h4>Edit post</h4>
 
     <div class="form-group">

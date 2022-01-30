@@ -6,7 +6,14 @@
   margin-top: 30px;
 }
 
-.comment-edit-form {
+.comment-form {
   margin-top: 15px;
   padding-left: 30px;
+  display: none;
+}
+
+.edit-form {
+  margin-top: 15px;
+  padding-left: 30px;
+  display: none;
 }
