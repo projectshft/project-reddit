@@ -3,7 +3,7 @@ const $postsDiv = $('.posts');
 const $nameInput = $('#name');
 const $messageInput = $('#message');
 
-const submitPost = () => {
+function submitPost() {
   const nameVal = $nameInput.val();
   const messageVal = $messageInput.val();
 
@@ -12,27 +12,29 @@ const submitPost = () => {
     alert('Input fields cannot be blank.');
     return;
   }
-  
+
   // creates post and displays it
-  const newPost = `<post>${createPost(nameVal, messageVal)}</post>`
+  const newPost = `<post>${createPost(nameVal, messageVal)}</post>`;
   $postsDiv.append(newPost);
 
   // clears input fields on submit
   $nameInput.val('');
   $messageInput.val('');
-  
+
   // delete post functionality
   const $post = $('post');
   $post.on('click', '.delete-btn', e => $(e.target).parent().remove());
 
   // comment functionality
-  $post.on('click', '.comment-btn', () => $post.append(commentFormHtml));
+  $('.comment-btn').on('click', function(e) {
+    $(e.target).parent().append(commentFormHtml);
+  });``
+
   // const commentNameVal = $post.find('.name').val();
   // const commentMessageVal = null;
   // const newComment = `<comment>${createPost(commentNameVal, commentMessageVal)}</comment>`;
   // const $submitCommentBtn = $('#submit-comment');
   // $submitCommentBtn.on('click', () => $post.append(newComment));
-  
   // edit functionality
   // $post.on('click', '.edit-btn', () => $post.append(editFormHtml));
 }

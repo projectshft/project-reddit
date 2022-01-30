@@ -1,5 +1,5 @@
 const commentFormHtml = `
-  <form id="comment-form" class="comment-edit-form" onsubmit="event.preventDefault();">
+  <form class="comment-edit-form" onsubmit="event.preventDefault();">
     <h4>Add a comment</h4>
 
     <div class="form-group">
