@@ -12,8 +12,11 @@
   padding-left: 30px;
 }
 
-.edit-form {
+/* .edit-form {
   margin-top: 15px;
   padding-left: 30px;
-  display: none;
+} */
+
+.comment-style {
+  font-size: 92%;
 }
