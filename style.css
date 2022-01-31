@@ -11,3 +11,8 @@
 .comment-button {
   margin-bottom: 10px;
 }
+
+.remove {
+  font-size: smaller;
+  color: red;
+}
