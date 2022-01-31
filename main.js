@@ -4,7 +4,7 @@ var $messageInput = $('.post-message');
 var $posts = $('.posts');
 var numOfPosts = 0;
 
-var submitCommentListener = function (postNumber, $comments) {
+var makeSubmitCommentListener = function (postNumber, $comments) {
   var numOfComments = 0;
   var $button = $('.comment-button-' + postNumber);
 
@@ -55,6 +55,6 @@ $postSubButton.on('click', function (event) {
   $removePostButton.on('click', function () {
     postContent.remove();
   });
-  submitCommentListener(numOfPosts, $('.comments-' + numOfPosts));
+  makeSubmitCommentListener(numOfPosts, $('.comments-' + numOfPosts));
 });
 
