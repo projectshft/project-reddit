@@ -1,0 +1,68 @@
+* {
+  font-family: sans-serif;
+}
+
+.bubble {
+  width: 37%;
+  height: 2000px;
+  float: left;
+}
+
+input {
+  width: 500px;
+}
+
+.hidden {
+  display: none;
+}
+
+textarea {
+  margin-top: 5px;
+  height: 30px;
+  width: 500px;
+}
+
+h1 {
+  margin: 10px;
+}
+
+button {
+  background-color: rgba(10, 88, 255, 0.925);
+  border-color: rgb(20, 94, 255);
+  color: white;
+  border-radius: 5px;
+  margin: 5px 0px;
+}
+
+.remove:hover {
+  color: rgba(206, 22, 206, 0.527);
+}
+
+.remove1:hover {
+  color: rgba(206, 22, 206, 0.527);
+}
+
+.comments1:hover {
+  color: rgba(206, 22, 206, 0.527);
+}
+
+.plzWork {
+  /* width: auto;
+  height: 24px;
+  display: inline-block; */
+}
+
+.posts {
+}
+
+.remove {
+  color: rgba(10, 88, 255, 0.925);
+}
+
+.remove1 {
+  color: rgba(10, 88, 255, 0.925);
+}
+
+.comments1 {
+  color: rgba(10, 88, 255, 0.925);
+}
