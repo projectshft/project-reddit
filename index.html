@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link
+      href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="comment-box">
+      <h2 class="comment-heading">Comments</h2>
+      <hr class="comment-separator" />
+      <div class="comments"></div>
+    </div>
+    <div class="container border-top w-75">
+      <div class="post-container"></div>
+      <form id="input-form" class="mt-5" onsubmit="event.preventDefault()">
+        <div class="form-group">
+          <textarea
+            class="form-control form-control-lg"
+            id="message"
+            placeholder="Message"
+            rows="3"
+          ></textarea>
+        </div>
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control form-control-lg"
+            id="name"
+            placeholder="Name"
+          />
+        </div>
+        <div class="submit-btn-div">
+          <button type="submit" class="submit-btn">Submit Post</button>
+        </div>
+      </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
