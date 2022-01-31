@@ -1,5 +1,6 @@
 .new-post {
   border-bottom: 1px solid #eee;
+  margin-bottom: 10px;
 }
 
 .comment {
@@ -15,4 +16,9 @@
 .remove {
   font-size: smaller;
   color: red;
+}
+
+.display-toggle {
+  font-size: small;
+  color: grey;
 }
