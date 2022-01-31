@@ -4,26 +4,29 @@ var $commentSubmitButton = $('#submit-comment');
 
 
 var onSubmitPost = function() {
-  var username = $('#username-post').val();
-  var postContent = $('#post-text').val();
+  var $username = $('#username-post');
+  var $postContent = $('#post-text');
 
-  if (username && postContent) {
-    createNewPost(username, postContent);
+  if ($username.val() && $postContent.val()) {
+    createNewPost($username, $postContent);
   } else {
     alert("Please enter a post and your name before submitting!");
   }
 };
 
-var createNewPost = function(username, post) {
+var createNewPost = function($username, $post) {
   var $newPost = $(`<div class="post">` +
     `<hr />` + 
     `<p><` +
     `span class="remove-comments text-primary">remove </span>
-    <span class="show-comments text-primary">comments </span>${post} - Posted By: ${username}` +
+    <span class="show-comments text-primary">comments </span>${$post.val()} - Posted By: ${$username.val()}` +
     `</p>` +
     `</div>`);
-
+  
   $('.posts').append($newPost);
+  // reset placeholders
+  $username.val("");
+  $post.val("");
 
   // bind comments and remove link
   $newPost.find('.show-comments').on('click', onCommentClick);
@@ -53,26 +56,30 @@ var createCommentSection = function($post) {
   $commentSection.hide();
 };
 
-var createNewComment = function(username, comment, $commentSection) {
+var createNewComment = function($username, $comment, $commentSection) {
   var $newComment = $(`<div class="comment">` +
     `<p>` + 
     `<span class="remove-comment text-primary">remove </span>` + 
-    `${comment} - Posted By: ${username}</p>` +
+    `${$comment.val()} - Posted By: ${$username.val()}</p>` +
     `</div>`);
 
   $commentSection.find('.comments').append($newComment);
+
+  // reset input values
+  $username.val("");
+  $comment.val("");
 
   // bind remove link
   $newComment.find('.remove-comment').on('click', onRemoveCommentClick);
 };
 
 var onSubmitComment = function() {
-  var username = $(this).closest('.comments-form').find('.comment-text').val();
-  var comment = $(this).closest('.comments-form').find('.username-comment').val();
+  var $comment = $(this).closest('.comments-form').find('.comment-text');
+  var $username = $(this).closest('.comments-form').find('.username-comment');
   
-  if (username && comment) { 
+  if ($username.val() && $comment.val()) { 
     var $currCommentSection = $(this).closest('.comments-section');
-    createNewComment(username, comment, $currCommentSection);
+    createNewComment($username, $comment, $currCommentSection);
   } else {
     alert("Please enter a comment and your name before submitting!");
   }
