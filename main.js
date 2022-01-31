@@ -1,45 +1,46 @@
 var $button = $('#submit')
 
-$button.on('click', function () {
-  // var $name = $('#name');
-  // var $message = $('#message');
-
-  var message = document.createElement("p")
-  var name = document.createElement("p")
-  var $newDiv = $(document.createElement("div"));
-  var $posts = $('.posts');
-
-  //Creating variables for user messages and names
-  message.append(document.createTextNode($('#message').val()));
-  name.append(document.createTextNode("Posted By: " + $('#name').val()));
-
-  $newDiv.append(message);
-  $newDiv.append(name);
-  $newDiv.attr("class","newPost");
-
-  //Creating comment form section
-  var $newComment = $(document.createElement("form"));
-  $newComment.append($("<div></div>").attr("class", "form-group").append($("<input></input>").attr({class: "for-control", id: `comName-${Date($.now())}`, class: "comment", type: "text", placeholder: "Name"})), $("<div></div>").attr("class", "form-group").append($("<input></input>").attr({class: "for-control", id: `comMessage-${Date($.now())}`, class: "comment", type: "text", placeholder: "Message"})));
-
-  // $newComment.append($("<input></input>").attr({class: "for-control", class: `comMessage-${Date($.now())}`, type: "text", placeholder: "Message"}));
-  // $newComment.append($("<input></input>").attr({class: "for-control", type: "text", class: `comName-${Date($.now())}`, placeholder: "Name"}));
-
-  var $commentButton = $("<button></button>").attr({class: "btn btn-primary"});
-
-  $newComment.append($commentButton);
-
-  $newDiv.append($newComment);
- 
-
+var forum = {
+  createPost: function () {
+    var $posts = $(".posts")
+    var $name = $("#name").val();
+    var $message = $("#message").val();
+    var $newPost = $("<div></div>").attr("class", "new-post")
   
-  $posts.append($newDiv);
 
-  // $posts.append(newDiv);
+    $newPost.append($("<p></p>").text($message));
+    $newPost.append($("<p></p>").text(`Posted By: ${$name}`));
 
-  // var newDiv = document.createElement('div');
-  // newDiv.append($message);
-  // newDiv.appendChild($name);
-  // var posts = $('.posts');
+    var $comments = $("<div></div>").attr("class", "comment-section");
 
-  // posts.appendChild(newDiv);
-});
+    var $commentToggle = $newPost.append("<p>Show/hide Comments</p>").attr("class", "toggle-comment");
+
+    var $commentsInput = $comments.append($("<form></form>").append($("<div></div>").attr("class", "form-group").append($("<input></input>").attr({type: "text", class: "form-control", placeholder: "Name"})), $("<div></div>").attr("class", "form-group").append($("<input></input>").attr({type: "text", class: "form-control", placeholder: "Message"}))));
+
+    $comments.append($commentsInput);
+    $newPost.append($comments);
+
+
+
+
+    if ($name && $message) {
+      $posts.append($newPost);
+    }
+  },
+  createComment: function () {
+    
+  },
+  hideComments: function (event) {
+   var $comments = $(event.target).siblings(".comment-section");
+
+   console.log($comments);
+
+   $comments.toggle("display");
+  //  if ($comments.attr("display") == )
+  }
+};
+
+
+$button.on("click", forum.createPost);
+
+$("body").on("click", forum.hideComments);
