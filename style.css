@@ -1,0 +1,24 @@
+.new-post {
+  border-bottom: 1px solid #eee;
+  margin-bottom: 10px;
+}
+
+.comment {
+  margin-left: 5%;
+  background-color: azure;
+  border-bottom: 1px solid #eee;
+}
+
+.comment-button {
+  margin-bottom: 10px;
+}
+
+.remove {
+  font-size: smaller;
+  color: red;
+}
+
+.display-toggle {
+  font-size: small;
+  color: grey;
+}
