@@ -17,6 +17,8 @@ var forum = {
 
     var $commentsInput = $comments.append($("<form></form>").append($("<div></div>").attr("class", "form-group").append($("<input></input>").attr({type: "text", class: "form-control", placeholder: "Name"})), $("<div></div>").attr("class", "form-group").append($("<input></input>").attr({type: "text", class: "form-control", placeholder: "Message"}))));
 
+    var $commentButton = $comments.append($("<button></button>").attr("class", "btn btn-primary").text("Comment"));
+
     $comments.append($commentsInput);
     $newPost.append($comments);
 
