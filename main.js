@@ -6,7 +6,12 @@ var $commentSubmitButton = $('#submit-comment');
 var onSubmitPost = function() {
   var username = $('#username-post').val();
   var postContent = $('#post-text').val();
-  createNewPost(username, postContent);
+
+  if (username && postContent) {
+    createNewPost(username, postContent);
+  } else {
+    alert("Please enter a post and your name before submitting!");
+  }
 };
 
 var createNewPost = function(username, post) {
@@ -62,13 +67,15 @@ var createNewComment = function(username, comment, $commentSection) {
 };
 
 var onSubmitComment = function() {
-  
   var username = $(this).closest('.comments-form').find('.comment-text').val();
   var comment = $(this).closest('.comments-form').find('.username-comment').val();
-  var $currCommentSection = $(this).closest('.comments-section');
-
-  createNewComment(username, comment, $currCommentSection);
-
+  
+  if (username && comment) { 
+    var $currCommentSection = $(this).closest('.comments-section');
+    createNewComment(username, comment, $currCommentSection);
+  } else {
+    alert("Please enter a comment and your name before submitting!");
+  }
 };
 
 var onCommentClick = function() {
