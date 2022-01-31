@@ -4,12 +4,12 @@
 
 .post-form {
   margin-top: 30px;
+  margin-bottom: 25%;
 }
 
 .comment-form {
   margin-top: 15px;
   padding-left: 30px;
-  display: none;
 }
 
 .edit-form {
