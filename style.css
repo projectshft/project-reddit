@@ -4,5 +4,10 @@
 
 .comment {
   margin-left: 5%;
-  background-color: blue;
+  background-color: azure;
+  border-bottom: 1px solid #eee;
+}
+
+.comment-button {
+  margin-bottom: 10px;
 }
