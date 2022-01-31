@@ -31,13 +31,12 @@ var forum = {
     }
   },
   createComment: function (event) {
-    console.log($(event.target).hasClass("comment-button"));
-    if ($(event.target).hasClass("comment-button")) {
     var parentComm = $(event.target).closest(".comment-section");
     var $commName = parentComm.find(".commName").val();
     var $commMessage = parentComm.find(".commMessage").val();
-    
-    parentComm.find(".post-comments").append($("<div></div>").attr("class","comment removable").append($(`<p>${$commMessage}</p>`), $(`<p>Posted by: ${$commName}</p>`), $("<p></p>").attr("class","remove").text("remove")));
+
+    if ($(event.target).hasClass("comment-button") && $commName && $commMessage) {
+        parentComm.find(".post-comments").append($("<div></div>").attr("class","comment removable").append($(`<p>${$commMessage}</p>`), $(`<p>Posted by: ${$commName}</p>`), $("<p></p>").attr("class","remove").text("remove")));
     }
 
   },
