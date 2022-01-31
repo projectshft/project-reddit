@@ -4,14 +4,10 @@
 
 .post-message,
 .post-author,
-.comment-message,
-.comment-author {
+.width-handle {
   width: 100%;
 }
 
-.hide-1 {
-}
-
 .spacer {
-  margin-top: 80px;
+  margin-top: 50px;
 }
