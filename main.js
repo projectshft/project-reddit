@@ -12,20 +12,22 @@ var makeSubmitCommentListener = function (postNumber, $comments) {
     numOfComments += 1;
     var commentAuthor = $('.comment-author-' + postNumber).val();
     var commentMessage = $('.comment-message-' + postNumber).val();
-    var $newComment = $('<div class=comment-num-' + numOfComments + '><p>' + commentMessage + ' - <span>Posted By: ' + commentAuthor + '</span></p><button class="btn btn-danger">Delete Comment</button><hr /></div>');
+    var newComment = $.parseHTML('<div class=comment-num-' + numOfComments + '><p>' + commentMessage + ' - <span>Posted By: ' + commentAuthor + '</span></p><button class="btn btn-danger">Delete Comment</button><hr /></div>');
     
-    $comments.append($newComment);
+    $comments.append(newComment);
     
-    $comments.find($newComment).find('button').on('click', function () {
-      $newComment.remove();
+    $comments.find(newComment).find('button').on('click', function () {
+      $(newComment).remove();
     });
   });
 };
 
 var createInitialPost = function (postNumber, postMessage, postAuthor) {
-  var $mainPostDiv = $('<div class="post-' + postNumber + '"><p><strong>' + postMessage + ' - <span>Posted By: ' + postAuthor + '</span></strong></p><button class="btn btn-primary show_">Comments</button><button class="btn btn-danger del">Delete</button><hr /></div>');
+  var $mainPostDiv = $.parseHTML('<div class="post-' + postNumber + '"><p><strong>' + postMessage + ' - <span>Posted By: ' + postAuthor + '</span></strong></p><button class="btn btn-primary show_">Comments</button><button class="btn btn-danger del">Delete</button><hr /></div>');
 
   var $commentsHideWrapper = $('<section class="hide-' + postNumber + '"></section>');
+
+  debugger;
 
   var $commentsDiv = $('<div class="comments-' + postNumber + '"></div>');
 
@@ -45,6 +47,7 @@ $postSubButton.on('click', function (event) {
   
   var postContent = createInitialPost(numOfPosts, message, author);
 
+  // $posts.append(postContent);
   $posts.append(postContent);
 
   var $showCommentsButton = $('.post-' + numOfPosts + ' .show_');
