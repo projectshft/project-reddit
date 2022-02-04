@@ -1,0 +1,13 @@
+.row {
+  margin: 5px 0 5px 0;
+}
+
+.post-message,
+.post-author,
+.width-handle {
+  width: 100%;
+}
+
+.spacer {
+  margin-top: 50px;
+}
