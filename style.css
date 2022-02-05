@@ -1,0 +1,9 @@
+* {
+  box-sizing: border-box;
+}
+
+input {
+  display: block;
+  margin-bottom: 1em;
+  width: 100%;
+}
