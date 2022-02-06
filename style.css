@@ -4,6 +4,10 @@
   -moz-box-sizing: border-box;
 }
 
+html {
+  min-width: 375px;
+}
+
 .container {
   width: 50%;
 }
@@ -18,4 +22,8 @@
   .container {
     width: 90%;
   }
+}
+
+.post-text {
+  display: inline-block;
 }
