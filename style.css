@@ -27,3 +27,11 @@ html {
 .post-text {
   display: inline-block;
 }
+
+.comment {
+  padding-left: 40px;
+}
+
+.comment-text {
+  display: inline-block;
+}
