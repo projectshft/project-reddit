@@ -19,8 +19,15 @@
           <div>
             <h1><strong>ReReddit</strong></h1>
           </div>
+
           <div class="posts"></div>
-          <form style="margin-top: 30px" onsubmit="event.preventDefault();">
+          <div class="comments"></div>
+
+          <form
+            class="post-form"
+            style="margin-top: 30px"
+            onsubmit="event.preventDefault();"
+          >
             <div class="form-group">
               <input
                 type="text"
@@ -39,7 +46,12 @@
               Submit Post
             </button>
           </form>
-          <form style="margin-top: 30px" onsubmit="event.preventDefault();">
+
+          <form
+            class="comment-form"
+            style="margin-top: 30px"
+            onsubmit="event.preventDefault();"
+          >
             <div class="form-group">
               <input
                 type="text"
@@ -54,7 +66,7 @@
                 placeholder="Your Name"
               />
             </div>
-            <button class="btn btn-primary comment-button" type="submit">
+            <button class="btn btn-primary comment-submit-button" type="submit">
               Submit Comment
             </button>
           </form>
