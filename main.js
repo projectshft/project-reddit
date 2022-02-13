@@ -1,7 +1,3 @@
-// TODO: can't submit comment if one comment form is open with multiple posts
-// CONSIDER: Create separate create comments function, to go with submit content handler
-
-
 // focus when document ready
 $(document).ready(function () {
   $('#postInputName').focus();
