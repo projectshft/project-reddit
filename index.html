@@ -5,25 +5,42 @@
       href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="style.css"/>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Forum</title>
   </head>
   <body>
     <div class="comment-box">
-      <h2 class="comment-heading">Comments</h2>
+      <h2 class="comment-heading">Forum Posts</h2>
       <hr class="comment-separator" />
       <div class="comments"></div>
     </div>
     <div class="container border-top w-75">
       <div class="post-container"></div>
+      <form class="comment-form" style="margin-top:30px;" onsubmit="event.preventDefault();">
+
+        <div class="form-group">
+          <textarea id="comment-message" type="text"
+          class="form-control"
+          rows="1"
+          placeholder="leave your hottest takes here"></textarea>
+        </div>
+
+        <div class="form-group">
+          <input id="comment-name" type="text"
+            class="form-control"
+            placeholder="your name"></input>
+        </div>
+        <button id="comment-submit" class="btn btn-primary btn-xs">Submit Comment</button><hr>
+        </form>
       <form id="input-form" class="mt-5" onsubmit="event.preventDefault()">
         <div class="form-group">
           <textarea
             class="form-control form-control-lg"
             id="message"
-            placeholder="Message"
+            placeholder="message"
             rows="3"
           ></textarea>
         </div>
@@ -32,7 +49,7 @@
             type="text"
             class="form-control form-control-lg"
             id="name"
-            placeholder="Name"
+            placeholder="name"
           />
         </div>
         <div class="submit-btn-div">
