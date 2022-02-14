@@ -1,0 +1,31 @@
+h2 {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.commentbtn {
+  background-color: seagreen
+  padding-left: 5px 
+  cursor: pointer;
+}
+
+.deletebtn {
+  background-color: seagreen 
+  padding-left: 5px 
+  cursor: pointer;
+}
+
+#post-content {
+  word-spacing: 2px;
+}
+
+.btn {
+background-color: seagreen;
+}
+
+.comment-form {
+  display: none;
+}
+
+.comment-row {
+  display: block;
+}
