@@ -43,7 +43,7 @@ if (postName && postTxt) {
 
 
   
-var bindClicks = function(){  /*funtcton that runs a click handler on Post button with an id="submit"; and listens for click on "comments" anchor with id="show-comments"*/ 
+var bindClicks = function(){  /*runs click handler on Post button with an id="submit"; and listens for click on "comments" anchor with id="show-comments"*/ 
 
   $('#submit').click(function(){
   console.log('Post Button is cklicked!');
@@ -54,3 +54,4 @@ var bindClicks = function(){  /*funtcton that runs a click handler on Post butto
   });
 }
 bindClicks();  
+
