@@ -64,24 +64,30 @@ var removePost = $('.posts').on('click', '.remove-post', function () {
 });
 
 var createComment = $('.posts').on('click', '#submit-comment', function () {
-  var commentInput = $(this).parent().siblings().find('.comment-input')[0].value;
-  var commentNameInput = $(this).parent().siblings().find('.comment-name-input')[0].value;
-  var currentCommentSection = $(this).closest('.post').find('.post-comments');
+  var $commentInput = $(this).parent().siblings().find('.comment-input')[0].value;
+  var $commentNameInput = $(this).parent().siblings().find('.comment-name-input')[0].value;
+  var $currentCommentSection = $(this).closest('.post').find('.post-comments');
 
-  var setComment = '<p class="comment-content">' +
-    commentInput +
-  '</h3>' +
-  '<p class="comment-author text-muted">' +
-    'Posted By: ' + commentNameInput +
-  '</p>'
-  ;
+  
+  if($commentInput === '' || $commentNameInput === '') {
+    alert('Please enter text before posting');
+  } else {
+    var setComment = '<p class="comment-content">' +
+        $commentInput +
+      '</p>' +
+      '<p class="comment-author text-muted">' +
+        'Posted By: ' + $commentNameInput +
+      '</p>'
+    ;
 
-  currentCommentSection.append(
-    '<div class="comment card">' +
-      setComment +
-    '</div>'
-  );
+    $currentCommentSection.append(
+      '<div class="comment card">' +
+        setComment +
+      '</div>'
+    );
+  }
+  
 
-  $('.comment-input')[0].value = '';
-  $('.comment-name-input')[0].value = '';
+  $(this).parent().parent().find('.comment-input')[0].value = '';
+  $(this).parent().parent().find('.comment-name-input')[0].value = '';
 });
