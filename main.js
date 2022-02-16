@@ -68,7 +68,6 @@ var createComment = $('.posts').on('click', '#submit-comment', function () {
   var $commentNameInput = $(this).parent().siblings().find('.comment-name-input')[0].value;
   var $currentCommentSection = $(this).closest('.post').find('.post-comments');
 
-  
   if($commentInput === '' || $commentNameInput === '') {
     alert('Please enter text before posting');
   } else {
@@ -77,7 +76,8 @@ var createComment = $('.posts').on('click', '#submit-comment', function () {
       '</p>' +
       '<p class="comment-author text-muted">' +
         'Posted By: ' + $commentNameInput +
-      '</p>'
+      '</p>' +
+      '<p class="fs-h6 link-primary remove-comment">Remove</p>'
     ;
 
     $currentCommentSection.append(
@@ -86,8 +86,11 @@ var createComment = $('.posts').on('click', '#submit-comment', function () {
       '</div>'
     );
   }
-  
 
   $(this).parent().parent().find('.comment-input')[0].value = '';
   $(this).parent().parent().find('.comment-name-input')[0].value = '';
+});
+
+var removeComment = $('.posts').on('click', '.remove-comment', function () {
+  $(this).parent().remove();
 });
