@@ -1,5 +1,5 @@
 $(document).ready(function(){
-
+  var postCount = 0;
   var commentTemplate = /* template html for post comments */
     '<div>' + 
 
@@ -21,20 +21,22 @@ $(document).ready(function(){
     '</div>';
 
   var makePost = function(){ 
+    postCount += 1;
     var postName = $('#name').val();
     var postTxt = $('#message').val();
+
     if (postName && postTxt) {
-      $('.post-items').append('<li class="single-post">'+ postTxt + '   posted by: ' + postName + '<a href="#" class="removeBtn" >  remove post </a>' + '<br>' + '<ul class="post-comments">' + '</  ul>' + '<br>' + commentTemplate + '</li>');
+      $('.post-items').append(`<li id="post-${postCount}" class="single-post">`+ postTxt + '   posted by: ' + postName + '<a href="#" class="removeBtn" >  remove post </a>' + '<br>' + '<ul class="post-comments">' + '</  ul>' + '<br>' + commentTemplate + '</li>');
       $('.test-block').hide();
     }
   }
 
-  var makeComment = function(){
-    var comName = $('.com-name').val();
-    var comBody = $('.com-body').val();
+  var makeComment = function(postId){
+    var comName = $(`#${postId}`).find('.com-name').val();
+    var comBody = $(`#${postId}`).find('.com-body').val();
     // if(comName && comBody){};
     console.log('makeComment is invoked!');
-      $('.post-comments').append('<li class="comment">' + comBody + ' - COMMENTED BY  '+ comName + '<a href="#" class="removeBtn"> remove </a>' + '</li>');
+      $(`#${postId}`).append('<li class="comment">' + comBody + ' - COMMENTED BY  '+ comName + '<a href="#" class="removeBtn"> remove </a>' + '</li>');
     }
 
   $('#submit').click(function(){
@@ -43,8 +45,10 @@ $(document).ready(function(){
      });
      
   $('.post-items').on('click', '.com-submit', function(){
-    makeComment();
-    debugger;
+    var commentId = $(this).parents('.single-post').attr('id');
+    console.log(commentId);
+    makeComment(commentId);
+    // #
   });
 
   $('.post-items').on('click', '.removeBtn', function(){
