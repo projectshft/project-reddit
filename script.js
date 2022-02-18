@@ -1,65 +1,60 @@
-var postArry = []; /* empty array to store posts */
-var commentTemplate = /* template html for post comments */
-'<div class="com-block">'+
-  
-      '<a href="#" class="remove-com" >remove</a>'+
-      '<a href="#" class=" com-block show-com"> comments</a>'+
-  
-  '<div class="test-block">'+
-    '<form onsubmit="event.preventDefault();">'+
-        '<h3>Add a comment</h3>'+
+$(document).ready(function(){
+
+  var commentTemplate = /* template html for post comments */
+    '<div>' + 
+
+      '<a href="#" class="com-block">comments </a>' + 
+      '<div class="test-block">'+
+        '<form onsubmit="event.preventDefault();">'+
+          '<h3>Add a comment</h3>'+
     
-        '<div class="form-group">'+
-          '<input  type="text" placeholder="Name">'+'</input>'+
-          
-        '</div>'+
-        '<div class="form-group">'+
-          '<textarea  type="text"placeholder="Message"></textarea>'+
-        '</div>'+
+          '<div class="form-group">'+
+            '<input class="com-name" type="text"  placeholder="Name">'+'</input>'+
+          '</div>'+
+          '<div class="form-group">'+
+            '<textarea class="com-body"   type="text"placeholder="Message"></textarea>'+
+          '</div>'+
 
-        '<button  class="btn btn-primary">Submit Comment</button>'+
-    
-    '</form>'+
-  '</div>'+
-'</div>';
+          '<button class="com-submit btn btn-primary">Submit  Comment</button>'+
+        '</form>'+
+      '</div>'+
+    '</div>';
 
-
-
-var makePost = function(){ /*function that takes input from html form and adds a new <li> to <div class =".posts"> child <ul id="post-comments"> */
-var postName = $('#name').val();
-var postTxt = $('#message').val();
-if (postName && postTxt) {
-
-  postArry.push('<li>' + '<p>' + postTxt + ' posted by: ' +postName + '<br>' +'<ul class="post-comments"></ul>'+ commentTemplate + '</p>' + '</li>');
-  var postIndex = postArry.length - 1;
-  console.log(`current post index is ${postIndex}`);
-
-  $('#post-items').append(`<li class="index-${postIndex}">` + '<p>' + postTxt + ' posted by: ' +postName + '<br>' + commentTemplate + '</p>' + '</li>');
-  // $('.test-block').find('form').hide();
-
+  var makePost = function(){ 
+    var postName = $('#name').val();
+    var postTxt = $('#message').val();
+    if (postName && postTxt) {
+      $('.post-items').append('<li class="single-post">'+ postTxt + '   posted by: ' + postName + '<a href="#" class="removeBtn" >  remove post </a>' + '<br>' + '<ul class="post-comments">' + '</  ul>' + '<br>' + commentTemplate + '</li>');
+      $('.test-block').hide();
+    }
   }
-  console.log(postArry);
-}
 
-
-  
-var bindClicks = function(){  /*runs click handler on Post button with an id="submit"; and listens for click on "comments" anchor with id="show-comments"*/ 
+  var makeComment = function(){
+    var comName = $('.com-name').val();
+    var comBody = $('.com-body').val();
+    // if(comName && comBody){};
+    console.log('makeComment is invoked!');
+      $('.post-comments').append('<li class="comment">' + comBody + ' - COMMENTED BY  '+ comName + '<a href="#" class="removeBtn"> remove </a>' + '</li>');
+    }
 
   $('#submit').click(function(){
-    console.log('Post Button is cklicked!');
+    console.log('Post Button is clicked!');
     makePost();
-      $('.show-com').click(function(){
-        console.log('comments anchor is cklicked!');
-        $('.com-block').find('div').toggle();
-      });
      });
-  }
-bindClicks();  
+     
+  $('.post-items').on('click', '.com-submit', function(){
+    makeComment();
+    debugger;
+  });
+
+  $('.post-items').on('click', '.removeBtn', function(){
+    $(this).parent().remove();
+  })
+
+  $('.forum-posts').on('click', '.com-block', function(){
+    $(this).siblings('.test-block').toggle();
+  });
+      
+});
 
 
-    // var commentBlock = $('.com-block');
-    // var showComments = $('.show-com');
-    // function toggleComments(){
-    // commentBlock.find('div').toggle();
-    // }
-    // showComments.click(toggleComments);
