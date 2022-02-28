@@ -1,0 +1,30 @@
+#title {
+  font-family: "Roboto", sans-serif;
+  font-size: 70px;
+  text-align: center;
+  font-weight: 500;
+}
+
+.comments-hide {
+  display: none;
+}
+
+body {
+  width: 1000px;
+}
+
+.row {
+  padding-top: 15px;
+}
+
+.link-primary:hover {
+  cursor: pointer;
+}
+
+.card {
+  background-color: #0938;
+}
+
+.comments-show {
+  display: block;
+}
