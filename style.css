@@ -1,3 +1,86 @@
 body {
   padding-top: 1.5rem;
 }
+
+p.small {
+  font-size: 0.75rem;
+  padding-top: 1rem;
+  /* margin: 0; */
+}
+
+.table-parent {
+  display: table;
+  /* padding-top: 0.5rem; */
+}
+
+.table-child {
+  display: table-cell;
+  vertical-align: bottom;
+}
+
+.post {
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.comments-container {
+  display: none;
+}
+
+.comment {
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  background-color: rgb(245, 245, 245);
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.post-form {
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.comment-form {
+  margin-top: 1rem;
+}
+
+.submit-change-btn {
+  margin-bottom: 1rem;
+}
+
+[contenteditable] {
+  padding: 0.375rem 0.75rem;
+  color: #495057;
+  background-color: #fff;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color 0s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+[contenteditable]:focus {
+  color: #495057;
+  background-color: #fff;
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.btn-sm {
+  padding: 0.125rem 0.5rem;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  border-radius: 0.2rem;
+}
+
+h4 {
+  color: #007bff;
+}
+
+.edit-post-btn,
+.remove-post-btn {
+  display: none;
+}
