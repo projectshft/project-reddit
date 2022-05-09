@@ -17,7 +17,7 @@ const getDate = () => {
 
 // Submit a post
 
-$('.submit-post').on('click', function (e) {
+$('body').on('click', '.submit-post', function () {
   const postTextInput = $('#post-text-input').val()
   const postNameInput = $('#post-name-input').val()
   const postDate = getDate();
@@ -28,15 +28,14 @@ $('.submit-post').on('click', function (e) {
         <div class="row">
           <div class="col table-parent">
             <div class="table-child">
-              <button type="button" class="btn btn-primary btn-sm comments-btn">View / Comment</button>
+              <button type="button" class="btn btn-primary btn-sm view-btn">View / Edit / Comment</button>
               <button type="button" class="btn btn-outline-secondary btn-sm edit-post-btn">Edit</button>
               <button type="button" class="btn btn-outline-danger btn-sm remove-post-btn">Delete</button>
             </div>
           </div>
           <div class="col-md-auto table-parent">
-          <p class="text-muted small table-child">
-            Posted by <strong>${postNameInput}</strong> on
-            ${postDate.day}, at ${postDate.time}
+          <p class="stamp small table-child">
+            Posted by <strong>${postNameInput}</strong> on ${postDate.day}, at ${postDate.time}
           </p>
         </div>
         </div>
@@ -73,6 +72,7 @@ $('.submit-post').on('click', function (e) {
   `);
 
   $('#posts').last().append(newPostTemplate);
+  $('body').find('.post').last().data('name', `${postNameInput}`);
   $('form :input').val('');
 });
 
@@ -93,7 +93,7 @@ $('body').on('click', '.submit-comment', function () {
           </p>
         </div>
         <div class="col-md-auto table-parent">
-          <p class="text-muted small table-child">
+          <p class="stamp small table-child">
             Posted by <strong>${commentNameInput}</strong> on ${commentDate.day}, at ${commentDate.time}
           </p>
         </div>
@@ -118,16 +118,11 @@ $('body').on('click', '.remove-comment-btn', function () {
   $(this).closest('.comment').remove();
 });
 
-// Show/hide comments
-
-// $('body').on('click', '.comment-btn', function () {
-//   $(this).closest('.post').find('.comments-container').toggle();
-// });
-
 // edit post
 
 $('body').on('click', '.edit-post-btn', function () {
   const $postElement = $(this).closest('.post').find('.post-text');
+  
   if (!$postElement.attr('contenteditable')) {
     $postElement.attr('contenteditable', 'true');
     $postElement.after('<button type="button" class="btn btn-primary submit-change-btn">Submit Change</button>');
@@ -137,16 +132,23 @@ $('body').on('click', '.edit-post-btn', function () {
 
 $('body').on('click', '.submit-change-btn', function () {
   const $postElement = $(this).closest('.post').find('.post-text');
+  const $postAuthor = $(this).closest('.post').data('name')
+  const $postStamp = $(this).closest('.post').find('.stamp').first();
+  const commentDate = getDate();
+
   $postElement.removeAttr('contenteditable');
+  $postStamp.html(`Edited by <strong>${$postAuthor}</strong> on ${commentDate.day}, at ${commentDate.time}`);
+  
   $(this).remove();
 });
 
-// display post only
+// view post/comments
 
-$('body').on('click', '.comments-btn', function () {
+$('body').on('click', '.view-btn', function () {
   $(this).closest('.post').find('.comments-container').toggle();
   $(this).siblings('.remove-post-btn').toggle();
   $(this).siblings('.edit-post-btn').toggle();
   $(this).closest('.post').siblings().toggle();
+  $(this).text().length > 5 ? $(this).html('Back') : $(this).html('View / Edit / Comment')
   $('.post-form').toggle();
 });
