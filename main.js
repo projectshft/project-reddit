@@ -43,7 +43,10 @@ $('body').on('click', '.submit-post', function () {
         <section class="comments"></section>
         <form class="comment-form">
           <div class="form-group">
-            <h4>Leave a Comment</h4>
+            <h4>
+              <i class="bi bi-chat-text" style="font-size: 32px; margin-right: 0.25rem"></i>
+              Join the Conversation
+            </h4>
           </div>
           <div class="form-group">
             <textarea
@@ -108,8 +111,10 @@ $('body').on('click', '.submit-comment', function () {
 
 // Remove post
 
-$('body').on('click', '.remove-post-btn', function () {
+$('body').on('click', '.remove-post-btn', function () {  
   $(this).closest('.post').remove();
+  $('.post').toggle();
+  $('.post-form').toggle();
 });
 
 // Remove comment
@@ -122,7 +127,7 @@ $('body').on('click', '.remove-comment-btn', function () {
 
 $('body').on('click', '.edit-post-btn', function () {
   const $postElement = $(this).closest('.post').find('.post-text');
-  
+
   if (!$postElement.attr('contenteditable')) {
     $postElement.attr('contenteditable', 'true');
     $postElement.after('<button type="button" class="btn btn-primary submit-change-btn">Submit Change</button>');
@@ -152,3 +157,12 @@ $('body').on('click', '.view-btn', function () {
   $(this).text().length > 5 ? $(this).html('Back') : $(this).html('View / Edit / Comment')
   $('.post-form').toggle();
 });
+
+// textarea resize
+
+// $("textarea").each(function () {
+//   this.setAttribute("style", "height:" + (this.scrollHeight) + "px;overflow-y:hidden;");
+// }).on("input", function () {
+//   this.style.height = "auto";
+//   this.style.height = (this.scrollHeight) + "px";
+// });

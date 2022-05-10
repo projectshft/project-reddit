@@ -84,3 +84,7 @@ h4 {
 .stamp {
   color: #007bff;
 }
+
+.post-text {
+  white-space: pre-wrap;
+}
