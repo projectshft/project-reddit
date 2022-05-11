@@ -1,6 +1,8 @@
-// A user should be able to use the form at the bottom of the page to create a new post.
+// [x] A user should be able to use the form at the bottom of the page to create a new post.
 
-// "Create a new post" means the user can fill out info, hit submit, and see post appear in newsfeed
+    // "Create a new post" means the user can fill out info, hit submit, and see post appear in newsfeed
+
+// [] New posts to the newsfeed should have an option to leave a comment, and an option to remove the post
 
 // New Post
 
@@ -19,17 +21,33 @@ button.addEventListener('click', function () {
     newPostBody.appendChild(newPostBodyTextNode);
 
     var newPostAuthor = document.createElement('p');
-    var newPostAuthorTextNode = document.createTextNode(postAuthor);
+    var newPostAuthorTextNode = document.createTextNode('- ' + postAuthor);
     newPostAuthor.appendChild(newPostAuthorTextNode);
 
-    newPostHR = document.createElement('hr');
+    var newPostCommentButton = document.createElement('button');
+    var newPostCommentButtonTextNode = document.createTextNode('Comments');
+    newPostCommentButton.appendChild(newPostCommentButtonTextNode);
+    newPostCommentButton.setAttribute('type', 'button');
+    newPostCommentButton.setAttribute('class', 'btn btn-info');
+
+    var newPostDeleteButton = document.createElement('button');
+    var newPostDeleteButtonTextNode = document.createTextNode('Delete Post');
+    newPostDeleteButton.appendChild(newPostDeleteButtonTextNode);
+    newPostCommentButton.setAttribute('type', 'button');
+    newPostDeleteButton.setAttribute('class', 'btn btn-danger');
+
+    var newPostHR = document.createElement('hr');
 
     newPostContainer.append(newPostBody);
     newPostContainer.append(newPostAuthor);
+    newPostContainer.append(newPostCommentButton);
+    newPostContainer.append(newPostDeleteButton);
     newPostContainer.append(newPostHR);
 
     newsfeed.append(newPostContainer);
 });
+
+
 
 /* Dummy Text:
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
