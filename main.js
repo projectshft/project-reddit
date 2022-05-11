@@ -1,5 +1,7 @@
 // A user should be able to use the form at the bottom of the page to create a new post.
 
+// "Create a new post" means the user can fill out info, hit submit, and see post appear in newsfeed
+
 // New Post
 
 var button = document.getElementById('post-creation-submit-btn');
