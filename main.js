@@ -21,7 +21,7 @@ button.addEventListener('click', function () {
     newPostBody.appendChild(newPostBodyTextNode);
 
     var newPostAuthor = document.createElement('p');
-    var newPostAuthorTextNode = document.createTextNode('- ' + postAuthor);
+    var newPostAuthorTextNode = document.createTextNode('Posted By: ' + postAuthor);
     newPostAuthor.appendChild(newPostAuthorTextNode);
 
     var newPostCommentButton = document.createElement('button');
@@ -29,12 +29,14 @@ button.addEventListener('click', function () {
     newPostCommentButton.appendChild(newPostCommentButtonTextNode);
     newPostCommentButton.setAttribute('type', 'button');
     newPostCommentButton.setAttribute('class', 'btn btn-info');
+    newPostCommentButton.setAttribute('id', 'commentButton');
 
     var newPostDeleteButton = document.createElement('button');
     var newPostDeleteButtonTextNode = document.createTextNode('Delete Post');
     newPostDeleteButton.appendChild(newPostDeleteButtonTextNode);
     newPostCommentButton.setAttribute('type', 'button');
     newPostDeleteButton.setAttribute('class', 'btn btn-danger');
+    newPostCommentButton.setAttribute('id', 'deleteButton');
 
     var newPostHR = document.createElement('hr');
 
@@ -46,6 +48,17 @@ button.addEventListener('click', function () {
 
     newsfeed.append(newPostContainer);
 });
+
+// var commentButton = document.getElementById('commentButton');
+// var deleteButton = document.getElementById('deleteButton');
+
+// commentButton.addEventListener('click', function () {
+//     console.log('hello');
+// });
+
+// deleteButton.addEventListener('click',  function () {
+//     console.log('world');
+// });
 
 
 
