@@ -27,7 +27,7 @@ $('body').on('click', '.submit-post', function () {
       <p class="post-text">${postTextInput}</p>
         <div class="row">
           <div class="col table-parent">
-            <div class="table-child">
+            <div class="table-child post-btns-inner">
               <button type="button" class="btn btn-primary btn-sm view-btn">View / Edit / Comment</button>
               <button type="button" class="btn btn-outline-secondary btn-sm edit-post-btn">Edit</button>
               <button type="button" class="btn btn-outline-danger btn-sm remove-post-btn">Delete</button>
@@ -76,6 +76,7 @@ $('body').on('click', '.submit-post', function () {
 
   $('#posts').last().append(newPostTemplate);
   $('body').find('.post').last().data('name', `${postNameInput}`);
+  $('body').find('.post').last().data('post-text', `${postTextInput}`);
   $('form :input').val('');
 });
 
@@ -88,7 +89,7 @@ $('body').on('click', '.submit-comment', function () {
 
   const newCommentTemplate = (`
     <div class="comment">
-      <p>${commentTextInput}</p>
+      <p class="comment-text">${commentTextInput}</p>
       <div class="row">
         <div class="col table-parent">
           <p class="table-child">
@@ -111,16 +112,24 @@ $('body').on('click', '.submit-comment', function () {
 
 // Remove post
 
-$('body').on('click', '.remove-post-btn', function () {  
-  $(this).closest('.post').remove();
-  $('.post').toggle();
-  $('.post-form').toggle();
+$('body').on('click', '.remove-post-btn', function () {
+  const confirmRemove = confirm('Are you sure you want to remove this post?');
+  
+  if (confirmRemove) {
+    $(this).closest('.post').remove();
+    $('.post').toggle();
+    $('.post-form').toggle();
+  }
 });
 
 // Remove comment
 
 $('body').on('click', '.remove-comment-btn', function () {
-  $(this).closest('.comment').remove();
+  const confirmRemove = confirm('Are you sure you want to remove this comment?');
+
+  if (confirmRemove) {
+    $(this).closest('.comment').remove();
+  }
 });
 
 // edit post
@@ -130,20 +139,41 @@ $('body').on('click', '.edit-post-btn', function () {
 
   if (!$postElement.attr('contenteditable')) {
     $postElement.attr('contenteditable', 'true');
-    $postElement.after('<button type="button" class="btn btn-primary submit-change-btn">Submit Change</button>');
+    $postElement.after('<button type="button" class="btn btn-outline-danger cancel-change-btn">Cancel</button>');
+    $postElement.after('<button type="button" class="btn btn-primary submit-change-btn">Submit Change</button> ');
     $postElement.focus()
+    $(this).closest('.post-btns-inner').toggle();
   }
+});
+
+$('body').on('click', '.cancel-change-btn', function () {
+  const $postElement = $(this).closest('.post').find('.post-text');
+  const $postText = $(this).closest('.post').data('post-text');
+
+  $postElement.html($postText);
+  $postElement.removeAttr('contenteditable');
+
+  $(this).closest('.post').find('.post-btns-inner').toggle();
+  $(this).closest('.post').find('.submit-change-btn').remove();
+  $(this).remove();
 });
 
 $('body').on('click', '.submit-change-btn', function () {
   const $postElement = $(this).closest('.post').find('.post-text');
   const $postAuthor = $(this).closest('.post').data('name')
   const $postStamp = $(this).closest('.post').find('.stamp').first();
+  const $postText = $(this).closest('.post').data('post-text');
+  const $newPostText = $postElement.html();
+
   const commentDate = getDate();
+  $(this).closest('.post').data('post-text', `${$newPostText}`)
+  
 
   $postElement.removeAttr('contenteditable');
   $postStamp.html(`Edited by <strong>${$postAuthor}</strong> on ${commentDate.day}, at ${commentDate.time}`);
   
+  $(this).closest('.post').find('.post-btns-inner').toggle();
+  $(this).closest('.post').find('.cancel-change-btn').remove();
   $(this).remove();
 });
 
@@ -157,12 +187,3 @@ $('body').on('click', '.view-btn', function () {
   $(this).text().length > 5 ? $(this).html('Back') : $(this).html('View / Edit / Comment')
   $('.post-form').toggle();
 });
-
-// textarea resize
-
-// $("textarea").each(function () {
-//   this.setAttribute("style", "height:" + (this.scrollHeight) + "px;overflow-y:hidden;");
-// }).on("input", function () {
-//   this.style.height = "auto";
-//   this.style.height = (this.scrollHeight) + "px";
-// });
