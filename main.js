@@ -5,10 +5,28 @@
 var button = document.getElementById('post-creation-submit-btn');
 
 button.addEventListener('click', function () {
+    var newsfeed = document.querySelector('.newsfeed');
+
     var postText = document.getElementById('post-text').value;
     var postAuthor = document.getElementById('post-author').value;
-    console.log(postText);
-    console.log(postAuthor);
+
+    var newPostContainer = document.createElement('div');
+
+    var newPostBody = document.createElement('p');
+    var newPostBodyTextNode = document.createTextNode(postText);
+    newPostBody.appendChild(newPostBodyTextNode);
+
+    var newPostAuthor = document.createElement('p');
+    var newPostAuthorTextNode = document.createTextNode(postAuthor);
+    newPostAuthor.appendChild(newPostAuthorTextNode);
+
+    newPostHR = document.createElement('hr');
+
+    newPostContainer.append(newPostBody);
+    newPostContainer.append(newPostAuthor);
+    newPostContainer.append(newPostHR);
+
+    newsfeed.append(newPostContainer);
 });
 
 /* Dummy Text:
