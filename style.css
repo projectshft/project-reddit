@@ -3,19 +3,16 @@ body {
 }
 
 .logo {
-  /* margin-top: 1rem; */
   height: 4.5rem;
 }
 
 p.small {
   font-size: 0.75rem;
   padding-top: 1rem;
-  /* margin: 0; */
 }
 
 .table-parent {
   display: table;
-  /* padding-top: 0.5rem; */
 }
 
 .table-child {
