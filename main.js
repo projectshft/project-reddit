@@ -4,6 +4,8 @@
 
 // [] New posts to the newsfeed should have an option to leave a comment, and an option to remove the post
 
+    // These should appear as buttons
+
 // New Post
 
 var button = document.getElementById('post-creation-submit-btn');
@@ -28,15 +30,13 @@ button.addEventListener('click', function () {
     var newPostCommentButtonTextNode = document.createTextNode('Comments');
     newPostCommentButton.appendChild(newPostCommentButtonTextNode);
     newPostCommentButton.setAttribute('type', 'button');
-    newPostCommentButton.setAttribute('class', 'btn btn-info');
-    newPostCommentButton.setAttribute('id', 'commentButton');
+    newPostCommentButton.setAttribute('class', 'btn btn-info commentButton');
 
     var newPostDeleteButton = document.createElement('button');
     var newPostDeleteButtonTextNode = document.createTextNode('Delete Post');
     newPostDeleteButton.appendChild(newPostDeleteButtonTextNode);
     newPostCommentButton.setAttribute('type', 'button');
-    newPostDeleteButton.setAttribute('class', 'btn btn-danger');
-    newPostCommentButton.setAttribute('id', 'deleteButton');
+    newPostDeleteButton.setAttribute('class', 'btn btn-danger deleteButton');
 
     var newPostHR = document.createElement('hr');
 
@@ -47,20 +47,19 @@ button.addEventListener('click', function () {
     newPostContainer.append(newPostHR);
 
     newsfeed.append(newPostContainer);
+
+    var deletePost = function () {
+        console.log('Hello');
+    };
+    var deleteButton = document.getElementsByClassName('deleteButton')[0];
+    deleteButton.addEventListener('click', deletePost);
+
+    var commentOnPost = function () {
+        console.log('World');
+    };
+    var commentButton = document.getElementsByClassName('commentButton')[0];
+    commentButton.addEventListener('click', commentOnPost);
 });
-
-// var commentButton = document.getElementById('commentButton');
-// var deleteButton = document.getElementById('deleteButton');
-
-// commentButton.addEventListener('click', function () {
-//     console.log('hello');
-// });
-
-// deleteButton.addEventListener('click',  function () {
-//     console.log('world');
-// });
-
-
 
 /* Dummy Text:
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
