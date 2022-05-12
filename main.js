@@ -10,6 +10,8 @@
 
 var button = document.getElementById('post-creation-submit-btn');
 
+var postNumber = 0;
+
 button.addEventListener('click', function () {
     var newsfeed = document.querySelector('.newsfeed');
 
