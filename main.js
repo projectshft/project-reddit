@@ -17,6 +17,7 @@ button.addEventListener('click', function () {
     var postAuthor = document.getElementById('post-author').value;
 
     var newPostContainer = document.createElement('div');
+    newPostContainer.setAttribute('class', 'user-post');
 
     var newPostBody = document.createElement('p');
     var newPostBodyTextNode = document.createTextNode(postText);
@@ -49,13 +50,14 @@ button.addEventListener('click', function () {
     newsfeed.append(newPostContainer);
 
     var deletePost = function () {
-        console.log('Hello');
+        var post = document.getElementsByClassName('user-post')[0];
+        post.remove();
     };
     var deleteButton = document.getElementsByClassName('deleteButton')[0];
     deleteButton.addEventListener('click', deletePost);
 
     var commentOnPost = function () {
-        console.log('World');
+        console.log('hello');
     };
     var commentButton = document.getElementsByClassName('commentButton')[0];
     commentButton.addEventListener('click', commentOnPost);
