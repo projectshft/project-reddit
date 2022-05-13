@@ -1,3 +1,5 @@
+// Vanilla JS Version:
+
 // var button = document.getElementById('post-creation-submit-btn');
 
 // button.addEventListener('click', function () {
@@ -41,6 +43,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 Parzival, First to the Key
 */
+
+// jQuery Version
 
 var postNumber = 0
 
