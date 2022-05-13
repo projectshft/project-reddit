@@ -28,7 +28,11 @@ button.addEventListener('click', function () {
     var newPostDeleteButton = document.createElement('button');
     var newPostDeleteButtonTextNode = document.createTextNode('Delete Post');
     newPostDeleteButton.appendChild(newPostDeleteButtonTextNode);
-    newPostDeleteButton.setAttribute('class', 'btn btn-danger deleteButton');
+    newPostDeleteButton.setAttribute('class', 'btn btn-danger');
+    newPostDeleteButton.addEventListener('click', function () {
+        var post = $(this).closest('.user-post');
+        post.remove();
+    });
 
     var newPostHR = document.createElement('hr');
 
@@ -38,13 +42,6 @@ button.addEventListener('click', function () {
     newPostContainer.append(newPostHR);
 
     newsfeed.append(newPostContainer);
-
-    var deletePost = function () {
-        var post = document.getElementsByClassName('user-post')[0];
-        post.remove();
-    };
-    var deleteButton = document.getElementsByClassName('deleteButton')[0];
-    deleteButton.addEventListener('click', deletePost);
 });
 
 /* Dummy Text:
