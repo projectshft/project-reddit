@@ -11,8 +11,47 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="style.css" />
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js" defer></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
+      integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+      crossorigin="anonymous" defer>
+    </script>
     <script src="main.js" defer></script>
     <title>Document</title>
   </head>
-  <body></body>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+  
+          <div class="page-header">
+            <h1>ReReddit</h1>
+          </div>
+  
+          <div class="posts">
+          </div>
+  
+          <form style="margin-top:30px;" onsubmit="event.preventDefault();">
+            <h3>Add a new post</h3>
+            
+            <div class="form-group">
+              <input id="name" type="text"
+                class="form-control"
+                placeholder="Name"></input>
+            </div>
+            
+            <div class="form-group">
+              <textarea id="message" type="text"
+              class="form-control"
+              placeholder="Message"></textarea>
+            </div>
+            
+            <button id="submit" class="btn btn-primary">Post</button>
+          </form>
+  
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
