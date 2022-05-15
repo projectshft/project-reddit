@@ -1,10 +1,14 @@
+.page-header h1 {
+  font-weight: bold;
+}
+
 .post-container {
   border: black solid 1px;
   border-radius: 11px;
 }
 
 .post-padding {
-  padding: 0px 10px 10px;
+  padding: 0px 15px 15px;
 }
 
 .remove-button {
