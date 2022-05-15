@@ -1,18 +1,3 @@
-/*
-document.getElementById('submit').addEventListener('click', function () {
-  const target = document.getElementsByClassName('posts')[0];
-  const div = document.createElement('div');
-  const author = document.getElementById('name').value;
-  const message = document.getElementById('message').value;
-
-  div.innerHTML = 
-    `<p>${message}</p>
-    <p>Posted by: <strong>${author}</strong></p>
-    <hr>`;
-
-  target.appendChild(div);
-});
-*/
 const postState = {
   posts: [
     {
@@ -52,7 +37,7 @@ $('#submit').on('click', function () {
   const postText = $('#message')[0].value;
   $('.posts').append(`
   <div class="post-container">
-    <button type="button" class="btn btn-danger remove-button">
+    <button type="button" id="remove" class="btn btn-danger remove-button">
       <span class="glyphicon glyphicon-remove"></span>
     </button>
     <div class="post-padding">
@@ -74,4 +59,8 @@ $('#submit').on('click', function () {
     </div>
   </div>
   `);
+});
+
+$('.posts').on('click', 'button', function () {
+  $(this).parent().remove();
 });
