@@ -1,24 +1,35 @@
 body {
   background-color: #dae0e6;
+  font-family: "Libre Franklin", Verdana, sans-serif;
 }
+
 .page-header {
   margin-bottom: 0;
-  color: #ff4500;
+}
+
+.page-header img {
+  height: 48px;
+  margin-right: 10px;
 }
 
 .page-header h1 {
   font-weight: bold;
+  font-family: "Varela Round", sans-serif;
+}
+
+.title-logo {
+  color: #ff4500;
 }
 
 .post-container {
-  border: black solid 1px;
+  border: #cccccc solid 1px;
   border-radius: 11px;
   margin-top: 20px;
   background-color: white;
 }
 
 .post-padding {
-  padding: 5px 15px 15px;
+  padding: 5px 15px 0px;
 }
 
 .remove-button {
@@ -29,24 +40,36 @@ body {
 }
 
 .author p {
+  margin-top: 6px;
+  font-size: 0.8em;
+  color: #787c7e;
+}
+
+.title p {
   font-size: 20px;
   font-weight: bold;
-  margin-top: 6px;
+}
+
+.comment-link {
+  margin-bottom: 6px;
 }
 
 .comment-link a {
-  padding: 2px 5px;
-  border-radius: 5px;
-  background-color: #ebeeff;
-  margin-right: 5px;
+  padding: 7px 7px;
+  color: #878a8c;
 }
 
 .comment-link a:hover {
   text-decoration: none;
-  background-color: #a6d2f8;
+  background-color: #dfdfdf;
 }
 
 .comment-link a:focus {
   text-decoration: none;
   background-color: #a6d2f8;
+}
+
+.btn-primary {
+  background-color: #0079d3;
+  border-color: #0079d3;
 }

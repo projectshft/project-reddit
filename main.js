@@ -34,16 +34,21 @@ const postState = {
 
 $('#submit').on('click', function () {
   const postAuthor = $('#name')[0].value;
+  const postTitle = $('#title')[0].value;
   const postText = $('#message')[0].value;
+  
   $('.posts').append(`
   <div class="post-container">
     <button type="button" id="remove" class="btn btn-danger remove-button">
       <span class="glyphicon glyphicon-remove"></span>
     </button>
     <div class="post-padding">
-      <div class="row author-section">
+      <div class="row title-section">
         <div class="col-xs-10 author">
-          <p>${postAuthor}</p>
+          <p>Posted by u/${postAuthor}</p>
+        </div>
+        <div class="col-xs-10 title">
+          <p>${postTitle}</p>
         </div>
       </div>
       <div class="row text-section">
