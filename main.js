@@ -53,7 +53,9 @@ $('#submit').on('click', function () {
       </div>
       <div class="row comment-section">
         <div class="col-xs-12 comment-link">
-          <a href="#">Comments</a>
+          <a href="#"><i class="fa-regular fa-comment"></i> Comments</a>
+          <a href="#"><i class="fa-solid fa-share"></i> Share</a>
+          <a href="#"><i class="fa-regular fa-bookmark"></i> Save</a>
         </div>
       </div>
     </div>
