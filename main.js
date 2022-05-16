@@ -1,3 +1,4 @@
+// Add a post
 $('#post-form').on('submit', function (event) {
   event.preventDefault();
   const postAuthor = $('#name')[0].value;
@@ -34,7 +35,7 @@ $('#post-form').on('submit', function (event) {
     <div class="row comment-posts hidden">
       <div class="each-comment"></div>
       <div class="col-xs-10 col-xs-offset-1 comment-form">
-        <form>
+        <form id="comment-submission-form">
           <h5>Add a Comment</h5>
           <div class="form-group">
             <input
@@ -60,17 +61,22 @@ $('#post-form').on('submit', function (event) {
     </div>
   </div>
   `);
+
+  $('#post-form')[0].reset();
 });
 
+// Remove a post
 $('.posts').on('click', '#remove', function () {
   $(this).parent().remove();
 });
 
+// Toggle showing/hiding comments
 $('.posts').on('click', '#comments', function () {
   $(this).parents('.post-padding').siblings('.comment-posts').toggleClass('hidden');
   return false;
 });
 
+// Add a comment
 $('.posts').on('click', '#submit-comment', function () {
   const commentAuthor = $(this).siblings('div.form-group').children('#comment-name').val()
   const commentText = $(this).siblings('div.form-group').children('#comment-text').val();
@@ -84,8 +90,11 @@ $('.posts').on('click', '#submit-comment', function () {
       <p>${commentText}</p>
     </div>
   `);
+
+  $('#comment-submission-form')[0].reset();
 });
 
+// Remove a comment
 $('.posts').on('click', '#comment-remove', function () {
   $(this).parent().remove();
 });
