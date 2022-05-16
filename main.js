@@ -1,4 +1,5 @@
-$('#submit').on('click', function () {
+$('#post-form').on('submit', function (event) {
+  event.preventDefault();
   const postAuthor = $('#name')[0].value;
   const postTitle = $('#title')[0].value;
   const postText = $('#message')[0].value;
@@ -33,10 +34,11 @@ $('#submit').on('click', function () {
     <div class="row comment-posts hidden">
       <div class="each-comment"></div>
       <div class="col-xs-10 col-xs-offset-1 comment-form">
-        <form onsubmit="event.preventDefault();">
+        <form>
           <h5>Add a Comment</h5>
           <div class="form-group">
             <input
+              required 
               id="comment-name"
               type="text"
               class="form-control"
@@ -45,13 +47,14 @@ $('#submit').on('click', function () {
           </div>
           <div class="form-group">
             <textarea
+              required 
               id="comment-text"
               type="text"
               class="form-control"
               placeholder="Type Your Comment Here"
             ></textarea>
           </div>
-          <button type="button" id="submit-comment" class="btn btn-primary">Comment</button>
+          <button id="submit-comment" type="button" class="btn btn-primary">Comment</button>
         </form>
       </div>
     </div>

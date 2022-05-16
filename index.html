@@ -27,7 +27,7 @@
       defer
     ></script>
     <script src="main.js" defer></script>
-    <title>rereddit</title>
+    <title>rereddit - Definitely Not Reddit</title>
   </head>
   <body>
     <div class="container">
@@ -43,11 +43,12 @@
         >
           <div class="posts"></div>
 
-          <form class="post-form" onsubmit="event.preventDefault();">
+          <form id="post-form">
             <h3>Create a Post</h3>
 
             <div class="form-group">
               <input
+                required
                 id="name"
                 type="text"
                 class="form-control"
@@ -57,6 +58,7 @@
 
             <div class="form-group">
               <input
+                required
                 id="title"
                 type="text"
                 class="form-control"
@@ -66,6 +68,7 @@
 
             <div class="form-group">
               <textarea
+                required
                 id="message"
                 type="text"
                 class="form-control"
