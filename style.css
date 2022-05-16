@@ -86,15 +86,32 @@ body {
   font-weight: bold;
 }
 
+#comment-remove {
+  background-color: #ff6a33;
+  border-color: #ff6a33;
+  border-radius: 0px 10px 0px 10px;
+  margin-right: -15px;
+  padding: 1px 3px;
+}
+
 .comment-text {
   background-color: #dae6da;
   border: solid #ccc 1px;
-  border-radius: 10px;
+  border-radius: 11px;
   margin-top: 15px;
 }
 
 .comment-text .author {
   margin-bottom: 0px;
+}
+
+.post-form {
+  margin-top: 30px;
+}
+
+.post-form h3 {
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .hidden {

@@ -74,8 +74,15 @@ $('.posts').on('click', '#submit-comment', function () {
 
   $(this).parents('.comment-posts').children('.each-comment').append(`
     <div class="col-xs-10 col-xs-offset-1 comment-text">
+      <button type="button" id="comment-remove" class="btn btn-danger remove-button">
+        <span class="glyphicon glyphicon-remove"></span>
+      </button>
       <p class="author">Comment by u/${commentAuthor}</p>
       <p>${commentText}</p>
     </div>
   `);
+});
+
+$('.posts').on('click', '#comment-remove', function () {
+  $(this).parent().remove();
 });
