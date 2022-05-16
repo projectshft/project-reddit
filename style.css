@@ -3,22 +3,28 @@ body {
   font-family: "Libre Franklin", Verdana, sans-serif;
 }
 
-.page-header {
-  margin-bottom: 0;
+nav {
+  padding: 5px 20px 0px;
 }
 
-.page-header img {
-  height: 48px;
+.navbar img {
+  height: 38px;
   margin-right: 10px;
 }
 
-.page-header h1 {
+.navbar p {
+  font-size: 2em;
   font-weight: bold;
   font-family: "Varela Round", sans-serif;
+  margin: 0px;
 }
 
 .title-logo {
   color: #ff4500;
+}
+
+.avoid-nav {
+  margin-top: 50px;
 }
 
 .post-container {
