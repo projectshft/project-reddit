@@ -1,9 +1,9 @@
 // Add a post
 $('#post-form').on('submit', function (event) {
   event.preventDefault();
-  const postAuthor = $('#name')[0].value;
-  const postTitle = $('#title')[0].value;
-  const postText = $('#message')[0].value;
+  const $postAuthor = $('#name').val();
+  const $postTitle = $('#title').val();
+  const $postText = $('#message').val();
   
   $('.posts').append(`
   <div class="post-container">
@@ -13,15 +13,15 @@ $('#post-form').on('submit', function (event) {
     <div class="post-padding">
       <div class="row title-section">
         <div class="col-xs-10 author">
-          <p>Posted by u/${postAuthor}</p>
+          <p>Posted by u/${$postAuthor}</p>
         </div>
         <div class="col-xs-10 title">
-          <p>${postTitle}</p>
+          <p>${$postTitle}</p>
         </div>
       </div>
       <div class="row text-section">
         <div class="col-xs-12 text">
-          <p>${postText}</p>
+          <p>${$postText}</p>
         </div>
       </div>
       <div class="row comment-section">
@@ -78,20 +78,20 @@ $('.posts').on('click', '#comments', function () {
 
 // Add a comment
 $('.posts').on('click', '#submit-comment', function () {
-  const commentAuthor = $(this).siblings('div.form-group').children('#comment-name').val()
-  const commentText = $(this).siblings('div.form-group').children('#comment-text').val();
+  const $commentAuthor = $(this).siblings('div.form-group').children('#comment-name').val()
+  const $commentText = $(this).siblings('div.form-group').children('#comment-text').val();
 
   $(this).parents('.comment-posts').children('.each-comment').append(`
     <div class="col-xs-10 col-xs-offset-1 comment-text">
       <button type="button" id="comment-remove" class="btn btn-danger remove-button">
         <span class="glyphicon glyphicon-remove"></span>
       </button>
-      <p class="author">Comment by u/${commentAuthor}</p>
-      <p>${commentText}</p>
+      <p class="author">Comment by u/${$commentAuthor}</p>
+      <p>${$commentText}</p>
     </div>
   `);
 
-  $('#comment-submission-form')[0].reset();
+  $(this).parents('#comment-submission-form')[0].reset();
 });
 
 // Remove a comment
