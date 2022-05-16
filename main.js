@@ -52,5 +52,6 @@ $(document).ready(() => {
   // Reset Word Count //
   $('.submit').click(() => {
     $('.wordsToCount').html('150');
+    $('.count').removeClass('text-danger');
   });
 });
