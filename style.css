@@ -96,3 +96,7 @@ body {
 .comment-text .author {
   margin-bottom: 0px;
 }
+
+.hidden {
+  display: none;
+}

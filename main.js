@@ -64,10 +64,52 @@ $('#submit').on('click', function () {
         </div>
       </div>
     </div>
+    <div class="row comment-posts hidden">
+      <div class="each-comment"></div>
+      <div class="col-xs-10 col-xs-offset-1 comment-form">
+        <form onsubmit="event.preventDefault();">
+          <h5>Add a Comment</h5>
+          <div class="form-group">
+            <input
+              id="comment-name"
+              type="text"
+              class="form-control"
+              placeholder="Your Name"
+            />
+          </div>
+          <div class="form-group">
+            <textarea
+              id="comment-text"
+              type="text"
+              class="form-control"
+              placeholder="Type Your Comment Here"
+            ></textarea>
+          </div>
+          <button type="button" id="submit-comment" class="btn btn-primary">Comment</button>
+        </form>
+      </div>
+    </div>
   </div>
   `);
 });
 
-$('.posts').on('click', 'button', function () {
+$('.posts').on('click', '#remove', function () {
   $(this).parent().remove();
+});
+
+$('.posts').on('click', 'a', function () {
+  $('.comment-posts').toggleClass('hidden');
+});
+
+$('.posts').on('click', '#submit-comment', function () {
+  const commentAuthor = $(this).siblings('div.form-group').children('#comment-name').val()
+  const commentText = $(this).siblings('div.form-group').children('#comment-text').val();
+
+  $(this).parents('.comment-posts').children('.each-comment').append(`
+    <div class="col-xs-10 col-xs-offset-1 comment-text">
+      <p class="author">Comment by u/${commentAuthor}</p>
+      <p>${commentText}</p>
+    </div>
+  `);
+
 });
