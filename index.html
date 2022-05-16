@@ -22,10 +22,9 @@
   </head>
   <body class="bg-light">
     <!-- Navigation -->
-
     <nav class="navbar bg-primary navbar-expand-lg py-3">
       <div class="container d-flex justify-content-start">
-        <i class="bi bi-dice-3 m-2"></i>
+        <i class="bi bi-controller m-2 h3"></i>
         <a class="navbar-brand text-light" href="#">Project Reddit</a>
       </div>
     </nav>
@@ -33,6 +32,7 @@
     <div class="posts container d-flex flex-column p-3">
       <!-- Posts are going to live here-->
     </div>
+
     <!-- Name and Comments -->
     <div class="container d-flex flex-column p-3">
       <div class="mb-3">
@@ -52,6 +52,9 @@
           placeholder="Type your comment here"
           rows="3"
         ></textarea>
+        <p class="count text-primary">
+          <span class="wordsToCount">150</span> characters remaining
+        </p>
         <button type="submit" class="submit btn btn-primary mt-2">
           Submit
         </button>
