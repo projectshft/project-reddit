@@ -1,37 +1,3 @@
-const postState = {
-  posts: [
-    {
-      author: 'Andrew',
-      text: 'What an amazing post!',
-      comments: [
-        {
-          author: 'Eliza',
-          text: 'Yes, it is!',
-        },
-        {
-          author: 'Alecia',
-          text: "Couldn't agree more!"
-        }
-      ]
-    },
-    {
-      author: 'Eliza',
-      text: 'But mine is even better.',
-      comments: [
-        {
-          author: 'Drew',
-          text: 'My post!',
-        },
-      ]
-    },
-    {
-      author: 'Alecia',
-      text: 'But what about mine?',
-      comments: []
-    }
-  ],
-};
-
 $('#submit').on('click', function () {
   const postAuthor = $('#name')[0].value;
   const postTitle = $('#title')[0].value;
@@ -58,7 +24,7 @@ $('#submit').on('click', function () {
       </div>
       <div class="row comment-section">
         <div class="col-xs-12 comment-link">
-          <a href="#"><i class="fa-regular fa-comment"></i> Comments</a>
+          <a href="#" id="comments"><i class="fa-regular fa-comment"></i> Comments</a>
           <a href="#"><i class="fa-solid fa-share"></i> Share</a>
           <a href="#"><i class="fa-regular fa-bookmark"></i> Save</a>
         </div>
@@ -97,8 +63,9 @@ $('.posts').on('click', '#remove', function () {
   $(this).parent().remove();
 });
 
-$('.posts').on('click', 'a', function () {
-  $('.comment-posts').toggleClass('hidden');
+$('.posts').on('click', '#comments', function () {
+  $(this).parents('.post-padding').siblings('.comment-posts').toggleClass('hidden');
+  return false;
 });
 
 $('.posts').on('click', '#submit-comment', function () {
@@ -111,5 +78,4 @@ $('.posts').on('click', '#submit-comment', function () {
       <p>${commentText}</p>
     </div>
   `);
-
 });
