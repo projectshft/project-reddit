@@ -1,10 +1,14 @@
-const postArray = []
-
-const postToArray = (comment) => {
-  postArray.push(comment);
+const stateObject = {
+  array: []
 }
 
-const postArrayMapped = postArray.map(array => `<p>${array}</p>`)
+const stateObjectArray = stateObject.array;
+
+const postToArray = (comment) => {
+  stateObjectArray.push(comment);
+}
+
+const postArrayMapped = stateObjectArray.map(array => `<p>${array}</p>`)
 
 const content = $('#content-post').append(postArrayMapped);
 
