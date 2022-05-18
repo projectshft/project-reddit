@@ -1,7 +1,10 @@
-const postArray = ['asf', 'asdf']
+const postArray = []
+
+const postToArray = (comment) => {
+  postArray.push(comment);
+}
 
 const postArrayMapped = postArray.map(array => `<p>${array}</p>`)
-
 
 const content = $('#content-post').append(postArrayMapped);
 
