@@ -1,6 +1,7 @@
 const postState = [];
 
 const text = $('#text-box').val();
+const name = $('#name-box').val();
 
 const formatter = (text, name) => {
   return `<p>${text} - Posted by: ${name}</p>`
@@ -35,7 +36,7 @@ const submitPost = (array, location, text, name) => {
 
 }
 
-submitPost(postState, '#content-post', text, 'jujubug');
+submitPost(postState, '#content-post', text, name);
 
 //create post test
 //use input values
