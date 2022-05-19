@@ -1,5 +1,7 @@
 const postState = [];
 
+const text = $('#text-box').val();
+
 const formatter = (text, name) => {
   return `<p>${text} - Posted by: ${name}</p>`
 }
@@ -7,9 +9,6 @@ const formatter = (text, name) => {
 const arrayPusher = (array, formattedElement) => {
   array.push(formattedElement);
 }
-
-arrayPusher(postState, formatter('hello', 'a human'));
-arrayPusher(postState, formatter('hello back', 'a non-human'));
 
 const mapper = (array) => {
   array.map(arr => arr)
@@ -36,8 +35,7 @@ const submitPost = (array, location, text, name) => {
 
 }
 
-submitPost(postState, '#content-post', 'testing 1, 2, 3', 'jujubug');
-submitPost(postState, '#content-post', 'test again', 'Bew bew')
+submitPost(postState, '#content-post', text, 'jujubug');
 
 //create post test
 //use input values
