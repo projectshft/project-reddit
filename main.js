@@ -1,9 +1,15 @@
 const postState = [];
 
+const formatter = (text, name) => {
+  return `<p>${text} - Posted by: ${name}`
+}
 
-//create array
+const arrayPusher = (array, formattedElement) => {
+  array.push(formattedElement);
+}
+
 //clear appended
-//push to array
+//function push to array
 //create formatter
 //map formatted
 //re-append
