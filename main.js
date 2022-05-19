@@ -8,11 +8,17 @@ const arrayPusher = (array, formattedElement) => {
   array.push(formattedElement);
 }
 
+arrayPusher(postState, formatter('hello', 'a human'));
+arrayPusher(postState, formatter('hello back', 'a non-human'));
 
+const mapper = (array) => {
+  array.map(arr => arr)
+  return array;
+}
+
+console.log(mapper(postState))
 //clear appended
-//function push to array
-//create formatter
-//map formatted
+//function to map formatted
 //re-append
 
 
