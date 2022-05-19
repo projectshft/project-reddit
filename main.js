@@ -20,7 +20,12 @@ const appender = (string, location) => {
   $(`${location}`).append(string)
 }
 
+const remover = (location) => {
+  $(`${location}`).remove();
+}
+
 appender('hello', '#content-post');
+remover('#content-post')
 
 //function with append functionality
 //funcrtion with remove functionality
