@@ -36,7 +36,8 @@ const submitPost = (array, location, text, name) => {
 
 }
 
-submitPost(postState, '#content-post', text, name);
+
+$('.btn').click(() => submitPost(postState, '#content-post', text, name))
 
 //create post test
 //use input values
