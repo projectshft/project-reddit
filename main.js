@@ -1,5 +1,30 @@
+const postState = [];
 
 
+//create array
+//clear appended
+//push to array
+//create formatter
+//map formatted
+//re-append
+
+
+
+
+
+
+
+
+
+// var text = $('#text-box').val();
+
+// const click = (comment) => {
+//   $('#content-post').append(`<p>${comment}</p>`);
+// }
+
+// $('.btn').click(() => {
+//   click(text)
+// })
 
 
 
