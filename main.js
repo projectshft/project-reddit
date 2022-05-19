@@ -16,19 +16,31 @@ const mapper = (array) => {
   return array;
 }
 
-const appender = (string, location) => {
-  $(`${location}`).append(string)
+const appender = (toAppend, location) => {
+  $(`${location}`).append(toAppend)
 }
 
 const remover = (location) => {
   $(`${location}`).remove();
 }
 
-appender('hello', '#content-post');
-remover('#content-post')
 
-//function with append functionality
-//funcrtion with remove functionality
+const submitPost = (array, location, text, name) => {
+  remover(location);
+
+  const formatted = formatter(text, name);
+
+  arrayPusher(array, formatted);
+
+  appender(array, location)
+
+}
+
+submitPost(postState, '#content-post', 'testing 1, 2, 3', 'jujubug');
+submitPost(postState, '#content-post', 'test again', 'Bew bew')
+
+//create post test
+//use input values
 
 
 //clear appended
