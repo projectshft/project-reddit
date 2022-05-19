@@ -16,9 +16,17 @@ const mapper = (array) => {
   return array;
 }
 
-console.log(mapper(postState))
+const appender = (string, location) => {
+  $(`${location}`).append(string)
+}
+
+appender('hello', '#content-post');
+
+//function with append functionality
+//funcrtion with remove functionality
+
+
 //clear appended
-//function to map formatted
 //re-append
 
 
