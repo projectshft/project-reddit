@@ -20,13 +20,13 @@ const appender = (toAppend, location) => {
   $(`${location}`).append(toAppend)
 }
 
-const remover = (location) => {
-  $(`${location}`).remove();
+const emptyer = (location) => {
+  $(`${location}`).empty();
 }
 
 
 const submitPost = (array, location, text, name) => {
-  remover(location);
+  emptyer(location);
 
   const formatted = formatter(text, name);
 
