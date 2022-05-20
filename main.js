@@ -37,6 +37,8 @@ const submitPost = (array, location) => {
 
   appender(array, location)
 
+  $('#text-box').val('');
+  $('#name-box').val('');
 }
 
 $('.btn').click(() => submitPost(postState, '#content-post'))
