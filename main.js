@@ -1,7 +1,7 @@
 const postState = [];
 
-const text = $('#text-box').val();
-const name = $('#name-box').val();
+
+
 
 const formatter = (text, name) => {
   return `<p>${text} - Posted by: ${name}</p>`
@@ -25,7 +25,10 @@ const emptyer = (location) => {
 }
 
 
-const submitPost = (array, location, text, name) => {
+const submitPost = (array, location) => {
+  const text = $('#text-box').val();
+  const name = $('#name-box').val();
+
   emptyer(location);
 
   const formatted = formatter(text, name);
@@ -36,8 +39,7 @@ const submitPost = (array, location, text, name) => {
 
 }
 
-
-$('.btn').click(() => submitPost(postState, '#content-post', text, name))
+$('.btn').click(() => submitPost(postState, '#content-post'))
 
 //create post test
 //use input values
