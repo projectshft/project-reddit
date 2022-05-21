@@ -5,6 +5,10 @@ $('#post-form').on('submit', function (event) {
   const $postTitle = $('#title').val();
   const $postText = $('#message').val();
   
+  if (!$postTitle || !$postAuthor || !$postText) {
+    return alert('Please complete all fields to submit your post.');
+  }
+
   $('.posts').append(`
   <div class="post-container">
     <button type="button" id="remove" class="btn btn-danger remove-button">
@@ -39,7 +43,6 @@ $('#post-form').on('submit', function (event) {
           <h5>Add a Comment</h5>
           <div class="form-group">
             <input
-              required 
               id="comment-name"
               type="text"
               class="form-control"
@@ -48,7 +51,6 @@ $('#post-form').on('submit', function (event) {
           </div>
           <div class="form-group">
             <textarea
-              required 
               id="comment-text"
               type="text"
               class="form-control"
@@ -65,10 +67,16 @@ $('#post-form').on('submit', function (event) {
   $('#post-form')[0].reset();
 });
 
-// Remove a post
-$('.posts').on('click', '#remove', function () {
+// Helper function to remove posts or comments
+const postCommentRemover = function () {
   $(this).parent().remove();
-});
+};
+
+// Remove a post
+$('.posts').on('click', '#remove', postCommentRemover);
+
+// Remove a comment
+$('.posts').on('click', '#comment-remove', postCommentRemover);
 
 // Toggle showing/hiding comments
 $('.posts').on('click', '#comments', function () {
@@ -81,6 +89,10 @@ $('.posts').on('click', '#submit-comment', function () {
   const $commentAuthor = $(this).siblings('div.form-group').children('#comment-name').val()
   const $commentText = $(this).siblings('div.form-group').children('#comment-text').val();
 
+  if (!$commentAuthor || !$commentText) {
+    return alert('Please complete all fields to submit your comment.');
+  }
+
   $(this).parents('.comment-posts').children('.each-comment').append(`
     <div class="col-xs-10 col-xs-offset-1 comment-text">
       <button type="button" id="comment-remove" class="btn btn-danger remove-button">
@@ -92,9 +104,4 @@ $('.posts').on('click', '#submit-comment', function () {
   `);
 
   $(this).parents('#comment-submission-form')[0].reset();
-});
-
-// Remove a comment
-$('.posts').on('click', '#comment-remove', function () {
-  $(this).parent().remove();
 });
