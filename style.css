@@ -107,6 +107,10 @@ nav {
   margin-top: 15px;
 }
 
+.comment-text {
+  font-family: "Noto Sans", Arial, Helvetica, sans-serif;
+}
+
 .comment-text .author {
   margin-bottom: 0px;
 }

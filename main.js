@@ -98,7 +98,7 @@ $('.posts').on('click', '#submit-comment', function () {
       <button type="button" id="comment-remove" class="btn btn-danger remove-button">
         <span class="glyphicon glyphicon-remove"></span>
       </button>
-      <p class="author">Comment by u/${$commentAuthor}</p>
+      <p class="author">${$commentAuthor}</p>
       <p>${$commentText}</p>
     </div>
   `);
