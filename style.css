@@ -1,0 +1,129 @@
+body {
+  background-color: #dae0e6;
+  font-family: "Libre Franklin", Verdana, sans-serif;
+}
+
+nav {
+  padding: 5px 20px 0px;
+}
+
+.navbar img {
+  height: 38px;
+  margin-right: 10px;
+}
+
+.navbar p {
+  font-size: 2em;
+  font-weight: bold;
+  font-family: "Varela Round", sans-serif;
+  margin: 0px;
+}
+
+.title-logo {
+  color: #ff4500;
+}
+
+.avoid-nav {
+  margin-top: 50px;
+}
+
+.post-container {
+  border: #cccccc solid 1px;
+  border-radius: 6px;
+  margin-top: 20px;
+  background-color: white;
+}
+
+.post-padding {
+  padding: 5px 15px 0px;
+}
+
+.remove-button {
+  float: right;
+  border-radius: 0px 5px 0px 5px;
+  padding: 3px 6px;
+  background-color: #ff4500;
+}
+
+.author {
+  margin-top: 6px;
+  font-size: 0.8em;
+  color: #787c7e;
+}
+
+.title p {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.comment-link {
+  margin-bottom: 6px;
+}
+
+.comment-link a {
+  padding: 7px 7px;
+  color: #878a8c;
+}
+
+.comment-link a:hover {
+  text-decoration: none;
+  background-color: #dfdfdf;
+}
+
+.comment-link a:focus {
+  text-decoration: none;
+  background-color: #a6d2f8;
+}
+
+.btn-primary {
+  background-color: #0079d3;
+  border-color: #0079d3;
+}
+
+.comment-posts {
+  padding-bottom: 15px;
+}
+
+.comment-form {
+  margin-top: 10px;
+}
+
+.comment-form h5 {
+  font-weight: bold;
+}
+
+#comment-remove {
+  background-color: #ff6a33;
+  border-color: #ff6a33;
+  border-radius: 0px 10px 0px 10px;
+  margin-right: -15px;
+  padding: 1px 3px;
+}
+
+.comment-text {
+  background-color: #dae6da;
+  border: solid #ccc 1px;
+  border-radius: 11px;
+  margin-top: 15px;
+}
+
+.comment-text {
+  font-family: "Noto Sans", Arial, Helvetica, sans-serif;
+}
+
+.comment-text .author {
+  margin-bottom: 0px;
+}
+
+#post-form {
+  margin-top: 30px;
+}
+
+#post-form h3 {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.hidden {
+  display: none;
+}
