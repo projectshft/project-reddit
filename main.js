@@ -55,9 +55,38 @@ var deletePost = function(e) {
 };
 
 var editPost = function(e) {
-    var parentPost = $(e.target).parent().parent().parent();
+    var $button = $(e.target)
+    var $parentPost = $button.parent().parent().parent();
+    var $parentPostcontent = $parentPost.children().first();
+    var $text = $parentPostcontent.children().first();
+    
+    //check if post is currently in editing or not
+    if ($button.hasClass("btn-warning")) {
+        //if currently in editing
+        //make a new <p> with the edited text
+        //$text is now the editable area
+        var $editedText = $("<p></p>");
+        $editedText.text($text.val());
+
+        //replace editable text area with edited text
+        $text.replaceWith($editedText);
+    } else {
+        //if not currently in editing
+        //create editable text area
+        var $formGroup = $("<div></div>");
+        $formGroup.addClass("form-group");
+        var $editArea = $("<textarea></textarea>");
+        $editArea.addClass("form-control");
+        $editArea.attr("type", "text");
+        $editArea.text($text.html());
+
+        //replace current text with editable text area
+        $text.replaceWith($editArea);
+    }
+
+    $button.toggleClass("btn-warning");
 };
 
 var expandPost = function() {
-
+    //more code here
 };
