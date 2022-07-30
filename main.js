@@ -7,6 +7,11 @@ $submitBtn.click(function() {
     var name = $inputName.val();
     var message = $inputPost.val();
 
+    //check if BOTH name and message are nonempty
+    if (!(name && message)) {
+        return false;
+    }
+
     //create div for the whole "post"
     var $post = $("<div></div>");
     $post.addClass("panel");
@@ -41,6 +46,7 @@ $submitBtn.click(function() {
     $posts.append($post);
 });
 
+//creates Bootstrap buttons with an click event listener
 var createButton = function(icon, func, bootstrapStyle="default") {
     var $newButton = $("<button></button>");
     $newButton.addClass(`btn btn-${bootstrapStyle}`);
@@ -58,7 +64,7 @@ var editPost = function(e) {
     var $button = $(e.target)
     var $parentPost = $button.parent().parent().parent();
     var $parentPostcontent = $parentPost.children().first();
-    var $text = $parentPostcontent.children().first();
+    var $text = $parentPostcontent.children().first().children().first();
     
     //check if post is currently in editing or not
     if ($button.hasClass("btn-warning")) {
