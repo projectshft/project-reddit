@@ -3,31 +3,37 @@ var $submitBtn = $("#submit");
 var $inputPost = $("#post-text");
 var $inputName = $("#name");
 
-//used for creating unique post IDs
-var postCount = 0;
-
 //boolean to check if 
 var isViewingComments = false;
+
 
 $submitBtn.click(function() {
     var name = $inputName.val();
     var message = $inputPost.val();
 
+    //used to identify post when commenting
+    var parentPostId = $submitBtn.attr("data-post-to-append");
+
     //check if BOTH name and message are nonempty
     if (!(name && message)) {
         return false;
     }
+    
 
-    (isViewingComments) ? createComment(name, message) : createPost(name, message);
+    //create Post or Comment
+    (isViewingComments) ? createComment(name, message, parentPostId) : createPost(name, message);
+    
+    //reset fields
+    $inputName.val("");
+    $inputPost.val("");
     
 });
 
 var createPost = function(name, message) {
-    //increment post count, used for creating unique post id
-    //think of a way to do ids disconnected with the number of posts (getUTC?)
-    
+    //generate unique ids
     var randomString = generateString();
-    var postId = randomString + Date.now();
+    var UTC = Date.now();
+    var postId = randomString + UTC;
 
     //create div for the whole "post"
     var $post = $("<div></div>");
@@ -45,14 +51,16 @@ var createPost = function(name, message) {
     var $commentButton = $("<button></button>");
     $commentButton.addClass("btn-link");
     $commentButton.text("view comments");
+    $commentButton.attr({"data-parent": postId});
     $commentButton.click(toggleComments);
 
     //create comment section for post
     var $comments = $("<div></div>");
     $comments.attr({
-        "data-id" : `comments-${postCount}`,
+        "data-parent" : postId,
         "class" : "panel-group"
     });
+    //$comments.text("Hi");
     $comments.css("display", "none");
 
     $content.append("<p>" + message +"</p>"); 
@@ -65,8 +73,18 @@ var createPost = function(name, message) {
     $content.addClass("col-1-xs-offset-2");
     
     //work ids into the buttons
-    var $deleteBtn = createButton("trash", deletePost,"danger");
-    var $editBtn = createButton("pencil", editPost);
+    var $deleteBtn = createButton("trash", "danger");
+    $deleteBtn.click(function() {
+        var $parentPost = $(document).find(`div[data-id="${postId}"]`);
+        $parentPost.remove();
+    });
+
+    var $editBtn = createButton("pencil");
+    //$editBtn.click(function() {
+    //    var $parentPost = $(document).find(`div[data-id="${postId}]`);
+    //    console.log($parentPost);
+    //    editPost($parentPost);
+    //})
 
     $buttons.append($editBtn, $deleteBtn);
 
@@ -76,61 +94,55 @@ var createPost = function(name, message) {
 };
 
 //creates Bootstrap buttons with an click event listener
-var createButton = function(icon, func, bootstrapStyle="default") {
+var createButton = function(icon, bootstrapStyle="default") {
     var $newButton = $("<button></button>");
     $newButton.addClass(`btn btn-${bootstrapStyle}`);
     $newButton.append('<i class="fa fa-'+icon+'"></i>');
-    $newButton.click(func);
     return $newButton;
 };
 
-var deletePost = function(e) {
-    var $parentPost = $(e.target).parent().parent().parent();
-    $parentPost.remove();
-};
-
-var editPost = function(e) {
-    var $button = $(e.target);
-    var $parentPost = $button.parent().parent().parent();
-    var $parentPostcontent = $parentPost.children().first();
-    var $text = $parentPostcontent.children().first().children().first();
-    
-    //check if post is currently in editing or not
-    if ($button.hasClass("btn-warning")) {
-        //if currently in editing
-        //make a new <p> with the edited text
-        //$text is now the editable area
-        var $editedText = $("<p></p>");
-        $editedText.text($text.val());
-
-        //replace editable text area with edited text
-        $text.replaceWith($editedText);
-    } else {
-        //if not currently in editing
-        //create editable text area
-        var $formGroup = $("<div></div>");
-        $formGroup.addClass("form-group");
-        var $editArea = $("<textarea></textarea>");
-        $editArea.addClass("form-control");
-        $editArea.attr("type", "text");
-        $editArea.text($text.html());
-
-        //replace current text with editable text area
-        $text.replaceWith($editArea);
-    }
-
-    $button.toggleClass("btn-warning");
-};
+//var editPost = function($parentPost) {
+//    console.log($parentPost);
+//    var $text = $parentPost.child();
+//    console.log($text);
+//    
+//    //check if post is currently in editing or not
+//    if ($text.hasClass("form-group")) {
+//        //if currently in editing
+//        //make a new <p> with the edited text
+//        //$text is now the editable area
+//        var $editedText = $("<p></p>");
+//        $editedText.text($text.val());
+//
+//        //replace editable text area with edited text
+//        $text.replaceWith($editedText);
+//    } else {
+//        //if not currently in editing
+//        //create editable text area
+//        var $formGroup = $("<div></div>");
+//        $formGroup.addClass("form-group");
+//        var $editArea = $("<textarea></textarea>");
+//        $editArea.addClass("form-control");
+//        $editArea.attr("type", "text");
+//        $editArea.text($text.html());
+//
+//        //replace current text with editable text area
+//        $text.replaceWith($editArea);
+//    }
+//
+//    //$button.toggleClass("btn-warning");
+//};
 
 var toggleComments = function(e) {
     var $button = $(e.target);
-    var $parentPost = $button.parent().parent();
-    var parentPostId = $parentPost.attr("data-id");
-    var $commentSection = $(`div[data-id="comments-${parentPostId}"]`);
+    console.log($button);
+    var parentPostId = $button.attr("data-parent");
+    var $parentPost = $(`div[data-id="${parentPostId}"]`);
+    var $commentSection = $(`div[data-parent="${parentPostId}"]`);
 
     if (isViewingComments) {
         //show other posts
-        $parentPost.siblings().show();
+        $parentPost.siblings().css("display", "block");
         //change button text
         $button.text("view comments");
         //change bool
@@ -139,7 +151,7 @@ var toggleComments = function(e) {
         $commentSection.css("display", "none");
     } else {
         //hide other posts
-        $parentPost.siblings().hide();
+        $parentPost.siblings().css("display", "none");
         //change button text
         $button.text("hide comments");
         //change bool
@@ -149,25 +161,26 @@ var toggleComments = function(e) {
     }
 
     //change text of forms
-    toggleForm();
+    toggleForm(parentPostId);
 };
 
-var toggleForm = function() {
+var toggleForm = function(postToAppend) {
     if (isViewingComments) {
         $inputPost.attr("placeholder", "Comment Text");
         $submitBtn.text("Submit Comment");
+        $submitBtn.attr("data-post-to-append", postToAppend);
     } else {
         $inputPost.attr("placeholder", "Post Text");
         $submitBtn.text("Submit Post");
+        $submitBtn.attr("data-post-to-append", "");
     }
 }
 
-var createComment = function(name, message) {
-    var $parentPost = $posts.children("div[display='block']");
-    var parentPostId = $parentPost.attr("data-id");
-    var $commentSection = $parentPost.find(`div[data-id="comments-${parentPostId}"]`);
+var createComment = function(name, message, parentPostId) {
+    var $parentPost = $posts.children(`div[data-id="${parentPostId}"]`);
+    var $commentSection = $parentPost.find(`div[data-parent="${parentPostId}"]`);
 
-
+    console.log($commentSection);   
 
     //build comment
     var $comment = $("<div>");
