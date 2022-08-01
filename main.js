@@ -5,6 +5,7 @@ var $inputName = $("#name");
 
 //boolean to check if 
 var isViewingComments = false;
+var isEditing = false;
 
 
 $submitBtn.click(function() {
@@ -63,7 +64,7 @@ var createPost = function(name, message) {
     //$comments.text("Hi");
     $comments.css("display", "none");
 
-    $content.append("<p>" + message +"</p>"); 
+    $content.append(`<p data-parent="${postId}">` + message +"</p>"); 
     $content.append("<p>Posted by: " + name + "</p>");
     $content.append($commentButton);
     $content.append($comments);
@@ -80,11 +81,10 @@ var createPost = function(name, message) {
     });
 
     var $editBtn = createButton("pencil");
-    //$editBtn.click(function() {
-    //    var $parentPost = $(document).find(`div[data-id="${postId}]`);
-    //    console.log($parentPost);
-    //    editPost($parentPost);
-    //})
+    $editBtn.attr("data-id", `e${postId}`);
+    $editBtn.click(function() {
+        editPost(postId, $editBtn.attr("data-id"));
+    });
 
     $buttons.append($editBtn, $deleteBtn);
 
@@ -101,37 +101,44 @@ var createButton = function(icon, bootstrapStyle="default") {
     return $newButton;
 };
 
-//var editPost = function($parentPost) {
-//    console.log($parentPost);
-//    var $text = $parentPost.child();
-//    console.log($text);
-//    
-//    //check if post is currently in editing or not
-//    if ($text.hasClass("form-group")) {
-//        //if currently in editing
-//        //make a new <p> with the edited text
-//        //$text is now the editable area
-//        var $editedText = $("<p></p>");
-//        $editedText.text($text.val());
-//
-//        //replace editable text area with edited text
-//        $text.replaceWith($editedText);
-//    } else {
-//        //if not currently in editing
-//        //create editable text area
-//        var $formGroup = $("<div></div>");
-//        $formGroup.addClass("form-group");
-//        var $editArea = $("<textarea></textarea>");
-//        $editArea.addClass("form-control");
-//        $editArea.attr("type", "text");
-//        $editArea.text($text.html());
-//
-//        //replace current text with editable text area
-//        $text.replaceWith($editArea);
-//    }
-//
-//    //$button.toggleClass("btn-warning");
-//};
+var editPost = function(parentPostId, buttonId) {
+    //var $text = $(`p[data-parent="${parentPostId}"]`);
+    //var $edit = $(`input[data-parent="${parentPostId}"]`);
+    var $button = $(`button[data-id="${buttonId}"]`);
+    
+    //check if ediitng
+    if (isEditing) {
+        var $edit = $(`input[data-parent="${parentPostId}"]`);
+
+        //make p to replace $edit with
+        var $text = $("<p></p>");
+        $text.attr({
+            "data-parent": parentPostId
+        });
+        $text.text($edit.val());
+        //replace
+        $edit.replaceWith($text);
+    } else {
+        var $text = $(`p[data-parent="${parentPostId}"]`);  
+
+        //make form to replace $text with;
+        var $edit = $("<input></input>");
+        $edit.attr({
+            "type": "text",
+            "class": "form-control",
+            "value": `${$text.text()}`,
+            "data-parent": parentPostId
+        });
+        //replace
+        $text.replaceWith($edit);
+    }
+
+    //change colors when in editing mode
+    $button.toggleClass("btn-warning");
+
+    //toggle Boolean
+    isEditing = !isEditing;
+};
 
 var toggleComments = function(e) {
     var $button = $(e.target);
