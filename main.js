@@ -178,13 +178,18 @@ var toggleForm = function(postToAppend) {
 
 var createComment = function(name, message, parentPostId) {
     var $parentPost = $posts.children(`div[data-id="${parentPostId}"]`);
-    var $commentSection = $parentPost.find(`div[data-parent="${parentPostId}"]`);
-
-    console.log($commentSection);   
+    var $commentSection = $parentPost.find(`div[data-parent="${parentPostId}"]`);   
 
     //build comment
+
     var $comment = $("<div>");
     $comment.addClass("panel panel-default");
+    
+    //add id for each comment
+    var randomString = generateString();
+    $comment.attr({
+        "data-id": `${parentPostId}-${randomString}`
+    });
     
     var $commentAuthor = $("<div>");
     $commentAuthor.addClass("panel-header");
@@ -193,7 +198,9 @@ var createComment = function(name, message, parentPostId) {
     //build remove button for comment
     var $closeBtn = $($commentAuthor.children()[0]);
     $closeBtn.css("padding", "3px 6px");
-    $closeBtn.click();
+    $closeBtn.click(function() {
+        $(document).find(`[data-id="${parentPostId}-${randomString}"]`).remove();
+    });
 
     var $commentMessage = $("<div>");
     $commentMessage.addClass("panel-body");
@@ -203,7 +210,7 @@ var createComment = function(name, message, parentPostId) {
     $comment.append($commentMessage);
 
     //add to comment section
-    $commentSection.append($comment);
+    $comment.appendTo($commentSection);
 };
 
 var generateString = function() {
