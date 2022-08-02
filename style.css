@@ -1,0 +1,27 @@
+.posts {
+  overflow-y: auto;
+  overflow-x: hidden;
+  /* max-height: 60vh; */
+}
+.post-author {
+  font-size: 2rem;
+}
+
+.post-bubble {
+  border: 2px black solid;
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  background-color: rgb(255, 0, 0);
+  margin-bottom: 2px;
+}
+
+i {
+  font-size: 20px;
+  position: relative;
+  top: 5px;
+}
+
+.post-header {
+  padding-bottom: 2%;
+}
