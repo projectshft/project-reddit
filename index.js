@@ -10,7 +10,8 @@ function addPost() {
   const message = $('#new-message').val();
   const name = $('#user-name').val();
   if (isValidMessage(message) && isValidName(name)) {
-    const template = `<div class="row">
+    const template = `<div class="container">
+    <div class="row">
     <div class="col-xs-1 col-md-1 text-left post-header">
       <div class="post-bubble text-center"><i class="fa-solid fa-${name[0].toLowerCase()}"></i></div>
     </div>
@@ -20,6 +21,8 @@ function addPost() {
     </div>
     <div class="row">
       <p class = "col-md-12 post-comment"> ${message} </p>
+    </div>
+    <button class="btn btn-danger remove">Remove</button>
     </div>
     <hr></hr>`;
     const $post = $(template);
@@ -35,4 +38,7 @@ function addPost() {
 
 $('#submit').click(addPost);
 
-isValidName('dillon');
+// create listener for new .remove buttons that are children of .posts
+$('.posts').on('click', '.remove', function () {
+  $(this).parent().remove();
+});
