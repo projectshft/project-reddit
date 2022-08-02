@@ -26,6 +26,10 @@ function addPost() {
     $('.posts').append($post);
     $('#new-message').val('');
     $('#user-name').val('');
+
+    // using jquery to scroll to the bottom of posts section
+    const postScrollHeight = $('.posts').prop('scrollHeight');
+    $('.posts').scrollTop(postScrollHeight);
   }
 }
 
