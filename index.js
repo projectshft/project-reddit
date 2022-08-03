@@ -28,10 +28,6 @@ function addPost() {
   </form>`;
 
     const commentSectionTemplate = `<section class="comment-list"></section>`;
-    // <div class="comment">
-    // <button class="btn btn-warning comment-removal remove">X</button>
-    // <span>Im a comment- Dillon</span>
-    // </div>
     const template = `<div class="container post">
     <div class="row">
     <div class="col-xs-1 col-md-1 text-left post-header">
@@ -64,12 +60,7 @@ function addPost() {
 }
 function renderPosts(post) {
   const $commentList = post.find('.comment-list');
-  // console.log($commentList, 'commentList');
   $commentList.empty();
-  // while ($commentList.children().length > 0) {
-  //   $commentList.find('.comment').remove();
-  //   console.log($commentList.children());
-  // }
   const commentArray = post.data('comments');
   let comments = '';
   for (let i = 0; i < commentArray.length; i += 1) {
@@ -77,32 +68,17 @@ function renderPosts(post) {
   }
   $commentList.append(comments);
 }
-$('#submit').click(addPost);
 
-// create listener for new .remove buttons that are children of .posts
-$('.posts').on('click', '.remove', function () {
-  // console.log($(this).parent());
-  // console.log($(this).parent().parent());
-
-  if ($(this).hasClass('comment-removal')) {
-    const dataArray = $(this).closest('.post').data('comments');
-    dataArray.splice($(this).closest('.comment').data('index'), 1);
-    renderPosts($(this).closest('.post'));
-  }
-  $(this).parent().remove();
-});
-
-$('.posts').on('click', '.btn-comments', function () {
+function toggleComments() {
   const commentSection = $(this).parent().find('.comments');
   if (commentSection.hasClass('hidden')) {
     commentSection.removeClass('hidden');
   } else {
     commentSection.addClass('hidden');
   }
-  // console.log($(this).parent().data('comments'));
-});
+}
 
-$('.posts').on('click', '.comment-btn', function () {
+function addComment() {
   const comment = $(this).parent().find('.comment-message').val();
   const name = $(this).parent().find('.commenter-name').val();
   const $post = $(this).closest('.post');
@@ -112,32 +88,26 @@ $('.posts').on('click', '.comment-btn', function () {
       comment,
     };
     $post.data('comments').push(commentData);
-    // console.log($post.data('comments'));
     renderPosts($post);
-    // const postScrollHeight = $(this).prop('scrollHeight');
-    // $('.posts').scrollTop(postScrollHeight);
+    $(this).parent().find('.comment-message').val('');
+    $(this).parent().find('.commenter-name').val('');
   }
-});
+}
 
-// function renderCart() {
-//   const commentList = document.getElementsByClassName('cart-list')[0];
+function remove() {
+  if ($(this).hasClass('comment-removal')) {
+    const dataArray = $(this).closest('.post').data('comments');
+    dataArray.splice($(this).closest('.comment').data('index'), 1);
+    renderPosts($(this).closest('.post'));
+  }
+  $(this).parent().remove();
+}
 
-//   while (cartList.hasChildNodes()) {
-//     cartList.removeChild(cartList.firstChild);
-//   }
+// Event listeners
+$('#submit').click(addPost);
 
-//   let items = '';
-//   for (let i = 0; i < cart.length; i++) {
-//     items += `${'<div>' + 'QTY: '}${cart[i].quantity} - ${cart[i].name} - $${
-//       cart[i].price * cart[i].quantity
-//     }</div>`;
-//   }
-//   document.querySelector('.total').innerText = total;
-//   cartList.innerHTML = items;
-// }
+$('.posts').on('click', '.remove', remove);
 
-// document.querySelector('.clear-cart').addEventListener('click', () => {
-//   cart = [];
-//   total = 0;
-//   renderCart();
-// });
+$('.posts').on('click', '.btn-comments', toggleComments);
+
+$('.posts').on('click', '.comment-btn', addComment);
