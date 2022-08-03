@@ -3,13 +3,15 @@ $("button").click(() => {
   let $userName = $("#name").val();
   let $divPosts = $(".posts").append("<div></div>");
 
-  $divPosts.append(`<p>${$userPost} - Posted By: ${$userName}</p> <hr>`);
+  $divPosts.append(
+    `<div><p>${$userPost} - Posted By: ${$userName}</p><hr></div>`
+  );
 
   rmPost();
 });
 
 const rmPost = function () {
   $("p").click(function () {
-    $(this).remove();
+    this.parentElement.remove();
   });
 };
