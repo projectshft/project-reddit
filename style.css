@@ -36,6 +36,10 @@ i {
   min-width: 50vw;
   max-width: 90vw;
 }
+.edit-message {
+  margin-bottom: 6px;
+  padding: 0 15px;
+}
 
 /* Sticky footer styles for better mobile responsiveness
 -------------------------------------------------- */

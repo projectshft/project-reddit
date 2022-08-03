@@ -34,14 +34,15 @@ function addPost() {
       <div class="post-bubble text-center"><i class="fa-solid fa-${name[0].toLowerCase()}"></i></div>
     </div>
     <div class="col-xs-10 col-md-4">
-      <strong class = "post-author">${name}</strong>
+      <strong class = "post-author"></strong>
     </div>
     </div>
     <div class="row">
-      <p class = "col-md-12 post-comment"> ${message} </p>
+      <p class = "col-md-9 post-comment"></p>
     </div>
     <button class="btn btn-danger remove">Remove</button>
     <button class="btn btn-info btn-comments">Comments</button>
+    <button type="button" class="btn btn-secondary edit">Edit Post</button>
     <div class="comments hidden">
       ${commentSectionTemplate}
       ${commentInputSection}
@@ -50,6 +51,11 @@ function addPost() {
     <hr></hr>`;
     const $post = $(template);
     $post.data('comments', []);
+
+    // done for security reasons so no HTML can be injected via the html template
+    $post.find('.post-author').text(name);
+    $post.find('.post-comment').text(message);
+
     $('.posts').append($post);
     resetInputs();
 
@@ -103,6 +109,24 @@ function remove() {
   $(this).parent().remove();
 }
 
+function editPost() {
+  const message = $(this).closest('.post').find('.post-comment');
+  if (message.hasClass('edit-message')) {
+    const $messageTemplate = $(`<p class = "col-md-9 post-comment"></p>`);
+    $messageTemplate.text(message.val());
+    message.replaceWith($messageTemplate);
+    $(this).text('Edit Post');
+  } else {
+    const $editTemplate =
+      $(`<input class="col-md-9 edit-message post-comment" name="new-message" type="text"
+  class="form-control"></input>`);
+    $(this).text('Save Changes');
+    const messageText = message.text();
+    $editTemplate.val(messageText);
+
+    message.replaceWith($editTemplate);
+  }
+}
 // Event listeners
 $('#submit').click(addPost);
 
@@ -111,3 +135,5 @@ $('.posts').on('click', '.remove', remove);
 $('.posts').on('click', '.btn-comments', toggleComments);
 
 $('.posts').on('click', '.comment-btn', addComment);
+
+$('.posts').on('click', '.edit', editPost);
