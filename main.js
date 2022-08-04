@@ -1,6 +1,10 @@
 $("button").click(() => {
   let $userPost = $("#post").val();
   let $userName = $("#name").val();
+
+  $("#post").val("")
+  $("#name").val("")
+  
   let $divPosts = $(".posts").append("<div></div>");
 
   $divPosts.append(
