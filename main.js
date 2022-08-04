@@ -1,11 +1,11 @@
 $("button").click(() => {
-  let $userPost = $("#post").val();
-  let $userName = $("#name").val();
+  const $userPost = $("#post").val();
+  const $userName = $("#name").val();
 
-  $("#post").val("")
-  $("#name").val("")
-  
-  let $divPosts = $(".posts").append("<div></div>");
+  $("#post").val("");
+  $("#name").val("");
+
+  const $divPosts = $(".posts").append("<div></div>");
 
   $divPosts.append(
     `<div><p>${$userPost} - Posted By: ${$userName}</p><hr></div>`
