@@ -18,8 +18,11 @@
   
   var $post = $(template);
   
+  resetInputFields();
+
   return $post;
 });
+
 
 
 $('.posts').on('click', '.remove',function(e){
@@ -27,6 +30,11 @@ var $element = $(e.target);
 $element.closest('div').remove();
 });
   
+var resetInputFields = function(){
+  $('#name').val('');
+  $('#message').val('');
+};
+
 
     
 
