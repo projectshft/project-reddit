@@ -10,10 +10,6 @@ body {
   font-family: "Open Sans", sans-serif;
 }
 
-/* .post-head {
-  display: inline-block;
-} */
-
 @media (max-width: 1000px) {
   .row {
     width: 80%;
