@@ -3,10 +3,18 @@ html {
   font-size: 100%;
 }
 
+h1 {
+  font-size: 350%;
+}
+
 body {
   font-family: "Montserrat", sans-serif;
   color: black;
   min-height: 100%;
+}
+
+span {
+  color: blue;
 }
 
 @media (min-width: 640px) {
@@ -22,5 +30,5 @@ body {
 }
 
 .form-group {
-  color: #555;
+  color: rgb(34, 5, 5);
 }
