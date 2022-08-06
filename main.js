@@ -9,18 +9,25 @@
 		(7)		user input needs to be placed in the nodes mentioned above...use appendChild method for this
 		(8)		user input must be rendered on page upon triggering event (i.e. button), so...specify the location of such rendering by declaring variables that are associated with the appropriate elements (i.e. posts div and new posts div)
 		(9)		new posts should be rendered on separate rows. Declare a variable that stores the creation of a new element (i.e. row)
-		(10)	review code and assure that, when possible, jQuery syntax is used 
+		(10)	clear input fields upon click event (i.e. submit button)
+		(11)	review code and assure that, when possible, jQuery syntax is used
+		(12)	when necessary, rewrite code to limit verbosity
+		(13)	re-arrange the lines of the main code block so that it is easy for the 'reader' to follow
 
 		-PART2-
-		(11)  
+		(14)  
 
 
 		-BEAUTIFY-
-		( )		clear input fields upon click event (i.e. submit button)
+		( )		
 		( )		stylize all text
 		( )		stylize background
 		( )		utilize 12-column grid from css.frameworks file
 */
+
+
+
+
 
 
 $('button').on('click', function () {
@@ -35,10 +42,11 @@ $('button').on('click', function () {
 	var newPostTextSpan = document.createElement('span');
 	var newPostTextNode = document.createTextNode(text);
 	newPostTextSpan.appendChild(newPostTextNode);
-
+	
 	var newPostNameSpan = document.createElement('span');
 	var newPostNameNode = document.createTextNode(' -Posted By: ' + name);
 	newPostNameSpan.appendChild(newPostNameNode);
+	
 
 	var newPostHR = document.createElement('hr');
 
@@ -46,8 +54,14 @@ $('button').on('click', function () {
 	newPostDiv.append(newPostNameSpan);
 	newPostDiv.append(newPostHR);
 
-	postsDiv.append(newPostDiv);
+	postsDiv.append(newPostDiv);	
+	document.getElementById('name').value = '';
+	document.getElementById('message').value = '';
+	
 });
+
+
+
 
 
 	
