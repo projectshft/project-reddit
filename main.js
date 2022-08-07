@@ -28,8 +28,8 @@
 
 
 
+
 $('button').on('click', function () {
-	
 	
 	var text = $('#message').val();
 	var name = $('#name').val();
@@ -40,9 +40,10 @@ $('button').on('click', function () {
 
 
 	var newRemoveOptionSpan = document.createElement('button');
+	newRemoveOptionSpan.id = 'someId';
 	var newRemoveOptionNode = document.createTextNode('remove');
 	newRemoveOptionSpan.appendChild(newRemoveOptionNode);
-
+	
 	
 	var newPostTextSpan = document.createElement('span');
 	var newPostTextNode = document.createTextNode(text);
@@ -66,7 +67,19 @@ $('button').on('click', function () {
 	postsDiv.append(newPostDiv);	
 	document.getElementById('name').value = '';
 	document.getElementById('message').value = '';
+
+	function clearMessage() {
+		document.getElementsByName('newPostDiv').innerHTML = '';
+	}
+	
+	newRemoveOptionSpan.addEventListener('click', function () {
+		// $('newPostDiv').find('span').remove();
+		clearMessage();
+	});
+
+	
 });
+
 
 
 

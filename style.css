@@ -33,14 +33,14 @@ span {
   color: rgb(34, 5, 5);
 }
 
-.remove {
+#someId {
   background: none !important;
   border: none;
-  padding: 0 !important;
+  padding-right: 20px;
   /*optional*/
   font-family: arial, sans-serif;
   /*input has OS specific font-family*/
-  color: #069;
+  color: rgb(15, 165, 240);
   text-decoration: underline;
   cursor: pointer;
 }
