@@ -14,8 +14,8 @@
 		(12)	when necessary, rewrite code to limit verbosity
 		(13)	re-arrange the lines of the main code block so that it is easy for the 'reader' to follow
 
-		-PART2-
-		(14)  
+		-PART1 (continued)-
+		(14)  make sure a user can remove their post
 
 
 		-BEAUTIFY-
@@ -28,9 +28,8 @@
 
 
 
-
-
 $('button').on('click', function () {
+	
 	
 	var text = $('#message').val();
 	var name = $('#name').val();
@@ -39,26 +38,36 @@ $('button').on('click', function () {
 
 	var newPostDiv = $('<div>');
 
+
+	var newRemoveOptionSpan = document.createElement('button');
+	var newRemoveOptionNode = document.createTextNode('remove');
+	newRemoveOptionSpan.appendChild(newRemoveOptionNode);
+
+	
 	var newPostTextSpan = document.createElement('span');
 	var newPostTextNode = document.createTextNode(text);
 	newPostTextSpan.appendChild(newPostTextNode);
+	
 	
 	var newPostNameSpan = document.createElement('span');
 	var newPostNameNode = document.createTextNode(' -Posted By: ' + name);
 	newPostNameSpan.appendChild(newPostNameNode);
 	
-
+	
 	var newPostHR = document.createElement('hr');
 
+	
+	newPostDiv.append(newRemoveOptionSpan);
 	newPostDiv.append(newPostTextSpan);
 	newPostDiv.append(newPostNameSpan);
 	newPostDiv.append(newPostHR);
 
+	
 	postsDiv.append(newPostDiv);	
 	document.getElementById('name').value = '';
 	document.getElementById('message').value = '';
-	
 });
+
 
 
 
