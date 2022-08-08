@@ -61,7 +61,7 @@ function addPost() {
     // This data attribute on the post element will hold the comments for this specific post
     $post.data('comments', []);
 
-    // done for security reasons so no HTML can be injected via the html template
+    // done so no HTML can be injected via the html template (without the user changing the client's code)
     $post.find('.post-author').text(name);
     $post.find('.post-comment').text(message);
 
@@ -129,6 +129,7 @@ function removeComment() {
 }
 function editPost() {
   const message = $(this).closest('.post').find('.post-comment');
+  // Conditional toggles the editing state depending on if the user if currently editing
   if (message.hasClass('edit-message')) {
     const $messageTemplate = $(`<p class = "col-md-9 post-comment"></p>`);
     $messageTemplate.text(message.val());
