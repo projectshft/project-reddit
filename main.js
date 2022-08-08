@@ -19,7 +19,6 @@
 
 
 		-BEAUTIFY-
-		( )		
 		( )		stylize all text
 		( )		stylize background
 		( )		utilize 12-column grid from css.frameworks file
@@ -65,8 +64,7 @@ $('button').on('click', function () {
 
 	
 	postsDiv.append(newPostDiv);	
-	document.getElementById('name').value = '';
-	document.getElementById('message').value = '';
+	
 
 	function clearMessage() {
 		document.getElementsByName('newPostDiv').innerHTML = '';
@@ -75,9 +73,10 @@ $('button').on('click', function () {
 	newRemoveOptionSpan.addEventListener('click', function () {
 		// $('newPostDiv').find('span').remove();
 		clearMessage();
+		
 	});
 
-	
+
 });
 
 
