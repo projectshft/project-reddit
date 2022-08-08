@@ -12,22 +12,25 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>The Comments Section</title>
+    <title>The Post</title>
   </head>
   <body>
     <header>
-      <h1 id="title-header">The Comments Section</h1>
+      <h1 id="title-header" class="text-center" >The Post</h1>
     </header>
     <div class="row container">
-      <div class="col col-md-4">
+      <div class="col col-md-6 offset-2">
         <div class="posts-div"></div>
       </div>
       
-      <div class="col col-md-6">
-        <input type="text" id="post-text" placeholder="Write your post here"></input>
-        <input type="text" id="post-name" placeholder="Enter your name here"></input>
-        <button class="btn btn-primary" id="post-sub-button">Submit</button>
+      <div class="col col-md-4">
+        <div>
+          <input type="text" id="post-head" placeholder="Enter your headline here"></input>
+          <input type="text" id="post-name" placeholder="Enter your name here"></input>
+          <textarea rows="4" cols="50" type="text" id="post-text" placeholder="Write your post here"></textarea>
+        </div>
         
+        <button class="btn btn-primary" id="post-sub-button">Submit</button>
       </div>
     </div>
     </div>

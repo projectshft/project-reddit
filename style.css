@@ -4,15 +4,34 @@
   color: #555;
 }
 
-.comment {
-  color: green;
+.post-btn {
+  color: #fff;
+  font-weight: 600;
+  border: 1px solid black;
+  border-radius: 3px;
   font-size: 12px;
   display: inline-block;
-  margin: 0 10px;
+  padding: 5px;
+  cursor: pointer;
 }
+
 .remove {
-  color: red;
+  background-color: red;
+}
+
+#post-name {
+  height: 30px;
+}
+
+#post-sub-button {
+  margin-top: 10px;
+}
+.card {
+  margin-bottom: 20px;
+}
+.card h2 {
+  color: #555;
+}
+.card h6 {
   font-size: 12px;
-  display: inline-block;
-  margin: 0 10px;
 }
