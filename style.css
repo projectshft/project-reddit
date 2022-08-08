@@ -1,0 +1,18 @@
+#submit {
+  background-color: #1e90ff;
+}
+
+form {
+  margin-top: 10px;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+}
+
+@media (max-width: 1000px) {
+  .row {
+    width: 80%;
+    margin-left: 15px;
+  }
+}
