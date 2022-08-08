@@ -16,7 +16,7 @@ var addComment = function () {
       <button type="button" id="delete" class="btn btn-default btn-xs">
         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>Delete
       </button>
-    </li>`;
+  </li>`;
 
   $('.list-group').append(innerHTMLString);
 
