@@ -33,7 +33,7 @@ $('button').on('click', function () {
 	var name = $('#name').val();
 
 	var postsDiv = $('.posts');
-	var newPostDiv = $('<div>');
+	var newPostDiv = $('<div/>', {id: "newness"});
 
 	var buttonRemove = document.createElement('button');
 	buttonRemove.id = 'someId';
@@ -55,14 +55,15 @@ $('button').on('click', function () {
 	newPostDiv.append(newName);
 	newPostDiv.append(newPostHR);
 
-	postsDiv.append(newPostDiv);	
+	postsDiv.append(newPostDiv);
+	document.getElementById('name').value = '';
+	document.getElementById('message').value = '';	
 	
 	function clearMessage() {
-		document.getElementsByName('newPostDiv').innerHTML = '';
+		$('#newness').remove();
 	}
 	
 	buttonRemove.addEventListener('click', function () {
-		// $('newPostDiv').find('span').remove();
 		clearMessage();
 	});
 });
