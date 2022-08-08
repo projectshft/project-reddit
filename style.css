@@ -1,0 +1,12 @@
+.comment {
+  color: green;
+  font-size: 12px;
+  display: inline-block;
+  margin: 0 10px;
+}
+.remove {
+  color: red;
+  font-size: 12px;
+  display: inline-block;
+  margin: 0 10px;
+}
