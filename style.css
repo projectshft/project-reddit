@@ -1,0 +1,21 @@
+* {
+    text-align:  center;
+}
+
+.form-control {
+display: inline-block;
+width: 20%;
+}
+   
+
+.btn {
+margin-top: 1%;
+}
+
+.expandComments {
+    color: blue;
+}
+
+.removeClick {
+    color: blue;
+}
