@@ -10,14 +10,11 @@
 		(8)		user input must be rendered on page upon triggering event (i.e. button), so...specify the location of such rendering by declaring variables that are associated with the appropriate elements (i.e. posts div and new posts div)
 		(9)		new posts should be rendered on separate rows. Declare a variable that stores the creation of a new element (i.e. row)
 		(10)	clear input fields upon click event (i.e. submit button)
-		(11)	make sure a user can remove their post
+		(11)	make sure a user can remove their post (i.e. remove button-link)
 		(11)	review code and assure that, when possible, jQuery syntax is used
 		(12)	when necessary, rewrite code to limit verbosity
-		(13)	re-arrange the lines of the main code block so that it is easy for the 'reader' to follow
-		(14)  revisit #11 
-
-		PART2
-		(1)		begin once PART1 is functional
+		(13)	re-arrange the lines of the main code block so that it is easy for the reader to follow
+		
 
 		-BEAUTIFY-
 		(1)		check indentation and rename variables so that they are concise yet still descriptive
@@ -26,47 +23,33 @@
 		(4)		utilize 12-column grid from css.frameworks file
 */
 
-
 $('button').on('click', function () {
-	
-	var text = $('#message').val();
-	var name = $('#name').val();
+  var text = $('#message').val();
+  var name = $('#name').val();
+  if (text == '' || name == '') {
+    return alert('Post and Name are required');
+  }
+  var both = text + ' -Posted By: ' + name;
 
-	var postsDiv = $('.posts');
-	var newPostDiv = $('<div/>', {id: "newness"});
+  var removeButton = document.createElement('button');
+  removeButton.innerHTML = 'remove';
+  removeButton.id = 'oneId';
 
-	var buttonRemove = document.createElement('button');
-	buttonRemove.id = 'someId';
-	var removeNode = document.createTextNode('remove');
-	buttonRemove.appendChild(removeNode);
-	
-	var newPost = document.createElement('span');
-	var newPostNode = document.createTextNode(text);
-	newPost.appendChild(newPostNode);
-	
-	var newName = document.createElement('span');
-	var newNameNode = document.createTextNode(' -Posted By: ' + name);
-	newName.appendChild(newNameNode);
-	
-	var newPostHR = document.createElement('hr');
+  $('.posts').append("<p id='someId'>");
+  $('p').append('<span>');
+  $('span').append(removeButton);
+  $('span').append(both);
+  $('span').append('<hr>');
 
-	newPostDiv.append(buttonRemove);
-	newPostDiv.append(newPost);
-	newPostDiv.append(newName);
-	newPostDiv.append(newPostHR);
+  document.getElementById('message').value = '';
+  document.getElementById('name').value = '';
 
-	postsDiv.append(newPostDiv);
-	document.getElementById('name').value = '';
-	document.getElementById('message').value = '';	
-	
-	function clearMessage() {
-		$('#newness').remove();
-	}
-	
-	buttonRemove.addEventListener('click', function () {
-		clearMessage();
-	});
+  removeButton.addEventListener('click', function () {
+    $('#someId').remove();
+  });
 });
+
+
 
 
 

@@ -8,7 +8,7 @@ h1 {
 }
 
 body {
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   color: black;
   min-height: 100%;
 }
@@ -33,7 +33,7 @@ span {
   color: rgb(34, 5, 5);
 }
 
-#someId {
+#oneId {
   background: none !important;
   border: none;
   padding-right: 20px;
