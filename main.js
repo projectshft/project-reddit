@@ -37,7 +37,7 @@ $('button').on('click', function () {
 
 	var currentPost = $('<p></p>')
 	$('.posts').append(currentPost);
-	currentPost.id = 'new';
+	// currentPost.id = 'new';
 	currentPost.append(removeButton);
 	currentPost.append(both);
 	currentPost.append('<hr>');
@@ -47,7 +47,8 @@ $('button').on('click', function () {
   
 	function clearMessage() {
 		console.log('This button fires at the appropriate time');
-		$('.posts').children(this.currentPost).remove();
+		$('.posts').children($(this).p).remove();
+		
 	}
 
 	removeButton.addEventListener('click', function () {	
