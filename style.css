@@ -1,0 +1,46 @@
+html {
+  height: 100%;
+  font-size: 100%;
+}
+
+h1 {
+  font-size: 350%;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  color: black;
+  min-height: 100%;
+}
+
+span {
+  color: green;
+}
+
+@media (min-width: 640px) {
+  html {
+    font-size: 112%;
+  }
+}
+
+@media (min-width: 640px) {
+  html {
+    font-size: 120%;
+  }
+}
+
+.form-group {
+  color: rgb(34, 5, 5);
+}
+
+#oneId {
+  background: none !important;
+  border: none;
+  padding-right: 20px;
+  /*optional*/
+  font-family: arial, sans-serif;
+  /*input has OS specific font-family*/
+  color: rgb(15, 165, 240);
+  text-decoration: underline;
+  cursor: pointer;
+}
