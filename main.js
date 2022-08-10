@@ -23,7 +23,6 @@
 		(4)		utilize 12-column grid from css.frameworks file
 */
 
-
 $('button').on('click', function () {
   var text = $('#message').val();
   var name = $('#name').val();
@@ -36,23 +35,24 @@ $('button').on('click', function () {
   removeButton.innerHTML = 'remove';
   removeButton.id = 'oneId';
 
-	var currentPost = $('.posts').append('<p>');
-	currentPost.append('<span>');
+	var currentPost = $('<p></p>')
+	$('.posts').append(currentPost);
+	currentPost.id = 'new';
 	currentPost.append(removeButton);
 	currentPost.append(both);
-	currentPost.append('hr');
+	currentPost.append('<hr>');
 
-  document.getElementById('message').value = '';
-  document.getElementById('name').value = '';
-
+	$('#message').val('');
+	$('#name').val('');
+  
 	function clearMessage() {
-		//clear the post
-		$('.posts').find('span').remove();
-		
+		console.log('This button fires at the appropriate time');
+		$('.posts').children(this.currentPost).remove();
 	}
 
-	removeButton.addEventListener('click', function () {
+	removeButton.addEventListener('click', function () {	
 		clearMessage();
+		
   });
 });
 
