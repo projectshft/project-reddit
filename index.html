@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://kit.fontawesome.com/7770c02586.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Project Reddit</title>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row content">
+        <div class="col-md-6 col-md-offset-3">
+          <div class="page-header text-center">
+            <h1>Wrote-it</h1>
+          </div>
+          
+          <div class="posts"></div>
+        </div>
+      </div>
+      <footer class="footer">
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3">
+            <form style="margin-top:30px;" onsubmit="event.preventDefault();">
+              <h3>Add a new post</h3>
+              
+              <div class="form-group">
+                <input id="user-name" name="user-name" type="text"
+                  class="form-control"
+                  placeholder="Name" pattern="^[A-Za-z].*" title="Please begin your username with a letter" ></input>
+              </div>
+              
+              <div class="form-group">
+                <textarea id="new-message" name="new-message" type="text"
+                class="form-control"
+                placeholder="Message"></textarea>
+              </div>
+              
+              <button id="submit" class="btn btn-primary">Post</button>
+            </form>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+  crossorigin="anonymous"></script>
+    <script src="index.js"></script>
+  </body>
+</html>
