@@ -15,15 +15,49 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="style.css" />
+
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+    <script src="main.js" defer></script>
   </head>
+
   <body class="bg-dark">
     <div class="container">
-      <div class="row justify-content-center">
+      <!-- HEADER SECTION-->
+      <div class="row justify-content-center mt-3">
         <div class="col-6 text-light">
           <h1>ReReddit</h1>
           <hr class="border" />
         </div>
       </div>
+
+      <!-- NEW POST SECTION-->
+      <div class="row justify-content-center">
+        <div class="col-6" id="post-container">
+          <!-- PROTOTYPE NEW POST SECTION-->
+          <!-- <div class="container text-light my-4">
+            <div class="row bg-secondary rounded">
+              <div id="user-name" class="row mb-0 pb-0">
+                <p class="col px-3 pt-1 mb-0"><strong>${$name}</strong></p>
+              </div>
+              <div id="user-message" class="row">
+                <p class="col px-3 pt-0 pb-1 mb-0">${$message}</p>
+              </div>
+            </div>
+            <div id="" class="row mb-0 pb-0">
+              <p class="col-1"><small>Like</small></p>
+              <p class="col-1"><small>Reply</small></p>
+              <p class="col-2"><small>${getCurrentTime(new Date)}</small></p>
+            </div>
+          </div> -->
+          <!-- END OF PROTOTYPE-->
+        </div>
+      </div>
+
+      <!-- ADD POST SECTION-->
       <div class="row justify-content-center">
         <form class="col-6" onsubmit="preventDefault()">
           <div class="form-floating mb-3">
@@ -33,6 +67,7 @@
               id="name"
               class="form-control form-control-sm my-2"
               placeholder="name"
+              required
             />
             <label for="name">Name</label>
           </div>
@@ -42,10 +77,13 @@
               id="message"
               class="form-control my-2"
               placeholder="message"
+              required
             ></textarea>
             <label for="message">Message</label>
           </div>
-          <button class="btn btn-primary">Add Post</button>
+          <button class="btn btn-primary" id="post-submit" type="submit">
+            Add Post
+          </button>
         </form>
       </div>
     </div>
