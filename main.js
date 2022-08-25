@@ -1,74 +1,75 @@
 
+import { faker } from 'https://cdn.skypack.dev/@faker-js/faker'; //https://fakerjs.dev/api/image.html
 
-const form = document.getElementById('new-post-form')
+const postsObject = {
+  numberOfPosts: 0,
+  posts: {}
+};
+
 const $postContainer = $('#post-container');
 
 $(document).ready(function() {
-  $('#new-post-form').submit(function(e) {
-    e.preventDefault();
 
+  $('#new-comment-form').submit(function(e) {
+    e.preventDefault()
 
-    
-    const $name = $('#name').val();
-    const $message = $('#message').val();
-    
-    //SECTION new post template
+    postsObject.numberOfPosts++
+    const $postNumber = postsObject.numberOfPosts
+
+    const $commentName = $(this).find('#comment-name').val()
+    const $commentMessage = $(this).find('#comment-message').val()
+
+    postsObject.posts[`post${$postNumber}`] = {name: $commentName, message: $commentMessage}
+
+    const $postId = postsObject.posts[`post${$postNumber}`];
+
     let $newPost = 
-    `<div class="container-fluid user-post text-light my-3">
-      <div class="row justify-content-center bg-secondary rounded">
-        <div class="row justify-content-between align-items-center mb-0 mt-2 pb-0 user-message">
-          <p class="col-11 px-0 mb-0"><strong>${$name}</strong></p>
-          <button type="button" class="remove-post btn-close col-1" aria-label="Close"></button>
+    `<div class="user-post container-fluid text-light my-3">
+      <div class="row align-items-center">
+        <div class='col-1 p-2'>
+          <img src='${faker.image.abstract()}' class="rounded-circle img-fluid p-0" >
         </div>
-        <div class="row user-message mb-2">
-          <p class="col pb-0 mb-0 px-0">${$message}</p>
+        <div class='col-11'>
+          <div class="row justify-content-center bg-secondary rounded">
+            <div class="user-name row fw-light justify-content-between align-items-center mb-0 mt-2 pb-0">
+              <p class="col-11 px-0 mb-0"><strong>${$postId.name}</strong></p>
+              <button type="button" class="remove-post btn-close col-1" aria-label="Close"></button>
+            </div>
+            <div class="user-message row fw-light mb-2">
+              <p class="col pb-0 mb-0 px-0">${$postId.message}</p>
+            </div>
+          </div>
         </div>
-      </div>
-      <div id="" class="test row mb-2">
-        <p data-likes="0" class="col-1 like"><small>Like</small></p>
-        <p class="col-1 reply"><small>Reply</small></p>
-        <p class="col-3">
-        <small>${getCurrentTime(new Date)}</small>
-        </p>
-      </div>
+      <div class='row'>  
+        <p class="col-1 rounded border border-dark text-center p-0 offset-1 mb-0 hover"><small class="like">Like</small></p>
+        <p class="col-1 rounded border border-dark text-center p-0 mb-0 hover"><small class="reply">Reply</small></p>
+        <p class="col-3 rounded border border-dark text-start mb-0"><small>${getCurrentTime(new Date)}</small></p>
+      </div>  
     </div>`
-    
-    $($newPost).hide().appendTo($postContainer).fadeIn('500')
-    
-    form.reset(); //resets form after each submission
+
+    $($newPost).hide().appendTo($postContainer).fadeIn(500)
+
+    console.log(postsObject)
+    $(this)[0].reset()
   })
 
+  //SECTION hover over effect
+  $($postContainer).on('mouseenter', '.hover', function() {
+    $(this).addClass('bg-primary')
+    $(this).css('cursor', 'pointer')
+  }).on("mouseleave", '.hover', function(){
+    $(this).removeClass('bg-primary')
+  })
 
-  //SECTION adds ability to increase likes
-  $($postContainer).on('click', ".like", function() {
+  //SECTION like functionality
+  $($postContainer).click(function(e) {
+    if(e.target && e.target.classList.contains('like')) {
 
-    const $numOfLikesTemplate = `<p class="col-1 offset-5 text-white text-end num-likes"><small>0<small></p>`
-    const $thumbsUpTemplate = `<i class="col-1 text-start text-success pl-0 bi bi-hand-thumbs-up-fill"></i>`
-
-    let numOfLikes = $(this).data('likes');
-    
-    //number of likes and icon doesn't show until first like
-    if(numOfLikes === 0) {
-      $(this).parent().append($numOfLikesTemplate)
-      $(this).parent().append($thumbsUpTemplate)
     }
-    
-    numOfLikes++;
-
-    $(this).data('likes', numOfLikes) //set likes data property to increased number
-    $(this).parent().find('.num-likes').text(numOfLikes); //change likes html text
   })
 
- //SECTION adds ability to delete post
- $($postContainer).on('click', '.remove-post', function() {
-  const $userPost = $(this).parentsUntil('#post-container')
-  $userPost.remove();
- })
+
 })
-
-
-
-
 
 
 //SECTION Function to get current time and display as HH:MM:SS AM/PM
@@ -85,6 +86,3 @@ let getCurrentTime = function(date) {
   let strTime = `${hours}:${minutes}:${seconds} ${ampm}`;
   return strTime;
 }     
-
-
-
