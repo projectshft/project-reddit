@@ -24,7 +24,7 @@ $(document).ready(function() {
     const $postId = postsObject.posts[`post${$postNumber}`];
 
     let $newPost = 
-    `<div class="user-post container-fluid text-light my-3">
+    `<div id="post${postsObject.numberOfPosts}" class="user-post container-fluid text-light my-3">
       <div class="row align-items-center">
         <div class='col-1 p-2'>
           <img src='${faker.image.abstract()}' class="rounded-circle img-fluid p-0" >
@@ -40,20 +40,50 @@ $(document).ready(function() {
             </div>
           </div>
         </div>
+      </div>
       <div class='row'>  
-        <p class="col-1 rounded border border-dark text-center p-0 offset-1 mb-0 hover"><small class="like">Like</small></p>
-        <p class="col-1 rounded border border-dark text-center p-0 mb-0 hover"><small class="reply">Reply</small></p>
+        <p class="like-button col-1 rounded border border-dark text-center p-0 offset-1 mb-0 hover"><small>Like</small></p>
+        <p class="reply-button col-1 rounded border border-dark text-center p-0 mb-0 hover"><small>Reply</small></p>
         <p class="col-3 rounded border border-dark text-start mb-0"><small>${getCurrentTime(new Date)}</small></p>
       </div>  
-    </div>`
+      <div id='reply-container' class='row d-none'>
+      </div>
+      <div id="new-reply-form-container" class="row justify-content-end d-none">
+        <form id='new-reply-form' class='col-11'>
+          <div class="mb-3">
+            <input
+              type="name"
+              name="reply-name"
+              id="reply-name"
+              class="form-control form-control-sm my-2"
+              placeholder="name"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <textarea
+              name="reply-message"
+              id="comment-message"
+              class="form-control form-control-sm my-2"
+              placeholder="comment"
+              required
+            ></textarea>
+          </div>
+          <button class="btn btn-primary" id="reply-submit" type="submit">
+            Reply
+          </button>
+        </form>
+      </div>
+    </div>
+    `
 
-    $($newPost).hide().appendTo($postContainer).fadeIn(500)
+    $($newPost).hide().appendTo($postContainer).fadeIn(200)
 
     console.log(postsObject)
     $(this)[0].reset()
   })
 
-  //SECTION hover over effect
+  //SECTION hover over effect on like and reply
   $($postContainer).on('mouseenter', '.hover', function() {
     $(this).addClass('bg-primary')
     $(this).css('cursor', 'pointer')
@@ -62,12 +92,30 @@ $(document).ready(function() {
   })
 
   //SECTION like functionality
-  $($postContainer).click(function(e) {
-    if(e.target && e.target.classList.contains('like')) {
-
+  $($postContainer).on('click', '.like-button', function(e) {
+    console.log($(this).parentsUntil())
+    const $currentPost = $(this).parentsUntil($postContainer)[1].id;
+    postsObject.posts[$currentPost]['likes'] = postsObject.posts[$currentPost]['likes'] + 1 || 1;
+    const $currentLikes = postsObject.posts[$currentPost]['likes']
+    if($(this).parent().children().length === 3) {
+      $(this).parent().append('<i class="col-1 text-end offset-4 bi bi-hand-thumbs-up-fill"></i>')
+      $(this).parent().append('<p class="col-1 text-start mb-0"><small class="likes-text">1<small></p>')  
+    } else {
+      $(this).parent().find('.likes-text').text($currentLikes);
     }
   })
 
+  //SECTION Show Reply Div
+  $($postContainer).on('click', '.reply-button', function() {
+    $(this).parentsUntil().find("#reply-container").removeClass('d-none')
+    $(this).parentsUntil().find("#new-reply-form-container").removeClass('d-none')
+  })
+
+  // $($postContainer).on('click', '#reply-submit', function(e) {
+  //   e.preventDefault();
+
+  //   console.log('hello')
+  // })
 
 })
 
