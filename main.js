@@ -1,25 +1,27 @@
 
 import { faker } from 'https://cdn.skypack.dev/@faker-js/faker'; //https://fakerjs.dev/api/image.html
 
-const postsObject = {
-  numberOfPosts: 0,
-  posts: {}
+
+//object to store state of comments
+const commentsObject = {
+  numberOfComments: 0,
+  comments: {}
 };
 
-const $postContainer = $('#post-container');
+const $commentContainer = $('#comment-container');
 
 $(document).ready(function() {
 
   $('#new-comment-form').submit(function(e) {
     e.preventDefault()
 
-    postsObject.numberOfPosts++
-    const $postNumber = postsObject.numberOfPosts
+    commentsObject.numberOfComments++
+    const $commentNumber = commentsObject.numberOfComments
 
     const $commentName = $(this).find('#comment-name').val()
     const $commentMessage = $(this).find('#comment-message').val()
 
-    postsObject.posts[`post${$postNumber}`] = {
+    commentsObject.comments[`comment${$commentNumber}`] = {
       name: $commentName,
       message: $commentMessage,
       likes: 0, 
@@ -27,10 +29,10 @@ $(document).ready(function() {
       replies: {}
     }
 
-    const $postId = postsObject.posts[`post${$postNumber}`];
+    const $commentId = commentsObject.comments[`comment${$commentNumber}`];
 
-    let $newPost = 
-    `<div id="post${postsObject.numberOfPosts}" class="user-post container-fluid text-light mt-5  ">
+    let $newComment = 
+    `<div id="comment${commentsObject.numberOfComments}" class="user-comment container-fluid text-light mt-5  ">
       <div class="row align-items-center p-1">
         <div class='col-1 p-2'>
           <img src='${faker.image.people('100', '100', true)}' class="rounded-circle img-fluid p-0" >
@@ -38,17 +40,17 @@ $(document).ready(function() {
         <div class='col-11'>
           <div class="row justify-content-center bg-secondary rounded">
             <div class="user-name row fw-light justify-content-between align-items-center mb-0 mt-2 pb-0">
-              <p class="col-11 px-0 mb-0"><strong>${$postId.name}</strong></p>
+              <p class="col-11 px-0 mb-0"><strong>${$commentId.name}</strong></p>
               <button type="button" class="remove-comment btn-close col-1" aria-label="Close"></button>
             </div>
             <div class="user-message row fw-light mb-2">
-              <p class="col pb-0 mb-0 px-0">${$postId.message}</p>
+              <p class="col pb-0 mb-0 px-0">${$commentId.message}</p>
             </div>
           </div>
         </div>
       </div>
       <div class='row p-1'>  
-        <p class="comment-like-button col-1 rounded border border-dark text-secondary text-center p-0 offset-1 mb-0 hover"><small>Like</small></p>
+        <p class="like-button col-1 rounded border border-dark text-secondary text-center p-0 offset-1 mb-0 hover"><small>Like</small></p>
         <p class="reply-button col-1 rounded border border-dark text-secondary text-center p-0 mb-0 hover"><small>Reply</small></p>
         <p class="col-3 rounded border border-dark text-start text-secondary mb-0"><small>${getCurrentTime(new Date)}</small></p>
       </div>  
@@ -83,13 +85,13 @@ $(document).ready(function() {
     </div>
     `
 
-    $($newPost).hide().appendTo($postContainer).fadeIn(200)
+    $($newComment).hide().appendTo($commentContainer).fadeIn(200)
 
     $(this)[0].reset()
   })
 
   //SECTION hover over effect on like and reply
-  $($postContainer).on('mouseenter', '.hover', function() {
+  $($commentContainer).on('mouseenter', '.hover', function() {
     $(this).addClass('bg-primary text-light')
     $(this).css('cursor', 'pointer')
   }).on("mouseleave", '.hover', function(){
@@ -97,33 +99,38 @@ $(document).ready(function() {
   })
 
   //SECTION like functionality for comments
-  $($postContainer).on('click', '.comment-like-button', function(e) {
-    const $currentPost = $(this).parentsUntil($postContainer)[1].id;
-    postsObject.posts[$currentPost]['likes']++
-    const $currentLikes = postsObject.posts[$currentPost]['likes']
-    if($(this).parent().children().length === 3) {
-      $(this).parent().append('<i class="col-1 text-end text-primary offset-4 pr-0 bi bi-hand-thumbs-up-fill"></i>')
-      $(this).parent().append('<p class="col-1 text-start text-primary pl-0 mb-0"><small class="likes-text">1<small></p>')  
+  $($commentContainer).on('click', '.like-button', function(e) {
+
+    const $currentCommentId = $(this).closest('.user-comment').attr('id');
+    const $currentReplyId = $(this).closest('.user-reply').attr('id');
+
+    //logic to determine whether like being clicked is comment or reply
+    if($currentReplyId) {
+      //apply likes only to select reply
+      commentsObject.comments[$currentCommentId]['replies'][$currentReplyId]['likes'] = commentsObject.comments[$currentCommentId]['replies'][$currentReplyId]['likes'] + 1 || 1
+      const $currentLikes = commentsObject.comments[$currentCommentId]['replies'][$currentReplyId]['likes']
+      if($(this).parent().children().length ==2 ) {
+        $(this).parent().append('<i class="col-1 text-end text-primary offset-5 pr-0 bi bi-hand-thumbs-up-fill"></i>')
+        $(this).parent().append('<p class="col-1 text-start text-primary pl-0 mb-0"><small class="likes-text">1<small></p>')  
+      } else {
+        $(this).parent().find('.likes-text').text($currentLikes);
+      }
     } else {
-      $(this).parent().find('.likes-text').text($currentLikes);
+      //apply likes only to selected comment
+      commentsObject.comments[$currentCommentId]['likes']++
+      const $currentLikes = commentsObject.comments[$currentCommentId]['likes']
+      if($(this).parent().children().length === 3) {
+        $(this).parent().append('<i class="col-1 text-end text-primary offset-4 pr-0 bi bi-hand-thumbs-up-fill"></i>')
+        $(this).parent().append('<p class="col-1 text-start text-primary pl-0 mb-0"><small class="likes-text">1<small></p>')  
+      } else {
+        $(this).parent().find('.likes-text').text($currentLikes);
+      }
     }
+
   })
 
-    // //SECTION like functionality for replies
-    // $($postContainer).on('click', '.reply-like-button', function(e) {
-    //   const $currentPost = $(this).parentsUntil($postContainer)[1].id;
-    //   postsObject.posts[$currentPost]['likes']++
-    //   const $currentLikes = postsObject.posts[$currentPost]['likes']
-    //   if($(this).parent().children().length === 3) {
-    //     $(this).parent().append('<i class="col-1 text-end text-primary offset-4 bi bi-hand-thumbs-up-fill"></i>')
-    //     $(this).parent().append('<p class="col-1 text-start text-primary mb-0"><small class="likes-text">1<small></p>')  
-    //   } else {
-    //     $(this).parent().find('.likes-text').text($currentLikes);
-    //   }
-    // })
-
   //SECTION Show Reply Div
-  $($postContainer).on('click', '.reply-button', function() {
+  $($commentContainer).on('click', '.reply-button', function() {
     const $replyContainer = $(this).parent().siblings('#reply-container')
     const $newReplyFormContainer = $(this).parent().siblings('#new-reply-form-container')
     $replyContainer.toggleClass('d-none');
@@ -135,61 +142,61 @@ $(document).ready(function() {
 
 
   //SECTION Add Reply
-  $($postContainer).on('submit', '#new-reply-form', function(e) {
+  $($commentContainer).on('submit', '#new-reply-form', function(e) {
     e.preventDefault();
 
     const $replyName = $(this).find('#reply-name').val()
     const $replyMessage= $(this).find('#reply-message').val()
 
-    const $currentPost = $(this).parentsUntil($postContainer)[1].id;
+    const $currentComment = $(this).parentsUntil($commentContainer)[1].id;
 
-    postsObject.posts[$currentPost]['numberOfReplies']++
-    const $numberOfReplies = postsObject.posts[$currentPost]['numberOfReplies']
+    commentsObject.comments[$currentComment]['numberOfReplies']++
+    const $numberOfReplies = commentsObject.comments[$currentComment]['numberOfReplies']
 
 
-    postsObject.posts[$currentPost]['replies'][`reply${$numberOfReplies}`] = {name: $replyName, message: $replyMessage, likes: 0}
+    commentsObject.comments[$currentComment]['replies'][`reply${$numberOfReplies}`] = {name: $replyName, message: $replyMessage, likes: 0}
 
-    console.log(postsObject);
+    console.log(commentsObject);
 
     const $newReply = 
-    `<div id="${postsObject.posts[$currentPost]['numberOfReplies']}" class="user-post col-10 text-light my-3">
-    <div class="row align-items-center">
-      <div class='col-1 p-2'>
-        <img src='${faker.image.cats('100', '100', true)}' class="rounded-circle img-fluid p-0" >
-      </div>
-      <div class='col-11'>
-        <div class="row justify-content-center bg-secondary rounded">
-          <div class="user-name row fw-light justify-content-between align-items-center mb-0 mt-2 pb-0">
-            <p class="col-11 px-0 mb-0"><strong>${$replyName}</strong></p>
-            <button type="button" class="remove-comment btn-close col-1" aria-label="Close"></button>
-          </div>
-          <div class="user-message row fw-light mb-2">
-            <p class="col pb-0 mb-0 px-0">${$replyMessage}</p>
+    `<div id="reply${commentsObject.comments[$currentComment]['numberOfReplies']}" class="user-reply col-10 text-light my-3">
+      <div class="row align-items-center">
+        <div class='col-1 p-2'>
+          <img src='${faker.image.cats('100', '100', true)}' class="rounded-circle img-fluid p-0" >
+        </div>
+        <div class='col-11'>
+          <div class="row justify-content-center bg-secondary rounded">
+            <div class="user-name row fw-light justify-content-between align-items-center mb-0 mt-2 pb-0">
+              <p class="col-11 px-0 mb-0"><strong>${$replyName}</strong></p>
+              <button type="button" class="remove-comment btn-close col-1" aria-label="Close"></button>
+            </div>
+            <div class="user-message row fw-light mb-2">
+              <p class="col pb-0 mb-0 px-0">${$replyMessage}</p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class='row text-secondary'>  
-      <p class="like-button col-1 rounded border border-dark text-center p-0 offset-1 mb-0 hover"><small>Like</small></p>
-      <p class="col-3 rounded border border-dark text-start mb-0"><small>${getCurrentTime(new Date)}</small></p>
-    </div>  `
+      <div class='row text-secondary'>  
+        <p class="like-button col-1 rounded border border-dark text-center p-0 offset-1 mb-0 hover"><small>Like</small></p>
+        <p class="col-3 rounded border border-dark text-start mb-0"><small>${getCurrentTime(new Date)}</small></p>
+      </div>  
+    <div>`
 
 
-    const $replyContainer = $(this).parentsUntil($postContainer).find('#reply-container')
+    const $replyContainer = $(this).parentsUntil($commentContainer).find('#reply-container')
     $($newReply).hide().appendTo($replyContainer).fadeIn(200);
 
-
-
-    $(this)[0].reset();
+    $(this)[0].reset();  //resets form after submission
   })
 
+
+  //SECTION Delete Comment on Close Button
+  $($commentContainer).on('click', '.remove-comment', function() {
+    $(this).closest(".user-comment").remove();
+  })
 })
 
 
-//SECTION Delete Comment on Close Button
-$($postContainer).on('click', '.remove-comment', function() {
-  $(this).parentsUntil("#post-container").remove();
-})
 
 
 //SECTION Function to get current time and display as HH:MM:SS AM/PM
