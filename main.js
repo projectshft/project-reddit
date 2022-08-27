@@ -136,7 +136,7 @@ $(document).ready(function() {
     $replyContainer.toggleClass('d-none');
     $newReplyFormContainer.toggleClass('d-none');
     const text = $(this).find('small').text();
-    $(this).find('small').text(text === 'Reply' ? 'Close' : 'Reply')
+    $(this).find('small').text(text === 'Reply' ? 'Hide' : 'Reply')
     $(this).toggleClass('bg-danger text-secondary')
   })
 
