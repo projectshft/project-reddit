@@ -1,12 +1,18 @@
 
 import { faker } from 'https://cdn.skypack.dev/@faker-js/faker'; //https://fakerjs.dev/api/image.html
 
+let commentsObject = {}
 
 //object to store state of comments
-const commentsObject = {
-  numberOfComments: 0,
-  comments: {}
-};
+//If localStorage has data, commentsObject will pull that data. If not, a template object is created
+if(localStorage.getItem('session') === null){
+  commentsObject = {
+    numberOfComments: 0,
+    comments: {}
+  };
+} else {
+  commentsObject = JSON.parse(localStorage.getItem('session'))
+}
 
 const $commentContainer = $('#comment-container');
 
@@ -31,8 +37,9 @@ $(document).ready(function() {
 
     const $commentId = commentsObject.comments[`comment${$commentNumber}`];
 
+    //template for when a new comment is added
     let $newComment = 
-    `<div id="comment${commentsObject.numberOfComments}" class="user-comment container-fluid text-light mt-5  ">
+    `<div id="comment${commentsObject.numberOfComments}" class="user-comment close container-fluid text-light mt-5  ">
       <div class="row align-items-center p-1">
         <div class='col-1 p-2'>
           <img src='${faker.image.people('100', '100', true)}' class="rounded-circle img-fluid p-0" >
@@ -54,7 +61,7 @@ $(document).ready(function() {
         <p class="reply-button col-1 rounded border border-dark text-secondary text-center p-0 mb-0 hover"><small>Reply</small></p>
         <p class="col-3 rounded border border-dark text-start text-secondary mb-0"><small>${getCurrentTime(new Date)}</small></p>
       </div>  
-      <div id='reply-container' class='row justify-content-end d-none p-1'>
+      <div id='reply-container'class='row justify-content-end d-none p-1'>
       </div>
       <div id="new-reply-form-container" class="row justify-content-end d-none p-1">
         <form id='new-reply-form' class='col-10 p-0'>
@@ -63,7 +70,7 @@ $(document).ready(function() {
               type="name"
               name="reply-name"
               id="reply-name"
-              class="form-control form-control-sm my-2"
+              class="form-control form-control-sm my-2 border-secondary bg-secondary text-light"
               placeholder="name"
               required
             />
@@ -72,7 +79,7 @@ $(document).ready(function() {
             <textarea
               name="reply-message"
               id="reply-message"
-              class="form-control form-control-sm my-2"
+              class="form-control form-control-sm my-2 border-secondary bg-secondary text-light"
               placeholder="comment"
               required
             ></textarea>
@@ -86,6 +93,8 @@ $(document).ready(function() {
     `
 
     $($newComment).hide().appendTo($commentContainer).fadeIn(200)
+
+    setLocalStorage();
 
     $(this)[0].reset()
   })
@@ -107,7 +116,9 @@ $(document).ready(function() {
     //logic to determine whether like being clicked is comment or reply
     if($currentReplyId) {
       //apply likes only to select reply
+
       commentsObject.comments[$currentCommentId]['replies'][$currentReplyId]['likes'] = commentsObject.comments[$currentCommentId]['replies'][$currentReplyId]['likes'] + 1 || 1
+
       const $currentLikes = commentsObject.comments[$currentCommentId]['replies'][$currentReplyId]['likes']
       if($(this).parent().children().length ==2 ) {
         $(this).parent().append('<i class="col-1 text-end text-primary offset-5 pr-0 bi bi-hand-thumbs-up-fill"></i>')
@@ -126,6 +137,8 @@ $(document).ready(function() {
         $(this).parent().find('.likes-text').text($currentLikes);
       }
     }
+
+    setLocalStorage();
 
   })
 
@@ -158,8 +171,10 @@ $(document).ready(function() {
 
     console.log(commentsObject);
 
+
+    //template for when a new reply is added
     const $newReply = 
-    `<div id="reply${commentsObject.comments[$currentComment]['numberOfReplies']}" class="user-reply col-10 text-light my-3">
+    `<div id="reply${commentsObject.comments[$currentComment]['numberOfReplies']}" class="close user-reply col-10 text-light my-3">
       <div class="row align-items-center">
         <div class='col-1 p-2'>
           <img src='${faker.image.cats('100', '100', true)}' class="rounded-circle img-fluid p-0" >
@@ -186,13 +201,22 @@ $(document).ready(function() {
     const $replyContainer = $(this).parentsUntil($commentContainer).find('#reply-container')
     $($newReply).hide().appendTo($replyContainer).fadeIn(200);
 
+    setLocalStorage();
+
     $(this)[0].reset();  //resets form after submission
   })
 
 
   //SECTION Delete Comment on Close Button
   $($commentContainer).on('click', '.remove-comment', function() {
-    $(this).closest(".user-comment").remove();
+    $(this).closest(".close").remove();
+  })
+
+
+  //SECTION console log session storage
+  $('#reset-all').click(function() {
+    const retrievedObject = JSON.parse(localStorage.getItem('session'))
+    console.log(retrievedObject)
   })
 })
 
@@ -213,3 +237,9 @@ let getCurrentTime = function(date) {
   let strTime = `${hours}:${minutes}:${seconds} ${ampm}`;
   return strTime;
 }     
+
+const setLocalStorage = function(){
+  localStorage.setItem('session', JSON.stringify(commentsObject))
+}
+
+
