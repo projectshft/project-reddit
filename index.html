@@ -30,20 +30,20 @@
 
   <body class="bg-dark">
     <div class="container">
-      <!-- HEADER SECTION-->
+      <!-- HEADER ANCHOR-->
       <div class="row justify-content-center mt-3">
         <div class="col-6 text-light">
-          <h1>ReReddit</h1>
+          <h1 class="display-3">ReReddit</h1>
           <hr class="border" />
         </div>
       </div>
 
-      <!-- NEW COMMENT SECTION-->
+      <!-- NEW COMMENT ANCHOR-->
       <div class="row justify-content-center">
         <div class="col-6 justify-content-center" id="comment-container"></div>
       </div>
 
-      <!-- ADD COMMENT SECTION-->
+      <!-- ADD COMMENT ANCHOR-->
       <div class="row justify-content-center my-5">
         <form class="col-6" id="new-comment-form" action="#">
           <div class="mb-3">
@@ -51,7 +51,7 @@
               type="name"
               name="comment-name"
               id="comment-name"
-              class="form-control form-control-md my-2 border-secondary"
+              class="form-control form-control-md my-2 border-secondary bg-secondary text-light"
               placeholder="name"
               required
             />
@@ -60,7 +60,7 @@
             <textarea
               name="comment-message"
               id="comment-message"
-              class="form-control form-control-md my-2 border-secondary"
+              class="form-control form-control-md my-2 border-secondary bg-secondary text-light"
               placeholder="comment"
               required
             ></textarea>
@@ -69,15 +69,6 @@
             Comment
           </button>
         </form>
-      </div>
-      <div class="row justify-content-center m-5">
-        <div class="col-6 text-center">
-          <hr class="border" />
-          <button class="btn btn-danger mb-2">RESET</button>
-          <p class="text-light">
-            <small>Will Reset All Comments and Erase from Local Storage</small>
-          </p>
-        </div>
       </div>
     </div>
   </body>

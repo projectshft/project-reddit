@@ -1,4 +1,3 @@
-
 import { faker } from 'https://cdn.skypack.dev/@faker-js/faker'; //https://fakerjs.dev/api/image.html
 
 
@@ -8,19 +7,25 @@ const commentsObject = {
   comments: {}
 };
 
+//overall container to hold all comments
 const $commentContainer = $('#comment-container');
+
 
 $(document).ready(function() {
 
+  //ANCHOR creates new comment when form is submitted
   $('#new-comment-form').submit(function(e) {
-    e.preventDefault()
+    e.preventDefault() //prevents submission from reloading page
 
+    //each comment created adds to the numberOfComments in the commentsObject
     commentsObject.numberOfComments++
     const $commentNumber = commentsObject.numberOfComments
 
+    //retrieving values of Name and Message 
     const $commentName = $(this).find('#comment-name').val()
     const $commentMessage = $(this).find('#comment-message').val()
 
+    //populates commentObject with data on each comment
     commentsObject.comments[`comment${$commentNumber}`] = {
       name: $commentName,
       message: $commentMessage,
@@ -29,8 +34,10 @@ $(document).ready(function() {
       replies: {}
     }
 
+    //variable to be used to assign IDs to each post
     const $commentId = commentsObject.comments[`comment${$commentNumber}`];
 
+    //HTML template for each new comment
     let $newComment = 
     `<div id="comment${commentsObject.numberOfComments}" class="user-comment container-fluid text-light mt-5  ">
       <div class="row align-items-center p-1">
@@ -40,7 +47,7 @@ $(document).ready(function() {
         <div class='col-11'>
           <div class="row justify-content-center bg-secondary rounded">
             <div class="user-name row fw-light justify-content-between align-items-center mb-0 mt-2 pb-0">
-              <p class="col-11 px-0 mb-0"><strong>${$commentId.name}</strong></p>
+              <h6 class="col-11 px-0 mb-0"><strong>${$commentId.name}</strong></h6>
               <button type="button" class="remove-comment btn-close col-1" aria-label="Close"></button>
             </div>
             <div class="user-message row fw-light mb-2">
@@ -51,7 +58,7 @@ $(document).ready(function() {
       </div>
       <div class='row p-1'>  
         <p class="like-button col-1 rounded border border-dark text-secondary text-center p-0 offset-1 mb-0 hover"><small>Like</small></p>
-        <p class="reply-button col-1 rounded border border-dark text-secondary text-center p-0 mb-0 hover"><small>Reply</small></p>
+        <p class="reply-button col-2 rounded border border-dark text-secondary text-center p-0 pl-2 mb-0 hover"><small>Reply<span class="reply-count"></span></small></p>
         <p class="col-3 rounded border border-dark text-start text-secondary mb-0"><small>${getCurrentTime(new Date)}</small></p>
       </div>  
       <div id='reply-container' class='row justify-content-end d-none p-1'>
@@ -63,7 +70,7 @@ $(document).ready(function() {
               type="name"
               name="reply-name"
               id="reply-name"
-              class="form-control form-control-sm my-2"
+              class="form-control form-control-sm my-2 border-secondary bg-secondary text-light"
               placeholder="name"
               required
             />
@@ -72,7 +79,7 @@ $(document).ready(function() {
             <textarea
               name="reply-message"
               id="reply-message"
-              class="form-control form-control-sm my-2"
+              class="form-control form-control-sm my-2 border-secondary bg-secondary text-light"
               placeholder="comment"
               required
             ></textarea>
@@ -85,12 +92,14 @@ $(document).ready(function() {
     </div>
     `
 
+    //comment will fade in on submission
     $($newComment).hide().appendTo($commentContainer).fadeIn(200)
 
-    $(this)[0].reset()
+    $(this)[0].reset() //resets form after submission
   })
 
-  //SECTION hover over effect on like and reply
+
+  //ANCHOR hover over effect on like and reply
   $($commentContainer).on('mouseenter', '.hover', function() {
     $(this).addClass('bg-primary text-light')
     $(this).css('cursor', 'pointer')
@@ -98,7 +107,8 @@ $(document).ready(function() {
     $(this).removeClass('bg-primary text-light')
   })
 
-  //SECTION like functionality for comments
+
+  //ANCHOR like functionality for comments
   $($commentContainer).on('click', '.like-button', function(e) {
 
     const $currentCommentId = $(this).closest('.user-comment').attr('id');
@@ -120,7 +130,7 @@ $(document).ready(function() {
       commentsObject.comments[$currentCommentId]['likes']++
       const $currentLikes = commentsObject.comments[$currentCommentId]['likes']
       if($(this).parent().children().length === 3) {
-        $(this).parent().append('<i class="col-1 text-end text-primary offset-4 pr-0 bi bi-hand-thumbs-up-fill"></i>')
+        $(this).parent().append('<i class="col-1 text-end text-primary offset-3 pr-0 bi bi-hand-thumbs-up-fill"></i>')
         $(this).parent().append('<p class="col-1 text-start text-primary pl-0 mb-0"><small class="likes-text">1<small></p>')  
       } else {
         $(this).parent().find('.likes-text').text($currentLikes);
@@ -129,35 +139,36 @@ $(document).ready(function() {
 
   })
 
-  //SECTION Show Reply Div
+
+  //ANCHOR Show Reply Div
   $($commentContainer).on('click', '.reply-button', function() {
     const $replyContainer = $(this).parent().siblings('#reply-container')
     const $newReplyFormContainer = $(this).parent().siblings('#new-reply-form-container')
     $replyContainer.toggleClass('d-none');
     $newReplyFormContainer.toggleClass('d-none');
     const text = $(this).find('small').text();
-    $(this).find('small').text(text === 'Reply' ? 'Hide' : 'Reply')
+    // $(this).find('small').text(text === 'Reply' ? 'Hide' : 'Reply')
     $(this).toggleClass('bg-danger text-secondary')
   })
 
 
-  //SECTION Add Reply
+  //ANCHOR Add Reply
   $($commentContainer).on('submit', '#new-reply-form', function(e) {
-    e.preventDefault();
+    e.preventDefault(); //prevents submission from reloading page
 
     const $replyName = $(this).find('#reply-name').val()
     const $replyMessage= $(this).find('#reply-message').val()
 
-    const $currentComment = $(this).parentsUntil($commentContainer)[1].id;
+    const $currentComment = $(this).closest('.user-comment').attr('id');
 
+    //tracks number of replies in each comment
     commentsObject.comments[$currentComment]['numberOfReplies']++
     const $numberOfReplies = commentsObject.comments[$currentComment]['numberOfReplies']
 
-
+    //populates commentsObject with each reply data
     commentsObject.comments[$currentComment]['replies'][`reply${$numberOfReplies}`] = {name: $replyName, message: $replyMessage, likes: 0}
 
-    console.log(commentsObject);
-
+    //HTML template for new replies
     const $newReply = 
     `<div id="reply${commentsObject.comments[$currentComment]['numberOfReplies']}" class="user-reply col-10 text-light my-3">
       <div class="row align-items-center">
@@ -167,7 +178,7 @@ $(document).ready(function() {
         <div class='col-11'>
           <div class="row justify-content-center bg-secondary rounded">
             <div class="user-name row fw-light justify-content-between align-items-center mb-0 mt-2 pb-0">
-              <p class="col-11 px-0 mb-0"><strong>${$replyName}</strong></p>
+              <h6 class="col-11 px-0 mb-0"><strong>${$replyName}</strong></h6>
               <button type="button" class="remove-comment btn-close col-1" aria-label="Close"></button>
             </div>
             <div class="user-message row fw-light mb-2">
@@ -182,6 +193,8 @@ $(document).ready(function() {
       </div>  
     <div>`
 
+    //updates the reply text to show number of replies within each comment
+    $(this).closest('.user-comment').find('.reply-count').text(` (${$numberOfReplies})`)
 
     const $replyContainer = $(this).parentsUntil($commentContainer).find('#reply-container')
     $($newReply).hide().appendTo($replyContainer).fadeIn(200);
@@ -190,16 +203,14 @@ $(document).ready(function() {
   })
 
 
-  //SECTION Delete Comment on Close Button
+  //ANCHOR Delete Comment on Close Button
   $($commentContainer).on('click', '.remove-comment', function() {
     $(this).closest(".user-comment").remove();
   })
 })
 
 
-
-
-//SECTION Function to get current time and display as HH:MM:SS AM/PM
+//ANCHOR Function to get current time and display as HH:MM:SS AM/PM
 let getCurrentTime = function(date) {
   let hours = date.getHours();
   let minutes = date.getMinutes();
