@@ -170,7 +170,7 @@ $(document).ready(function() {
 
     //HTML template for new replies
     const $newReply = 
-    `<div id="reply${commentsObject.comments[$currentComment]['numberOfReplies']}" class="user-reply col-10 text-light my-3">
+    `<div id="reply${commentsObject.comments[$currentComment]['numberOfReplies']}" class="user-comment col-10 text-light my-3">
       <div class="row align-items-center">
         <div class='col-1 p-2'>
           <img src='${faker.image.cats('100', '100', true)}' class="rounded-circle img-fluid p-0" >
