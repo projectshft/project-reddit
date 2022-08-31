@@ -72,6 +72,8 @@ $(document).ready(function() {
     const $currentCommentId = $(this).closest('.user-comment').attr('id');
     const $currentReplyId = $(this).closest('.user-reply').attr('id');
 
+    console.log($currentCommentId, $currentReplyId)
+
     //logic to determine whether like being clicked is comment or reply
     if($currentReplyId) {
       //apply likes only to select reply
@@ -79,8 +81,8 @@ $(document).ready(function() {
 
       const $currentLikes = commentsObject.comments[$currentCommentId]['replies'][$currentReplyId]['likes']
       
-      if($(this).parent().children().length === 2 ) {
-        $(this).parent().append('<i class="col-1 text-end text-primary offset-5 pr-0 bi bi-hand-thumbs-up-fill"></i>')
+      if($(this).parent().children().length === 3 ) {
+        $(this).parent().append('<i class="col-1 text-end text-primary offset-3 pr-0 bi bi-hand-thumbs-up-fill"></i>')
         $(this).parent().append('<p class="col-1 text-start text-primary pl-0 mb-0"><small class="likes-text">1<small></p>')  
       } else {
         $(this).parent().find('.likes-text').text($currentLikes);
@@ -89,7 +91,6 @@ $(document).ready(function() {
       //apply likes only to selected comment
       commentsObject.comments[$currentCommentId]['likes']++
       const $currentLikes = commentsObject.comments[$currentCommentId]['likes']
-      console.log($currentCommentId)
       if($(this).parent().children().length === 3) {
         $(this).parent().append('<i class="col-1 text-end text-primary offset-3 pr-0 bi bi-hand-thumbs-up-fill"></i>')
         $(this).parent().append('<p class="col-1 text-start text-primary pl-0 mb-0"><small class="likes-text">1<small></p>')  
@@ -151,7 +152,7 @@ $(document).ready(function() {
 
   //ANCHOR Delete Comment on Close Button
   $($commentContainer).on('click', '.remove-comment', function() {
-    $(this).closest(".user-comment").remove();
+    $(this).closest(".comment-reply").remove();
   })
 })
 

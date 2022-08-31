@@ -75,7 +75,10 @@
 
     <!-- ANCHOR Handlebar template for new comment-->
     <script id="new-comment-template" type="text/x-handlebars-template">
-      <div id="{{id}}" class="user-comment container-fluid text-light mt-5">
+      <div
+        id="{{id}}"
+        class="user-comment comment-reply container-fluid text-light mt-5"
+      >
         <div class="row align-items-center p-1">
           <div class="col-1 p-2">
             <img src="{{faker}}" class="rounded-circle img-fluid p-0" />
@@ -145,7 +148,7 @@
 
     <!-- ANCHOR Handlebar template for new reply-->
     <script id="new-reply-template" type="text/x-handlebars-template">
-      <div id="{{ id }}" class="user-comment col-10 text-light my-3">
+      <div id="{{ id }}" class="user-reply comment-reply user-reply col-10 text-light my-3">
         <div class="row align-items-center">
           <div class='col-1 p-2'>
             <img src='{{ faker }}' class="rounded-circle img-fluid p-0" >
@@ -165,6 +168,7 @@
         <div class='row text-secondary'>
           <p class="like-button col-1 rounded border border-dark text-center p-0 offset-1 mb-0 hover"><small>Like</small></p>
           <p class="col-3 rounded border border-dark text-start mb-0"><small>{{ date }}</small></p>
+          <p class="col-2"></p>
         </div>
       <div>
     </script>
