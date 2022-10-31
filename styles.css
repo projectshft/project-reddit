@@ -1,4 +1,47 @@
+body {
+  background-color: rgb(44, 43, 43);
+}
+
+.page-header {
+  border-bottom: 0px transparent;
+}
+
+h1 {
+  color: aliceblue;
+}
+
 .post {
-  border-bottom: 1px solid black;
+  color: aliceblue;
+  background-color: darkslategrey;
+  margin: 10px;
+  border-radius: 10px;
   padding: 15px;
+}
+
+.comment-section {
+  display: none;
+  padding-left: 10%;
+}
+
+.show {
+  display: block;
+}
+
+.comment {
+  margin: 5px;
+  padding: 5px;
+  border: 2px solid rgb(44, 43, 43);
+  border-radius: 5px;
+}
+
+.btn {
+  background-color: rgb(44, 43, 43);
+}
+
+.fa-trash:hover {
+  color: red;
+}
+
+.fa-comment:hover {
+  color: rgb(28, 170, 206);
 }
