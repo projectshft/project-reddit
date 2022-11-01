@@ -92,6 +92,7 @@ function handleSubmitClick(e) {
   let $post = createPost(commentInput, nameInput);
 
   $('.posts-container')[0].append($post[0])
+  clearForm();
 }
 
 
@@ -129,6 +130,8 @@ $('.posts-container').on('click', '.btn-post', function (e) {
   let $comment = createComment(commentInput, nameInput)
 
   $commentSection.prepend($comment);
+
+  clearForm();
 })
 
 
@@ -147,6 +150,8 @@ $('.posts-container').on('click', '.edit-post', function (e) {
     $('.edit-form').hide();
 
   }) 
+
+  clearForm();
 })
 
 $('.posts-container').on('click', '.edit-comment', function (e) {
@@ -163,5 +168,15 @@ $('.posts-container').on('click', '.edit-comment', function (e) {
     $(e.currentTarget).off();
     $('.edit-form').hide();
 
+    clearForm();
   }) 
 })
+
+function clearForm() {
+  let $formsArr = $('.form-control');
+  
+  
+  $formsArr.each((input) => {
+    $($formsArr[input]).val('')
+  })
+}
