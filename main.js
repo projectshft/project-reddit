@@ -33,7 +33,7 @@ function createPost(comment, name) {
   +        'Posted by:' + name
   +      '</p>'
   +    '</div>'
-  +    '<div class="col-xs-1 col-offset-1">'
+  +    '<div class="col-xs-1 col-offset-1 edit-post">'
   +      '<i class="fa-solid fa-pen-to-square"></i>'
   +    '</div>'
   +  '</div>'
@@ -71,7 +71,7 @@ function createComment(comment, name) {
   +             'Posted by: ' + name
   +          '</p>'
   +        '</div>'
-  +        '<div class="edit col-md-1">'
+  +        '<div class="edit-comment col-md-1">'
   +          '<i class="fa-solid fa-pen-to-square"></i>'
   +        '</div>'
   +      '</div>'
@@ -129,4 +129,39 @@ $('.posts-container').on('click', '.btn-post', function (e) {
   let $comment = createComment(commentInput, nameInput)
 
   $commentSection.prepend($comment);
+})
+
+
+$('.posts-container').on('click', '.edit-post', function (e) {
+  $('.edit-form').show();
+  let $postText = $(e.currentTarget).prev().find('.post-text');
+
+  
+  $('.edit-btn').on('click', function(e) {
+    e.preventDefault();
+    
+    let editInput = $('#edit-form-comment').val();
+    $postText.text(editInput);
+
+    $(e.currentTarget).off();
+    $('.edit-form').hide();
+
+  }) 
+})
+
+$('.posts-container').on('click', '.edit-comment', function (e) {
+  $('.edit-form').show();
+  let $commentText = $(e.currentTarget).prev().find('.comment-text');
+
+  
+  $('.edit-btn').on('click', function(e) {
+    e.preventDefault();
+    
+    let editInput = $('#edit-form-comment').val();
+    $commentText.text(editInput);
+
+    $(e.currentTarget).off();
+    $('.edit-form').hide();
+
+  }) 
 })

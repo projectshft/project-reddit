@@ -85,7 +85,7 @@ h1 {
   color: chartreuse;
 }
 
-.edit-post {
+.edit-form {
   display: none;
   position: fixed;
   left: 33.333%;
@@ -96,6 +96,6 @@ h1 {
   z-index: 10;
 }
 
-.edit-post-inner {
+.edit-form-inner {
   padding: 15px;
 }
