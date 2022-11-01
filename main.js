@@ -8,6 +8,8 @@
 // 5. enable editing
   //on click open up a form that will modify the text of the post
 
+// clear forms on submit
+
 $postComment = $('#post-form-comment');
 $postName = $('#post-form-name');
 $submit = $('.btn-submit');
@@ -37,21 +39,6 @@ function createPost(comment, name) {
   +  '</div>'
   +  '<div class="row comment-section">'
   +    '<div class="col-xs-12">'
-  +      '<div class="row comment">'
-  +        '<div class="col-md-11">'
-  +          '<p class="comment-text">Comment 1</p>'
-  +          '<p class="comment-info">'
-  +            '<span class="delete-comment"'
-  +              '><i class="fa-solid fa-trash"></i'
-  +            '></span>'
-  // comment posted by
-  +          '</p>'
-  +        '</div>'
-  +        '<div class="edit col-md-1">'
-  +          '<i class="fa-solid fa-pen-to-square"></i>'
-  +        '</div>'
-  +      '</div>'
-
   +      '<form>'
   +        '<div class="form-group form-comment">'
   +          '<input type="text" class="form-control" id="name" placeholder="Comment Text"/>'
@@ -72,6 +59,29 @@ let $post = $(template);
 return $post;
 }
 
+function createComment(comment, name) {
+  let template =  
+         '<div class="row comment">'
+  +        '<div class="col-md-11">'
+  +          '<p class="comment-text">' + comment +  '</p>'
+  +          '<p class="comment-info">'
+  +            '<span class="delete-comment"'
+  +              '><i class="fa-solid fa-trash"></i'
+  +            '></span> | '
+  +             'Posted by: ' + name
+  +          '</p>'
+  +        '</div>'
+  +        '<div class="edit col-md-1">'
+  +          '<i class="fa-solid fa-pen-to-square"></i>'
+  +        '</div>'
+  +      '</div>'
+  ;
+
+  let $comment = $(template);
+
+  return $comment;
+}
+
 
 function handleSubmitClick(e) {
   let commentInput = $postComment.val();
@@ -89,18 +99,34 @@ $submit.click(function (e) {
   handleSubmitClick(e);
 })
 
-$('.posts-container').click(function (e) {//listen for clicks on trash and comment buttons
-  let $clickedElement = $(e.target)
 
-  if($clickedElement.attr('class').includes('trash')){
-    $clickedElement.closest('.post').remove();
-  }
-
-  if($clickedElement.attr('class').includes('comment')){
+$('.posts-container').on('click', '.make-comment', function (e) {
     let $mainPost = $(e.target.closest('.main-post'))
     let $commentSection = $mainPost.next()
+    // debugger;
 
     $commentSection.toggle();
-  }
 })
 
+
+$('.posts-container').on('click', '.delete-post', function (e) {
+  $(e.target).closest('.post').remove();
+})
+
+
+$('.posts-container').on('click', '.delete-comment', function (e) {
+  $(e.target).closest('.row').remove();
+})
+
+
+$('.posts-container').on('click', '.btn-post', function (e) {
+  let commentInput = $(e.target).prevAll('.form-comment').children().val();
+  let nameInput = $(e.target).prev().children().val();
+  let $commentSection = $(e.target).closest('.comment-section')
+  
+  e.preventDefault();
+
+  let $comment = createComment(commentInput, nameInput)
+
+  $commentSection.prepend($comment);
+})
