@@ -84,3 +84,18 @@ h1 {
 .fa-pen-to-square:hover {
   color: chartreuse;
 }
+
+.edit-post {
+  display: none;
+  position: fixed;
+  left: 33.333%;
+  top: 25%;
+  background-color: rgb(47, 79, 79, 0.7);
+  width: 33.333%;
+  border-radius: 8px;
+  z-index: 10;
+}
+
+.edit-post-inner {
+  padding: 15px;
+}
