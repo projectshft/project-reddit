@@ -146,6 +146,7 @@ function addListenerToEditButton($postChanges) {
 $allPosts.on('click', '.edit-post', function (e) {//reveal the form to make edits to posts
   $('.edit-form').show();
   let $postText = $(e.currentTarget).prev().find('.post-text');
+  $('#edit-form-comment').val($postText.text())
 
   addListenerToEditButton($postText);
 })
@@ -153,7 +154,12 @@ $allPosts.on('click', '.edit-post', function (e) {//reveal the form to make edit
 $allPosts.on('click', '.edit-comment', function (e) {//reveal the form to make edits to comments
   $('.edit-form').show();
   let $commentText = $(e.currentTarget).prev().find('.comment-text');
+  $('#edit-form-comment').val($commentText.text())
   
   addListenerToEditButton($commentText);
 })
 
+$('.close-edit-form').click(function() {
+  $('.edit-form').hide();
+  $('.edit-btn').off();
+})

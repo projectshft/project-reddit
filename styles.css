@@ -96,7 +96,7 @@ h1 {
 }
 
 .edit-form {
-  /* display: none; */
+  display: none;
   position: fixed;
   left: 37.333%;
   top: 25%;
@@ -111,5 +111,6 @@ h1 {
   padding: 15px;
 }
 
-#edit-form-comment {
+.close-edit-form:hover {
+  color: red;
 }
