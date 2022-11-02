@@ -38,7 +38,7 @@ function createPost(comment, name) {
   +  '</div>'
   +  '<div class="row comment-section">'
   +    '<div class="col-xs-12">'
-  +      '<form>'
+  +      '<form class="comment-form">'
   +        '<div class="form-group form-comment">'
   +          '<input type="text" class="form-control" id="name" placeholder="Comment Text"/>'
   +        '</div>'
