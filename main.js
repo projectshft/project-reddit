@@ -129,24 +129,28 @@ $allPosts.on('click', '.btn-post', function (e) {//get values from the comments 
   clearForms();
 })
 
-
-$allPosts.on('click', '.edit-post', function (e) {
-  $('.edit-form').show();
-  let $postText = $(e.currentTarget).prev().find('.post-text');
-
-  
-  $('.edit-btn').on('click', function(e) {
+function addListenerToEditButton($postChanges) {
+  $('.edit-btn').on('click', function(e) {//while the edit form is visible have listen for clicks on edit button
     e.preventDefault();
     
     let editInput = $('#edit-form-comment').val();
-    $postText.text(editInput);
+    $postChanges.text(editInput);
 
     $(e.currentTarget).off();
     $('.edit-form').hide();
 
+    clearForms();
   }) 
+}
 
-  clearForms();
+
+$allPosts.on('click', '.edit-post', function (e) {//reveal the form to make edits to posts
+  $('.edit-form').show();
+  let $postText = $(e.currentTarget).prev().find('.post-text');
+
+  addListenerToEditButton($postText);
+
+  
 })
 
 $allPosts.on('click', '.edit-comment', function (e) {
@@ -154,16 +158,7 @@ $allPosts.on('click', '.edit-comment', function (e) {
   let $commentText = $(e.currentTarget).prev().find('.comment-text');
 
   
-  $('.edit-btn').on('click', function(e) {
-    e.preventDefault();
-    
-    let editInput = $('#edit-form-comment').val();
-    $commentText.text(editInput);
+  addListenerToEditButton($commentText);
 
-    $(e.currentTarget).off();
-    $('.edit-form').hide();
-
-    clearForms();
-  }) 
 })
 
