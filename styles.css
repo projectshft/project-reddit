@@ -1,0 +1,23 @@
+h3 {
+  margin-bottom: 20px;
+}
+
+.comment-section {
+  margin-top: 10px;
+}
+
+.submit-remark {
+  margin-top: 5px;
+}
+
+.remark-name {
+  margin-top: 5px;
+}
+
+.hide-thing {
+  display: none;
+}
+
+.remove-comment {
+  color: red;
+}
