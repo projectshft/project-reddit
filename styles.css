@@ -1,0 +1,127 @@
+body {
+  background-color: rgb(44, 43, 43);
+  height: 150vh;
+  font-family: "Dosis", sans-serif;
+  font-weight: 600;
+}
+
+.page-header {
+  border-bottom: 0px transparent;
+  margin-top: 0;
+  background-color: rgb(47, 79, 79, 0.5);
+  color: aliceblue;
+  font-family: "ABeeZee", sans-serif;
+}
+
+.main {
+  margin-top: 75px;
+  max-height: 50%;
+}
+
+.container h1 {
+  color: aliceblue;
+  margin-top: 10px;
+}
+
+.post {
+  color: aliceblue;
+  background-color: darkslategrey;
+  margin: 10px;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.comment-section {
+  display: none;
+  padding-left: 10%;
+  padding-top: 10px;
+  border-top: 2px solid rgb(44, 43, 43);
+}
+
+.show {
+  display: block;
+}
+
+.comment {
+  margin: 5px;
+  padding: 5px;
+  background-color: rgb(44, 43, 43);
+  border-radius: 5px;
+}
+
+.submit-comment {
+  position: fixed;
+  bottom: 25px;
+  left: 25%;
+  width: 50%;
+}
+
+.submit-comment-col {
+  position: fixed;
+}
+
+.comment-form {
+  margin-top: 15px;
+}
+
+.btn-post {
+  background-color: rgb(44, 43, 43);
+}
+
+.btn-post:hover {
+  color: white;
+}
+.btn-submit {
+  color: white;
+  background-color: darkslategray;
+}
+
+.btn-submit:hover {
+  color: white;
+}
+
+.btn:hover {
+  box-shadow: 2px 2px 8px;
+  font-weight: 800;
+}
+
+.edit-btn {
+  background-color: rgb(44, 43, 43);
+  color: white;
+  margin-left: 25%;
+}
+
+.edit-btn:hover {
+  color: white;
+}
+.fa-trash:hover {
+  color: red;
+}
+
+.fa-comment:hover {
+  color: rgb(28, 170, 206);
+}
+
+.fa-pen-to-square:hover {
+  color: chartreuse;
+}
+
+.edit-form {
+  display: none;
+  position: fixed;
+  left: 37.333%;
+  top: 25%;
+  background-color: rgb(47, 79, 79, 0.95);
+  width: 25%;
+  border-radius: 8px;
+  z-index: 10;
+  color: white;
+}
+
+.edit-form-inner {
+  padding: 15px;
+}
+
+.close-edit-form:hover {
+  color: red;
+}
