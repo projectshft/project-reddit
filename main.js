@@ -71,7 +71,7 @@ function createComment(comment, name) {
 }
 
 
-function handleSubmitClick(e) {
+$submit.click(function (e) {
   let commentInput = $postComment.val();
   let nameInput = $postName.val();
 
@@ -81,11 +81,6 @@ function handleSubmitClick(e) {
 
   $('.posts-container')[0].append($post[0])
   clearForm();
-}
-
-
-$submit.click(function (e) {
-  handleSubmitClick(e);
 })
 
 
