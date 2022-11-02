@@ -3,6 +3,17 @@ $postName = $('#post-form-name');
 $submit = $('.btn-submit');
 $allPosts = $('.posts-container');
 
+
+function clearForms() {
+  let $formsArr = $('.form-control');
+  
+  
+  $formsArr.each((input) => {
+    $($formsArr[input]).val('')
+  })
+}
+
+
 function createPost(comment, name) {
   let template = 
   '<div class="row post">' 
@@ -48,6 +59,7 @@ let $post = $(template);
 return $post;
 }
 
+
 function createComment(comment, name) {
   let template =  
          '<div class="row comment">'
@@ -72,7 +84,7 @@ function createComment(comment, name) {
 }
 
 
-$submit.click(function (e) {
+$submit.click(function (e) {//append post on submit
   let commentInput = $postComment.val();
   let nameInput = $postName.val();
 
@@ -81,14 +93,13 @@ $submit.click(function (e) {
   let $post = createPost(commentInput, nameInput);
 
   $allPosts[0].append($post[0])
-  clearForm();
+  clearForms();
 })
 
 
-$allPosts.on('click', '.make-comment', function (e) {
+$allPosts.on('click', '.make-comment', function (e) {//when the comment button is clicked, reveal the comment section
     let $mainPost = $(e.target.closest('.main-post'))
     let $commentSection = $mainPost.next()
-    // debugger;
 
     $commentSection.toggle();
 })
@@ -104,7 +115,7 @@ $allPosts.on('click', '.delete-comment', function (e) {
 })
 
 
-$allPosts.on('click', '.btn-post', function (e) {
+$allPosts.on('click', '.btn-post', function (e) {//get values from the comments form and prepend to comment section of that post
   let commentInput = $(e.target).prevAll('.form-comment').children().val();
   let nameInput = $(e.target).prev().children().val();
   let $commentSection = $(e.target).closest('.comment-section')
@@ -115,7 +126,7 @@ $allPosts.on('click', '.btn-post', function (e) {
 
   $commentSection.prepend($comment);
 
-  clearForm();
+  clearForms();
 })
 
 
@@ -135,7 +146,7 @@ $allPosts.on('click', '.edit-post', function (e) {
 
   }) 
 
-  clearForm();
+  clearForms();
 })
 
 $allPosts.on('click', '.edit-comment', function (e) {
@@ -152,15 +163,7 @@ $allPosts.on('click', '.edit-comment', function (e) {
     $(e.currentTarget).off();
     $('.edit-form').hide();
 
-    clearForm();
+    clearForms();
   }) 
 })
 
-function clearForm() {
-  let $formsArr = $('.form-control');
-  
-  
-  $formsArr.each((input) => {
-    $($formsArr[input]).val('')
-  })
-}
