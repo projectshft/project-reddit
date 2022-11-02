@@ -1,6 +1,7 @@
 $postComment = $('#post-form-comment');
 $postName = $('#post-form-name');
 $submit = $('.btn-submit');
+$allPosts = $('.posts-container');
 
 function createPost(comment, name) {
   let template = 
@@ -79,12 +80,12 @@ $submit.click(function (e) {
 
   let $post = createPost(commentInput, nameInput);
 
-  $('.posts-container')[0].append($post[0])
+  $allPosts[0].append($post[0])
   clearForm();
 })
 
 
-$('.posts-container').on('click', '.make-comment', function (e) {
+$allPosts.on('click', '.make-comment', function (e) {
     let $mainPost = $(e.target.closest('.main-post'))
     let $commentSection = $mainPost.next()
     // debugger;
@@ -93,17 +94,17 @@ $('.posts-container').on('click', '.make-comment', function (e) {
 })
 
 
-$('.posts-container').on('click', '.delete-post', function (e) {
+$allPosts.on('click', '.delete-post', function (e) {
   $(e.target).closest('.post').remove();
 })
 
 
-$('.posts-container').on('click', '.delete-comment', function (e) {
+$allPosts.on('click', '.delete-comment', function (e) {
   $(e.target).closest('.row').remove();
 })
 
 
-$('.posts-container').on('click', '.btn-post', function (e) {
+$allPosts.on('click', '.btn-post', function (e) {
   let commentInput = $(e.target).prevAll('.form-comment').children().val();
   let nameInput = $(e.target).prev().children().val();
   let $commentSection = $(e.target).closest('.comment-section')
@@ -118,7 +119,7 @@ $('.posts-container').on('click', '.btn-post', function (e) {
 })
 
 
-$('.posts-container').on('click', '.edit-post', function (e) {
+$allPosts.on('click', '.edit-post', function (e) {
   $('.edit-form').show();
   let $postText = $(e.currentTarget).prev().find('.post-text');
 
@@ -137,7 +138,7 @@ $('.posts-container').on('click', '.edit-post', function (e) {
   clearForm();
 })
 
-$('.posts-container').on('click', '.edit-comment', function (e) {
+$allPosts.on('click', '.edit-comment', function (e) {
   $('.edit-form').show();
   let $commentText = $(e.currentTarget).prev().find('.comment-text');
 
