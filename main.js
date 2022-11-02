@@ -7,7 +7,6 @@ $allPosts = $('.posts-container');
 function clearForms() {
   let $formsArr = $('.form-control');
   
-  
   $formsArr.each((input) => {
     $($formsArr[input]).val('')
   })
@@ -85,10 +84,10 @@ function createComment(comment, name) {
 
 
 $submit.click(function (e) {//append post on submit
+  e.preventDefault()
+
   let commentInput = $postComment.val();
   let nameInput = $postName.val();
-
-  e.preventDefault()
 
   let $post = createPost(commentInput, nameInput);
 
@@ -116,12 +115,12 @@ $allPosts.on('click', '.delete-comment', function (e) {
 
 
 $allPosts.on('click', '.btn-post', function (e) {//get values from the comments form and prepend to comment section of that post
+  e.preventDefault();
+
   let commentInput = $(e.target).prevAll('.form-comment').children().val();
   let nameInput = $(e.target).prev().children().val();
   let $commentSection = $(e.target).closest('.comment-section')
   
-  e.preventDefault();
-
   let $comment = createComment(commentInput, nameInput)
 
   $commentSection.prepend($comment);
@@ -149,16 +148,12 @@ $allPosts.on('click', '.edit-post', function (e) {//reveal the form to make edit
   let $postText = $(e.currentTarget).prev().find('.post-text');
 
   addListenerToEditButton($postText);
-
-  
 })
 
-$allPosts.on('click', '.edit-comment', function (e) {
+$allPosts.on('click', '.edit-comment', function (e) {//reveal the form to make edits to comments
   $('.edit-form').show();
   let $commentText = $(e.currentTarget).prev().find('.comment-text');
-
   
   addListenerToEditButton($commentText);
-
 })
 
