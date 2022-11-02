@@ -59,20 +59,30 @@ h1 {
 }
 
 .btn-post:hover {
-  background-color: darkturquoise;
+  color: white;
 }
-
 .btn-submit {
   color: white;
-
   background-color: darkslategray;
 }
 
 .btn-submit:hover {
-  font-weight: 600;
-  background-color: darkturquoise;
+  color: white;
 }
 
+.btn:hover {
+  box-shadow: 2px 2px 8px;
+}
+
+.edit-btn {
+  background-color: rgb(44, 43, 43);
+  color: white;
+  margin-left: 25%;
+}
+
+.edit-btn:hover {
+  color: white;
+}
 .fa-trash:hover {
   color: red;
 }
@@ -88,12 +98,13 @@ h1 {
 .edit-form {
   display: none;
   position: fixed;
-  left: 33.333%;
+  left: 37.333%;
   top: 25%;
-  background-color: rgb(47, 79, 79, 0.7);
-  width: 33.333%;
+  background-color: rgb(47, 79, 79, 0.95);
+  width: 25%;
   border-radius: 8px;
   z-index: 10;
+  color: white;
 }
 
 .edit-form-inner {
