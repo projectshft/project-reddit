@@ -15,6 +15,7 @@ body {
 
 .main {
   margin-top: 75px;
+  max-height: 50%;
 }
 
 .container h1 {
