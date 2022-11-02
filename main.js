@@ -164,6 +164,6 @@ $('.close-edit-form').click(function() {
   $('.edit-btn').off();
 })
 
-$allPosts.on('mouseup', '.btn', function () {
+$('body').on('mouseup', '.btn', function () {
   $('.btn').blur()
 })
