@@ -163,3 +163,7 @@ $('.close-edit-form').click(function() {
   $('.edit-form').hide();
   $('.edit-btn').off();
 })
+
+$allPosts.on('mouseup', '.btn', function () {
+  $('.btn').blur()
+})
