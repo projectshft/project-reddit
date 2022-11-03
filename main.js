@@ -1,8 +1,8 @@
 // Event listener on the submit post button.
 
 $(".btn-primary").click(function () {
-  let $name = $("#name").val();
-  let $message = $("#message").val();
+  var $name = $("#name").val();
+  var $message = $("#message").val();
 
   // The input fields for message and name will be appended into a new <post>
   $(".post-area").append(
