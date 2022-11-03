@@ -1,0 +1,77 @@
+@font-face {
+  font-family: "Verdana";
+  src: url("/fonts/verdana-bold-italic.ttf");
+}
+
+body {
+  background-color: #6884c041;
+}
+
+.content-window {
+  margin-top: 80px;
+  /* border: solid 2px red; */
+  display: flex;
+  flex-direction: column;
+}
+
+#div-content {
+  height: 100%;
+  width: 100%;
+  border-radius: 6px;
+  text-align: left;
+  margin-left: 10px;
+  margin-top: 10px;
+  color: black;
+}
+
+.button-container {
+  display: flex;
+  margin-top: 10px;
+}
+
+.button-style {
+  /* border: 2px red solid; */
+  display: inline-block;
+  margin-top: 5px;
+  /* margin-right: 4px; */
+  font-family: "Verdana";
+  padding: 2px 4px;
+  border-radius: 50%;
+  background-color: lightgray;
+  border-radius: 2px;
+  /* text-decoration: underline; */
+}
+
+.btn:hover {
+  background-color: lightgray;
+  color: white;
+}
+
+.btn {
+  font-family: "Verdana";
+  background-color: lightgray;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  padding: 2px 4px;
+  border-radius: 8px;
+}
+
+.btn-primary {
+  font-family: "Verdana";
+  background-color: lightgray;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  padding: 2px 4px;
+  border-radius: 8px;
+  color: black;
+}
+
+.btn-secondary {
+  font-family: "Verdana";
+  background-color: lightgray;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  padding: 2px 4px;
+  border-radius: 8px;
+  color: black;
+}
