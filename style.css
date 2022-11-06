@@ -1,0 +1,64 @@
+@font-face {
+  font-family: "Verdana";
+  src: url("/fonts/verdana-bold-italic.ttf");
+}
+
+body {
+  background-color: #6884c041;
+}
+
+.content-window {
+  margin-top: 80px;
+  border: solid 1px black;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+}
+
+.button-container {
+  display: flex;
+  margin-top: 10px;
+  /* border: 2px red solid; */
+  margin-left: 10px;
+}
+
+#commenter-name,
+#commenter-message,
+#message,
+#name {
+  color: black;
+}
+
+.btn:hover {
+  background-color: lightgray;
+  color: white;
+}
+
+.btn {
+  font-family: "Verdana";
+  background-color: lightgray;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  padding: 2px 4px;
+  border-radius: 8px;
+}
+
+.btn-primary,
+.btn-secondary {
+  font-family: "Verdana";
+  background-color: lightgray;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  padding: 2px 4px;
+  border-radius: 8px;
+  color: black;
+}
+
+.post-styling {
+  margin-top: 10px;
+  height: 125px;
+  width: 100%;
+  padding: 7px 14px;
+  background-color: #8d99ae;
+  border-radius: 8px;
+}
