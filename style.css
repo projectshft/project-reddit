@@ -1,0 +1,39 @@
+.page-header h1 {
+  background-color: rgb(42, 42, 163);
+  color: white;
+  padding: 20px;
+}
+
+.post-author {
+  margin-bottom: 20px;
+  font-size: 17px;
+  font-family: Kalam;
+}
+
+.post-message {
+  font-size: 17px;
+  font-family: Kalam;
+}
+
+.new-posts {
+  background-color: rgb(158, 176, 236);
+  padding: 20px;
+  border-radius: 7px;
+  margin-top: 10px;
+}
+
+.remove-button {
+  margin: 5px;
+  border-radius: 4px;
+  background-color: rgb(241, 89, 63);
+  padding: 3px;
+}
+
+body {
+  background-color: rgb(27, 27, 43);
+}
+
+.author {
+  border-bottom: 2px solid rgb(42, 42, 163);
+  margin-bottom: 10px;
+}
