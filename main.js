@@ -6,15 +6,19 @@ $(".btn-primary").click(function () {
 
   // The input fields for message and name will be appended into a new <post>
   $(".post-area").append(
-    `<post> ${$message} - Posted By: <strong>${$name}
-    <section class='button-container'>
-    <button class='btn' id='delete-btn'>delete</></button>
-    <button class='btn' id='comments-btn'>comments</class=></button>
-    </section>
-    <div class="row comments-row"><div class="col-md-6 col-md-offset-3">
-    <div class="comments">
+    ` <post> 
+    <div class="post-styling">${$message} - Posted By: <strong>${$name}
     </div>
-    <form style="margin-top:30px;" class="form-show" onsubmit="event.preventDefault();">
+    <section class='button-container'>
+      <button class='btn' id='delete-btn'>delete</></button>
+      <button class='btn' id='comments-btn'>comments</class=></button>
+    </section>
+    
+  <div class="row comments-row">
+    <div class="comment-window col-md-8 offset-2">
+    <div class="comments">
+  </div>
+  <form style="margin-top:30px;" onsubmit="event.preventDefault();">
     
     <div class="form-group">
     
@@ -24,7 +28,9 @@ $(".btn-primary").click(function () {
     
     <div class="form-group">
     
-    <textarea id="commenter-message" type="text"class="form-control"placeholder="Post Comment"></textarea></div><button id="submit-comment" class="btn btn-secondary">Post Comment</button></form>
+    <textarea id="commenter-message" type="text"class="form-control"placeholder="Post Comment"></textarea></div>
+    <button id="submit-comment" class="btn btn-secondary">Post Comment</button>
+  </form>
     
     </div>
     </post>`
@@ -37,6 +43,11 @@ $(".btn-primary").click(function () {
   // This function should delete the post entirely.
   $("post").on("click", "#delete-btn", function () {
     $(this).closest("post").remove();
+  });
+
+  // This will toggle the comments.
+  $("#comments-btn").on("click", function () {
+    $(".comment-window").toggle();
   });
 
   // This function will append a comment to the post and populate a remove button
