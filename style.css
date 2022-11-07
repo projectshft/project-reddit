@@ -1,0 +1,9 @@
+
+body{
+  background: rgb(253,223,199);
+  background: linear-gradient(184deg, rgba(242,146,107,1) 12%, rgba(253,223,199,1) 90%);
+}
+
+h1{
+  color: white;
+}
