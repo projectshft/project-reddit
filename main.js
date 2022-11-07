@@ -3,7 +3,7 @@ $("body").on("click", ".post-button", function () {
   var poster = $(".poster").find("input").val();
   $("#add").append(
     $(
-      `<div class="post-text"><p><span class="text-primary font-weight-bold comments">comments </span>${post} - <strong>Posted By:</strong> ${poster}<i class="delete-button fa-solid fa-trash"></i></p></div>`
+      `<div class="post-text"><p><span class="text-primary font-weight-bold comments">comments </span>${post} - <strong>Posted By:</strong> ${poster} <i class="delete-button fa-solid fa-trash"></i></p></div>`
     )
   );
 
@@ -34,8 +34,16 @@ $("body").on("click", ".delete-button", function () {
 });
 
 $("body").on("click", ".comment-button", function () {
-  var comment = $(".comment").find("input").val();
-  var commenter = $(".commenter").find("input").val();
+  var comment = $(this)
+    .closest("div")
+    .prevAll(".comment:first")
+    .find("input")
+    .val();
+  var commenter = $(this)
+    .closest("div")
+    .prevAll(".commenter:first")
+    .find("input")
+    .val();
   $(this)
     .closest(".hide")
     .prepend(
