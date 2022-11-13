@@ -1,11 +1,14 @@
 var $posts = $('.posts');
 var $submitButton = $('#submit-button');
 
+// add post function that is called when submit button is clicked
 var addPost = function() {
+
+	// get the users name and message
 	var $userName = $('#name').val();
 	var $userMessage = $('#message').val();
 
-
+	// create necessary elements to be append to page
 	var $holder = $('<div/>',{
 		class: 'holder'
 	}); 
@@ -29,14 +32,16 @@ var addPost = function() {
 	$holder.append($userPosted, $commentButton, $removeButton);
 	$posts.append($holder);
 
+	// functions called on events
 	$removeButton.click(removePost);
 	$commentButton.click(addComment);
 }
 
-
+// add comment to correct post
 var addComment = function () {
 	var $parent = $(this).parent();
 
+	// again build necessary elements
 	var 
 	$newForm = $('<form> </form>'),
 
@@ -75,6 +80,7 @@ var addComment = function () {
 	$newForm.append($formDiv);
 	$parent.append($newForm);
 
+	// here we need to build an additional div and remove comment button for every submitted comment
 	$commentHere.click(function (e) {
 		var $commentList = $('<div/>', {
 			class: 'comments-List',
@@ -100,6 +106,7 @@ var addComment = function () {
 	});	
 }
 
+// simple function to remove either posts or comments
 var removePost = function() {
 	var $parent = $(this).parent();
 	$parent.remove();	
