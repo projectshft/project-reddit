@@ -7,6 +7,7 @@
       integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
       crossorigin="anonymous"
     />
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <meta charset="UTF-8" />
@@ -17,40 +18,39 @@
   <body>
     <nav class="navbar navbar-default">
       <div class="title">
-        <h1 class="text-center">ReReddit</h1>
+        <h1 class="text-center">P#NKReddit <img src="files/punk icon.png" class="icon"></h1>
       </div>
     </nav>
-    <div class="row">
-      <div class="col-md-6 col-md-offset-3">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
   
-        <div class="page-header">
-          <h1>Parsity Chat</h1>
-        </div>
-  
-        <div class="posts">
-        </div>
-  
-        <form style="margin-top:30px;" onsubmit="event.preventDefault();">
-          <h3>Add a new post</h3>
-          
-          <div class="form-group">
-            <textarea id="message" type="text"
-            class="form-control"
-            placeholder="Post Text"></textarea>
+          <div class="page-header">
+            <h1>IRC Chat</h1>
           </div>
-
-          <div class="form-group">
-            <input id="name" type="text"
+  
+          <div class="posts">
+          </div>
+  
+          <form style="margin-top:30px;" onsubmit="event.preventDefault();">
+          
+            <div class="form-group">
+              <textarea id="message" type="text"
               class="form-control"
-              placeholder="Your Name"></input>
-          </div>
+              placeholder="Post Text"></textarea>
+            </div>
+
+            <div class="form-group">
+              <input id="name" type="text"
+                class="form-control"
+                placeholder="Your Name"></input>
+            </div>
           
-          <button id="submit" class="btn btn-primary">Submit Post</button>
-        </form>
-  
+            <button id="submit" class="btn btn-primary">Submit Post</button>
+          </form>
+        </div>
       </div>
     </div>
-    
     <script src="main.js"></script>
   </body>
 </html>
