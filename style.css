@@ -1,3 +1,15 @@
+a {
+  -webkit-text-stroke: 0.5px white;
+}
+body {
+  background-image: url("files/wp3191520-background-punk.jpg");
+}
+
+.comment-input {
+  margin-bottom: 20px;
+  display: none;
+}
+
 .icon {
   height: 50px;
 }
@@ -15,11 +27,4 @@
 .posts {
   background-color: black;
   color: white;
-}
-
-a {
-  -webkit-text-stroke: 0.5px white;
-}
-body {
-  background-image: url("files/wp3191520-background-punk.jpg");
 }
