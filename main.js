@@ -13,6 +13,7 @@ var makePost = function() {
     // resets post input boxes
     $('form').trigger('reset');
 
+    // call to other functions to allow user to implement them within each post.
     makeComment();
     showComments();
     removePost();
@@ -29,24 +30,27 @@ var makeComment = function() {
     $('.comment-list').append(commentTemplate);
     $('form').trigger('reset');
 
+    // call removeComment to allow user to remove comments within the posted comments
     removeComment();
   })
 }
 
 var removeComment = function() {
   $('.remove').on('click', function() {
+    // removes the closest comment div above the remove that was clicked
     $(this).closest('div.comment').remove();
   });
 }
 
 var removePost = function() {
   $('.remove').on('click', function() {
-    // removes the closes post div above the remove that was clicked
+    // removes the closest post div above the remove that was clicked (including all comments)
     $(this).closest('div.post').remove();
   });
 }
 
-var showComments = function() {
+// showComments can show/hide comment inputs - only works on bottom post && only works for all comments - need to find way to create unique id's for every post comment box.  
+var showComments = function() { 
   $('.comments').on('click', function() {
     if ($('.comment-input').css('display') == 'none') {
       $('.comment-input').show();
@@ -55,9 +59,6 @@ var showComments = function() {
     }
   });
 }
-
-// showComments can show/hide comment inputs - only works on bottom post && only works for all comments - need to find way to create unique id's for every post comment box
-
 
 
 makePost();
