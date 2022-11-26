@@ -1,16 +1,18 @@
 
 var makePost = function() {
-  $('.btn').on('click', function() {
+  $('#new-post').on('submit', function() {
     var userName = $('#name').val();
     var userMessage = $('#message').val();
-    
+
     var commentBox = '<form style="margin-top:30px;" onsubmit="event.preventDefault();"><div class="comment-input"><div class="form-group"><input id="comment" type="text" class="form-control" placeholder="Comment Text"></input></div><div class="form-group"><input id="user" type="text" class="form-control" placeholder="Your Name"></input></div><button id="submit-comment" class="btn btn-primary">Submit Comment</button></div>';
 
     var postTemplate = '<div class="post"><p><a class="remove">remove</a> <a class="comments">comments</a> ' + userMessage + ' - Posted By: ' + userName + '</p>' + commentBox + '<hr>';
 
+    // adds postTemplate to the .posts div
     $('.posts').append(postTemplate);
+    // resets post input boxes
     $("form").trigger("reset");
-  
+
     makeComments();
     removePost();
   }) 
@@ -29,7 +31,8 @@ var makeComments = function() {
 
 var removePost = function() {
   $('.remove').on('click', function() {
-  $(this).closest('div.post').remove();
+    // removes the closes post div above the remove that was clicked
+    $(this).closest('div.post').remove();
   });
 }
 

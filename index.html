@@ -29,18 +29,20 @@
           </div>
           <div class="posts">
           </div>
-          <form style="margin-top:30px;" onsubmit="event.preventDefault();">
+          <form id="new-post" style="margin-top:30px;" onsubmit="event.preventDefault();">
             <div class="form-group">
               <input id="message" type="text"
               class="form-control"
-              placeholder="Post Text"></input>
+              placeholder="Post Text" 
+              required></input>
             </div>
             <div class="form-group">
               <input id="name" type="text"
                 class="form-control"
-                placeholder="Your Name"></input>
+                placeholder="Your Name"
+                required></input>
             </div>
-            <button id="submit" class="btn btn-primary">Submit Post</button>
+            <button id="submit" type="submit" class="btn btn-primary">Submit Post</button>
           </form>
         </div>
       </div>
