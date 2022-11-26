@@ -20,7 +20,8 @@ var makePost = function() {
   }) 
 };
 
-var makeComment = function() {
+// makeComment only works when there is one post.  How to get it to go
+var makeComment = function(e) {
   $('#new-comment').on('submit', function () {
     var userName = $('#user-name').val();
     var commentText = $('#comment').val();
@@ -49,7 +50,7 @@ var removePost = function() {
   });
 }
 
-// showComments can show/hide comment inputs - only works on bottom post && only works for all comments - need to find way to create unique id's for every post comment box.  
+// showComments can show/hide comment inputs - shows comments and input boxes for every post - need to find way to create unique id's for every post comment box.  
 var showComments = function() { 
   $('.comments').on('click', function() {
     if ($('.comment-input').css('display') == 'none') {
