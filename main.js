@@ -24,7 +24,7 @@ var makeComment = function() {
     var userName = $('#user-name').val();
     var commentText = $('#comment').val();
 
-    var commentTemplate = '<div class="comment comment-input"><a class="remove">remove</a> ' + commentText + ' Posted by: ' + userName + '</div>';
+    var commentTemplate = '<div class="comment comment-input"><p><a class="remove">remove</a> ' + commentText + ' Posted by: ' + userName + '</p></div>';
 
     $('.comment-list').append(commentTemplate);
     $('form').trigger('reset');
