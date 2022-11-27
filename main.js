@@ -2,9 +2,11 @@ $('button').on('click', function () {
   var inputPost = $('#post').val();
   var inputName = $('#name').val();
 
-  $('.posts').append('<p>' + inputPost + ' - Posted By: ' + inputName + '</p>');
+  $('.posts').append('<p>' + inputPost + ' - Posted By: ' + inputName + '</p>' + '<hr>');
 
-  $('p').click(function () {
-    $(this).remove();
-  });
+  $('form :input').val('');
+});
+
+$('body').on('click', 'p', function () {
+  $(this).remove();
 });
