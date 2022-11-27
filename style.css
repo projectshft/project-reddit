@@ -1,0 +1,28 @@
+.page-header {
+  color: rgb(221, 143, 9);
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+}
+
+.form-group {
+  background-color: brown;
+  border: double;
+}
+
+h3 {
+  font: italic bold 12px/30px Georgia, serif;
+  font-size: larger;
+}
+
+body {
+  background: rgba(222, 169, 90, 0.587) url("img_tree.gif") no-repeat fixed
+    center;
+}
+
+#post {
+  font-size: 15px;
+}
+
+#postedBy {
+  opacity: 0.5;
+}
