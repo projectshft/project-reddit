@@ -1,5 +1,3 @@
-<!-- NOTE: If my code formatting is off it's likely because some of the environemnt setup work had us dive into VSCode settings to set up auto-formating with prettier that I didn't really understand. The instructions said not to worry if this was confusing, as we would go back and re-address these settings later in the course but haven't done so yet. -->
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -37,6 +35,26 @@
           <hr />
         </div>
         <div class="row posts">
+          <script id="user-post-template" type="text/x-handlebars-template">
+            {{#each examples}}
+              <div class="user-post">
+                <hr />
+                <p>{{message}}</p>
+                <p>
+                  Posted By:
+                  <strong>{{name}}</strong>
+                </p>
+                <a href="#" role="button" class="post-remove-button">
+                  Remove
+                </a>
+                &nbsp;
+                <a href="#" role="button" class="expand-button">
+                  Expand
+                </a>
+                &nbsp;
+              </div>
+            {{/each}}
+          </script>
           <div class="user-post">
             <p>I have something cool to share!</p>
             <p>Posted By: <strong>Jim</strong></p>
@@ -103,6 +121,12 @@
       </div>
       <button class="post-button btn btn-primary">Post</button>
     </div>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"
+      integrity="sha512-RNLkV3d+aLtfcpEyFG8jRbnWHxUqVZozacROI4J2F1sTaDqo1dPQYs01OMi1t1w9Y2FdbSCDSQ2ZVdAC8bzgAg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"

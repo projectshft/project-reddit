@@ -1,3 +1,11 @@
+var examplePosts = {
+  examples: [
+    { name: 'Joe', message: "Hey there buddy"},
+    { name: 'Juan', message: "I'm not your buddy, friend"},
+    { name: 'Joe', message: "I'm not your friend, guy"},
+    { name: 'Juan', message: "I'm not your guy, buddy"}
+  ]
+}
 var $postsArea = $( '.posts' )
 var $postButton = $( '.post-button' )
 var $commentButton = $( '.comment-button' )
@@ -6,14 +14,19 @@ var $sillyEasterEgg = $('.text-center')
 $postButton.click(function () {
   var $userName = $('#post-name').val();
   var $userMsg = $('#post-message').val();
+  
+  var source = $('#user-post-template').html();
+  var template = Handlebars.compile(source);
+  var newHTML = template(examplePosts);
+  $postsArea.append(newHTML);
 
-  postTemplate = `<div class="user-post">
-  <hr />
-    <p>` + $userMsg + `</p>
-    <p>Posted By: <strong>` + $userName + `</strong></p>
-    <a href="#" role="button" class="post-remove-button">Remove</a>&nbsp;
-    <a href="#" role="button" class="expand-button">Expand</a>&nbsp;
-  </div>`;
+  // postTemplate = `<div class="user-post">
+  // <hr />
+  //   <p>` + $userMsg + `</p>
+  //   <p>Posted By: <strong>` + $userName + `</strong></p>
+  //   <a href="#" role="button" class="post-remove-button">Remove</a>&nbsp;
+  //   <a href="#" role="button" class="expand-button">Expand</a>&nbsp;
+  // </div>`;
 
   $postsArea.append(postTemplate);
 });
