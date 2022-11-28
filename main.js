@@ -1,15 +1,17 @@
 
 var makePost = function() {
   $('#new-post').on('submit', function() {
-    var userName = $('#name').val();
-    var userMessage = $('#message').val();
+    var post = {
+      userName: $('#name').val(),
+      userMessage: $('#message').val()
+    }
 
-    var commentBox = '<form id="new-comment" style="margin-top:30px;" onsubmit="event.preventDefault();"><div class="comment-input"><div class="form-group"><input id="comment" type="text" class="form-control" placeholder="Comment Text" required></input></div><div class="form-group"><input id="user-name" type="text" class="form-control" placeholder="Your Name" required></input></div><button id="submit-comment" type="submit" class="btn btn-primary">Submit Comment</button></div>';
-
-    var postTemplate = '<div class="post"><p><a class="remove">remove</a> <a class="comments">comments</a> ' + userMessage + ' - Posted By: ' + userName + '</p><div class="comment-list"></div>' + commentBox + '<hr>';
+    var source = $('#post-template').html();
+    var template = Handlebars.compile(source);
+    var newPost = template(post);
 
     // adds postTemplate to the .posts div
-    $('.posts').append(postTemplate);
+    $('.posts').append(newPost);
     // resets post input boxes
     $('form').trigger('reset');
 
@@ -23,12 +25,16 @@ var makePost = function() {
 // makeComment only works when there is one post.  How to get it to go
 var makeComment = function(e) {
   $('#new-comment').on('submit', function () {
-    var userName = $('#user-name').val();
-    var commentText = $('#comment').val();
+    var comment = {
+      userName: $('#user-name').val(),
+      commentText: $('#comment').val()
+    }
 
-    var commentTemplate = '<div class="comment comment-input"><p><a class="remove">remove</a> ' + commentText + ' Posted by: ' + userName + '</p></div>';
+    var source = $('#comment-template').html();
+    var template = Handlebars.compile(source);
+    var newComment = template(comment);
 
-    $('.comment-list').append(commentTemplate);
+    $('.comment-list').append(newComment);
     $('form').trigger('reset');
 
     // call removeComment to allow user to remove comments within the posted comments
