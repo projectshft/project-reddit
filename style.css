@@ -1,0 +1,41 @@
+body {
+  background-color: coral;
+}
+
+textarea {
+  margin-top: 15px;
+}
+
+#emptier {
+  background-color: black;
+}
+
+p {
+  inline-size: 400px;
+  overflow-wrap: break-word;
+}
+
+.post {
+  inline-size: 400px;
+  overflow-wrap: break-word;
+}
+
+h1 {
+  text-align: center;
+}
+
+.whole-background {
+  height: 100%;
+  margin: 0;
+
+  /* The image used */
+  background-image: url("href='https://pngtree.com/free-backgrounds'>free background photos from pngtree.com/");
+
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
