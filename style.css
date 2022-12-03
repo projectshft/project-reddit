@@ -1,15 +1,16 @@
 body {
-  font-family: 'Open Sans';
-  color: white;
-  min-height: 100%;
+  background-color: white;
+}
+
+p {
+  font-weight: 450;
+  
 }
 
 button {
-  font-size: small;
-  background-color: rgb(0, 255, 34);
+  background-color: blue;
 }
 
-header {
-  font-weight: bold;
+h1 {
+  font-size:x-large;
 }
-
