@@ -1,0 +1,17 @@
+input {
+    width: 100%;
+}
+
+input, select, textarea {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+.h1 {
+    font-size: 30px;
+}
+
+.delete-post {
+    color: red;
+}
