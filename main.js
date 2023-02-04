@@ -10,4 +10,10 @@ let createPost = () => {
   $('.posts').append(template);
 }
 
+$('.posts').on('click','.post', function() {
+  let element = $(this);
+  console.log(element)
+  element.remove();
+});
+
 $('#submit').click(createPost);
