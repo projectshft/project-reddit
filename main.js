@@ -4,15 +4,14 @@ let createPost = () => {
   let name = $('#name').val();
 
   // create post template
-  let template = "<div class='post'><p>" + text + " - Posted By: " + name + " </p> <a>remove</a> <br> <hr></hr></div>" 
+  let template = "<div class='post'><p>" + text + " - Posted By: " + name + " </p> <a class='remove'>remove</a> <br> <hr></hr></div>" 
 
   // append text & name to posts div
   $('.posts').append(template);
 }
 
-$('.posts').on('click','.post', function() {
-  let element = $(this);
-  console.log(element)
+$('.posts').on('click','.remove', function() {
+  let element = $(this).parent();
   element.remove();
 });
 
