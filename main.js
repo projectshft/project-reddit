@@ -5,3 +5,4 @@
 
 var submitButton = $('.btn')
 
+$('.card').css('color', 'red')

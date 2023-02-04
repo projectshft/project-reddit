@@ -15,111 +15,199 @@
     <title>Re-Reddit....</title>
   </head>
   <body>
-    <body>
-      <div class="container">
-  
-        <div class="blog-header">
-          <h1 class="blog-title">ReReddit...</h1>
-          <p class="lead blog-description">Welcome to Ben's version of ReReddit our favorite place to express ones thoughts and bash others opinions!</p>
-        </div>
-  
+    <header>
+      <div class="container text-center">
         <div class="row">
-  
-          <div class="col-sm-8 blog-main">
-  
-            <div class="blog-post">
-              <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Please enter username</label>
-                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Username">
-              </div>
-              <div class="mb-3">
-                <label for="exampleFormControlTextarea1" class="form-label">Post</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1"rows="3"></textarea>
-              </div>
-              <div class="post">
-                <h2 class="post">Press Submit to Leave a Post Press Delete to Remove</h2>
-              </div>
-            </div><!-- /.blog-post -->
-  
-  
-            <div class="blog-post">
-              <h2 class="blog-post-title">New feature</h2>
-              <p class="blog-post-meta">December 14, 2013 by <a href="#">Chris</a></p>
-  
-              <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-              <ul>
-                <li>Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</li>
-                <li>Donec id elit non mi porta gravida at eget metus.</li>
-                <li>Nulla vitae elit libero, a pharetra augue.</li>
-              </ul>
-              <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
-              <p>Donec ullamcorper nulla non metus auctor fringilla. Nulla vitae elit libero, a pharetra augue.</p>
-            </div><!-- /.blog-post -->
-  
-            <nav>
-              <ul class="pager">
-                <li><a href="#">Previous</a></li>
-                <li><a href="#">Next</a></li>
-              </ul>
-            </nav>
-  
-          </div><!-- /.blog-main -->
-  
-          <div class="col-sm-3      col-sm-offset-1 blog-sidebar">
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <button class="btn btn-primary me-md-2" type="button">Submit</button>
-             <button class="btn btn-primary" type="button">Delete</button>
-               </div>
+          <div class="col-12">
+            <h3>
+              ReReddit where your comments come alive
+              <small class="text-muted">-B.Corbett Programming</small>
+            </h3>
+          </div>
+        </div>
+      </div>
+    </header>
 
+    <!-- navbar -->
+    <div class="container text-center">
+      <div class="row">
+        <div class="col-12">
+          <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#">Navbar</a>
+              <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#"
+                      >Home</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a
+                      class="nav-link dropdown-toggle"
+                      href="#"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      Dropdown
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="#">Action</a></li>
+                      <li>
+                        <a class="dropdown-item" href="#">Another action</a>
+                      </li>
+                      <li><hr class="dropdown-divider" /></li>
+                      <li>
+                        <a class="dropdown-item" href="#"
+                          >Something else here</a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link disabled">Disabled</a>
+                  </li>
+                </ul>
+                <form class="d-flex" role="search">
+                  <input
+                    class="form-control me-2"
+                    type="search"
+                    placeholder="Search"
+                    aria-label="Search"
+                  />
+                  <button class="btn btn-outline-success" type="submit">
+                    Search
+                  </button>
+                </form>
+              </div>
             </div>
+          </nav>
+        </div>
+      </div>
+    </div>
 
-            <div class="sidebar-module">
-              <h4>Elsewhere</h4>
-              <ol class="list-unstyled">
-                <li><a href="#">GitHub</a></li>
-                <li><a href="#">Twitter</a></li>
-                <li><a href="#">Facebook</a></li>
-              </ol>
+    <div class="comments">
+      <div class="container text-center">
+        <div class="row">
+          <div class="col-6">
+            <div class="card" style="width: 18rem">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                <p class="card-text">
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </p>
+                <a href="#" class="card-link">Card link</a>
+                <a href="#" class="card-link">Another link</a>
+              </div>
             </div>
-          </div><!-- /.blog-sidebar -->
-  
-        </div><!-- /.row -->
-  
-      </div><!-- /.container -->
-  
-      <footer class="blog-footer">
-        <div class="container text-center">
-          <div class="row align-items-center">
-            <div class="col">
-              <input class="btn btn-primary" type="submit" value="Submit">
-
-            </div>
-            <div class="col">
-              <div class="blog-post">
-                <div class="mb-3">
-                  <label for="exampleFormControlInput1" class="form-label">Please enter username</label>
-                  <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Username">
-                </div>
-                <div class="mb-3">
-                  <label for="exampleFormControlTextarea1" class="form-label">Comment</label>
-                  <textarea class="form-control" id="exampleFormControlTextarea1"rows="3"></textarea>
-                </div>
+          </div>
+          <div class="col-6">
+            <div class="card" style="width: 18rem">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                <p class="card-text">
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </p>
+                <a href="#" class="card-link">Card link</a>
+                <a href="#" class="card-link">Another link</a>
+              </div>
             </div>
           </div>
         </div>
-      </footer>
-  
-  
-      <!-- Bootstrap core JavaScript
+      </div>
+    </div>
+
+    <div class="post">
+      <div class="container text-center">
+        <div class="row align-items-center">
+          <div class="col">
+            <div class="mb-3">
+              <label for="exampleFormControlInput1" class="form-label"
+                >Name</label
+              >
+              <input
+                type="email"
+                class="form-control"
+                id="exampleFormControlInput1"
+                placeholder="name@example.com"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="exampleFormControlTextarea1" class="form-label"
+                >Post</label
+              >
+              <textarea
+                class="form-control"
+                id="exampleFormControlTextarea1"
+                rows="3"
+              ></textarea>
+            </div>
+          </div>
+          <div class="col">
+            <div class="d-grid gap-2 col-6 mx-auto">
+              <button class="btn btn-primary" type="button">Post</button>
+              <button class="btn btn-primary" type="button">Comment</button>
+            </div>
+          </div>
+          <div class="col">
+            <div class="mb-3">
+              <label for="exampleFormControlInput1" class="form-label"
+                >Name</label
+              >
+              <input
+                type="email"
+                class="form-control"
+                id="exampleFormControlInput1"
+                placeholder="Enter name"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="exampleFormControlTextarea1" class="form-label"
+                >Comment</label
+              >
+              <textarea
+                class="form-control"
+                id="exampleFormControlTextarea1"
+                rows="3"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Bootstrap core JavaScript
       ================================================== -->
-      <!-- Placed at the end of the document so the pages load faster -->
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-      <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-      <script src="../../dist/js/bootstrap.min.js"></script>
-      <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-      <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
-      <link rel="stylesheet" href="style.css" />
-      <script src="main.js"></script>
-    
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>
+      window.jQuery ||
+        document.write(
+          '<script src="../../assets/js/vendor/jquery.min.js"><\/script>'
+        );
+    </script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <script src="main.js"></script>
   </body>
 </html>

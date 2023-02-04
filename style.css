@@ -1,13 +1,11 @@
-.btn {
-  margin-top: 169px;
-}
-button.btn:nth-child(1) {
-  margin-right: 19px;
-}
-
 .d-grid {
   margin-right: 3px;
   margin-right: 2px;
   margin-right: 1px;
   margin-right: 100px;
+}
+
+button.btn:nth-child(2) {
+  margin-top: 3px;
+  margin-bottom: 4px;
 }
