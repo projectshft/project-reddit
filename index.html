@@ -28,107 +28,53 @@
       </div>
     </header>
 
-    <!-- navbar -->
+    <!-- spacer -->
     <div class="container text-center">
-      <div class="row">
+      <div class="row align-items-start">
         <div class="col-12">
-          <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <div class="container-fluid">
-              <a class="navbar-brand" href="#">Navbar</a>
-              <button
-                class="navbar-toggler"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent"
-                aria-expanded="false"
-                aria-label="Toggle navigation"
-              >
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#"
-                      >Home</a
-                    >
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                  </li>
-                  <li class="nav-item dropdown">
-                    <a
-                      class="nav-link dropdown-toggle"
-                      href="#"
-                      role="button"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
-                      Dropdown
-                    </a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">Action</a></li>
-                      <li>
-                        <a class="dropdown-item" href="#">Another action</a>
-                      </li>
-                      <li><hr class="dropdown-divider" /></li>
-                      <li>
-                        <a class="dropdown-item" href="#"
-                          >Something else here</a
-                        >
-                      </li>
-                    </ul>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link disabled">Disabled</a>
-                  </li>
-                </ul>
-                <form class="d-flex" role="search">
-                  <input
-                    class="form-control me-2"
-                    type="search"
-                    placeholder="Search"
-                    aria-label="Search"
-                  />
-                  <button class="btn btn-outline-success" type="submit">
-                    Search
-                  </button>
-                </form>
-              </div>
-            </div>
-          </nav>
+          <span class="placeholder col-6 bg-secondary"></span>
         </div>
       </div>
     </div>
 
+    <!-- navbar -->
+    <div class="container text-center">
+      <div class="row">
+        <div class="col-6">
+          <span class="placeholder col-6 bg-secondary"></span>
+
+        </div>
+        <div class="col-6">
+          <span class="placeholder col-6 bg-secondary"></span>
+        </div>
+      </div>
+    <!-- 2 boxes with for posts and comments -->
     <div class="comments">
       <div class="container text-center">
         <div class="row">
           <div class="col-6">
             <div class="card" style="width: 18rem">
               <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                <p class="card-text">
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
+                <h5 class="postname">Name</h5>
+                <h6 class="card-subtitle mb-2 text-muted">?</h6>
+                <p class="postbody">
+                  Wherethey will put post
                 </p>
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
+                <a href="#" class="card-link">Edit</a>
+                <a href="#" class="card-link">Delete</a>
               </div>
             </div>
           </div>
           <div class="col-6">
             <div class="card" style="width: 18rem">
               <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                <p class="card-text">
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
+                <h5 class="commentname">Name</h5>
+                <h6 class="card-subtitle mb-2 text-muted">?</h6>
+                <p class="commentbody">
+                  where they will comment
                 </p>
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
+                <a href="#" class="card-link">Delete</a>
+                <a href="#" class="card-link">Edit</a>
               </div>
             </div>
           </div>
@@ -136,6 +82,7 @@
       </div>
     </div>
 
+    <!-- post and comment boxes -->
     <div class="post">
       <div class="container text-center">
         <div class="row align-items-center">
@@ -147,8 +94,8 @@
               <input
                 type="email"
                 class="form-control"
-                id="exampleFormControlInput1"
-                placeholder="name@example.com"
+                id="postnameinput"
+                placeholder="name"
               />
             </div>
             <div class="mb-3">
@@ -157,15 +104,15 @@
               >
               <textarea
                 class="form-control"
-                id="exampleFormControlTextarea1"
+                id="posttextinput"
                 rows="3"
               ></textarea>
             </div>
           </div>
           <div class="col">
             <div class="d-grid gap-2 col-6 mx-auto">
-              <button class="btn btn-primary" type="button">Post</button>
-              <button class="btn btn-primary" type="button">Comment</button>
+              <button class="btnpost btn-primary" type="button">Post</button>
+              <button class="btncomment btn-primary" type="button">Comment</button>
             </div>
           </div>
           <div class="col">
@@ -176,7 +123,7 @@
               <input
                 type="email"
                 class="form-control"
-                id="exampleFormControlInput1"
+                id="commentname"
                 placeholder="Enter name"
               />
             </div>
@@ -186,7 +133,7 @@
               >
               <textarea
                 class="form-control"
-                id="exampleFormControlTextarea1"
+                id="commenttext"
                 rows="3"
               ></textarea>
             </div>
