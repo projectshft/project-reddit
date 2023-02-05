@@ -1,18 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="style.css" />
-    <!-- <script src="main.js"></script> -->
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Re-Reddit....</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    
+    <link rel="stylesheet" href="style.css">
+    <script src="main.js"></script>
+  </head>
+
   </head>
   <body>
     <header>
@@ -29,132 +27,93 @@
     </header>
 
     <!-- spacer -->
-    <div class="container text-center">
-      <div class="row align-items-start">
-        <div class="col-12">
-          <span class="placeholder col-6 bg-secondary"></span>
-        </div>
-      </div>
-    </div>
-
-    <!-- navbar -->
-    <div class="container text-center">
+    <div id="addabove" class="container text-center">
       <div class="row">
-        <div class="col-6">
-          <span class="placeholder col-6 bg-secondary"></span>
-
-        </div>
-        <div class="col-6">
-          <span class="placeholder col-6 bg-secondary"></span>
-        </div>
-      </div>
-    <!-- 2 boxes with for posts and comments -->
-    <div class="comments">
-      <div class="container text-center">
-        <div class="row">
-          <div class="col-6">
-            <div class="card" style="width: 18rem">
-              <div class="card-body">
-                <h5 class="postname">Name</h5>
-                <h6 class="card-subtitle mb-2 text-muted">?</h6>
-                <p class="postbody">
-                  Wherethey will put post
-                </p>
-                <a href="#" class="card-link">Edit</a>
-                <a href="#" class="card-link">Delete</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-6">
-            <div class="card" style="width: 18rem">
-              <div class="card-body">
-                <h5 class="commentname">Name</h5>
-                <h6 class="card-subtitle mb-2 text-muted">?</h6>
-                <p class="commentbody">
-                  where they will comment
-                </p>
-                <a href="#" class="card-link">Delete</a>
-                <a href="#" class="card-link">Edit</a>
-              </div>
-            </div>
-          </div>
+        <div class="col-12">
+          <div
+            class="h4 pb-2 mb-4 text-danger border-bottom border-danger"
+          ></div>
         </div>
       </div>
     </div>
 
-    <!-- post and comment boxes -->
-    <div class="post">
+    <!-- newBoxes post and comment holders -->
+    <div id="everything" class="container">
+      <div class="row mb-3 text-center">
+        <div class="col-6 col-md-4 themed-grid-col">
+          <div class="feature col">
+            <div
+              class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3"
+            >
+              <svg class="bi" width="1em" height="1em">
+                <use xlink:href="#collection"></use>
+              </svg>
+            </div>
+            <h3 class="fs-2">Featured title</h3>
+            <p>
+              Paragraph of text beneath the heading to explain the heading.
+              We'll add onto it with another sentence and probably just keep
+              going until we run out of words.
+            </p>
+            <a href="#" class="icon-link d-inline-flex align-items-center">
+              Call to action
+              <svg class="bi" width="1em" height="1em">
+                <use xlink:href="#chevron-right"></use>
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 themed-grid-col">
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label"
+              >Email address</label
+            >
+            <input
+              type="email"
+              class="form-control"
+              id="exampleFormControlInput1"
+              placeholder="name@example.com"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label"
+              >Example textarea</label
+            >
+            <textarea
+              class="form-control"
+              id="exampleFormControlTextarea1"
+              rows="3"
+            ></textarea>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 themed-grid-col">
+          <button id="only" type="button" class="btn btn-primary">Primary</button>
+        </div>
+      </div>
       <div class="container text-center">
-        <div class="row align-items-center">
-          <div class="col">
-            <div class="mb-3">
-              <label for="exampleFormControlInput1" class="form-label"
-                >Name</label
-              >
-              <input
-                type="email"
-                class="form-control"
-                id="postnameinput"
-                placeholder="name"
-              />
-            </div>
-            <div class="mb-3">
-              <label for="exampleFormControlTextarea1" class="form-label"
-                >Post</label
-              >
-              <textarea
-                class="form-control"
-                id="posttextinput"
-                rows="3"
-              ></textarea>
-            </div>
-          </div>
-          <div class="col">
-            <div class="d-grid gap-2 col-6 mx-auto">
-              <button class="btnpost btn-primary" type="button">Post</button>
-              <button class="btncomment btn-primary" type="button">Comment</button>
-            </div>
-          </div>
-          <div class="col">
-            <div class="mb-3">
-              <label for="exampleFormControlInput1" class="form-label"
-                >Name</label
-              >
-              <input
-                type="email"
-                class="form-control"
-                id="commentname"
-                placeholder="Enter name"
-              />
-            </div>
-            <div class="mb-3">
-              <label for="exampleFormControlTextarea1" class="form-label"
-                >Comment</label
-              >
-              <textarea
-                class="form-control"
-                id="commenttext"
-                rows="3"
-              ></textarea>
-            </div>
-          </div>
+        <div class="row align-items-start">
+          <div id="commentbox" class="col">One of three columns</div>
+          <div class="col"></div>
+          <div class="col"></div>
         </div>
       </div>
     </div>
+
+    <div class="addarea"></div>
     <!-- Bootstrap core JavaScript
       ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script>
+    <!-- <script>
       window.jQuery ||
         document.write(
           '<script src="../../assets/js/vendor/jquery.min.js"><\/script>'
         );
-    </script>
-    <script src="../../dist/js/bootstrap.min.js"></script>
+    </script> -->
+    <!-- <script src="../../dist/js/bootstrap.min.js"></script> -->
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
-    <link rel="stylesheet" href="style.css" />
+    <!-- <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> -->
+    <!-- <link rel="stylesheet" href="style.css" /> -->
     <script src="main.js"></script>
   </body>
 </html>
