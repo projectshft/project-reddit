@@ -1,40 +1,33 @@
-//Use Bootstrap
-//Write good HTML,CSS,JS
-//Use jQuery
-//Make sure a user can add posts as well as remove them
 
-// var postButton = $('.btnpost');
-// var commentButton = $('.btncomment');;
+var button = $('#only');
+var commentbtn = $('#commentbtn')
 
-// var deletePost = null;
-// var deleteComment = null;
+// var cloneFunction = $(button).on('click', function () {
+//   var clone = $('#everything');
+//   $(clone).clone().appendTo('.addarea');
+// });
 
-// var postNameIn = $('#postnameinput');
-// var postTextIn = $('#posttextinput');
+var addTextName =  $(button).on('click', function () {
+  // cloneFunction();
+  var postnamebox = $('#postnamein').val();
+  var textbox = $('#posttextin').val();
 
-// var commentName = $('commentname');
-// var commentText = $('.commenttext');
-
-// var postBoxName = $('.postname');
-// var postBoxText = $('.postbody');
-
-// var commentBoxName = $('.commentname');
-// var commentBoxText = $('.commentbody');
-var button = $('.btn');
-
-$(button).on('click', function () {
-  var clone = $('#everything');
-  $(clone).clone(true).appendTo('.addarea');
+    $('#postname').append('<h3>'  + postnamebox +  '</h3>');
+    $('.postbody').append('<p>' + textbox + '</p>');
+    // cloneFunction();
 })
 
-// $(button).on('click', function(e) {
-//   var $element = e.target;
-//   console.log($element);
+// $(commentbtn).on('click', function () {
+//   console.log('im click')
+//   $('.postbody').append('<h6>' + commentName + '</h6>' )
 // })
-// 
-// var bindEvent = function () {
-//   $(button).click(function () {
-//     var clone = $('#everything');
-//   $(clone).clone().appendTo('.addarea');
-//   });
-// }
+
+// var addComment = function () {
+//   var commentName = $('#commentname').val();
+//   var commentFrom = $('#commentfrom').val();
+  $(commentbtn).on('click', function () {
+    // var commentName = $('#commentname').val();
+    var commentFrom = $('#commentbox').val();
+    $('.postbody').append('<h6>' + commentFrom + '</h6>')
+    // $('postbody').append('<p>' + commentFrom + '</p>')
+  })
