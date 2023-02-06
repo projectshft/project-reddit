@@ -8,7 +8,6 @@ let createPost = () => {
 
   // append text & name to posts div
   $('.posts').append(template);
-  console.log($('textarea'));
 
   // clears text and name after submit
   $('.form-control').val('')
