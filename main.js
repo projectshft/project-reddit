@@ -1,5 +1,4 @@
 
-// $('.myclone').clone().appendTo("body")
 var newPost = $("#newpostbtn")
 var postButton = $ (".post")
 var commentLink = $('#commentlink')
@@ -28,17 +27,14 @@ var clickPost = $(postButton).on('click', function () {
     $('#postname').val('');
   }
   //create comment varaibles
-  var commentBubble = $('<input id="commentbubble" class="alert alert-success" role="alert"/>')
   var commentBtn = $('<input id="commentbar" type="button" value="Comment"/>');
   var commentBar = $('<input id="commenttab" placeholder="name" type="text" />')
   var nameCommentBar = $('<input id="commentname" placeholder="comment" type="text" />')
 
+
 //append to postBox
   $('<h4>' + getMessage + '</h4>').appendTo(place);
   $('<p>' + getPost + '</p>').appendTo(place);
-  // $('#postname').css('display', 'none')
-  // $('#posttext').css('display', 'none');
-  // $(postButton).css('display', 'none');
   $(commentBtn).appendTo(place);
   console.log('click')
 resetInput();
@@ -60,7 +56,7 @@ $("#commentbar").on('click', function () {
     var getComment = $('#commentname').val();
 
     $('<h4>' +  getCommentName + '</h4>').appendTo('#commentsection');
-    $('<p>' + getComment + '</p>').appendTo('#commentsection');
+    $('<p>' + getComment +  '</p>').appendTo('#commentsection');
     console.log('click')
     resetComments();
   })
