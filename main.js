@@ -1,37 +1,4 @@
-// // $(document).ready(function() {
-//   //form submit
-//   $('#postbtn').on('click', function() {
-//     // avoid page reload
-//     // e.preventDefault()
 
-    // get message
-//     let getMessage = $('#postname').val();
-//     var getPost = $('#posttext').val();
-//     console.log(click)
-//   //   console.log(getMessage)
-//   //   console.log(getPost);
-
-//   //   if(getMessage !== '') {
-//   //     // prepare messgage
-//       let newMessage = "<p class='message'>" + getMessage + "</p>" + "<p>" + getPost + "</p>";
-
-// //   //     //apend message to box
-//       $(newMessage).appendTo('#postin');
-
-//   //     //clear the form
-//   //     $('input').val("");
-//   //   }
-//   // });
-
-// console.log('hello')
-//   
-// var commentBox = function test() {
-//   var r = "$('<input/>').attr({
-//                type: "button",
-//                id: "field"
-//           })";
-// }
-// $("body").append(r);
 // $('.myclone').clone().appendTo("body")
 var newPost = $("#newpostbtn")
 var postButton = $ (".post")
@@ -39,27 +6,15 @@ var commentLink = $('#commentlink')
 var clone = $('.clone')
 
 $(newPost).on('click', function () {
-  var newElem = $('#input' + num).clone().attr('id', 'input' + newNum)
+
   $('.myclone').first().clone(true).appendTo("body")
   clickPost();
 })
 
 
 
-// $( document).on( "click", function( event ) {
-//   $( event.target ).closest(clickPost);
-// })
-//   console.log('newbt')
-// })
-
-
 var clickPost = $(postButton).on('click', function () {
-  // var cln= $("#toclone").clone().find("input").val("").end();
-//   $('#toclone').append(cln)
-// }
-
-
-
+ 
 
 //post variables
   var place = $('#place')
@@ -118,8 +73,3 @@ $("#commentbar").on('click', function () {
 $( document).on( "click", function( event ) {
   $( event.target ).closest(clickPost);
 })
-// var last12 = $('#toclone').last(),
-// newForm = $("#toclone")[0].cloneNode(true);
-
-// newForm.innerHTML = newForm.innerHTML;
-// $(newForm).insertBefore(last12)
