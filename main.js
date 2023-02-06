@@ -39,20 +39,22 @@ var commentLink = $('#commentlink')
 var clone = $('.clone')
 
 $(newPost).on('click', function () {
-  
+  var newElem = $('#input' + num).clone().attr('id', 'input' + newNum)
   $('.myclone').first().clone(true).appendTo("body")
   clickPost();
 })
 
 
 
-
+// $( document).on( "click", function( event ) {
+//   $( event.target ).closest(clickPost);
+// })
 //   console.log('newbt')
 // })
 
 
 var clickPost = $(postButton).on('click', function () {
-  var cln= $("#toclone").clone().find("input").val("").end();
+  // var cln= $("#toclone").clone().find("input").val("").end();
 //   $('#toclone').append(cln)
 // }
 
@@ -73,12 +75,15 @@ var clickPost = $(postButton).on('click', function () {
   //create comment varaibles
   var commentBubble = $('<input id="commentbubble" class="alert alert-success" role="alert"/>')
   var commentBtn = $('<input id="commentbar" type="button" value="Comment"/>');
-  var commentBar = $('<input id="commenttab" placeholder="comment" type="text" />')
-  var nameCommentBar = $('<input id="commentname" placeholder="name" type="text" />')
+  var commentBar = $('<input id="commenttab" placeholder="name" type="text" />')
+  var nameCommentBar = $('<input id="commentname" placeholder="comment" type="text" />')
 
 //append to postBox
   $('<h4>' + getMessage + '</h4>').appendTo(place);
   $('<p>' + getPost + '</p>').appendTo(place);
+  // $('#postname').css('display', 'none')
+  // $('#posttext').css('display', 'none');
+  // $(postButton).css('display', 'none');
   $(commentBtn).appendTo(place);
   console.log('click')
 resetInput();
@@ -109,7 +114,10 @@ $("#commentbar").on('click', function () {
 })
 })
 
-clickPost();
+// clickPost();
+$( document).on( "click", function( event ) {
+  $( event.target ).closest(clickPost);
+})
 // var last12 = $('#toclone').last(),
 // newForm = $("#toclone")[0].cloneNode(true);
 
