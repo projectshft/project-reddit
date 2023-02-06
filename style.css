@@ -24,3 +24,12 @@ input {
 input.btn:nth-child(1) {
   margin-bottom: 22px;
 }
+
+input.btn:nth-child(1) {
+  color: red;
+  border: solid;
+}
+
+.myclone {
+  padding: 15px;
+}

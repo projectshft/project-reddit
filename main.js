@@ -32,29 +32,64 @@
 //           })";
 // }
 // $("body").append(r);
-
+// $('.myclone').clone().appendTo("body")
+var newPost = $("#newpostbtn")
 var postButton = $ (".post")
 var commentLink = $('#commentlink')
+var clone = $('.clone')
+
+$(newPost).on('click', function () {
+  
+  $('.myclone').first().clone(true).appendTo("body")
+  clickPost();
+})
+
+
+
+
+//   console.log('newbt')
+// })
 
 
 var clickPost = $(postButton).on('click', function () {
+  var cln= $("#toclone").clone().find("input").val("").end();
+//   $('#toclone').append(cln)
+// }
 
+
+
+
+//post variables
   var place = $('#place')
   var getMessage = $('#postname').val();
   var getPost = $('#posttext').val();
   
+
+  //Reset function
+  var resetInput = function () {
+    $('#posttext').val('');
+    $('#postname').val('');
+  }
+  //create comment varaibles
   var commentBubble = $('<input id="commentbubble" class="alert alert-success" role="alert"/>')
   var commentBtn = $('<input id="commentbar" type="button" value="Comment"/>');
   var commentBar = $('<input id="commenttab" placeholder="comment" type="text" />')
   var nameCommentBar = $('<input id="commentname" placeholder="name" type="text" />')
 
-
+//append to postBox
   $('<h4>' + getMessage + '</h4>').appendTo(place);
   $('<p>' + getPost + '</p>').appendTo(place);
   $(commentBtn).appendTo(place);
   console.log('click')
+resetInput();
 
+//comment function
 $("#commentbar").on('click', function () {
+  //reset comments
+  var resetComments = function () {
+    $('#commentname').val('');
+    $('#commenttab').val('');
+  }
   $(commentBar).appendTo(place)
   $(nameCommentBar).appendTo(place)
   // $(commentBubble).appendTo('#commentsection');
@@ -67,6 +102,7 @@ $("#commentbar").on('click', function () {
     $('<h4>' +  getCommentName + '</h4>').appendTo('#commentsection');
     $('<p>' + getComment + '</p>').appendTo('#commentsection');
     console.log('click')
+    resetComments();
   })
   postComment();
   // $(commentPost).appendTo("#commenttab")
@@ -74,3 +110,8 @@ $("#commentbar").on('click', function () {
 })
 
 clickPost();
+// var last12 = $('#toclone').last(),
+// newForm = $("#toclone")[0].cloneNode(true);
+
+// newForm.innerHTML = newForm.innerHTML;
+// $(newForm).insertBefore(last12)
