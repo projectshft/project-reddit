@@ -1,8 +1,26 @@
-button.btn:nth-child(2) {
-  margin-top: 3px;
-  margin-bottom: 4px;
+.fs-0 {
+  font-size: 4 rem;
 }
 
-/* #commentbox {
-  display: ;
-} */
+.fs-7 {
+  font-size: 0.8 rem;
+}
+
+.box {
+  border: 1px solid grey;
+  border-radius: 3px;
+  margin-bottom: 1;
+}
+
+box .inner {
+  height: 200px;
+  overflow-y: auto;
+}
+
+input {
+  border-radius: 3px;
+}
+
+input.btn:nth-child(1) {
+  margin-bottom: 22px;
+}
