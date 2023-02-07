@@ -1,0 +1,11 @@
+.newname {
+  border: solid blue;
+}
+
+.deletebtn {
+}
+
+h4.newname:nth-child(3) {
+  padding-top: 1px;
+  margin-top: 22px;
+}

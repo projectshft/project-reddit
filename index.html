@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- fontawesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <!-- css -->
+    <link rel="stylesheet" href="style.css" />
+    <title>Reddit Final</title>
+  </head>
+  <body>
+    <div
+      class="container d-flex flex-column flex-lg-row justify-content-evenly mt-5 pt-5"
+    >
+      <!-- heading -->
+      <div class="text-center text-lg-start">
+        <h1 class="text-primary fw-bold">Re-Reddit</h1>
+        <p>Where all your comments come alive</p>
+      </div>
+    </div>
+
+    <div class="container text-center">
+      <div class="row align-items-center">
+        <div id="postarea" class="col"></div>
+        <div id="post" class="col"></div>
+        <div id="delete" class="col"></div>
+      </div>
+    </div>
+
+    <div class="container text-center">
+      <div class="row align-items-center">
+        <div class="col">
+          <form>
+            <input id="postname" class="form-control" placeholder="Name" />
+          </form>
+        </div>
+        <div class="col">
+          <form>
+            <input id="posttext" class="form-control" placeholder="Post" />
+          </form>
+        </div>
+        <div class="col">
+          <button id="postbtn" type="button" class="post btn btn-primary">
+            Post
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- clone start -->
+
+    <!-- Bootstrap core JavaScript
+      ================================================== -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
