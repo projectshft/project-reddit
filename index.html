@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project Reddit</title>
+  </head>
+  <body>
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <div class="page-header">
+          <h1>ReReddit</h1>
+        </div>
+
+        <div class="posts"></div>
+
+        <form style="margin-top: 30px">
+          <div class="form-group">
+            <textarea
+              id="message"
+              type="text"
+              class="form-control"
+              placeholder="Post Text"
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <textarea
+              id="message-name"
+              type="text"
+              class="form-control"
+              placeholder="Your Name"
+            ></textarea>
+          </div>
+
+          <button id="submit-post" class="btn btn-primary" type="button">
+            Submit Post
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <script id="post-template" type="text/x-handlebars-template">
+      <div class="post">
+        <p>{{text}} - Posted By: {{name}}</p>
+        <a class="remove">remove</a>
+        <a class="comments">comments</a>
+        <div class="comments-container hidden">
+          <div class="comments-list"></div>
+          <form style="margin-top: 30px">
+            <div class="form-group">
+              <textarea
+                id="comment"
+                type="text"
+                class="form-control"
+                placeholder="Comment Text"
+              ></textarea>
+            </div>
+
+            <div class="form-group">
+              <textarea
+                id="comment-name"
+                type="text"
+                class="form-control"
+                placeholder="Your Name"
+              ></textarea>
+            </div>
+
+            <button id="submit-comment" class="btn btn-primary" type="button">
+              Submit Comment
+            </button>
+          </form>
+        </div>
+        <hr />
+      </div>
+    </script>
+
+    <script id="comment-template" type="text/x-handlebars-template">
+      <div class="comment">
+        <hr />
+        <p>{{comment}} - Posted By: {{comName}}</p>
+        <a class="remove">remove</a>
+      </div>
+    </script>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"
+      integrity="sha512-RNLkV3d+aLtfcpEyFG8jRbnWHxUqVZozacROI4J2F1sTaDqo1dPQYs01OMi1t1w9Y2FdbSCDSQ2ZVdAC8bzgAg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
