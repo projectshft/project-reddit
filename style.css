@@ -1,35 +1,11 @@
-.fs-0 {
-  font-size: 4 rem;
+.newname {
+  border: solid blue;
 }
 
-.fs-7 {
-  font-size: 0.8 rem;
+.deletebtn {
 }
 
-.box {
-  border: 1px solid grey;
-  border-radius: 3px;
-  margin-bottom: 1;
-}
-
-box .inner {
-  height: 200px;
-  overflow-y: auto;
-}
-
-input {
-  border-radius: 3px;
-}
-
-input.btn:nth-child(1) {
-  margin-bottom: 22px;
-}
-
-input.btn:nth-child(1) {
-  color: red;
-  border: solid;
-}
-
-.myclone {
-  padding: 15px;
+h4.newname:nth-child(3) {
+  padding-top: 1px;
+  margin-top: 22px;
 }
