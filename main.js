@@ -22,11 +22,13 @@ $("#postbtn").on('click', function () {
     $("#postname").val('')
     $("#posttext").val('')
 
+    $(".btn-close").on("click", function () {
+      $(this).parent().remove();
+    });
+
     }
     postFunc();
-    $('.btn-close').on('click', '.newname', function () {
-      $(this).remove();
-  });
+
   })
  
 
