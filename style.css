@@ -1,0 +1,22 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.btn {
+  color: white;
+  background-color: #1da1f2;
+}
+
+.post-board li {
+  list-style-type: none;
+}
+
+/* ? */
+a:link a:visited a:hover a:active {
+  text-decoration-line: none;
+}
+
+.submit-post:hover {
+  background-color: #1da1f2;
+  color: white;
+}
