@@ -1,30 +1,34 @@
 <html>
     <head>
         <title>ReReddit</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link href="https://fonts.googleapis.com/css2?family=Kadwa&family=Open+Sans&display=swap" rel="stylesheet">
     </head>
     <body>
-        <div class ="header">
+        <div class ="comment-box">
             <h1> ReReddit </h1>
             <hr>
-        </div>
 
-        <div class="comments-remove">
-            <div class="remove"></div>
-            <div class="comments"></div>
-        </div>
+            <div class="comments-remove">
+                <div class="comments"></div>
+                <div class="remove"></div>
+            </div>
+    
+            <div class="name">
+                <label for="name"></label>
+                <input type="text" id="Name" placeholder="Your Name">
+            </div>
+    
+            <div class="message">
+                <label for="message"></label>
+                <input type="text" id="Message" placeholder="Your Message">
+            </div>
+            <button class="post-button" type="button"> 
+                Submit Comment 
+            </button>
 
-        <div class="name">
-            <label for="name"> Name: </label>
-            <input type="text" id="Name" placeholder="Your Name">
         </div>
-
-        <div class="messgae">
-            <label for="messgae"> Message: </label>
-            <input type="text" id="Message" placeholder="Your Message">
-        </div>
-        <button class="post-button" type="button"> 
-            Submit Comment 
-        </button>
 
         <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
         <script src="main.js"></script>
