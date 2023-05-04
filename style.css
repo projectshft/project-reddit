@@ -4,6 +4,11 @@
   font-size: 30px;
   margin-bottom: 50px;
 }
+
 .btn  {
   margin-top: 10px;
+}
+
+.posts-appear {
+  text-align: center;
 }
