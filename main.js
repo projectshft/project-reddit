@@ -5,18 +5,18 @@ $('#submit').on('click', function() {
 
   //comments appear above inputs
 
-$('.posts-appear').append('<div class="post">' + text + " " + ' Posted By: ' + " " + name + '<button type="button" class="btn btn-link" id="option1" >Comment</button>' + '<button type="button" class="btn btn-link" id="option2" >Remove</button>');
+$('.posts').append('<div class="post">' + text + " " + ' Posted By: ' + " " + name + '<button type="button" class="btn btn-link" id="option1" >Comment</button>' + '<button type="button" class="btn btn-link" id="option2" >Remove</button>');
 
 
 
-$("#option2").on('click', function () {
-  return $('text').remove();
+$('#option2').on('click', function () {
+  $('#here').remove();
 });
   
 
 
 
 
-})
+});
 
 
