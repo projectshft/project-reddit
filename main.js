@@ -63,7 +63,7 @@ const renderPosts = function() {
   });
 }
 
-// *************** VIEW COMMENTS ***************
+// *************** VIEW COMMENTS TOGGLE ***************
 const viewComments = function(name) {
   // Find the post name in the array of posts
   let post = posts.find(post => post.name === name);
@@ -97,6 +97,10 @@ const viewComments = function(name) {
     }
     // Add this new comment object to the comments array of the corresponding post
     post.comments.push(comment);
+
+    document.getElementsByClassName('comment-name')[postIndex].value = '';
+    document.getElementsByClassName('comment-message')[postIndex].value = '';
+
     renderComments(post.name);
 }
 
@@ -104,8 +108,10 @@ const viewComments = function(name) {
 const renderComments = function(name) {
   // Find the post name in the array of posts
   let post = posts.find(post => post.name === name);
+  // Find index of this post
+  let postIndex = posts.indexOf(post);
   // Get the post comments container element
-  let postsCommentsContainer = document.querySelector('.post-comments');
+  let postsCommentsContainer = document.getElementsByClassName('post-comments')[postIndex];
   // Clear the posts container
   postsCommentsContainer.innerHTML = '';
   // Loop through the post comments array and generate HTML for each post
