@@ -37,7 +37,23 @@ const renderPosts = function() {
         <button type="button" class="btn btn-primary btn-sm" onclick="viewComments('${post.name}')">Comments</button> 
         ${post.message} - Posted By: ${post.name} 
       </div>
-      <div class="comment-section">This is the comment section</div>
+      <div class="comment-section">
+        <form style="margin-top:30px;" onsubmit="event.preventDefault();">
+          <div class="form-group">
+            <textarea type="text"
+            class="form-control comment-post"
+            placeholder="Comment Text"></textarea>
+          </div>
+
+          <div class="form-group">
+            <input type="text"
+            class="form-control comment-name"
+            placeholder="Your Name"></input>
+          </div>
+      
+          <button id="submit-post" class="btn btn-primary">Submit Comment</button>
+        </form>
+      </div>
       <hr>
     `;
     // Append the post element to the posts container
