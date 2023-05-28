@@ -10,7 +10,8 @@ document.getElementById('submit-post').addEventListener('click', function() {
   // Create new post object for this post
   let post = {
     name: name,
-    message: message
+    message: message,
+    comments: []
   }
   // Add this new post object to the posts array
   posts.push(post);
@@ -38,10 +39,11 @@ const renderPosts = function() {
         ${post.message} - Posted By: ${post.name} 
       </div>
       <div class="comment-section">
+        <div class="post-comments"></div>
         <form style="margin-top:30px;" onsubmit="event.preventDefault();">
           <div class="form-group">
             <textarea type="text"
-            class="form-control comment-post"
+            class="form-control comment-message"
             placeholder="Comment Text"></textarea>
           </div>
 
@@ -51,7 +53,7 @@ const renderPosts = function() {
             placeholder="Your Name"></input>
           </div>
       
-          <button id="submit-post" class="btn btn-primary">Submit Comment</button>
+          <button id="submit-comment" class="btn btn-primary" onclick="postComment('${post.name}')">Submit Comment</button>
         </form>
       </div>
       <hr>
@@ -61,16 +63,10 @@ const renderPosts = function() {
   });
 }
 
-// *************** POST A COMMENT ***************
-// document.getElementById('submit-comment').addEventListener('click', function() {
-  
-// }); 
-
 // *************** VIEW COMMENTS ***************
 const viewComments = function(name) {
   // Find the post name in the array of posts
   let post = posts.find(post => post.name === name);
-  console.log(post);
   // Find index of this post
   let postIndex = posts.indexOf(post);
   // Select comment section of that post
@@ -81,6 +77,65 @@ const viewComments = function(name) {
   } else {
     commentSection.className += ' show';
   }
+  renderComments(post.name);
+}
+
+
+// *************** POST A COMMENT ***************
+  const postComment = function(name) {
+    // Find the post name in the array of posts
+    let post = posts.find(post => post.name === name);
+    // Find index of this post
+    let postIndex = posts.indexOf(post);
+    // Create a string variable to store the text from both text firelds.
+    let commentName = document.getElementsByClassName('comment-name')[postIndex].value;
+    let commentMessage = document.getElementsByClassName('comment-message')[postIndex].value;
+    // Create new comment object for this comment
+    let comment = {
+      commentName: commentName,
+      commentMessage: commentMessage
+    }
+    // Add this new comment object to the comments array of the corresponding post
+    post.comments.push(comment);
+    renderComments(post.name);
+}
+
+// *************** RENDER COMMENTS ***************
+const renderComments = function(name) {
+  // Find the post name in the array of posts
+  let post = posts.find(post => post.name === name);
+  // Get the post comments container element
+  let postsCommentsContainer = document.querySelector('.post-comments');
+  // Clear the posts container
+  postsCommentsContainer.innerHTML = '';
+  // Loop through the post comments array and generate HTML for each post
+  post.comments.forEach(comment => {
+    // Create the post element
+    let postCommentElement = document.createElement('div');
+    postCommentElement.innerHTML = `
+      <div>
+        <br>
+        <button type="button" class="btn btn-danger btn-sm" onclick="deleteComment('${name, comment.commentName}')">Delete</button>
+        ${comment.commentMessage} - Posted By: ${comment.commentName} 
+      <hr>
+    `;
+    // Append the post element to the posts container
+    postsCommentsContainer.appendChild(postCommentElement);
+  });
+}
+
+// *************** DELETE COMMENT ***************
+const deleteComment = function(name, commentName) {
+  // Find the post name in the array of posts
+  let post = posts.find(post => post.name === name);
+  // Find the comment in the array of comments
+  let comment = post.comments.find(comment => comment.commentName === commentName);
+  // Find index of this comment
+  let commentIndex = post.comments.indexOf(comment);
+  // Remove that item from the array
+  post.comments.splice(commentIndex, 1);
+  // Re-render the posts
+  renderComments(post.name);
 }
 
 // *************** DELETE POST ***************
