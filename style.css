@@ -1,0 +1,14 @@
+.post h3 {
+  display: inline;
+  font-family: sans-serif;
+  font-size: 18px;
+}
+
+li {
+  list-style: none;
+}
+
+h1 {
+  font-family: 'Times New Roman', Times, serif;
+  text-align: center;
+}
