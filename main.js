@@ -12,13 +12,13 @@ postForm.addEventListener("submit", (event) => {
   newPost.querySelector("#user").innerText = user;
   newPost.querySelector("#post-text").innerText = post;
 
-  const timeStamp = new Date()
+  const timeStamp = new Date();
 
-  newPost.id = `post ${timeStamp}`
+  newPost.id = `post ${timeStamp}`;
   examplePost.after(newPost); 
 
   const commentLink = newPost.querySelector("#comment-link");
-  const createComment = newPost.querySelector("#create-comment")
+  const createComment = newPost.querySelector("#create-comment");
 
   commentLink.addEventListener("click", () => {
     if (createComment.classList.contains("hidden")) {
@@ -35,7 +35,7 @@ postForm.addEventListener("submit", (event) => {
   removePost.addEventListener("click", (e) => {
     e.preventDefault();
     const posts = document.querySelector("#posts");
-    posts.removeChild(newPost)
+    posts.removeChild(newPost);
   });
 
   const commentForm = newPost.querySelector("#comment-form");
@@ -48,17 +48,16 @@ postForm.addEventListener("submit", (event) => {
       const commentUser = newPost.querySelector("#user-2").value;
       const commentPost = newPost.querySelector("#comment-text").value;
       const newComment = exampleComment.cloneNode(true);
-      console.log(newComment)
 
       newComment.classList.remove("hidden");
 
       newComment.querySelector("#comment-user").innerText = commentUser;
       newComment.querySelector("#comment-post").innerText = commentPost;
 
-      const commTimeStamp = new Date() 
+      const commTimeStamp = new Date(); 
 
-      newComment.id = `post ${commTimeStamp}`
-      createComment.before(newComment)
+      newComment.id = `post ${commTimeStamp}`;
+      createComment.before(newComment);
 
       const removeComm = newComment.querySelector("#remove-c");
 
