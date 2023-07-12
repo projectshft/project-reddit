@@ -4,11 +4,31 @@
   font-size: 18px;
 }
 
+.post {
+  border-top: 5px;
+  border-bottom: 10px;
+  border-left: 0;
+  border-right: 0;
+  border-top-color: rgb(227, 227, 227);
+  border-bottom-color: rgb(149, 149, 149);
+  border-style: solid;
+  width: 100%;
+  background-color: azure;
+
+}
+#posts {
+  display: grid;
+  width: 100%;
+  background-color: whitesmoke;
+  justify-content: center;
+}
+
 li {
   list-style: none;
 }
 
 h1 {
-  font-family: 'Times New Roman', Times, serif;
+  font-family: sans-serif;
+  font-weight: bold;
   text-align: center;
 }
