@@ -22,19 +22,19 @@
   <div class="header">
     <h1>Reddit</h1>
   </div>
-  <div id="posts" class="">
+  <div id="posts">
     <div class="hidden post" id="example-post">
-      <h3><span id="user">USER</span> posted:</h3>
-      <h3><span id="post-text">POST</span></h3>
-      <a href="" id="remove-p">remove</a>
-      <a id="comment-link">comment</a>
+      <h3><span id="change-user">USER</span> posted:</h3>
+      <h3><span id="change-post">POST</span></h3>
+      <a href="" id="remove">remove</a>
+      <a href="" id="comment-link">comment</a>
       <div class="hidden" id="example-comment">
         <h3><span id="comment-user">USER</span> commented:</h3>
         <h3><span id="comment-post">POST</span></h3>
-        <a href=""id="remove-c">remove</a>
+        <a href="" id="remove" class="remove-c">remove</a>
       </div>
-      <div class="hidden" id="create-comment">
-        <form method="get" action="" id="comment-form">
+      <div id="create-comment">
+        <form method="get" action="" class="hidden comment-form">
           <ul>
             <li>
               <label for="comment-text">Comment text</label>
@@ -45,13 +45,13 @@
               <input type="text" id="user-2">
             </li>
             <li>
-              <button class="btn-primary" type="submit" id="comment-submit">Post</button>
+              <button class="btn-primary" type="button" id="comment-submit">Post</button>
             </li>
           </ul>
         </form>
     </div>
   </div>
-  <div class="create-post center-block">
+  <div id="create-post" class="center-block">
     <form method="get" action="" id="post-form">
       <ul>
         <li>
@@ -62,8 +62,8 @@
           <label for="user-1">Name</label>
           <input type="text" id="user-1" name="user" placeholder="Enter your name here.">
         </li>
-        <li class="post-submit">
-          <button class="btn-primary" type="submit">Post</button>
+        <li>
+          <button class="btn-primary" id="post-submit" type="button">Post</button>
         </li>
       </ul>
     </form>

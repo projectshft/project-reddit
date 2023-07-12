@@ -1,77 +1,131 @@
-const postForm = document.getElementById("post-form");
-const examplePost = document.querySelector("#example-post");
+var app = {
+  posts: []
+};
+var postCount = 0;
+var postAction = function(el) {
+  if (el.id === "post-submit") {
+    var post = el.parentElement.parentElement;
+    
+    var exPost = document.querySelector("#example-post");
+    var postText = post.querySelector("#post-text-1");
+    var userText = post.querySelector("#user-1");
 
-postForm.addEventListener("submit", (event) => {
-  event.preventDefault();
+    var newPost = exPost.cloneNode(true);
 
-  const user = document.getElementById("user-1").value;
-  const post = document.getElementById("post-text-1").value;
-  const newPost = examplePost.cloneNode(true);
-  newPost.classList.remove("hidden");
+    postCount++;
+    
+    newPost.id = `post${postCount}`;
+    app.posts.push({post : newPost.id, comments : []});
+    newPost.classList.remove("hidden");
+    newPost.querySelector("#change-post").innerText = postText.value;
+    newPost.querySelector("#change-user").innerText = userText.value;
+    exPost.after(newPost);
+    renderComment(newPost);
 
-  newPost.querySelector("#user").innerText = user;
-  newPost.querySelector("#post-text").innerText = post;
+    postText.value = "";
+    userText.value = "";
+}
+}
+var posts = app.posts;
 
-  const timeStamp = new Date();
+var hideComment = function() {
+  posts.forEach((item) => {
 
-  newPost.id = `post ${timeStamp}`;
-  examplePost.after(newPost); 
+    var findPost = document.querySelector(`#${item.post}`);
 
-  const commentLink = newPost.querySelector("#comment-link");
-  const createComment = newPost.querySelector("#create-comment");
+    findPost.addEventListener("click", (e) => {
 
-  commentLink.addEventListener("click", () => {
-    if (createComment.classList.contains("hidden")) {
-      createComment.classList.remove("hidden");
+      var commentButton = findPost.querySelector("#comment-link");
 
-    } else {
-      createComment.classList.add("hidden");
+      if (e.target === commentButton) {
+        var commentForm = findPost.querySelector(".comment-form");
 
-    }
-  });
-
-  const removePost = newPost.querySelector("#remove-p");
-
-  removePost.addEventListener("click", (e) => {
-    e.preventDefault();
-    const posts = document.querySelector("#posts");
-    posts.removeChild(newPost);
-  });
-
-  const commentForm = newPost.querySelector("#comment-form");
-  const exampleComment = document.querySelector("#example-comment");
-
-  commentForm.addEventListener("submit", (e) => {
-    if (e.target.id === "comment-form") {
-      e.preventDefault();
-
-      const commentUser = newPost.querySelector("#user-2").value;
-      const commentPost = newPost.querySelector("#comment-text").value;
-      const newComment = exampleComment.cloneNode(true);
-
-      newComment.classList.remove("hidden");
-
-      newComment.querySelector("#comment-user").innerText = commentUser;
-      newComment.querySelector("#comment-post").innerText = commentPost;
-
-      const commTimeStamp = new Date(); 
-
-      newComment.id = `post ${commTimeStamp}`;
-      createComment.before(newComment);
-
-      const removeComm = newComment.querySelector("#remove-c");
-
-      removeComm.addEventListener("click", (e) => {
         e.preventDefault();
-        newPost.removeChild(newComment)
-      });
+
+        if (commentForm.classList.contains("hidden")) {
+          commentForm.classList.remove("hidden");
+        } else {
+          commentForm.classList.add("hidden");
+        }
     }
+  })
+  })
+}
+
+var addComment = function(el) {
+  var post = el.parentElement.parentElement;
+
+  var exComment = document.querySelector("#example-comment");
+  var commentText = el.querySelector("#comment-text");
+  var commentUser = el.querySelector("#user-2");
+
+  var newComment = exComment.cloneNode(true);
+  
+  var date = new Date();
+  var currentPost = post.id;
+  var findPostApp = posts.findIndex((element) => {
+    return element.post === currentPost;
+  })
+  posts[findPostApp].comments.push(`${currentPost}${date}`);
+  newComment.classList.remove("hidden");
+  newComment.querySelector("#comment-user").innerText = commentUser.value;
+  newComment.querySelector("#comment-post").innerText = commentText.value;
+  el.before(newComment);
+
+  commentText.value = "";
+  commentUser.value = "";
+
+}
+var removeAction = function() {
+  posts.forEach((item) => {
+
+    var findPost = document.querySelector(`#${item.post}`);
+
+    findPost.addEventListener("click", (e) => {
+      var indexItem = posts.indexOf(item);
+      var removeButton = findPost.querySelectorAll("#remove");
+      Array.from(removeButton).forEach((i) => {
+        if (e.target === i) {
+          e.preventDefault();
+          if (i.classList.contains("remove-c")) {
+            var currentComment = i.parentElement;
+            currentComment.remove();
+            var findCommApp = posts[indexItem].comments.findIndex((element) => {
+              return element === currentComment.id;
+            })
+            posts[indexItem].comments.splice(findCommApp, 1);
+            
+          } else {
+            findPost.remove();
+            posts.splice(indexItem, 1);
+          }
+        } 
+      });
+    });
+  });
+}
+
+var postForm = document.querySelector("#post-form");
+var postButtons = postForm.querySelectorAll("button");
+
+Array.from(postButtons).forEach(el => {
+  el.addEventListener("click", () => {
+    postAction(el);
+    hideComment();
+    removeAction();
   });
 });
 
 
 
+var renderComment = function(newPost) {
+  var commentForm = newPost.querySelectorAll(".comment-form");
+  Array.from(commentForm).forEach(el => {
+    var commentButton = el.querySelector("button");
+    commentButton.addEventListener("click", () => {
+      addComment(el);
+      removeAction();
+    });
+  });
+}
 
-
-
-  
