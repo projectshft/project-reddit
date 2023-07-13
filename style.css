@@ -1,6 +1,7 @@
 .post h3 {
   display: inline;
-  font-family: sans-serif;
+  font-family: "Mukta";
+  font-weight: 600;
   font-size: 18px;
 }
 
@@ -28,7 +29,12 @@ li {
 }
 
 h1 {
-  font-family: sans-serif;
+  font-family: "Kadwa";
   font-weight: bold;
   text-align: center;
+}
+
+span {
+  font-family: "Mukta";
+  font-weight: 400;
 }

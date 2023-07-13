@@ -4,30 +4,33 @@ var app = {
 
 var postCount = 0;
 var postAction = function(el) {
-
   if (el.id === "post-submit") {
-    
+
     var post = el.parentElement.parentElement;
-    
+
     var exPost = document.querySelector("#example-post");
     var postText = post.querySelector("#post-text-1");
     var userText = post.querySelector("#user-1");
 
-    var newPost = exPost.cloneNode(true);
+    if (postText.value.length > 0 && userText.value.length > 0) {
+      var newPost = exPost.cloneNode(true);
 
-    postCount++;
-    
-    newPost.id = `post${postCount}`;
-    app.posts.push({post : newPost.id, comments : []});
-    newPost.classList.remove("hidden");
-    newPost.querySelector("#change-post").innerText = postText.value;
-    newPost.querySelector("#change-user").innerText = userText.value;
-    exPost.after(newPost);
-    renderComment(newPost);
+      postCount++;
+      
+      newPost.id = `post${postCount}`;
+      app.posts.push({post : newPost.id, comments : []});
+      newPost.classList.remove("hidden");
+      newPost.querySelector("#change-post").innerText = postText.value;
+      newPost.querySelector("#change-user").innerText = userText.value;
+      exPost.after(newPost);
+      renderComment(newPost);
 
-    postText.value = "";
-    userText.value = "";
-}
+      postText.value = "";
+      userText.value = "";
+    } else {
+      alert("You need to fill out both fields")
+    }
+  }
 }
 var posts = app.posts;
 
@@ -62,27 +65,31 @@ var addComment = function(el) {
   var exComment = document.querySelector("#example-comment");
   var commentText = el.querySelector("#comment-text");
   var commentUser = el.querySelector("#user-2");
-  var newComment = exComment.cloneNode(true);
-  var date = new Date();
-  var currentPost = post.id;
+  
+  if (commentText.value.length > 0 && commentUser.value.length > 0) {
 
-  var findPostApp = posts.findIndex((element) => {
-    return element.post === currentPost;
+    var newComment = exComment.cloneNode(true);
+    var date = new Date();
+    var currentPost = post.id;
 
-  })
+    var findPostApp = posts.findIndex((element) => {
+      return element.post === currentPost;
 
-  posts[findPostApp].comments.push(`${currentPost}${date}`);
+    })
 
-  newComment.classList.remove("hidden");
+    posts[findPostApp].comments.push(`${currentPost}${date}`);
 
-  newComment.querySelector("#comment-user").innerText = commentUser.value;
-  newComment.querySelector("#comment-post").innerText = commentText.value;
+    newComment.classList.remove("hidden");
 
-  el.before(newComment);
+    newComment.querySelector("#comment-user").innerText = commentUser.value;
+    newComment.querySelector("#comment-post").innerText = commentText.value;
 
-  commentText.value = "";
-  commentUser.value = "";
+    el.before(newComment);
 
+    commentText.value = "";
+    commentUser.value = "";
+
+  }
 }
 var removeAction = function() {
   posts.forEach((item) => {
