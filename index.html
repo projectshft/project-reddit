@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Kadwa&display=swap" rel="stylesheet" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;600&display=swap" rel="stylesheet" crossorigin>
+  
+  <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+      integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" type="text/css" href="style.css">
+  <title>Reddit</title>
+</head>
+<body>
+  <div class="header">
+    <h1>Reddit</h1>
+  </div>
+  <div id="posts">
+    <div class="hidden post" id="example-post">
+      <h3><span id="change-user">USER</span> posted:</h3>
+      <h3><span id="change-post">POST</span></h3>
+      <a href="" id="remove">remove</a>
+      <a href="" id="comment-link">comment</a>
+      <div class="hidden" id="example-comment">
+        <h3><span id="comment-user">USER</span> commented:</h3>
+        <h3><span id="comment-post">POST</span></h3>
+        <a href="" id="remove" class="remove-c">remove</a>
+      </div>
+      <div id="create-comment">
+        <form method="get" action="" class="hidden comment-form">
+          <ul>
+            <li>
+              <label for="comment-text">Comment text</label>
+              <input type="text" id="comment-text" placeholder="Enter your comment here." required>
+            </li>
+            <li>
+              <label for="user-2">Name</label>
+              <input type="text" id="user-2" placeholder="Enter your name here." required>
+            </li>
+            <li>
+              <button class="btn-primary" type="button" id="comment-submit">Post</button>
+            </li>
+          </ul>
+        </form>
+    </div>
+  </div>
+  <div id="create-post" class="center-block">
+    <form method="get" action="" id="post-form">
+      <ul>
+        <li>
+          <label for="post-text-1">Post text</label>
+          <input type="text" id="post-text-1" name="posttext" placeholder="Enter your post here." required>
+        </li>
+        <li>
+          <label for="user-1">Name</label>
+          <input type="text" id="user-1" name="user" placeholder="Enter your name here." required>
+        </li>
+        <li>
+          <button class="btn-primary" id="post-submit" type="button">Post</button>
+        </li>
+      </ul>
+    </form>
+  </div>
+  
+  </div>
+  <script src="main.js"></script>
+</body>
+</html>
