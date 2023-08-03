@@ -213,20 +213,11 @@ function displayComments (post, currentComments) {
 
     const iconDiv = document.createElement('div');
     iconDiv.setAttribute('class', 'icons');
-
-    const deleteEditDiv = document.createElement('div');
-    deleteEditDiv.setAttribute('class', 'delete-edit-post');
-    deleteEditDiv.innerHTML = '<i class="fa-solid fa-pen-to-square comment-icon"></i> <i class="fa-solid fa-trash comment-icon"></i>'
-
-    const divider = document.createElement('hr');
-    divider.setAttribute('class', 'hr');
-
-    iconDiv.appendChild(deleteEditDiv);
+    iconDiv.innerHTML = '<i class="fa-solid fa-pen-to-square comment-icon"></i> <i class="fa-solid fa-trash comment-icon"></i> <hr>'
 
     commentDiv.appendChild(messageDiv);
     commentDiv.appendChild(postedByDiv);
     commentDiv.appendChild(iconDiv);
-    commentDiv.appendChild(divider);
 
     commentsDiv.appendChild(commentDiv);
   })
