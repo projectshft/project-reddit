@@ -86,9 +86,13 @@ function displayPosts (currentPosts) {
     iconDiv.setAttribute('class', 'icons');
     iconDiv.innerHTML = '<i class="fa-solid fa-comment"></i> <i class="fa-solid fa-pen-to-square"></i> <i class="fa-solid fa-trash"></i> <hr>';
 
+    const commentsDiv = document.createElement('div');
+    commentsDiv.setAttribute('class', 'comments col-md-12 offset-md-12');
+
     postDiv.appendChild(messageDiv);
     postDiv.appendChild(postedByDiv);
     postDiv.appendChild(iconDiv);
+    postDiv.appendChild(commentsDiv);
     
     displayNewCommentForm(postDiv);
 
@@ -145,13 +149,15 @@ function addComment (e) {
 }
 
 function toggleComments (e) {
-  const commentForm = e.target.parentNode.nextSibling;
-  if (commentForm.classList.contains('show')) {
-    commentForm.classList.remove('show');
-  } else {
-    commentForm.classList.add('show');
-  }
-
+  const commentDivs = [e.target.parentNode.nextSibling, e.target.parentNode.nextSibling.nextSibling];
+  commentDivs.forEach(function (div) {
+    if (div.classList.contains('show')) {
+      div.classList.remove('show');
+    } else {
+      div.classList.add('show');
+    }
+  })
+  
   const post = getPost(e);
   const postIndex = post.dataset.index;
 
@@ -163,8 +169,9 @@ function getPost (e) {
 }
 
 function displayComments (post, currentComments) {
-  const commentsDiv = document.createElement('div');
-  commentsDiv.setAttribute('class', 'comments col-md-12 offset-md-12');
+  const commentsDiv = document.querySelector('.comments');
+  
+  commentsDiv.innerHTML = '';
 
   currentComments.forEach(function (comment) {
     const commentDiv = document.createElement('div');
