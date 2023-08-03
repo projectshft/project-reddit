@@ -6,6 +6,14 @@
   padding: 4px 8px;
 }
 
+i:hover {
+  color: #0275d8;
+}
+
+.new-comment-form {
+  margin-bottom: 30px;
+}
+
 .comments,
 .new-comment-form {
   display: none;
