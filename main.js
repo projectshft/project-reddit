@@ -43,12 +43,21 @@ function addPost () {
   displayPosts(myPosts.posts);
 }
 
+function deletePost (e) {
+  const postIndex = e.target.closest('.new-post').dataset.index;
+
+  myPosts.posts.splice(postIndex, 1);
+
+  displayPosts(myPosts.posts);
+}
+
 function displayPosts (currentPosts) {
   postsDiv.innerHTML = '';
   
   currentPosts.forEach (function (post) {
     const postDiv = document.createElement('div');
     postDiv.setAttribute('data-index', post.index);
+    postDiv.setAttribute('class', 'new-post');
 
     const messageDiv = document.createElement('div')
     messageDiv.innerHTML = post.message;
@@ -78,8 +87,13 @@ function displayPosts (currentPosts) {
     messageInput.value = '';
     nameInput.value = '';
 
-    // addVoteEventListeners();
-    // addDeleteEventListeners();
     // addEditEventListeners();
+    addDeleteEventListeners();
   })
+}
+
+function addDeleteEventListeners () {
+  const deleteIcons = document.querySelectorAll('.fa-trash');
+
+  deleteIcons.forEach((icon) => icon.addEventListener('click', deletePost));
 }
