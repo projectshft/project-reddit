@@ -61,7 +61,7 @@ function addPost () {
 }
 
 function deletePost (e) {
-  const postIndex = e.target.closest('.new-post').dataset.index;
+  const postIndex = getPost(e).dataset.index;
 
   myPosts.posts.splice(postIndex, 1);
 
@@ -143,8 +143,8 @@ function addComment (e) {
   const post = getPost(e);
   const postIndex = post.dataset.index;
 
-  const commentNameInput = document.querySelector('#comment-name');
-  const commentMessageInput = document.querySelector('#comment-message');
+  const commentNameInput = post.querySelector('#comment-name');
+  const commentMessageInput = post.querySelector('#comment-message');
 
   const newComment = createNewComment(commentNameInput.value, commentMessageInput.value);
 
@@ -196,7 +196,7 @@ function getComment (e) {
 }
 
 function displayComments (post, currentComments) {
-  const commentsDiv = document.querySelector('.comments');
+  const commentsDiv = post.querySelector('.comments');
   
   commentsDiv.innerHTML = '';
 
@@ -221,9 +221,6 @@ function displayComments (post, currentComments) {
 
     commentsDiv.appendChild(commentDiv);
   })
-
-  const newCommentForm = document.querySelector(`[data-index="${post.dataset.index}"]`).lastChild;
-  post.insertBefore(commentsDiv, newCommentForm);
 
   addDeleteCommentEventListeners();
 }
