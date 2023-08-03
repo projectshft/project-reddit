@@ -123,13 +123,13 @@ function addToggleCommentsEventListeners () {
 }
 
 function addDeletePostEventListeners () {
-  const deleteIcons = document.querySelectorAll('.fa-trash, .post-icon');
+  const deleteIcons = document.querySelectorAll('.fa-trash.post-icon');
 
   deleteIcons.forEach((icon) => icon.addEventListener('click', deletePost));
 }
 
 function addDeleteCommentEventListeners () {
-  const deleteIcons = document.querySelectorAll('.fa-trash, .comment-icon');
+  const deleteIcons = document.querySelectorAll('.fa-trash.comment-icon');
 
   deleteIcons.forEach((icon) => icon.addEventListener('click', deleteComment));
 }
@@ -161,7 +161,6 @@ function deleteComment (e) {
   const postIndex = post.dataset.index;
 
   const comment = getComment(e);
-  console.log(comment.dataset.index);
   const commentIndex = comment.dataset.index;
 
   myPosts.posts[postIndex].comments.splice(commentIndex, 1);
@@ -233,3 +232,9 @@ function displayNewCommentForm (post) {
   post.appendChild(newCommentForm);
 }
 
+// -- deleting posts
+// only one post, no comments - good
+// only one post, with comment - issue
+// more than one post, no comments - good
+// more than one post, first post with comment - issue
+// more than one post, second post with comment - issue deleting both posts
