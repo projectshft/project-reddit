@@ -1,0 +1,22 @@
+.fa-solid {
+  padding: 4px 8px;
+}
+
+i:hover {
+  color: #0275d8;
+}
+
+.new-comment-form,
+.edit-post-form {
+  margin-bottom: 30px;
+}
+
+.comments,
+.new-comment-form,
+.edit-post-form {
+  display: none;
+}
+
+.show {
+  display: block;
+}
