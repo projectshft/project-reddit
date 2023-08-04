@@ -1,3 +1,13 @@
+//
+// Declare variables and factory functions
+//
+
+const postsDiv = document.querySelector('.posts');
+const nameInput = document.querySelector('#name');
+const messageInput = document.querySelector('#message');
+const submitButton = document.querySelector('#submit');
+
+// Declare factory function for generating new Post objects
 const Post = (name, message) => {
   const index = null;
   const comments = [];
@@ -16,6 +26,7 @@ const Post = (name, message) => {
   }
 }
 
+// Declare factory function for generating new Comment objects
 const Comment = (name, message) => {
 
   return {
@@ -24,7 +35,8 @@ const Comment = (name, message) => {
   }
 }
 
-const postList = () => {
+// Declare factory function for generating new PostList objects
+const PostList = () => {
   const posts = [];
 
   const addPostToList = (post) => {
@@ -38,20 +50,17 @@ const postList = () => {
   }
 }
 
-myPosts = postList();
 
-const postsDiv = document.querySelector('.posts');
-const nameInput = document.querySelector('#name');
-const messageInput = document.querySelector('#message');
-const submitButton = document.querySelector('#submit');
+//
+// Post functions
+//
 
-submitButton.addEventListener('click', addPost);
-
-// post functions
+// Return a new post object
 function createNewPost (name, message) {
   return Post(name, message);
 }
 
+// Create post object and add to PostList, update display
 function addPost () {
   const newPost = createNewPost(nameInput.value, messageInput.value);
 
@@ -60,6 +69,7 @@ function addPost () {
   displayPosts(myPosts.posts);
 }
 
+// Delete post object from PostList, update display
 function deletePost (e) {
   const postIndex = getPost(e).dataset.index;
 
@@ -70,6 +80,7 @@ function deletePost (e) {
   displayPosts(myPosts.posts);
 }
 
+// Edit post object in PostList, update display
 function editPost (e) {
   const postIndex = getPost(e).dataset.index;
 
@@ -82,6 +93,46 @@ function editPost (e) {
   displayPosts(myPosts.posts);
 }
 
+// Toggle edit post form
+function toggleEditPost (e) {
+  const editPostDiv = e.target.parentNode.nextSibling;
+
+  if (editPostDiv.classList.contains('show')) {
+    editPostDiv.classList.remove('show');
+  } else {
+    editPostDiv.classList.add('show');
+  }
+}
+
+// Get post element from DOM
+function getPost (e) {
+  return e.target.closest('.new-post');
+}
+
+// Create display for edit post form
+function displayEditPostForm (post) {
+  const editPostForm = document.createElement('div');
+  editPostForm.setAttribute('class', 'edit-post-form col-md-12 offset-md-12');
+
+  const postIndex = post.dataset.index;
+  const postMessage = myPosts.posts[postIndex].message;
+  const postName = myPosts.posts[postIndex].name;
+
+  editPostForm.innerHTML = `<form style="margin-top:30px;" onsubmit="event.preventDefault();"> <h5>Edit post</h5> <div class="form-group"> <textarea id="edit-message" type="text" class="form-control">${postMessage}</textarea> </div> <div class="form-group"> <input id="edit-name" type="text" class="form-control" value="${postName}"></input></div><button id="edit-post" class="btn btn-primary edit-post">Edit Post</button></form>`;
+
+  post.appendChild(editPostForm);
+}
+
+// Create display for new comment form
+function displayNewCommentForm (post) {
+  const newCommentForm = document.createElement('div');
+  newCommentForm.setAttribute('class', 'new-comment-form col-md-12 offset-md-12');
+  newCommentForm.innerHTML = '<form style="margin-top:30px;" onsubmit="event.preventDefault();"> <h5>New comment</h5> <div class="form-group"> <textarea id="comment-message" type="text" class="form-control" placeholder="Comment text"></textarea> </div> <div class="form-group"> <input id="comment-name" type="text" class="form-control" placeholder="Your name"></input></div><button id="submit-comment" class="btn btn-primary submit-comment">Submit Comment</button></form>';
+
+  post.appendChild(newCommentForm);
+}
+
+// Update post display
 function displayPosts (currentPosts) {
   postsDiv.innerHTML = '';
   
@@ -126,47 +177,17 @@ function displayPosts (currentPosts) {
   })
 }
 
-function addSubmitCommentEventListeners () {
-  const submitCommentButtons = document.querySelectorAll('.submit-comment');
 
-  submitCommentButtons.forEach((button) => button.addEventListener('click', addComment));
-}
+//
+// Comment functions
+//
 
-function addToggleCommentsEventListeners () {
-  const commentIcons = document.querySelectorAll('.fa-comment');
-
-  commentIcons.forEach((icon) => icon.addEventListener('click', toggleComments));
-}
-
-function addToggleEditPostEventListeners () {
-  const editIcons = document.querySelectorAll('.fa-pen-to-square.post-icon');
-
-  editIcons.forEach((icon) => icon.addEventListener('click', toggleEditPost));
-}
-
-function addEditPostEventListeners () {
-  const editPostButtons = document.querySelectorAll('.edit-post');
-
-  editPostButtons.forEach((icon) => icon.addEventListener('click', editPost));
-}
-
-function addDeletePostEventListeners () {
-  const deleteIcons = document.querySelectorAll('.fa-trash.post-icon');
-
-  deleteIcons.forEach((icon) => icon.addEventListener('click', deletePost));
-}
-
-function addDeleteCommentEventListeners () {
-  const deleteIcons = document.querySelectorAll('.fa-trash.comment-icon');
-
-  deleteIcons.forEach((icon) => icon.addEventListener('click', deleteComment));
-}
-
-// comment functions
+// Return a new comment object
 function createNewComment (name, message) {
     return Comment(name, message);
 }
 
+// Create new comment object and add to comment array in associated post, update display
 function addComment (e) {
   const post = getPost(e);
   const postIndex = post.dataset.index;
@@ -184,6 +205,7 @@ function addComment (e) {
   displayComments(post, myPosts.posts[postIndex].comments);
 }
 
+// Delete comment from comment array in associated post, update display
 function deleteComment (e) {
   const post = getPost(e);
   const postIndex = post.dataset.index;
@@ -198,6 +220,7 @@ function deleteComment (e) {
   displayComments(post, myPosts.posts[postIndex].comments);
 }
 
+// Toggle existing comments and new comment form
 function toggleComments (e) {
   const commentDivs = [e.target.parentNode.nextSibling.nextSibling, e.target.parentNode.nextSibling.nextSibling.nextSibling];
   commentDivs.forEach(function (div) {
@@ -214,24 +237,12 @@ function toggleComments (e) {
   displayComments(post, myPosts.posts[postIndex].comments)
 }
 
-function toggleEditPost (e) {
-  const editPostDiv = e.target.parentNode.nextSibling;
-
-  if (editPostDiv.classList.contains('show')) {
-    editPostDiv.classList.remove('show');
-  } else {
-    editPostDiv.classList.add('show');
-  }
-}
-
-function getPost (e) {
-  return e.target.closest('.new-post');
-}
-
+// Get comment element from DOM
 function getComment (e) {
   return e.target.closest('.new-comment');
 }
 
+// Update comment display
 function displayComments (post, currentComments) {
   const commentsDiv = post.querySelector('.comments');
   
@@ -262,23 +273,59 @@ function displayComments (post, currentComments) {
   addDeleteCommentEventListeners();
 }
 
-function displayNewCommentForm (post) {
-  const newCommentForm = document.createElement('div');
-  newCommentForm.setAttribute('class', 'new-comment-form col-md-12 offset-md-12');
-  newCommentForm.innerHTML = '<form style="margin-top:30px;" onsubmit="event.preventDefault();"> <h5>New comment</h5> <div class="form-group"> <textarea id="comment-message" type="text" class="form-control" placeholder="Comment text"></textarea> </div> <div class="form-group"> <input id="comment-name" type="text" class="form-control" placeholder="Your name"></input></div><button id="submit-comment" class="btn btn-primary submit-comment">Submit Comment</button></form>';
 
-  post.appendChild(newCommentForm);
+//
+// Event listener functions
+//
+
+// Add submit comment event listeners to each new comment form
+function addSubmitCommentEventListeners () {
+  const submitCommentButtons = document.querySelectorAll('.submit-comment');
+
+  submitCommentButtons.forEach((button) => button.addEventListener('click', addComment));
 }
 
-function displayEditPostForm (post) {
-  const editPostForm = document.createElement('div');
-  editPostForm.setAttribute('class', 'edit-post-form col-md-12 offset-md-12');
+// Add toggle comments event listeners to each post
+function addToggleCommentsEventListeners () {
+  const commentIcons = document.querySelectorAll('.fa-comment');
 
-  const postIndex = post.dataset.index;
-  const postMessage = myPosts.posts[postIndex].message;
-  const postName = myPosts.posts[postIndex].name;
-
-  editPostForm.innerHTML = `<form style="margin-top:30px;" onsubmit="event.preventDefault();"> <h5>Edit post</h5> <div class="form-group"> <textarea id="edit-message" type="text" class="form-control">${postMessage}</textarea> </div> <div class="form-group"> <input id="edit-name" type="text" class="form-control" value="${postName}"></input></div><button id="edit-post" class="btn btn-primary edit-post">Edit Post</button></form>`;
-
-  post.appendChild(editPostForm);
+  commentIcons.forEach((icon) => icon.addEventListener('click', toggleComments));
 }
+
+// Add toggle edit post form event listeners to each post
+function addToggleEditPostEventListeners () {
+  const editIcons = document.querySelectorAll('.fa-pen-to-square.post-icon');
+
+  editIcons.forEach((icon) => icon.addEventListener('click', toggleEditPost));
+}
+
+// Add edit post event listeners to each edit post form
+function addEditPostEventListeners () {
+  const editPostButtons = document.querySelectorAll('.edit-post');
+
+  editPostButtons.forEach((icon) => icon.addEventListener('click', editPost));
+}
+
+// Add delete post event listeners to each post
+function addDeletePostEventListeners () {
+  const deleteIcons = document.querySelectorAll('.fa-trash.post-icon');
+
+  deleteIcons.forEach((icon) => icon.addEventListener('click', deletePost));
+}
+
+// Add delete comment event listeners to each comment
+function addDeleteCommentEventListeners () {
+  const deleteIcons = document.querySelectorAll('.fa-trash.comment-icon');
+
+  deleteIcons.forEach((icon) => icon.addEventListener('click', deleteComment));
+}
+
+//
+// Initializations and event listeners
+//
+
+// Initialize PostList object
+myPosts = PostList();
+
+// Add add post event listener to submit post button
+submitButton.addEventListener('click', addPost);

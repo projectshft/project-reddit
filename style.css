@@ -6,7 +6,8 @@ i:hover {
   color: #0275d8;
 }
 
-.new-comment-form {
+.new-comment-form,
+.edit-post-form {
   margin-bottom: 30px;
 }
 
