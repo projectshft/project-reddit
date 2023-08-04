@@ -70,6 +70,18 @@ function deletePost (e) {
   displayPosts(myPosts.posts);
 }
 
+function editPost (e) {
+  const postIndex = getPost(e).dataset.index;
+
+  const editedMessage = e.target.form[0].value;
+  const editedName = e.target.form[1].value;
+
+  myPosts.posts[postIndex].message = editedMessage;
+  myPosts.posts[postIndex].name = editedName;
+
+  displayPosts(myPosts.posts);
+}
+
 function displayPosts (currentPosts) {
   postsDiv.innerHTML = '';
   
@@ -94,8 +106,11 @@ function displayPosts (currentPosts) {
     postDiv.appendChild(messageDiv);
     postDiv.appendChild(postedByDiv);
     postDiv.appendChild(iconDiv);
-    postDiv.appendChild(commentsDiv);
+
+    displayEditPostForm(postDiv);
     
+    postDiv.appendChild(commentsDiv);
+
     displayNewCommentForm(postDiv);
 
     postsDiv.appendChild(postDiv);
@@ -105,8 +120,9 @@ function displayPosts (currentPosts) {
 
     addSubmitCommentEventListeners();
     addToggleCommentsEventListeners();
-    // addEditEventListeners();
+    addToggleEditPostEventListeners();
     addDeletePostEventListeners();
+    addEditPostEventListeners();
   })
 }
 
@@ -120,6 +136,18 @@ function addToggleCommentsEventListeners () {
   const commentIcons = document.querySelectorAll('.fa-comment');
 
   commentIcons.forEach((icon) => icon.addEventListener('click', toggleComments));
+}
+
+function addToggleEditPostEventListeners () {
+  const editIcons = document.querySelectorAll('.fa-pen-to-square.post-icon');
+
+  editIcons.forEach((icon) => icon.addEventListener('click', toggleEditPost));
+}
+
+function addEditPostEventListeners () {
+  const editPostButtons = document.querySelectorAll('.edit-post');
+
+  editPostButtons.forEach((icon) => icon.addEventListener('click', editPost));
 }
 
 function addDeletePostEventListeners () {
@@ -171,7 +199,7 @@ function deleteComment (e) {
 }
 
 function toggleComments (e) {
-  const commentDivs = [e.target.parentNode.nextSibling, e.target.parentNode.nextSibling.nextSibling];
+  const commentDivs = [e.target.parentNode.nextSibling.nextSibling, e.target.parentNode.nextSibling.nextSibling.nextSibling];
   commentDivs.forEach(function (div) {
     if (div.classList.contains('show')) {
       div.classList.remove('show');
@@ -184,6 +212,16 @@ function toggleComments (e) {
   const postIndex = post.dataset.index;
 
   displayComments(post, myPosts.posts[postIndex].comments)
+}
+
+function toggleEditPost (e) {
+  const editPostDiv = e.target.parentNode.nextSibling;
+
+  if (editPostDiv.classList.contains('show')) {
+    editPostDiv.classList.remove('show');
+  } else {
+    editPostDiv.classList.add('show');
+  }
 }
 
 function getPost (e) {
@@ -212,7 +250,7 @@ function displayComments (post, currentComments) {
 
     const iconDiv = document.createElement('div');
     iconDiv.setAttribute('class', 'icons');
-    iconDiv.innerHTML = '<i class="fa-solid fa-pen-to-square comment-icon"></i> <i class="fa-solid fa-trash comment-icon"></i> <hr>'
+    iconDiv.innerHTML = '<i class="fa-solid fa-trash comment-icon"></i> <hr>'
 
     commentDiv.appendChild(messageDiv);
     commentDiv.appendChild(postedByDiv);
@@ -232,9 +270,15 @@ function displayNewCommentForm (post) {
   post.appendChild(newCommentForm);
 }
 
-// -- deleting posts
-// only one post, no comments - good
-// only one post, with comment - issue
-// more than one post, no comments - good
-// more than one post, first post with comment - issue
-// more than one post, second post with comment - issue deleting both posts
+function displayEditPostForm (post) {
+  const editPostForm = document.createElement('div');
+  editPostForm.setAttribute('class', 'edit-post-form col-md-12 offset-md-12');
+
+  const postIndex = post.dataset.index;
+  const postMessage = myPosts.posts[postIndex].message;
+  const postName = myPosts.posts[postIndex].name;
+
+  editPostForm.innerHTML = `<form style="margin-top:30px;" onsubmit="event.preventDefault();"> <h5>Edit post</h5> <div class="form-group"> <textarea id="edit-message" type="text" class="form-control">${postMessage}</textarea> </div> <div class="form-group"> <input id="edit-name" type="text" class="form-control" value="${postName}"></input></div><button id="edit-post" class="btn btn-primary edit-post">Edit Post</button></form>`;
+
+  post.appendChild(editPostForm);
+}

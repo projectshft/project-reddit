@@ -11,7 +11,8 @@ i:hover {
 }
 
 .comments,
-.new-comment-form {
+.new-comment-form,
+.edit-post-form {
   display: none;
 }
 
