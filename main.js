@@ -12,33 +12,7 @@ button.addEventListener("click", () => {
 
 allPosts.addEventListener("click", (event) => {
   if (event.target.getAttribute("id") === "submit-comment") {
-    
-    // Select post
-    const selectedPost = event.target.parentElement.parentElement.parentElement.parentElement;
-    const commentSectionId = selectedPost
-      .querySelector(".card")
-      .parentElement.getAttribute("id");
-    const postNumber = commentSectionId.match(/\d+$/)[0];
-
-    // Get comment data
-    const commentContent = document.querySelector(`#post-comment-${postNumber}`).value;
-    const userName = document.querySelector(`#your-name-${postNumber}`).value;
-
-    const comment = {
-      text: commentContent,
-      name: userName
-    };
-
-    // Push comment to post object
-    postList[postNumber].comments.push(comment);
-
-    // Update UI
-
-
-    // testing
-    console.log(commentSectionId);
-    console.log(postNumber);
-    console.log(postList[postNumber]);
+    newComment(event);
   }
 
   if (event.target.classList.contains("remove-post")) {
@@ -90,7 +64,7 @@ const newPost = (postContent, userName) => {
   // Comment section
   document.querySelector(
     `#post-count-${postCount}`
-  ).innerHTML += `<span class="icon-button"  data-bs-toggle="collapse" href="#show-comments-${postCount}" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="fa-solid fa-comments comment-section"></i></span><div class="collapse mt-2" id="show-comments-${postCount}"><div class="card card-body bg-dark">
+  ).innerHTML += `<span class="icon-button"  data-bs-toggle="collapse" href="#show-comments-${postCount}" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="fa-solid fa-comments comment-section"></i></span><div class="collapse mt-2" id="show-comments-${postCount}"><div class="card card-body bg-dark"><div class="post-comment-section-${postCount}"></div>
   <form onsubmit="event.preventDefault();">
             <div class="mb-3">
               <label for="post-comment" class="form-label">Leave a Comment:</label>
@@ -112,3 +86,57 @@ const newPost = (postContent, userName) => {
   postCount++;
 };
 
+const newComment = (event) => {
+  // Select post
+  const selectedPost =
+    event.target.parentElement.parentElement.parentElement.parentElement;
+  const commentSectionId = selectedPost
+    .querySelector(".card")
+    .parentElement.getAttribute("id");
+  const postNumber = commentSectionId.match(/\d+$/)[0];
+
+  // Get comment data
+  const commentContent = document.querySelector(
+    `#post-comment-${postNumber}`
+  ).value;
+  const userName = document.querySelector(`#your-name-${postNumber}`).value;
+
+  const comment = {
+    text: commentContent,
+    name: userName,
+  };
+
+  // Push comment to post object
+  postList[postNumber].comments.push(comment);
+
+  // Update UI
+  const commentDiv = document.createElement("div");
+  const commentText = document.createTextNode(comment.text);
+
+  commentDiv.appendChild(commentText);
+
+  const lineBreak = document.createElement("br");
+
+  commentDiv.appendChild(lineBreak);
+
+  const postedByText = document.createTextNode("Posted by: ");
+
+  commentDiv.appendChild(postedByText);
+
+  const boldText = document.createElement("b");
+  const name = document.createTextNode(comment.name);
+
+  boldText.appendChild(name);
+
+  commentDiv.appendChild(boldText);
+
+  const hrDivider = document.createElement("hr");
+
+  document.querySelector(`.post-comment-section-${postNumber}`).append(commentDiv);
+  document.querySelector(`.post-comment-section-${postNumber}`).append(hrDivider);
+
+  // testing
+  console.log(commentSectionId);
+  console.log(postNumber);
+  console.log(postList[postNumber]);
+};
