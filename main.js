@@ -73,9 +73,9 @@ const newPost = (postContent, userName) => {
               <textarea class="form-control" id="post-comment" rows="3" placeholder="What would you like to say?"></textarea>
             </div>
             <div class="mb-3">
-              <input type="text" class="form-control" id="name" placeholder="Name">
+              <input type="text" class="form-control" id="your-name" placeholder="Name">
             </div>
-            <button type="submit" class="btn btn-primary" id="submit-comment">Submit Comment</button>
+            <button type="submit" class="btn btn-primary" id="submit-comment">Comment</button>
           </form>
 </div>
 </div>`;
