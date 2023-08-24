@@ -13,7 +13,9 @@ button.addEventListener("click", () => {
 allPosts.addEventListener("click", (event) => {
   if (event.target.classList.contains("comment-section")) {
     const selectedPost = event.target.parentElement.parentElement;
-    const commentSectionId = selectedPost.querySelector(".card").parentElement.getAttribute("id");
+    const commentSectionId = selectedPost
+      .querySelector(".card")
+      .parentElement.getAttribute("id");
 
     console.log(commentSectionId);
   }
@@ -63,7 +65,7 @@ const newPost = (postContent, userName) => {
     `#post-count-${postCount}`
   ).innerHTML += `<span class="icon-button"><i class="fa-solid fa-trash-can remove-post"></i></span>`;
 
-  // Comments (num of comments)
+  // Comment section
   document.querySelector(
     `#post-count-${postCount}`
   ).innerHTML += `<span class="icon-button"  data-bs-toggle="collapse" href="#show-comments-${postCount}" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="fa-solid fa-comments comment-section"></i></span><div class="collapse mt-2" id="show-comments-${postCount}"><div class="card card-body bg-dark">
@@ -86,4 +88,7 @@ const newPost = (postContent, userName) => {
 
   // Increment post count
   postCount++;
+
+  console.log(postList)
 };
+
