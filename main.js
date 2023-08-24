@@ -11,15 +11,26 @@ button.addEventListener("click", () => {
 });
 
 allPosts.addEventListener("click", (event) => {
-  if (event.target.classList.contains("comment-section")) {
-    const selectedPost = event.target.parentElement.parentElement;
+  if (event.target.getAttribute("id") === "submit-comment") {
+    // Select post
+    const selectedPost = event.target.parentElement.parentElement.parentElement.parentElement;
     const commentSectionId = selectedPost
       .querySelector(".card")
       .parentElement.getAttribute("id");
     const postNumber = commentSectionId.match(/\d+$/)[0];
-    
+
+    // Get comment data
+    const commentContent = document.querySelector("#post-comment").value;
+    const userName = document.querySelector("#your-name").value;
+
+    const comment = {
+      text: commentContent,
+      name: userName
+    };
+
     // Push comment to post object
-    postList[postNumber].comments.push("example comment");
+    postList[postNumber].comments.push(comment);
+
     // testing
     console.log(commentSectionId);
     console.log(postNumber);
@@ -35,7 +46,7 @@ const newPost = (postContent, userName) => {
   const post = {
     text: postContent,
     name: userName,
-    comments: []
+    comments: [],
   };
 
   postList.push(post);
@@ -96,4 +107,3 @@ const newPost = (postContent, userName) => {
   // Increment post count
   postCount++;
 };
-
