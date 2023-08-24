@@ -16,7 +16,7 @@
     ></script>
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body>
+  <body class="bg-dark text-light">
     <header class="container">
       <h1 class="text-center">ReReddit</h1>
       <hr />
@@ -26,8 +26,22 @@
       <div class="row justify-content-md-center">
         <div class="col-md-6 posts"> <!-- dynamically add posts -->
         </div>
+      </div>
 
-
+      <div class="row justify-content-md-center">
+        <div class="col-md-6">
+          <form>
+            <div class="mb-3">
+              <label for="post-content" class="form-label">Write a Post:</label>
+              <textarea class="form-control" id="post-content" rows="3" placeholder="What would you like to say?"></textarea>
+            </div>
+            <div class="mb-3">
+              <!--<label for="name" class="form-label">Enter Your Name:</label>-->
+              <input type="text" class="form-control" id="name" placeholder="Name">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit Post</button>
+          </form>
+        </div>
       </div>
       
     </section>
