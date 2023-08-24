@@ -1,4 +1,5 @@
 const button = document.querySelector("#submit");
+let postList = [];
 
 button.addEventListener("click", () => {
   const postContent = document.querySelector("#post-content").value;
@@ -13,6 +14,12 @@ const newPost = (postContent, userName) => {
     name: userName
   };
 
+  postList.push(post);
+
   const newPost = `<div>${post.text}<br/>Posted by: <b>${post.name}</b></div><hr/>`;
   document.querySelector(".posts").innerHTML += newPost;
+
+  // Clear message box
+  document.querySelector("#name").value = "";
+  document.querySelector("#post-content").value = "";
 };
