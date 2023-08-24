@@ -12,7 +12,9 @@ button.addEventListener("click", () => {
 
 allPosts.addEventListener("click", (event) => {
   if (event.target.classList.contains("comment-section")) {
-    // alert("Ladies and gentlemen, we got him");
+    const commentSection = event.target.parentElement.parentElement;
+
+    console.log(commentSection.querySelector(".card").parentElement.getAttribute("id")); // show-comments-0
   }
 
   if (event.target.classList.contains("remove-post")) {
