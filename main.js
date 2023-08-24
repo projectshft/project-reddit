@@ -16,8 +16,14 @@ allPosts.addEventListener("click", (event) => {
     const commentSectionId = selectedPost
       .querySelector(".card")
       .parentElement.getAttribute("id");
-
+    const postNumber = commentSectionId.match(/\d+$/)[0];
+    
+    // Push comment to post object
+    postList[postNumber].comments.push("example comment");
+    // testing
     console.log(commentSectionId);
+    console.log(postNumber);
+    console.log(postList[postNumber]);
   }
 
   if (event.target.classList.contains("remove-post")) {
@@ -29,6 +35,7 @@ const newPost = (postContent, userName) => {
   const post = {
     text: postContent,
     name: userName,
+    comments: []
   };
 
   postList.push(post);
@@ -88,7 +95,5 @@ const newPost = (postContent, userName) => {
 
   // Increment post count
   postCount++;
-
-  console.log(postList)
 };
 
