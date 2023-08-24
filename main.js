@@ -2,6 +2,7 @@ const button = document.querySelector("#submit");
 const allPosts = document.querySelector(".posts");
 let postList = [];
 let postCount = 0;
+let commentNum = 0;
 
 button.addEventListener("click", () => {
   const postContent = document.querySelector("#post-content").value;
@@ -111,6 +112,7 @@ const newComment = (event) => {
 
   // Update UI
   const commentDiv = document.createElement("div");
+  commentDiv.setAttribute("id", `comment-number-${commentNum}`);
   const commentText = document.createTextNode(comment.text);
 
   commentDiv.appendChild(commentText);
@@ -135,8 +137,15 @@ const newComment = (event) => {
   document.querySelector(`.post-comment-section-${postNumber}`).append(commentDiv);
   document.querySelector(`.post-comment-section-${postNumber}`).append(hrDivider);
 
-  // testing
-  console.log(commentSectionId);
-  console.log(postNumber);
-  console.log(postList[postNumber]);
+  //TODO: add delete button next to comment section button. Have warning pop up saying, "Are you sure you want to delete this post?"
+  document.querySelector(
+    `#comment-number-${commentNum}`
+  ).innerHTML += `<span class="icon-button"><i class="fa-solid fa-trash-can remove-post"></i></span>`;
+
+  // Clear message box
+  document.querySelector(`#your-name-${postNumber}`).value = "";
+  document.querySelector(`#post-comment-${postNumber}`).value = "";
+
+  // Increment comment number
+  commentNum++;
 };
