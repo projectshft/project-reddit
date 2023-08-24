@@ -12,6 +12,7 @@ button.addEventListener("click", () => {
 
 allPosts.addEventListener("click", (event) => {
   if (event.target.getAttribute("id") === "submit-comment") {
+    
     // Select post
     const selectedPost = event.target.parentElement.parentElement.parentElement.parentElement;
     const commentSectionId = selectedPost
@@ -20,8 +21,8 @@ allPosts.addEventListener("click", (event) => {
     const postNumber = commentSectionId.match(/\d+$/)[0];
 
     // Get comment data
-    const commentContent = document.querySelector("#post-comment").value;
-    const userName = document.querySelector("#your-name").value;
+    const commentContent = document.querySelector(`#post-comment-${postNumber}`).value;
+    const userName = document.querySelector(`#your-name-${postNumber}`).value;
 
     const comment = {
       text: commentContent,
@@ -30,6 +31,9 @@ allPosts.addEventListener("click", (event) => {
 
     // Push comment to post object
     postList[postNumber].comments.push(comment);
+
+    // Update UI
+
 
     // testing
     console.log(commentSectionId);
@@ -90,10 +94,10 @@ const newPost = (postContent, userName) => {
   <form onsubmit="event.preventDefault();">
             <div class="mb-3">
               <label for="post-comment" class="form-label">Leave a Comment:</label>
-              <textarea class="form-control" id="post-comment" rows="3" placeholder="What would you like to say?"></textarea>
+              <textarea class="form-control" id="post-comment-${postCount}" rows="3" placeholder="What would you like to say?"></textarea>
             </div>
             <div class="mb-3">
-              <input type="text" class="form-control" id="your-name" placeholder="Name">
+              <input type="text" class="form-control" id="your-name-${postCount}" placeholder="Name">
             </div>
             <button type="submit" class="btn btn-primary" id="submit-comment">Comment</button>
           </form>
@@ -107,3 +111,4 @@ const newPost = (postContent, userName) => {
   // Increment post count
   postCount++;
 };
+
