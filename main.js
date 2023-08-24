@@ -14,6 +14,10 @@ allPosts.addEventListener("click", (event) => {
   if (event.target.classList.contains("comment-section")) {
     alert("Ladies and gentlemen, we got him");
   }
+
+  if (event.target.classList.contains("remove-post")) {
+    alert("Remove post");
+  }
 });
 
 const newPost = (postContent, userName) => {
@@ -52,7 +56,7 @@ const newPost = (postContent, userName) => {
   document.querySelector(".posts").append(hrDivider);
 
   //TODO: add delete button next to comment section button. Have warning pop up saying, "Are you sure you want to delete this post?"
-  document.querySelector(`#post-count-${postCount}`).innerHTML += `<span class="icon-button"><i class="fa-solid fa-trash-can"></i><span class="icon-button">`;
+  document.querySelector(`#post-count-${postCount}`).innerHTML += `<span class="icon-button"><i class="fa-solid fa-trash-can remove-post"></i><span class="icon-button">`;
 
   // Comments (num of comments)
   document.querySelector(`#post-count-${postCount}`).innerHTML += `<span class="icon-button"><i class="fa-solid fa-comments comment-section"></i></span>`;
