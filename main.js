@@ -1,4 +1,5 @@
 const button = document.querySelector("#submit");
+const allPosts = document.querySelector(".posts");
 let postList = [];
 let postCount = 0;
 
@@ -9,6 +10,12 @@ button.addEventListener("click", () => {
   newPost(postContent, userName);
 });
 
+allPosts.addEventListener("click", (event) => {
+  if (event.target.classList.contains("comment-section")) {
+    alert("Ladies and gentlemen, we got him");
+  }
+});
+
 const newPost = (postContent, userName) => {
   const post = {
     text: postContent,
@@ -16,9 +23,6 @@ const newPost = (postContent, userName) => {
   };
 
   postList.push(post);
-
-  // const newPost = `<div id="post-count-${postCount}">${post.text}<br/>Posted by: <b>${post.name}</b></div><hr/>`;
-  // document.querySelector(".posts").innerHTML += newPost;
 
   // Populate new post div
   const postDiv = document.createElement("div");
@@ -47,6 +51,12 @@ const newPost = (postContent, userName) => {
   document.querySelector(".posts").append(postDiv);
   document.querySelector(".posts").append(hrDivider);
 
+  //TODO: add delete button next to comment section button. Have warning pop up saying, "Are you sure you want to delete this post?"
+  document.querySelector(`#post-count-${postCount}`).innerHTML += `<span class="icon-button"><i class="fa-solid fa-trash-can"></i><span class="icon-button">`;
+
+  // Comments (num of comments)
+  document.querySelector(`#post-count-${postCount}`).innerHTML += `<span class="icon-button"><i class="fa-solid fa-comments comment-section"></i></span>`;
+  
   // Clear message box
   document.querySelector("#name").value = "";
   document.querySelector("#post-content").value = "";
