@@ -12,9 +12,10 @@ button.addEventListener("click", () => {
 
 allPosts.addEventListener("click", (event) => {
   if (event.target.classList.contains("comment-section")) {
-    const commentSection = event.target.parentElement.parentElement;
+    const selectedPost = event.target.parentElement.parentElement;
+    const commentSectionId = selectedPost.querySelector(".card").parentElement.getAttribute("id");
 
-    console.log(commentSection.querySelector(".card").parentElement.getAttribute("id")); // show-comments-0
+    console.log(commentSectionId);
   }
 
   if (event.target.classList.contains("remove-post")) {
@@ -66,7 +67,16 @@ const newPost = (postContent, userName) => {
   document.querySelector(
     `#post-count-${postCount}`
   ).innerHTML += `<span class="icon-button"  data-bs-toggle="collapse" href="#show-comments-${postCount}" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="fa-solid fa-comments comment-section"></i></span><div class="collapse mt-2" id="show-comments-${postCount}"><div class="card card-body bg-dark">
-  Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
+  <form onsubmit="event.preventDefault();">
+            <div class="mb-3">
+              <label for="post-comment" class="form-label">Leave a Comment:</label>
+              <textarea class="form-control" id="post-comment" rows="3" placeholder="What would you like to say?"></textarea>
+            </div>
+            <div class="mb-3">
+              <input type="text" class="form-control" id="name" placeholder="Name">
+            </div>
+            <button type="submit" class="btn btn-primary" id="submit-comment">Submit Comment</button>
+          </form>
 </div>
 </div>`;
 
