@@ -225,7 +225,7 @@ const editPost = (event) => {
   const postNumber = selectedPost.match(/\d+$/)[0];
 
   document.querySelector(".edit-post-textarea").innerHTML =
-    postList[postNumber].text;
+  event.target.closest(".single-post").querySelector("br").previousSibling.textContent; // make this dynamic
 
   // Submit edit
 
