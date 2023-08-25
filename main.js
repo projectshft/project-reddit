@@ -224,8 +224,14 @@ const editPost = (event) => {
   const selectedPost = event.target.closest(".single-post").getAttribute("id");
   const postNumber = selectedPost.match(/\d+$/)[0];
 
-  document.querySelector(".edit-post-textarea").innerHTML =
-  event.target.closest(".single-post").querySelector("br").previousSibling.textContent; // make this dynamic
+  document.querySelector(".edit-post-textarea").remove(); // make this dynamic
+  
+  const newTextarea = document.createElement("textarea");
+  newTextarea.setAttribute("class", "bg-dark text-light edit-post-textarea");
+  const oldText = document.createTextNode(postList[postNumber].text);
+  newTextarea.appendChild(oldText);
+
+  document.querySelector(".textarea-wrapper-div").append(newTextarea);
 
   // Submit edit
 
