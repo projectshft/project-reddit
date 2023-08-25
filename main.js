@@ -23,15 +23,19 @@ allPosts.addEventListener("click", (event) => {
   if (event.target.classList.contains("remove-post")) {
     deletePostButton = document.querySelector(".delete-post-button");
 
+    deletePostButton.addEventListener("click", deletePost);
+
     function deletePost() {
       document.querySelector('[data-bs-dismiss="modal"]').click();
       event.target.closest(".single-post").nextSibling.remove();
       event.target.closest(".single-post").remove();
+      removeHandler();
     }
 
-    deletePostButton.addEventListener("click", () => deletePost());
-
-    deletePostButton.removeEventListener("click", deletePost, true); // TODO: remove event listener each time...
+    function removeHandler() {
+      deletePostButton.removeEventListener("click", deletePost);
+    }
+ // TODO: remove event listener each time...
   }
 
   if (event.target.classList.contains("remove-comment")) {
