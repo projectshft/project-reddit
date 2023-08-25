@@ -27,6 +27,14 @@ allPosts.addEventListener("click", (event) => {
   if (event.target.classList.contains("remove-comment")) {
     removeComment(event);
   }
+
+  if (event.target.classList.contains("edit-post")) {
+    editPost(event);
+  }
+
+  if (event.target.classList.contains("edit-comment")) {
+    editComment(event);
+  }
 });
 
 const newPost = (postContent, userName) => {
@@ -72,7 +80,9 @@ const newPost = (postContent, userName) => {
   ).innerHTML += `<span class="icon-button" data-bs-toggle="modal" data-bs-target="#delete-post-modal"><i class="fa-solid fa-trash-can remove-post"></i></span>`;
 
   // Edit post button TODO: Add edit modal...
-  document.querySelector(`#post-count-${postCount}`).innerHTML += `<span class="icon-button"><i class="fa-solid fa-pen-to-square edit-post"></i></span>`;
+  document.querySelector(
+    `#post-count-${postCount}`
+  ).innerHTML += `<span class="icon-button"><i class="fa-solid fa-pen-to-square edit-post"></i></span>`;
 
   // Comment section
   document.querySelector(
@@ -164,7 +174,9 @@ const newComment = (event) => {
   ).innerHTML += `<span class="icon-button" data-bs-toggle="modal" data-bs-target="#delete-comment-modal"><i class="fa-solid fa-trash-can remove-comment"></i></span>`;
 
   // Edit comment TODO: add edit comment modal
-  document.querySelector(`#comment-number-${commentNum}`).innerHTML += `<span class="icon-button"><i class="fa-solid fa-pen-to-square edit-comment"></i></span>`;
+  document.querySelector(
+    `#comment-number-${commentNum}`
+  ).innerHTML += `<span class="icon-button"><i class="fa-solid fa-pen-to-square edit-comment"></i></span>`;
 
   // Clear message box
   document.querySelector(`#your-name-${postNumber}`).value = "";
@@ -194,16 +206,24 @@ const removePost = (event) => {
 const removeComment = (event) => {
   deleteCommentButton = document.querySelector(".delete-comment-button");
 
-    deleteCommentButton.addEventListener("click", deleteComment);
+  deleteCommentButton.addEventListener("click", deleteComment);
 
-    function deleteComment() {
-      document.querySelector("#comment-exit-button").click();
-      event.target.closest(".single-comment").nextSibling.remove();
-      event.target.closest(".single-comment").remove();
-      removeHandler()
-    }
+  function deleteComment() {
+    document.querySelector("#comment-exit-button").click();
+    event.target.closest(".single-comment").nextSibling.remove();
+    event.target.closest(".single-comment").remove();
+    removeHandler();
+  }
 
-    function removeHandler() {
-      deleteCommentButton.removeEventListener("click", deleteComment);
-    }
-  };
+  function removeHandler() {
+    deleteCommentButton.removeEventListener("click", deleteComment);
+  }
+};
+
+const editPost = () => {
+  alert("edit post");
+};
+
+const editComment = () => {
+  alert("edit comment");
+};
