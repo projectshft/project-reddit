@@ -9,6 +9,7 @@ I built this project using vanilla JavaScript, HTML, Bootstrap 5, and a minor am
 - Write and submit a post, which then appears in the forum section above the input fields.
 - Open a collapsible comment section for each post and leave a comment if you choose.
 - Delete posts and comments.
+- Edit posts after they have been posted.
 
 ## How to Use
 

@@ -32,9 +32,6 @@ allPosts.addEventListener("click", (event) => {
     editPost(event);
   }
 
-  if (event.target.classList.contains("edit-comment")) {
-    editComment(event);
-  }
 });
 
 const newPost = (postContent, userName) => {
@@ -173,11 +170,6 @@ const newComment = (event) => {
     `#comment-number-${commentNum}`
   ).innerHTML += `<span class="icon-button" data-bs-toggle="modal" data-bs-target="#delete-comment-modal"><i class="fa-solid fa-trash-can remove-comment"></i></span>`;
 
-  // Edit comment TODO: add edit comment modal
-  document.querySelector(
-    `#comment-number-${commentNum}`
-  ).innerHTML += `<span class="icon-button"><i class="fa-solid fa-pen-to-square edit-comment"></i></span>`;
-
   // Clear message box
   document.querySelector(`#your-name-${postNumber}`).value = "";
   document.querySelector(`#post-comment-${postNumber}`).value = "";
@@ -232,7 +224,7 @@ const editPost = (event) => {
   const oldText = document.createTextNode(postList[postNumber].text);
   newTextarea.appendChild(oldText);
 
-  document.querySelector(".textarea-wrapper-div").append(newTextarea);
+  document.querySelector(".post-textarea-wrapper-div").append(newTextarea);
 
   // Submit edit
 
@@ -254,8 +246,4 @@ const editPost = (event) => {
   function removeHandler() {
     submitEditButton.removeEventListener("click", submitEdit);
   }
-};
-
-const editComment = (event) => {
-  alert("edit comment");
 };
