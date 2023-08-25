@@ -5,6 +5,7 @@ let postCount = 0;
 let commentNum = 0;
 const error = "One or more input fields is empty.";
 
+// Submit post event listener
 button.addEventListener("click", () => {
   const postContent = document.querySelector("#post-content").value;
   const userName = document.querySelector("#name").value;
@@ -15,6 +16,7 @@ button.addEventListener("click", () => {
   newPost(postContent, userName);
 });
 
+// Posts / comments event listener
 allPosts.addEventListener("click", (event) => {
   if (event.target.getAttribute("id") === "submit-comment") {
     newComment(event);
@@ -34,6 +36,7 @@ allPosts.addEventListener("click", (event) => {
 
 });
 
+// Create a new post and add to list of posts
 const newPost = (postContent, userName) => {
   const post = {
     text: postContent,
@@ -43,7 +46,7 @@ const newPost = (postContent, userName) => {
 
   postList.push(post);
 
-  // Populate new post div
+  // Update UI
   const postDiv = document.createElement("div");
   postDiv.setAttribute("id", `post-count-${postCount}`);
   postDiv.setAttribute("class", "single-post");
@@ -76,7 +79,7 @@ const newPost = (postContent, userName) => {
     `#post-count-${postCount}`
   ).innerHTML += `<span class="icon-button" data-bs-toggle="modal" data-bs-target="#delete-post-modal"><i class="fa-solid fa-trash-can remove-post"></i></span>`;
 
-  // Edit post button TODO: Add edit modal...
+  // Edit post button
   document.querySelector(
     `#post-count-${postCount}`
   ).innerHTML += `<span class="icon-button" data-bs-toggle="modal" data-bs-target="#edit-post-modal"><i class="fa-solid fa-pen-to-square edit-post"></i></span>`;
@@ -106,8 +109,9 @@ const newPost = (postContent, userName) => {
   postCount++;
 };
 
+// Create new comment
 const newComment = (event) => {
-  // Select post
+  // Post comment falls under
   const selectedPost =
     event.target.parentElement.parentElement.parentElement.parentElement;
   const commentSectionId = selectedPost
@@ -165,7 +169,7 @@ const newComment = (event) => {
     .querySelector(`.post-comment-section-${postNumber}`)
     .append(hrDivider);
 
-  // Delete button
+  // Delete comment button
   document.querySelector(
     `#comment-number-${commentNum}`
   ).innerHTML += `<span class="icon-button" data-bs-toggle="modal" data-bs-target="#delete-comment-modal"><i class="fa-solid fa-trash-can remove-comment"></i></span>`;
@@ -174,15 +178,17 @@ const newComment = (event) => {
   document.querySelector(`#your-name-${postNumber}`).value = "";
   document.querySelector(`#post-comment-${postNumber}`).value = "";
 
-  // Increment comment number
+  // Increment number of comments
   commentNum++;
 };
 
 const removePost = (event) => {
+  // Add delete button event listener
   const deletePostButton = document.querySelector(".delete-post-button");
 
   deletePostButton.addEventListener("click", deletePost);
 
+  // Delete selected post
   function deletePost() {
     document.querySelector('[data-bs-dismiss="modal"]').click();
     event.target.closest(".single-post").nextSibling.remove();
@@ -196,10 +202,12 @@ const removePost = (event) => {
 };
 
 const removeComment = (event) => {
+  // Add delete button event listener
   const deleteCommentButton = document.querySelector(".delete-comment-button");
 
   deleteCommentButton.addEventListener("click", deleteComment);
 
+  // Delete selected comment
   function deleteComment() {
     document.querySelector("#comment-exit-button").click();
     event.target.closest(".single-comment").nextSibling.remove();
@@ -212,12 +220,15 @@ const removeComment = (event) => {
   }
 };
 
+// Edit a selected post
 const editPost = (event) => {
   const selectedPost = event.target.closest(".single-post").getAttribute("id");
   const postNumber = selectedPost.match(/\d+$/)[0];
 
-  document.querySelector("#edit-post-textarea").remove(); // make this dynamic
+  // Remove old text area
+  document.querySelector("#edit-post-textarea").remove();
   
+  // Update UI
   const newTextarea = document.createElement("textarea");
   newTextarea.setAttribute("class", "bg-dark text-light");
   newTextarea.setAttribute("id", "edit-post-textarea");
@@ -226,12 +237,12 @@ const editPost = (event) => {
 
   document.querySelector(".post-textarea-wrapper-div").append(newTextarea);
 
-  // Submit edit
-
+  // Submit edit event listener
   const submitEditButton = document.querySelector(".edit-post-submit-buttton");
 
   submitEditButton.addEventListener("click", submitEdit);
 
+  // Update editor textarea
   function submitEdit() {
     postList[postNumber].text = document.querySelector(
       "#edit-post-textarea"
