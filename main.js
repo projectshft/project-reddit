@@ -23,11 +23,15 @@ allPosts.addEventListener("click", (event) => {
   if (event.target.classList.contains("remove-post")) {
     deletePostButton = document.querySelector(".delete-post-button");
 
-    deletePostButton.addEventListener("click", () => {
+    function deletePost() {
       document.querySelector('[data-bs-dismiss="modal"]').click();
       event.target.closest(".single-post").nextSibling.remove();
       event.target.closest(".single-post").remove();
-    });
+    }
+
+    deletePostButton.addEventListener("click", () => deletePost());
+
+    deletePostButton.removeEventListener("click", deletePost, true); // TODO: remove event listener each time...
   }
 
   if (event.target.classList.contains("remove-comment")) {
@@ -39,8 +43,6 @@ allPosts.addEventListener("click", (event) => {
       event.target.closest(".single-comment").remove();
     });
   }
-
-  // if contains remove-comment... (same procedure, different target)
 });
 
 const newPost = (postContent, userName) => {
@@ -80,7 +82,7 @@ const newPost = (postContent, userName) => {
   document.querySelector(".posts").append(postDiv);
   document.querySelector(".posts").append(hrDivider);
 
-  //TODO: add delete button next to comment section button. Have warning pop up saying, "Are you sure you want to delete this post?"
+  // Delete button
   document.querySelector(
     `#post-count-${postCount}`
   ).innerHTML += `<span class="icon-button" data-bs-toggle="modal" data-bs-target="#delete-post-modal"><i class="fa-solid fa-trash-can remove-post"></i></span>`;
@@ -169,7 +171,7 @@ const newComment = (event) => {
     .querySelector(`.post-comment-section-${postNumber}`)
     .append(hrDivider);
 
-  //TODO: add delete button next to comment section button. Have warning pop up saying, "Are you sure you want to delete this post?"
+  // Delete button
   document.querySelector(
     `#comment-number-${commentNum}`
   ).innerHTML += `<span class="icon-button" data-bs-toggle="modal" data-bs-target="#delete-comment-modal"><i class="fa-solid fa-trash-can remove-comment"></i></span>`;
