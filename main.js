@@ -21,7 +21,14 @@ allPosts.addEventListener("click", (event) => {
   }
 
   if (event.target.classList.contains("remove-post")) {
-    alert("Remove post");
+    event.target.closest(".single-post").nextSibling.remove();
+    event.target.closest(".single-post").remove();
+  }
+
+  if (event.target.classList.contains("remove-comment")) {
+    event.target.closest(".single-comment").nextSibling.remove();
+    event.target.closest(".single-comment").remove();
+    
   }
 
   // if contains remove-comment... (same procedure, different target)
@@ -39,6 +46,7 @@ const newPost = (postContent, userName) => {
   // Populate new post div
   const postDiv = document.createElement("div");
   postDiv.setAttribute("id", `post-count-${postCount}`);
+  postDiv.setAttribute("class", "single-post");
   const postText = document.createTextNode(post.text);
 
   postDiv.appendChild(postText);
@@ -123,6 +131,7 @@ const newComment = (event) => {
   // Update UI
   const commentDiv = document.createElement("div");
   commentDiv.setAttribute("id", `comment-number-${commentNum}`);
+  commentDiv.setAttribute("class", "single-comment");
   const commentText = document.createTextNode(comment.text);
 
   commentDiv.appendChild(commentText);
@@ -150,7 +159,7 @@ const newComment = (event) => {
   //TODO: add delete button next to comment section button. Have warning pop up saying, "Are you sure you want to delete this post?"
   document.querySelector(
     `#comment-number-${commentNum}`
-  ).innerHTML += `<span class="icon-button"><i class="fa-solid fa-trash-can remove-post"></i></span>`;
+  ).innerHTML += `<span class="icon-button"><i class="fa-solid fa-trash-can remove-comment"></i></span>`;
 
   // Clear message box
   document.querySelector(`#your-name-${postNumber}`).value = "";
@@ -158,4 +167,12 @@ const newComment = (event) => {
 
   // Increment comment number
   commentNum++;
+};
+
+const removePost = () => {
+
+};
+
+const removeComment = () => {
+
 };
