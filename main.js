@@ -32,12 +32,9 @@ allPosts.addEventListener("click", (event) => {
 
   if (event.target.classList.contains("remove-comment")) {
     deleteCommentButton = document.querySelector(".delete-comment-button");
-    console.log(deleteCommentButton);
 
     deleteCommentButton.addEventListener("click", () => {
-      console.log("CLICK")
-      // console.log(document.querySelectorAll('[data-bs-dismiss="modal"]')[1]);
-      // document.querySelectorAll('[data-bs-dismiss="modal"]')[1].click();
+      document.querySelector("#comment-exit-button").click();
       event.target.closest(".single-comment").nextSibling.remove();
       event.target.closest(".single-comment").remove();
     });
@@ -175,7 +172,7 @@ const newComment = (event) => {
   //TODO: add delete button next to comment section button. Have warning pop up saying, "Are you sure you want to delete this post?"
   document.querySelector(
     `#comment-number-${commentNum}`
-  ).innerHTML += `<span class="icon-button" data-bs-toggle="modal" data-bs-target="#delete-post-modal"><i class="fa-solid fa-trash-can remove-comment"></i></span>`;
+  ).innerHTML += `<span class="icon-button" data-bs-toggle="modal" data-bs-target="#delete-comment-modal"><i class="fa-solid fa-trash-can remove-comment"></i></span>`;
 
   // Clear message box
   document.querySelector(`#your-name-${postNumber}`).value = "";
