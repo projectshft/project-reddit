@@ -3,7 +3,7 @@ const allPosts = document.querySelector(".posts");
 let postList = [];
 let postCount = 0;
 let commentNum = 0;
-const error = "One or more input fields is empty."
+const error = "One or more input fields is empty.";
 
 button.addEventListener("click", () => {
   const postContent = document.querySelector("#post-content").value;
@@ -21,14 +21,26 @@ allPosts.addEventListener("click", (event) => {
   }
 
   if (event.target.classList.contains("remove-post")) {
-    event.target.closest(".single-post").nextSibling.remove();
-    event.target.closest(".single-post").remove();
+    deletePostButton = document.querySelector(".delete-post-button");
+
+    deletePostButton.addEventListener("click", () => {
+      document.querySelector('[data-bs-dismiss="modal"]').click();
+      event.target.closest(".single-post").nextSibling.remove();
+      event.target.closest(".single-post").remove();
+    });
   }
 
   if (event.target.classList.contains("remove-comment")) {
-    event.target.closest(".single-comment").nextSibling.remove();
-    event.target.closest(".single-comment").remove();
-    
+    deleteCommentButton = document.querySelector(".delete-comment-button");
+    console.log(deleteCommentButton);
+
+    deleteCommentButton.addEventListener("click", () => {
+      console.log("CLICK")
+      // console.log(document.querySelectorAll('[data-bs-dismiss="modal"]')[1]);
+      // document.querySelectorAll('[data-bs-dismiss="modal"]')[1].click();
+      event.target.closest(".single-comment").nextSibling.remove();
+      event.target.closest(".single-comment").remove();
+    });
   }
 
   // if contains remove-comment... (same procedure, different target)
@@ -74,7 +86,7 @@ const newPost = (postContent, userName) => {
   //TODO: add delete button next to comment section button. Have warning pop up saying, "Are you sure you want to delete this post?"
   document.querySelector(
     `#post-count-${postCount}`
-  ).innerHTML += `<span class="icon-button"><i class="fa-solid fa-trash-can remove-post"></i></span>`;
+  ).innerHTML += `<span class="icon-button" data-bs-toggle="modal" data-bs-target="#delete-post-modal"><i class="fa-solid fa-trash-can remove-post"></i></span>`;
 
   // Comment section
   document.querySelector(
@@ -153,13 +165,17 @@ const newComment = (event) => {
 
   const hrDivider = document.createElement("hr");
 
-  document.querySelector(`.post-comment-section-${postNumber}`).append(commentDiv);
-  document.querySelector(`.post-comment-section-${postNumber}`).append(hrDivider);
+  document
+    .querySelector(`.post-comment-section-${postNumber}`)
+    .append(commentDiv);
+  document
+    .querySelector(`.post-comment-section-${postNumber}`)
+    .append(hrDivider);
 
   //TODO: add delete button next to comment section button. Have warning pop up saying, "Are you sure you want to delete this post?"
   document.querySelector(
     `#comment-number-${commentNum}`
-  ).innerHTML += `<span class="icon-button"><i class="fa-solid fa-trash-can remove-comment"></i></span>`;
+  ).innerHTML += `<span class="icon-button" data-bs-toggle="modal" data-bs-target="#delete-post-modal"><i class="fa-solid fa-trash-can remove-comment"></i></span>`;
 
   // Clear message box
   document.querySelector(`#your-name-${postNumber}`).value = "";
@@ -169,10 +185,6 @@ const newComment = (event) => {
   commentNum++;
 };
 
-const removePost = () => {
+const removePost = () => {};
 
-};
-
-const removeComment = () => {
-
-};
+const removeComment = () => {};
