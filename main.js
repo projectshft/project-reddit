@@ -82,7 +82,7 @@ const newPost = (postContent, userName) => {
   // Edit post button TODO: Add edit modal...
   document.querySelector(
     `#post-count-${postCount}`
-  ).innerHTML += `<span class="icon-button"><i class="fa-solid fa-pen-to-square edit-post"></i></span>`;
+  ).innerHTML += `<span class="icon-button" data-bs-toggle="modal" data-bs-target="#edit-post-modal"><i class="fa-solid fa-pen-to-square edit-post"></i></span>`;
 
   // Comment section
   document.querySelector(
@@ -187,7 +187,7 @@ const newComment = (event) => {
 };
 
 const removePost = (event) => {
-  deletePostButton = document.querySelector(".delete-post-button");
+  const deletePostButton = document.querySelector(".delete-post-button");
 
   deletePostButton.addEventListener("click", deletePost);
 
@@ -204,7 +204,7 @@ const removePost = (event) => {
 };
 
 const removeComment = (event) => {
-  deleteCommentButton = document.querySelector(".delete-comment-button");
+  const deleteCommentButton = document.querySelector(".delete-comment-button");
 
   deleteCommentButton.addEventListener("click", deleteComment);
 
@@ -220,10 +220,35 @@ const removeComment = (event) => {
   }
 };
 
-const editPost = () => {
-  alert("edit post");
+const editPost = (event) => {
+  const selectedPost = event.target.closest(".single-post").getAttribute("id");
+  const postNumber = selectedPost.match(/\d+$/)[0];
+
+  document.querySelector(".edit-post-textarea").innerHTML =
+    postList[postNumber].text;
+
+  // Submit edit
+
+  const submitEditButton = document.querySelector(".edit-post-submit-buttton");
+
+  submitEditButton.addEventListener("click", submitEdit);
+
+  function submitEdit() {
+    postList[postNumber].text = document.querySelector(
+      ".edit-post-textarea"
+    ).value;
+    document.querySelector("#edit-post-exit-button").click();
+    const originalPostDiv = document.querySelector(`#post-count-${postNumber}`);
+    const newText = document.createTextNode(postList[postNumber].text);
+    originalPostDiv.querySelector("br").previousSibling.replaceWith(newText);
+    removeHandler();
+  }
+
+  function removeHandler() {
+    submitEditButton.removeEventListener("click", submitEdit);
+  }
 };
 
-const editComment = () => {
+const editComment = (event) => {
   alert("edit comment");
 };
