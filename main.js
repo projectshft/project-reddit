@@ -3,10 +3,14 @@ const allPosts = document.querySelector(".posts");
 let postList = [];
 let postCount = 0;
 let commentNum = 0;
+const error = "One or more input fields is empty."
 
 button.addEventListener("click", () => {
   const postContent = document.querySelector("#post-content").value;
   const userName = document.querySelector("#name").value;
+  if (postContent === "" || userName === "") {
+    throw error;
+  }
 
   newPost(postContent, userName);
 });
@@ -19,6 +23,8 @@ allPosts.addEventListener("click", (event) => {
   if (event.target.classList.contains("remove-post")) {
     alert("Remove post");
   }
+
+  // if contains remove-comment... (same procedure, different target)
 });
 
 const newPost = (postContent, userName) => {
@@ -69,10 +75,10 @@ const newPost = (postContent, userName) => {
   <form onsubmit="event.preventDefault();">
             <div class="mb-3">
               <label for="post-comment" class="form-label">Leave a Comment:</label>
-              <textarea class="form-control" id="post-comment-${postCount}" rows="3" placeholder="What would you like to say?"></textarea>
+              <textarea class="form-control" id="post-comment-${postCount}" rows="3" placeholder="What would you like to say?" required></textarea>
             </div>
             <div class="mb-3">
-              <input type="text" class="form-control" id="your-name-${postCount}" placeholder="Name">
+              <input type="text" class="form-control" id="your-name-${postCount}" placeholder="Name" required>
             </div>
             <button type="submit" class="btn btn-primary" id="submit-comment">Comment</button>
           </form>
@@ -101,6 +107,10 @@ const newComment = (event) => {
     `#post-comment-${postNumber}`
   ).value;
   const userName = document.querySelector(`#your-name-${postNumber}`).value;
+
+  if (commentContent === "" || userName === "") {
+    throw error;
+  }
 
   const comment = {
     text: commentContent,

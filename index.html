@@ -43,11 +43,11 @@
           <form onsubmit="event.preventDefault();">
             <div class="mb-3">
               <label for="post-content" class="form-label">Write a Post:</label>
-              <textarea class="form-control" id="post-content" rows="3" placeholder="What would you like to say?"></textarea>
+              <textarea class="form-control" id="post-content" rows="3" placeholder="What would you like to say?" required></textarea>
             </div>
             <div class="mb-3">
               <!--<label for="name" class="form-label">Enter Your Name:</label>-->
-              <input type="text" class="form-control" id="name" placeholder="Name">
+              <input type="text" class="form-control" id="name" placeholder="Name" required>
             </div>
             <button type="submit" class="btn btn-primary" id="submit">Submit Post</button>
           </form>
