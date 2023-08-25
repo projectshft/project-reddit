@@ -41,11 +41,18 @@ allPosts.addEventListener("click", (event) => {
   if (event.target.classList.contains("remove-comment")) {
     deleteCommentButton = document.querySelector(".delete-comment-button");
 
-    deleteCommentButton.addEventListener("click", () => {
+    deleteCommentButton.addEventListener("click", deleteComment);
+
+    function deleteComment() {
       document.querySelector("#comment-exit-button").click();
       event.target.closest(".single-comment").nextSibling.remove();
       event.target.closest(".single-comment").remove();
-    });
+      removeHandler()
+    }
+
+    function removeHandler() {
+      deleteCommentButton.removeEventListener("click", deleteComment);
+    }
   }
 });
 
