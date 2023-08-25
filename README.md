@@ -12,4 +12,4 @@ I built this project using vanilla JavaScript, HTML, Bootstrap 5, and a minor am
 
 ## How to Use
 
-To test this project out, [click here]().
+To test this project out, [click here](https://jordanccox.github.io/project-reddit/).

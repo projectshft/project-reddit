@@ -194,7 +194,3 @@ const newComment = (event) => {
   // Increment comment number
   commentNum++;
 };
-
-const removePost = () => {};
-
-const removeComment = () => {};
