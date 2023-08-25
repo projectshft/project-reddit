@@ -21,38 +21,11 @@ allPosts.addEventListener("click", (event) => {
   }
 
   if (event.target.classList.contains("remove-post")) {
-    deletePostButton = document.querySelector(".delete-post-button");
-
-    deletePostButton.addEventListener("click", deletePost);
-
-    function deletePost() {
-      document.querySelector('[data-bs-dismiss="modal"]').click();
-      event.target.closest(".single-post").nextSibling.remove();
-      event.target.closest(".single-post").remove();
-      removeHandler();
-    }
-
-    function removeHandler() {
-      deletePostButton.removeEventListener("click", deletePost);
-    }
- // TODO: remove event listener each time...
+    removePost(event);
   }
 
   if (event.target.classList.contains("remove-comment")) {
-    deleteCommentButton = document.querySelector(".delete-comment-button");
-
-    deleteCommentButton.addEventListener("click", deleteComment);
-
-    function deleteComment() {
-      document.querySelector("#comment-exit-button").click();
-      event.target.closest(".single-comment").nextSibling.remove();
-      event.target.closest(".single-comment").remove();
-      removeHandler()
-    }
-
-    function removeHandler() {
-      deleteCommentButton.removeEventListener("click", deleteComment);
-    }
+    removeComment(event);
   }
 });
 
@@ -97,6 +70,9 @@ const newPost = (postContent, userName) => {
   document.querySelector(
     `#post-count-${postCount}`
   ).innerHTML += `<span class="icon-button" data-bs-toggle="modal" data-bs-target="#delete-post-modal"><i class="fa-solid fa-trash-can remove-post"></i></span>`;
+
+  // Edit post button TODO: Add edit modal...
+  document.querySelector(`#post-count-${postCount}`).innerHTML += `<span class="icon-button"><i class="fa-solid fa-pen-to-square edit-post"></i></span>`;
 
   // Comment section
   document.querySelector(
@@ -187,6 +163,9 @@ const newComment = (event) => {
     `#comment-number-${commentNum}`
   ).innerHTML += `<span class="icon-button" data-bs-toggle="modal" data-bs-target="#delete-comment-modal"><i class="fa-solid fa-trash-can remove-comment"></i></span>`;
 
+  // Edit comment TODO: add edit comment modal
+  document.querySelector(`#comment-number-${commentNum}`).innerHTML += `<span class="icon-button"><i class="fa-solid fa-pen-to-square edit-comment"></i></span>`;
+
   // Clear message box
   document.querySelector(`#your-name-${postNumber}`).value = "";
   document.querySelector(`#post-comment-${postNumber}`).value = "";
@@ -194,3 +173,37 @@ const newComment = (event) => {
   // Increment comment number
   commentNum++;
 };
+
+const removePost = (event) => {
+  deletePostButton = document.querySelector(".delete-post-button");
+
+  deletePostButton.addEventListener("click", deletePost);
+
+  function deletePost() {
+    document.querySelector('[data-bs-dismiss="modal"]').click();
+    event.target.closest(".single-post").nextSibling.remove();
+    event.target.closest(".single-post").remove();
+    removeHandler();
+  }
+
+  function removeHandler() {
+    deletePostButton.removeEventListener("click", deletePost);
+  }
+};
+
+const removeComment = (event) => {
+  deleteCommentButton = document.querySelector(".delete-comment-button");
+
+    deleteCommentButton.addEventListener("click", deleteComment);
+
+    function deleteComment() {
+      document.querySelector("#comment-exit-button").click();
+      event.target.closest(".single-comment").nextSibling.remove();
+      event.target.closest(".single-comment").remove();
+      removeHandler()
+    }
+
+    function removeHandler() {
+      deleteCommentButton.removeEventListener("click", deleteComment);
+    }
+  };
