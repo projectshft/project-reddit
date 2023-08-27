@@ -136,12 +136,28 @@ button.addEventListener('click', function(){
     newPostSpan.appendChild(newPostRemove);
     newPostSpan.appendChild(seperatorElement);
     newPostSpan.appendChild(newPostComments);
-    newPostDiv.appendChild(makeComment);
+    newPostSpan.appendChild(makeComment);
     newPostDiv.appendChild(newPostHR);
    
     postsDiv.append(newPostDiv);
     document.getElementById('yourName').value = "";
     document.getElementById('message').value = "";
+
+    // Comment toggle
+      newPostSpan.addEventListener("click", function (e)
+    {
+      if (e.target.classList.contains("new-post-comments"))
+       {
+      const commentSection = this.querySelector('.comments-all');
+      
+        if(commentSection.style.display === "none")
+      {
+        commentSection.style.display = "inline"; 
+    
+      }
+        else{commentSection.style.display = "none"}
+       }
+    })
   });
 
 // Remove Post functionality
@@ -154,17 +170,3 @@ postsDiv.addEventListener("click", function (e)
     }
 })
 
-// Comment toggle functionality
-postsDiv.addEventListener("click", function (e)
-{
-  if (e.target.classList.contains("new-post-comments"))
-    {
-      const commentSection = this.querySelector('.comments-all');
-      if(commentSection.style.display === "none")
-      {
-      commentSection.style.display = "inline"; 
-    
-      }
-      else{commentSection.style.display = "none"}
-    }
-})
