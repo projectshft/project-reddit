@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project Reddit</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://kit.fontawesome.com/efbf0acdfa.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="bg-dark text-light">
+    <header class="container">
+      <h1 class="text-center">ReReddit</h1>
+      <hr />
+    </header>
+
+    <section class="container">
+      <div class="row justify-content-md-center">
+        <div class="col-md-6 posts"> <!-- dynamically add posts -->
+        </div>
+      </div>
+
+      <div class="row justify-content-md-center">
+        <div class="col-md-6">
+          <form onsubmit="event.preventDefault();">
+            <div class="mb-3">
+              <label for="post-content" class="form-label">Write a Post:</label>
+              <textarea class="form-control" id="post-content" rows="3" placeholder="What would you like to say?" required></textarea>
+            </div>
+            <div class="mb-3">
+              <!--<label for="name" class="form-label">Enter Your Name:</label>-->
+              <input type="text" class="form-control" id="name" placeholder="Name" required>
+            </div>
+            <button type="submit" class="btn btn-primary" id="submit">Submit Post</button>
+          </form>
+        </div>
+      </div>
+      
+    </section>
+
+    <!-- Delete Post Modal -->
+    <div class="modal fade" id="delete-post-modal" tabindex="-1" aria-labelledby="deletePostLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content bg-dark">
+          <div class="modal-header">
+           <h1 class="modal-title fs-5" id="deletePostLabel">Are you sure you want to delete this post?</h1>
+           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success" data-bs-dismiss="modal">Exit</button>
+            <button type="button" class="btn btn-danger delete-post-button">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Delete Comment Modal -->
+    <div class="modal fade" id="delete-comment-modal" tabindex="-1" aria-labelledby="deleteCommentLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content bg-dark">
+          <div class="modal-header">
+           <h1 class="modal-title fs-5" id="deleteCommentLabel">Are you sure you want to delete this commment?</h1>
+           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success" data-bs-dismiss="modal" id="comment-exit-button">Exit</button>
+            <button type="button" class="btn btn-danger delete-comment-button">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Edit Post Modal -->
+    <div class="modal fade" id="edit-post-modal" tabindex="-1" aria-labelledby="editPostLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content bg-dark">
+          <div class="modal-header">
+           <h1 class="modal-title fs-5" id="editPostLabel">Edit Post</h1>
+           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-content post-textarea-wrapper-div">
+            <textarea class="bg-dark text-light" id="edit-post-textarea"></textarea> <!--Dynamically populate with current post text-->
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="edit-post-exit-button">Exit without Saving</button>
+            <button type="button" class="btn btn-success edit-post-submit-buttton">Save Edit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+  </body>
+    <script src="main.js"></script>
+  </body>
+</html>

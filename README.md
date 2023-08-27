@@ -1,5 +1,16 @@
-## Project Reddit
+# Project Reddit
 
-This project has been created by a student at Parsity, an online software engineering course. The work in this repository is wholly of the student based on a sample starter project that can be accessed by looking at the repository that this project forks.
+I created this project for [Parsity's](https://parsity.io/) software engineering bootcamp curriculum. I was evaluated on my ability to create a frontend and dynamically manipulate it using the Document Object Model (DOM).
 
-If you have any questions about this project or the program in general, visit [parsity.io](https://parsity.io/) or email hello@parsity.io.
+I built this project using vanilla JavaScript, HTML, Bootstrap 5, and a minor amount of custom CSS.
+
+## Features
+
+- Write and submit a post, which then appears in the forum section above the input fields.
+- Open a collapsible comment section for each post and leave a comment if you choose.
+- Delete posts and comments.
+- Edit posts after they have been posted.
+
+## How to Use
+
+To test this project out, [click here](https://jordanccox.github.io/project-reddit/).
