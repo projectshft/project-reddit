@@ -3,7 +3,7 @@ const allPosts = document.querySelector(".posts");
 let postList = [];
 let postCount = 0;
 let commentNum = 0;
-const error = "One or more input fields is empty.";
+const error = "Error: One or more input fields is empty.";
 
 // Submit post event listener
 button.addEventListener("click", () => {
