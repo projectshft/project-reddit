@@ -1,0 +1,61 @@
+/*  */
+
+.post-comment-thread {
+  text-align: center;
+}
+
+.column {
+  margin-left: 33%;
+  margin-right: 33%;
+}
+
+.header {
+  font: bold;
+  margin: 0px 15px 15px 15px;
+  border-bottom: gray;
+  text-align: left;
+}
+
+.post-comment-submission {
+  display: block;
+  align-items: center;
+}
+
+.thread-body {
+  width: 100%;
+  margin: 15px 5px 15px 5px;
+}
+
+.comment {
+  margin-bottom: 15px;
+  text-align: left;
+}
+.comment-text {
+  margin: 0px 5px 5px 5px;
+  width: 100%;
+}
+.commentor-name {
+  margin: 0px 5px 5px 5px;
+  width: 100%;
+}
+.comment-btn {
+  margin: 5px;
+  border-radius: 5px;
+}
+
+.post {
+  margin-bottom: 15px;
+  text-align: left;
+}
+.post-text {
+  margin: 0px 5px 5px 5px;
+  width: 100%;
+}
+.post-name {
+  margin: 0px 5px 5px 5px;
+  width: 100%;
+}
+.post-btn {
+  margin: 0px 5px 5px 5px;
+  border-radius: 5px;
+}
