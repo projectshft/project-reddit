@@ -1,0 +1,15 @@
+/* #commentId {
+  display: none;
+}
+
+#commentTextbox {
+  display: none;
+}
+
+.submit-comment {
+  display: none;
+} */
+
+.visible {
+  display: block !important;
+}
