@@ -1,9 +1,5 @@
 /*  */
 
-.post-comment-thread {
-  text-align: center;
-}
-
 .column {
   margin-left: 33%;
   margin-right: 33%;
@@ -18,17 +14,43 @@
 
 .post-comment-submission {
   display: block;
-  align-items: center;
+  align-items: left;
 }
 
 .thread-body {
   width: 100%;
   margin: 15px 5px 15px 5px;
+  display: inline-block;
+}
+
+.post-item {
+  display: flex;
+  flex-direction: row;
+}
+
+.delete-post {
+  color: blue;
+  margin-right: 5px;
+}
+.delete-post:hover {
+  color: red;
+  cursor: pointer;
+}
+
+.post-comments {
+  color: blue;
+  margin-left: 5px;
+}
+
+.post-comments:hover {
+  color: red;
+  cursor: pointer;
 }
 
 .comment {
   margin-bottom: 15px;
   text-align: left;
+  display: none;
 }
 .comment-text {
   margin: 0px 5px 5px 5px;
@@ -58,4 +80,12 @@
 .post-btn {
   margin: 0px 5px 5px 5px;
   border-radius: 5px;
+}
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
 }

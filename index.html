@@ -13,30 +13,32 @@
     <title>Document</title>
   </head>
   <body>
-    <section class="post-comment-thread">
+    <section>
       <div class="column">
         <header class="header">
           <h1><strong>ReReddit</strong></h1>
         </header>
+        <hr/>
         <section class="post-comment-submission">
           <div class="thread-body"></div>
-          <div class="comment">
+          <div class="comment hide">
             <div>
-              <input type="text" placeholder="Comment Text" class="comment-text"></input>
+              <input type="text" placeholder="Comment Text" class="comment-text" required></input>
             </div>
             <div>
-              <input type="text" placeholder="Your Name" class="commentor-name"></input>
+              <input type="text" placeholder="Your Name" class="commentor-name" required></input>
             </div>
             <div>
               <button class="comment-btn btn-primary">Submit Comment</button>
             </div>
+            <hr/>
           </div>
           <div class="post">
             <div>
-              <input type="text" placeholder="Post Text" class="post-text"></input>
+              <input type="text" placeholder="Post Text" class="post-text" required></input>
             </div>
             <div>
-              <input type="text" placeholder="Your Name" class="post-name"></input>
+              <input type="text" placeholder="Your Name" class="post-name" required></input>
             </div>
             <div>
               <button class="post-btn btn-primary">Submit Post</button>
