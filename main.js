@@ -2,6 +2,7 @@
 
 // array variable to contain all posts
 var posts = [];
+var comments = [];
 
 // vars for HTML elements
 var pageView = document.getElementsByClassName('post-comment-thread')[0];
@@ -27,8 +28,9 @@ class MessageBoard {
     while(threadBody.hasChildNodes()){
       threadBody.removeChild(threadBody.firstChild);
     }
-
-    threadBody.innerHTML = messageBoard.renderPosts();
+    if(!messageBoard.renderPosts() === undefined){
+      threadBody.append(messageBoard.renderPosts());
+    }
   }
 
   addPost = function (){
@@ -52,23 +54,67 @@ class MessageBoard {
     }
   }
 
+  deletePost = function (){
+
+  }
+
   renderPosts = function (){
-    var items = "";
-    for(var i = 0; i < posts.length; i++){
-      items += '<div class="post-item"><p class="delete-post"> Delete Post </p><p class="post-content">' + posts[i].post + ' - Posted By: ' + posts[i].postUserName + `</p><p id="post${posts[i]}" class="post-comments" onclick="messageBoard.toggleComments()"> show comments </p></div><hr/>`;
-      console.log(posts[i]);
+    // var items = "";
+    var threadBody = document.getElementsByClassName('thread-body')[0];
+    while(threadBody.hasChildNodes()){
+      threadBody.removeChild(threadBody.firstChild);
     }
-    return items;
+
+    for(var i = 0; i < posts.length; i++){
+      var divPostPanel = document.createElement('div');
+      var pPostContent = document.createElement('p');
+      var pPostContentTextNode = document.createTextNode(posts[i].post);
+      var pPostActionBar = document.createElement('div');
+      var pDeletePost = document.createElement('p');
+      var pDeletePostTextNode = document.createTextNode(" Delete Post ");
+      var pPostComments = document.createElement('p');
+      var pPostCommentsTextNode = document.createTextNode(" Show Comments ");
+      var pPostedBy = document.createElement('p');
+      var pPostByTextNode = document.createTextNode("Posted By: " + posts[i].postUserName);
+      var hr = document.createElement('hr');
+
+      divPostPanel.className = "post-item panel-default";
+
+      pPostContent.className = "post-content panel-body";
+      pPostContent.append(pPostContentTextNode);
+
+      pPostActionBar.className = "post-action-bar";
+      pDeletePost.className = "delete-post";
+      pDeletePost.append(pDeletePostTextNode);
+      pDeletePost.onclick = function () {messageBoard.deletePost();};
+      pPostComments.id = "postID" + posts[i];
+      pPostComments.className = "post-comments";
+      pPostComments.append(pPostCommentsTextNode);
+      pPostComments.onclick = function () {messageBoard.toggleComments();};
+
+      pPostActionBar.appendChild(pDeletePost);
+      pPostActionBar.appendChild(pPostComments);
+
+      pPostedBy.className = "posted-by panel-footer";
+      pPostedBy.append(pPostByTextNode);
+
+      divPostPanel.appendChild(pPostContent);
+      divPostPanel.appendChild(pPostActionBar);
+      divPostPanel.appendChild(pPostedBy);
+      divPostPanel.appendChild(hr);
+      
+      threadBody.append(divPostPanel);
+    }
   }
 
   toggleComments = function (){
     // if(target.classList.contains('.post-comments')){
       if(document.getElementsByClassName('comment')[0].classList.contains('show')){
         document.getElementsByClassName('comment')[0].classList.remove('show');
-        document.getElementsByClassName('post-comments')[0].innerHTML = "show comments";
+        document.getElementsByClassName('post-comments')[0].innerHTML = "Show Comments";
       } else {
         document.getElementsByClassName('comment')[0].className += ' show';
-        document.getElementsByClassName('post-comments')[0].innerHTML = "hide comments";
+        document.getElementsByClassName('post-comments')[0].innerHTML = "Hide Comments";
       }
     // } 
   }
