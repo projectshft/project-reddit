@@ -66,54 +66,83 @@ class MessageBoard {
     }
 
     for(var i = 0; i < posts.length; i++){
+      // DOM elements to contain post and comment input
       var divPostPanel = document.createElement('div');
+      divPostPanel.className = "post-item panel-default";
+      // post input DOM elements 
       var pPostContent = document.createElement('p');
       var pPostContentTextNode = document.createTextNode(posts[i].post);
+      pPostContent.className = "post-content panel-body";
+      pPostContent.append(pPostContentTextNode);
+      // Post delete and show comments DOM elements 
       var pPostActionBar = document.createElement('div');
       var pDeletePost = document.createElement('p');
       var pDeletePostTextNode = document.createTextNode(" Delete Post ");
-      var pPostComments = document.createElement('p');
+      var pPostCommentsToggle = document.createElement('p');
       var pPostCommentsTextNode = document.createTextNode(" Show Comments ");
-      var pPostedBy = document.createElement('p');
-      var pPostByTextNode = document.createTextNode("Posted By: " + posts[i].postUserName);
-      var hr = document.createElement('hr');
-
-      divPostPanel.className = "post-item panel-default";
-
-      pPostContent.className = "post-content panel-body";
-      pPostContent.append(pPostContentTextNode);
-
       pPostActionBar.className = "post-action-bar";
       pDeletePost.className = "delete-post";
       pDeletePost.append(pDeletePostTextNode);
       pDeletePost.onclick = function () {messageBoard.deletePost();};
-      pPostComments.id = "postID" + posts[i];
-      pPostComments.className = "post-comments";
-      pPostComments.append(pPostCommentsTextNode);
-      pPostComments.onclick = function () {messageBoard.toggleComments();};
-
+      pPostCommentsToggle.id = "postID" + posts[i];
+      pPostCommentsToggle.className = "post-comments";
+      pPostCommentsToggle.append(pPostCommentsTextNode);
+      pPostCommentsToggle.onclick = function () {messageBoard.toggleShowHideComments();};
+      // appends delete post and show comments DOM elements as child nodes
       pPostActionBar.appendChild(pDeletePost);
-      pPostActionBar.appendChild(pPostComments);
-
+      pPostActionBar.appendChild(pPostCommentsToggle);
+      // Post user input name and className assignment
+      var pPostedBy = document.createElement('p');
+      var pPostByTextNode = document.createTextNode("Posted By: " + posts[i].postUserName);
       pPostedBy.className = "posted-by panel-footer";
       pPostedBy.append(pPostByTextNode);
 
+      // DOM elements for comment input on post - initially hidden in browser display
+      var divCommentForm = document.createElement('div');
+      var divCommentFormLabel = document.createTextNode(" Comments: ");
+      divCommentForm.className = "comments hide";
+      divCommentForm.append(divCommentFormLabel);
+      // input elements 
+      var inputCommentText = document.createElement('input');
+      inputCommentText.type = "text";
+      inputCommentText.placeholder = "Comment Text";
+      inputCommentText.className = "comment-text";
+      inputCommentText.required;
+      var inputCommentorName = document.createElement('input');
+      inputCommentorName.type = "text";
+      inputCommentorName.placeholder = "Your Name";
+      inputCommentorName.className = "commentor-name";
+      inputCommentorName.required;
+      // submit comment button
+      var submitCommentBtn = document.createElement('button');
+      var submitCommentBtnTextNode = document.createTextNode("Submit Comment");
+      submitCommentBtn.className = "comment-btn btn-primary";
+      submitCommentBtn.append(submitCommentBtnTextNode);
+      var hr = document.createElement('hr');
+      // appendChild nodes on comment form DOM
+      divCommentForm.appendChild(inputCommentText);
+      divCommentForm.appendChild(inputCommentorName);
+      divCommentForm.appendChild(submitCommentBtn);
+      divCommentForm.appendChild(hr);
+
+      // appendChild nodes to divPostPanel 
       divPostPanel.appendChild(pPostContent);
       divPostPanel.appendChild(pPostActionBar);
       divPostPanel.appendChild(pPostedBy);
-      divPostPanel.appendChild(hr);
+      divPostPanel.appendChild(divCommentForm);
+      // divPostPanel.appendChild(hr);
       
       threadBody.append(divPostPanel);
     }
   }
 
-  toggleComments = function (){
+  toggleShowHideComments = function (){
     // if(target.classList.contains('.post-comments')){
-      if(document.getElementsByClassName('comment')[0].classList.contains('show')){
-        document.getElementsByClassName('comment')[0].classList.remove('show');
+      if(document.getElementsByClassName('comments')[0].classList.contains('show')){
+        document.getElementsByClassName('comments')[0].classList.remove('show');
         document.getElementsByClassName('post-comments')[0].innerHTML = "Show Comments";
       } else {
-        document.getElementsByClassName('comment')[0].className += ' show';
+        document.getElementsByClassName('comments')[0].className += ' show';
         document.getElementsByClassName('post-comments')[0].innerHTML = "Hide Comments";
       }
     // } 
@@ -149,9 +178,9 @@ postBtn.addEventListener('click', function(){
 
 });
 
-commentBtn.addEventListener('click', function(){
+// commentBtn.addEventListener('click', function(){
 
-});
+// });
 
 // Instantiates variable for new MessageBoard class & call to renderPage() funciton
 var messageBoard = new MessageBoard();
