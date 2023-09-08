@@ -1,0 +1,149 @@
+/*  */
+
+.column {
+  margin-left: 30%;
+  margin-right: 30%;
+  background-color: darkseagreen;
+}
+
+.header {
+  font: bold;
+  margin: 0px 15px 15px 15px;
+  border-bottom: gray;
+  text-align: left;
+}
+
+.post-comment-submission {
+  display: block;
+  align-items: left;
+}
+
+/* contains user input for message board - initially blank */
+.thread-body {
+  width: 100%;
+  margin: 15px 5px 15px 5px;
+  display: inline-block;
+}
+
+/* HTML classes created in Javascript on user input submission */
+.post-item {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+}
+
+.post-content {
+  border-color: gray;
+}
+
+.post-action-bar {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+}
+.delete-post {
+  color: blue;
+  text-align: left;
+  margin-left: 15px;
+  margin-right: 10px;
+}
+.delete-post:hover {
+  color: red;
+  cursor: pointer;
+}
+
+.post-comments {
+  color: blue;
+  text-align: right;
+  margin-left: 10px;
+}
+.post-comments:hover {
+  color: red;
+  cursor: pointer;
+}
+
+/* Comment user input classes  */
+.comment-text {
+  margin: 5px 5px 5px 5px;
+  width: 100%;
+}
+.commentor-name {
+  margin: 5px;
+  width: 100%;
+}
+.comment-btn {
+  margin: 5px;
+  border-radius: 5px;
+}
+
+/* Comment display classes */
+.comments-form {
+  width: 100%;
+  padding: 5px;
+  margin: 2px 2px 2px 2px;
+  display: none;
+}
+.comments {
+  margin-bottom: 5px;
+  text-align: left;
+  display: none;
+}
+.comment-panel {
+  display: flex;
+  flex-direction: column;
+  background-color: lightsteelblue;
+  width: 100%;
+  margin: 2px 2px 2px 2px;
+}
+.remove-comment-btn {
+  display: flex;
+  background-color: red;
+  color: black;
+  border-radius: 5px;
+  margin-right: 10px;
+  block-size: 25px;
+}
+.remove-comment-btn:hover {
+  background-color: white;
+  color: black;
+  border-color: red;
+}
+.comment-content {
+  margin-left: 25px;
+}
+.content-delete-row {
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+}
+.comment-posted-by {
+  margin-left: 25px;
+  background-color: darkgray;
+}
+
+/* Post user input classes */
+.post {
+  margin-bottom: 15px;
+  text-align: left;
+}
+.post-text {
+  margin: 0px 5px 5px 5px;
+  width: 100%;
+}
+.post-name {
+  margin: 0px 5px 5px 5px;
+  width: 100%;
+}
+.post-btn {
+  margin: 0px 5px 5px 5px;
+  border-radius: 5px;
+}
+
+/* show/hide classes */
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
