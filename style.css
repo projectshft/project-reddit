@@ -1,0 +1,33 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 32px;
+}
+
+.page-header h1 {
+  color: black;
+  padding: 20px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+.message {
+  font-size: 25px;
+  font-family: sans-serif;
+}
+
+.posted {
+  margin-bottom: 40px;
+  font-size: 20px;
+  font-family: sans-serif;
+}
+
+.new-posts {
+  background-color: rgb(202, 142, 252);
+  padding: 20px;
+  border-radius: 20px;
+  margin-top: 10px;
+}
