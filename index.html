@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .center-form {
+      max-width: 400px;
+      width: 100%;
+    }
+
+    .center-header {
+      text-align: center;
+      margin-bottom: 20px; 
+    }
+     .post-container {
+      margin-top: 20px;
+    }
+
+    .post {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+
+    .comment-container {
+      margin-top: 10px;
+    }
+
+    .comment {
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container center-form">    
+    <header class="center-header">
+      <h1><em><strong>ReReddit</strong></em></h1>
+    </header>    
+    <br>
+    <hr>
+    <form id="myForm">
+      <div class="form-group">
+        <label for="post-input"></label>
+        <input type="Post" class="form-control" id="post-input" placeholder="Create Post">
+      </div>
+      <hr>
+      <div class="form-group">
+        <label for="name-input"></label>
+        <input type="Name" class="form-control" id="input-name" placeholder="Your Name">
+      </div>
+      <hr>
+      <button type="submit" class="btn-primary mx-auto">Post</button>
+    </form>
+    <div class="post-container" id="posts">
+    </div>      
+    </div>
+  </div>
+<script>
+$(document).ready(function(){
+  var posts = [];
+
+  $("#myForm").submit(function(event) {
+    event.preventDefault();
+
+    var postText = $("#post-input").val();
+    var name = $("#input-name").val();
+
+    if (postText.trim() !== "") {
+      var post = {
+        text: postText,
+        name: name,
+        comments: []
+      };
+
+      posts.push(post);
+
+      updatePosts();
+
+      $("#post-input").val("");
+      $("#input-name").val("");
+    }
+  });
+
+  function updatePosts() {
+    var postsContainer = $("#posts");
+    postsContainer.empty(); 
+
+    for (var i = 0; i < posts.length; i++) {
+      var post = posts[i];
+      var postHTML = '<div class="post">';
+      postHTML += '<p><strong>' + post.name + '</strong>: ' + post.text + '</p>';
+      postHTML += '<button class="btn btn-danger btn-sm" onclick="removePost(' + i + ')">Remove</button>';
+      postHTML += '<div class="comment-container">';
+      postHTML += '<input type="text" placeholder="Add a comment..." class="commentInput" id="commentInput_' + i + '">';
+      postHTML += '<button class="btn btn-primary btn-sm" onclick="addComment(' + i + ')">Comment</button>';
+      postHTML += '<div class="comments" id="comments_' + i + '"></div>';
+      postHTML += '</div>';
+      postHTML += '</div>';
+
+      postsContainer.append(postHTML);
+    }
+  }
+
+  window.removePost = function(index) {
+    posts.splice(index, 1); 
+    updatePosts(); 
+  };
+
+ 
+  window.addComment = function(postIndex) {
+    var commentInput = $("#commentInput_" + postIndex);
+    var commentText = commentInput.val();
+
+    if (commentText.trim() !== "") {
+      
+      var comment = {
+        text: commentText
+      };
+
+           posts[postIndex].comments.push(comment);
+
+          updateComments(postIndex);
+
+           commentInput.val("");
+    }
+  };
+
+    function updateComments(postIndex) {
+    var commentsContainer = $("#comments_" + postIndex);
+    commentsContainer.empty(); // Clear existing comments
+
+      for (var i = 0; i < posts[postIndex].comments.length; i++) {
+      var comment = posts[postIndex].comments[i];
+      var commentHTML = '<div class="comment">';
+      commentHTML += '<p>' + comment.text + '</p>';
+      commentHTML += '</div>';
+
+       commentsContainer.append(commentHTML);
+    }
+  }
+});
+</script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
