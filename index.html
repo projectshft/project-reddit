@@ -52,12 +52,12 @@
     <form id="myForm">
       <div class="form-group">
         <label for="post-input"></label>
-        <input type="Post" class="form-control" id="post-input" placeholder="Create Post">
+        <input type="text" class="form-control" id="post-input" placeholder="Create Post">
       </div>
       <hr>
       <div class="form-group">
-        <label for="name-input"></label>
-        <input type="Name" class="form-control" id="input-name" placeholder="Your Name">
+        <label for="input-name"></label>
+        <input type="text" class="form-control" id="input-name" placeholder="Your Name">
       </div>
       <hr>
       <button type="submit" class="btn-primary mx-auto">Post</button>
@@ -66,7 +66,11 @@
     </div>      
     </div>
   </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script>
+
 $(document).ready(function(){
   var posts = [];
 
@@ -100,7 +104,7 @@ $(document).ready(function(){
       var post = posts[i];
       var postHTML = '<div class="post">';
       postHTML += '<p><strong>' + post.name + '</strong>: ' + post.text + '</p>';
-      postHTML += '<button class="btn btn-danger btn-sm" onclick="removePost(' + i + ')">Remove</button>';
+      postHTML += '<button class="btn btn-primary btn-sm" onclick="removePost(' + i + ')">Remove</button>';
       postHTML += '<div class="comment-container">';
       postHTML += '<input type="text" placeholder="Add a comment..." class="commentInput" id="commentInput_' + i + '">';
       postHTML += '<button class="btn btn-primary btn-sm" onclick="addComment(' + i + ')">Comment</button>';
@@ -111,36 +115,31 @@ $(document).ready(function(){
       postsContainer.append(postHTML);
     }
   }
+ window.addComment = function(index) {
+  var commentInput = $("#commentInput_" + index);
+  var commentText = commentInput.val();
 
+  if(commentText.trim() !== "") {
+    var comment = {
+      text:commentText
+    }
+
+ posts[index].comments.push(comment)
+ updateComments(index);
+
+ commentInput.val("")
+  }
+}
   window.removePost = function(index) {
     posts.splice(index, 1); 
     updatePosts(); 
-  };
-
- 
-  window.addComment = function(postIndex) {
-    var commentInput = $("#commentInput_" + postIndex);
-    var commentText = commentInput.val();
-
-    if (commentText.trim() !== "") {
-      
-      var comment = {
-        text: commentText
-      };
-
-           posts[postIndex].comments.push(comment);
-
-          updateComments(postIndex);
-
-           commentInput.val("");
-    }
-  };
+  }
 
     function updateComments(postIndex) {
     var commentsContainer = $("#comments_" + postIndex);
-    commentsContainer.empty(); // Clear existing comments
+    commentsContainer.empty(); 
 
-      for (var i = 0; i < posts[postIndex].comments.length; i++) {
+    for (var i = 0; i < posts[postIndex].comments.length; i++) {
       var comment = posts[postIndex].comments[i];
       var commentHTML = '<div class="comment">';
       commentHTML += '<p>' + comment.text + '</p>';
@@ -151,8 +150,5 @@ $(document).ready(function(){
   }
 });
 </script>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>
