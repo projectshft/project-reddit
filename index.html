@@ -163,7 +163,7 @@ $(document).ready(function(){
           posts[postIndex].comments.push(comment);
           updateComments(postIndex);
 
-          commentInput.val(""); /
+          commentInput.val(""); 
         }
       }
       function updateComments(postIndex) {
@@ -188,15 +188,14 @@ $(document).ready(function(){
     }
 }
 
-
-function removePost(index) {
-    posts.splice(index, 1);
-    updatePosts();
+    function removePost(index) {
+     posts.splice(index, 1);
+      updatePosts();
 }
 
-function removeComment(postIndex, commentIndex) {
-    posts[postIndex].comments.splice(commentIndex, 1);
-    updateComments(postIndex);
+    function removeComment(postIndex, commentIndex) {
+        posts[postIndex].comments.splice(commentIndex, 1);
+        updateComments(postIndex);
     }
   });
 </script>
