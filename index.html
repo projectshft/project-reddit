@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ReReddit</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .center-form {
+      max-width: 400px;
+      width: 100%;
+    }
+
+    .center-header {
+      text-align: center;
+      margin-bottom: 20px; 
+    }
+     .post-container {
+      margin-top: 20px;
+    }
+
+    .post {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+
+    .comment-container {
+      margin-top: 10px;
+    }
+
+    .comment {
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container center-form">    
+    <header class="center-header">
+      <h1><e<strong>ReReddit</strong></h1>
+    </header>    
+    <br>
+    <hr>
+    <form id="myForm">
+      <div class="form-group">
+        <label for="post-input"></label>
+        <input type="text" class="form-control" id="post-input" placeholder="Create Post">
+      </div>
+        <hr>
+      <div class="form-group">
+        <label for="input-name"></label>
+        <input type="text" class="form-control" id="input-name" placeholder="Your Name">
+      </div>
+      <hr>
+      <button type="submit" class="btn-primary mx-auto">Post</button>
+    </form>
+    <div class="post-container" id="posts">
+    </div>      
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script>
+
+$(document).ready(function(){
+  var posts = [];
+
+  $("#myForm").submit(function(event) {
+    event.preventDefault();
+
+    var postText = $("#post-input").val();
+    var name = $("#input-name").val();
+
+    if (postText.trim() !== "") {
+      var post = {
+        text: postText,
+        name: name,
+        comments: []
+      };
+
+      posts.push(post);
+
+      updatePosts();
+
+      $("#post-input").val("");
+      $("#input-name").val("");
+    }
+  });
+
+  function updatePosts() {
+    var postsContainer = $("#posts");
+    postsContainer.empty(); 
+
+    for (var i = 0; i < posts.length; i++) {
+      var post = posts[i];
+      var postHTML = '<div class="post">';
+      postHTML += '<p><strong>' + post.name + '</strong>: ' + post.text + '</p>';
+      postHTML += '<div class="comment-container">';
+      postHTML += '<input type="text" placeholder="Add a comment..." class="commentInput" id="commentInput_' + i + '">';
+      postHTML += '<input type="text" placeholder="Name" class="commentName" id="commentName_' + i + '">';
+      postHTML += '<button class="btn btn-primary btn-sm" onclick="addComment(' + i + ')">Comment</button>';
+      postHTML += '<div class="comments" id="comments_' + i + '"></div>';
+      postHTML += '</div>';
+      postHTML += '</div>';
+
+      postsContainer.append(postHTML);
+    }
+  }
+
+ window.addComment = function(index) {
+  var commentInput = $("#commentInput_" + index);
+  var commentText = commentInput.val();
+  var commentName = $("#commentName_" + index);
+
+  if(commentText.trim() !== "") {
+    var comment = {
+      name: commentName.val(),
+      text: commentText
+    }
+
+ posts[index].comments.push(comment)
+ updateComments(index);
+
+ commentInput.val("")
+  }
+}
+  window.removePost = function(index) {
+    posts.splice(index, 1); 
+    updatePosts(); 
+  }
+
+  window.toggleComments = function(postIndex) {
+        var commentsContainer = $("#comments_" + postIndex);
+        var commentInput = $("#commentInput_" + postIndex);
+        commentsContainer.toggle();
+
+        commentsContainer.toggle();
+        commentInput.toggle(); 
+      }
+
+      window.removeComment = function(postIndex, commentIndex) {
+        posts[postIndex].comments.splice(commentIndex, 1);
+        updateComments(postIndex);
+      }
+
+      window.postComment = function(postIndex) {
+        var commentInput = $("#commentInput_" + postIndex);
+        var commentText = commentInput.val();
+
+        if (commentText.trim() !== "") {
+          var comment = {
+            text: commentText
+          };
+
+          posts[postIndex].comments.push(comment);
+          updateComments(postIndex);
+
+          commentInput.val(""); 
+        }
+      }
+      function updateComments(postIndex) {
+    var commentsContainer = $("#comments_" + postIndex);
+    commentsContainer.empty();
+
+    for (var i = 0; i < posts[postIndex].comments.length; i++) {
+        var comment = posts[postIndex].comments[i];
+        var commentHTML = '<div class="comment">';
+        commentHTML += '<p><strong>' + comment.name + '</strong>: ' + comment.text + '</p>';
+        commentHTML += '<button class="btn btn-outline-primary btn-sm" onclick="removeComment(' + postIndex + ',' + i + ')">Remove Comment</button>';
+        commentHTML += '</div>';
+
+        commentsContainer.append(commentHTML);
+    }
+
+
+    var removePostButton = commentsContainer.parent().find('.remove-post-button');
+    if (removePostButton.length === 0) {
+        removePostButton = '<button class="btn btn-primary btn-sm remove-post-button" onclick="removePost(' + postIndex + ')">Remove Post</button>';
+        commentsContainer.parent().append(removePostButton);
+    }
+}
+
+    function removePost(index) {
+     posts.splice(index, 1);
+      updatePosts();
+}
+
+    function removeComment(postIndex, commentIndex) {
+        posts[postIndex].comments.splice(commentIndex, 1);
+        updateComments(postIndex);
+    }
+  });
+</script>
+</body>
+</html>
