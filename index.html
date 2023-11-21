@@ -54,7 +54,7 @@
         <label for="post-input"></label>
         <input type="text" class="form-control" id="post-input" placeholder="Create Post">
       </div>
-      <hr>
+        <hr>
       <div class="form-group">
         <label for="input-name"></label>
         <input type="text" class="form-control" id="input-name" placeholder="Your Name">
@@ -115,6 +115,7 @@ $(document).ready(function(){
       postsContainer.append(postHTML);
     }
   }
+
  window.addComment = function(index) {
   var commentInput = $("#commentInput_" + index);
   var commentText = commentInput.val();
