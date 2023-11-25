@@ -4,6 +4,7 @@ const message = document.querySelector("#message");
 const posts = document.querySelector('.posts');
 
 let postId = 0;
+let commentId = 0;
 
 function createPostDiv(messageValue, posterNameValue, id) {
   const postDiv = document.createElement('div');
@@ -20,7 +21,7 @@ function createPostDiv(messageValue, posterNameValue, id) {
   postDiv.appendChild(messageP);
   postDiv.appendChild(nameP);
   postDiv.appendChild(createCommentButton(id));
-  postDiv.appendChild(createTrashButton(id))
+  postDiv.appendChild(createPostTrashButton(id))
   postDiv.appendChild(postHR);
 
   return postDiv;
@@ -47,11 +48,13 @@ function createCommentButton(id) {
   return commentButton;
 }
 
-function deleteThis(id) {
+function deleteThisPost(id) {
+  if(confirm('Are you sure you want to delete this post?')){
   document.getElementById(`post${id}`).remove()
 }
+}
 
-function createTrashButton(id) {
+function createPostTrashButton(id) {
   const trashButton = document.createElement('button');
   const trashIcon = document.createElement('i');
 
@@ -60,17 +63,39 @@ function createTrashButton(id) {
 
   trashButton.appendChild(trashIcon);
 
-  trashButton.addEventListener('click', () => deleteThis(id))
+  trashButton.addEventListener('click', () => deleteThisPost(id))
 
   return trashButton;
+}
+
+function deleteThisComment(id) {
+  if(confirm('Are you sure you want to delete this comment?')){
+  document.getElementById(`comment${id}`).remove()
+}
+}
+
+function createCommentTrashButton(id) {
+    const trashButton = document.createElement('button');
+    const trashIcon = document.createElement('i');
+
+    trashButton.setAttribute('style', 'float: right')
+  
+    trashButton.classList.add('btn', 'btn-danger');
+    trashButton.classList.add('fa-solid', 'fa-trash');
+  
+    trashButton.appendChild(trashIcon);
+  
+    trashButton.addEventListener('click', () => deleteThisComment(id))
+  
+    return trashButton;
 }
 
 function createCommentForm(postId) {
 
   const commentForm = document.createElement('form');
+  commentForm.setAttribute('id', `commentForm${postId}`)
   commentForm.setAttribute('onsubmit', 'event.preventDefault()');
   commentForm.setAttribute('style', 'margin-top: 30px;');
-  commentForm.setAttribute('id', `comment${postId}`);
   
   const nameDiv = document.createElement('div');
   nameDiv.classList.add('form-group', 'comment-name-div');
@@ -95,6 +120,9 @@ function createCommentForm(postId) {
   submitButton.setAttribute('class', 'btn btn-primary');
   submitButton.innerHTML = 'Comment';
 
+  const deleteButton = document.createElement('button');
+  
+
   submitButton.addEventListener('click', () => submitComment(nameInput.value, commentInput.value, postId))
   
   nameDiv.appendChild(nameInput);
@@ -102,6 +130,7 @@ function createCommentForm(postId) {
   commentForm.appendChild(nameDiv);
   commentForm.appendChild(contentsDiv);
   commentForm.appendChild(submitButton);
+
   
   return commentForm;
 }
@@ -113,21 +142,42 @@ function toggleComments(x) {
 }
 
 function submitComment(name, comment, pId) {
+
+  if(!name) {
+    alert('name cannot be empty')
+    return;
+  } else if (!comment) {
+    alert('comment body cannot be empty')
+    return;
+  }
+
+  commentId += 1;
+
   const newCommentDiv = document.createElement('div')
+  newCommentDiv.setAttribute('id', `comment${commentId}`)
   const commentContents = document.createTextNode(`${comment} `)
   const commenterName = document.createTextNode(`- Posted By: ${name}`)
   const commentHR = document.createElement('hr')
   newCommentDiv.appendChild(commentContents)
   newCommentDiv.appendChild(commenterName)
+  newCommentDiv.appendChild(createCommentTrashButton(commentId))
   newCommentDiv.appendChild(commentHR)
   document.getElementById(`comment-contents-${pId}`).value = ''
   document.getElementById(`comment-name-${pId}`).value = ''
-  let commentForm = document.getElementById(`comment${pId}`)
+  let commentForm = document.getElementById(`commentForm${pId}`)
   document.getElementById(`${pId}`).insertBefore(newCommentDiv, commentForm)
 }
 
 submitBtn.addEventListener('click', () => {
   postId += 1;
+
+  if(!posterName.value) {
+    alert('Please enter your name')
+    return;
+  } else if(!message.value) {
+    alert('post cannot be blank')
+    return;
+  }
 
   const postDiv = createPostDiv(message.value, posterName.value, postId);
   const commentDiv = createCommentDiv(postId);
