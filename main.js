@@ -9,7 +9,7 @@ let postId = 0;
 let commentId = 0;
 
 //create a function that will create the div for the post from the values of the form
-function createPostDiv(messageValue, posterNameValue, id) {
+const createPostDiv = (messageValue, posterNameValue, id) => {
 
   //create the div and give it class and id
   const postDiv = document.createElement('div');
@@ -37,7 +37,7 @@ function createPostDiv(messageValue, posterNameValue, id) {
 }
 
 //create div for the section with the comments and the comment form
-function createCommentDiv(id) {
+const createCommentDiv = (id) => {
   const commentDiv = document.createElement('div');
   //give it class hide so that it is hidden until the button is pressed
   commentDiv.classList.add('comment-div', 'hide');
@@ -47,14 +47,14 @@ function createCommentDiv(id) {
 }
 
 //create function to toggle the display of the comments section
-function toggleComments(id) {
+const toggleComments = (id) => {
   const comments = document.getElementById(`${id}`);
   comments.classList.toggle('show');
   comments.classList.toggle('hide');
 }
 
 //create the button to toggle the comment section
-function createCommentButton(id) {
+const createCommentButton = (id) => {
   //create button with icon
   const commentButton = document.createElement('button');
   const commentIcon = document.createElement('i');
@@ -70,14 +70,14 @@ function createCommentButton(id) {
 }
 
 //create a function to delete a post
-function deleteThisPost(id) {
+const deleteThisPost = (id) => {
   if(confirm('Are you sure you want to delete this post?')){
     document.getElementById(`post${id}`).remove();
   }
 }
 
 //create a trash button for the post
-function createPostTrashButton(id) {
+const createPostTrashButton = (id) => {
   //create the button
   const trashButton = document.createElement('button');
   const trashIcon = document.createElement('i');
@@ -93,14 +93,14 @@ function createPostTrashButton(id) {
 }
 
 //create a function to delete a comment
-function deleteThisComment(id) {
+const deleteThisComment = (id) => {
   if(confirm('Are you sure you want to delete this comment?')){
     document.getElementById(`comment${id}`).remove();
   }
 }
 
 //create a trash button for the comment
-function createCommentTrashButton(id) {
+const createCommentTrashButton = (id) => {
   //create the button
   const trashButton = document.createElement('button');
   const trashIcon = document.createElement('i');
@@ -118,7 +118,7 @@ function createCommentTrashButton(id) {
 }
 
 //create a function that creates a comment div under the post
-function submitComment(name, comment, pId) {
+const submitComment = (name, comment, pId) => {
   //check that the name and comment are not blank
   if(!name) {
     alert('name cannot be empty');
@@ -152,7 +152,7 @@ function submitComment(name, comment, pId) {
 }
 
 //create the comment form
-function createCommentForm(postId) {
+const createCommentForm = (postId) => {
   //create the form element, prevent default, and give margin
   const commentForm = document.createElement('form');
   commentForm.id = `commentForm${postId}`;
