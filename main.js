@@ -14,7 +14,7 @@ function createPostDiv(messageValue, posterNameValue, id) {
   //create the div and give it class and id
   const postDiv = document.createElement('div');
   postDiv.classList.add('post-div');
-  postDiv.setAttribute('id', `post${postId}`)
+  postDiv.setAttribute('id', `post${postId}`);
   
   //create the other elements of the post
   const messageP = document.createElement('p');
@@ -29,7 +29,7 @@ function createPostDiv(messageValue, posterNameValue, id) {
   postDiv.appendChild(messageP);
   postDiv.appendChild(nameP);
   postDiv.appendChild(createCommentButton(id));
-  postDiv.appendChild(createPostTrashButton(id))
+  postDiv.appendChild(createPostTrashButton(id));
   postDiv.appendChild(postHR);
 
   //return the post so it can be called in the event listener for the submit button
@@ -64,7 +64,7 @@ function createCommentButton(id) {
   //append icon to button
   commentButton.appendChild(commentIcon);
   //add event listener with callback to toggle the comments, pass in the id passed in from the submit button
-  commentButton.addEventListener('click', () => toggleComments(id))
+  commentButton.addEventListener('click', () => toggleComments(id));
   
   return commentButton;
 }
@@ -72,8 +72,8 @@ function createCommentButton(id) {
 //create a function to delete a post
 function deleteThisPost(id) {
   if(confirm('Are you sure you want to delete this post?')){
-  document.getElementById(`post${id}`).remove()
-}
+    document.getElementById(`post${id}`).remove();
+  }
 }
 
 //create a trash button for the post
@@ -87,7 +87,7 @@ function createPostTrashButton(id) {
   //append the icon to the button
   trashButton.appendChild(trashIcon);
   //addd event listener to evoke callback to delete the post
-  trashButton.addEventListener('click', () => deleteThisPost(id))
+  trashButton.addEventListener('click', () => deleteThisPost(id));
 
   return trashButton;
 }
@@ -95,8 +95,8 @@ function createPostTrashButton(id) {
 //create a function to delete a comment
 function deleteThisComment(id) {
   if(confirm('Are you sure you want to delete this comment?')){
-  document.getElementById(`comment${id}`).remove()
-}
+    document.getElementById(`comment${id}`).remove();
+  }
 }
 
 //create a trash button for the comment
@@ -105,14 +105,14 @@ function createCommentTrashButton(id) {
   const trashButton = document.createElement('button');
   const trashIcon = document.createElement('i');
   //float it to the right for style
-  trashButton.setAttribute('style', 'float: right')
+  trashButton.setAttribute('style', 'float: right');
   //add classes for fontawesome and style
   trashButton.classList.add('btn', 'btn-danger');
   trashButton.classList.add('fa-solid', 'fa-trash');
   //append trash icon to trash button
   trashButton.appendChild(trashIcon);
   //add event listener that deletes the comment
-  trashButton.addEventListener('click', () => deleteThisComment(id))
+  trashButton.addEventListener('click', () => deleteThisComment(id));
 
   return trashButton;
 }
@@ -121,10 +121,10 @@ function createCommentTrashButton(id) {
 function submitComment(name, comment, pId) {
   //check that the name and comment are not blank
   if(!name) {
-    alert('name cannot be empty')
+    alert('name cannot be empty');
     return;
   } else if (!comment) {
-    alert('comment body cannot be empty')
+    alert('comment body cannot be empty');
     return;
   }
 
@@ -155,7 +155,7 @@ function submitComment(name, comment, pId) {
 function createCommentForm(postId) {
   //create the form element, prevent default, and give margin
   const commentForm = document.createElement('form');
-  commentForm.id =`commentForm${postId}`;
+  commentForm.id = `commentForm${postId}`;
   commentForm.setAttribute('onsubmit', 'event.preventDefault()');
   commentForm.setAttribute('style', 'margin-top: 30px;');
   //create a div for the name input
@@ -182,7 +182,7 @@ function createCommentForm(postId) {
   submitButton.setAttribute('class', 'btn btn-primary');
   submitButton.innerHTML = 'Comment';
   //add an event listener that evokes a callback that submits the comment and passes values to the function
-  submitButton.addEventListener('click', () => submitComment(nameInput.value, commentInput.value, postId))
+  submitButton.addEventListener('click', () => submitComment(nameInput.value, commentInput.value, postId));
   //append all elements to the tree to create the comment form
   nameDiv.appendChild(nameInput);
   contentsDiv.appendChild(commentInput);
@@ -190,7 +190,6 @@ function createCommentForm(postId) {
   commentForm.appendChild(contentsDiv);
   commentForm.appendChild(submitButton);
 
-  
   return commentForm;
 }
 
@@ -199,12 +198,12 @@ submitBtn.addEventListener('click', () => {
   //increment the post ID to create a new unique ID
   postId += 1;
 
-  //check if name and post is blank
+  //check if name and post are blank
   if(!posterName.value) {
-    alert('Please enter your name')
+    alert('Please enter your name');
     return;
   } else if(!message.value) {
-    alert('post cannot be blank')
+    alert('post cannot be blank');
     return;
   }
 
