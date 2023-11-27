@@ -1,83 +1,80 @@
 let submitButton = document.getElementById('submit');
-let commentSubmitButton = document.getElementById('submit-comment');
-let commentInput = document.getElementById('comment');
-let commentNameInput = document.getElementById('comment-name');
-let submitCommentButton = document.getElementById('submit-comment');
-
-
 
 
 submitButton.addEventListener('click', function () {
-  
-  var userName = document.getElementById('name').value;
-  var userMessage = document.getElementById('message').value;
+  // gets values from post input fields
+  let userName = document.getElementById('name').value;
+  let userMessage = document.getElementById('message').value;
 
-  var postsDiv = document.querySelector('.item');
-  var newPostDiv = document.createElement('div');
+  // selects where to put new post
+  const postsDiv = document.querySelector('.item');
+  const newPostDiv = document.createElement('div');
     newPostDiv.className = 'posts';
   
-  var newPostMessageP = document.createElement('p');
+  // creates new post
+  const newPostMessageP = document.createElement('p');
     newPostMessageP.className = 'post';
-  var newPostMessageNode = document.createTextNode(userMessage + ' - Posted By: ' + userName);
+  let newPostMessageNode = document.createTextNode(userMessage + ' - Posted By: ' + userName);
 
-  var newPostRemoveButton = document.createElement('button');
+  // creates remove button
+  const newPostRemoveButton = document.createElement('button');
     newPostRemoveButton.className = 'remove';
     newPostRemoveButton.innerHTML = 'remove';
-  var newPostCommentButton = document.createElement('button');
+
+  // creates comment button
+  const newPostCommentButton = document.createElement('button');
     newPostCommentButton.className = 'comments';
     newPostCommentButton.innerHTML = 'comment';
-  // var newPostHR = document.createElement('hr');
-  //   newPostHR.className = "break";
+
+  // creates submit comment button
+  const newSubmitCommentButton = document.createElement('button');
+    newSubmitCommentButton.className = 'submit-comment';
+    newSubmitCommentButton.id = 'submit-comment';
+    newSubmitCommentButton.innerHTML = 'submit comment';
+    // newSubmitCommentButton.style = 'display: none;'
+  
+
+  // creates comment input field
+  const newCommentInputField = document.createElement('input');
+    newCommentInputField.className = 'form-control-comment';
+    newCommentInputField.id = 'comment' + userMessage;
+    newCommentInputField.type = 'text';
+    // newCommentInputField.style = 'display: none;'
+    newCommentInputField.placeholder = 'Your Comment'
+
+  // creates comment input name field
+  const newCommentNameInputField = document.createElement('input');
+  newCommentNameInputField.className = 'form-control-comment-name';
+  newCommentNameInputField.id = 'comment-name' + userName;
+  newCommentNameInputField.type = 'text';
+  // newCommentNameInputField.style = 'display: none;'
+  newCommentNameInputField.placeholder = 'Your Name'  
+
+  // adds line break
+  const newPostHR = document.createElement('hr');
+    newPostHR.className = "break";
+  
 
 
+  // appends new post to P, adds new remove and comment button to P 
   newPostMessageP.appendChild(newPostMessageNode);
   newPostRemoveButton.append(newPostMessageP);
   newPostCommentButton.append(newPostMessageP);
 
+  // appends all elements to new posts div
   newPostDiv.append(newPostMessageP);
   newPostDiv.append(newPostRemoveButton);
   newPostDiv.append(newPostCommentButton);
+  newPostDiv.append(newCommentInputField);
+  newPostDiv.append(newCommentNameInputField);
+  newPostDiv.append(newSubmitCommentButton);
   
+  // appends new posts div to posts div and appends line break to end of posts div
   postsDiv.append(newPostDiv);
-
-  
-
+  postsDiv.append(newPostHR);
 })
 
-
-
-commentSubmitButton.addEventListener('click', function (e) {
-  var userNameComment = document.getElementById('comment-name').value;
-  var userMessageComment = document.getElementById('comment').value;
-
-  var postsDiv = document.querySelector('.posts');
-
-  var newCommentsMessageP = document.createElement('p');
-    newCommentsMessageP.className = 'comment';
-  var newCommentsMessageNode = document.createTextNode(userMessageComment + ' - Posted By: ' + userNameComment);
-
-  var newCommentsRemoveButton = document.createElement('button');
-    newCommentsRemoveButton.className = 'remove-comment';
-    newCommentsRemoveButton.innerHTML = 'remove';
-
-  // var newPostHR = document.createElement('hr');
-  //   newPostHR.className = "break";
-
-  newCommentsMessageP.appendChild(newCommentsMessageNode);
-  newCommentsRemoveButton.append(newCommentsMessageP);
-  
-
-  postsDiv.append(newCommentsMessageP);
-  postsDiv.append(newCommentsRemoveButton);
-  // newCommentsDiv.append(newCommentsHR);
-
-  $(commentInput).hide();
-    $(commentNameInput).hide();
-    $(submitCommentButton).hide();
-});
-
-
-
+// removes closest post to remove button
 document.addEventListener('click', function (e) {
   if (e.target.classList.contains('remove')) {
     let closestRemoveButton = e.target.closest('.posts');
@@ -86,23 +83,53 @@ document.addEventListener('click', function (e) {
   }
   });
 
+
+// adds comments to closest post
 document.addEventListener('click', function (e) {
-  if (e.target.classList.contains('remove-comment')) {
-    let closestRemoveCommentButton = e.target.closest('.posts');
-      document.querySelector(".comment").remove();
-      document.querySelector(".remove-comment").remove('button');
-    //  console.log('click', closestRemoveCommentButton);
-  }
-  });
+  let userName = document.getElementById('name').value;
+  let userMessage = document.getElementById('message').value;
 
-document.addEventListener('click', function (e) {
-  if (e.target.classList.contains('comments')) {
-    let closestCommentButton = e.target.closest('.posts');
-    $(commentInput).show();
-    $(commentNameInput).show();
-    $(submitCommentButton).show();
-  }
-})
+  if (e.target.classList.contains('submit-comment')) {
+    let userNameComment = document.getElementById('comment-name' + userName).value;
+    let userComment = document.getElementById('comment' + userMessage).value;
+
+    const postsDiv = document.querySelector('.posts');
+
+  // adds comment P to posts div
+    const newCommentP = document.createElement('div');
+      newCommentP.className = 'user-comment';
+    let newCommentNode = document.createTextNode(userComment + ' - Posted By: ' + userNameComment);
+
+  // adds remove button to each comment added
+    const newPostRemoveButton = document.createElement('button');
+    newPostRemoveButton.className = 'remove-comment';
+    newPostRemoveButton.innerHTML = 'remove';
+
+  // appends comment and remove button to new comment P, appends new comment P to posts div
+    newCommentP.append(newPostRemoveButton);
+    newCommentP.append(newCommentNode);
+    postsDiv.append(newCommentP);
+    
+  // targets closest posts div
+    let closestSubmitCommentButton = e.target.closest('.posts');
+        
+  // adds new comment to closest posts div
+    closestSubmitCommentButton.append(newCommentP);
+    
+    }
+    });
+
+    document.addEventListener('click', function (e) {
+      if (e.target.classList.contains('remove-comment')) {
+        // removes closest comment to remove button
+        const closestCommentRemoveButton = e.target.closest("div")
+
+          $(closestCommentRemoveButton).remove('button');
+          $(closestCommentRemoveButton).remove();
+          
+      }
+      });
+  
 
 
 
@@ -110,11 +137,20 @@ document.addEventListener('click', function (e) {
 
 
 
-// let removeComments = document.addEventListener('click', function (e) {
-//   if (e.target.classList.contains('remove-comment')) {
-//     let closestRemoveButton = e.target.closest('.posts');
-//     // console.log('click', closestRemoveButton);
-//       $('.comment').remove();
-//       closestRemoveButton.remove('hr');
-//   }
-// })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
