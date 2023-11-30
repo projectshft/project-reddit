@@ -1,7 +1,9 @@
 let submitButton = document.getElementById('submit');
 
 
+
 submitButton.addEventListener('click', function () {
+  let generateId = Math.floor(Math.random() * 10000);
   // gets values from post input fields
   let userName = document.getElementById('name').value;
   let userMessage = document.getElementById('message').value;
@@ -9,7 +11,8 @@ submitButton.addEventListener('click', function () {
   // selects where to put new post
   const postsDiv = document.querySelector('.item');
   const newPostDiv = document.createElement('div');
-    newPostDiv.className = 'posts';
+    newPostDiv.className = 'post';
+    newPostDiv.id = generateId;
   
   // creates new post
   const newPostMessageP = document.createElement('p');
@@ -37,7 +40,7 @@ submitButton.addEventListener('click', function () {
   // creates comment input field
   const newCommentInputField = document.createElement('input');
     newCommentInputField.className = 'form-control-comment';
-    newCommentInputField.id = 'comment' + userMessage;
+    newCommentInputField.id = generateId;
     newCommentInputField.type = 'text';
     // newCommentInputField.style = 'display: none;'
     newCommentInputField.placeholder = 'Your Comment'
@@ -45,7 +48,7 @@ submitButton.addEventListener('click', function () {
   // creates comment input name field
   const newCommentNameInputField = document.createElement('input');
   newCommentNameInputField.className = 'form-control-comment-name';
-  newCommentNameInputField.id = 'comment-name' + userName;
+  newCommentNameInputField.id = generateId;
   newCommentNameInputField.type = 'text';
   // newCommentNameInputField.style = 'display: none;'
   newCommentNameInputField.placeholder = 'Your Name'  
@@ -72,12 +75,14 @@ submitButton.addEventListener('click', function () {
   // appends new posts div to posts div and appends line break to end of posts div
   postsDiv.append(newPostDiv);
   postsDiv.append(newPostHR);
+
+  // console.log(newPostDiv.id);
 })
 
 // removes closest post to remove button
 document.addEventListener('click', function (e) {
   if (e.target.classList.contains('remove')) {
-    let closestRemoveButton = e.target.closest('.posts');
+    let closestRemoveButton = e.target.closest('.post');
       closestRemoveButton.remove('p');
       closestRemoveButton.remove('hr');
   }
@@ -86,19 +91,29 @@ document.addEventListener('click', function (e) {
 
 // adds comments to closest post
 document.addEventListener('click', function (e) {
-  let userName = document.getElementById('name').value;
-  let userMessage = document.getElementById('message').value;
-
   if (e.target.classList.contains('submit-comment')) {
-    let userNameComment = document.getElementById('comment-name' + userName).value;
-    let userComment = document.getElementById('comment' + userMessage).value;
+    // targets closest posts div
+    let closestPostDiv = e.target.closest('.post');
+    let closestCommentToPost = closestPostDiv.id;
+    
 
-    const postsDiv = document.querySelector('.posts');
+    // gets value of the closest input fields
+    let closestSubmitCommentName = e.target.closest('.submit-comment');
+    let userNameComment = closestSubmitCommentName.previousSibling;
+    let userNameCommentInput = userNameComment.value;
+
+    let closestSubmitComment = userNameComment.previousSibling;
+    let userComment = closestSubmitComment.value;
+    
+    
+    // let newCommentDivId = document.querySelector('.post').id;
+    const postsDiv = document.querySelector('.post');
 
   // adds comment P to posts div
     const newCommentP = document.createElement('div');
       newCommentP.className = 'user-comment';
-    let newCommentNode = document.createTextNode(userComment + ' - Posted By: ' + userNameComment);
+      newCommentP.id = closestCommentToPost;
+    let newCommentNode = document.createTextNode(userComment + ' - Posted By: ' + userNameCommentInput);
 
   // adds remove button to each comment added
     const newPostRemoveButton = document.createElement('button');
@@ -110,12 +125,11 @@ document.addEventListener('click', function (e) {
     newCommentP.append(newCommentNode);
     postsDiv.append(newCommentP);
     
-  // targets closest posts div
-    let closestSubmitCommentButton = e.target.closest('.posts');
-        
-  // adds new comment to closest posts div
-    closestSubmitCommentButton.append(newCommentP);
+
     
+  // adds new comment to closest posts div
+    closestPostDiv.append(newCommentP);
+    // console.log(closestCommentToPost);
     }
     });
 
@@ -130,11 +144,6 @@ document.addEventListener('click', function (e) {
       }
       });
   
-
-
-
-
-
 
 
 
