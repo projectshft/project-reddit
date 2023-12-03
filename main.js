@@ -109,7 +109,6 @@ var renderPost = function () {
       commentsInner += commentForm;
       commentDiv.innerHTML = commentsInner;
       div.appendChild(commentDiv);
-      // div.insertBefore(commentDiv, formDiv);
       postsDiv.appendChild(div);
     });
     // add event listener to red x button  to find closest container
@@ -119,14 +118,8 @@ var renderPost = function () {
     console.log(trashButtons);
 
     var commentsToToggle = document.querySelectorAll(".commentsBubble");
-    // console.log(commentsToToggle);
     commentsToToggle.forEach(function (comment) {
       comment.addEventListener("click", function (event) {
-        // if (event.target.classList.contains("show")) {
-        //   event.target.classList.remove("show");
-        // } else {
-        //   event.target.classList.add("show");
-        // }
         var commentsDiv =
           event.target.parentNode.parentNode.parentNode.parentNode.parentNode
             .nextElementSibling;
@@ -160,11 +153,8 @@ var renderPost = function () {
               "data-index"
             );
           var comment = event.target.parentNode[0].value;
-          console.log(comment);
           var commentAuthor = event.target.parentNode[1].value;
-          console.log(commentAuthor);
           var singleComment = { name: commentAuthor, comment: comment };
-          console.log(singleComment);
           posts[currentPost].comments.push(singleComment);
           renderPost();
         });
@@ -175,13 +165,10 @@ var renderPost = function () {
               event.target.parentNode.parentNode.parentNode.getAttribute(
                 "data-index"
               );
-            console.log(postIndex);
             var commentIndex =
               event.target.parentNode.getAttribute("data-comment");
-            console.log(commentIndex);
-            console.log(posts[postIndex].comments.splice(commentIndex, 1));
+            posts[postIndex].comments.splice(commentIndex, 1);
             renderPost();
-            // .getAttribute("data-comment");
           });
         });
       });
@@ -191,5 +178,4 @@ var renderPost = function () {
   }
   nameInput.value = "";
   postInput.value = "";
-  console.log(`current number of posts: ${posts.length}`);
 };
