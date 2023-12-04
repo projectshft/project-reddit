@@ -1,8 +1,3 @@
-//TODO: add comments div
-// initially set display to none and add a show class that toggles when clicking on "comments div"
-//TODO: add remove comment
-//TODO: hide/show comments
-
 // posts div
 var postsDiv = document.querySelector("#posts");
 // name input
@@ -136,8 +131,10 @@ var renderPost = function () {
       button.addEventListener("click", function (event) {
         // gget closest container class and access the  data index to splice the posts array posts.splice(data-index,1)
         var postToRemove = event.target
-          .closest(".container")
+          .closest(".post")
           .getAttribute("data-index");
+        debugger;
+        console.log(postToRemove);
 
         posts.splice(postToRemove, 1);
 
