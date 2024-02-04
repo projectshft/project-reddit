@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>ReReddit</title>
+  </head>
+  <body>
+    <div class="col-md-6 col-md-offset-3">
+      <div class="page-header">
+        <h1>ReReddit</h1>
+      </div>
+
+      <form class="container">
+        <h3>Posts</h3>
+        
+        <div class="posts">
+          <div class="container" id="comment-container">
+            <p></p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <textarea
+            id="post-text"
+            type="text"
+            class="form-control"
+            placeholder="Your Text"
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <input
+            id="post-name"
+            type="text"
+            class="form-control"
+            placeholder="Your Name"
+          ></input>
+        </div>
+
+        <button id="submit-post" class="btn btn-primary btn-lg">Submit Post</button>
+
+      </form>
+    </div>
+
+  </body>
+  <script src="main.js"></script>
+</html>
