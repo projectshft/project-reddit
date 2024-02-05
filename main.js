@@ -45,7 +45,7 @@ submitButton.addEventListener('click', function(){
   commentButton.appendChild(document.createTextNode('Comment'));
   commentButton.addEventListener('click', function() {
     // Open the comment form below the post
-    openCommentFormBelowPost(newPost);
+    createCommentForm(newPost);
   });
 
   newButton.appendChild(rmButton);
@@ -60,7 +60,6 @@ submitButton.addEventListener('click', function(){
   newPost.append(newPostText, newNameText, newButton, commentSection, pageHr);
   postSection.appendChild(newPost);
 
-  // Evaluating whether or not both sections are filled
   if(name === '' || post === ''){
     form.reset();
   } else {
@@ -68,7 +67,7 @@ submitButton.addEventListener('click', function(){
   }
 });
 
-function openCommentFormBelowPost(parentPost) {
+function createCommentForm(parentPost) {
   // Create the comment form
   const commentForm = document.createElement('form');
   const commentInput = document.createElement('textarea');
@@ -80,7 +79,7 @@ function openCommentFormBelowPost(parentPost) {
     event.preventDefault();
     const commentText = commentInput.value;
     if (commentText.trim() !== '') {
-      // Display the comment below the post
+      
       const comment = document.createElement('div');
       comment.className = 'comment';
       comment.appendChild(document.createTextNode('Comment: ' + commentText));
@@ -96,7 +95,7 @@ function openCommentFormBelowPost(parentPost) {
 
       comment.appendChild(deleteCommentButton);
       parentPost.querySelector('.comment-section').appendChild(comment);
-      commentInput.value = '';  // Clear the input field
+      commentInput.value = '';
       commentForm.style.display = 'none';
     }
   });
@@ -104,18 +103,17 @@ function openCommentFormBelowPost(parentPost) {
   commentForm.appendChild(commentInput);
   commentForm.appendChild(commentSubmitButton);
 
-  // Create a section for comments if not already present
+  // Add comments section
   if (!parentPost.querySelector('.comment-section')) {
     let commentSection = document.createElement('div');
     commentSection.className = 'comment-section';
     parentPost.appendChild(commentSection);
   }
 
-  // Append the comment form to the comment section
   parentPost.querySelector('.comment-section').appendChild(commentForm);
 }
 
+// Remove the comment from the comment section
 function removeComment(parentPost, comment) {
-  // Remove the comment from the comment section
   parentPost.querySelector('.comment-section').removeChild(comment);
 }
