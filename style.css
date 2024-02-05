@@ -1,0 +1,20 @@
+body {
+  background-color: rgba(171, 17, 91, 0.502);
+}
+
+h1 {
+  text-align: center;
+  font-size: 40px;
+  margin-top: 100px;
+  margin-bottom: 5px;
+  color: rgba(21, 4, 49, 0.701);
+}
+
+.container {
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-top: 50px;
+}
