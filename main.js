@@ -12,7 +12,21 @@ clickable.addEventListener("click", function () {
 
   newNameElement.innerText = author.value;
   newTextElement.innerText = postText.value;
+  const btnElement = createElementsetAttributes("btn", {"type": "button", "class": "btn btn-outline-secondary btn-sm"});
+  btnElement.innerText = "Comment";
+
   postElement.appendChild(newNameElement);
   postElement.appendChild(newTextElement);
+  postElement.appendChild(btnElement);
   posts.appendChild(postElement);
+
 })
+
+//function that sets attributes from and object parameter
+function createElementsetAttributes(elementString, attributeObject) {
+  let attributeTarget = document.createElement(elementString);
+  for (let key of Object.keys(attributeObject)) {
+    attributeTarget.setAttribute(key, attributeObject[key]);
+  };
+  return attributeTarget
+};
