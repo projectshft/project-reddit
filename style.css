@@ -6,6 +6,24 @@
   margin: auto;
   width: 50%;
 }
+
+.posts {
+  margin: auto;
+  width: 50%;
+}
+.new-post {
+  border-style: solid;
+  border-radius: 10px;
+  border-width: 1px;
+  border-color: rgb(211, 211, 211);
+  margin: 10px;
+}
+
+.posts p,
+strong {
+  margin: 10px;
+}
+
 .form-label {
   text-align: center;
 }
