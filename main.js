@@ -76,10 +76,12 @@ const post = () => {
   button.addEventListener('click', () => {
     let nameInput = document.getElementById('name').value;
     let postInput = document.getElementById('message').value;
+
     let postDiv = document.querySelector('.posts');
     let element = document.createElement('p');
-    let elementText = document.createTextNode(nameInput);
-    let elementText2 = document.createTextNode(' Posted By: ' + postInput);
+
+    let elementText = document.createTextNode(postInput);
+    let elementText2 = document.createTextNode(' Posted By: ' + nameInput);
     let newPostHR = document.createElement('hr');
 
     element.setAttribute('id', postIdCounter);
@@ -97,9 +99,25 @@ const post = () => {
 post();
 
 const comment = () => {
-  let button = document.getElementById('submit2');
-  button.addEventListener('click', () => {
-    
+  let button2 = document.getElementById('submit2');
+
+  button2.addEventListener('click', () => {
+    let nameInput2 = document.getElementById('name2').value;
+    let postInput2 = document.getElementById('message2').value;
+
+    let commentDiv = document.querySelector('p');
+    let element2 = document.createElement('div');
+
+    let commentText = document.createTextNode(postInput2);
+    let commentName = document.createTextNode(' Posted by: ' + nameInput2);
+    let newCommentHR = document.createElement('hr');
+
+    commentDiv.append(element2);
+    element2.appendChild(commentText);
+    element2.appendChild(commentName);
+    element2.appendChild(newCommentHR);
 
   })
 }
+
+comment();
