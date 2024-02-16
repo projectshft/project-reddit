@@ -4,53 +4,61 @@
 document.getElementById('submit-post').addEventListener('click', function(event) {
   event.preventDefault();
 
-  let postText = document.getElementById('post-text').value;
-  let postName = document.getElementById('post-name').value;
+  const postText = document.getElementById('post-text').value;
+  const postName = document.getElementById('post-name').value;
 
-  let postContainer = document.querySelector('.posts');
-  let individualPost = document.createElement('div');
-  individualPost.id = "individual-post";
+  if (postText === "" || postName === "") {
+    alert("Please enter text for your post and your name.")
+    return;
+  };
 
-  let renderedPost = document.createElement('p');
+  const postContainer = document.querySelector('.posts');
+  const individualPostContainer = document.createElement('div');
+  // individualPostContainer.classList.add('individual-post-container');
+  const individualPost = document.createElement('div');
+  // individualPost.classList.add('individual-post');
+
+  const renderedPost = document.createElement('p');
   renderedPost.innerHTML = `${postText} - Posted By: ${postName}`;
+
+  const postSeperator = document.createElement('hr');
+  postContainer.appendChild(postSeperator);
 
   let comments = [];
 
-  let commentButton = document.createElement('a');
+  const commentButton = document.createElement('a');
   commentButton.classList.add("btn", "btn-link");
   commentButton.innerHTML = `Comment`;
 
   commentButton.addEventListener('click', function(event) {
     event.preventDefault();
 
-    let commentContainer = document.createElement('div');
+    const commentContainer = document.createElement('div');
     commentContainer.classList.add('form-group');
 
-    let commentTextId = `comment-text-${Date.now()}`;
-    let commentText = document.createElement('textarea');
-    let commentTextValue = document.getElementById(commentTextId);
+    const commentTextId = `comment-text-${Date.now()}`;
+    const commentText = document.createElement('textarea');
     commentText.placeholder = "Your comment";
     commentText.classList.add("form-control");
     commentText.id = commentTextId;
     commentText.setAttribute("type", "text");
 
-    let commentNameId = `comment-name-${Date.now()}`;
-    let commentName = document.createElement('input');
-    let commentNameValue = document.getElementById(commentNameId);
+    const commentNameId = `comment-name-${Date.now()}`;
+    const commentName = document.createElement('input');
     commentName.placeholder = "Your name";
     commentName.classList.add("form-control");
     commentName.id = commentNameId;
     commentName.setAttribute("type", "text");
 
-    let submitCommentButton = document.createElement("a");
+    const submitCommentButton = document.createElement("a");
     submitCommentButton.classList.add("btn", "btn-primary", "btn-sm");
     submitCommentButton.innerHTML = "Submit Comment";
-
 
     submitCommentButton.addEventListener('click', function(event) {
       event.preventDefault();
 
-      let renderedComment = document.createElement('p');
+      const renderedComment = document.createElement('p');
+      renderedComment.style.marginLeft = "20px";
       renderedComment.innerHTML = `${commentText.value} - Comment By: ${commentName.value}`;
 
       comments.push(renderedComment);
@@ -61,6 +69,8 @@ document.getElementById('submit-post').addEventListener('click', function(event)
 
       commentContainer.appendChild(commentButton);
       commentContainer.appendChild(removeButton);
+      individualPost.appendChild(commentContainer);
+      postContainer.appendChild(postSeperator);
     });
 
     commentContainer.appendChild(commentText);
@@ -75,16 +85,17 @@ document.getElementById('submit-post').addEventListener('click', function(event)
   });
   
 
-  let removeButton = document.createElement('a');
+  const removeButton = document.createElement('a');
   removeButton.classList.add("btn", "btn-link");
   removeButton.innerHTML = `Remove`;
 
   removeButton.addEventListener('click', function(event) {
     event.preventDefault();
 
-    let individualPostContainer = document.getElementById("individual-post");
+    const individualPostContainer = document.getElementById("individual-post");
     if (individualPostContainer) {
       individualPostContainer.remove();
+      postSeperator.remove();
     };
 
   });
@@ -94,6 +105,7 @@ document.getElementById('submit-post').addEventListener('click', function(event)
   individualPost.appendChild(removeButton);
   
   postContainer.appendChild(individualPost);
+  postContainer.appendChild(postSeperator);
 
   document.getElementById('post-text').value = "";
   document.getElementById('post-name').value = "";
