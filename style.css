@@ -28,3 +28,15 @@ strong {
 .form-label {
   text-align: center;
 }
+
+.comment-box {
+  margin: auto;
+  width: 75%;
+}
+
+.comments {
+}
+
+.hide-comments {
+  display: none;
+}
