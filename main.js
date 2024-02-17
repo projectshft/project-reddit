@@ -35,25 +35,33 @@ PostBtn.addEventListener("click", function () {
   commentDiv.appendChild(commentAuthor);
   commentDiv.appendChild(commentField);
 
-  // create text elements to store comment field values and append them to `commentDiv`
+  // create text elements to store comment field values and button, then append them to `commentDiv`
   commentField.addEventListener("keydown", function (e) {
     if (e.key === 'Enter') {
       let commentAuthorText = createElementsetAttributes('strong', {"class": "comment"});
       let commentText = createElementsetAttributes('p', {"class": "comment"});
+      const deleteBtn = createElementsetAttributes('button', {"type": "button", "class": "btn btn-outline-danger btn-sm delete-button"});
+      deleteBtn.innerText = "Delete";
       commentAuthorText.innerText = commentAuthor.value;
       commentText.innerText = commentField.value;
-      commentDiv.appendChild(commentAuthorText);
+      commentDiv.append(commentAuthorText, deleteBtn);
       commentDiv.appendChild(commentText);
+      
+      // remove all comment data upon clicking `delete`
+      deleteBtn.addEventListener("click", function () {
+        commentAuthorText.remove();
+        deleteBtn.remove();
+        commentText.remove();
+      })
     }
   });
   
-
   //Toggle this `hide-comments` class of `commentDiv` to enable hiding and displaying comment secton.
   commentButton.addEventListener("click", function () {
     const commentClasses = commentDiv.classList;
     commentClasses.toggle("hide-comments");
   });
-})
+});
 
 
 //function that creates element and sets attributes from an object parameter
