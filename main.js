@@ -4,6 +4,11 @@ let postText = document.querySelector(".post")
 let PostBtn = document.querySelector(".btn");
 let posts = document.querySelector(".posts");
 
+///attempt at builder method for individual posts
+
+
+//
+
 //create text elements to store post data
 PostBtn.addEventListener("click", function () {
   const newTextElement = document.createElement('p');
