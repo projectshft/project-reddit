@@ -79,20 +79,26 @@ const post = () => {
 
     let postDiv = document.querySelector('.posts');
     let element = document.createElement('p');
-
+    let element2 = document.createElement('p');
+    
     let elementText = document.createTextNode(postInput);
     let elementText2 = document.createTextNode(' Posted By: ' + nameInput);
     let newPostHR = document.createElement('hr');
 
+    let commentLink = document.createTextNode('Comment ');
+
     element.setAttribute('id', postIdCounter);
     postIdCounter++;
-    
+
+    element2.setAttribute('id', 'comment-link');
+
+    postDiv.append(element2);
+    element2.appendChild(commentLink);
     postDiv.append(element);
     element.appendChild(elementText);
     element.appendChild(elementText2);
     element.appendChild(newPostHR);
-
-    event.preventDefault();
+  
   });
 }
 
@@ -118,6 +124,25 @@ const comment = () => {
     element2.appendChild(newCommentHR);
 
   })
-}
+};
 
 comment();
+
+const commentToggle = () => {
+  let getCommentLink = document.getElementById('comment-link');
+  let getCommentForm = document.getElementById('comment-form');
+
+  console.log(getCommentLink)
+  
+  getCommentLink.addEventListener('click', () => {
+    if (getCommentForm.className.indexOf('show') === -1) {
+      getCommentForm.className += ' show';
+    } else {
+      getCommentForm.className = 'comment-form';
+    };
+  })
+};
+
+commentToggle();
+
+// issue is that I am trying to getCommentForm before it is created. 
