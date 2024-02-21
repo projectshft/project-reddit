@@ -13,16 +13,26 @@
     <title>ReReddit</title>
   </head>
   <body>
-    <h1><strong>ReReddit</strong></h1>
+    <div class="container">
+      <h1><strong>ReReddit</strong></h1>
+    </div>
     <div class="posts"></div>
-    <div class="form-group">
-      <input type="text" id="message" name="message" placeholder="Post Text" />
-    </div>
-    <div class="form-group">
-      <input type="text" id="author" name="author" placeholder="Your Name" />
-    </div>
-    <div>
-      <button>Submit Post</button>
+    <div class="container">
+      <hr />
+      <div class="form-group">
+        <input
+          type="text"
+          id="message"
+          name="message"
+          placeholder="Post Text"
+        />
+      </div>
+      <div class="form-group">
+        <input type="text" id="author" name="author" placeholder="Your Name" />
+      </div>
+      <div>
+        <button class="btn btn-primary">Submit Post</button>
+      </div>
     </div>
     <script src="./main.js"></script>
   </body>
