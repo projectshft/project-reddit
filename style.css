@@ -1,0 +1,25 @@
+.post {
+  margin: 25px;
+}
+
+.posts {
+  max-height: 50vh;
+  overflow-y: scroll;
+}
+
+.form-control {
+  margin: 20px;
+  width: 92%;
+}
+
+#comment-form {
+  padding-left: 15%;
+}
+
+#posting-form {
+  margin: 15px;
+}
+
+.comment {
+  margin: 10px;
+}
