@@ -77,8 +77,9 @@ const renderPosts = function() {
         message: messageContent,
       }
     
-      debugger;
       comments.push(commentObj);
+
+      renderComments(comments, commentsDiv);
     
     });
 
@@ -88,7 +89,7 @@ const renderPosts = function() {
 
     let commentsLink = document.createElement('a');
     commentsLink.innerHTML = 'comments';
-    commentsLink.addEventListener('click', function() {
+    commentsLink.addEventListener('click', function() { //This stops working after a comment is added.
       if (commentsDiv.classList.contains('d-none')) {
         commentsDiv.classList.remove('d-none');
       } else {
@@ -114,6 +115,17 @@ const renderPosts = function() {
 
 };
 
-const renderComments = function() {
+const renderComments = function(comments, div) {
+  debugger;
+  // Empty the comments div
+  while (div.hasChildNodes()) {
+    div.removeChild(div.firstChild);
+  }
+  
+  for (comment in comments) {
+    let commentContent = document.createElement('p');
+    commentContent.innerHTML = `${comments[comment].message} - Posted By: ${comments[comment].author}`;
 
+    div.previousElementSibling.appendChild(commentContent);
+  }
 };
