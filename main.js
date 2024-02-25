@@ -38,37 +38,38 @@ submitPostButton.addEventListener('click', function () {
 });
 
 const renderPost = function() {
-  
-  // Render a post once. It should include:
-  // - an 'a' element that can delete an entire post
-  // - an 'a' element that shows/hides the comments div
-  // - a 'p' element that contains the post content and post author
-  // Each time the comments form is submitted, a new comments object should be appended to the comments Array;
-  // and a new div that represents the comment object should be appended between the post and comments form.
-  // The new comments div should have a button that removes it.
 
   // Access the last element in the posts Array, create a new div, and render it within postsDiv
   let postObj = posts[posts.length - 1];
   let newPost = document.createElement('div');
   newPost.setAttribute('class', 'post');
 
-  // Insert the paragraph with the author, message 
-  const postContent = document.createElement('p');
-  postContent.innerHTML = `${postObj.message} - Posted By: ${postObj.author}`;
-  newPost.appendChild(postContent);
+  // Create a link to delete the post
+  let deletePost = document.createElement('a');
+  deletePost.setAttribute('href', '#')
+  deletePost.innerHTML = 'remove';
+  deletePost.addEventListener('click', function() {
+    this.parentElement.remove();
+  })
+  newPost.appendChild(deletePost);
 
-  let commentsLink = document.createElement('span');
+  // Create a link to show/hide the comments
+  let commentsLink = document.createElement('a');
+  commentsLink.setAttribute('href', '#')
   commentsLink.innerHTML = 'comments';
-  commentsLink.addEventListener('click', function() { //This stops working after a comment is added.
+  commentsLink.addEventListener('click', function() {
     if (commentsDiv.classList.contains('d-none')) {
       commentsDiv.classList.remove('d-none');
     } else {
       commentsDiv.classList.add('d-none');
     }
   })
-
-  // Insert the comments link
   newPost.appendChild(commentsLink);
+
+  // Create a paragraph to display the post message and author
+  const postContent = document.createElement('p');
+  postContent.innerHTML = `${postObj.message} - Posted By: ${postObj.author}`;
+  newPost.appendChild(postContent);
 
   // Create a comments div to contain all the comments and insert it inside the post div
   let commentsDiv = document.createElement('div');
@@ -104,6 +105,10 @@ const renderPost = function() {
     }
     
     comments.push(commentObj);
+
+    // Clear input fields after submitted
+    commentAuthor.value = "";
+    commentMessage.value = "";
     
     renderComment(comments, commentsDiv);
     
@@ -141,6 +146,14 @@ const renderComment = function(comments, div) {
   
   newComment.appendChild(commentContent);
 
-  div.insertBefore(newComment, commentsForm);
+  let deleteComment = document.createElement('a');
+  deleteComment.setAttribute('href', '#')
+  deleteComment.innerHTML = 'remove';
+  deleteComment.addEventListener('click', function() {
+    this.parentElement.remove();
+  })
 
+  newComment.appendChild(deleteComment);
+  
+  div.insertBefore(newComment, commentsForm);
 };
