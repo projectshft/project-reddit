@@ -2,18 +2,13 @@
 const postsDiv = document.getElementsByClassName('posts')[0];
 
 // Access message div
-let postMessage = document.getElementById('message');
+const postMessage = document.getElementById('message');
 
 // Access name div
-let postAuthor = document.getElementById('author');
+const postAuthor = document.getElementById('author');
 
 // Access Submit Post button
-let submitPostButton = document.getElementById('submit-post');
-
-// Example Data Structure
-// [{author: 'Jack Reacher', message: 'Hey', comments: []},{author: 'Frances Neagley', message: 'What's up?', comments: []}]
-
-let posts = [];
+const submitPostButton = document.getElementById('submit-post');
 
 // When the Submit Post button is clicked, create a new div under the posts div.
 // Example: Text - Posted By: Name
@@ -28,25 +23,23 @@ submitPostButton.addEventListener('click', function () {
     comments: [],
   }
 
-  posts.push(postObj);
-
   postAuthor.value = "";
   postMessage.value = "";
 
-  renderPost();
+  renderPost(postObj);
 
 });
 
-const renderPost = function() {
+const renderPost = function(postObj) {
 
-  // Access the last element in the posts Array, create a new div, and render it within postsDiv
-  let postObj = posts[posts.length - 1];
+  // Create a new post div render it within postsDiv
   let newPost = document.createElement('div');
   newPost.setAttribute('class', 'post');
 
   // Create a link to delete the post
   let deletePost = document.createElement('a');
-  deletePost.setAttribute('href', '#')
+  deletePost.setAttribute('class', 'link-underline link-underline-opacity-0');
+  deletePost.setAttribute('href', '#');
   deletePost.innerHTML = 'remove';
   deletePost.addEventListener('click', function() {
     this.parentElement.remove();
@@ -55,7 +48,8 @@ const renderPost = function() {
 
   // Create a link to show/hide the comments
   let commentsLink = document.createElement('a');
-  commentsLink.setAttribute('href', '#')
+  commentsLink.setAttribute('class', 'link-underline link-underline-opacity-0');
+  commentsLink.setAttribute('href', '#');
   commentsLink.innerHTML = 'comments';
   commentsLink.addEventListener('click', function() {
     if (commentsDiv.classList.contains('d-none')) {
@@ -93,12 +87,10 @@ const renderPost = function() {
   // Make the button update the comments Array
   commentsButton.addEventListener('click', function () {
 
-    // Access the comments Array
+    // Build a comment object
     let comments = postObj.comments;
-
     let authorName = commentAuthor.value;
     let messageContent = commentMessage.value;
-  
     let commentObj = {
       author: authorName,
       message: messageContent,
@@ -111,7 +103,6 @@ const renderPost = function() {
     commentMessage.value = "";
     
     renderComment(comments, commentsDiv);
-    
   });
 
   // Create a new div for the comments form (By default, it is hidden.)
@@ -141,12 +132,8 @@ const renderComment = function(comments, div) {
 
   let commentsForm = div.getElementsByClassName('comments-form')[0];
 
-  let commentContent = document.createElement('p');
-  commentContent.innerHTML = `${comment.message} - Posted By: ${comment.author}`;
-  
-  newComment.appendChild(commentContent);
-
   let deleteComment = document.createElement('a');
+  deleteComment.setAttribute('class', 'link-underline link-underline-opacity-0');
   deleteComment.setAttribute('href', '#')
   deleteComment.innerHTML = 'remove';
   deleteComment.addEventListener('click', function() {
@@ -154,6 +141,11 @@ const renderComment = function(comments, div) {
   })
 
   newComment.appendChild(deleteComment);
+
+  let commentContent = document.createElement('p');
+  commentContent.innerHTML = `${comment.message} - Posted By: ${comment.author}`;
   
+  newComment.appendChild(commentContent);
+
   div.insertBefore(newComment, commentsForm);
 };
