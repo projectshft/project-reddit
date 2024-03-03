@@ -81,7 +81,7 @@ const renderPost = function(postObj) {
   commentsButton.setAttribute('class', "btn btn-primary submit-comment")
   commentsButton.innerHTML = "Submit Comment";
 
-  // Make the button update the comments Array
+  // Make the button add a comment
   commentsButton.addEventListener('click', function () {
 
     // Build a comment object
@@ -144,5 +144,6 @@ const renderComment = function(comments, div) {
   
   newComment.appendChild(commentContent);
 
+  // Insert the comment div before the comments-form div
   div.insertBefore(newComment, commentsForm);
 };
