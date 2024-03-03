@@ -1,0 +1,18 @@
+.post p {
+  display: inline;
+  margin: 5px;
+}
+
+.post a {
+  margin: 5px;
+}
+
+.posts-form input {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.comments-form input {
+  width: 100%;
+  margin-bottom: 10px;
+}
