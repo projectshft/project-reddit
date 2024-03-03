@@ -14,10 +14,10 @@ const submitPostButton = document.getElementById('submit-post');
 // Example: Text - Posted By: Name
 submitPostButton.addEventListener('click', function () {
   
-  let authorName = postAuthor.value;
-  let messageContent = postMessage.value;
+  const authorName = postAuthor.value;
+  const messageContent = postMessage.value;
 
-  let postObj = {
+  const postObj = {
     author: authorName,
     message: messageContent,
     comments: [],
@@ -33,30 +33,27 @@ submitPostButton.addEventListener('click', function () {
 const renderPost = function(postObj) {
 
   // Create a new post div render it within postsDiv
-  let newPost = document.createElement('div');
+  const newPost = document.createElement('div');
   newPost.setAttribute('class', 'post');
 
-  // Create a link to delete the post
-  let deletePost = document.createElement('a');
-  deletePost.setAttribute('class', 'link-underline link-underline-opacity-0');
-  deletePost.setAttribute('href', '#');
-  deletePost.innerHTML = 'remove';
-  deletePost.addEventListener('click', function() {
+  // Create a link to deconste the post
+  const deconstePost = document.createElement('a');
+  deconstePost.setAttribute('class', 'link-underline link-underline-opacity-0');
+  deconstePost.setAttribute('href', '#');
+  deconstePost.innerHTML = 'remove';
+  deconstePost.addEventListener('click', function() {
     this.parentElement.remove();
   })
-  newPost.appendChild(deletePost);
+  newPost.appendChild(deconstePost);
 
   // Create a link to show/hide the comments
-  let commentsLink = document.createElement('a');
+  const commentsLink = document.createElement('a');
   commentsLink.setAttribute('class', 'link-underline link-underline-opacity-0');
   commentsLink.setAttribute('href', '#');
   commentsLink.innerHTML = 'comments';
   commentsLink.addEventListener('click', function() {
-    if (commentsDiv.classList.contains('d-none')) {
-      commentsDiv.classList.remove('d-none');
-    } else {
-      commentsDiv.classList.add('d-none');
-    }
+    const commentsClasses = commentsDiv.classList;
+    commentsClasses.contains('d-none') ? commentsClasses.remove('d-none') : commentsClasses.add('d-none');
   })
   newPost.appendChild(commentsLink);
 
@@ -66,21 +63,21 @@ const renderPost = function(postObj) {
   newPost.appendChild(postContent);
 
   // Create a comments div to contain all the comments and insert it inside the post div
-  let commentsDiv = document.createElement('div');
+  const commentsDiv = document.createElement('div');
   commentsDiv.setAttribute('class', 'comments d-none');
   newPost.appendChild(commentsDiv);
 
   // Create an input field for the comment content
-  let commentMessage = document.createElement('input');
+  const commentMessage = document.createElement('input');
   commentMessage.setAttribute('placeholder', 'Comment Text');
   commentMessage.setAttribute('id', 'comment-text');
 
   // Create an input field for the author name
-  let commentAuthor = document.createElement('input');
+  const commentAuthor = document.createElement('input');
   commentAuthor.setAttribute('placeholder', 'Your Name');
 
   // Create a button to submit the comment content and author
-  let commentsButton = document.createElement('button');
+  const commentsButton = document.createElement('button');
   commentsButton.setAttribute('class', "btn btn-primary submit-comment")
   commentsButton.innerHTML = "Submit Comment";
 
@@ -88,10 +85,10 @@ const renderPost = function(postObj) {
   commentsButton.addEventListener('click', function () {
 
     // Build a comment object
-    let comments = postObj.comments;
-    let authorName = commentAuthor.value;
-    let messageContent = commentMessage.value;
-    let commentObj = {
+    const comments = postObj.comments;
+    const authorName = commentAuthor.value;
+    const messageContent = commentMessage.value;
+    const commentObj = {
       author: authorName,
       message: messageContent,
     }
@@ -106,7 +103,7 @@ const renderPost = function(postObj) {
   });
 
   // Create a new div for the comments form (By default, it is hidden.)
-  let commentsForm = document.createElement('div');
+  const commentsForm = document.createElement('div');
   commentsForm.setAttribute('class', 'comments-form');
   commentsForm.appendChild(commentMessage);
   commentsForm.appendChild(commentAuthor);
@@ -125,24 +122,24 @@ const renderPost = function(postObj) {
 
 const renderComment = function(comments, div) {
 
-  let comment = comments[comments.length - 1];
+  const comment = comments[comments.length - 1];
 
-  let newComment = document.createElement('div');
+  const newComment = document.createElement('div');
   newComment.setAttribute('class', 'comment');
 
-  let commentsForm = div.getElementsByClassName('comments-form')[0];
+  const commentsForm = div.getElementsByClassName('comments-form')[0];
 
-  let deleteComment = document.createElement('a');
-  deleteComment.setAttribute('class', 'link-underline link-underline-opacity-0');
-  deleteComment.setAttribute('href', '#')
-  deleteComment.innerHTML = 'remove';
-  deleteComment.addEventListener('click', function() {
+  const deconsteComment = document.createElement('a');
+  deconsteComment.setAttribute('class', 'link-underline link-underline-opacity-0');
+  deconsteComment.setAttribute('href', '#')
+  deconsteComment.innerHTML = 'remove';
+  deconsteComment.addEventListener('click', function() {
     this.parentElement.remove();
   })
 
-  newComment.appendChild(deleteComment);
+  newComment.appendChild(deconsteComment);
 
-  let commentContent = document.createElement('p');
+  const commentContent = document.createElement('p');
   commentContent.innerHTML = `${comment.message} - Posted By: ${comment.author}`;
   
   newComment.appendChild(commentContent);
