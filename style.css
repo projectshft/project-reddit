@@ -1,6 +1,37 @@
-.form-group2 {
+h1 {
+  background-color: orangered;
+  text-align: center;
+  color: white;
+}
+
+h3 {
+  color: white;
+}
+
+body {
+  background-color:rgb(48, 46, 46);
+}
+
+form {
+  background-color: rgb(125, 124, 122);
+  text-align: center;
+}
+
+b {
   display: none;
 }
+
+.posts {
+  background-color:rgb(213, 212, 211);
+}
+
+.col-md-6 {
+  background-color:rgb(213, 212, 211);
+}
+
+/* .comment-form {
+  display: none;
+} */
 
 .show {
   display: block;
