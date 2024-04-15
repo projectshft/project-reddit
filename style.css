@@ -1,0 +1,27 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(to left, rgb(211, 171, 184), rgb(159, 225, 236));
+  min-height: 100vh; 
+}
+
+button {
+  margin: 8px;
+}
+
+form {
+  margin-bottom: 10px;
+}
+
+.comments-container {
+  margin: 5px;
+}
+
+.comment-form {
+  margin-top: 5px;
+  padding: 5px;
+}
