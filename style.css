@@ -1,0 +1,17 @@
+p {
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.btn-xs {
+    display: inline-block;
+    margin: 0px 5px;
+}
+
+.comment-form {
+    margin: 20px 0px;
+}
+
+.hidden {
+    display: none;
+}
