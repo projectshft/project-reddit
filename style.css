@@ -1,0 +1,107 @@
+header {
+  font-size: 60px;
+  margin: 20px;
+}
+
+body {
+  font-size: 20px;
+  margin: 20px;
+}
+
+hr {
+  border: 1.5px solid black;
+  border-radius: 5px;
+}
+
+button {
+  margin: 10px;
+  color: white;
+  background-color: rgb(55, 220, 55);
+  border-radius: 5px;
+  border: none;
+}
+
+input {
+  margin: 20px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+li {
+  font-size: 20px;
+  list-style-type: none;
+}
+
+.post-div {
+  border: 1.5px solid black;
+  border-radius: 5px;
+}
+
+.comment-div {
+  border: 1px solid lightgray;
+  border-radius: 5px;
+}
+
+.posts {
+  font-size: 15px;
+  font-weight: light;
+  font-style: italic;
+}
+
+.btn-remove {
+  font-size: 10px;
+  background-color: red;
+  color: white;
+  height: 20px;
+  width: 50px;
+  border-radius: 5px;
+  border: none;
+  display: block;
+}
+
+.btn-comment {
+  font-size: 10px;
+  background-color: skyblue;
+  color: white;
+  height: 20px;
+  width: 70px;
+  border-radius: 5px;
+  border: none;
+  display: block;
+}
+
+.btn-submit-comment {
+  font-size: 15px;
+  background-color: rgb(55, 220, 55);
+  color: white;
+  border-radius: 5px;
+  border: none;
+}
+
+.btn-remove-comment {
+  font-size: 10px;
+  height: 30px;
+  width: 60px;
+  background-color: red;
+  color: white;
+  border-radius: 5px;
+  border: none;
+}
+
+.posted-by,
+.name-li,
+.comment-name {
+  display: inline;
+}
+
+.comment-posted-by {
+  display: inline;
+}
+
+.comment-box,
+.name-box,
+.btn-submit-comment {
+  visibility: visible;
+}
