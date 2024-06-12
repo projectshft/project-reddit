@@ -1,0 +1,22 @@
+.post-container {
+  height: 420px;
+  position: relative;
+  background-color: white;
+  color: black;
+  overflow: hidden;
+  z-index: 20;
+  box-shadow: 2px 2px 2px #b3b3b3;
+  margin: 20px;
+}
+
+.form-inline {
+  display: inline-block;
+}
+
+
+
+
+
+.container {
+  display: block;
+}
