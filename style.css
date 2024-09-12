@@ -1,0 +1,60 @@
+body {
+    background-color: white;
+    font-family: Calibri
+  }
+
+  .heading h1 {
+    text-align: left;
+    font-weight: bold;
+    font-size: 37px;
+    margin-left: 20px;
+    margin-bottom: 40px;
+  }
+
+   .post {
+    text-align: left;
+    width: 500px;
+    height: 25px;
+  }
+
+  .name {
+    text-align: left;
+    width: 500px;
+    height: 25px;
+  }
+
+  .button {
+      background-color: rgb(55, 77, 248);
+      color: white;
+      margin-left: 20px;
+      border-radius: 5px;
+      height: 30px;
+      width: 100px;
+  }
+
+  .ptxt {
+    height: 35px;
+    margin-bottom: 10px;
+    margin-top: 20px;
+    margin-left: 20px;
+  }
+
+  .yname {
+    height: 35px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+  }
+
+  .rembutton {
+    color: rgb(55, 77, 248);
+    font-weight: bold;
+  }
+
+  .combutton {
+    color: rgb(55, 77, 248);
+    font-weight: bold;
+  }
+ 
+  .post {
+      margin-bottom: 1em;
+  }
