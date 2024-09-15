@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+      integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ReReddit</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 offset-md-3">
+          <div class="page-title">
+            <h1>ReReddit</h1>
+          </div>
+          <div class="posts">
+            <hr />
+          </div>
+          <div class="individual-post d-none">
+            <hr />
+          </div>
+          <div class="create-post">
+            <input
+              type="text"
+              class="form-control post-text"
+              placeholder="Post Text"
+            />
+            <br />
+            <input
+              type="text"
+              class="form-control post-author"
+              placeholder="Your Name"
+            />
+            <br />
+            <button class="btn btn-primary submit-post">Submit Post</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
