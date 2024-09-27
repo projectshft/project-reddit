@@ -1,0 +1,39 @@
+DONE ensure HTML boilerplate is compliant
+DONE basic details: site title, naming, defaults, etc
+DONE check version of bootstrap (updated to 3.3.7)
+DONE add bootstrap boilerplate, ensure best practices
+DONE grab jQuery (jquery 2.1.3 added)
+DONE clean existing code; keep code tidy
+DONE look at grid layout and correct/modify  3-6-3cols?
+Use patterns
+DONE Use jQuery
+DONE adding a post with Post Text and Your Name appends entry to .posts
+DONE  get submit event
+DONE  on submit event, fire function
+DONE  take Message val append as <p> to .posts
+DONE  take Name val append as <p> to messsage above?
+DONE  format name in <b>
+DONE  line spacing ok?
+DONE  <hr> line
+DONE message if both are not filled
+----part 2 below -----
+DONE implement comments on each post.
+DONE 'comments' link toggles input box  (hidden looks to be wrong way)
+  DONE add div/span for comments
+  DONE  inject 'remove comments' links before message append
+  DONE  how to identify these with jQ?
+  DONE reveal or append comment and user fields with button?
+  DONE Posted By byline stays at end of comments
+  CHECKED comments div line-height ok?
+
+DONE 'x' bootstrap glyph deletes a comment
+DONE user & comment fields + button click immediately adds comment to list
+DONE click on 'remove' a post removes it (  <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button> )
+DONE check CSS colors, formatting, fonts etc conform to spec -- comment form
+N/A any in-line css to own sheet? override with bootstrap?
+reset input fields to placeholder text? https://stackoverflow.com/questions/28896937/jquery-restore-changed-placeholder
+FIXED post-entry div's not properly wrapping?  Something still seems amiss
+OK format of comments fields and button
+N/A Attribute Contains Selector [name*=”value”]
+FIXED comments not at end of comments
+FIXED comments going inside form
