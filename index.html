@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+      integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Re-Reddit</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="display-1"><strong>ReReddit</strong></h1>
+      <div class="lead">
+        <h2><u>Posts:</u></h2>
+      </div>
+    </div>
+    <div class="container" id="post-list"></div>
+    <div class="container">
+      <div class="input-group input-group-lg mb-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Post Text"
+          id="post-input"
+        />
+      </div>
+    </div>
+    <div class="container">
+      <div class="input-group input-group-lg">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Your Name"
+          id="name-input"
+        />
+      </div>
+      <br />
+      <button type="button" class="btn btn-primary" id="post-btn">
+        Submit Post
+      </button>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>
