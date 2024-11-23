@@ -1,0 +1,82 @@
+body {
+  background-color: #000;
+  color: #fff;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+p {
+  font-size: 17px;
+}
+
+.post-form {
+  width: 80%;
+}
+
+.posts-feed {
+  width: 80%;
+}
+
+.posts-container {
+  width: 80%;
+}
+
+.removePost {
+  color: red;
+  cursor: pointer;
+}
+
+.removePost:hover {
+  text-decoration: underline;
+}
+
+.addComment {
+  cursor: pointer;
+  color: yellow;
+  margin-left: 10px;
+}
+
+.addComment:hover {
+  text-decoration: underline;
+}
+
+.commentForm {
+  display: none;
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
+
+.postUtilities {
+  margin-bottom: 50px;
+}
+
+.headerBreak {
+  border-top: 3px solid white;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.posts {
+  padding: 12px;
+  margin-bottom: 30px;
+  border-left: 3px solid white;
+}
+
+.comment {
+  border-left: 2px solid white;
+  padding-left: 10px;
+  margin-bottom: 20px;
+}
+
+.deleteComment {
+  cursor: pointer;
+  color: red;
+}
+
+.deleteComment:hover {
+  text-decoration: underline;
+}
