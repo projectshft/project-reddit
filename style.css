@@ -1,0 +1,49 @@
+.container {
+  display: grid;
+  justify-content: center;
+}
+
+hr {
+  background-color: black;
+  color: black;
+}
+
+.rm-comments-btn {
+  background-color: blue;
+  border-radius: 5px;
+  padding: 2px;
+  font-size: 80%;
+  color: white;
+}
+
+.show-comments-btn {
+  margin-left: 5px;
+  background-color: blue;
+  border-radius: 5px;
+  padding: 2px;
+  font-size: 80%;
+  color: white;
+}
+
+input {
+  width: 400px;
+  margin: 5px;
+}
+
+hr {
+  width: 95%;
+}
+
+.active {
+  margin-left: 4px;
+}
+
+/* button {
+  background-color: royalblue;
+  color: white;
+  border-radius: 5px;
+  margin-left: 7px;
+  width: 24%;
+  font-size:70%;
+} */
+
