@@ -1,0 +1,38 @@
+.posts .post {
+  margin-bottom: 20x;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+.comments-btn {
+  margin-top: 10px;
+  display: inline-block;
+}
+
+.remove-btn {
+  margin-top: 10px;
+  display: inline-block;
+}
+
+.new-remove-btn {
+  margin-top: 10px;
+  display: inline-block;
+}
+
+.new-comment-btn {
+  margin-top: 10px;
+  display: inline-block;
+  background-color: #008cba;
+  color: white;
+}
+
+.comment-name,
+.comment-input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  box-sizing: border-box;
+}
