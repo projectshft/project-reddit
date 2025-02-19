@@ -1,0 +1,15 @@
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.button {
+  color: rgb(171, 76, 76);
+}
