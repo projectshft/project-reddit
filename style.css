@@ -1,0 +1,16 @@
+body {
+  background-color: #eaebe7;
+}
+.remove-link {
+  margin-right: 10px;
+}
+.remove-link:hover {
+  color: red;
+}
+
+.comment-input-container {
+  display: none;
+}
+.comment-input-container.visible {
+  display: block;
+}
