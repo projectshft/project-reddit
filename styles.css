@@ -1,0 +1,33 @@
+h1 {
+  font-size: 48px;
+}
+
+body {
+  margin-left: 20px;
+}
+
+.btn-default, .btn-comment {
+  color: white;
+  background-color: #1877F2;
+}
+
+.comment-horizontal {
+  display: none;
+}
+
+.comment, .remove-comment {
+  padding-right: 10px;
+}
+
+.remove, .comment, .remove-comment {
+  cursor: default;
+}
+
+.remove, .comment {
+  font-weight: lighter;
+}
+
+.postP {
+  font-weight: bold;
+  color: purple;
+}
