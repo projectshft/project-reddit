@@ -1,0 +1,20 @@
+.form-group {
+  padding-bottom: 0;
+}
+.hidden {
+  display: none;
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.posts button {
+  background: none;
+  border: none;
+  color: blue;
+  cursor: pointer;
+  padding: 0;
+}
