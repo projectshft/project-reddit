@@ -1,0 +1,19 @@
+.post hr {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-top: 1px solid #ccc;
+}
+
+ul {
+  padding-left: 0px;
+  margin: 0px;
+  list-style: none;
+}
+
+.comment-list {
+  display: none;
+}
+
+.comment-list.show {
+  display: block !important;
+}
