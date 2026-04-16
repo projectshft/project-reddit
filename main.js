@@ -1,10 +1,18 @@
+let count = 0;
+let postList = [];
+
 let leavePost = function () {
   const name = document.getElementById("your-name").value;
   const message = document.getElementById("message").value;
 
   const postDiv = document.querySelector(".post-master");
   let newPostDiv = document.createElement("div");
-  newPostDiv.className = "post";
+
+  //Identifier for Each Post & Array Tracker
+  count += 1;
+  newPostDiv.className = "main-post";
+  newPostDiv.dataset.index = count;
+  postList.push(count);
 
   let removeLink = document.createElement("button");
   let commentsLink = document.createElement("button");
@@ -17,6 +25,7 @@ let leavePost = function () {
   commentsLink.style.marginRight = "10px";
 
   const newPostP = document.createElement("span");
+  newPostP.className = "span-class";
   const newPostTextNode = document.createTextNode(
     `${message} - Posted By: ${name}`,
   );
@@ -25,6 +34,7 @@ let leavePost = function () {
 
   let newPostHR = document.createElement("hr");
 
+  //Check if the boxes have text
   if (name.length > 0 && message.length > 0) {
     newPostDiv.append(newPostHR);
     newPostDiv.append(removeLink);
@@ -43,66 +53,103 @@ let leavePost = function () {
     newPostDiv.append(newPostDiv2);
 
     newPostDiv2.innerHTML += `
+    
   <form style="margin-top:30px;" onsubmit="event.preventDefault();">
     
     <div class="form-group">
-      <textarea id="comment-text"
-        class="form-control"
+      <textarea class="comment-text form-control"
         placeholder="Comment Text"></textarea>
     </div>
 
     <div class="form-group">
-      <textarea id="comment-name"
-        class="form-control"
+      <input class="comment-name form-control"
         placeholder="Your Name"></textarea>
     </div>
 
     <button class="btn btn-primary submit-comment" >Submit Comment</button>
 
   </form>
+  
 `;
+  } else {
+    alert("Enter your Name & a Post!");
   }
 };
 
 document.querySelector("#submit").addEventListener("click", function () {
   leavePost();
 
+  //Reset
   document.getElementById("your-name").value = "";
   document.getElementById("message").value = "";
 });
 
-document.querySelector(".post-master").addEventListener("click", function (e) {
-  if (e.target.classList.contains("remove-post")) {
-    e.target.closest(".post").remove();
-  }
+//Add show class to post-list view
+document.querySelector(".back-button").addEventListener("click", function () {
+  document.querySelector(".single-post-view").classList.remove("show");
+  document.querySelector(".main-list-view").classList.add("show");
 });
 
-//Toggle Comments on and Off
-document.querySelector(".post-master").addEventListener("click", function (e) {
-  if (e.target.classList.contains("comments")) {
-    const post = e.target.closest(".post");
+function openSinglePostView(index) {
+  const mainListView = document.querySelector(".main-list-view");
+  const singlePostView = document.querySelector(".single-post-view");
+  const singlePostContainer = document.querySelector(".single-post-container");
 
+  const originalPost = document.querySelector(
+    `.main-post[data-index="${index}"]`,
+  );
+
+  const clonedPost = originalPost.cloneNode(true);
+
+  const commentList = clonedPost.querySelector(".comment-list");
+  if (commentList) {
+    commentList.classList.add("show");
+  }
+
+  //Remove form
+  const form = clonedPost.querySelector(".form-group");
+  if (form) {
+    form.remove();
+    form.remove();
+  }
+
+  singlePostContainer.innerHTML = "";
+  singlePostContainer.appendChild(clonedPost);
+
+  singlePostView.classList.add("show");
+  mainListView.classList.remove("show");
+}
+
+document.querySelector(".post-master").addEventListener("click", function (e) {
+  const selectedPost = e.target.closest(".main-post");
+  const removePost = e.target.closest(".remove-post");
+  const commentBtn = e.target.closest(".comments");
+  const submitComment = e.target.closest(".submit-comment");
+  const formControl = e.target.closest(".form-control");
+
+  if (removePost) {
+    removePost.closest(".main-post").remove();
+    return;
+  }
+
+  if (commentBtn) {
+    const post = commentBtn.closest(".main-post");
     const commentList = post.querySelector(".comment-list");
-
     commentList.classList.toggle("show");
+    return;
   }
-});
 
-//Leave New Comment on Post
-document.querySelector(".post-master").addEventListener("click", function (e) {
-  if (e.target.classList.contains("submit-comment")) {
-    const post = e.target.closest(".post");
+  if (submitComment) {
+    const post = submitComment.closest(".main-post");
 
-    const commentName = post.querySelector("#comment-name").value;
-    const commentText = post.querySelector("#comment-text").value;
+    const commentName = post.querySelector(".comment-name").value;
+    const commentText = post.querySelector(".comment-text").value;
 
     const postUl = post.querySelector(".ordered-list");
     let newPostLi = document.createElement("li");
-    newPostLi.className = "post";
 
     let removeLink = document.createElement("button");
     removeLink.textContent = "remove";
-
     removeLink.className = "btn btn-link remove-post";
     removeLink.style.marginRight = "10px";
 
@@ -115,16 +162,57 @@ document.querySelector(".post-master").addEventListener("click", function (e) {
       newPostLi.append(newPostHR);
       newPostLi.append(removeLink);
       newPostLi.append(newPostP);
-
       postUl.append(newPostLi);
 
-      //Prevent Reassignment Resulting in Error
-      if (postUl.querySelectorAll("li").length > 0) {
-        postUl.classList.add("posts-plus");
-      }
-
-      post.querySelector("#comment-name").value = "";
-      post.querySelector("#comment-text").value = "";
+      post.querySelector(".comment-name").value = "";
+      post.querySelector(".comment-text").value = "";
+    } else {
+      alert("Enter your Name & a Comment!");
     }
+
+    return;
+  }
+
+  const span = e.target.closest(".span-class");
+
+  //Post Editor
+  if (span) {
+    const textArea = document.createElement("textarea");
+    textArea.placeholder = "Edit Post Text";
+    textArea.className = "form-control";
+
+    const nameInput = document.createElement("input");
+    nameInput.type = "text";
+    nameInput.placeholder = "Edit Post Name";
+    nameInput.className = "form-control";
+
+    span.replaceWith(textArea);
+    textArea.after(nameInput);
+
+    const submitEdit = function () {
+      if (textArea.value.length > 0 && nameInput.value.length > 0) {
+        const newText = `${textArea.value} - Posted By: ${nameInput.value}`;
+        span.textContent = newText;
+        textArea.replaceWith(span);
+        nameInput.remove();
+      } else {
+        alert("Enter a name and text!");
+      }
+    };
+
+    [textArea, nameInput].forEach(function (i) {
+      i.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          submitEdit();
+        }
+      });
+    });
+
+    return;
+  }
+
+  if (selectedPost && !formControl) {
+    openSinglePostView(selectedPost.dataset.index);
   }
 });

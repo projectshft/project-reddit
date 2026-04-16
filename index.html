@@ -3,51 +3,57 @@
   <head>
     <link
       href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"
-      rel="stylesheet">
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
-    
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Reddit Forum</title>
   </head>
   <body>
-    <div class = "container-fluid">
-    <div class = "row">
-      <div class = "col-md-6 col-md-offset-3">
-        <div class="header">
-          <h1>ReReddit</h1>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-9">
+          <div class="header">
+            <h1>ReReddit</h1>
+          </div>
+
+          <form style="margin-bottom: 30px" onsubmit="event.preventDefault()">
+            <div class="single-post-view">
+              <button class="back-button btn btn-primary">Back</button>
+              <div class="single-post-container"></div>
+            </div>
+
+            <div class="main-list-view show">
+              <div class="composer">
+                <div class="form-group">
+                  <input
+                    id="your-name"
+                    type="text"
+                    class="form-control"
+                    placeholder="Your Name"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <textarea
+                    id="message"
+                    class="form-control"
+                    placeholder="Post Text"
+                  ></textarea>
+                </div>
+
+                <button id="submit" class="btn btn-primary">Submit Post</button>
+              </div>
+
+              <div class="post-master"></div>
+            </div>
+          </form>
         </div>
-
-
-
-        <div class ="post-master">
-
-        </div>
-        
-    <form style="margin-top:30px;" onsubmit="event.preventDefault();">
-      <form style="margin-top:30px;" >
-      
-    
-
-        <div class="form-group">
-            <input id="your-name" type="text"
-              class="form-control"
-              placeholder="Your Name"></input>
-        </div>
-
-        <div class="form-group">
-          <textarea id="message" type="text"
-          class="form-control"
-          placeholder="Post Text"></textarea>
-        </div>
-
-        
-          <button id="submit" class="btn btn-primary">Submit Post</button>
-        
-        </form>
       </div>
     </div>
-    </div>
+
     <script src="main.js"></script>
   </body>
 </html>
