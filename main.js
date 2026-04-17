@@ -54,6 +54,7 @@ let leavePost = function () {
 
     newPostDiv2.innerHTML += `
     
+  <div class="forms">
   <form style="margin-top:30px;" onsubmit="event.preventDefault();">
     
     <div class="form-group">
@@ -69,6 +70,7 @@ let leavePost = function () {
     <button class="btn btn-primary submit-comment" >Submit Comment</button>
 
   </form>
+  </div>
   
 `;
   } else {
@@ -90,28 +92,27 @@ document.querySelector(".back-button").addEventListener("click", function () {
   document.querySelector(".main-list-view").classList.add("show");
 });
 
-function openSinglePostView(index) {
+function openSinglePostView(originalPost) {
   const mainListView = document.querySelector(".main-list-view");
   const singlePostView = document.querySelector(".single-post-view");
   const singlePostContainer = document.querySelector(".single-post-container");
 
-  const originalPost = document.querySelector(
-    `.main-post[data-index="${index}"]`,
-  );
-
   const clonedPost = originalPost.cloneNode(true);
 
-  const commentList = clonedPost.querySelector(".comment-list");
-  if (commentList) {
-    commentList.classList.add("show");
+  const commentText = clonedPost.querySelector(".comment-text");
+  const forms = clonedPost.querySelector(".forms");
+  const removeLink = clonedPost.querySelectorAll(".remove-post");
+  const commentsLink = clonedPost.querySelector(".comments");
+
+  if (commentText) {
+    commentText.remove();
+    forms.remove();
+    commentsLink.remove();
   }
 
-  //Remove form
-  const form = clonedPost.querySelector(".form-group");
-  if (form) {
-    form.remove();
-    form.remove();
-  }
+  removeLink.forEach(function (link) {
+    link.remove();
+  });
 
   singlePostContainer.innerHTML = "";
   singlePostContainer.appendChild(clonedPost);
@@ -128,7 +129,15 @@ document.querySelector(".post-master").addEventListener("click", function (e) {
   const formControl = e.target.closest(".form-control");
 
   if (removePost) {
-    removePost.closest(".main-post").remove();
+    const commentItem = removePost.closest("li");
+    const mainPost = removePost.closest(".main-post");
+
+    if (commentItem) {
+      commentItem.remove();
+    } else if (mainPost) {
+      mainPost.remove();
+    }
+
     return;
   }
 
@@ -147,6 +156,7 @@ document.querySelector(".post-master").addEventListener("click", function (e) {
 
     const postUl = post.querySelector(".ordered-list");
     let newPostLi = document.createElement("li");
+    newPostLi.classList.add("li-post");
 
     let removeLink = document.createElement("button");
     removeLink.textContent = "remove";
@@ -213,6 +223,6 @@ document.querySelector(".post-master").addEventListener("click", function (e) {
   }
 
   if (selectedPost && !formControl) {
-    openSinglePostView(selectedPost.dataset.index);
+    openSinglePostView(selectedPost);
   }
 });
