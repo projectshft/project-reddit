@@ -1,0 +1,53 @@
+.post hr {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-top: 1px solid #ccc;
+}
+
+ul {
+  padding-left: 0px;
+  margin: 0px;
+  list-style: none;
+}
+
+.comment-list {
+  display: none;
+}
+
+.comment-list.show {
+  display: block !important;
+}
+
+.main-list-view,
+.single-post-view {
+  display: none;
+}
+
+.main-list-view.show,
+.single-post-view.show {
+  display: block !important;
+}
+
+.post,
+.ordered-list,
+.comment-list form,
+.comment-list .form-group,
+.comment-list textarea,
+.comment-list input {
+  width: 100%;
+  display: block;
+  box-sizing: border-box;
+}
+
+li {
+  float: none;
+}
+
+.submit-comment {
+  margin-bottom: 30px;
+}
+
+.span-class:hover {
+  color: red;
+  cursor: pointer;
+}
